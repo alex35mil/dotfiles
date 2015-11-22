@@ -1,0 +1,17 @@
+[alias]
+  history = log --pretty=format:'%C(yellow)%h%C(reset) - %s %C(dim)%ad <%an>' --date=relative
+[core]
+  excludesfile = ~/.gitignore
+  ignorecase = false
+  editor = vim
+[color]
+  ui = true
+[user]
+  name = Alex Fedoseev
+  email = alex.fedoseev@gmail.com
+[push]
+  default = simple
+[filter "lfs"]
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
