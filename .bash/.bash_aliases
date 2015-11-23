@@ -5,6 +5,12 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias -- -="cd -"
 
+alias dev="cd ~/Dev"
+alias prj="cd ~/Dev/Projects"
+alias lib="cd ~/Dev/Libs"
+alias snd="cd ~/Dev/Sandboxes"
+alias sys="cd ~/Dev/System"
+
 # Listings
 if ls --color > /dev/null 2>&1; then # GNU `ls`
   colorflag="--color"
