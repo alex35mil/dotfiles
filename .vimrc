@@ -57,3 +57,10 @@ endif
 set tabstop=2
 set shiftwidth=2
 set expandtab
+
+" Open new split panes to right and bottom
+set splitbelow
+set splitright
+
+" Allow netrw to remove non-empty local directories
+let g:netrw_localrmdir='rm -r'
