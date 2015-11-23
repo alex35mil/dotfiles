@@ -27,8 +27,8 @@ function v() {
 # otherwise lists directory tree given depth
 function dir() {
   if [ $# -eq 0 ]; then
-    tree -L 1;
+    tree -a -L 1;
   else
-    tree -L "$@";
+    tree -a -L "$@";
   fi;
 }
