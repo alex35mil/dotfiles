@@ -1,5 +1,5 @@
 # Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:$PATH";
+export PATH="$PATH:$HOME/bin";
 
 # Load the default .profile
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile";
