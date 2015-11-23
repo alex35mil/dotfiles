@@ -64,3 +64,6 @@ set splitright
 
 " Allow netrw to remove non-empty local directories
 let g:netrw_localrmdir='rm -r'
+
+" OSX clipboard sharing
+set clipboard=unnamed
