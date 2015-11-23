@@ -85,3 +85,17 @@ alias rg="rails generate "
 
 alias rr="rake routes"
 alias rdbm="rake db:migrate"
+
+
+# ===== Ruby
+alias rl="rvm list"
+alias rlk="rvm list known"
+
+alias gems="gem list"
+alias gemi="gem install "
+alias gemu="gem uninstall "
+
+alias rgl="rvm gemset list"
+alias rgc="rvm gemset create "
+alias rgd="rvm gemset delete "
+alias rge="rvm gemset empty "
