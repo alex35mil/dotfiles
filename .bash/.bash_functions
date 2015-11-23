@@ -22,3 +22,13 @@ function v() {
     vim "$@";
   fi;
 }
+
+# `dir` with no arguments lists contents of the current directory via `tree`,
+# otherwise lists directory tree given depth
+function dir() {
+  if [ $# -eq 0 ]; then
+    tree -L 1;
+  else
+    tree -L "$@";
+  fi;
+}
