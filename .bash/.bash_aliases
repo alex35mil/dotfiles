@@ -83,6 +83,8 @@ alias rs="rails server "
 alias rc="rails console "
 alias rg="rails generate "
 
+alias bi="bundle install "
+
 alias rr="rake routes"
 alias rdbm="rake db:migrate"
 
