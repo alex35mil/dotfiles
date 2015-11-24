@@ -67,3 +67,6 @@ let g:netrw_localrmdir='rm -r'
 
 " OSX clipboard sharing
 set clipboard=unnamed
+
+" Delete in insert mode
+set backspace=indent,eol,start
