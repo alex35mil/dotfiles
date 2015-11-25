@@ -1,4 +1,5 @@
 # ===== Bash
+alias reload="source ~/.bashrc"
 
 # Navigation
 alias ..="cd .."
