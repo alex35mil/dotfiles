@@ -7,15 +7,22 @@ DOTFILES="\
   .bash/.bash_exports \
   .bash/.bash_functions \
   .bash/.bash_prompt \
+
   .bash_profile \
   .bashrc \
+
   .editorconfig \
+
   .gemrc \
+
   .gitconfig \
   .gitignore \
+
   .profile \
+
   .vimrc \
   .vim/colors/Tomorrow-Night-Bright.vim \
+
   .atom/config.cson \
   .atom/init.coffee \
   .atom/keymap.cson \

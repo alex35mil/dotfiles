@@ -1,6 +1,6 @@
 colorscheme Tomorrow-Night-Bright           " Use the Tomorrow-Night-Bright theme
 syntax on                                   " Enable syntax highlighting
-set nocompatible                            " Use Vim settings, rather then Vi
+set nocompatible                            " Enable Vim's *cool* mode
 set number                                  " Enable line numbers
 set showmode                                " Show the current mode
 set title                                   " Show the filename in the window titlebar
@@ -29,9 +29,10 @@ set incsearch                               " Highlight dynamically as pattern i
 set splitright                              " Open new split panes to right
 set splitbelow                              " Open new split panes to bottom
 
-filetype plugin indent on                   " Enable file type detection
-
 let g:netrw_localrmdir='rm -r'              " Allow netrw to remove non-empty local directories
+
+filetype plugin on                          " Enable file type detection
+filetype indent on                          " Enable file type detection
 
 " Automatic commands
 if has("autocmd")
