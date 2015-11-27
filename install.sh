@@ -22,3 +22,9 @@ ln -sfn ~/.dotfiles/.profile ~/.profile
 
 ln -sfn ~/.dotfiles/.vimrc ~/.vimrc
 ln -sfn ~/.dotfiles/.vim/colors/Tomorrow-Night-Bright.vim ~/.vim/colors/Tomorrow-Night-Bright.vim
+
+ln -sfn ~/.dotfiles/.atom/config.cson ~/.atom/config.cson
+ln -sfn ~/.dotfiles/.atom/init.coffee ~/.atom/init.coffee
+ln -sfn ~/.dotfiles/.atom/keymap.cson ~/.atom/keymap.cson
+ln -sfn ~/.dotfiles/.atom/snippets.cson ~/.atom/snippets.cson
+ln -sfn ~/.dotfiles/.atom/styles.less ~/.atom/styles.less

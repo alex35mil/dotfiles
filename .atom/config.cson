@@ -1,0 +1,45 @@
+"*":
+  "exception-reporting":
+    userId: "b6743906-56c6-7cc4-4c17-1e358db56a15"
+  welcome:
+    showOnStartup: false
+  core:
+    themes: [
+      "seti-ui"
+      "alex-base16-tomorrow-dark-theme"
+    ]
+    excludeVcsIgnoredPaths: false
+  editor:
+    invisibles: {}
+    fontFamily: "Source Code Pro"
+    showIndentGuide: true
+  "language-babel":
+    transpileOnSave: false
+    babelMapsAddUrl: false
+  autosave:
+    enabled: true
+  "markdown-preview":
+    useGitHubStyle: true
+  "autocomplete-plus":
+    minimumWordLength: 2
+    strictMatching: true
+  tabs:
+    usePreviewTabs: true
+    enableVcsColoring: true
+    tabScrolling: true
+  linter:
+    errorPanelHeight: 110
+  "tree-view": {}
+  "fuzzy-finder":
+    ignoredNames: [
+      "node_modules"
+    ]
+  zentabs:
+    neverCloseNew: true
+    maximumOpenedTabs: 7
+  "todo-show": {}
+  "linter-eslint": {}
+  "linter-clojure": {}
+".clojure.source":
+  editor:
+    showIndentGuide: false
