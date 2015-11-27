@@ -12,7 +12,7 @@
   editor:
     invisibles: {}
     fontFamily: "Source Code Pro"
-    showIndentGuide: true
+    showInvisibles: true
   "language-babel":
     transpileOnSave: false
     babelMapsAddUrl: false
