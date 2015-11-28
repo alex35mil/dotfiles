@@ -21,7 +21,7 @@ DOTFILES="\
   .profile \
 
   .vimrc \
-  .vim/colors/Tomorrow-Night-Bright.vim \
+  .vim/colors \
 
   .atom/config.cson \
   .atom/init.coffee \
@@ -30,8 +30,8 @@ DOTFILES="\
   .atom/styles.less \
 ";
 
-for file in $DOTFILES; do
-  [ -r "$DOTFILES_PATH/$file" ] && \
-  [ -f "$DOTFILES_PATH/$file" ] && \
-  ln -sfn "$DOTFILES_PATH/$file" "$HOME/$file";
+for item in $DOTFILES; do
+  [ -r "$DOTFILES_PATH/$item" ] && \
+  [ -e "$DOTFILES_PATH/$item" ] && \
+  ln -sfn "$DOTFILES_PATH/$item" "$HOME/$item";
 done;
