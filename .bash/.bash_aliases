@@ -12,6 +12,8 @@ alias lib="cd ~/Dev/Libs"
 alias snd="cd ~/Dev/Sandboxes"
 alias sys="cd ~/Dev/System"
 
+alias hosts="sudo $EDITOR /etc/hosts"
+
 # Listings
 if ls --color > /dev/null 2>&1; then # GNU `ls`
   colorflag="--color"
@@ -48,8 +50,7 @@ alias cr="lein repl"
 
 
 # ===== Git
-alias got="git "
-alias get="git "
+alias g="git "
 
 alias gs="git status "
 alias ga="git add "
