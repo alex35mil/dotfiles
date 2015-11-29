@@ -1,4 +1,4 @@
-colorscheme Tomorrow-Night-Eighties         " Use the Tomorrow-Night-Eighties theme
+colorscheme sorcerer                        " Use theme
 syntax on                                   " Enable syntax highlighting
 
 scriptencoding utf-8                        " UTF-8 all the way
