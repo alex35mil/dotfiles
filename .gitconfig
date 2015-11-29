@@ -1,4 +1,5 @@
 [alias]
+  irebase = "!r() { git rebase -i HEAD~$1; }; r"
   history = log --pretty=format:'%C(yellow)%h%C(reset) - %s %C(dim)%ad <%an>' --date=relative
 [core]
   excludesfile = ~/.gitignore
