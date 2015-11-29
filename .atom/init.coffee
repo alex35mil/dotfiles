@@ -9,3 +9,7 @@
 # atom.workspace.observeTextEditors (editor) ->
 #   editor.onDidSave ->
 #     console.log "Saved! #{editor.getPath()}"
+
+# Needed for atom-script package
+# https://github.com/rgbkrk/atom-script/issues/61
+process.env.PATH = ['/usr/local/bin', process.env.PATH].join(':')
