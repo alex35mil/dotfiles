@@ -16,6 +16,9 @@ for file in ~/.bash/.{bash_prompt,bash_exports,bash_aliases,bash_functions}; do
 done;
 unset file;
 
+# Turn on Vi bindings
+set -o vi
+
 # Add tab completion for many Bash commands
 if which brew > /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
   source "$(brew --prefix)/share/bash-completion/bash_completion";
