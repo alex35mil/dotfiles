@@ -22,6 +22,7 @@ DOTFILES="\
 
   .vimrc \
   .vim/colors \
+  .vim/snips \
 
   .atom/config.cson \
   .atom/init.coffee \
@@ -34,4 +35,5 @@ for item in $DOTFILES; do
   [ -r "$DOTFILES_PATH/$item" ] && \
   [ -e "$DOTFILES_PATH/$item" ] && \
   ln -sfn "$DOTFILES_PATH/$item" "$HOME/$item";
+  echo "$DOTFILES_PATH/$item -> $HOME/$item ... Done!";
 done;

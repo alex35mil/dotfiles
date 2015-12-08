@@ -6,6 +6,8 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias -- -="cd -"
 
+alias v="vim "
+
 alias dev="cd ~/Dev"
 alias prj="cd ~/Dev/Projects"
 alias lib="cd ~/Dev/Libs"
@@ -55,6 +57,7 @@ alias g="git "
 alias gs="git status "
 alias ga="git add "
 alias gb="git branch "
+alias gdm="git dm"
 alias gc="git commit "
 alias gca="git commit --amend --reuse-message=HEAD"
 alias gd="git diff "
@@ -84,6 +87,7 @@ alias nid="npm install --save-dev "
 alias nrs="npm remove --save "
 alias nrd="npm remove --save-dev "
 alias nsw="npm shrinkwrap "
+alias nlg="npm ls -g --depth=0"
 
 
 # ===== Rails

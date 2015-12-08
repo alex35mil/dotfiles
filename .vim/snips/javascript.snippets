@@ -1,0 +1,51 @@
+snippet l "console.log"
+console.log(${1});
+endsnippet
+
+snippet c "const"
+const ${1} = ${2};
+endsnippet
+
+snippet try "try/catch"
+try {
+  ${1}
+} catch (${2:err}) {
+  ${0:// handle error...}
+}
+endsnippet
+
+snippet i "import module"
+import ${1:module} from '${0:location}';
+endsnippet
+
+snippet @@ "JSDoc doc"
+/**
+ * ${1:Method description}
+ *
+ * @${0:smth}
+ */
+endsnippet
+
+snippet @p "JSDoc @param"
+@param {${1:type}} ${2:name} ${0}
+endsnippet
+
+snippet @r "JSDoc returns"
+@returns {${1:type}} ${0}
+endsnippet
+
+snippet comp "React component"
+import React, { PropTypes  } from 'react';
+
+export default class ${1:Component} extends React.Component {
+
+  static propTypes = {}
+
+  render() {
+    return (
+      // jsx...
+    );
+  }
+
+}
+endsnippet

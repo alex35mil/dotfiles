@@ -15,13 +15,14 @@ function a() {
 
 # `v` with no arguments opens the current directory in Vim,
 # otherwise opens the given location
-function v() {
-  if [ $# -eq 0 ]; then
-    vim .;
-  else
-    vim "$@";
-  fi;
-}
+# Currently handled by NERDTree
+# function v() {
+#   if [ $# -eq 0 ]; then
+#     vim .;
+#   else
+#     vim "$@";
+#   fi;
+# }
 
 # `dir` with no arguments lists contents of the current directory via `tree`,
 # otherwise lists directory tree given depth
