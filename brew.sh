@@ -9,13 +9,15 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # Make sure we’re using the latest Homebrew
 brew update
 
-# Upgrade any already-installed formulae
+# Upgrade any already-installed formulas
 brew upgrade --all
 
-# Install
+# Install tools
+brew install cmake
 brew install git
 brew install git-lfs
 brew install nginx
+brew install tmux
 brew install vim --override-system-vi
 brew install wget --with-iri
 brew install curl
