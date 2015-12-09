@@ -96,7 +96,9 @@ hi NonText ctermfg=bg
 
 " ======= Functions
 
-fun! <SID>StripTrailingWhitespaces()
+" Strips trailing whitespaces and blank lines at the end of the file
+fun! <SID>StripTrailingWhitespacesAndBlankLinesAtTheEnd()
+  %s/\($\n\s*\)\+\%$//e
   let file_type = &filetype
   if file_type != 'markdown'
     let l = line('.')
@@ -106,10 +108,11 @@ fun! <SID>StripTrailingWhitespaces()
   endif
 endfun
 
+" Strips whitespaces and blank lines at the end of the file + saves all on focus lost
 fun! <SID>SaveOnBlur()
   let file_path = expand('%')
   if filewritable(file_path) == 1 && file_path !~ '.*/vim/.*/doc/.*'
-    call <SID>StripTrailingWhitespaces()
+    call <SID>StripTrailingWhitespacesAndBlankLinesAtTheEnd()
     exec 'silent! wa'
   endif
 endfun
@@ -125,11 +128,11 @@ if has("autocmd")
   " Update file if it was changed outside of Vim
   autocmd BufEnter,FocusGained * silent! !
 
-  " Save all on focus lost
+  " Strip whitespaces and blank lines at the end of the file + save all on focus lost
   autocmd BufLeave,FocusLost * call <SID>SaveOnBlur()
 
-  " Trim whitespaces on save
-  autocmd BufWritePre *.* call <SID>StripTrailingWhitespaces()
+  " Trim whitespaces and blank lines at the end of the file on save
+  autocmd BufWritePre *.* call <SID>StripTrailingWhitespacesAndBlankLinesAtTheEnd()
 
   " Handle filetypes
   autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
