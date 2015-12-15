@@ -6,14 +6,6 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias -- -="cd -"
 
-alias v="vim "
-
-alias dev="cd ~/Dev"
-alias prj="cd ~/Dev/Projects"
-alias lib="cd ~/Dev/Libs"
-alias snd="cd ~/Dev/Sandboxes"
-alias sys="cd ~/Dev/System"
-
 alias hosts="sudo $EDITOR /etc/hosts"
 
 # Listings
@@ -113,3 +105,18 @@ alias rgl="rvm gemset list"
 alias rgc="rvm gemset create "
 alias rgd="rvm gemset delete "
 alias rge="rvm gemset empty "
+
+
+# ===== tmux
+alias t="tmux "
+alias tns="tmux new -s "
+alias ta="tmux attach -t "
+alias tks="tmux kill-session -t "
+alias tgl="tmux list-windows"
+
+alias ts="tmuxinator start "
+alias tsapp="tmuxinator start app "
+
+
+# ===== Vim
+alias v="vim "

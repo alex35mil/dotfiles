@@ -11,6 +11,7 @@ Plugin 'VundleVim/Vundle.vim'                       " Vim's Bundler
 Plugin 'scrooloose/nerdtree'                        " File manager
 Plugin 'wincent/command-t'                          " File finder
 Plugin 'bling/vim-airline'                          " Status bars
+Plugin 'edkolev/tmuxline.vim'                       " tmux status line integration
 Plugin 'ryanoasis/vim-devicons'                     " Icons
 Plugin 'sjl/vitality.vim'                           " iTerm & tmux focus events integration
 Plugin 'Valloric/YouCompleteMe'                     " Autocomplition for Vim
@@ -35,6 +36,7 @@ filetype plugin indent on                           " Enable file type detection
 
 set background=dark                                 " Dark background
 set t_Co=256                                        " 256 colors, please
+set t_ut=                                           " Fix bg color inside tmux sessions
 syntax on                                           " Enable syntax highlighting
 colorscheme Tomorrow-Night-Eighties                 " Use theme
 
@@ -49,7 +51,6 @@ set autoread                                        " Autoread files
 
 set number                                          " Enable line numbers
 set noshowmode                                      " Don't show the current mode, it's in status line
-set title                                           " Show the filename in the window titlebar
 set showcmd                                         " Show the (partial) command as it’s being typed
 set ruler                                           " Show the cursor position
 set cursorline                                      " Highlight current line
@@ -145,7 +146,8 @@ endif
 " ======= Plugins setup
 
 " NERDTree setup
-let NERDTreeShowHidden=1
+let NERDTreeMinimalUI = 1
+let NERDTreeShowHidden = 1
 
 " Devicons setup
 let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
@@ -172,6 +174,14 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
 let g:airline#extensions#syntastic#enabled = 1
+
+" tmuxline setup
+let g:tmuxline_separators = {
+    \ 'left_alt': '',
+    \ 'right' : '',
+    \ 'right_alt' : '',
+    \ 'space' : ' '
+    \ }
 
 " netrw setup
 let g:netrw_localrmdir='rm -r'
@@ -227,7 +237,7 @@ let b:javascript_fold = 0
 
 " ======= Mappings
 
-" First of all, remap your CapsLock key to Ctrl in System Preferences
+" ProTip: Remap your CapsLock key to Ctrl in System Preferences.
 
 " Set Leader char to comma
 let mapleader=","
@@ -239,7 +249,7 @@ nnoremap <Leader>qa :qa<CR>
 " Write
 nnoremap <Leader>w :w<CR>
 
-" Show/hide NERDTree
+" Show/hide NERDTree (press twice b/c of tmux prefix binding)
 nnoremap <F1> :NERDTreeToggle<CR>
 
 " Show current file

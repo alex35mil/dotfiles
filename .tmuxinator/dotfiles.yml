@@ -1,0 +1,11 @@
+# ~/.tmuxinator/dotfiles.yml
+
+name: dotfiles
+root: ~/Dev/System/dotfiles
+
+windows:
+  - editor:
+      layout: 14c5,181x44,0,0[181x31,0,0,28,181x12,0,32,30]
+      panes:
+        - tmux resize-pane -Z && vim
+        - # bash

@@ -7,6 +7,7 @@ DOTFILES="\
   .bash/.bash_exports \
   .bash/.bash_functions \
   .bash/.bash_prompt \
+  .bash/.bash_locals \
 
   .bash_profile \
   .bashrc \
@@ -23,6 +24,9 @@ DOTFILES="\
   .vimrc \
   .vim/colors \
   .vim/snips \
+
+  .tmux.conf \
+  .tmuxinator \
 
   .atom/config.cson \
   .atom/init.coffee \

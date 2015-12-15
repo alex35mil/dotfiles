@@ -11,7 +11,7 @@ export PATH="$PATH:$HOME/bin";
 [ -s "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh";
 
 # Load the shell .dotfiles
-for file in ~/.bash/.{bash_prompt,bash_exports,bash_aliases,bash_functions}; do
+for file in ~/.bash/.{bash_prompt,bash_exports,bash_aliases,bash_functions,bash_locals}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;

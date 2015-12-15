@@ -1,0 +1,18 @@
+# ~/.tmuxinator/shaka-project.yml
+
+name: <%= @args[0] %>
+root: <%= @settings["root"] || '.' %>
+
+windows:
+  - editor:
+      layout: 320f,181x44,0,0[181x35,0,0,39,181x8,0,36{90x8,0,36,41,90x8,91,36,45}]
+      panes:
+        - tmux resize-pane -Z && vim
+        - # rails
+        - cd client && clear && tmux clear-history
+  - servers:
+      layout: 7b64,181x44,0,0[181x31,0,0{90x31,0,0,27,90x31,91,0,32},181x12,0,32,29]
+      panes:
+        - # rails
+        - cd client && clear && tmux clear-history
+        - foreman start -f Procfile.dev
