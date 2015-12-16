@@ -23,7 +23,7 @@ DOTFILES="\
 
   .vimrc \
   .vim/colors \
-  .vim/snips \
+  .vim/snippets \
 
   .tmux.conf \
   .tmuxinator \

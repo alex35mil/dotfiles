@@ -9,15 +9,15 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'                       " Vim's Bundler
 
 Plugin 'scrooloose/nerdtree'                        " File manager
-Plugin 'wincent/command-t'                          " File finder
 Plugin 'bling/vim-airline'                          " Status bars
 Plugin 'edkolev/tmuxline.vim'                       " tmux status line integration
 Plugin 'ryanoasis/vim-devicons'                     " Icons
 Plugin 'sjl/vitality.vim'                           " iTerm & tmux focus events integration
-Plugin 'Valloric/YouCompleteMe'                     " Autocomplition for Vim
+Plugin 'ctrlpvim/ctrlp.vim'                         " Finder
+Plugin 'Shougo/neocomplete.vim'                     " Autocompletion
+Plugin 'Shougo/neosnippet.vim'                      " Snippets
 Plugin 'scrooloose/nerdcommenter'                   " Commenter
 Plugin 'jiangmiao/auto-pairs'                       " Insert/delete brackets, parens, quotes in pair
-Plugin 'SirVer/ultisnips'                           " Vim snippets
 Plugin 'scrooloose/syntastic'                       " Linter
 Plugin 'mtscout6/syntastic-local-eslint.vim'        " Prefer local eslint
 Plugin 'Xuyuanp/nerdtree-git-plugin'                " Git files status in NERDTree
@@ -135,6 +135,11 @@ if has("autocmd")
   " Trim whitespaces and blank lines at the end of the file on save
   autocmd BufWritePre *.* call <SID>StripTrailingWhitespacesAndBlankLinesAtTheEnd()
 
+  " Enable omni completion
+  autocmd FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+
   " Handle filetypes
   autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
   autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
@@ -199,26 +204,24 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-" Command-T setup
-let g:CommandTAlwaysShowDotFiles = 1
-let g:CommandTFileScanner = 'git'
-let g:CommandTTraverseSCM = 'pwd'
-if &term =~ 'xterm' || &term =~ 'screen'
-  let g:CommandTAcceptSelectionSplitMap = ['<C-s>', '{']
-  let g:CommandTAcceptSelectionVSplitMap = ['<C-v>', '}']
-  let g:CommandTCancelMap = ['<Esc>', '<F2>', '<F3>']
-endif
+" ctrlp setup
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_prompt_mappings = {'PrtExit()': ['<Esc>', '<F2>', '<F3>']}
 
-" YouCompleteMe setup
-let g:ycm_key_list_select_completion=['<Down>']
-let g:ycm_key_list_previous_completion=['<Up>']
+" neocomplete setup
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 1
 
-" UltiSnips setup
-let g:UltiSnipsSnippetDirectories=['snips']
+" neosnippet setup
+let g:neosnippet#disable_runtime_snippets = {'_' : 1}
+let g:neosnippet#enable_snipmate_compatibility = 0
+let g:neosnippet#snippets_directory = '~/.vim/snippets'
 
-let g:UltiSnipsExpandTrigger='§'
-let g:UltiSnipsJumpForwardTrigger='§'
-let g:UltiSnipsJumpBackwardTrigger='±'
+let g:neosnippet#scope_aliases = {}
+let g:neosnippet#scope_aliases['scss'] = 'scss,css'
 
 " NERDCommenter setup
 let NERDSpaceDelims=1
@@ -256,10 +259,10 @@ nnoremap <F1> :NERDTreeToggle<CR>
 nnoremap \ :NERDTreeFind<CR>
 
 " Show Buffers
-nnoremap <F2> :CommandTBuffer<CR>
+nnoremap <F2> :CtrlPBuffer<CR>
 
 " Show file finder
-nnoremap <F3> :CommandT<CR>
+nnoremap <F3> :CtrlP<CR>
 
 " Close current buffer without loosing current split
 nnoremap <S-w> :bp\|bd #<CR>
@@ -315,6 +318,14 @@ nnoremap <C-a> :%y+<CR>
 " Blank line w/o going in insert mode
 nnoremap = o<Esc>
 nnoremap + O<Esc>
+
+" Expand snippets on Tab
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: pumvisible() ? "\<C-n>" : "\<Tab>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: "\<Tab>"
 
 " Clear highlighting on Space in normal mode
 nnoremap <Space> :noh<CR><Esc>
