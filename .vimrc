@@ -16,6 +16,7 @@ Plugin 'sjl/vitality.vim'                           " iTerm & tmux focus events 
 Plugin 'ctrlpvim/ctrlp.vim'                         " Finder
 Plugin 'Shougo/neocomplete.vim'                     " Autocompletion
 Plugin 'Shougo/neosnippet.vim'                      " Snippets
+Plugin 'wesQ3/vim-windowswap'                       " Splits swapper
 Plugin 'scrooloose/nerdcommenter'                   " Commenter
 Plugin 'jiangmiao/auto-pairs'                       " Insert/delete brackets, parens, quotes in pair
 Plugin 'scrooloose/syntastic'                       " Linter
@@ -223,6 +224,9 @@ let g:neosnippet#snippets_directory = '~/.vim/snippets'
 let g:neosnippet#scope_aliases = {}
 let g:neosnippet#scope_aliases['scss'] = 'scss,css'
 
+" windowswap setup
+let g:windowswap_map_keys = 0
+
 " NERDCommenter setup
 let NERDSpaceDelims=1
 let NERDCreateDefaultMappings=0
@@ -263,6 +267,9 @@ nnoremap <F2> :CtrlPBuffer<CR>
 
 " Show file finder
 nnoremap <F3> :CtrlP<CR>
+
+" Swap windows
+nnoremap <silent> § :call WindowSwap#EasyWindowSwap()<CR>
 
 " Close current buffer without loosing current split
 nnoremap <S-w> :bp\|bd #<CR>
