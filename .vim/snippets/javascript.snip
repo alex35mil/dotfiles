@@ -20,6 +20,10 @@ snippet import
 alias   i
   import ${1:module} from '${0:location}';
 
+snippet require
+alias   r
+  const ${1:module} = require('${0:location}');
+
 snippet jsdoc
 abbr    JSDoc
 alias   @@
@@ -42,7 +46,7 @@ alias   @r
 snippet react__component
 abbr    React.Component
 alias   rc
-  import React, { PropTypes  } from 'react';
+  import React, { PropTypes } from 'react';
 
   export default class ${1:Component} extends React.Component {
 
