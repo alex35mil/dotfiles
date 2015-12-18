@@ -10,12 +10,14 @@ Plugin 'VundleVim/Vundle.vim'                       " Vim's Bundler
 
 Plugin 'scrooloose/nerdtree'                        " File manager
 Plugin 'bling/vim-airline'                          " Status bars
-Plugin 'edkolev/tmuxline.vim'                       " tmux status line integration
+Plugin 'edkolev/tmuxline.vim'                       " tmux status line
 Plugin 'ryanoasis/vim-devicons'                     " Icons
-Plugin 'sjl/vitality.vim'                           " iTerm & tmux focus events integration
+Plugin 'tmux-plugins/vim-tmux-focus-events'         " iTerm & tmux focus events
 Plugin 'ctrlpvim/ctrlp.vim'                         " Finder
 Plugin 'Shougo/neocomplete.vim'                     " Autocompletion
 Plugin 'Shougo/neosnippet.vim'                      " Snippets
+Plugin 'jszakmeister/vim-togglecursor'              " Change cursor shape in Insert mode
+Plugin 'vim-scripts/BufOnly.vim'                    " Close all buffers except current
 Plugin 'wesQ3/vim-windowswap'                       " Splits swapper
 Plugin 'scrooloose/nerdcommenter'                   " Commenter
 Plugin 'jiangmiao/auto-pairs'                       " Insert/delete brackets, parens, quotes in pair
@@ -57,7 +59,9 @@ set ruler                                           " Show the cursor position
 set cursorline                                      " Highlight current line
 set laststatus=2                                    " Always show status line
 set colorcolumn=80                                  " 80 chars limit
+set ttyfast                                         " Send more characters for redraws
 set mouse=a                                         " Enable mouse in all modes
+set ttymouse=xterm2                                 " Make it usable in iTerm2
 set nowrap                                          " Turn wrap off
 set clipboard+=unnamed                              " OSX clipboard sharing
 set backspace=indent,eol,start                      " Delete in insert mode
@@ -143,9 +147,8 @@ if has("autocmd")
 
   " Handle filetypes
   autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+  autocmd BufNewFile,BufRead *.es6 setlocal filetype=javascript
   autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
-  autocmd BufNewFile,BufRead *.es6 setfiletype es6 syntax=javascript
-  autocmd BufNewFile,BufRead *.es6 UltiSnipsAddFiletypes es6.javascript
 endif
 
 
@@ -224,12 +227,18 @@ let g:neosnippet#snippets_directory = '~/.vim/snippets'
 let g:neosnippet#scope_aliases = {}
 let g:neosnippet#scope_aliases['scss'] = 'scss,css'
 
+" togglecursor setup
+let g:togglecursor_default = 'block'
+
 " windowswap setup
 let g:windowswap_map_keys = 0
 
 " NERDCommenter setup
 let NERDSpaceDelims=1
 let NERDCreateDefaultMappings=0
+let g:NERDCustomDelimiters = {
+  \ 'scss': { 'left': '//' },
+  \ }
 
 " Syntastic setup
 let g:syntastic_always_populate_loc_list = 1
@@ -237,6 +246,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_scss_checkers = ['scss_lint']
 
 " vim-javascript setup
 let b:javascript_fold = 0
@@ -251,7 +261,6 @@ let mapleader=","
 
 " Quit
 nnoremap <Leader>q :q<CR>
-nnoremap <Leader>qa :qa<CR>
 
 " Write
 nnoremap <Leader>w :w<CR>
@@ -259,7 +268,7 @@ nnoremap <Leader>w :w<CR>
 " Show/hide NERDTree (press twice b/c of tmux prefix binding)
 nnoremap <F1> :NERDTreeToggle<CR>
 
-" Show current file
+" Focus on current file in NERDTree
 nnoremap \ :NERDTreeFind<CR>
 
 " Show Buffers
@@ -271,8 +280,15 @@ nnoremap <F3> :CtrlP<CR>
 " Swap windows
 nnoremap <silent> § :call WindowSwap#EasyWindowSwap()<CR>
 
+" On/off focus mode for current split
+nnoremap <Leader>ff :tabedit %<CR>
+nnoremap <Leader>fd :tabclose<CR>
+
 " Close current buffer without loosing current split
-nnoremap <S-w> :bp\|bd #<CR>
+nnoremap <C-w> :bp\|bd #<CR>
+
+" Close all buffers except current
+nnoremap <Leader>xx :BufOnly<CR>
 
 " Easier split navigations
 nnoremap <C-j> <C-w><C-j>
@@ -302,12 +318,12 @@ nnoremap <S-j> <C-d>
 nnoremap <S-k> <C-u>
 
 " Delete forward in insert mode
-inoremap <C-b> <Esc>lxi
+inoremap § <Esc>lxi
 
 " Dup things
-nnoremap <C-c> yyp
-vnoremap <C-c> ygv<Esc>p
-inoremap <C-c> <Esc>yypA
+nnoremap <C-d> yyp
+vnoremap <C-d> ygv<Esc>p
+inoremap <C-d> <Esc>yypA
 
 " Tab/Untab
 nnoremap <Tab> V>
@@ -319,8 +335,10 @@ vnoremap <S-Tab> <gv
 inoremap <C-Right> <Esc>A
 inoremap <C-Left> <Esc>I
 
-" Copy all
-nnoremap <C-a> :%y+<CR>
+" Select/copy/delete all
+nnoremap <C-a> ggVG
+nnoremap <C-c> :%y+<CR>
+nnoremap <C-x> ggVGd
 
 " Blank line w/o going in insert mode
 nnoremap = o<Esc>
@@ -341,4 +359,4 @@ nnoremap <Space> :noh<CR><Esc>
 nnoremap <Leader>vii :vsp $MYVIMRC<CR>
 
 " Without this Command-T do wierd stuff
-nnoremap <Esc>^[ <Esc>^[
+" nnoremap <Esc>^[ <Esc>^[
