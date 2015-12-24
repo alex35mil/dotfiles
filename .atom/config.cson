@@ -5,14 +5,22 @@
     showOnStartup: false
   core:
     themes: [
-      "seti-ui"
+      "nucleus-dark-ui"
       "alex-base16-tomorrow-dark-theme"
     ]
-    excludeVcsIgnoredPaths: false
+    packagesWithKeymapsDisabled: [
+      "tool-bar"
+      "nrepl"
+      "maximize-panes"
+    ]
   editor:
-    invisibles: {}
+    invisibles:
+      eol: " "
+      space: " "
     fontFamily: "Source Code Pro"
+    showIndentGuide: true
     showInvisibles: true
+    fontSize: 13
   "language-babel":
     transpileOnSave: false
     babelMapsAddUrl: false
@@ -23,23 +31,44 @@
   "autocomplete-plus":
     minimumWordLength: 2
     strictMatching: true
+    enableAutoConfirmSingleSuggestion: false
+    defaultProvider: "Fuzzy"
+    backspaceTriggersAutocomplete: true
   tabs:
-    usePreviewTabs: true
     enableVcsColoring: true
     tabScrolling: true
   linter:
     errorPanelHeight: 110
-  "tree-view": {}
-  "fuzzy-finder":
-    ignoredNames: [
-      "node_modules"
-    ]
+  "tree-view":
+    squashDirectoryNames: true
   zentabs:
     neverCloseNew: true
     maximumOpenedTabs: 7
   "todo-show": {}
   "linter-eslint": {}
   "linter-clojure": {}
+  "vim-mode":
+    useClipboardAsDefaultRegister: true
+  "custom-title":
+    template: "atom/<%= projectName %>"
+  "tool-bar":
+    position: "Left"
+  "flex-tool-bar":
+    showConfigButton: false
+  "autohide-tree-view":
+    showOn: "none"
+    animationSpeed: 0
+    minWidth: 0
+  react: {}
+  "advanced-open-file":
+    createDirectories: true
+    createFileInstantly: true
+    helmDirSwitch: true
+  "file-icons":
+    coloured: false
+  "color-picker":
+    abbreviateValues: true
+    preferredFormat: "HEX"
 ".clojure.source":
   editor:
     showIndentGuide: false

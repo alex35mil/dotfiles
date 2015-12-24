@@ -1,36 +1,51 @@
-/*
- * Your Stylesheet
- *
- * This stylesheet is loaded when Atom starts up and is reloaded automatically
- * when it is changed and saved.
- *
- * Add your own CSS or Less to fully customize Atom.
- * If you are unfamiliar with Less, you can read more about it here:
- * http://lesscss.org
- */
+/* Stylesheet */
 
+.tree-view {}
 
-/*
- * Examples
- * (To see them, uncomment and save)
- */
-
-// style the background color of the tree view
-.tree-view {
-  // background-color: whitesmoke;
-}
-
-// style the background and foreground colors on the atom-text-editor-element itself
-atom-text-editor {
-  // color: white;
-  // background-color: hsl(180, 24%, 12%);
-}
-
-// To style other content in the text editor's shadow DOM, use the ::shadow expression
-atom-text-editor::shadow .cursor {
-  // border-color: red;
-}
-
+atom-text-editor,
 atom-text-editor::shadow {
-  // Custom styles here
+
+  // Make line numbers less visible
+  .gutter {
+    color: #666;
+  }
+
+  // Make thin guides sexy
+  .indent-guide,
+  .wrap-guide {
+    box-shadow: inset 1px 0 0 #2a2a2a;
+  }
+
+  // Make selection visible
+  .selection .region {
+    background-color: rgba(255, 255, 255, .15);
+  }
+
+  // Remove little red arrow before removed lines
+  .line-number.git-line-removed:before {
+    border-left: none !important;
+  }
+
+}
+
+/* Setup icons */
+
+// This file is symlinked, so going up-up-up all the way to ~
+@import "../../../../.atom/packages/file-icons/styles/items";
+@import "../../../../.atom/packages/file-icons/styles/icons";
+
+.file-icons-tab-pane-icon @{pane-tab-selector}:before {
+  display: inline-block;
+  position: relative;
+  top: -2px !important;
+}
+
+.file-icons-tab-pane-icon @{pane-tab-selector},
+.icon-file-text {
+  &[data-name$="package.json"]:before { .devicons; content: "\e681"; }
+  &[data-name$=".js"]:before          { .devicons; content: "\e618"; }
+  &[data-name$=".jsx"]:before         { .devicons; content: "\e618"; }
+  &[data-name$=".spec.js"]:before     { .devicons; content: "\e688"; }
+  &[data-name$=".spec.jsx"]:before    { .devicons; content: "\e688"; }
+  &[data-name$=".scss"]:before        { .octicons; content: "\f0d1"; }
 }

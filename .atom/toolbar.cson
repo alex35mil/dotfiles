@@ -1,0 +1,94 @@
+[
+  {
+    type: "url"
+    iconset: "ion"
+    icon: "social-github"
+    url: "http://github.com"
+    style:
+      'border-radius': 0
+  }
+  {
+    type: "spacer"
+  }
+  {
+    type: "url"
+    iconset: "devicon"
+    icon: "nodewebkit-plain"
+    url: "http://lvh.me"
+    style:
+      'border-radius': 0
+  }
+  {
+    type: "url"
+    iconset: "ion"
+    icon: "monitor"
+    url: "http://lvh.me:3000"
+    style:
+      'border-radius': 0
+  }
+  {
+    type: "url"
+    iconset: "ion"
+    icon: "fireball"
+    url: "http://lvh.me:4000"
+    style:
+      'border-radius': 0
+  }
+  {
+    type: "spacer"
+  }
+  {
+    type: "button"
+    iconset: "ion"
+    icon: "android-done-all"
+    callback: "todo-show:find-in-project"
+    style:
+      'border-radius': 0
+  }
+  {
+    type: "button"
+    iconset: "ion"
+    icon: "ios-barcode-outline"
+    callback: "markdown-preview:toggle"
+    style:
+      'border-radius': 0
+  }
+  {
+    type: "button"
+    iconset: "ion"
+    icon: "merge"
+    callback: "merge-conflicts:detect"
+    style:
+      'border-radius': 0
+  }
+  {
+    type: "spacer"
+  }
+  {
+    type: "button"
+    iconset: "devicon"
+    icon: "nodejs-plain"
+    callback: "set-syntax:Babel ES6 JavaScript"
+    style:
+      'border-radius': 0
+  }
+  {
+    type: "button"
+    iconset: "devicon"
+    icon: "react-original"
+    callback: "set-syntax:JavaScript (JSX)"
+    style:
+      'border-radius': 0
+  }
+  {
+    type: "spacer"
+  }
+  {
+    type: "button"
+    iconset: "ion"
+    icon: "ios-pulse-strong"
+    callback: "settings-view:show-keybindings"
+    style:
+      'border-radius': 0
+  }
+]

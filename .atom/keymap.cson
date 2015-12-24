@@ -1,30 +1,63 @@
 # Your keymap
 #
-# Atom keymaps work similarly to style sheets. Just as style sheets use
-# selectors to apply styles to elements, Atom keymaps use selectors to associate
-# keystrokes with events in specific contexts.
-#
-# You can create a new keybinding in this file by typing "key" and then hitting
-# tab.
-#
-# Here's an example taken from Atom's built-in keymap:
-#
-# 'atom-text-editor':
-#   'enter': 'editor:newline'
-#
-# 'atom-workspace':
-#   'ctrl-shift-p': 'core:move-up'
-#   'ctrl-p': 'core:move-down'
-#
 # You can find more information about keymaps in these guides:
 # * https://atom.io/docs/latest/using-atom-basic-customization#customizing-key-bindings
 # * https://atom.io/docs/latest/behind-atom-keymaps-in-depth
-#
-# This file uses CoffeeScript Object Notation (CSON).
-# If you are unfamiliar with CSON, you can read more about it here:
-# https://github.com/bevry/cson#what-is-cson
+
+# ======= Bindings
+
+'body':
+  'cmd-, k': 'settings-view:show-keybindings'
+  'cmd-, p': 'settings-view:uninstall-packages'
+  'cmd-, i': 'settings-view:install-packages-and-themes'
+
+'.platform-darwin':
+  'f1': 'tree-view:toggle'
+  'cmd-\\': 'tree-view:toggle-focus'
+  'cmd-r': 'fuzzy-finder:toggle-buffer-finder'
+  'cmd-t': 'fuzzy-finder:toggle-file-finder'
+
+'.platform-darwin atom-workspace':
+  'cmd-o': 'advanced-open-file:toggle'
+
+'.platform-darwin atom-text-editor':
+  'cmd-r': 'unset!'
+  'ctrl-cmd-w': 'pane:close-other-items'
+
+'.platform-darwin, .platform-darwin .command-palette atom-text-editor':
+  'ctrl-shift-p': 'command-palette:toggle'
+
+'.fuzzy-finder':
+  'cmd-enter': 'pane:split-right'
+  'cmd-shift-enter': 'pane:split-down'
+
+'.platform-darwin .tree-view':
+  'cmd-enter': 'tree-view:open-selected-entry-right'
+  'cmd-shift-enter': 'tree-view:open-selected-entry-down'
+  's': 'tree-view:open-selected-entry-right'
+  'i': 'tree-view:open-selected-entry-down'
 
 'atom-workspace atom-text-editor:not([mini])':
-  'shift-cmd-D': 'find-and-replace:select-next'
-'.platform-darwin atom-text-editor':
+  'f2': 'maximize-panes:maximize'
+
+  'ctrl-up': 'window:focus-pane-above'
+  'ctrl-right': 'window:focus-pane-on-right'
+  'ctrl-down': 'window:focus-pane-below'
+  'ctrl-left': 'window:focus-pane-on-left'
+
+  'cmd-ctrl-alt-up': 'move-panes:move-up'
+  'cmd-ctrl-alt-right': 'move-panes:move-right'
+  'cmd-ctrl-alt-down': 'move-panes:move-down'
+  'cmd-ctrl-alt-left': 'move-panes:move-left'
+
+  'cmd-l j': 'set-syntax:Babel ES6 JavaScript'
+  'cmd-l r': 'set-syntax:JavaScript (JSX)'
+
   'cmd-d': 'editor:duplicate-lines'
+  'alt-up': 'vim-mode:scroll-half-screen-up'
+  'alt-down': 'vim-mode:scroll-half-screen-down'
+
+'atom-text-editor.vim-mode:not(.insert-mode)':
+  '=': 'editor:newline-below'
+  '+': 'editor:newline-above'
+  '\\': 'tree-view:reveal-active-file'

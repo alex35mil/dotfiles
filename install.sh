@@ -33,6 +33,7 @@ DOTFILES="\
   .atom/keymap.cson \
   .atom/snippets.cson \
   .atom/styles.less \
+  .atom/toolbar.cson \
 ";
 
 for item in $DOTFILES; do

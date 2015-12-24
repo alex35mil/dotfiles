@@ -4,13 +4,13 @@ name: <%= @args[0] %>
 root: <%= @settings["root"] || '.' %>
 
 windows:
-  - editor:
-      layout: 14c5,181x44,0,0[181x31,0,0,28,181x12,0,32,30]
-      panes:
-        - tmux resize-pane -Z && vim
-        - # bash
   - console:
       layout: 610a,181x44,0,0{112x44,0,0,29,68x44,113,0,31}
       panes:
         - # bash
         - npm start
+  - editor:
+      layout: 14c5,181x44,0,0[181x31,0,0,28,181x12,0,32,30]
+      panes:
+        - tmux resize-pane -Z && atom . && vim
+        - # bash

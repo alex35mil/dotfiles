@@ -1,0 +1,33 @@
+#!/bin/bash
+
+apm install advanced-open-file
+apm install autocomplete-paths
+apm install autohide-tree-view
+apm install color-picker
+apm install custom-title
+apm install file-icons
+apm install flex-tool-bar
+apm install highlight-selected
+apm install language-babel
+apm install language-jade
+apm install language-nginx
+apm install language-slim
+apm install linter
+apm install linter-clojure
+apm install linter-eslint
+apm install linter-scss-lint
+apm install maximize-panes
+apm install merge-conflicts
+apm install move-panes
+apm install nrepl
+apm install nucleus-dark-ui
+apm install pretty-json
+apm install react
+apm install rest-client
+apm install script
+apm install set-syntax
+apm install Stylus
+apm install todo-show
+apm install tool-bar
+apm install vim-mode
+apm install zentabs
