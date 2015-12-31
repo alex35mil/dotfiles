@@ -41,7 +41,7 @@
     'body': 'this.setState({${1}});'
 
   'constructor':
-    'prefix': 'ctr'
+    'prefix': 'cnstr'
     'body': """
       constructor(props, context) {
         super(props, context);
@@ -67,6 +67,110 @@
 
       }
     """
+
+  'PropTypes.shape':
+    'prefix': 'ptsh'
+    'body': """
+      PropTypes.shape({
+        ${1:property}: ${0}
+      }),
+    """
+
+  'PropTypes.shape.isRequired':
+    'prefix': 'ptshr'
+    'body': """
+      PropTypes.shape({
+        ${1:property}: pt${0}
+      }).isRequired,
+    """
+
+  'PropTypes.bool':
+    'prefix': 'ptb'
+    'body': 'PropTypes.bool,'
+
+  'PropTypes.bool.isRequired':
+    'prefix': 'ptbr'
+    'body': 'PropTypes.bool.isRequired,'
+
+  'PropTypes.string':
+    'prefix': 'pts'
+    'body': 'PropTypes.string,'
+
+  'PropTypes.string.isRequired':
+    'prefix': 'ptsr'
+    'body': 'PropTypes.string.isRequired,'
+
+  'PropTypes.number':
+    'prefix': 'ptn'
+    'body': 'PropTypes.number,'
+
+  'PropTypes.number.isRequired':
+    'prefix': 'ptnr'
+    'body': 'PropTypes.number.isRequired,'
+
+  'PropTypes.array':
+    'prefix': 'pta'
+    'body': 'PropTypes.array,'
+
+  'PropTypes.array.isRequired':
+    'prefix': 'ptar'
+    'body': 'PropTypes.array.isRequired,'
+
+  'PropTypes.object':
+    'prefix': 'pto'
+    'body': 'PropTypes.object,'
+
+  'PropTypes.object.isRequired':
+    'prefix': 'ptor'
+    'body': 'PropTypes.object.isRequired,'
+
+  'PropTypes.func':
+    'prefix': 'ptf'
+    'body': 'PropTypes.func,'
+
+  'PropTypes.func.isRequired':
+    'prefix': 'ptfr'
+    'body': 'PropTypes.func.isRequired,'
+
+  'PropTypes.instanceOf':
+    'prefix': 'pti'
+    'body': 'PropTypes.instanceOf(${0}),'
+
+  'PropTypes.instanceOf.isRequired':
+    'prefix': 'ptir'
+    'body': 'PropTypes.instanceOf(${0}).isRequired,'
+
+  'PropTypes.oneOf':
+    'prefix': 'ptoo'
+    'body': 'PropTypes.oneOf([${0}]),'
+
+  'PropTypes.oneOf.isRequired':
+    'prefix': 'ptoor'
+    'body': 'PropTypes.oneOf([${0}]).isRequired,'
+
+  'PropTypes.oneOfType':
+    'prefix': 'ptoot'
+    'body': 'PropTypes.oneOfType([pt${0}]),'
+
+  'PropTypes.oneOfType.isRequired':
+    'prefix': 'ptootr'
+    'body': 'PropTypes.oneOfType([pt${0}]).isRequired,'
+
+  'PropTypes.arrayOf':
+    'prefix': 'ptao'
+    'body': 'PropTypes.arrayOf(pt${0}),'
+
+  'PropTypes.arrayOf.isRequired':
+    'prefix': 'ptaor'
+    'body': 'PropTypes.arrayOf(pt${0}).isRequired,'
+
+  'PropTypes.any':
+    'prefix': 'ptany'
+    'body': 'PropTypes.any,'
+
+  'PropTypes.any.isRequired':
+    'prefix': 'ptanyr'
+    'body': 'PropTypes.any.isRequired,'
 
   'JSDoc':
     'prefix': '@@'
