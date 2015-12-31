@@ -4,7 +4,8 @@ alias reload="source ~/.bashrc"
 # Navigation
 alias ..="cd .."
 alias ...="cd ../.."
-alias -- -="cd -"
+# Breakes `go -`
+# alias -- -="cd -"
 
 alias hosts="sudo $EDITOR /etc/hosts"
 
