@@ -14,14 +14,21 @@
 '.platform-darwin':
   'f1': 'tree-view:toggle'
   'cmd-\\': 'tree-view:toggle-focus'
+  'cmd-alt-p': 'autohide-tree-view:pin'
+  'cmd-alt-u': 'autohide-tree-view:unpin'
   'cmd-r': 'fuzzy-finder:toggle-buffer-finder'
   'cmd-t': 'fuzzy-finder:toggle-file-finder'
 
 '.platform-darwin atom-workspace':
   'cmd-o': 'advanced-open-file:toggle'
 
+'.advanced-open-file atom-text-editor':
+  'cmd-enter': 'pane:split-right'
+  'cmd-shift-enter': 'pane:split-down'
+
 '.platform-darwin atom-text-editor':
   'cmd-r': 'unset!'
+  'cmd-alt-p': 'unset!'
   'ctrl-cmd-w': 'pane:close-other-items'
 
 '.platform-darwin, .platform-darwin .command-palette atom-text-editor':
