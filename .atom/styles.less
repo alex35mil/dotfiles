@@ -5,6 +5,9 @@
 atom-text-editor,
 atom-text-editor::shadow {
 
+  // Make white sexy
+  color: #e4e4cb;
+
   // Make line numbers less visible
   .gutter {
     color: #666;
@@ -24,6 +27,12 @@ atom-text-editor::shadow {
   // Remove little red arrow before removed lines
   .line-number.git-line-removed:before {
     border-left: none !important;
+  }
+
+  // Redefine some syntax colors
+  .variable,
+  .entity.name.tag {
+    color: #f0c674;
   }
 
 }

@@ -6,7 +6,7 @@
   core:
     themes: [
       "nucleus-dark-ui"
-      "alex-base16-tomorrow-dark-theme"
+      "base16-tomorrow-dark-theme"
     ]
     packagesWithKeymapsDisabled: [
       "tool-bar"
