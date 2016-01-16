@@ -57,7 +57,7 @@
 
       export default class ${1:Component} extends React.Component {
 
-        static propTypes = {}
+        static propTypes = {};
 
         render() {
           return (
