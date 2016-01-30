@@ -7,7 +7,6 @@ DOTFILES="\
   .bash/.bash_exports \
   .bash/.bash_functions \
   .bash/.bash_prompt \
-  .bash/.bash_locals \
 
   .bash_profile \
   .bashrc \
@@ -28,6 +27,8 @@ DOTFILES="\
   .tmux.conf \
   .tmuxinator \
 
+  .iterm \
+
   .atom/config.cson \
   .atom/init.coffee \
   .atom/keymap.cson \
@@ -40,5 +41,5 @@ for item in $DOTFILES; do
   [ -r "$DOTFILES_PATH/$item" ] && \
   [ -e "$DOTFILES_PATH/$item" ] && \
   ln -sfn "$DOTFILES_PATH/$item" "$HOME/$item";
-  echo "$DOTFILES_PATH/$item -> $HOME/$item ... Done!";
+  echo "🍻  $DOTFILES_PATH/$item -> $HOME/$item ... Done!";
 done;

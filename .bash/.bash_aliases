@@ -1,4 +1,5 @@
 # ===== Bash
+alias install="$HOME/Dev/System/dotfiles/install.sh"
 alias reload="source ~/.bashrc"
 
 # Navigation
@@ -6,6 +7,13 @@ alias ..="cd .."
 alias ...="cd ../.."
 # Breakes `go -`
 # alias -- -="cd -"
+
+alias ~="cd ~"
+alias dev="cd ~/Dev"
+alias pro="cd ~/Dev/Projects"
+alias sys="cd ~/Dev/System"
+alias libs="cd ~/Dev/Libs"
+alias sand="cd ~/Dev/Sandboxes"
 
 alias hosts="sudo $EDITOR /etc/hosts"
 
@@ -50,12 +58,14 @@ alias g="git "
 alias gs="git status "
 alias ga="git add "
 alias gb="git branch "
+__git_complete gb _git_branch
 alias gdm="git dm"
 alias gc="git commit "
 alias gca="git commit --amend --reuse-message=HEAD"
 alias gd="git diff "
 alias gp="git push "
 alias go="git checkout "
+__git_complete go _git_checkout
 alias gu="git pull --rebase --prune"
 alias gr="git rebase "
 alias gri="git irebase "
@@ -71,6 +81,7 @@ alias ghg="gh --graph"
 # ===== Node
 alias ns="npm start"
 alias nt="npm test"
+alias nr="npm run"
 alias nrb="npm run build"
 alias nrp="npm run prod"
 alias nrl="npm run lint"
@@ -80,6 +91,7 @@ alias nid="npm install --save-dev "
 alias nrs="npm remove --save "
 alias nrd="npm remove --save-dev "
 alias nsw="npm shrinkwrap "
+alias no="npm outdated"
 alias nlg="npm ls -g --depth=0"
 
 

@@ -19,6 +19,7 @@ brew install git-lfs
 brew install nginx
 brew install tmux
 brew install reattach-to-user-namespace
+brew install TomAnthony/brews/itermocil
 brew install vim --override-system-vi
 brew install wget --with-iri
 brew install curl
