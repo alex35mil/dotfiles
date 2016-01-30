@@ -33,11 +33,13 @@ DOTFILES="\
   .atom/snippets.cson \
   .atom/styles.less \
   .atom/toolbar.cson \
-";
+"
 
-for item in $DOTFILES; do
+for item in $DOTFILES
+do
   [ -r "$PWD/$item" ] && \
   [ -e "$PWD/$item" ] && \
-  ln -sfn "$PWD/$item" "$HOME/$item";
-  echo "🍻  $PWD/$item -> $HOME/$item ... Done!";
-done;
+  ln -sfn "$PWD/$item" "$HOME/$item"
+
+  echo "🍻  $PWD/$item -> $HOME/$item ... Done!"
+done

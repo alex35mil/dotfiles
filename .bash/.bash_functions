@@ -1,16 +1,16 @@
 # Create a new directory and enter it
 function mkd() {
-  mkdir -p "$@" && cd "$_";
+  mkdir -p $@ && cd $_
 }
 
 # `a` with no arguments opens the current directory in Atom Editor,
 # otherwise opens the given location
 function a() {
   if [ $# -eq 0 ]; then
-    atom .;
+    atom .
   else
-    atom "$@";
-  fi;
+    atom $@
+  fi
 }
 
 # `v` with no arguments opens the current directory in Vim,
@@ -18,20 +18,20 @@ function a() {
 # Currently handled by NERDTree
 # function v() {
 #   if [ $# -eq 0 ]; then
-#     vim .;
+#     vim .
 #   else
-#     vim "$@";
-#   fi;
+#     vim $@
+#   fi
 # }
 
 # `dir` with no arguments lists contents of the current directory via `tree`,
 # otherwise lists directory tree given depth
 function dir() {
   if [ $# -eq 0 ]; then
-    tree -a -L 1;
+    tree -a -L 1
   else
-    tree -a -L "$@";
-  fi;
+    tree -a -L $@
+  fi
 }
 
 # Scaffold specified project or layout in iTerm
