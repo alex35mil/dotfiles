@@ -1,7 +1,5 @@
 #!/bin/bash
 
-DOTFILES_PATH="$HOME/Dev/System/dotfiles";
-
 DOTFILES="\
   .bash/.bash_aliases \
   .bash/.bash_exports \
@@ -38,8 +36,8 @@ DOTFILES="\
 ";
 
 for item in $DOTFILES; do
-  [ -r "$DOTFILES_PATH/$item" ] && \
-  [ -e "$DOTFILES_PATH/$item" ] && \
-  ln -sfn "$DOTFILES_PATH/$item" "$HOME/$item";
-  echo "🍻  $DOTFILES_PATH/$item -> $HOME/$item ... Done!";
+  [ -r "$PWD/$item" ] && \
+  [ -e "$PWD/$item" ] && \
+  ln -sfn "$PWD/$item" "$HOME/$item";
+  echo "🍻  $PWD/$item -> $HOME/$item ... Done!";
 done;
