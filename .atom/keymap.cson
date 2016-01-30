@@ -43,6 +43,9 @@
   'cmd-shift-enter': 'tree-view:open-selected-entry-down'
   's': 'tree-view:open-selected-entry-right'
   'i': 'tree-view:open-selected-entry-down'
+  'r': 'tree-view:rename'
+  'd': 'tree-view:remove'
+  'c': 'tree-view:duplicate'
 
 'atom-workspace atom-text-editor:not([mini])':
   'f2': 'maximize-panes:maximize'
