@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Install cask
-brew install caskroom/cask/brew-cask
-brew tap caskroom/versions
+brew tap caskroom/cask
 
 # Install apps
 brew cask install iterm2
