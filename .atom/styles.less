@@ -2,11 +2,16 @@
 
 .tree-view {}
 
+// Make tree view vizible when pane is maximized
+.tree-view-resizer[data-autohide] {
+  z-index: 1000;
+}
+
 atom-text-editor,
 atom-text-editor::shadow {
 
   // Make white sexy
-  color: #e4e4cb;
+  color: #e6e6bd;
 
   // Make line numbers less visible
   .gutter {

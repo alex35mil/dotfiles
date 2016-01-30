@@ -1,74 +1,78 @@
 "*":
-  "exception-reporting":
-    userId: "b6743906-56c6-7cc4-4c17-1e358db56a15"
-  welcome:
-    showOnStartup: false
+  "advanced-open-file":
+    createDirectories: true
+    createFileInstantly: true
+    helmDirSwitch: true
+  "autocomplete-plus":
+    backspaceTriggersAutocomplete: true
+    defaultProvider: "Fuzzy"
+    enableAutoConfirmSingleSuggestion: false
+    minimumWordLength: 2
+    strictMatching: true
+  "autohide-tree-view":
+    animationSpeed: 0
+    minWidth: 0
+    showOn: "none"
+  autosave:
+    enabled: true
+  "color-picker":
+    abbreviateValues: true
+    preferredFormat: "HEX"
   core:
-    themes: [
-      "nucleus-dark-ui"
-      "base16-tomorrow-dark-theme"
+    disabledPackages: [
+      "linter-scss-lint"
     ]
     packagesWithKeymapsDisabled: [
       "tool-bar"
       "nrepl"
       "maximize-panes"
     ]
+    themes: [
+      "nucleus-dark-ui"
+      "base16-tomorrow-dark-theme"
+    ]
+  "custom-title":
+    template: "atom/<%= projectName %>"
   editor:
+    fontFamily: "Source Code Pro"
+    fontSize: 13
     invisibles:
       eol: " "
       space: " "
-    fontFamily: "Source Code Pro"
     showIndentGuide: true
     showInvisibles: true
-    fontSize: 13
-  "language-babel":
-    transpileOnSave: false
-    babelMapsAddUrl: false
-  autosave:
-    enabled: true
-  "markdown-preview":
-    useGitHubStyle: true
-  "autocomplete-plus":
-    minimumWordLength: 2
-    strictMatching: true
-    enableAutoConfirmSingleSuggestion: false
-    defaultProvider: "Fuzzy"
-    backspaceTriggersAutocomplete: true
-  tabs:
-    enableVcsColoring: true
-    tabScrolling: true
-  linter:
-    errorPanelHeight: 110
-  "tree-view":
-    squashDirectoryNames: true
-  zentabs:
-    neverCloseNew: true
-    maximumOpenedTabs: 7
-  "todo-show": {}
-  "linter-eslint": {}
-  "linter-clojure": {}
-  "vim-mode":
-    useClipboardAsDefaultRegister: true
-  "custom-title":
-    template: "atom/<%= projectName %>"
-  "tool-bar":
-    position: "Left"
-  "flex-tool-bar":
-    showConfigButton: false
-  "autohide-tree-view":
-    showOn: "none"
-    animationSpeed: 0
-    minWidth: 0
-  react: {}
-  "advanced-open-file":
-    createDirectories: true
-    createFileInstantly: true
-    helmDirSwitch: true
+  "exception-reporting":
+    userId: "b6743906-56c6-7cc4-4c17-1e358db56a15"
   "file-icons":
     coloured: false
-  "color-picker":
-    abbreviateValues: true
-    preferredFormat: "HEX"
+  "flex-tool-bar":
+    showConfigButton: false
+  "language-babel":
+    babelMapsAddUrl: false
+    transpileOnSave: false
+  linter:
+    errorPanelHeight: 110
+  "linter-clojure": {}
+  "linter-eslint": {}
+  "linter-scss-lint":
+    executablePath: "/Users/Alex/.rvm/gems/ruby-2.2.4@global/bin/scss-lint"
+  "markdown-preview":
+    useGitHubStyle: true
+  react: {}
+  tabs:
+    enableVcsColoring: true
+  "todo-show": {}
+  "tool-bar":
+    position: "Left"
+  "tree-view": {}
+  "vim-mode":
+    useClipboardAsDefaultRegister: true
+  welcome:
+    showOnStartup: false
+  zentabs:
+    maximumOpenedTabs: 7
+    neverCloseDirty: true
+    neverCloseNew: true
 ".clojure.source":
   editor:
     showIndentGuide: false

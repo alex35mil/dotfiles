@@ -32,6 +32,10 @@
     'prefix': 'tp'
     'body': 'this.props'
 
+  'this.context':
+    'prefix': 'tc'
+    'body': 'this.context'
+
   'this.state':
     'prefix': 'ts'
     'body': 'this.state'
@@ -57,7 +61,7 @@
 
       export default class ${1:Component} extends React.Component {
 
-        static propTypes = {}
+        static propTypes = {};
 
         render() {
           return (
