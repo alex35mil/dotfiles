@@ -39,6 +39,9 @@ brew.sh
 echo "===> ⌛️  Installing cask apps..."
 cask.sh
 
+echo "===> ⌛️  Installing global npm packages..."
+npm.sh
+
 echo "===> ⌛️  Installing global ruby gems..."
 rvm.sh
 
