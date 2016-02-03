@@ -1,13 +1,15 @@
 #!/bin/bash
 
 DOTFILES="\
-  .bash/.bash_aliases \
-  .bash/.bash_exports \
-  .bash/.bash_functions \
-  .bash/.bash_prompt \
-
-  .bash_profile \
   .bashrc \
+  .bash_profile \
+
+  .zshrc \
+  .zsh_profile \
+
+  .shell \
+
+  .profile \
 
   .editorconfig \
 
@@ -15,8 +17,6 @@ DOTFILES="\
 
   .gitconfig \
   .gitignore \
-
-  .profile \
 
   .vimrc \
   .vim/colors \
@@ -26,6 +26,8 @@ DOTFILES="\
   .tmuxinator \
 
   .iterm \
+  .kwm \
+  .ubersicht \
 
   .atom/config.cson \
   .atom/init.coffee \
@@ -35,11 +37,13 @@ DOTFILES="\
   .atom/toolbar.cson \
 "
 
+INSTALL_SCRIPT_DIR=$(dirname $0)
+
 for item in $DOTFILES
 do
-  [ -r "$PWD/$item" ] && \
-  [ -e "$PWD/$item" ] && \
-  ln -sfn "$PWD/$item" "$HOME/$item"
+  [ -r "$INSTALL_SCRIPT_DIR/$item" ] && \
+  [ -e "$INSTALL_SCRIPT_DIR/$item" ] && \
+  ln -sfn "$INSTALL_SCRIPT_DIR/$item" "$HOME/$item"
 
-  echo "🍻  $PWD/$item -> $HOME/$item ... Done!"
+  echo "🍻  $INSTALL_SCRIPT_DIR/$item -> $HOME/$item ... Done!"
 done

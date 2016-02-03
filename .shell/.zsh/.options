@@ -1,0 +1,9 @@
+# Turn on Vi bindings
+set -o vi
+bindkey -v
+
+# Auto cd to dir, if it's exists and not a command
+setopt auto_cd
+
+# Make cd push the old directory onto the directory stack
+setopt auto_pushd

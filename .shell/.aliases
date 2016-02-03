@@ -1,14 +1,16 @@
-# ===== Bash
+# ===== Shell
 alias install="$HOME/Dev/System/dotfiles/install.sh"
-alias reload="source ~/.bashrc"
+
+[[ -n $BASH_VERSION ]] && alias reload="source ~/.bashrc"
+[[ -n $ZSH_VERSION ]]  && alias reload="source ~/.zshrc"
 
 # Navigation
 alias ..="cd .."
 alias ...="cd ../.."
-# Breakes `go -`
-# alias -- -="cd -"
+alias ....="cd ../../.."
 
-alias ~="cd ~"
+[[ -n $BASH_VERSION ]] && alias ~="cd ~"
+
 alias dev="cd ~/Dev"
 alias pro="cd ~/Dev/Projects"
 alias sys="cd ~/Dev/System"
@@ -58,14 +60,12 @@ alias g="git "
 alias gs="git status "
 alias ga="git add "
 alias gb="git branch "
-__git_complete gb _git_branch
 alias gdm="git dm"
 alias gc="git commit "
 alias gca="git commit --amend --reuse-message=HEAD"
 alias gd="git diff "
 alias gp="git push "
 alias go="git checkout "
-__git_complete go _git_checkout
 alias gu="git pull --rebase --prune"
 alias gr="git rebase "
 alias gri="git irebase "
@@ -77,6 +77,8 @@ alias gshp="git stash pop "
 alias gh="git history"
 alias ghg="gh --graph"
 
+[[ -n $BASH_VERSION ]] && __git_complete gb _git_branch
+[[ -n $BASH_VERSION ]] && __git_complete go _git_checkout
 
 # ===== Node
 alias ns="npm start"

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Check if Homebrew is installed
 if [ command -v brew >/dev/null 2>&1 ]; then
   echo "🚨  You don't have Homebrew installed. Please install it from http://brew.sh. Aborting."

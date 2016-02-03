@@ -13,6 +13,9 @@ brew update
 brew upgrade --all
 
 # Install tools
+brew install zsh
+brew install zsh-completions
+brew install bash-completion
 brew install cmake
 brew install git
 brew install git-lfs

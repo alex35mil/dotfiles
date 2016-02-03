@@ -1,0 +1,29 @@
+# Load completions system
+zmodload -i zsh/complist
+
+# Auto rehash commands
+zstyle ':completion:*' rehash true
+
+# Enable menuselection
+zstyle ':completion:*' menu select=1
+
+# Enable grouping the output
+zstyle ':completion:*' group-name ''
+
+# Enable color
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# Enable completion of .. directories
+zstyle ':completion:*' special-dirs true
+
+# Show comments when present
+zstyle ':completion:*' verbose yes
+
+# Add zsh-completions to fpath
+# fpath=(/usr/local/share/zsh-completions $fpath)
+
+# Add custom zsh-completions to fpath
+fpath=(~/.shell/.zsh/completions $fpath)
+
+# Load completions
+autoload -Uz compinit && compinit
