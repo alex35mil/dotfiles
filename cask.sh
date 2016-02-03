@@ -11,6 +11,8 @@ brew cask install onepassword
 brew cask install google-chrome-canary
 brew cask install google-chrome
 brew cask install torbrowser
+brew cask install ubersicht
+brew cask install caskroom/fonts/font-hack
 
 # To maintain cask:
 # brew update && brew upgrade brew-cask && brew cleanup && brew cask cleanup
