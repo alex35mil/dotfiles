@@ -1,12 +1,36 @@
 # .dotfiles
 
-Bash, iTerm, Atom, Vim, Tmux, Git, OSX, Brew, npm, rvm etc.
+Bash, Zsh, iTerm, Atom, Vim, Tmux, Git, OSX, Brew, npm, rvm etc.
 
-![Editor](./screens/editor.png?raw=true)
+![Console](./screens/console.png?raw=true)
+
+[All screens](./screens)
 
 ## Install
 
 Use `bootstrap.sh` to install all at once (never tested haha). Or run individual scripts. To apply only dotfiles run `install.sh`.
+
+### zsh
+
+To switch to `zsh` as your login shell grab it from the brew and add this to `/etc/shells`:
+
+```
+/usr/local/bin/zsh
+```
+
+Then run:
+
+```
+chsh -s $(which zsh)
+```
+
+### iTerm
+
+Use [this patch](https://github.com/jaredculp/iterm2-borderless-padding) to add breathing room to your `iTerm`. Sadly but  [`itermocil`](https://github.com/TomAnthony/itermocil) gets broken on iTerm compiled from the sources ([issue](https://github.com/TomAnthony/itermocil/issues/32)).
+
+### Others
+
+I use [`kwm`](https://github.com/koekeishiya/kwm) to manage windows (but it has issues with multiple displays). And [`Übersicht`](http://tracesof.net/uebersicht/) to reduce the noise from menu bar.
 
 ## Keyboard Shortcuts
 
@@ -34,14 +58,31 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or smth).
 #### Global
 
 ```
-* <Cmd-F1>        Toggle Console                Alfred
-* <Cmd-F2>        Toggle Atom                   Alfred
-* <Cmd-F3>        Toggle Dev Browser            Alfred
-* <Cmd-F3>        Toggle Common Browser         Alfred
+* <Cmd-F1>          Toggle Console                      Alfred
+* <Cmd-F2>          Toggle Atom                         Alfred
+* <Cmd-F3>          Toggle Dev Browser                  Alfred
+* <Cmd-F3>          Toggle Common Browser               Alfred
 
-  F3              Toggle Mission Control        System Preferences > Mission Control
-  F4              Toggle Launchpad              System Preferences > Keyboard > Shortcuts > Launchpad & Dock
-* F5              Toggle Full Screen Mode       System Preferences > Keyboard > Shortcuts > App Shortcuts
+* <Alt-Space>       Show Alfred                         Alfred
+* <Ctrl-Space>      Create TODO in Things               Things
+
+  <Cmd-Ctrl-A>      Set Space Tiling Mode To BSP        KWM
+  <Cmd-Ctrl-S>      Set Space Tiling Mode To Monocle    KWM
+  <Cmd-Ctrl-D>      Set Space Tiling Mode To Float      KWM
+* <Cmd-Ctrl-F>      Maximize / restore current window   KWM
+* <Cmd-Ctrl-.>      Focus next window                   KWM
+* <Cmd-Ctrl-,>      Focus previous window               KWM
+* <Cmd-Ctrl-R>      Rotate Window-Tree 180              KWM
+* <Cmd-Alt-Ctrl-R>  Rotate Window-Tree 90               KWM
+
+* <Ctrl-Shift-←>    Go to the left space                System Preferences > Mission Control
+* <Ctrl-Shift-→>    Go to the right space               System Preferences > Mission Control
+  <Ctrl-1>          Go to Space 1                       System Preferences > Mission Control
+  <Ctrl-2>          Go to Space 2                       System Preferences > Mission Control
+  <Ctrl-3>          Go to Space 3                       System Preferences > Mission Control
+  F3                Toggle Mission Control              System Preferences > Mission Control
+  F4                Toggle Launchpad                    System Preferences > Keyboard > Shortcuts > Launchpad & Dock
+* F5                Toggle Full Screen Mode             System Preferences > Keyboard > Shortcuts > App Shortcuts
 ```
 
 #### iTerm
