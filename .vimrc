@@ -9,10 +9,11 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'                       " Vim's Bundler
 
 Plugin 'scrooloose/nerdtree'                        " File manager
-Plugin 'bling/vim-airline'                          " Status bars
-Plugin 'edkolev/tmuxline.vim'                       " tmux status line
-Plugin 'ryanoasis/vim-devicons'                     " Icons
-Plugin 'tmux-plugins/vim-tmux-focus-events'         " iTerm & tmux focus events
+Plugin 'godlygeek/csapprox'                         " Transparent vim
+" Plugin 'bling/vim-airline'                        " Status bars
+" Plugin 'edkolev/tmuxline.vim'                     " tmux status line
+" Plugin 'ryanoasis/vim-devicons'                   " Icons
+" Plugin 'tmux-plugins/vim-tmux-focus-events'       " iTerm & tmux focus events
 Plugin 'ctrlpvim/ctrlp.vim'                         " Finder
 Plugin 'Shougo/neocomplete.vim'                     " Autocompletion
 Plugin 'Shougo/neosnippet.vim'                      " Snippets
@@ -167,7 +168,6 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['jsx'] = ''
 
 " Airline setup
-let g:airline_detect_whitespace=0
 let g:airline_powerline_fonts = 1
 let g:airline_symbols = {}
 
@@ -207,6 +207,23 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Clean"     : "⎀",
     \ "Unknown"   : "?"
     \ }
+
+let g:CSApprox_hook_post = [
+    \ 'highlight Normal            ctermbg=NONE',
+    \ 'highlight LineNr            ctermbg=NONE',
+    \ 'highlight SignifyLineAdd    cterm=bold ctermbg=NONE ctermfg=green',
+    \ 'highlight SignifyLineDelete cterm=bold ctermbg=NONE ctermfg=red',
+    \ 'highlight SignifyLineChange cterm=bold ctermbg=NONE ctermfg=yellow',
+    \ 'highlight SignifySignAdd    cterm=bold ctermbg=NONE ctermfg=green',
+    \ 'highlight SignifySignDelete cterm=bold ctermbg=NONE ctermfg=red',
+    \ 'highlight SignifySignChange cterm=bold ctermbg=NONE ctermfg=yellow',
+    \ 'highlight SignColumn        ctermbg=NONE',
+    \ 'highlight CursorLine        ctermbg=NONE cterm=NONE',
+    \ 'highlight Folded            ctermbg=NONE cterm=bold',
+    \ 'highlight FoldColumn        ctermbg=NONE cterm=bold',
+    \ 'highlight NonText           ctermbg=NONE',
+    \ 'highlight clear LineNr'
+    \]
 
 " ctrlp setup
 let g:ctrlp_working_path_mode = 'ra'
