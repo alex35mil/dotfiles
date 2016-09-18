@@ -98,8 +98,11 @@ set lcs=tab:▸\ ,eol:¬                               " Define invisibles
 " set lcs=space:·,tab:▸\ ,eol:¬                     " Or with space
 
 " Hide ~~~ noise
-hi NonText ctermfg=bg
-
+hi NonText      ctermfg=bg
+hi StatusLine   ctermbg=239  ctermfg=bg
+hi StatusLineNC ctermbg=NONE ctermfg=bg
+hi VertSplit    ctermbg=NONE ctermfg=bg
+hi ColorColumn  ctermbg=NONE
 
 " ======= Functions
 
@@ -160,37 +163,37 @@ let NERDTreeMinimalUI = 1
 let NERDTreeShowHidden = 1
 
 " Devicons setup
-let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
-let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:DevIconsEnableFoldersOpenClose = 0  " Broken: https://github.com/ryanoasis/vim-devicons/issues/130
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['jsx'] = ''
+" let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+" let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+" let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+" let g:DevIconsEnableFoldersOpenClose = 0  " Broken: https://github.com/ryanoasis/vim-devicons/issues/130
+" let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
+" let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['jsx'] = ''
 
 " Airline setup
-let g:airline_powerline_fonts = 1
-let g:airline_symbols = {}
+" let g:airline_powerline_fonts = 1
+" let g:airline_symbols = {}
 
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
+" let g:airline_symbols.branch = ''
+" let g:airline_symbols.readonly = ''
+" let g:airline_symbols.linenr = ''
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#buffer_nr_show = 1
 
-let g:airline#extensions#syntastic#enabled = 1
+" let g:airline#extensions#syntastic#enabled = 1
 
 " tmuxline setup
-let g:tmuxline_separators = {
-    \ 'left_alt': '',
-    \ 'right' : '',
-    \ 'right_alt' : '',
-    \ 'space' : ' '
-    \ }
+" let g:tmuxline_separators = {
+    " \ 'left_alt': '',
+    " \ 'right' : '',
+    " \ 'right_alt' : '',
+    " \ 'space' : ' '
+    " \ }
 
 " netrw setup
 let g:netrw_localrmdir='rm -r'
