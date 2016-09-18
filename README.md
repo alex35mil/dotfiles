@@ -8,7 +8,9 @@ Bash, Zsh, iTerm, Atom, Vim, Tmux, Git, OSX, Brew, npm, rvm etc.
 
 ## Install
 
-Use `bootstrap.sh` to install all at once (never tested haha). Or run individual scripts. To apply only dotfiles run `install.sh`.
+Use `bootstrap.sh` to install all at once (never tested haha). Or run individual scripts.
+
+To apply only dotfiles run `install.sh`.
 
 ### zsh
 
@@ -26,11 +28,11 @@ chsh -s $(which zsh)
 
 ### iTerm
 
-Use [this patch](https://github.com/jaredculp/iterm2-borderless-padding) to add breathing room to your `iTerm`. Sadly but  [`itermocil`](https://github.com/TomAnthony/itermocil) gets broken on iTerm compiled from the sources ([issue](https://github.com/TomAnthony/itermocil/issues/32)).
+Use [this patch](https://github.com/jaredculp/iterm2-borderless-padding) to add breathing room to your `iTerm` (mine is 30px).
 
 ### Others
 
-I use [`kwm`](https://github.com/koekeishiya/kwm) to manage windows (but it has issues with multiple displays). And [`Übersicht`](http://tracesof.net/uebersicht/) to reduce the noise from menu bar.
+I use [`kwm`](https://github.com/koekeishiya/kwm) to manage windows. And [`Übersicht`](http://tracesof.net/uebersicht/) to reduce the noise from menu bar.
 
 ## Keyboard Shortcuts
 
@@ -49,7 +51,7 @@ System Preferences > Keyboard > Keyboard > [x] Use F1, F2, ...
 ```
 
 #### ProTip #3
-Use F7 – F12 keys for iTunes and volume controls (via Alfred or smth).
+Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
 
 ### Cheatsheets
 
@@ -58,31 +60,40 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or smth).
 #### Global
 
 ```
-* <Cmd-F1>          Toggle Console                      Alfred
-* <Cmd-F2>          Toggle Atom                         Alfred
-* <Cmd-F3>          Toggle Dev Browser                  Alfred
-* <Cmd-F3>          Toggle Common Browser               Alfred
+* <Cmd-F1>             Toggle Console                      Alfred
+* <Cmd-F2>             Toggle Atom                         Alfred
+* <Cmd-F3>             Toggle Browser                      Alfred
 
-* <Alt-Space>       Show Alfred                         Alfred
-* <Ctrl-Space>      Create TODO in Things               Things
+  <Ctrl-F2>            Show menu bar
+  <Ctrl-F3>            Show dock
+* <Alt-Space>          Show Alfred                         Alfred
+* <Ctrl-Space>         Create TODO in Things               Things
 
-  <Cmd-Ctrl-A>      Set Space Tiling Mode To BSP        KWM
-  <Cmd-Ctrl-S>      Set Space Tiling Mode To Monocle    KWM
-  <Cmd-Ctrl-D>      Set Space Tiling Mode To Float      KWM
-* <Cmd-Ctrl-F>      Maximize / restore current window   KWM
-* <Cmd-Ctrl-.>      Focus next window                   KWM
-* <Cmd-Ctrl-,>      Focus previous window               KWM
-* <Cmd-Ctrl-R>      Rotate Window-Tree 180              KWM
-* <Cmd-Alt-Ctrl-R>  Rotate Window-Tree 90               KWM
+  <Cmd-Ctrl-A>         Set Space Tiling Mode To BSP        KWM
+  <Cmd-Ctrl-S>         Set Space Tiling Mode To Monocle    KWM
+  <Cmd-Ctrl-D>         Set Space Tiling Mode To Float      KWM
+  <Cmd-Ctrl-F>         Set current window to float         KWM
+  <Cmd-Ctrl-B>         Toggle active border                KWM
+  <Cmd-Ctrl-M>         Mark/Swap current window            KWM
+* <Cmd-Ctrl-Enter>     Maximize/Restore current window     KWM
+* <Cmd-Ctrl-Arrow>     Focus window in direction           KWM
+* <Cmd-Ctrl-[/]>       Focus next/previous window          KWM
+* <Cmd-Alt-Arrow>      Swap w/ next window                 KWM
+* <Cmd-Shift-Up/Down>  Change split-ratio                  KWM
+* <Cmd-Ctrl-0>         Focus primary display               KWM
+* <Cmd-Ctrl-9>         Focus secondary display             KWM
+* <Cmd-Alt-0>          Move window to primary display      KWM
+* <Cmd-Alt-9>          Move window to secondary display    KWM
 
-* <Ctrl-Shift-←>    Go to the left space                System Preferences > Mission Control
-* <Ctrl-Shift-→>    Go to the right space               System Preferences > Mission Control
-  <Ctrl-1>          Go to Space 1                       System Preferences > Mission Control
-  <Ctrl-2>          Go to Space 2                       System Preferences > Mission Control
-  <Ctrl-3>          Go to Space 3                       System Preferences > Mission Control
-  F3                Toggle Mission Control              System Preferences > Mission Control
-  F4                Toggle Launchpad                    System Preferences > Keyboard > Shortcuts > Launchpad & Dock
-* F5                Toggle Full Screen Mode             System Preferences > Keyboard > Shortcuts > App Shortcuts
+* <Ctrl-Shift-←>       Go to the left space                System Preferences > Mission Control
+* <Ctrl-Shift-→>       Go to the right space               System Preferences > Mission Control
+  <Ctrl-1>             Go to Space 1                       System Preferences > Mission Control
+  <Ctrl-2>             Go to Space 2                       System Preferences > Mission Control
+  <Ctrl-N>             Go to Space N                       System Preferences > Mission Control
+  F3                   Toggle Mission Control              System Preferences > Mission Control
+  F4                   Toggle Launchpad                    System Preferences > Keyboard > Shortcuts > Launchpad & Dock
+* F5                   Toggle Full Screen Mode             System Preferences > Keyboard > Shortcuts > App Shortcuts
+* F6                   Toggle Do Not Disturb Mode          System Preferences > Keyboard > Shortcuts > App Shortcuts
 ```
 
 #### iTerm
@@ -92,6 +103,7 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or smth).
   <Cmd-T>                 New Tab
   <Cmd-D>                 New Pane on the Right
   <Cmd-Shift-D>           New Pane on the Bottom
+  <Cmd-K>                 Clear history
   <Cmd-Right>             Next Tab
   <Cmd-Left>              Previous Tab
   <Cmd-Number>            N Tab
@@ -99,8 +111,7 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or smth).
   <Cmd-[>                 Previous Pane
   <Cmd-Alt-Arrow/Number>  Navigate Panes
   <Cmd-Ctrl-Arrow>        Resize Pane
-  <Cmd-Shift-Enter>       Maximize / Restore Pane
-  <Cmd-K>                 Clear history
+  <Cmd-Shift-Enter>       Maximize/Restore Pane
 ```
 
 #### Atom
@@ -126,10 +137,8 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or smth).
 * d                       Delete
 * c                       Duplicate
   <Cmd-Number>            Open file in N Pane
-* <Cmd-Alt-p>             Pin Tree View
-* <Cmd-Alt-u>             Unpin Tree View
 * \                       Find current file in the tree (in Normal mode)
-  <Cmd-\>                                               (in all modes)
+  <Cmd-\>                 Toggle focus on Tree view (in all modes)
 
                           ### Fuzzy Finder
 * <Cmd-r>                 Toggle buffer finder
@@ -147,6 +156,7 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or smth).
                           ### Panes / Buffers
 * F2                      Maximize current
 * <Ctrl-Arrow>            Move around
+  <Cmd-k> Arrow           Copy current into new split on provided direction
 * <Cmd-Ctrl-Alt-Arrow>    Move current to new split in provided direction
 * <Cmd-Ctrl-w>            Close others (in current split)
 
@@ -163,10 +173,13 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or smth).
 * <Cmd-d>                 Duplicate line
   <Cmd-Ctrl-Up>           Move line up
   <Cmd-Ctrl-Down>         Move line down
+* <Ctrl-Shift-/>          Align stuff
 
                           ### Editor - Normal mode
   Tab                     Indent
   <Shift-Tab>             Un-indent
+* <Shift-Alt-Up>          Move line up
+* <Shift-Alt-Down>        Move line down
   i                       Go to Insert mode (place cursor before char)
   a                       Go to Insert mode (place cursor after char)
   s                       Remove selected char(s) and go to Insert mode
@@ -177,11 +190,11 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or smth).
 * +                       New line above (w/o going in Insert mode)
 * =                       New line below (w/o going in Insert mode)
   w                       Move to the beginning of the next word
-  W                       Move to the beginning of the next word (ignore commas, dots etc., only spaces are seporators)
+  W                       Move to the beginning of the next word (ignore commas, dots etc., only spaces are separators)
   e                       Move to the end of the next word
-  E                       Move to the end of the next word (ignore commas, dots etc., only spaces are seporators)
+  E                       Move to the end of the next word (ignore commas, dots etc., only spaces are separators)
   b                       Move to the beginning of the previous word
-  B                       Move to the beginning of the previous word (ignore commas, dots etc., only spaces are seporators)
+  B                       Move to the beginning of the previous word (ignore commas, dots etc., only spaces are separators)
   f <char>                Search froward for the <char> (stop on the <char>)
   F <char>                Search backward for the <char> (stop on the <char>)
   t <char>                Search froward for the <char> (stop on the symbol before the <char>)
