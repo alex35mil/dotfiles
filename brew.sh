@@ -22,7 +22,6 @@ brew install git-lfs
 brew install nginx
 brew install tmux
 brew install reattach-to-user-namespace
-brew install TomAnthony/brews/itermocil
 brew install vim --override-system-vi
 brew install wget --with-iri
 brew install curl
@@ -30,8 +29,9 @@ brew install tree
 brew install imagemagick --with-webp
 brew install node
 brew install postgresql
-brew install leiningen
+brew install mongodb
 brew install rlwrap
+brew install koekeishiya/kwm/kwm
 
 # Remove outdated versions from the cellar
 brew cleanup

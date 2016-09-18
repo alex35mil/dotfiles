@@ -5,10 +5,8 @@ brew tap caskroom/cask
 
 # Install apps
 brew cask install iterm2
-brew cask install spectacle
 brew cask install dropbox
 brew cask install onepassword
-brew cask install google-chrome-canary
 brew cask install google-chrome
 brew cask install torbrowser
 brew cask install ubersicht

@@ -31,7 +31,7 @@ defaults write com.apple.BezelServices kDim -bool true
 defaults write com.apple.BezelServices kDimTime -int 300
 
 # Save screenshots to the desktop's `sreens` folder
-defaults write com.apple.screencapture location -string "${HOME}/Desktop/screens"
+defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screens"
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
