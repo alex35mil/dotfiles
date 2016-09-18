@@ -9,23 +9,17 @@
     enableAutoConfirmSingleSuggestion: false
     minimumWordLength: 2
     strictMatching: true
-  "autohide-tree-view":
-    animationSpeed: 0
-    minWidth: 0
-    showOn: "none"
   autosave:
     enabled: true
   "color-picker":
     abbreviateValues: true
     preferredFormat: "HEX"
   core:
-    disabledPackages: [
-      "linter-scss-lint"
-    ]
     packagesWithKeymapsDisabled: [
       "tool-bar"
       "nrepl"
       "maximize-panes"
+      "autohide-tree-view"
     ]
     themes: [
       "nucleus-dark-ui"
@@ -35,33 +29,41 @@
     template: "atom/<%= projectName %>"
   editor:
     fontFamily: "Source Code Pro"
-    fontSize: 13
+    fontSize: 15
     invisibles:
       eol: " "
       space: " "
+    preferredLineLength: 100
     showIndentGuide: true
     showInvisibles: true
   "exception-reporting":
     userId: "b6743906-56c6-7cc4-4c17-1e358db56a15"
   "file-icons":
     coloured: false
+  "file-watcher":
+    promptWhenFileHasChangedOnDisk: false
   "flex-tool-bar":
     showConfigButton: false
+  "git-blame":
+    columnWidth: 250
+    showOnlyLastNames: false
   "language-babel":
     babelMapsAddUrl: false
     transpileOnSave: false
   linter:
     errorPanelHeight: 110
-  "linter-clojure": {}
   "linter-eslint": {}
+  "linter-flow":
+    executablePath: "./node_modules/.bin/flow"
   "linter-scss-lint":
-    executablePath: "/Users/Alex/.rvm/gems/ruby-2.2.4@global/bin/scss-lint"
+    disableWhenNoConfigFileInPath: true
+    executablePath: "/Users/Alex/.rvm/gems/ruby-2.3.0@global/bin/scss-lint"
   "markdown-preview":
     useGitHubStyle: true
-  react: {}
   tabs:
     enableVcsColoring: true
-  "todo-show": {}
+  "todo-show":
+    sortBy: "Type"
   "tool-bar":
     position: "Left"
   "tree-view": {}
@@ -70,9 +72,24 @@
   welcome:
     showOnStartup: false
   zentabs:
-    maximumOpenedTabs: 7
+    maximumOpenedTabs: 20
     neverCloseDirty: true
     neverCloseNew: true
+".babel.regexp.source":
+  editor:
+    preferredLineLength: 100
 ".clojure.source":
   editor:
     showIndentGuide: false
+".css.postcss.source":
+  editor:
+    preferredLineLength: 100
+".css.postcss.source.sugarss":
+  editor:
+    preferredLineLength: 100
+".dockerfile.source":
+  editor:
+    preferredLineLength: 100
+".js.jsx.source":
+  editor:
+    preferredLineLength: 100

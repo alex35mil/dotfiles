@@ -7,6 +7,7 @@
 # ======= Bindings
 
 'body':
+  'f5': 'window:toggle-full-screen'
   'cmd-, k': 'settings-view:show-keybindings'
   'cmd-, p': 'settings-view:uninstall-packages'
   'cmd-, i': 'settings-view:install-packages-and-themes'
@@ -27,6 +28,7 @@
   'cmd-shift-enter': 'pane:split-down'
 
 '.platform-darwin atom-text-editor':
+  'ctrl-f2': 'unset!'
   'cmd-r': 'unset!'
   'cmd-alt-p': 'unset!'
   'ctrl-cmd-w': 'pane:close-other-items'
@@ -55,17 +57,15 @@
   'ctrl-down': 'window:focus-pane-below'
   'ctrl-left': 'window:focus-pane-on-left'
 
-  'cmd-ctrl-alt-up': 'move-panes:move-up'
-  'cmd-ctrl-alt-right': 'move-panes:move-right'
-  'cmd-ctrl-alt-down': 'move-panes:move-down'
-  'cmd-ctrl-alt-left': 'move-panes:move-left'
-
   'cmd-l j': 'set-syntax:Babel ES6 JavaScript'
   'cmd-l r': 'set-syntax:JavaScript (JSX)'
 
   'cmd-d': 'editor:duplicate-lines'
   'alt-up': 'vim-mode:scroll-half-screen-up'
   'alt-down': 'vim-mode:scroll-half-screen-down'
+  'shift-alt-up': 'editor:move-line-up'
+  'shift-alt-down': 'editor:move-line-down'
+  'ctrl-shift-b': 'git-blame:toggle'
 
 'atom-text-editor.vim-mode:not(.insert-mode)':
   '=': 'editor:newline-below'

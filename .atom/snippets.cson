@@ -4,7 +4,7 @@
 
   'console.log':
     'prefix': 'l'
-    'body': 'console.log($1);'
+    'body': 'console.log($1)'
 
   'const':
     'prefix': 'c'
@@ -13,6 +13,46 @@
   'import':
     'prefix': 'i'
     'body': 'import ${1:module} from \'${0:location}\';'
+
+  'import type':
+    'prefix': 'it'
+    'body': 'import type { ${1:Type} } from \'${0:location}\';'
+
+  'import react':
+    'prefix': 'ir'
+    'body': 'import React from \'react\';'
+
+  'import react w/ Component':
+    'prefix': 'irc'
+    'body': 'import React, { Component } from \'react\';'
+
+  'import immutable':
+    'prefix': 'ii'
+    'body': 'import Immutable from \'immutable\';'
+
+  'import immutable Map':
+    'prefix': 'iim'
+    'body': 'import { Map } from \'immutable\';'
+
+  'import immutable List':
+    'prefix': 'iil'
+    'body': 'import { List } from \'immutable\';'
+
+  'import immutable List':
+    'prefix': 'iis'
+    'body': 'import { Set } from \'immutable\';'
+
+  'import lodash':
+    'prefix': 'il'
+    'body': 'import _ from \'lodash/fp\';'
+
+  'import classnames':
+    'prefix': 'ic'
+    'body': 'import classNames from \'classnames\';'
+
+  'import styles':
+    'prefix': 'is'
+    'body': 'import styles from \'./styles.css\';'
 
   'require':
     'prefix': 'r'
@@ -23,7 +63,7 @@
     'body': """
       try {
         ${1:expression}
-      } catch (err) {
+      } catch (error) {
         ${0:// handle error...}
       }
     """
@@ -31,6 +71,10 @@
   'this.props':
     'prefix': 'tp'
     'body': 'this.props'
+
+  'props':
+    'prefix': 'p'
+    'body': 'props'
 
   'this.context':
     'prefix': 'tc'
@@ -44,11 +88,25 @@
     'prefix': 'tss'
     'body': 'this.setState({${1}});'
 
+  'styles':
+    'prefix': 's'
+    'body': 'styles'
+
   'constructor':
     'prefix': 'cnstr'
     'body': """
-      constructor(props, context) {
-        super(props, context);
+      constructor(...args: Array<*>) {
+        super(...args);
+
+        ${1}
+      }
+    """
+
+  'constructor':
+    'prefix': 'cnstrp'
+    'body': """
+      constructor(props: Props, ...restArgs: Array<*>) {
+        super(props, ...restArgs);
 
         ${1}
       }
@@ -57,11 +115,16 @@
   'React.Component':
     'prefix': 'rc'
     'body': """
-      import React, { PropTypes } from 'react';
+      /* @flow */
 
-      export default class ${1:Component} extends React.Component {
+      import React, { Component } from 'react';
 
-        static propTypes = {};
+
+      type Props = {};
+
+      export default class ${1:Component} extends Component {
+
+        props: Props;
 
         render() {
           return (
@@ -70,6 +133,57 @@
         }
 
       }
+    """
+
+  'React.Functional.Component':
+    'prefix': 'rfc'
+    'body': """
+      /* @flow */
+
+      import React from 'react';
+
+
+      const ${1:Component} = (props) => (
+        // jsx...
+      );
+
+
+      export default ${1:Component};
+    """
+
+  'React.HOC':
+    'prefix': 'rh'
+    'body': """
+      /* @flow */
+
+      import React, { Component } from 'react';
+
+
+      type Props = {};
+
+      type NextProps = Props & State & Handlers;
+      type NextComponent = (props: NextProps) => React.Element<*>;
+
+
+      const ${1:withHOC} = (${2:NextComponent}: NextComponent) => class extends Component {
+
+        props: Props;
+
+        render() {
+          return (
+            <${2:NextComponent} />
+          );
+        }
+      };
+
+      export default ${1:withHOC};
+    """
+
+  'flow':
+    'prefix': 'f'
+    'body': """
+      /* @flow */
+
     """
 
   'PropTypes.shape':
@@ -193,11 +307,3 @@
   'JSDoc@returns':
     'prefix': '@r'
     'body': '@returns {${1:type}} ${0:- Note.}'
-
-
-# ======= Clojure
-
-'.source.clojure':
-  'console.log':
-    'prefix': 'log'
-    'body': '(.log js/console $1)'
