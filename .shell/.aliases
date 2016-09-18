@@ -1,5 +1,5 @@
 # ===== Shell
-alias install="$HOME/Dev/System/dotfiles/install.sh"
+alias ish="$HOME/Dev/System/dotfiles/install.sh"
 
 [[ -n $BASH_VERSION ]] && alias reload="source ~/.bashrc"
 [[ -n $ZSH_VERSION ]]  && alias reload="source ~/.zshrc"
@@ -17,12 +17,16 @@ alias sys="cd ~/Dev/System"
 alias libs="cd ~/Dev/Libs"
 alias sand="cd ~/Dev/Sandboxes"
 
+alias fng="cd ~/Dev/Projects/shakacode.com/fng"
+alias dots="cd ~/Dev/System/dotfiles"
+
 alias hosts="sudo $EDITOR /etc/hosts"
 
 # Listings
-if ls --color > /dev/null 2>&1; then # GNU `ls`
+if ls --color > /dev/null 2>&1   # GNU `ls`
+then
   colorflag="--color"
-else                                 # OSX `ls`
+else                             # OSX `ls`
   colorflag="-G"
 fi
 
@@ -34,6 +38,8 @@ alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+alias netcfg="sudo ifconfig"
+alias netrst="sudo ifconfig en0 down; sudo route flush; sudo ifconfig en0 up;"
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
@@ -47,11 +53,41 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
 
-# ===== Clojure
-alias cba="lein cljsbuild auto "
-alias cbo="lein cljsbuild once "
-alias cs="lein ring server "
-alias cr="lein repl"
+# ===== Homebrew
+alias b="brew "
+alias bd="brew doctor"
+alias bup="brew update"
+alias bod="brew outdated"
+alias bcln="brew cleanup"
+alias binfo="brew info "
+alias bi="brew install "
+alias bl="brew list "
+alias bupg="brew upgrade "
+alias bun="brew uninstall "
+
+
+# ===== Homebrew Cask
+alias bc="brew cask "
+alias bcd="brew cask doctor"
+alias bccln="brew cask cleanup"
+alias bcinfo="brew cask info "
+alias bci="brew cask install "
+alias bcl="brew cask list "
+alias bcs="brew cask search "
+alias bcun="brew cask uninstall "
+
+
+# ===== Docker
+alias du="docker-compose up"
+alias dub="docker-compose up --build"
+alias dps="docker ps"
+alias dpsa="docker ps -a"
+alias di="docker images"
+alias ds="docker stop "
+alias dsa='docker stop $(docker ps -a -q)'
+alias dr="docker rm "
+alias dra='docker rm $(docker ps -a -q)'
+alias dri="docker rmi "
 
 
 # ===== Git
@@ -62,12 +98,16 @@ alias ga="git add "
 alias gb="git branch "
 alias gdm="git dm"
 alias gc="git commit "
+alias gcm="git commit -m "
 alias gca="git commit --amend --reuse-message=HEAD"
+alias gcu="git reset HEAD~"
 alias gd="git diff "
 alias gp="git push "
+alias gpf="git push --force"
 alias go="git checkout "
 alias gu="git pull --rebase --prune"
 alias gr="git rebase "
+alias grm="git rebase master"
 alias gri="git irebase "
 alias grst="git reset "
 alias grsthard="git reset --hard HEAD"
@@ -76,23 +116,43 @@ alias gshl="git stash list"
 alias gshp="git stash pop "
 alias gh="git history"
 alias ghg="gh --graph"
+alias gt="git tag "
+alias gta="git tag -a "
+alias gsm="git submodule "
+alias gsma="git submodule add -b master "
+alias gsmu="git submodule update --remote --merge "
+alias gpsc="git push --recurse-submodules=check "
+alias gpsd="git push --recurse-submodules=on-demand "
 
 [[ -n $BASH_VERSION ]] && __git_complete gb _git_branch
 [[ -n $BASH_VERSION ]] && __git_complete go _git_checkout
 
+
+# ===== KWM
+alias k="kwmc "
+alias kq="kwmc quit"
+alias kr="kwmc config reload"
+alias krst="brew services restart kwm"
+alias 211="kwmc tree restore 2-rows--medium"
+alias 212="kwmc tree restore 2-rows--large"
+alias 221="kwmc tree restore 2-cols--medium"
+
+
 # ===== Node
 alias ns="npm start"
 alias nt="npm test"
-alias nr="npm run"
+alias nr="npm run "
 alias nrb="npm run build"
 alias nrp="npm run prod"
 alias nrl="npm run lint"
+alias nrf="npm run flow"
 alias ni="npm install "
 alias nis="npm install --save "
-alias nid="npm install --save-dev "
+alias nid="npm install --save-dev --save-exact "
 alias nrs="npm remove --save "
 alias nrd="npm remove --save-dev "
 alias nsw="npm shrinkwrap "
+alias nfuck="rm -rf node_modules && npm cache clean && npm install"
 alias no="npm outdated"
 alias nlg="npm ls -g --depth=0"
 
@@ -100,12 +160,12 @@ alias nlg="npm ls -g --depth=0"
 # ===== Rails
 alias rs="rails server "
 alias rc="rails console "
-alias rg="rails generate "
 
-alias bi="bundle install "
+alias ri="bundle install "
 
 alias rr="rake routes"
 alias rdbm="rake db:migrate"
+alias rdbr="rake db:reset"
 
 
 # ===== Ruby

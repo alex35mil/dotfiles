@@ -7,3 +7,6 @@ setopt auto_cd
 
 # Make cd push the old directory onto the directory stack
 setopt auto_pushd
+
+# Append shell session history list to the history file
+setopt inc_append_history

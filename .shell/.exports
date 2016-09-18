@@ -1,16 +1,33 @@
-# Add RVM to PATH for scripting
-export PATH="$PATH:$HOME/.rvm/bin"
+# Add RVM & KWM to the $PATH
+export PATH="$PATH:$HOME/.rvm/bin:$HOME/.bin/kwm"
 
 # Set vim as the default editor
 export EDITOR="vim"
-export VISUAL="vim"
+export VISUAL=$EDITOR
 
 # Set terminal type
 export TERM="xterm-256color"
 
 # Set colors for `ls` command
-export CLICOLOR=1;
+export CLICOLOR=1
 # OSX
 export LSCOLORS="gxfxcxdxbxegedabagacad"
 # GNU
 export LS_COLORS="di=36:ln=35;40:so=32;40:pi=33;40:ex=31:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
+
+export DISABLE_AUTO_TITLE="true"
+
+# Set history file
+if [[ -n $BASH_VERSION ]]; then
+  export HISTFILE="$HOME/.bash_history"
+elif [[ -n $ZSH_VERSION ]]; then
+  export HISTFILE="$HOME/.zsh_history"
+fi
+
+# Set history size
+export HISTSIZE=10000
+export SAVEHIST=10000
+
+# Set locals
+export ALFRED="$HOME/.alfred"
+export KWM="$HOME/.kwm"
