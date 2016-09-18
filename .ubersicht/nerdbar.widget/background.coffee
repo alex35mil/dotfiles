@@ -1,4 +1,4 @@
-command: ""
+refreshFrequency: false
 
 render: (output) ->
   ""
@@ -6,8 +6,8 @@ render: (output) ->
 style: """
   top: 0
   left: 0
-  height: 20px
+  height: 25px
   width: 100%
-  background-color: rgba(0, 0, 0, .3)
+  background-color: #202020
   z-index: -1
 """
