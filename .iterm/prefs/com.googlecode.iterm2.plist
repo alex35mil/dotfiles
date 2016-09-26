@@ -401,15 +401,15 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>806 983 606 456 0 0 3440 1440 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>2203 399 700 622 0 0 3440 1440 </string>
+	<string>2620 738 700 622 0 0 3440 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>382 578 796 473 0 0 3440 1440 </string>
+	<string>2024 221 796 473 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>62 41 3316 1338 0 0 3440 1440 </string>
+	<string>61 722 2148 654 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>62 41 3316 1338 0 0 3440 1440 </string>
+	<string>61 45 2148 654 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
-	<string>648 41 570 698 0 0 1280 800 </string>
+	<string>62 41 3316 1338 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 11</key>
 	<string>63 41 1154 698 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 12</key>
@@ -417,19 +417,19 @@
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>2228 41 1148 1338 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>62 323 3316 1050 0 0 3440 1440 </string>
+	<string>60 323 1652 1050 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>62 41 3316 1338 0 0 3440 1440 </string>
+	<string>62 42 3316 258 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
-	<string>60 41 1652 1338 0 0 3440 1440 </string>
+	<string>61 722 2148 654 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 6</key>
-	<string>62 41 3316 1338 0 0 3440 1440 </string>
+	<string>61 45 2148 654 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 7</key>
-	<string>1727 722 1652 654 0 0 3440 1440 </string>
+	<string>2228 718 1148 662 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 8</key>
-	<string>1727 42 1652 1338 0 0 3440 1440 </string>
+	<string>2228 45 1148 654 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 9</key>
-	<string>62 44 3316 456 0 0 3440 1440 </string>
+	<string>1727 323 1652 1050 0 0 3440 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1162,7 +1162,7 @@
 	<key>RunJobsInServers</key>
 	<false/>
 	<key>SUEnableAutomaticChecks</key>
-	<true/>
+	<false/>
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
@@ -1170,7 +1170,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-09-18T07:40:30Z</date>
+	<date>2016-09-26T07:58:31Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>Secure Input</key>
