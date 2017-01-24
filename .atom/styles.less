@@ -1,24 +1,102 @@
 /* Stylesheet */
 
-.tree-view {}
-
-// Make tree view vizible when pane is maximized
+// Make tree view visible when pane is maximized
 .tree-view-resizer[data-autohide] {
   z-index: 1000;
 }
 
-atom-text-editor,
-atom-text-editor::shadow {
 
-  // Make white sexy
-  color: #e6e6bd;
+@panels-bg-color: #2a2a2a;
+@panels-top-label-margins: 20px 20px 0;
+
+atom-workspace {
+
+  // Adjust modal styles
+  .overlay,
+  atom-panel.modal {
+    background-color: @panels-bg-color;
+
+    .tree-view-dialog label:first-child {
+      margin: @panels-top-label-margins;
+    }
+  }
+
+  .overlay > * > *,
+  atom-panel.modal > * > * {
+    &:not(.list-group) {
+      margin: 20px;
+    }
+
+    &.info-message {
+      margin: @panels-top-label-margins;
+    }
+  }
+
+  .select-list ol.list-group li.two-lines .secondary-line,
+  .select-list ol.list-group li.two-lines .secondary-line {
+    color: inherit;
+
+    .character-match {
+      color: #fff;
+    }
+  }
+
+  // Adjust nuclide status bar styles
+  .footer .status-bar {
+    background-color: @panels-bg-color;
+
+    .highlight,
+    .highlight-warning,
+    .highlight-error {
+      border-radius: 0;
+      font-size: inherit;
+    }
+
+    .highlight {
+      border: 1px solid #444;
+      background-color: transparent;
+      color: #555;
+
+      &:last-child {
+        border-left: 0;
+      }
+    }
+
+    .highlight-warning {
+      border: 1px solid #de935f;
+      background-color: #de935f;
+
+      &:last-child {
+        border-left: 0;
+      }
+    }
+
+    .highlight-error {
+      border: 1px solid #cc6666;
+      background-color: #cc6666;
+    }
+  }
+}
+
+
+@white: #e6e6bd;
+
+atom-text-editor,
+atom-text-editor.editor {
+
+  // Sexy white
+  color: @white;
+
+  .syntax--meta {
+    color: @white;
+  }
 
   // Make line numbers less visible
   .gutter {
     color: #666;
   }
 
-  // Make thin guides sexy
+  // Make thin guides less visible
   .indent-guide,
   .wrap-guide {
     box-shadow: inset 1px 0 0 #2a2a2a;
@@ -36,30 +114,45 @@ atom-text-editor::shadow {
 
   // Redefine some syntax colors
   .variable,
-  .entity.name.tag {
+  .syntax--variable {
     color: #f0c674;
   }
-
 }
 
-/* Setup icons */
+// Adjust nuclide diagnostic message layout
+.nuclide-diagnostics-gutter-ui-popup {
+  .nuclide-diagnostics-gutter-ui-popup-header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding: 5px 12px;
+  }
 
-// This file is symlinked, so going up-up-up all the way to ~
-@import "../../../../.atom/packages/file-icons/styles/items";
-@import "../../../../.atom/packages/file-icons/styles/icons";
+  .highlight-error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    padding: 3px 5px;
+    line-height: 1;
+  }
 
-.file-icons-tab-pane-icon @{pane-tab-selector}:before {
-  display: inline-block;
-  position: relative;
-  top: -2px !important;
+  .btn-xs {
+    display: inline-flex;
+    align-self: center;
+    padding: 6px 8px;
+    height: auto;
+    line-height: 1.1;
+  }
 }
 
-.file-icons-tab-pane-icon @{pane-tab-selector},
-.icon-file-text {
-  &[data-name$="package.json"]:before { .devicons; content: "\e681"; }
-  &[data-name$=".js"]:before          { .devicons; content: "\e618"; }
-  &[data-name$=".jsx"]:before         { .devicons; content: "\e618"; }
-  &[data-name$=".spec.js"]:before     { .devicons; content: "\e688"; }
-  &[data-name$=".spec.jsx"]:before    { .devicons; content: "\e688"; }
-  &[data-name$=".scss"]:before        { .octicons; content: "\f0d1"; }
-}
+
+// Setup icons
+.icon[data-name$="package.json"]:before { font-family: "Devicons"; content: "\e681"; }
+.icon[data-name$=".js"]:before          { font-family: "Devicons"; content: "\e618"; }
+.icon[data-name$=".jsx"]:before         { font-family: "Devicons"; content: "\e618"; }
+.icon[data-name$=".spec.js"]:before     { font-family: "Octicons Regular"; content: "\f076"; }
+.icon[data-name$=".spec.jsx"]:before    { font-family: "Octicons Regular"; content: "\f076"; }
+.icon[data-name$=".css"]:before         { font-family: "Octicons Regular"; content: "\f0d1"; }
+.icon[data-name$=".scss"]:before        { font-family: "Octicons Regular"; content: "\f0d1"; }
+.icon[data-name$=".less"]:before        { font-family: "Octicons Regular"; content: "\f0d1"; }

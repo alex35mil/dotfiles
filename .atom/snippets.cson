@@ -4,11 +4,75 @@
 
   'console.log':
     'prefix': 'l'
-    'body': 'console.log($1)'
+    'body': 'console.log(${0})'
+
+  'console.log ||':
+    'prefix': 'lr'
+    'body': 'console.log(${0}) ||'
+
+  'console.log.jsx':
+    'prefix': 'lx'
+    'body': '{console.log(${0})}'
+
+  'debugger':
+    'prefix': 'dbg'
+    'body': 'debugger'
 
   'const':
     'prefix': 'c'
     'body': 'const ${1:name} = ${0:value};'
+
+  'type':
+    'prefix': 't'
+    'body': 'type ${1:name} = ${0:value};'
+
+  'type Props':
+    'prefix': 'tp'
+    'body': 'type Props = {${0}};'
+
+  'type exact':
+    'prefix': 'te'
+    'body': """
+      type ${1:name} = {|
+        ${0}
+      |};
+    """
+
+  'export default':
+    'prefix': 'ed'
+    'body': 'export default ${0};'
+
+  'export default function':
+    'prefix': 'edf'
+    'body': """
+      export default function ${1:myFunction}(${2:...args}) {
+        ${0}
+      }
+    """
+
+  'export const':
+    'prefix': 'ec'
+    'body': 'export const ${1:name} = ${0:value};'
+
+  'export function':
+    'prefix': 'ef'
+    'body': """
+      export function ${1:myFunction}(${2:...args}) {
+        ${0}
+      }
+    """
+
+  'export type':
+    'prefix': 'et'
+    'body': 'export type ${1:name} = ${0:value};'
+
+  'export exact type':
+    'prefix': 'eet'
+    'body': """
+      export type ${1:name} = {|
+        ${0}
+      |};
+    """
 
   'import':
     'prefix': 'i'
@@ -38,7 +102,7 @@
     'prefix': 'iil'
     'body': 'import { List } from \'immutable\';'
 
-  'import immutable List':
+  'import immutable Set':
     'prefix': 'iis'
     'body': 'import { Set } from \'immutable\';'
 
@@ -59,7 +123,7 @@
     'body': 'const ${1:module} = require(\'${0:location}\');'
 
   'try/catch':
-    'prefix': 'tc'
+    'prefix': 'trc'
     'body': """
       try {
         ${1:expression}
@@ -69,7 +133,7 @@
     """
 
   'this.props':
-    'prefix': 'tp'
+    'prefix': 'rtp'
     'body': 'this.props'
 
   'props':
@@ -77,20 +141,27 @@
     'body': 'props'
 
   'this.context':
-    'prefix': 'tc'
+    'prefix': 'rtc'
     'body': 'this.context'
 
   'this.state':
-    'prefix': 'ts'
+    'prefix': 'rts'
     'body': 'this.state'
 
   'this.setState':
-    'prefix': 'tss'
+    'prefix': 'rtss'
     'body': 'this.setState({${1}});'
 
   'styles':
     'prefix': 's'
     'body': 'styles'
+
+  'flow':
+    'prefix': 'f'
+    'body': """
+      /* @flow */
+
+    """
 
   'constructor':
     'prefix': 'cnstr'
@@ -102,7 +173,7 @@
       }
     """
 
-  'constructor':
+  'constructor w/ props':
     'prefix': 'cnstrp'
     'body': """
       constructor(props: Props, ...restArgs: Array<*>) {
@@ -147,7 +218,6 @@
         // jsx...
       );
 
-
       export default ${1:Component};
     """
 
@@ -164,7 +234,6 @@
       type NextProps = Props & State & Handlers;
       type NextComponent = (props: NextProps) => React.Element<*>;
 
-
       const ${1:withHOC} = (${2:NextComponent}: NextComponent) => class extends Component {
 
         props: Props;
@@ -179,12 +248,225 @@
       export default ${1:withHOC};
     """
 
-  'flow':
-    'prefix': 'f'
+  'story':
+    'prefix': 'st'
     'body': """
       /* @flow */
 
+      import type { $ReducerHandler } from 'types/redux';
+      import type { $StoreState } from './initialState';
+
+      ${0:// stf / staf / stsup ...}
     """
+
+  'story feature':
+    'prefix': 'stf'
+    'body': """
+      // --- ${1:Feature}
+
+      const ${2:STATE_UPDATE}: '${2:STATE_UPDATE}' = '${2:STATE_UPDATE}';
+
+      // Action
+      type $Action = {| type: typeof ${2:STATE_UPDATE} |};
+
+      export const updateState = (): $Action => ({
+        type: ${2:STATE_UPDATE},
+      });
+
+
+      // Reducer
+      type $OnStateUpdate = {|
+        [type: typeof ${2:STATE_UPDATE}]: $ReducerHandler<$StoreState, $Action>,
+      |};
+
+      export const onStateUpdate: $OnStateUpdate = {
+        [${2:STATE_UPDATE}]:
+          (state) =>
+            state,
+      };
+    """
+
+  'story async feature':
+    'prefix': 'staf'
+    'body': """
+      // --- ${1:Async Feature}
+
+      const ${2:ASYNC_STATE_UPDATE}: '${2:ASYNC_STATE_UPDATE}' = '${2:ASYNC_STATE_UPDATE}';
+
+      // Action
+      type $Action = {| type: typeof ${2:ASYNC_STATE_UPDATE} |};
+
+      const updateStateAsyncAction = (): $Action => ({
+        type: ${2:ASYNC_STATE_UPDATE},
+      });
+
+      export const updateStateAsync = (): $Thunk => (dispatch, getState) => {
+        // do stuff...
+        dispatch(updateStateAsyncAction());
+      };
+
+
+      // Reducer
+      type $OnAsyncStateUpdate = {|
+        [type: typeof ${2:ASYNC_STATE_UPDATE}]: $ReducerHandler<$StoreState, $Action>,
+      |};
+
+      export const onAsyncStateUpdate: $OnAsyncStateUpdate = {
+        [${2:ASYNC_STATE_UPDATE}]:
+          (state) =>
+            state,
+      };
+    """
+
+  'story server update':
+    'prefix': 'stsup'
+    'body': """
+      const REQUESTED: 'REQUESTED' = 'REQUESTED';
+      const SUCCEEDED: 'SUCCEEDED' = 'SUCCEEDED';
+      const FAILED: 'FAILED' = 'FAILED';
+
+
+      // --- Request
+
+      // Action
+      type $RequestAction = {| type: typeof REQUESTED |};
+      const requestAction = (): $RequestAction => ({ type: REQUESTED });
+
+      // Reducer
+      type $OnRequest = {
+        [type: typeof REQUESTED]: $ReducerHandler<$StoreState, $RequestAction>,
+      };
+      const onRequest: $OnRequest = {
+        [UPDATE_REQUESTED]:
+          (state) =>
+            state.set('isProcessing', true),
+      };
+
+
+      // --- Success
+
+      // Action
+      type $SuccessAction = {|
+        type: typeof SUCCEEDED,
+      |};
+
+      const successAction = (
+        // ...args
+      ): $SuccessAction => ({
+        type: SUCCEEDED,
+        // ...args
+      });
+
+      // Reducer
+      type $OnSuccess = {
+        [type: typeof SUCCEEDED]: $ReducerHandler<$StoreState, $SuccessAction>,
+      };
+      const onSuccess: $OnSuccess = {
+        [SUCCEEDED]:
+          (state) =>
+            state,
+      };
+
+
+      // --- Failure
+
+      // Action
+      type $FailureAction = {
+        type: typeof FAILED,
+        error: $ResponseError,
+      };
+
+      const failureAction =
+        (error: $ResponseError): $FailureAction => ({
+          type: FAILED,
+          error,
+        })
+      ;
+
+      // Reducer
+      type $OnFailure = {
+        [type: typeof FAILED]: $ReducerHandler<$StoreState, $FailureAction>,
+      };
+      const onFailure: $OnFailure = {
+        [FAILED]:
+          (state) =>
+            state,
+      };
+
+
+      // --- Exports
+
+      // Action creator
+      export const updateServerState =
+        (): Thunk => (dispatch, getState) => {
+          // Perform local checks...
+
+          dispatch(requestAction());
+
+          const nextServerData = formStateSelector(state);
+
+          api
+            .patch({ url, data })
+            .then(
+              () => dispatch(successAction()),
+              (error: $ResponseError) => dispatch(withApiErrorMiddleware(failureAction(error))),
+            )
+          ;
+        }
+      ;
+
+
+      // Reducers
+      export const onServerStateUpdate = {
+        ...onRequest,
+        ...onSuccess,
+        ...onFailure,
+      };
+    """
+
+  'Eslint.disable':
+    'prefix': 'esld'
+    'body': '/* eslint-disable ${1:rule} */'
+
+  'Eslint.enable':
+    'prefix': 'esle'
+    'body': '/* eslint-enable ${1:rule} */'
+
+  'Eslint.disable-line':
+    'prefix': 'esldl'
+    'body': '// eslint-disable-line ${1:rule}'
+
+  'Eslint.disable-next-line':
+    'prefix': 'esldnl'
+    'body': '// eslint-disable-next-line ${1:rule}'
+
+  'Flow.number':
+    'prefix': 'fn'
+    'body': 'number'
+
+  'Flow.string':
+    'prefix': 'fs'
+    'body': 'string'
+
+  'Flow.boolean':
+    'prefix': 'fb'
+    'body': 'boolean'
+
+  'Flow.function.no-args':
+    'prefix': 'ff'
+    'body': '() => ${0:void}'
+
+  'Flow.function.args':
+    'prefix': 'ffa'
+    'body': '(${1:arg}) => ${0:void}'
+
+  'Flow.no-args':
+    'prefix': 'fna'
+    'body': '...args: Array<void>'
+
+  'Flow.no-rest-args':
+    'prefix': 'fnra'
+    'body': '...rest: Array<void>'
 
   'PropTypes.shape':
     'prefix': 'ptsh'
@@ -296,14 +578,5 @@
       /**
        * @desc ${1:Method description}
        *
-       * @${0:smth}
        */
     """
-
-  'JSDoc@param':
-    'prefix': '@p'
-    'body': '@param {${1:type}} ${2:name} ${0:- Note.}'
-
-  'JSDoc@returns':
-    'prefix': '@r'
-    'body': '@returns {${1:type}} ${0:- Note.}'

@@ -15,13 +15,18 @@
 '.platform-darwin':
   'f1': 'tree-view:toggle'
   'cmd-\\': 'tree-view:toggle-focus'
-  'cmd-alt-p': 'autohide-tree-view:pin'
-  'cmd-alt-u': 'autohide-tree-view:unpin'
   'cmd-r': 'fuzzy-finder:toggle-buffer-finder'
   'cmd-t': 'fuzzy-finder:toggle-file-finder'
+  'cmd-ctrl-/': 'nuclide-diagnostics-ui:toggle-table'
+  'cmd-ctrl-.': 'nuclide-test-runner:toggle-panel'
 
 '.platform-darwin atom-workspace':
   'cmd-o': 'advanced-open-file:toggle'
+  'cmd-ctrl-t': 'todo-show:find-in-project'
+  'cmd-ctrl-c': 'color-picker:open'
+  'cmd-m d': 'merge-conflicts:detect'
+  'cmd-m n': 'merge-conflicts:next-unresolved'
+  'cmd-m p': 'merge-conflicts:previous-unresolved'
 
 '.advanced-open-file atom-text-editor':
   'cmd-enter': 'pane:split-right'
@@ -30,11 +35,9 @@
 '.platform-darwin atom-text-editor':
   'ctrl-f2': 'unset!'
   'cmd-r': 'unset!'
-  'cmd-alt-p': 'unset!'
-  'ctrl-cmd-w': 'pane:close-other-items'
-
-'.platform-darwin, .platform-darwin .command-palette atom-text-editor':
-  'ctrl-shift-p': 'command-palette:toggle'
+  'cmd-ctrl-w': 'pane:close-other-items'
+  'cmd-ctrl-p': 'command-palette:toggle'
+  'cmd-ctrl-l': 'grammar-selector:show'
 
 '.fuzzy-finder':
   'cmd-enter': 'pane:split-right'
@@ -52,22 +55,28 @@
 'atom-workspace atom-text-editor:not([mini])':
   'f2': 'maximize-panes:maximize'
 
-  'ctrl-up': 'window:focus-pane-above'
-  'ctrl-right': 'window:focus-pane-on-right'
-  'ctrl-down': 'window:focus-pane-below'
-  'ctrl-left': 'window:focus-pane-on-left'
+  'cmd-ctrl-up': 'window:focus-pane-above'
+  'cmd-ctrl-right': 'window:focus-pane-on-right'
+  'cmd-ctrl-down': 'window:focus-pane-below'
+  'cmd-ctrl-left': 'window:focus-pane-on-left'
 
+  'ctrl-alt-right': 'nuclide-move-item-to-available-pane:right'
+  'ctrl-alt-left': 'nuclide-move-item-to-available-pane:left'
+  'ctrl-alt-up': 'nuclide-move-item-to-available-pane:up'
+  'ctrl-alt-down': 'nuclide-move-item-to-available-pane:down'
+
+  'cmd-l s': 'set-syntax:Shell Script'
   'cmd-l j': 'set-syntax:Babel ES6 JavaScript'
-  'cmd-l r': 'set-syntax:JavaScript (JSX)'
+
+  'cmd-ctrl-b': 'git-blame:toggle'
 
   'cmd-d': 'editor:duplicate-lines'
-  'alt-up': 'vim-mode:scroll-half-screen-up'
-  'alt-down': 'vim-mode:scroll-half-screen-down'
+  'ctrl-up': 'vim-mode-plus:scroll-half-screen-up'
+  'ctrl-down': 'vim-mode-plus:scroll-half-screen-down'
   'shift-alt-up': 'editor:move-line-up'
   'shift-alt-down': 'editor:move-line-down'
-  'ctrl-shift-b': 'git-blame:toggle'
 
-'atom-text-editor.vim-mode:not(.insert-mode)':
+'atom-text-editor.vim-mode-plus:not(.insert-mode)':
   '=': 'editor:newline-below'
   '+': 'editor:newline-above'
   '\\': 'tree-view:reveal-active-file'

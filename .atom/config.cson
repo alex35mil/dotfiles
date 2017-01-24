@@ -8,28 +8,61 @@
     defaultProvider: "Fuzzy"
     enableAutoConfirmSingleSuggestion: false
     minimumWordLength: 2
-    strictMatching: true
+    useLocalityBonus: false
   autosave:
     enabled: true
   "color-picker":
     abbreviateValues: true
     preferredFormat: "HEX"
   core:
+    automaticallyUpdate: false
+    customFileTypes:
+      "source.ini": [
+        ".hgrc"
+        ".buckconfig"
+        ".flowconfig"
+      ]
+      "source.json": [
+        ".arcconfig"
+        "BUCK.autodeps"
+      ]
+      "source.python": [
+        "BUCK"
+      ]
+    disabledPackages: [
+      "language-c"
+      "language-clojure"
+      "language-csharp"
+      "language-go"
+      "language-java"
+      "language-mustache"
+      "language-objective-c"
+      "language-perl"
+      "language-php"
+      "language-python"
+      "language-toml"
+      "language-xml"
+      "linter"
+    ]
     packagesWithKeymapsDisabled: [
       "tool-bar"
-      "nrepl"
+      "zentabs"
       "maximize-panes"
-      "autohide-tree-view"
+      "color-picker"
+      "todo-show"
+      "git-blame"
     ]
+    telemetryConsent: "limited"
     themes: [
       "nucleus-dark-ui"
       "base16-tomorrow-dark-theme"
     ]
+    useCustomTitleBar: true
   "custom-title":
     template: "atom/<%= projectName %>"
   editor:
     fontFamily: "Source Code Pro"
-    fontSize: 15
+    fontSize: 16
     invisibles:
       eol: " "
       space: " "
@@ -37,59 +70,99 @@
     showIndentGuide: true
     showInvisibles: true
   "exception-reporting":
-    userId: "b6743906-56c6-7cc4-4c17-1e358db56a15"
+    userId: "f07c48e3-36eb-b22e-de8c-423ac96973dd"
   "file-icons":
     coloured: false
-  "file-watcher":
-    promptWhenFileHasChangedOnDisk: false
-  "flex-tool-bar":
-    showConfigButton: false
+  "find-and-replace":
+    openProjectFindResultsInRightPane: true
+  "flex-tool-bar": {}
   "git-blame":
     columnWidth: 250
     showOnlyLastNames: false
-  "language-babel":
-    babelMapsAddUrl: false
-    transpileOnSave: false
+  "git-diff": {}
+  "highlight-selected": {}
   linter:
-    errorPanelHeight: 110
-  "linter-eslint": {}
-  "linter-flow":
-    executablePath: "./node_modules/.bin/flow"
+    displayLinterInfo: false
+    displayLinterStatus: false
+    showErrorTabFile: false
+    showErrorTabProject: false
+    statusIconScope: "File"
+  "linter-eslint":
+    fixOnSave: true
   "linter-scss-lint":
     disableWhenNoConfigFileInPath: true
-    executablePath: "/Users/Alex/.rvm/gems/ruby-2.3.0@global/bin/scss-lint"
   "markdown-preview":
     useGitHubStyle: true
+  nuclide:
+    "nuclide-flow":
+      canUseFlowBin: true
+      enableStructuredTypeHints: true
+      flowAutocompleteResultsFirst: false
+    use:
+      "nuclide-adb-logcat": false
+      "nuclide-arcanist": false
+      "nuclide-blame": false
+      "nuclide-blame-provider-hg": false
+      "nuclide-bookshelf": false
+      "nuclide-buck": false
+      "nuclide-buck-ios": false
+      "nuclide-busy-signal": false
+      "nuclide-clang": false
+      "nuclide-clipboard-path": false
+      "nuclide-console": false
+      "nuclide-context-view": false
+      "nuclide-ctags": false
+      "nuclide-debugger": false
+      "nuclide-debugger-iwdp": false
+      "nuclide-debugger-native": false
+      "nuclide-debugger-node": false
+      "nuclide-debugger-php": false
+      "nuclide-diff-view": false
+      "nuclide-distraction-free-mode": false
+      "nuclide-file-tree": false
+      "nuclide-file-watcher": false
+      "nuclide-find-references": false
+      "nuclide-fuzzy-filename-provider": false
+      "nuclide-hack": false
+      "nuclide-health": false
+      "nuclide-hg-conflict-resolver": false
+      "nuclide-hg-repository": false
+      "nuclide-hhvm": false
+      "nuclide-home": false
+      "nuclide-http-request-sender": false
+      "nuclide-ios-simulator-logs": false
+      "nuclide-language-hack": false
+      "nuclide-navigation-stack": false
+      "nuclide-nux": false
+      "nuclide-objc": false
+      "nuclide-open-filenames-provider": false
+      "nuclide-outline-view": false
+      "nuclide-python": false
+      "nuclide-quick-open": false
+      "nuclide-recent-files-provider": false
+      "nuclide-recent-files-service": false
+      "nuclide-refactorizer": false
+      "nuclide-related-files": false
+      "nuclide-remote-atom": false
+      "nuclide-remote-projects": false
+      "nuclide-settings": false
+      "nuclide-source-control-side-bar": false
+      "nuclide-swift": false
+      "nuclide-task-runner": false
+      "nuclide-vcs-log": false
+      "nuclide-working-sets": false
   tabs:
     enableVcsColoring: true
   "todo-show":
     sortBy: "Type"
   "tool-bar":
     position: "Left"
-  "tree-view": {}
-  "vim-mode":
+  "vim-mode-plus":
     useClipboardAsDefaultRegister: true
   welcome:
     showOnStartup: false
+  whitespace:
+    ignoreWhitespaceOnCurrentLine: false
   zentabs:
     maximumOpenedTabs: 20
-    neverCloseDirty: true
     neverCloseNew: true
-".babel.regexp.source":
-  editor:
-    preferredLineLength: 100
-".clojure.source":
-  editor:
-    showIndentGuide: false
-".css.postcss.source":
-  editor:
-    preferredLineLength: 100
-".css.postcss.source.sugarss":
-  editor:
-    preferredLineLength: 100
-".dockerfile.source":
-  editor:
-    preferredLineLength: 100
-".js.jsx.source":
-  editor:
-    preferredLineLength: 100
