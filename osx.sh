@@ -87,6 +87,12 @@ defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
 
+# ===== Sketch
+
+# Remove junk from exported SVGs
+defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist svgExportCompact -bool no
+
+
 # ===== Transmission
 
 # Don’t prompt for confirmation before downloading

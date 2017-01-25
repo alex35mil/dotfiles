@@ -28,10 +28,11 @@ brew install curl
 brew install tree
 brew install imagemagick --with-webp
 brew install node
+brew install yarn
 brew install postgresql
 brew install mongodb
-brew install rlwrap
-brew install koekeishiya/kwm/kwm
+brew install koekeishiya/formulae/kwm
+brew install koekeishiya/formulae/khd
 
 # Remove outdated versions from the cellar
 brew cleanup

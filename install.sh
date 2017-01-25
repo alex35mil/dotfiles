@@ -25,8 +25,12 @@ DOTFILES="\
   .tmux.conf \
   .tmuxinator \
 
+  .hyper.js \
+
   .iterm \
+
   .kwm \
+  .khdrc \
   .ubersicht \
 
   .atom/config.cson \

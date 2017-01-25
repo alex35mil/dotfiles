@@ -33,22 +33,22 @@ else
 fi
 
 echo "===> ⌛️  Applying OSX settings..."
-osx.sh
+./osx.sh
 
 echo "===> ⌛️  Installing brew packages..."
-brew.sh
+./brew.sh
 
 echo "===> ⌛️  Installing cask apps..."
-cask.sh
+./cask.sh
 
 echo "===> ⌛️  Installing global npm packages..."
-npm.sh
+./yarn.sh
 
 echo "===> ⌛️  Installing global ruby gems..."
-rvm.sh
+./rvm.sh
 
 echo "===> ⌛️  Installing atom plugins..."
-atom.sh
+./atom.sh
 
 # Download git-completion.bash
 if [ command -v curl >/dev/null 2>&1 ]; then
@@ -59,6 +59,6 @@ else
 fi
 
 echo "===> ⌛️  Installing dotfiles..."
-install.sh
+./install.sh
 
 echo "👊  All done."
