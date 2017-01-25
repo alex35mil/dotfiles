@@ -403,33 +403,33 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>2620 738 700 622 0 0 3440 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2024 221 796 473 0 0 3440 1440 </string>
+	<string>2024 506 918 381 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>61 722 2148 654 0 0 3440 1440 </string>
+	<string>61 723 1650 652 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>61 45 2148 654 0 0 3440 1440 </string>
+	<string>1728 723 1650 652 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
-	<string>62 41 3316 1338 0 0 3440 1440 </string>
+	<string>2225 46 1154 652 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 11</key>
 	<string>63 41 1154 698 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 12</key>
 	<string>648 161 570 572 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>2228 41 1148 1338 0 0 3440 1440 </string>
+	<string>61 42 1650 1336 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>60 323 1652 1050 0 0 3440 1440 </string>
+	<string>63 42 3314 1336 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>62 42 3316 258 0 0 3440 1440 </string>
+	<string>61 42 1650 1336 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
-	<string>61 722 2148 654 0 0 3440 1440 </string>
+	<string>63 42 3314 1336 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 6</key>
-	<string>61 45 2148 654 0 0 3440 1440 </string>
+	<string>61 46 1650 652 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 7</key>
-	<string>2228 718 1148 662 0 0 3440 1440 </string>
+	<string>61 42 1650 1336 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 8</key>
-	<string>2228 45 1148 654 0 0 3440 1440 </string>
+	<string>1728 42 1650 1336 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 9</key>
-	<string>1727 323 1652 1050 0 0 3440 1440 </string>
+	<string>63 42 3314 1336 0 0 3440 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -995,21 +995,29 @@
 			<integer>1000</integer>
 			<key>Selected Text Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.72798359394073486</real>
+				<real>0.93333333333333335</real>
+				<key>Color Space</key>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.73781722784042358</real>
+				<real>0.93333333333333335</real>
 				<key>Red Component</key>
-				<real>0.71933764219284058</real>
+				<real>0.93333333333333335</real>
 			</dict>
 			<key>Selection Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.13528014719486237</real>
+				<real>0.29999999999999999</real>
+				<key>Color Space</key>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.12312769144773483</real>
+				<real>0.29999999999999999</real>
 				<key>Red Component</key>
-				<real>0.11772145330905914</real>
+				<real>0.29999999999999999</real>
 			</dict>
 			<key>Semantic History</key>
 			<dict>
@@ -1202,7 +1210,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.git.2b2f92ba49</string>
+	<string>3.0.20161020-nightly</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
