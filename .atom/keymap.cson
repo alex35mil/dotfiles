@@ -53,7 +53,7 @@
   'c': 'tree-view:duplicate'
 
 'atom-workspace atom-text-editor:not([mini])':
-  'f2': 'maximize-panes:maximize'
+  'cmd-ctrl-enter': 'maximize-panes:maximize'
 
   'cmd-ctrl-up': 'window:focus-pane-above'
   'cmd-ctrl-right': 'window:focus-pane-on-right'
