@@ -10,7 +10,7 @@ function vcs_info_wrapper() {
   vcs_info
   if [[ -n $vcs_info_msg_0_ ]]
   then
-    echo $'%{\e[1;37m%}%{\e[38;5;242m%}⌗ '${vcs_info_msg_0_}$'%{\e[0m%}'
+    echo $'%{\e[1;37m%}%{\e[38;5;237m%}%1d ⌗ '${vcs_info_msg_0_}$'%{\e[0m%}'
   fi
 }
 
@@ -18,5 +18,10 @@ function precmd() {
   print ''
 }
 
-export PROMPT=$'%{\e[1;37m%}%{\e[38;5;242m%}↳ %1d %{\e[1;37;0m%}%{\e[38;5;160m%}»%{\e[38;5;208m%}»%{\e[38;5;34m%}»%{\e[0m%}  '
+# PROMPT: »»»
+export PROMPT=$'%{\e[1;37;0m%}%{\e[38;5;160m%}»%{\e[38;5;208m%}»%{\e[38;5;34m%}»%{\e[0m%}  '
+
+# PROMPT: ↳ dir-name »»»
+# export PROMPT=$'%{\e[1;37m%}%{\e[38;5;242m%}↳ %1d %{\e[1;37;0m%}%{\e[38;5;160m%}»%{\e[38;5;208m%}»%{\e[38;5;34m%}»%{\e[0m%}  '
+
 export RPROMPT=$'$(vcs_info_wrapper)'

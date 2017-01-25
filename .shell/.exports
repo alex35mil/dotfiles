@@ -1,5 +1,5 @@
-# Add RVM & KWM to the $PATH
-export PATH="$PATH:$HOME/.rvm/bin:$HOME/.bin/kwm"
+# Add rvm to the $PATH
+export PATH="$PATH:$HOME/.rvm/bin"
 
 # Set vim as the default editor
 export EDITOR="vim"

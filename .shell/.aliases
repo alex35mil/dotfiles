@@ -34,6 +34,8 @@ alias lsa="ls -lFa ${colorflag}"
 alias lsv="ls -lF ${colorflag}"
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 
+alias rmrf="rm -rf"
+
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
@@ -65,6 +67,11 @@ alias bl="brew list "
 alias bupg="brew upgrade "
 alias bun="brew uninstall "
 
+alias bs="brew services "
+alias bsl="brew services list"
+alias bsrun="brew services run "
+alias bsrst="brew services restart "
+
 
 # ===== Homebrew Cask
 alias bc="brew cask "
@@ -78,7 +85,7 @@ alias bcun="brew cask uninstall "
 
 
 # ===== Docker
-alias du="docker-compose up"
+alias dup="docker-compose up"
 alias dub="docker-compose up --build"
 alias dps="docker ps"
 alias dpsa="docker ps -a"
@@ -100,13 +107,19 @@ alias gdm="git dm"
 alias gc="git commit "
 alias gcm="git commit -m "
 alias gca="git commit --amend --reuse-message=HEAD"
+alias gcam="git commit --amend"
 alias gcu="git reset HEAD~"
 alias gd="git diff "
 alias gp="git push "
 alias gpf="git push --force-with-lease"
 alias gpu="git push -u origin HEAD"
 alias go="git checkout "
+alias gob="git checkout -b "
 alias gu="git pull --rebase --prune"
+alias gf="git fetch "
+alias gfu="git fetch upstream"
+alias gm="git merge "
+alias gmum="git merge upstream/master"
 alias gr="git rebase "
 alias grm="git rebase master"
 alias grc="git rebase --continue"
@@ -114,6 +127,10 @@ alias gra="git rebase --abort"
 alias grs="git rebase --skip"
 alias glc="git diff --name-only --diff-filter=U"
 alias gri="git irebase "
+alias gcp="git cherry-pick "
+alias gcpc="git cherry-pick --continue"
+alias gcpa="git cherry-pick --abort"
+alias gcpq="git cherry-pick --quit"
 alias grst="git reset "
 alias grsthard="git reset --hard HEAD"
 alias gsh="git stash"
@@ -133,17 +150,40 @@ alias gpsd="git push --recurse-submodules=on-demand "
 [[ -n $BASH_VERSION ]] && __git_complete go _git_checkout
 
 
-# ===== KWM
+# ===== kwm & khd
 alias k="kwmc "
-alias kq="kwmc quit"
-alias kr="kwmc config reload"
-alias krst="brew services restart kwm"
+alias krst="brew services restart kwm && brew services restart khd"
+
 alias 211="kwmc tree restore 2-rows--medium"
 alias 212="kwmc tree restore 2-rows--large"
 alias 221="kwmc tree restore 2-cols--medium"
 
 
 # ===== Node
+alias y="yarn "
+
+alias ys="yarn start"
+alias yr="yarn run "
+alias yrt="yarn run test"
+alias yrb="yarn run build"
+alias yrp="yarn run prod"
+alias yrl="yarn run lint"
+alias yrf="yarn run flow"
+alias yrc="yarn run check"
+
+alias yi="yarn add "
+alias yid="yarn add --dev --exact "
+alias yrm="yarn remove "
+
+alias yod="yarn outdated"
+alias yup="yarn upgrade-interactive"
+
+alias yg="yarn global "
+alias ygls="yarn global ls"
+
+alias yar="rm -rf node_modules && yarn"
+alias yarr="rm -rf node_modules && yarn cache clean && yarn"
+
 alias ns="npm start"
 alias nt="npm test"
 alias nr="npm run "

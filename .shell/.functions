@@ -1,3 +1,23 @@
+# `w` with no arguments lists all shell aliases,
+# otherwise lists aliases, that start with the given chars
+function w() {
+  if [[ $# -eq 0 ]]; then
+    alias
+  else
+    alias | grep "^$@"
+  fi
+}
+
+# `l` with no arguments lists contents of the current directory via `tree`,
+# otherwise lists directory tree given depth
+function l() {
+  if [[ $# -eq 0 ]]; then
+    tree -a -L 1
+  else
+    tree -a -L $@
+  fi
+}
+
 # Create a new directory and enter it
 function mkd() {
   mkdir -p $@ && cd $_
@@ -13,9 +33,9 @@ function a() {
   fi
 }
 
+# [ currently handled by NERDTree ]
 # `v` with no arguments opens the current directory in Vim,
 # otherwise opens the given location
-# Currently handled by NERDTree
 # function v() {
 #   if [[ $# -eq 0 ]]; then
 #     vim .
@@ -24,57 +44,16 @@ function a() {
 #   fi
 # }
 
-# `dir` with no arguments lists contents of the current directory via `tree`,
-# otherwise lists directory tree given depth
-function dir() {
-  if [[ $# -eq 0 ]]; then
-    tree -a -L 1
-  else
-    tree -a -L $@
-  fi
+# `p 3000` will print listners of port 3000
+function p() {
+  lsof -n -i:$@ | grep LISTEN
 }
 
-# Scaffold specified project or layout in iTerm
-function run() {
-  local NPM_MODULES="/usr/local/lib/node_modules"
-  local ITERM="$HOME/.iterm/layouts"
-
-  if [[ $# -eq 2 ]]; then
-    local TEMPLATE=$1
-    local APP=$2
-    local TEMPLATE_FILE="$ITERM/templates/$TEMPLATE.js"
-    if [[ -f $TEMPLATE_FILE ]]; then
-      NODE_PATH=$NPM_MODULES node $TEMPLATE_FILE $APP
-      itermocil --here $APP
-    else
-      echo "Can't find template file with name $TEMPLATE"
-    fi
-
-  elif [[ $# -eq 1 ]]; then
-    local PROJECT_FILE="$ITERM/projects/$@"
-    if [[ -r $PROJECT_FILE ]] && [[ -f $PROJECT_FILE ]]; then
-      if [[ -n $BASH_VERSION ]]; then
-        IFS=$'\n' read -d '' -r -a params < $PROJECT_FILE
-        local TEMPLATE=${params[0]}
-        local APP=${params[1]}
-        local LOCATION=${params[2]}
-      elif [[ -n $ZSH_VERSION ]]; then
-        params=()
-        while read i; do params+=$i; done < $PROJECT_FILE
-        local TEMPLATE=${params[1]}
-        local APP=${params[2]}
-        local LOCATION=${params[3]}
-      fi
-      local TEMPLATE_FILE="$ITERM/templates/$TEMPLATE.js"
-      if [[ -f $TEMPLATE_FILE ]]; then
-        NODE_PATH=$NPM_MODULES node $TEMPLATE_FILE $APP $LOCATION
-        itermocil --here $APP
-      else
-        echo "Can't find template file with name $TEMPLATE"
-      fi
-    else
-      echo "Can't find project file with name $@"
-    fi
-
-  fi
+# `ruby-up 2.0.0` will update ruby to v2.0.0 using rvm
+function ruby-up() {
+  rvm get stable && \
+  rvm install ruby-$@ --disable-binary && \
+  rvm --default use $@ && \
+  gem install bundler && \
+  gem install foreman
 }
