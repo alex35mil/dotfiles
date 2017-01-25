@@ -43,7 +43,7 @@ pom.xml.asc
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
 
 # Thumbnails
 ._*
@@ -177,7 +177,6 @@ bower.json
 /.config
 /coverage/
 /InstalledFiles
-/pkg/
 /spec/reports/
 /spec/examples.txt
 /test/tmp/
