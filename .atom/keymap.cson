@@ -12,13 +12,28 @@
   'cmd-, p': 'settings-view:uninstall-packages'
   'cmd-, i': 'settings-view:install-packages-and-themes'
 
+  'ctrl-f': '!unset'
+
+
 '.platform-darwin':
   'f1': 'tree-view:toggle'
   'cmd-\\': 'tree-view:toggle-focus'
+
   'cmd-r': 'fuzzy-finder:toggle-buffer-finder'
   'cmd-t': 'fuzzy-finder:toggle-file-finder'
+
   'cmd-ctrl-/': 'nuclide-diagnostics-ui:toggle-table'
   'cmd-ctrl-.': 'nuclide-test-runner:toggle-panel'
+
+  'cmd-ctrl-g': 'git-plus:menu'
+  'cmd-g s': 'git-plus:status'
+  'cmd-g g': 'git-plus:checkout'
+  'cmd-g n': 'git-plus:new-branch'
+  'cmd-g a': 'git-plus:add'
+  'cmd-g u': 'git-plus:checkout-current-file'
+  'cmd-g d': 'git-plus:diff'
+  'cmd-g r': 'git-plus:run'
+
 
 '.platform-darwin atom-workspace':
   'cmd-o': 'advanced-open-file:toggle'
@@ -28,20 +43,11 @@
   'cmd-m n': 'merge-conflicts:next-unresolved'
   'cmd-m p': 'merge-conflicts:previous-unresolved'
 
-'.advanced-open-file atom-text-editor':
-  'cmd-enter': 'pane:split-right'
-  'cmd-shift-enter': 'pane:split-down'
-
-'.platform-darwin atom-text-editor':
-  'ctrl-f2': 'unset!'
-  'cmd-r': 'unset!'
-  'cmd-ctrl-w': 'pane:close-other-items'
-  'cmd-ctrl-p': 'command-palette:toggle'
-  'cmd-ctrl-l': 'grammar-selector:show'
 
 '.fuzzy-finder':
   'cmd-enter': 'pane:split-right'
   'cmd-shift-enter': 'pane:split-down'
+
 
 '.platform-darwin .tree-view':
   'cmd-enter': 'tree-view:open-selected-entry-right'
@@ -51,6 +57,21 @@
   'r': 'tree-view:rename'
   'd': 'tree-view:remove'
   'c': 'tree-view:duplicate'
+
+
+'.platform-darwin atom-text-editor':
+  'ctrl-f2': 'unset!'
+  'cmd-r': 'unset!'
+  'cmd-g': 'unset!'
+  'cmd-ctrl-g': 'unset!'
+
+  'cmd-ctrl-w': 'pane:close-other-items'
+
+  'cmd-ctrl-p': 'command-palette:toggle'
+  'cmd-ctrl-l': 'grammar-selector:show'
+
+  'cmd-shift-a': 'find-and-replace:select-all'
+
 
 'atom-workspace atom-text-editor:not([mini])':
   'cmd-ctrl-enter': 'maximize-panes:maximize'
@@ -76,7 +97,15 @@
   'shift-alt-up': 'editor:move-line-up'
   'shift-alt-down': 'editor:move-line-down'
 
+
 'atom-text-editor.vim-mode-plus:not(.insert-mode)':
   '=': 'editor:newline-below'
   '+': 'editor:newline-above'
   '\\': 'tree-view:reveal-active-file'
+
+  'ctrl-f': '!unset'
+
+
+'.advanced-open-file atom-text-editor':
+  'cmd-enter': 'pane:split-right'
+  'cmd-shift-enter': 'pane:split-down'

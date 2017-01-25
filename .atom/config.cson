@@ -51,6 +51,7 @@
       "color-picker"
       "todo-show"
       "git-blame"
+      "git-plus"
     ]
     telemetryConsent: "limited"
     themes: [
@@ -80,6 +81,10 @@
     columnWidth: 250
     showOnlyLastNames: false
   "git-diff": {}
+  "git-plus":
+    general:
+      analytics: false
+      splitPane: "Right"
   "highlight-selected": {}
   linter:
     displayLinterInfo: false
