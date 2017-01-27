@@ -72,12 +72,12 @@ kwmc rule owner="Photo Booth" properties={float="true"}
 
 # Configure border for focused window, disabled by default
 kwmc config border focused off
-kwmc config border focused size 1
+kwmc config border focused size 4
 kwmc config border focused color 0xFFD5C4A3
-kwmc config border focused radius 0
+kwmc config border focused radius 8
 
 # Configure border for marked window, enabled by default
 kwmc config border marked on
-kwmc config border marked size 2
+kwmc config border marked size 4
 kwmc config border marked color 0xFFCC5577
-kwmc config border marked radius 0
+kwmc config border marked radius 8

@@ -1,11 +1,8 @@
 #!/bin/bash
 
-kwmc=/usr/local/bin/kwmc
+source ~/.kwm/scripts/vars.sh
 
-MARKED=$($kwmc query window marked id)
-CURRENT=$($kwmc query window focused id)
-
-if [[ $MARKED = "-1" || $MARKED = $CURRENT ]]
+if [[ $MARKED_WIN_ID = "-1" || $MARKED_WIN_ID = $FOCUSED_WIN_ID ]]
 then
   $kwmc window -mk focused
 else

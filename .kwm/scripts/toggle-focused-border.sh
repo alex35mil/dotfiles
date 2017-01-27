@@ -1,10 +1,8 @@
 #!/bin/bash
 
-kwmc=/usr/local/bin/kwmc
+source ~/.kwm/scripts/vars.sh
 
-ENABLED=$($kwmc query border focused)
-
-if [[ $ENABLED = "true" ]]
+if [[ $FOCUSED_BORDER_ENABLED = "true" ]]
 then
   $kwmc config border focused off
 else

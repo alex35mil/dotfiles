@@ -20,12 +20,6 @@ ctrl + alt - 9   :   kwmc window -m display 1
 # Maximize / minimize window
 cmd + ctrl - return   ![Hyper,Atom]   :   kwmc window -z fullscreen
 
-# Change split-ratio (TODO)
-cmd + shift - left    ![Hyper,Atom]   :   kwmc window -c expand 0.05 west
-cmd + shift - right   ![Hyper,Atom]   :   kwmc window -c expand 0.05 east
-cmd + shift - up      ![Hyper,Atom]   :   kwmc window -c expand 0.05 north
-cmd + shift - down    ![Hyper,Atom]   :   kwmc window -c expand 0.05 south
-
 # Give focus to window
 cmd + ctrl - left     ![Hyper,Atom]   :   kwmc window -f west
 cmd + ctrl - right    ![Hyper,Atom]   :   kwmc window -f east
@@ -48,3 +42,7 @@ cmd + ctrl - b        ![Hyper,Atom]   :   ~/.kwm/scripts/toggle-focused-border.s
 
 # Mark and swap windows
 cmd + ctrl - m        ![Hyper,Atom]   :   ~/.kwm/scripts/mark-and-swap-windows.sh
+
+# Change split-ratio
+cmd + shift - left    ![Hyper,Atom]   :   ~/.kwm/scripts/expand-reduce-split-ratio-left.sh
+cmd + shift - right   ![Hyper,Atom]   :   ~/.kwm/scripts/expand-reduce-split-ratio-right.sh

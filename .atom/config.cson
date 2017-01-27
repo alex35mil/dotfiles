@@ -82,6 +82,8 @@
     showOnlyLastNames: false
   "git-diff": {}
   "git-plus":
+    diffs:
+      syntaxHighlighting: false
     general:
       analytics: false
       splitPane: "Right"
@@ -162,6 +164,8 @@
     sortBy: "Type"
   "tool-bar":
     position: "Left"
+  "tree-view":
+    alwaysOpenExisting: true
   "vim-mode-plus":
     useClipboardAsDefaultRegister: true
   welcome:

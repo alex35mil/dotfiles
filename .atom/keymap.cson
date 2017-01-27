@@ -22,10 +22,10 @@
   'cmd-r': 'fuzzy-finder:toggle-buffer-finder'
   'cmd-t': 'fuzzy-finder:toggle-file-finder'
 
-  'cmd-ctrl-/': 'nuclide-diagnostics-ui:toggle-table'
-  'cmd-ctrl-.': 'nuclide-test-runner:toggle-panel'
+  'ctrl-cmd-/': 'nuclide-diagnostics-ui:toggle-table'
+  'ctrl-cmd-.': 'nuclide-test-runner:toggle-panel'
 
-  'cmd-ctrl-g': 'git-plus:menu'
+  'ctrl-cmd-g': 'git-plus:menu'
   'cmd-g s': 'git-plus:status'
   'cmd-g g': 'git-plus:checkout'
   'cmd-g n': 'git-plus:new-branch'
@@ -33,12 +33,16 @@
   'cmd-g u': 'git-plus:checkout-current-file'
   'cmd-g d': 'git-plus:diff'
   'cmd-g r': 'git-plus:run'
+  'cmd-g b': 'git-blame:toggle'
 
 
 '.platform-darwin atom-workspace':
   'cmd-o': 'advanced-open-file:toggle'
-  'cmd-ctrl-t': 'todo-show:find-in-project'
-  'cmd-ctrl-c': 'color-picker:open'
+
+  'ctrl-cmd-t': 'todo-show:find-in-project'
+  'ctrl-cmd-c': 'color-picker:open'
+  'ctrl-cmd-m': 'markdown-preview:toggle'
+
   'cmd-m d': 'merge-conflicts:detect'
   'cmd-m n': 'merge-conflicts:next-unresolved'
   'cmd-m p': 'merge-conflicts:previous-unresolved'
@@ -63,23 +67,26 @@
   'ctrl-f2': 'unset!'
   'cmd-r': 'unset!'
   'cmd-g': 'unset!'
-  'cmd-ctrl-g': 'unset!'
+  'ctrl-cmd-g': 'unset!'
+  'ctrl-cmd-m': 'unset!'
 
-  'cmd-ctrl-w': 'pane:close-other-items'
+  'ctrl-alt-q': 'pane:close'
+  'ctrl-alt-w': 'pane:close-other-items'
 
-  'cmd-ctrl-p': 'command-palette:toggle'
-  'cmd-ctrl-l': 'grammar-selector:show'
+  'ctrl-cmd-p': 'command-palette:toggle'
+  'ctrl-cmd-l': 'grammar-selector:show'
 
   'cmd-shift-a': 'find-and-replace:select-all'
+  'cmd-shift-b': 'bracket-matcher:select-inside-brackets'
 
 
 'atom-workspace atom-text-editor:not([mini])':
-  'cmd-ctrl-enter': 'maximize-panes:maximize'
+  'ctrl-cmd-enter': 'maximize-panes:maximize'
 
-  'cmd-ctrl-up': 'window:focus-pane-above'
-  'cmd-ctrl-right': 'window:focus-pane-on-right'
-  'cmd-ctrl-down': 'window:focus-pane-below'
-  'cmd-ctrl-left': 'window:focus-pane-on-left'
+  'ctrl-cmd-up': 'window:focus-pane-above'
+  'ctrl-cmd-right': 'window:focus-pane-on-right'
+  'ctrl-cmd-down': 'window:focus-pane-below'
+  'ctrl-cmd-left': 'window:focus-pane-on-left'
 
   'ctrl-alt-right': 'nuclide-move-item-to-available-pane:right'
   'ctrl-alt-left': 'nuclide-move-item-to-available-pane:left'
@@ -89,11 +96,11 @@
   'cmd-l s': 'set-syntax:Shell Script'
   'cmd-l j': 'set-syntax:Babel ES6 JavaScript'
 
-  'cmd-ctrl-b': 'git-blame:toggle'
-
   'cmd-d': 'editor:duplicate-lines'
-  'ctrl-up': 'vim-mode-plus:scroll-half-screen-up'
-  'ctrl-down': 'vim-mode-plus:scroll-half-screen-down'
+  'ctrl-up': 'editor:add-selection-above'
+  'ctrl-down': 'editor:add-selection-below'
+  'ctrl-shift-up': 'vim-mode-plus:scroll-half-screen-up'
+  'ctrl-shift-down': 'vim-mode-plus:scroll-half-screen-down'
   'shift-alt-up': 'editor:move-line-up'
   'shift-alt-down': 'editor:move-line-down'
 

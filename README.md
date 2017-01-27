@@ -60,40 +60,40 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
 #### Global
 
 ```
-* <Cmd-F1>             Toggle Console                      Alfred
-* <Cmd-F2>             Toggle Atom                         Alfred
-* <Cmd-F3>             Toggle Browser                      Alfred
+* <Cmd-F1>                Toggle Console                      Alfred
+* <Cmd-F2>                Toggle Atom                         Alfred
+* <Cmd-F3>                Toggle Browser                      Alfred
 
-  <Ctrl-F2>            Show menu bar
-  <Ctrl-F3>            Show dock
-* <Alt-Space>          Show Alfred                         Alfred
-* <Ctrl-Space>         Create TODO in Things               Things
+  <Ctrl-F2>               Show menu bar
+  <Ctrl-F3>               Show dock
+* <Alt-Space>             Show Alfred                         Alfred
+* <Ctrl-Space>            Create TODO in Things               Things
+* <Ctrl-T>                Show/Hide Timer                     Billings Pro
 
-  <Cmd-Ctrl-A>         Set Space Tiling Mode To BSP        KWM
-  <Cmd-Ctrl-S>         Set Space Tiling Mode To Monocle    KWM
-  <Cmd-Ctrl-D>         Set Space Tiling Mode To Float      KWM
-  <Cmd-Ctrl-F>         Set current window to float         KWM
-  <Cmd-Ctrl-B>         Toggle active border                KWM
-  <Cmd-Ctrl-M>         Mark/Swap current window            KWM
-* <Cmd-Ctrl-Enter>     Maximize/Restore current window     KWM
-* <Cmd-Ctrl-Arrow>     Focus window in direction           KWM
-* <Cmd-Ctrl-[/]>       Focus next/previous window          KWM
-* <Cmd-Alt-Arrow>      Swap w/ next window                 KWM
-* <Cmd-Shift-Up/Down>  Change split-ratio                  KWM
-* <Cmd-Ctrl-0>         Focus primary display               KWM
-* <Cmd-Ctrl-9>         Focus secondary display             KWM
-* <Cmd-Alt-0>          Move window to primary display      KWM
-* <Cmd-Alt-9>          Move window to secondary display    KWM
+* <Ctrl-Cmd-A>            Set Space Tiling Mode To BSP        KWM
+* <Ctrl-Cmd-S>            Set Space Tiling Mode To Monocle    KWM
+* <Ctrl-Cmd-D>            Set Space Tiling Mode To Float      KWM
+* <Ctrl-Cmd-F>            Set current window to float         KWM
+* <Ctrl-Cmd-B>            Toggle active border                KWM
+* <Ctrl-Cmd-M>            Mark/Swap current window            KWM
+* <Ctrl-Cmd-Enter>        Maximize/Restore current window     KWM
+* <Ctrl-Cmd-Arrow>        Focus window in direction           KWM
+* <Ctrl-Alt-Arrow>        Swap w/ next window                 KWM
+* <Cmd-Shift-←/→>         Change pane-ratio                   KWM
+* <Ctrl-Cmd-0>            Focus primary display               KWM
+* <Ctrl-Cmd-9>            Focus secondary display             KWM
+* <Ctrl-Alt-0>            Move window to primary display      KWM
+* <Ctrl-Alt-9>            Move window to secondary display    KWM
 
-* <Ctrl-Shift-←>       Go to the left space                System Preferences > Mission Control
-* <Ctrl-Shift-→>       Go to the right space               System Preferences > Mission Control
-  <Ctrl-1>             Go to Space 1                       System Preferences > Mission Control
-  <Ctrl-2>             Go to Space 2                       System Preferences > Mission Control
-  <Ctrl-N>             Go to Space N                       System Preferences > Mission Control
-  F3                   Toggle Mission Control              System Preferences > Mission Control
-  F4                   Toggle Launchpad                    System Preferences > Keyboard > Shortcuts > Launchpad & Dock
-* F5                   Toggle Full Screen Mode             System Preferences > Keyboard > Shortcuts > App Shortcuts
-* F6                   Toggle Do Not Disturb Mode          System Preferences > Keyboard > Shortcuts > App Shortcuts
+* <Ctrl-Shift-←>          Go to the left space                System Preferences > Mission Control
+* <Ctrl-Shift-→>          Go to the right space               System Preferences > Mission Control
+  <Ctrl-1>                Go to Space 1                       System Preferences > Mission Control
+  <Ctrl-2>                Go to Space 2                       System Preferences > Mission Control
+  <Ctrl-N>                Go to Space N                       System Preferences > Mission Control
+  F3                      Toggle Mission Control              System Preferences > Mission Control
+  F4                      Toggle Launchpad                    System Preferences > Keyboard > Shortcuts > Launchpad & Dock
+* F5                      Toggle Full Screen Mode             System Preferences > Keyboard > Shortcuts > App Shortcuts
+* F6                      Toggle Do Not Disturb Mode          System Preferences > Keyboard > Shortcuts > App Shortcuts
 ```
 
 #### iTerm
@@ -110,7 +110,7 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
   <Cmd-]>                 Next Pane
   <Cmd-[>                 Previous Pane
   <Cmd-Alt-Arrow/Number>  Navigate Panes
-  <Cmd-Ctrl-Arrow>        Resize Pane
+  <Ctrl-Cmd-Arrow>        Resize Pane
   <Cmd-Shift-Enter>       Maximize/Restore Pane
 ```
 
@@ -119,15 +119,14 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
 ```
                           ### Common
   <Cmd-.>                 Show keybinding resolver
-* <Ctrl-Shift-p>          Toggle command palette
-  <Cmd-Shift-p>
+* <Ctrl-Cmd-P>            Toggle command palette
 
                           ### File lists (Tree View, Fuzzy Finder etc.)
-* <Cmd-Enter>             New split on the right
-* <Cmd-Shift-Enter>       New split on the bottom
-  <Cmd-k> Arrow           New split on provided direction
-* s                       New split on the right (Tree View only)
-* i                       New split on the bottom (Tree View only)
+* <Cmd-Enter>             New pane on the right
+* <Cmd-Shift-Enter>       New pane on the bottom
+  <Cmd-K> Arrow           New pane on provided direction
+* s                       New pane on the right (Tree View only)
+* i                       New pane on the bottom (Tree View only)
 
                           ### Tree View
 * F1                      Toggle Tree View
@@ -141,45 +140,71 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
   <Cmd-\>                 Toggle focus on Tree view (in all modes)
 
                           ### Fuzzy Finder
-* <Cmd-r>                 Toggle buffer finder
-* <Cmd-t>                 Toggle file finder
+* <Cmd-R>                 Toggle buffer finder
+* <Cmd-T>                 Toggle file finder
 
                           ### Advanced open file
-* <Cmd-o>                 Toggle dialog
+* <Cmd-O>                 Toggle dialog
   /                       Go to the user's root
   :/                      Go to the project's root
-* <Cmd-Enter>             New split on the right
-* <Cmd-Shift-Enter>       New split on the bottom
-  <Cmd-k> Arrow           New split on provided direction
+* <Cmd-Enter>             New pane on the right
+* <Cmd-Shift-Enter>       New pane on the bottom
+  <Cmd-K> Arrow           New pane on provided direction
+
+
+                          ### Git
+* <Ctrl-Cmd-G>            Toggle commands panel
+* <Cmd-G> s               Git: Status
+* <Cmd-G> g               Git: Checkout
+* <Cmd-G> n               Git: New Branch
+* <Cmd-G> a               Git: Add Current File
+* <Cmd-G> u               Git: Checkout Current File (hard reset)
+* <Cmd-G> d               Git: Diff Current File
+* <Cmd-G> r               Git: Run Custom Command
+* <Cmd-G> b               Git: Blame
+
+* <Cmd-M> d               Git: Merge Conflict: Detect
+* <Cmd-M> n               Git: Merge Conflict: Next
+* <Cmd-M> p               Git: Merge Conflict: Previous
 
 
                           ### Panes / Buffers
-* F2                      Maximize current
-* <Ctrl-Arrow>            Move around
-  <Cmd-k> Arrow           Copy current into new split on provided direction
-* <Cmd-Ctrl-Alt-Arrow>    Move current to new split in provided direction
-* <Cmd-Ctrl-w>            Close others (in current split)
+* <Ctrl-Cmd-Enter>        Maximize current
+* <Ctrl-Cmd-Arrow>        Move around
+* <Ctrl-Alt-Arrow>        Move current to new pane in provided direction
+* <Ctrl-Alt-Q>            Destroy pane
+* <Ctrl-Alt-W>            Close other buffers in current pane
 
                           ### Editor - All modes
-* <Cmd-o>                 Open file via `advanced-open-file`
+* <Cmd-O>                 Open file via `advanced-open-file`
 
-  <Ctrl-Shift-l>          Toggle syntax selector
-* <Cmd-l> j               Set Babel ES6 JavaScript language
-* <Cmd-l> r               Set JavaScript (JSX) language
+* <Ctrl-Cmd-T>            Find TODOs
+* <Ctrl-Cmd-C>            Toggle color picker
+* <Ctrl-Cmd-M>            Toggle Markdown preview
 
-* <Alt-Up>                Scroll half screen up
-* <Alt-Down>              Scroll half screen down
+* <Ctrl-Cmd-/>            Toggle Nuclide diagnostic
+* <Ctrl-Cmd->>            Toggle Nuclide tests runner
 
-* <Cmd-d>                 Duplicate line
-  <Cmd-Ctrl-Up>           Move line up
-  <Cmd-Ctrl-Down>         Move line down
-* <Ctrl-Shift-/>          Align stuff
+* <Ctrl-Cmd-L>            Toggle syntax selector
+* <Cmd-L> s               Set Shell Script language
+* <Cmd-L> j               Set Babel ES6 JavaScript language
+
+* <Ctrl-↑>                Add selection above
+* <Ctrl-↓>                Add selection below
+
+* <Ctrl-Shift-↑>          Scroll half screen up
+* <Ctrl-Shift-↓>          Scroll half screen down
+
+* <Cmd-D>                 Duplicate line
+* <Shift-Alt-↑>           Move line up
+* <Shift-Alt-↓>           Move line down
+
+* <Cmd-Shift-A>           Select all entries that match selection
+* <Cmd-Shift-B>           Select all inside brackets
 
                           ### Editor - Normal mode
   Tab                     Indent
   <Shift-Tab>             Un-indent
-* <Shift-Alt-Up>          Move line up
-* <Shift-Alt-Down>        Move line down
   i                       Go to Insert mode (place cursor before char)
   a                       Go to Insert mode (place cursor after char)
   s                       Remove selected char(s) and go to Insert mode
