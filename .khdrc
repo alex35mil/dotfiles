@@ -28,8 +28,8 @@ cmd + ctrl - down     ![Hyper,Atom]   :   kwmc window -f south
 
 # Give focus to pane in Hyper
 # cmd + ctrl doesn't work in Hyper for some reason
-ctrl + alt - left      [Hyper]        :   khd -p "ctrl + alt - tab"
-ctrl + alt - right     [Hyper]        :   khd -p "ctrl + alt + shift - tab"
+ctrl - left            [Hyper]        :   khd -p "ctrl + alt - tab"
+ctrl - right           [Hyper]        :   khd -p "ctrl + alt + shift - tab"
 
 # Move focused window
 ctrl + alt - left     ![Hyper,Atom]   :   kwmc window -s west
