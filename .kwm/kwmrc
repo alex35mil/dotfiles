@@ -70,6 +70,12 @@ kwmc rule owner="Billings Pro" properties={float="true"}
 kwmc rule owner="CleanMyMac 3" properties={float="true"}
 kwmc rule owner="Photo Booth" properties={float="true"}
 
+# Keep those apps on secondary display
+kwmc rule owner="Slack" properties={display="1"}
+kwmc rule owner="Skype" properties={display="1"}
+kwmc rule owner="Things" properties={display="1"}
+kwmc rule owner="Billings Pro" properties={display="1"}
+
 # Configure border for focused window, disabled by default
 kwmc config border focused off
 kwmc config border focused size 4
