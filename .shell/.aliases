@@ -34,7 +34,9 @@ alias lsa="ls -lFa ${colorflag}"
 alias lsv="ls -lF ${colorflag}"
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 
+# General
 alias rmrf="rm -rf"
+alias hg="history | grep "
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
