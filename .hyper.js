@@ -22,6 +22,7 @@ module.exports = {
     'hyperfull',
     'hyperminimal',
     'hyper-statusline',
+    'hyper-pane',
   ],
 
   localPlugins: [

@@ -2,34 +2,29 @@
 khd kwm on
 
 # Set space tiling mode
-cmd + ctrl - a   :   kwmc space -t bsp
-cmd + ctrl - s   :   kwmc space -t monocle
-cmd + ctrl - d   :   kwmc space -t float
+ctrl + cmd - a   :   kwmc space -t bsp
+ctrl + cmd - s   :   kwmc space -t monocle
+ctrl + cmd - d   :   kwmc space -t float
 
 # Toggle float mode for window
-cmd + ctrl - f   :   kwmc window -t focused
+ctrl + cmd - f   :   kwmc window -t focused
 
 # Give focus to screen
-cmd + ctrl - 0   :   kwmc display -f 0
-cmd + ctrl - 9   :   kwmc display -f 1
+ctrl + cmd - 0   :   kwmc display -f 0
+ctrl + cmd - 9   :   kwmc display -f 1
 
 # Move focused window to screen
 ctrl + alt - 0   :   kwmc window -m display 0
 ctrl + alt - 9   :   kwmc window -m display 1
 
 # Maximize / minimize window
-cmd + ctrl - return   ![Hyper,Atom]   :   kwmc window -z fullscreen
+ctrl + cmd - return   ![Hyper,Atom]   :   kwmc window -z fullscreen
 
 # Give focus to window
-cmd + ctrl - left     ![Hyper,Atom]   :   kwmc window -f west
-cmd + ctrl - right    ![Hyper,Atom]   :   kwmc window -f east
-cmd + ctrl - up       ![Hyper,Atom]   :   kwmc window -f north
-cmd + ctrl - down     ![Hyper,Atom]   :   kwmc window -f south
-
-# Give focus to pane in Hyper
-# cmd + ctrl doesn't work in Hyper for some reason
-cmd - left             [Hyper]        :   khd -p "ctrl + alt - tab"
-cmd - right            [Hyper]        :   khd -p "ctrl + alt + shift - tab"
+ctrl + cmd - left     ![Hyper,Atom]   :   kwmc window -f west
+ctrl + cmd - right    ![Hyper,Atom]   :   kwmc window -f east
+ctrl + cmd - up       ![Hyper,Atom]   :   kwmc window -f north
+ctrl + cmd - down     ![Hyper,Atom]   :   kwmc window -f south
 
 # Move focused window
 ctrl + alt - left     ![Hyper,Atom]   :   kwmc window -s west
@@ -38,11 +33,29 @@ ctrl + alt - up       ![Hyper,Atom]   :   kwmc window -s north
 ctrl + alt - down     ![Hyper,Atom]   :   kwmc window -s south
 
 # Toggle focused window border
-cmd + ctrl - b        ![Hyper,Atom]   :   ~/.kwm/scripts/toggle-focused-border.sh
+ctrl + cmd - b        ![Hyper,Atom]   :   ~/.kwm/scripts/toggle-focused-border.sh
 
 # Mark and swap windows
-cmd + ctrl - m        ![Hyper,Atom]   :   ~/.kwm/scripts/mark-and-swap-windows.sh
+ctrl + cmd - m        ![Hyper,Atom]   :   ~/.kwm/scripts/mark-and-swap-windows.sh
 
 # Change split-ratio
 cmd + shift - left    ![Hyper,Atom]   :   ~/.kwm/scripts/expand-reduce-split-ratio-left.sh
 cmd + shift - right   ![Hyper,Atom]   :   ~/.kwm/scripts/expand-reduce-split-ratio-right.sh
+
+# Give focus to pane in Hyper
+# ctrl + cmd doesn't work in Hyper for some reason
+cmd - left             [Hyper]        :   khd -p "ctrl + alt - left"
+cmd - right            [Hyper]        :   khd -p "ctrl + alt - right"
+cmd - up               [Hyper]        :   khd -p "ctrl + alt - up"
+cmd - down             [Hyper]        :   khd -p "ctrl + alt - down"
+
+# Move panes in Hyper
+ctrl + alt - left      [Hyper]        :   khd -p "ctrl + alt + shift - left"
+ctrl + alt - right     [Hyper]        :   khd -p "ctrl + alt + shift - right"
+ctrl + alt - up        [Hyper]        :   khd -p "ctrl + alt + shift - up"
+ctrl + alt - down      [Hyper]        :   khd -p "ctrl + alt + shift - down"
+
+# Switch view mode in Bear
+cmd - 1                [Bear]         :   khd -p "ctrl - 1"
+cmd - 2                [Bear]         :   khd -p "ctrl - 2"
+cmd - 3                [Bear]         :   khd -p "ctrl - 3"

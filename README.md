@@ -87,9 +87,7 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
 
 * <Ctrl-Shift-←>          Go to the left space                System Preferences > Mission Control
 * <Ctrl-Shift-→>          Go to the right space               System Preferences > Mission Control
-  <Ctrl-1>                Go to Space 1                       System Preferences > Mission Control
-  <Ctrl-2>                Go to Space 2                       System Preferences > Mission Control
-  <Ctrl-N>                Go to Space N                       System Preferences > Mission Control
+* <Cmd-§>                 Go to Space 1                       System Preferences > Mission Control
   F3                      Toggle Mission Control              System Preferences > Mission Control
   F4                      Toggle Launchpad                    System Preferences > Keyboard > Shortcuts > Launchpad & Dock
 * F5                      Toggle Full Screen Mode             System Preferences > Keyboard > Shortcuts > App Shortcuts
