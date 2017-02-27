@@ -9,12 +9,22 @@ function w() {
 }
 
 # `l` with no arguments lists contents of the current directory via `tree`,
-# otherwise lists directory tree given depth
+# otherwise lists contents of given directory
 function l() {
   if [[ $# -eq 0 ]]; then
-    tree -a -L 1
+    tree -a -L 1 .
   else
-    tree -a -L $@
+    tree -a -L 1 $@
+  fi
+}
+
+# `o` with no arguments opens current folder in Finder,
+# otherwise selects given item in Finder
+function o() {
+  if [[ $# -eq 0 ]]; then
+    open -R ./$(ls | sort -n | head -1)
+  else
+    open -R $@
   fi
 }
 
