@@ -44,16 +44,10 @@ cmd + shift - right   ![Hyper,Atom]   :   ~/.kwm/scripts/expand-reduce-split-rat
 
 # Give focus to pane in Hyper
 # ctrl + cmd doesn't work in Hyper for some reason
-cmd - left             [Hyper]        :   khd -p "ctrl + alt - left"
-cmd - right            [Hyper]        :   khd -p "ctrl + alt - right"
-cmd - up               [Hyper]        :   khd -p "ctrl + alt - up"
-cmd - down             [Hyper]        :   khd -p "ctrl + alt - down"
-
-# Move panes in Hyper
-ctrl + alt - left      [Hyper]        :   khd -p "ctrl + alt + shift - left"
-ctrl + alt - right     [Hyper]        :   khd -p "ctrl + alt + shift - right"
-ctrl + alt - up        [Hyper]        :   khd -p "ctrl + alt + shift - up"
-ctrl + alt - down      [Hyper]        :   khd -p "ctrl + alt + shift - down"
+cmd - left             [Hyper]        :   khd -p "cmd + alt - left"
+cmd - right            [Hyper]        :   khd -p "cmd + alt - right"
+cmd - up               [Hyper]        :   khd -p "cmd + alt - up"
+cmd - down             [Hyper]        :   khd -p "cmd + alt - down"
 
 # Switch view mode in Bear
 cmd - 1                [Bear]         :   khd -p "ctrl - 1"
