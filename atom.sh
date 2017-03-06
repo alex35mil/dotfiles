@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apm install advanced-open-file
-apm install autocomplete-paths
+apm install autocomplete-modules
 apm install color-picker
 apm install custom-title
 apm install file-icons
