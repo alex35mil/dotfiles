@@ -7,11 +7,11 @@
     'body': 'console.log(${0})'
 
   'console.log ||':
-    'prefix': 'lr'
+    'prefix': 'lor'
     'body': 'console.log(${0}) ||'
 
   'console.log.jsx':
-    'prefix': 'lx'
+    'prefix': 'ljsx'
     'body': '{console.log(${0})}'
 
   'debugger':
@@ -76,11 +76,11 @@
 
   'import':
     'prefix': 'i'
-    'body': 'import ${1:module} from \'${0:location}\';'
+    'body': 'import ${0:module} from \'${1:location}\';'
 
   'import type':
     'prefix': 'it'
-    'body': 'import type { ${1:Type} } from \'${0:location}\';'
+    'body': 'import type { ${0:Type} } from \'${1:location}\';'
 
   'import react':
     'prefix': 'ir'
@@ -94,6 +94,10 @@
     'prefix': 'ii'
     'body': 'import Immutable from \'immutable\';'
 
+  'import immutable Record':
+    'prefix': 'iir'
+    'body': 'import { Record } from \'immutable\';'
+
   'import immutable Map':
     'prefix': 'iim'
     'body': 'import { Map } from \'immutable\';'
@@ -106,13 +110,17 @@
     'prefix': 'iis'
     'body': 'import { Set } from \'immutable\';'
 
+  'import immutable OrderedSet':
+    'prefix': 'iios'
+    'body': 'import { OrderedSet } from \'immutable\';'
+
   'import lodash':
     'prefix': 'il'
     'body': 'import _ from \'lodash/fp\';'
 
   'import classnames':
     'prefix': 'ic'
-    'body': 'import classNames from \'classnames\';'
+    'body': 'import cn from \'classnames\';'
 
   'import styles':
     'prefix': 'is'
@@ -191,7 +199,9 @@
       import React, { Component } from 'react';
 
 
-      type Props = {};
+      type Props = {|
+
+      |};
 
       export default class ${1:Component} extends Component {
 
@@ -206,15 +216,19 @@
       }
     """
 
-  'React.Functional.Component':
-    'prefix': 'rfc'
+  'React.SFC':
+    'prefix': 'rsfc'
     'body': """
       /* @flow */
 
       import React from 'react';
 
 
-      const ${1:Component} = (props) => (
+      type Props = {|
+
+      |};
+
+      const ${1:Component} = ({}: Props) => (
         // jsx...
       );
 
@@ -222,14 +236,16 @@
     """
 
   'React.HOC':
-    'prefix': 'rh'
+    'prefix': 'rhoc'
     'body': """
       /* @flow */
 
       import React, { Component } from 'react';
 
 
-      type Props = {};
+      type Props = {|
+
+      |};
 
       type NextProps = Props & State & Handlers;
       type NextComponent = (props: NextProps) => React.Element<*>;
@@ -248,36 +264,38 @@
       export default ${1:withHOC};
     """
 
-  'story':
-    'prefix': 'st'
+  'interaction':
+    'prefix': 'in'
     'body': """
       /* @flow */
 
-      import type { $ReducerHandler } from 'types/redux';
-      import type { $StoreState } from './initialState';
+      import type { $ActionHandler } from 'types/redux';
+      import type { $StoreState } from '../state';
 
-      ${0:// stf / staf / stsup ...}
+      ${0:// ins / inas / inr ...}
     """
 
-  'story feature':
-    'prefix': 'stf'
+  'interaction sync':
+    'prefix': 'ins'
     'body': """
       // --- ${1:Feature}
 
       const ${2:STATE_UPDATE}: '${2:STATE_UPDATE}' = '${2:STATE_UPDATE}';
 
-      // Action
-      type $Action = {| type: typeof ${2:STATE_UPDATE} |};
+      // Action creator
+      type $Action = {|
+        type: typeof ${2:STATE_UPDATE},
+      |};
 
       export const updateState = (): $Action => ({
         type: ${2:STATE_UPDATE},
       });
 
 
-      // Reducer
-      type $OnStateUpdate = {|
-        [type: typeof ${2:STATE_UPDATE}]: $ReducerHandler<$StoreState, $Action>,
-      |};
+      // Action handler
+      type $OnStateUpdate = {
+        [typeof ${2:STATE_UPDATE}]: $ActionHandler<$StoreState, $Action>,
+      };
 
       export const onStateUpdate: $OnStateUpdate = {
         [${2:STATE_UPDATE}]:
@@ -286,15 +304,17 @@
       };
     """
 
-  'story async feature':
-    'prefix': 'staf'
+  'interaction async':
+    'prefix': 'inas'
     'body': """
       // --- ${1:Async Feature}
 
       const ${2:ASYNC_STATE_UPDATE}: '${2:ASYNC_STATE_UPDATE}' = '${2:ASYNC_STATE_UPDATE}';
 
-      // Action
-      type $Action = {| type: typeof ${2:ASYNC_STATE_UPDATE} |};
+      // Action creator
+      type $Action = {|
+        type: typeof ${2:ASYNC_STATE_UPDATE},
+      |};
 
       const updateStateAsyncAction = (): $Action => ({
         type: ${2:ASYNC_STATE_UPDATE},
@@ -306,10 +326,10 @@
       };
 
 
-      // Reducer
-      type $OnAsyncStateUpdate = {|
-        [type: typeof ${2:ASYNC_STATE_UPDATE}]: $ReducerHandler<$StoreState, $Action>,
-      |};
+      // Action handler
+      type $OnAsyncStateUpdate = {
+        [typeof ${2:ASYNC_STATE_UPDATE}]: $ActionHandler<$StoreState, $Action>,
+      };
 
       export const onAsyncStateUpdate: $OnAsyncStateUpdate = {
         [${2:ASYNC_STATE_UPDATE}]:
@@ -318,8 +338,8 @@
       };
     """
 
-  'story server update':
-    'prefix': 'stsup'
+  'interaction remote':
+    'prefix': 'inr'
     'body': """
       const REQUESTED: 'REQUESTED' = 'REQUESTED';
       const SUCCEEDED: 'SUCCEEDED' = 'SUCCEEDED';
@@ -328,14 +348,20 @@
 
       // --- Request
 
-      // Action
-      type $RequestAction = {| type: typeof REQUESTED |};
-      const requestAction = (): $RequestAction => ({ type: REQUESTED });
+      // Action creator
+      type $RequestAction = {|
+        type: typeof REQUESTED,
+      |};
 
-      // Reducer
+      const requestAction = (): $RequestAction => ({
+        type: REQUESTED,
+      });
+
+      // Action handler
       type $OnRequest = {
-        [type: typeof REQUESTED]: $ReducerHandler<$StoreState, $RequestAction>,
+        [typeof REQUESTED]: $ActionHandler<$StoreState, $RequestAction>,
       };
+
       const onRequest: $OnRequest = {
         [UPDATE_REQUESTED]:
           (state) =>
@@ -345,7 +371,7 @@
 
       // --- Success
 
-      // Action
+      // Action creator
       type $SuccessAction = {|
         type: typeof SUCCEEDED,
       |};
@@ -357,10 +383,11 @@
         // ...args
       });
 
-      // Reducer
+      // Action handler
       type $OnSuccess = {
-        [type: typeof SUCCEEDED]: $ReducerHandler<$StoreState, $SuccessAction>,
+        [typeof SUCCEEDED]: $ActionHandler<$StoreState, $SuccessAction>,
       };
+
       const onSuccess: $OnSuccess = {
         [SUCCEEDED]:
           (state) =>
@@ -370,23 +397,22 @@
 
       // --- Failure
 
-      // Action
+      // Action creator
       type $FailureAction = {
         type: typeof FAILED,
         error: $ResponseError,
       };
 
-      const failureAction =
-        (error: $ResponseError): $FailureAction => ({
-          type: FAILED,
-          error,
-        })
-      ;
+      const failureAction = (error: $ResponseError): $FailureAction => ({
+        type: FAILED,
+        error,
+      });
 
-      // Reducer
+      // Action handler
       type $OnFailure = {
-        [type: typeof FAILED]: $ReducerHandler<$StoreState, $FailureAction>,
+        [type: typeof FAILED]: $ActionHandler<$StoreState, $FailureAction>,
       };
+
       const onFailure: $OnFailure = {
         [FAILED]:
           (state) =>
@@ -396,27 +422,28 @@
 
       // --- Exports
 
-      // Action creator
-      export const updateServerState =
-        (): Thunk => (dispatch, getState) => {
-          // Perform local checks...
+      // Thunk
+      export const updateServerState = (): Thunk => (dispatch, getState) => {
+        // Perform local checks...
 
-          dispatch(requestAction());
+        dispatch(requestAction());
 
-          const nextServerData = formStateSelector(state);
+        const nextServerData = formStateSelector(state);
 
-          api
-            .patch({ url, data })
-            .then(
-              () => dispatch(successAction()),
-              (error: $ResponseError) => dispatch(withApiErrorMiddleware(failureAction(error))),
-            )
-          ;
-        }
-      ;
+        api
+          .patch({ url, data })
+          .then(
+            // success
+            () => dispatch(successAction()),
+
+            // failure
+            (error: $ResponseError) => dispatch(withApiErrorMiddleware(failureAction(error))),
+          )
+        ;
+      };
 
 
-      // Reducers
+      // Action handlers
       export const onServerStateUpdate = {
         ...onRequest,
         ...onSuccess,

@@ -120,12 +120,14 @@ atom-text-editor.editor {
 }
 
 // Adjust nuclide diagnostic message layout
+.nuclide-datatip-overlay,
 .nuclide-diagnostics-gutter-ui-popup {
   .nuclide-diagnostics-gutter-ui-popup-header {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     padding: 5px 12px;
+    background-color: rgba(204, 102, 102, .2);
   }
 
   .highlight-error {
@@ -144,6 +146,11 @@ atom-text-editor.editor {
     height: auto;
     line-height: 1.1;
   }
+}
+
+.nuclide-navigation-stack-tile .nuclide-btn-group .btn {
+  border: 0;
+  border-radius: 0;
 }
 
 

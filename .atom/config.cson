@@ -46,6 +46,16 @@
       "language-xml"
       "linter"
     ]
+    ignoredNames: [
+      ".git"
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      "desktop.ini"
+      "node_modules"
+    ]
     packagesWithKeymapsDisabled: [
       "tool-bar"
       "zentabs"
@@ -103,8 +113,10 @@
   "markdown-preview":
     useGitHubStyle: true
   nuclide:
+    "nuclide-diagnostics-ui": {}
     "nuclide-flow":
       canUseFlowBin: true
+      enablePushDiagnostics: true
       enableStructuredTypeHints: true
       flowAutocompleteResultsFirst: false
       warnOnNotInstalled: false
@@ -131,7 +143,6 @@
       "nuclide-distraction-free-mode": false
       "nuclide-file-tree": false
       "nuclide-file-watcher": false
-      "nuclide-find-references": false
       "nuclide-fuzzy-filename-provider": false
       "nuclide-hack": false
       "nuclide-health": false
@@ -142,7 +153,6 @@
       "nuclide-http-request-sender": false
       "nuclide-ios-simulator-logs": false
       "nuclide-language-hack": false
-      "nuclide-navigation-stack": false
       "nuclide-nux": false
       "nuclide-objc": false
       "nuclide-open-filenames-provider": false
