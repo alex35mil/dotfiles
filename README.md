@@ -1,19 +1,18 @@
 # .dotfiles
-
 Bash, Zsh, iTerm, Atom, Vim, Tmux, Git, OSX, Brew, npm, rvm etc.
 
 ![Console](./screens/console.png?raw=true)
 
 [All screens](./screens)
 
-## Install
 
+## Install
 Use `bootstrap.sh` to install all at once (never tested haha). Or run individual scripts.
 
 To apply only dotfiles run `install.sh`.
 
-### zsh
 
+### zsh
 To switch to `zsh` as your login shell grab it from the brew and add this to `/etc/shells`:
 
 ```
@@ -26,13 +25,9 @@ Then run:
 chsh -s $(which zsh)
 ```
 
-### iTerm
-
-Use [this patch](https://github.com/jaredculp/iterm2-borderless-padding) to add breathing room to your `iTerm` (mine is 30px).
-
 ### Others
-
 I use [`kwm`](https://github.com/koekeishiya/kwm) to manage windows. And [`Übersicht`](http://tracesof.net/uebersicht/) to reduce the noise from menu bar.
+
 
 ## Keyboard Shortcuts
 
@@ -53,6 +48,7 @@ System Preferences > Keyboard > Keyboard > [x] Use F1, F2, ...
 #### ProTip #3
 Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
 
+
 ### Cheatsheets
 
 `*` means not standard.
@@ -68,7 +64,9 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
   <Ctrl-F3>               Show dock
 * <Alt-Space>             Show Alfred                         Alfred
 * <Ctrl-Space>            Create TODO in Things               Things
-* <Ctrl-T>                Show/Hide Timer                     Billings Pro
+* <Ctrl-Alt-Space>        Run Project in Term                 Alfred
+* <Ctrl-Cmd-N>            Open New Term Window                Alfred
+* <Ctrl-Cmd-T>            Show/Hide Timer                     Billings Pro
 
 * <Ctrl-Cmd-A>            Set Space Tiling Mode To BSP        KWM
 * <Ctrl-Cmd-S>            Set Space Tiling Mode To Monocle    KWM
@@ -98,18 +96,13 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
 
 ```
   <Cmd-N>                 New Window
-  <Cmd-T>                 New Tab
   <Cmd-D>                 New Pane on the Right
   <Cmd-Shift-D>           New Pane on the Bottom
+  <Cmd-Arrow>             Navigate Panes
+  <Cmd-Shift-Arrow>       Resize Panes
+  <Ctrl-Alt-Arrow>        Swap Panes
   <Cmd-K>                 Clear history
-  <Cmd-Right>             Next Tab
-  <Cmd-Left>              Previous Tab
-  <Cmd-Number>            N Tab
-  <Cmd-]>                 Next Pane
-  <Cmd-[>                 Previous Pane
-  <Cmd-Alt-Arrow/Number>  Navigate Panes
-  <Ctrl-Cmd-Arrow>        Resize Pane
-  <Cmd-Shift-Enter>       Maximize/Restore Pane
+  <Ctrl-Cmd-Enter>        Maximize/Restore Pane
 ```
 
 #### Atom

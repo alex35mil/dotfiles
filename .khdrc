@@ -18,38 +18,31 @@ ctrl + alt - 0   :   kwmc window -m display 0
 ctrl + alt - 9   :   kwmc window -m display 1
 
 # Maximize / minimize window
-ctrl + cmd - return   ![Hyper,Atom]   :   kwmc window -z fullscreen
+ctrl + cmd - return   ![iTerm2,Atom]   :   kwmc window -z fullscreen
 
 # Give focus to window
-ctrl + cmd - left     ![Hyper,Atom]   :   kwmc window -f west
-ctrl + cmd - right    ![Hyper,Atom]   :   kwmc window -f east
-ctrl + cmd - up       ![Hyper,Atom]   :   kwmc window -f north
-ctrl + cmd - down     ![Hyper,Atom]   :   kwmc window -f south
+ctrl + cmd - left     ![iTerm2,Atom]   :   kwmc window -f west
+ctrl + cmd - right    ![iTerm2,Atom]   :   kwmc window -f east
+ctrl + cmd - up       ![iTerm2,Atom]   :   kwmc window -f north
+ctrl + cmd - down     ![iTerm2,Atom]   :   kwmc window -f south
 
 # Move focused window
-ctrl + alt - left     ![Hyper,Atom]   :   kwmc window -s west
-ctrl + alt - right    ![Hyper,Atom]   :   kwmc window -s east
-ctrl + alt - up       ![Hyper,Atom]   :   kwmc window -s north
-ctrl + alt - down     ![Hyper,Atom]   :   kwmc window -s south
+ctrl + alt - left     ![iTerm2,Atom]   :   kwmc window -s west
+ctrl + alt - right    ![iTerm2,Atom]   :   kwmc window -s east
+ctrl + alt - up       ![iTerm2,Atom]   :   kwmc window -s north
+ctrl + alt - down     ![iTerm2,Atom]   :   kwmc window -s south
 
 # Toggle focused window border
-ctrl + cmd - b        ![Hyper,Atom]   :   ~/.kwm/scripts/toggle-focused-border.sh
+ctrl + cmd - b        ![iTerm2,Atom]   :   ~/.kwm/scripts/toggle-focused-border.sh
 
 # Mark and swap windows
-ctrl + cmd - m        ![Hyper,Atom]   :   ~/.kwm/scripts/mark-and-swap-windows.sh
+ctrl + cmd - m        ![iTerm2,Atom]   :   ~/.kwm/scripts/mark-and-swap-windows.sh
 
 # Change split-ratio
-cmd + shift - left    ![Hyper,Atom]   :   ~/.kwm/scripts/expand-reduce-split-ratio-left.sh
-cmd + shift - right   ![Hyper,Atom]   :   ~/.kwm/scripts/expand-reduce-split-ratio-right.sh
-
-# Give focus to pane in Hyper
-# ctrl + cmd doesn't work in Hyper for some reason
-cmd - left             [Hyper]        :   khd -p "cmd + alt - left"
-cmd - right            [Hyper]        :   khd -p "cmd + alt - right"
-cmd - up               [Hyper]        :   khd -p "cmd + alt - up"
-cmd - down             [Hyper]        :   khd -p "cmd + alt - down"
+cmd + shift - left    ![iTerm2,Atom]   :   ~/.kwm/scripts/expand-reduce-split-ratio-left.sh
+cmd + shift - right   ![iTerm2,Atom]   :   ~/.kwm/scripts/expand-reduce-split-ratio-right.sh
 
 # Switch view mode in Bear
-cmd - 1                [Bear]         :   khd -p "ctrl - 1"
-cmd - 2                [Bear]         :   khd -p "ctrl - 2"
-cmd - 3                [Bear]         :   khd -p "ctrl - 3"
+cmd - 1                [Bear]          :   khd -p "ctrl - 1"
+cmd - 2                [Bear]          :   khd -p "ctrl - 2"
+cmd - 3                [Bear]          :   khd -p "ctrl - 3"

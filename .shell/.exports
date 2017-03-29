@@ -27,7 +27,3 @@ fi
 # Set history size
 export HISTSIZE=10000
 export SAVEHIST=10000
-
-# Set locals
-export ALFRED="$HOME/.alfred"
-export KWM="$HOME/.kwm"

@@ -8,6 +8,10 @@
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
 	<integer>1</integer>
+	<key>BadgeRightMargin</key>
+	<integer>10</integer>
+	<key>BadgeTopMargin</key>
+	<integer>10</integer>
 	<key>Control</key>
 	<integer>1</integer>
 	<key>Custom Color Presets</key>
@@ -235,6 +239,8 @@
 	<true/>
 	<key>DisableFullscreenTransparency</key>
 	<true/>
+	<key>FocusFollowsMouse</key>
+	<false/>
 	<key>GlobalKeyMap</key>
 	<dict>
 		<key>0x19-0x60000</key>
@@ -251,45 +257,129 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
+		<key>0xd-0x140000</key>
+		<dict>
+			<key>Action</key>
+			<integer>25</integer>
+			<key>Text</key>
+			<string>Maximize Active Pane</string>
+		</dict>
+		<key>0xf700-0x2c0000</key>
+		<dict>
+			<key>Action</key>
+			<integer>55</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
 		<key>0xf700-0x300000</key>
 		<dict>
 			<key>Action</key>
-			<integer>7</integer>
+			<integer>20</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf700-0x320000</key>
+		<dict>
+			<key>Action</key>
+			<integer>25</integer>
+			<key>Text</key>
+			<string>Move Divider Up</string>
+		</dict>
+		<key>0xf700-0x340000</key>
+		<dict>
+			<key>Action</key>
+			<integer>20</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf701-0x2c0000</key>
+		<dict>
+			<key>Action</key>
+			<integer>56</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
 		<key>0xf701-0x300000</key>
 		<dict>
 			<key>Action</key>
-			<integer>6</integer>
+			<integer>21</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf701-0x320000</key>
+		<dict>
+			<key>Action</key>
+			<integer>25</integer>
+			<key>Text</key>
+			<string>Move Divider Down</string>
+		</dict>
+		<key>0xf701-0x340000</key>
+		<dict>
+			<key>Action</key>
+			<integer>21</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf702-0x2c0000</key>
+		<dict>
+			<key>Action</key>
+			<integer>53</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
 		<key>0xf702-0x300000</key>
 		<dict>
 			<key>Action</key>
-			<integer>2</integer>
+			<integer>18</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
 		<key>0xf702-0x320000</key>
 		<dict>
 			<key>Action</key>
-			<integer>33</integer>
+			<integer>25</integer>
+			<key>Text</key>
+			<string>Move Divider Left</string>
+		</dict>
+		<key>0xf702-0x340000</key>
+		<dict>
+			<key>Action</key>
+			<integer>18</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf703-0x2c0000</key>
+		<dict>
+			<key>Action</key>
+			<integer>54</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
 		<key>0xf703-0x300000</key>
 		<dict>
 			<key>Action</key>
-			<integer>0</integer>
+			<integer>19</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
 		<key>0xf703-0x320000</key>
 		<dict>
 			<key>Action</key>
-			<integer>34</integer>
+			<integer>25</integer>
+			<key>Text</key>
+			<string>Move Divider Right</string>
+		</dict>
+		<key>0xf703-0x340000</key>
+		<dict>
+			<key>Action</key>
+			<integer>19</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf708-0x0</key>
+		<dict>
+			<key>Action</key>
+			<integer>23</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
@@ -374,23 +464,29 @@
 	<false/>
 	<key>NSScrollViewShouldScrollUnderTitlebar</key>
 	<false/>
-	<key>NSTableView Columns KeyBingingTable</key>
-	<array>
-		<data>
-		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
-		hAErATCG
-		</data>
-		<string>198</string>
-		<data>
-		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
-		hAErATGG
-		</data>
-		<string>322</string>
-	</array>
-	<key>NSTableView Hidden Columns KeyBingingTable</key>
-	<array/>
-	<key>NSTableView Sort Ordering KeyBingingTable</key>
-	<array/>
+	<key>NSTableView Columns v2 KeyBingingTable</key>
+	<data>
+	YnBsaXN0MDDUAQIDBAUGNjdYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
+	AAGGoK4HCA8aGxwdHh8gJjAxMlUkbnVsbNIJCgsOWk5TLm9iamVjdHNWJGNsYXNzogwN
+	gAKACoAN0xAJChEVGVdOUy5rZXlzoxITFIADgASABaMWFxiABoAHgAiACVpJZGVudGlm
+	aWVyVVdpZHRoVkhpZGRlblEwI0BowAAAAAAACNIhIiMkWiRjbGFzc25hbWVYJGNsYXNz
+	ZXNcTlNEaWN0aW9uYXJ5oiMlWE5TT2JqZWN00xAJCicrGaMSExSAA4AEgAWjLC0YgAuA
+	DIAIgAlRMSNAdCAAAAAAANIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
+	TlNLZXllZEFyY2hpdmVy0Tg5VUFycmF5gAEACAARABoAIwAtADIANwBGAEwAUQBcAGMA
+	ZgBoAGoAbABzAHsAfwCBAIMAhQCJAIsAjQCPAJEAnACiAKkAqwC0ALUAugDFAM4A2wDe
+	AOcA7gDyAPQA9gD4APwA/gEAAQIBBAEGAQ8BFAEjAScBLwFBAUQBSgAAAAAAAAIBAAAA
+	AAAAADoAAAAAAAAAAAAAAAAAAAFM
+	</data>
+	<key>NSTableView Sort Ordering v2 KeyBingingTable</key>
+	<data>
+	YnBsaXN0MDDUAQIDBAUGFBVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
+	AAGGoKMHCA1VJG51bGzSCQoLDFpOUy5vYmplY3RzViRjbGFzc6CAAtIODxARWiRjbGFz
+	c25hbWVYJGNsYXNzZXNeTlNNdXRhYmxlQXJyYXmjEBITV05TQXJyYXlYTlNPYmplY3Rf
+	EA9OU0tleWVkQXJjaGl2ZXLRFhdVQXJyYXmAAQgRGiMtMjc7QUZRWFlbYGt0g4ePmKqt
+	swAAAAAAAAEBAAAAAAAAABgAAAAAAAAAAAAAAAAAAAC1
+	</data>
+	<key>NSTableView Supports v2 KeyBingingTable</key>
+	<true/>
 	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
 	<dict>
 		<key>TB Is Shown</key>
@@ -402,12 +498,16 @@
 	<string>806 983 606 456 0 0 3440 1440 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>2620 738 700 622 0 0 3440 1440 </string>
+	<key>NSWindow Frame SessionsPreferences</key>
+	<string>269 126 606 469 0 0 1280 800 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2024 506 918 381 0 0 3440 1440 </string>
+	<string>91 264 796 473 0 0 1280 800 </string>
+	<key>NSWindow Frame UKCrashReporter</key>
+	<string>20 20 1240 740 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>61 723 1650 652 0 0 3440 1440 </string>
+	<string>0 4 720 553 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1728 723 1650 652 0 0 3440 1440 </string>
+	<string>20 26 1240 728 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
 	<string>2225 46 1154 652 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 11</key>
@@ -415,17 +515,17 @@
 	<key>NSWindow Frame iTerm Window 12</key>
 	<string>648 161 570 572 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>61 42 1650 1336 0 0 3440 1440 </string>
+	<string>0 117 720 530 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>63 42 3314 1336 0 0 3440 1440 </string>
+	<string>0 270 720 530 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>61 42 1650 1336 0 0 3440 1440 </string>
+	<string>1728 42 1650 1336 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
-	<string>63 42 3314 1336 0 0 3440 1440 </string>
-	<key>NSWindow Frame iTerm Window 6</key>
-	<string>61 46 1650 652 0 0 3440 1440 </string>
-	<key>NSWindow Frame iTerm Window 7</key>
 	<string>61 42 1650 1336 0 0 3440 1440 </string>
+	<key>NSWindow Frame iTerm Window 6</key>
+	<string>1728 42 1650 1336 0 0 3440 1440 </string>
+	<key>NSWindow Frame iTerm Window 7</key>
+	<string>1728 42 1650 1336 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 8</key>
 	<string>1728 42 1650 1336 0 0 3440 1440 </string>
 	<key>NSWindow Frame iTerm Window 9</key>
@@ -1042,8 +1142,12 @@
 			<array/>
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
+			<key>Thin Strokes</key>
+			<integer>0</integer>
 			<key>Transparency</key>
 			<real>0.0</real>
+			<key>Triggers</key>
+			<array/>
 			<key>Unlimited Scrollback</key>
 			<true/>
 			<key>Use Bold Font</key>
@@ -1061,7 +1165,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>12</integer>
+			<integer>1</integer>
 			<key>Working Directory</key>
 			<string>/Users/Alex</string>
 		</dict>
@@ -1167,6 +1271,8 @@
 	<string>/Users/Alex/Dev/System/dotfiles/.iterm/prefs</string>
 	<key>Print In Black And White</key>
 	<true/>
+	<key>QuitWhenAllWindowsClosed</key>
+	<false/>
 	<key>RunJobsInServers</key>
 	<false/>
 	<key>SUEnableAutomaticChecks</key>
@@ -1178,7 +1284,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-09-26T07:58:31Z</date>
+	<date>2017-03-27T13:04:08Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>Secure Input</key>
@@ -1190,7 +1296,7 @@
 	<key>ShowPaneTitles</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.46029647435897436</real>
+	<real>0.41782852564102568</real>
 	<key>SwitchPaneModifier</key>
 	<integer>6</integer>
 	<key>SwitchTabModifier</key>
@@ -1201,6 +1307,12 @@
 	<integer>1</integer>
 	<key>TabViewType</key>
 	<integer>1</integer>
+	<key>TerminalMargin</key>
+	<integer>40</integer>
+	<key>TerminalVMargin</key>
+	<integer>40</integer>
+	<key>UKCrashReporterLastCrashReportDate</key>
+	<real>1490797952</real>
 	<key>Window Arrangements</key>
 	<dict/>
 	<key>WordCharacters</key>
@@ -1210,7 +1322,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.20161020-nightly</string>
+	<string>3.1.beta.2</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

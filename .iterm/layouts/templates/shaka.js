@@ -1,10 +1,23 @@
-const generator = require('../generator');
+const iTerm = Application('iTerm');
+const Utils = Library('utils');
 
-generator.writeConfig(process.argv, {
-  layout: 'tiled',
-  panes: [
-    'atom . && git status',
-    'cd client',
-    'foreman start -f Procfile.dev',
-  ],
-});
+iTerm.includeStandardAdditions = true;
+iTerm.activate();
+
+function run(path, cmd) {
+  const container = iTerm.createWindowWithDefaultProfile();
+
+  const rootSession = container.currentSession;
+  const serverSession = rootSession.splitVerticallyWithDefaultProfile();
+  const clientSession = rootSession.splitHorizontallyWithDefaultProfile();
+
+  Utils.prepareSessions(path, [
+    rootSession,
+    clientSession,
+    serverSession,
+  ]);
+
+  rootSession.write({ text: cmd.root });
+  clientSession.write({ text: cmd.client });
+  serverSession.write({ text: cmd.server });
+}

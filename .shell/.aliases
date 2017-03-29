@@ -18,6 +18,7 @@ alias libs="cd ~/Dev/Libs"
 alias sand="cd ~/Dev/Sandboxes"
 
 alias fng="cd ~/Dev/Projects/shakacode.com/fng"
+alias mnm="cd ~/Dev/Projects/minima.pro/minima"
 alias dots="cd ~/Dev/System/dotfiles"
 
 alias hosts="sudo $EDITOR /etc/hosts"
@@ -184,6 +185,7 @@ alias yrm="yarn remove "
 
 alias yod="yarn outdated"
 alias yup="yarn upgrade-interactive"
+alias yupd="yarn upgrade-interactive --exact"
 
 alias yg="yarn global "
 alias ygls="yarn global ls"

@@ -14,10 +14,6 @@ function vcs_info_wrapper() {
   fi
 }
 
-function precmd() {
-  print ''
-}
-
 # PROMPT: »»»
 export PROMPT=$'%{\e[1;37;0m%}%{\e[38;5;160m%}»%{\e[38;5;208m%}»%{\e[38;5;34m%}»%{\e[0m%}  '
 
@@ -28,3 +24,12 @@ export PROMPT=$'%{\e[1;37;0m%}%{\e[38;5;160m%}»%{\e[38;5;208m%}»%{\e[38;5;34m%
 # export PROMPT=$'%{\e[1;37;0m%}%{\e[38;5;160m%}˗%{\e[38;5;208m%}ˏ%{\e[38;5;34m%}ˋ%{\e[38;5;199m%}›%{\e[0m%}  '
 
 export RPROMPT=$'$(vcs_info_wrapper)'
+
+function precmd() {
+  if [[ $PROMPT_ADD_NEW_LINE = "true" ]]
+  then
+    print ''
+  else
+    PROMPT_ADD_NEW_LINE="true"
+  fi
+}

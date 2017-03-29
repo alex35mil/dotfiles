@@ -1,10 +1,10 @@
-# `w` with no arguments lists all shell aliases,
-# otherwise lists aliases, that start with the given chars
-function w() {
+# `a` with no arguments opens the current directory in Atom Editor,
+# otherwise opens the given location
+function a() {
   if [[ $# -eq 0 ]]; then
-    alias
+    atom .
   else
-    alias | grep "^$@"
+    atom $@
   fi
 }
 
@@ -28,19 +28,9 @@ function o() {
   fi
 }
 
-# Create a new directory and enter it
-function mkd() {
-  mkdir -p $@ && cd $_
-}
-
-# `a` with no arguments opens the current directory in Atom Editor,
-# otherwise opens the given location
-function a() {
-  if [[ $# -eq 0 ]]; then
-    atom .
-  else
-    atom $@
-  fi
+# `p 3000` will print listners of port 3000
+function p() {
+  lsof -n -i:$@ | grep LISTEN
 }
 
 # [ currently handled by NERDTree ]
@@ -54,9 +44,25 @@ function a() {
 #   fi
 # }
 
-# `p 3000` will print listners of port 3000
-function p() {
-  lsof -n -i:$@ | grep LISTEN
+# `w` with no arguments lists all shell aliases,
+# otherwise lists aliases, that start with the given chars
+function w() {
+  if [[ $# -eq 0 ]]; then
+    alias
+  else
+    alias | grep "^$@"
+  fi
+}
+
+# Clears output w/o new line being added by PROMPT
+function x() {
+  export PROMPT_ADD_NEW_LINE="false"
+  clear
+}
+
+# Create a new directory and enter it
+function mkd() {
+  mkdir -p $@ && cd $_
 }
 
 # `ruby-up 2.0.0` will update ruby to v2.0.0 using rvm

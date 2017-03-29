@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES="\
+FILES="\
   .bashrc \
   .bash_profile \
 
@@ -8,7 +8,6 @@ DOTFILES="\
   .zsh_profile \
 
   .shell \
-
   .profile \
 
   .editorconfig \
@@ -43,25 +42,21 @@ DOTFILES="\
   .alfred/filters \
 "
 
-ALFRED_DIRS="\
-  layouts \
-  projects \
-  scripts \
-  shared \
-"
+DOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-HERE=$(dirname $0)
-
+ITERM="$HOME/.iterm"
+ALFRED="$HOME/.alfred"
 
 # Symlink configs
 echo ""
-for item in $DOTFILES
+echo "🔖  Symlinking configs:"
+for FILE in $FILES
 do
-  [ -r "$HERE/$item" ] && \
-  [ -e "$HERE/$item" ] && \
-  ln -sfn "$HERE/$item" "$HOME/$item"
+  [ -r "$DOTFILES/$FILE" ] && \
+  [ -e "$DOTFILES/$FILE" ] && \
+  ln -sfn "$DOTFILES/$FILE" "$HOME/$FILE"
 
-  echo "🔖  $HERE/$item -> $HOME/$item ... Done!"
+  echo "   $DOTFILES/$FILE -> $HOME/$FILE ... Done"
 done
 
 # Source installed configs
@@ -71,49 +66,58 @@ elif [[ -n $ZSH_VERSION ]]; then
   source "$HOME/.zshrc"
 fi
 echo ""
-echo "🌟  Reloaded!"
+echo "🌟  Loaded!"
 
-# Make history file, if it doesn't exist
+
+# History file
 touch $HISTFILE
 echo ""
-echo "📜  $HISTFILE ... Done!"
+echo "📜  Makeing history file: $HISTFILE ... Done"
 
-# Make .bin dir, if it doesn't exist
-mkdir -p "$HOME/.bin"
+
+# .hushlogin (to get rid of "Last login...")
+touch "$HOME/.hushlogin"
 echo ""
-echo "🚀  $HOME/.bin ... Done!"
+echo "📋  Creating .hushlogin: $HOME/.hushlogin ... Done"
 
-# Set permissions for kwm scripts
+
+# kwm scripts
 chmod -R +x "$HOME/.kwm/scripts/"
 echo ""
-echo "🕹  $HOME/.kwm ... Done!"
+echo "🕹  Setting permissions for kwm scripts: $HOME/.kwm ... Done"
 
-# Set permissions for Alfred filters
+
+# Alfred filters
 chmod -R u+x "$ALFRED/filters/"
 echo ""
-echo "🎩  $ALFRED ... Done!"
+echo "🎩  Setting permissions for Alfred filters: $ALFRED ... Done"
 
-# Compile applescripts for Alfred
+
+# iTerm projects
+chmod -R u+x "$ITERM/layouts/projects/"
+echo ""
+echo "📐  Setting permissions for iTerm projects: $ITERM ... Done"
+
+
+# JXA templates
 shopt -s nullglob
-APPLESCRIPT="applescript"
 
 echo ""
-for alfred_sub_dir in $ALFRED_DIRS
+echo "🔨  Compiling JXA templates:"
+
+OSA_LIBS_PATH="$HOME/Library/Script Libraries"
+TEMPLATES="$HOME/.iterm/layouts/templates/*.js"
+
+rm -rf "$OSA_LIBS_PATH" && mkdir -p "$OSA_LIBS_PATH"
+
+for TEMPLATE in $TEMPLATES
 do
-  ALFRED_SOURCES="$HERE/.alfred/$alfred_sub_dir/*.$APPLESCRIPT"
-  ALFRED_DEST="$ALFRED/$alfred_sub_dir"
+  BUILD=$(basename $TEMPLATE .js)
+  BUILD_DEST="$OSA_LIBS_PATH/$BUILD.scpt"
 
-  rm -rf $ALFRED_DEST && mkdir -p $ALFRED_DEST
+  osacompile -l JavaScript -o "$BUILD_DEST" $TEMPLATE
 
-  for alfred_script in $ALFRED_SOURCES
-  do
-    SCRIPT=$(basename $alfred_script .$APPLESCRIPT)
-    SCRIPT_DEST="$ALFRED_DEST/$SCRIPT.scpt"
-
-    osacompile -t scpt -o $SCRIPT_DEST $alfred_script
-
-    echo "🔨  $alfred_script -> $SCRIPT_DEST ... Done!"
-  done
+  echo "   $TEMPLATE -> $BUILD_DEST ... Done"
 done
 
 

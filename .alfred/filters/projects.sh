@@ -1,7 +1,8 @@
 #!/bin/bash
 
 INPUT=$1
-ALL_PROJECTS=$(ls ~/.alfred/projects | sed -e 's/\.[^.]*$//')
+LOCATION="$HOME/.iterm/layouts/projects"
+ALL_PROJECTS=$(ls $LOCATION | sed -e 's/\.[^.]*$//')
 
 if [[ $# -eq 0 ]]
 then
@@ -19,7 +20,7 @@ ITEMS=""
 for PROJECT in ${PROJECTS[*]}
 do
   ITEMS+=$(cat << EOF
-    <item uid="$PROJECT" arg="$PROJECT" valid="YES" autocomplete="$PROJECT" type="default">
+    <item uid="$PROJECT" arg="$LOCATION/$PROJECT" valid="YES" autocomplete="$PROJECT" type="default">
       <title>$PROJECT</title>
       <icon type="fileicon">/Applications/Utilities/Script Editor.app</icon>
     </item>
