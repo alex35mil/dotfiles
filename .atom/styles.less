@@ -75,6 +75,21 @@ atom-workspace {
       border: 1px solid #cc6666;
       background-color: #cc6666;
     }
+
+    & > .flexbox-repaint-hack {
+      padding-top: 0;
+
+      .status-bar-left,
+      .status-bar-right {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+
+        .nuclide-navigation-stack-tile {
+          flex: initial;
+        }
+      }
+    }
   }
 }
 

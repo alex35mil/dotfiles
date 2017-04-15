@@ -109,6 +109,7 @@
   '=': 'editor:newline-below'
   '+': 'editor:newline-above'
   '\\': 'tree-view:reveal-active-file'
+  ', w': 'core:save'
 
   'ctrl-f': '!unset'
 

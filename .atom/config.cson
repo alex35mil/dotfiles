@@ -112,6 +112,10 @@
     disableWhenNoConfigFileInPath: true
   "markdown-preview":
     useGitHubStyle: true
+  "nice-index":
+    fileNames: [
+      "index\\.|styles\\.s?css"
+    ]
   nuclide:
     "nuclide-diagnostics-ui": {}
     "nuclide-flow":
@@ -119,7 +123,6 @@
       enablePushDiagnostics: true
       enableStructuredTypeHints: true
       flowAutocompleteResultsFirst: false
-      warnOnNotInstalled: false
     use:
       "nuclide-adb-logcat": false
       "nuclide-arcanist": false
@@ -180,6 +183,7 @@
   "tree-view":
     alwaysOpenExisting: true
   "vim-mode-plus":
+    dontUpdateRegisterOnChangeOrSubstitute: true
     useClipboardAsDefaultRegister: true
   welcome:
     showOnStartup: false

@@ -22,21 +22,97 @@
     'prefix': 'c'
     'body': 'const ${1:name} = ${0:value};'
 
-  'type':
+  'Flow.number':
+    'prefix': 'fn'
+    'body': 'number'
+
+  'Flow.string':
+    'prefix': 'fs'
+    'body': 'string'
+
+  'Flow.boolean':
+    'prefix': 'fb'
+    'body': 'boolean'
+
+  'Flow.function.no-args':
+    'prefix': 'ff'
+    'body': '() => ${0:void}'
+
+  'Flow.function.args':
+    'prefix': 'ffa'
+    'body': '(${1:arg}) => ${0:void}'
+
+  'Flow.no-args':
+    'prefix': 'fna'
+    'body': '...args: Array<void>'
+
+  'Flow.no-rest-args':
+    'prefix': 'fnra'
+    'body': '...rest: Array<void>'
+
+  'Flow.React.Element':
+    'prefix': 'fre'
+    'body': 'React.Element<*>'
+
+  'Flow.HTMLElement':
+    'prefix': 'fhtmle'
+    'body': 'HTMLElement'
+
+  'Flow.SyntheticEvent':
+    'prefix': 'fse'
+    'body': 'SyntheticEvent'
+
+  'Flow.SyntheticInputEvent':
+    'prefix': 'fsie'
+    'body': 'SyntheticInputEvent'
+
+  'Flow.SyntheticKeyboardEvent':
+    'prefix': 'fske'
+    'body': 'SyntheticKeyboardEvent'
+
+  'Flow.SyntheticMouseEvent':
+    'prefix': 'fsme'
+    'body': 'SyntheticMouseEvent'
+
+  'Flow.SyntheticTouchEvent':
+    'prefix': 'fste'
+    'body': 'SyntheticTouchEvent'
+
+  'Flow.type':
     'prefix': 't'
     'body': 'type ${1:name} = ${0:value};'
 
-  'type Props':
+  'Flow.type.Props':
     'prefix': 'tp'
-    'body': 'type Props = {${0}};'
+    'body': """
+      type $Props = {|
+        ${0}
+      |};
+    """
 
-  'type exact':
+  'Flow.type.exact':
     'prefix': 'te'
     'body': """
       type ${1:name} = {|
         ${0}
       |};
     """
+
+  'Flow.FlowTODO':
+    'prefix': 'ftodo'
+    'body': '$FlowTODO'
+
+  'Flow.FlowIgnoreMe':
+    'prefix': 'fim'
+    'body': '// $FlowIgnoreMe: ${0:reason}'
+
+  'Flow.FlowFixMe':
+    'prefix': 'ffm'
+    'body': '// $FlowFixMe: ${0:fix what}'
+
+  'export':
+    'prefix': 'e'
+    'body': 'export { ${0:module} } from \'${1:location}\';'
 
   'export default':
     'prefix': 'ed'
@@ -86,9 +162,9 @@
     'prefix': 'ir'
     'body': 'import React from \'react\';'
 
-  'import react w/ Component':
+  'import react w/ Children':
     'prefix': 'irc'
-    'body': 'import React, { Component } from \'react\';'
+    'body': 'import React, { Children } from \'react\';'
 
   'import immutable':
     'prefix': 'ii'
@@ -126,6 +202,10 @@
     'prefix': 'is'
     'body': 'import styles from \'./styles.css\';'
 
+  'import css':
+    'prefix': 'icss'
+    'body': 'import css from \'./index.css\';'
+
   'require':
     'prefix': 'r'
     'body': 'const ${1:module} = require(\'${0:location}\');'
@@ -139,6 +219,10 @@
         ${0:// handle error...}
       }
     """
+
+  'event.target.value':
+    'prefix': 'etv'
+    'body': 'event.target.value'
 
   'this.props':
     'prefix': 'rtp'
@@ -184,8 +268,8 @@
   'constructor w/ props':
     'prefix': 'cnstrp'
     'body': """
-      constructor(props: Props, ...restArgs: Array<*>) {
-        super(props, ...restArgs);
+      constructor(props: Props, ...rest: Array<*>) {
+        super(props, ...rest);
 
         ${1}
       }
@@ -196,23 +280,18 @@
     'body': """
       /* @flow */
 
-      import React, { Component } from 'react';
+      import React from 'react';
 
-
-      type Props = {|
+      type $Props = {|
 
       |};
 
-      export default class ${1:Component} extends Component {
+      export default class ${1:Component} extends React.Component {
+        props: $Props;
 
-        props: Props;
-
-        render() {
-          return (
-            // jsx...
-          );
-        }
-
+        render = () => (
+          // jsx...
+        );
       }
     """
 
@@ -223,12 +302,11 @@
 
       import React from 'react';
 
-
-      type Props = {|
+      type $Props = {|
 
       |};
 
-      const ${1:Component} = ({}: Props) => (
+      const ${1:Component} = ({}: $Props) => (
         // jsx...
       );
 
@@ -240,25 +318,26 @@
     'body': """
       /* @flow */
 
-      import React, { Component } from 'react';
+      import React from 'react';
 
-
-      type Props = {|
+      type $Props = {|
 
       |};
 
-      type NextProps = Props & State & Handlers;
-      type NextComponent = (props: NextProps) => React.Element<*>;
+      type $ChildProps = {
+        ...$Props,
+        ...$State,
+        ...$Handlers,
+      };
 
-      const ${1:withHOC} = (${2:NextComponent}: NextComponent) => class extends Component {
+      type $Child = (props: $ChildProps) => React.Element<*>;
 
-        props: Props;
+      const ${1:withHOC} = (${2:Child}: $Child) => class extends React.Component {
+        props: $Props;
 
-        render() {
-          return (
-            <${2:NextComponent} />
-          );
-        }
+        render = () => (
+          <${2:Child} />
+        );
       };
 
       export default ${1:withHOC};
@@ -466,34 +545,6 @@
   'Eslint.disable-next-line':
     'prefix': 'esldnl'
     'body': '// eslint-disable-next-line ${1:rule}'
-
-  'Flow.number':
-    'prefix': 'fn'
-    'body': 'number'
-
-  'Flow.string':
-    'prefix': 'fs'
-    'body': 'string'
-
-  'Flow.boolean':
-    'prefix': 'fb'
-    'body': 'boolean'
-
-  'Flow.function.no-args':
-    'prefix': 'ff'
-    'body': '() => ${0:void}'
-
-  'Flow.function.args':
-    'prefix': 'ffa'
-    'body': '(${1:arg}) => ${0:void}'
-
-  'Flow.no-args':
-    'prefix': 'fna'
-    'body': '...args: Array<void>'
-
-  'Flow.no-rest-args':
-    'prefix': 'fnra'
-    'body': '...rest: Array<void>'
 
   'PropTypes.shape':
     'prefix': 'ptsh'
