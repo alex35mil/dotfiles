@@ -258,21 +258,69 @@
   'constructor':
     'prefix': 'cnstr'
     'body': """
-      constructor(...args: Array<*>) {
+      constructor = (...args: Array<*>) => {
         super(...args);
 
-        ${1}
-      }
+        ${0}
+      };
     """
 
   'constructor w/ props':
     'prefix': 'cnstrp'
     'body': """
-      constructor(props: Props, ...rest: Array<*>) {
+      constructor = (props: Props, ...rest: Array<*>) => {
         super(props, ...rest);
 
-        ${1}
-      }
+        ${0}
+      };
+    """
+
+  'React.componentWillMount':
+    'prefix': 'rcwm'
+    'body': """
+      componentWillMount = () => {
+        ${0:// use it to do something on a server...}
+      };
+    """
+
+  'React.componentDidMount':
+    'prefix': 'rcdm'
+    'body': """
+      componentDidMount = () => {
+        ${0:// use it to do something w/ DOM on instantiation or for data fetching...}
+      };
+    """
+
+  'React.componentWillReceiveProps':
+    'prefix': 'rcwrp'
+    'body': """
+      componentWillReceiveProps = (nextProps: $Props) => {
+        ${0:// use it to update state or anything in response to next props...}
+      };
+    """
+
+  'React.componentWillUpdate':
+    'prefix': 'rcwup'
+    'body': """
+      componentWillUpdate = (nextProps: $Props, nextState: $State) => {
+        ${0:// use it to do something before an update...}
+      };
+    """
+
+  'React.componentDidUpdate':
+    'prefix': 'rcdu'
+    'body': """
+      componentDidUpdate = (prevProps: $Props, prevState: $State) => {
+        ${0:// use it to do something w/ the DOM after update...}
+      };
+    """
+
+  'React.componentWillUnmount':
+    'prefix': 'rcwun'
+    'body': """
+      componentWillUnmount = () => {
+        ${0:// use it to perform any necessary cleanups...}
+      };
     """
 
   'React.Component':
