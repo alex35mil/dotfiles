@@ -6,10 +6,29 @@
 }
 
 
-@panels-bg-color: #2a2a2a;
+@panels-bg-color: #141516;
 @panels-top-label-margins: 20px 20px 0;
 
 atom-workspace {
+  // Get rid of Nuclide's panels noise
+
+  // Get rid of top border of Nuclide's bottom panel
+  atom-panel.bottom {
+    border-top: 0;
+  }
+
+  .nuclide-workspace-views-panel-wrapper {
+    // I don't use these panels and they overlap editor's UI elements
+    &.left,
+    &.right {
+      display: none;
+    }
+
+    // Get rid of a 4px line above status bar
+    &.bottom {
+      bottom: -4px;
+    }
+  }
 
   // Adjust modal styles
   .overlay,
@@ -43,6 +62,7 @@ atom-workspace {
 
   // Adjust nuclide status bar styles
   .footer .status-bar {
+    border-top: 1px solid lighten(@panels-bg-color, 3%);
     background-color: @panels-bg-color;
 
     .highlight,
@@ -98,8 +118,6 @@ atom-workspace {
 
 atom-text-editor,
 atom-text-editor.editor {
-
-  // Sexy white
   color: @white;
 
   .syntax--meta {
