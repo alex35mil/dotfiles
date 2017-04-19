@@ -3,15 +3,27 @@
 '.source.js':
   'console.log':
     'prefix': 'l'
-    'body': 'console.log(${0})'
+    'body': 'console.log(${0});'
 
-  'console.log ||':
+  'console.log.return':
     'prefix': 'lor'
     'body': 'console.log(${0}) ||'
 
   'console.log.jsx':
     'prefix': 'ljsx'
     'body': '{console.log(${0})}'
+
+  'console.log.destructured':
+    'prefix': 'ld'
+    'body': 'console.log({ ${0} });'
+
+  'console.log.destructured.return':
+    'prefix': 'ldor'
+    'body': 'console.log({ ${0} }) ||'
+
+  'console.log.destructured.jsx':
+    'prefix': 'ldor'
+    'body': '{console.log({ ${0} })}'
 
   'debugger':
     'prefix': 'dbg'
@@ -20,6 +32,13 @@
   'const':
     'prefix': 'c'
     'body': 'const ${1:name} = ${0:value};'
+
+  'Flow':
+    'prefix': 'f'
+    'body': """
+      /* @flow */
+
+    """
 
   'Flow.number':
     'prefix': 'fn'
@@ -48,6 +67,10 @@
   'Flow.no-rest-args':
     'prefix': 'fnra'
     'body': '...rest: Array<void>'
+
+  'Flow.children':
+    'prefix': 'fc'
+    'body': 'children?: React.Element<*>,'
 
   'Flow.React.Element':
     'prefix': 'fre'
@@ -82,7 +105,7 @@
     'body': 'type ${1:name} = ${0:value};'
 
   'Flow.type.Props':
-    'prefix': 'tp'
+    'prefix': 'fp'
     'body': """
       type $Props = {|
         ${0}
@@ -90,7 +113,7 @@
     """
 
   'Flow.type.exact':
-    'prefix': 'te'
+    'prefix': 'fe'
     'body': """
       type ${1:name} = {|
         ${0}
@@ -113,11 +136,11 @@
     'prefix': 'e'
     'body': 'export { ${0:module} } from \'${1:location}\';'
 
-  'export default':
+  'export.default':
     'prefix': 'ed'
     'body': 'export default ${0};'
 
-  'export default function':
+  'export.default.function':
     'prefix': 'edf'
     'body': """
       export default function ${1:myFunction}(${2:...args}) {
@@ -125,11 +148,11 @@
       }
     """
 
-  'export const':
+  'export.const':
     'prefix': 'ec'
     'body': 'export const ${1:name} = ${0:value};'
 
-  'export function':
+  'export.function':
     'prefix': 'ef'
     'body': """
       export function ${1:myFunction}(${2:...args}) {
@@ -137,11 +160,11 @@
       }
     """
 
-  'export type':
+  'export.type':
     'prefix': 'et'
     'body': 'export type ${1:name} = ${0:value};'
 
-  'export exact type':
+  'export.exact.type':
     'prefix': 'eet'
     'body': """
       export type ${1:name} = {|
@@ -153,63 +176,63 @@
     'prefix': 'i'
     'body': 'import ${0:module} from \'${1:location}\';'
 
-  'import type':
+  'import.type':
     'prefix': 'it'
     'body': 'import type { ${0:Type} } from \'${1:location}\';'
 
-  'import react':
+  'import.react':
     'prefix': 'ir'
     'body': 'import React from \'react\';'
 
-  'import react w/ Children':
+  'import.react.Children':
     'prefix': 'irc'
     'body': 'import React, { Children } from \'react\';'
 
-  'import immutable':
+  'import.immutable':
     'prefix': 'ii'
     'body': 'import Immutable from \'immutable\';'
 
-  'import immutable Record':
+  'import.immutable.Record':
     'prefix': 'iir'
     'body': 'import { Record } from \'immutable\';'
 
-  'import immutable Map':
+  'import.immutable.Map':
     'prefix': 'iim'
     'body': 'import { Map } from \'immutable\';'
 
-  'import immutable List':
+  'import.immutable.List':
     'prefix': 'iil'
     'body': 'import { List } from \'immutable\';'
 
-  'import immutable Set':
+  'import.immutable.Set':
     'prefix': 'iis'
     'body': 'import { Set } from \'immutable\';'
 
-  'import immutable OrderedSet':
+  'import.immutable.OrderedSet':
     'prefix': 'iios'
     'body': 'import { OrderedSet } from \'immutable\';'
 
-  'import lodash':
+  'import.lodash':
     'prefix': 'il'
     'body': 'import _ from \'lodash/fp\';'
 
-  'import classnames':
+  'import.classnames':
     'prefix': 'ic'
     'body': 'import cn from \'classnames\';'
 
-  'import styles':
+  'import.styles':
     'prefix': 'is'
     'body': 'import styles from \'./styles.css\';'
 
-  'import css':
+  'import.css':
     'prefix': 'icss'
-    'body': 'import css from \'./index.css\';'
+    'body': 'import css from \'./index.scss\';'
 
   'require':
     'prefix': 'r'
     'body': 'const ${1:module} = require(\'${0:location}\');'
 
-  'try/catch':
+  'try.catch':
     'prefix': 'trc'
     'body': """
       try {
@@ -224,7 +247,7 @@
     'body': 'event.target.value'
 
   'this.props':
-    'prefix': 'rtp'
+    'prefix': 'tp'
     'body': 'this.props'
 
   'props':
@@ -232,27 +255,20 @@
     'body': 'props'
 
   'this.context':
-    'prefix': 'rtc'
+    'prefix': 'tc'
     'body': 'this.context'
 
   'this.state':
-    'prefix': 'rts'
+    'prefix': 'ts'
     'body': 'this.state'
 
   'this.setState':
-    'prefix': 'rtss'
+    'prefix': 'tss'
     'body': 'this.setState({${1}});'
 
   'styles':
     'prefix': 's'
     'body': 'styles'
-
-  'flow':
-    'prefix': 'f'
-    'body': """
-      /* @flow */
-
-    """
 
   'constructor':
     'prefix': 'cnstr'
@@ -264,7 +280,7 @@
       };
     """
 
-  'constructor w/ props':
+  'constructor.props':
     'prefix': 'cnstrp'
     'body': """
       constructor = (props: Props, ...rest: Array<*>) => {
@@ -390,6 +406,46 @@
       export default ${1:withHOC};
     """
 
+  'React.children':
+    'prefix': 'ch'
+    'body': 'children'
+
+  'React.className':
+    'prefix': 'cn'
+    'body': 'className'
+
+  'JSX.className.styles':
+    'prefix': 'cns'
+    'body': 'className={styles.${0}}'
+
+  'JSX.className.css':
+    'prefix': 'cncss'
+    'body': 'className={css.${0}}'
+
+  'JSX.div.className.styles':
+    'prefix': 'dc'
+    'body': """
+      <div className={styles.${1}}>
+        ${0}
+      </div>
+    """
+
+  'JSX.div.className.css':
+    'prefix': 'dcc'
+    'body': """
+      <div className={css.${1}}>
+        ${0}
+      </div>
+    """
+
+  'JSX.onClick':
+    'prefix': 'ocl'
+    'body': 'onClick={${0}}'
+
+  'JSX.onChange':
+    'prefix': 'och'
+    'body': 'onChange={${0}}'
+
   'interaction':
     'prefix': 'in'
     'body': """
@@ -401,7 +457,7 @@
       ${0:// ins / inas / inr ...}
     """
 
-  'interaction sync':
+  'interaction.sync':
     'prefix': 'ins'
     'body': """
       // --- ${1:Feature}
@@ -430,7 +486,7 @@
       };
     """
 
-  'interaction async':
+  'interaction.async':
     'prefix': 'inas'
     'body': """
       // --- ${1:Async Feature}
@@ -464,7 +520,7 @@
       };
     """
 
-  'interaction remote':
+  'interaction.remote':
     'prefix': 'inr'
     'body': """
       const REQUESTED: 'REQUESTED' = 'REQUESTED';
@@ -705,6 +761,9 @@
        *
        */
     """
+
+
+# ======= Styles
 
 '.source.css, .source.sass':
   'display.flex':
