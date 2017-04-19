@@ -70,7 +70,7 @@
       "nucleus-dark-ui"
       "base16-tomorrow-dark-theme"
     ]
-    useCustomTitleBar: true
+    titleBar: "custom"
   "custom-title":
     template: "atom/<%= projectName %>"
   editor:
@@ -123,6 +123,7 @@
       enablePushDiagnostics: true
       enableStructuredTypeHints: true
       flowAutocompleteResultsFirst: false
+      functionSnippetShouldIncludeArguments: false
     use:
       "nuclide-adb-logcat": false
       "nuclide-arcanist": false
