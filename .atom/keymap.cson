@@ -97,10 +97,10 @@
   'cmd-l j': 'set-syntax:Babel ES6 JavaScript'
 
   'cmd-d': 'editor:duplicate-lines'
+  'shift-up': 'vim-mode-plus:scroll-half-screen-up'
+  'shift-down': 'vim-mode-plus:scroll-half-screen-down'
   'ctrl-up': 'editor:add-selection-above'
   'ctrl-down': 'editor:add-selection-below'
-  'ctrl-shift-up': 'vim-mode-plus:scroll-half-screen-up'
-  'ctrl-shift-down': 'vim-mode-plus:scroll-half-screen-down'
   'shift-alt-up': 'editor:move-line-up'
   'shift-alt-down': 'editor:move-line-down'
 
