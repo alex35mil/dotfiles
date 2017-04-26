@@ -33,6 +33,14 @@
     'prefix': 'c'
     'body': 'const ${1:name} = ${0:value};'
 
+  'const.destructuring':
+    'prefix': 'cd'
+    'body': 'const { ${1:prop} } = ${0:obj};'
+
+  'typeof':
+    'prefix': 'to'
+    'body': 'typeof '
+
   'Flow':
     'prefix': 'f'
     'body': """
@@ -84,21 +92,41 @@
     'prefix': 'fse'
     'body': 'SyntheticEvent'
 
+  'Flow.$Event':
+    'prefix': 'fe'
+    'body': '$Event'
+
   'Flow.SyntheticInputEvent':
     'prefix': 'fsie'
     'body': 'SyntheticInputEvent'
+
+  'Flow.$InputEvent':
+    'prefix': 'fie'
+    'body': '$InputEvent'
 
   'Flow.SyntheticKeyboardEvent':
     'prefix': 'fske'
     'body': 'SyntheticKeyboardEvent'
 
+  'Flow.$KeyboardEvent':
+    'prefix': 'fke'
+    'body': '$KeyboardEvent'
+
   'Flow.SyntheticMouseEvent':
     'prefix': 'fsme'
     'body': 'SyntheticMouseEvent'
 
+  'Flow.$MouseEvent':
+    'prefix': 'fme'
+    'body': '$MouseEvent'
+
   'Flow.SyntheticTouchEvent':
     'prefix': 'fste'
     'body': 'SyntheticTouchEvent'
+
+  'Flow.$TouchEvent':
+    'prefix': 'fte'
+    'body': '$TouchEvent'
 
   'Flow.type':
     'prefix': 't'
@@ -113,7 +141,7 @@
     """
 
   'Flow.type.exact':
-    'prefix': 'fe'
+    'prefix': 'fet'
     'body': """
       type ${1:name} = {|
         ${0}
@@ -126,14 +154,14 @@
 
   'Flow.FlowIgnoreMe':
     'prefix': 'fim'
-    'body': '// $FlowIgnoreMe: ${0:reason}'
+    'body': '// $FlowIgnoreMe: ${0:why}'
 
   'Flow.FlowFixMe':
     'prefix': 'ffm'
     'body': '// $FlowFixMe: ${0:fix what}'
 
-  'export':
-    'prefix': 'e'
+  'export.named':
+    'prefix': 'en'
     'body': 'export { ${0:module} } from \'${1:location}\';'
 
   'export.default':
@@ -179,6 +207,10 @@
   'import.type':
     'prefix': 'it'
     'body': 'import type { ${0:Type} } from \'${1:location}\';'
+
+  'import.typeof':
+    'prefix': 'ito'
+    'body': 'import typeof { ${0:Type} } from \'${1:location}\';'
 
   'import.react':
     'prefix': 'ir'
@@ -242,6 +274,10 @@
       }
     """
 
+  'event':
+    'prefix': 'e'
+    'body': 'event'
+
   'event.target.value':
     'prefix': 'etv'
     'body': 'event.target.value'
@@ -273,21 +309,21 @@
   'constructor':
     'prefix': 'cnstr'
     'body': """
-      constructor = (...args: Array<*>) => {
+      constructor(...args: Array<*>) {
         super(...args);
 
         ${0}
-      };
+      }
     """
 
   'constructor.props':
     'prefix': 'cnstrp'
     'body': """
-      constructor = (props: Props, ...rest: Array<*>) => {
+      constructor(props: Props, ...rest: Array<*>) {
         super(props, ...rest);
 
         ${0}
-      };
+      }
     """
 
   'React.componentWillMount':
@@ -358,6 +394,31 @@
       }
     """
 
+  'React.Component.withState':
+    'prefix': 'rcs'
+    'body': """
+      /* @flow */
+
+      import React from 'react';
+
+      type $Props = {|
+
+      |};
+
+      type $State = {|
+
+      |};
+
+      export default class ${1:Component} extends React.Component {
+        props: $Props;
+        state: $State = {};
+
+        render = () => (
+          ${0}
+        );
+      }
+    """
+
   'React.SFC':
     'prefix': 'rsfc'
     'body': """
@@ -370,7 +431,7 @@
       |};
 
       const ${1:Component} = ({}: $Props) => (
-        // jsx...
+        ${0}
       );
 
       export default ${1:Component};
@@ -410,6 +471,10 @@
     'prefix': 'ch'
     'body': 'children'
 
+  'React.this.props.children':
+    'prefix': 'tpch'
+    'body': 'this.props.children'
+
   'React.className':
     'prefix': 'cn'
     'body': 'className'
@@ -423,7 +488,7 @@
     'body': 'className={css.${0}}'
 
   'JSX.div.className.styles':
-    'prefix': 'dc'
+    'prefix': 'dcs'
     'body': """
       <div className={styles.${1}}>
         ${0}
@@ -431,7 +496,7 @@
     """
 
   'JSX.div.className.css':
-    'prefix': 'dcc'
+    'prefix': 'dccss'
     'body': """
       <div className={css.${1}}>
         ${0}
@@ -451,8 +516,8 @@
     'body': """
       /* @flow */
 
-      import type { $ActionHandler } from 'types/redux';
-      import type { $StoreState } from '../state';
+      import type { $ActionHandler } from 'app/types/redux';
+      import type { $LeafState } from '../state';
 
       ${0:// ins / inas / inr ...}
     """
@@ -476,7 +541,7 @@
 
       // Action handler
       type $OnStateUpdate = {
-        [typeof ${2:STATE_UPDATE}]: $ActionHandler<$StoreState, $Action>,
+        [typeof ${2:STATE_UPDATE}]: $ActionHandler<$LeafState, $Action>,
       };
 
       export const onStateUpdate: $OnStateUpdate = {
@@ -510,7 +575,7 @@
 
       // Action handler
       type $OnAsyncStateUpdate = {
-        [typeof ${2:ASYNC_STATE_UPDATE}]: $ActionHandler<$StoreState, $Action>,
+        [typeof ${2:ASYNC_STATE_UPDATE}]: $ActionHandler<$LeafState, $Action>,
       };
 
       export const onAsyncStateUpdate: $OnAsyncStateUpdate = {
@@ -527,7 +592,6 @@
       const SUCCEEDED: 'SUCCEEDED' = 'SUCCEEDED';
       const FAILED: 'FAILED' = 'FAILED';
 
-
       // --- Request
 
       // Action creator
@@ -541,7 +605,7 @@
 
       // Action handler
       type $OnRequest = {
-        [typeof REQUESTED]: $ActionHandler<$StoreState, $RequestAction>,
+        [typeof REQUESTED]: $ActionHandler<$LeafState, $RequestAction>,
       };
 
       const onRequest: $OnRequest = {
@@ -567,7 +631,7 @@
 
       // Action handler
       type $OnSuccess = {
-        [typeof SUCCEEDED]: $ActionHandler<$StoreState, $SuccessAction>,
+        [typeof SUCCEEDED]: $ActionHandler<$LeafState, $SuccessAction>,
       };
 
       const onSuccess: $OnSuccess = {
@@ -592,7 +656,7 @@
 
       // Action handler
       type $OnFailure = {
-        [type: typeof FAILED]: $ActionHandler<$StoreState, $FailureAction>,
+        [type: typeof FAILED]: $ActionHandler<$LeafState, $FailureAction>,
       };
 
       const onFailure: $OnFailure = {
@@ -623,7 +687,6 @@
           )
         ;
       };
-
 
       // Action handlers
       export const onServerStateUpdate = {

@@ -117,6 +117,8 @@
       "index\\.|styles\\.s?css"
     ]
   nuclide:
+    "nuclide-code-format":
+      formatOnSave: true
     "nuclide-diagnostics-ui": {}
     "nuclide-flow":
       canUseFlowBin: true
