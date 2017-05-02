@@ -35,7 +35,7 @@
 
   'const.destructuring':
     'prefix': 'cd'
-    'body': 'const { ${1:prop} } = ${0:obj};'
+    'body': 'const { ${0:prop} } = ${1:obj};'
 
   'typeof':
     'prefix': 'to'
