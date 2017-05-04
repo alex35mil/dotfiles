@@ -106,8 +106,7 @@
     showErrorTabFile: false
     showErrorTabProject: false
     statusIconScope: "File"
-  "linter-eslint":
-    fixOnSave: true
+  "linter-eslint": {}
   "linter-scss-lint":
     disableWhenNoConfigFileInPath: true
   "markdown-preview":
@@ -177,6 +176,15 @@
       "nuclide-task-runner": false
       "nuclide-vcs-log": false
       "nuclide-working-sets": false
+  "prettier-atom":
+    formatOnSaveOptions:
+      enabled: true
+    prettierOptions:
+      printWidth: 100
+      singleQuote: true
+      trailingComma: "all"
+    silenceErrors: true
+    useEslint: true
   tabs:
     enableVcsColoring: true
   "todo-show":
