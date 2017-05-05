@@ -77,7 +77,7 @@
     'body': '...rest: Array<void>'
 
   'Flow.children':
-    'prefix': 'fc'
+    'prefix': 'fch'
     'body': 'children?: React.Element<*>,'
 
   'Flow.React.Element':
@@ -129,11 +129,11 @@
     'body': '$TouchEvent'
 
   'Flow.type':
-    'prefix': 't'
+    'prefix': 'ft'
     'body': 'type ${1:name} = ${0:value};'
 
   'Flow.type.Props':
-    'prefix': 'fp'
+    'prefix': 'ftp'
     'body': """
       type $Props = {|
         ${0}
@@ -215,10 +215,6 @@
   'import.react':
     'prefix': 'ir'
     'body': 'import React from \'react\';'
-
-  'import.react.Children':
-    'prefix': 'irc'
-    'body': 'import React, { Children } from \'react\';'
 
   'import.immutable':
     'prefix': 'ii'
@@ -488,7 +484,7 @@
     'body': 'className={css.${0}}'
 
   'JSX.div.className.styles':
-    'prefix': 'dcs'
+    'prefix': 'dcns'
     'body': """
       <div className={styles.${1}}>
         ${0}
@@ -496,7 +492,7 @@
     """
 
   'JSX.div.className.css':
-    'prefix': 'dccss'
+    'prefix': 'dcncss'
     'body': """
       <div className={css.${1}}>
         ${0}

@@ -180,7 +180,6 @@
     formatOnSaveOptions:
       enabled: true
     prettierOptions:
-      printWidth: 100
       singleQuote: true
       trailingComma: "all"
     silenceErrors: true
