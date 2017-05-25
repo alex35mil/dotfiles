@@ -5,10 +5,10 @@ brew tap caskroom/cask
 
 # Install apps
 brew cask install iterm2
-brew cask install hyper
 brew cask install dropbox
 brew cask install onepassword
 brew cask install google-chrome
+brew cask install caprine
 brew cask install torbrowser
 brew cask install ubersicht
 brew cask install caskroom/fonts/font-hack

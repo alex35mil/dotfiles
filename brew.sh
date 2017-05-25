@@ -26,6 +26,7 @@ brew install vim --override-system-vi
 brew install wget --with-iri
 brew install curl
 brew install tree
+brew install pstree
 brew install imagemagick --with-webp
 brew install node
 brew install yarn
