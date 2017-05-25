@@ -66,7 +66,6 @@ kwmc rule owner="iTerm2" properties={role="AXDialog"}
 # If the name consist of multiple words, the command looks like: kwmc config float Google Chrome
 kwmc rule owner="Atom" properties={float="true"}
 kwmc rule owner="CloudApp" properties={float="true"}
-kwmc rule owner="Billings Pro" properties={float="true"}
 kwmc rule owner="CleanMyMac 3" properties={float="true"}
 kwmc rule owner="Photo Booth" properties={float="true"}
 
