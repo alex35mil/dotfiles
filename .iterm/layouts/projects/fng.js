@@ -6,6 +6,6 @@ function run() {
   Shaka.run('~/Dev/Projects/shakacode.com/fng', {
     root: 'git status',
     client: 'cd client',
-    server: 'foreman start -f Procfile.dev',
+    server: 'script/server',
   });
 }

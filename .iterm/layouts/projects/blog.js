@@ -5,6 +5,6 @@ function run() {
 
   Blog.run('~/Dev/Projects/alexfedoseev.com/blog', {
     root: 'git status',
-    server: 'docker-compose up',
+    server: 'yarn start',
   });
 }
