@@ -31,9 +31,9 @@ else                             # OSX `ls`
   colorflag="-G"
 fi
 
-alias lsa="ls -lFa ${colorflag}"
-alias lsv="ls -lF ${colorflag}"
-alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
+alias lsa="ls -lhFa ${colorflag}"
+alias lsv="ls -lhF ${colorflag}"
+alias lsd="ls -lhF ${colorflag} | grep --color=never '^d'"
 
 # General
 alias rmrf="rm -rf"
@@ -62,16 +62,16 @@ alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 alias b="brew "
 alias bd="brew doctor"
 alias bup="brew update"
-alias bod="brew outdated"
-alias bcln="brew cleanup"
+alias bo="brew outdated"
+alias bcl="brew cleanup"
 alias binfo="brew info "
 alias bi="brew install "
-alias bl="brew list "
+alias bls="brew list "
 alias bupg="brew upgrade "
 alias bun="brew uninstall "
 
 alias bs="brew services "
-alias bsl="brew services list"
+alias bsls="brew services list"
 alias bsrun="brew services run "
 alias bsrst="brew services restart "
 
@@ -79,25 +79,48 @@ alias bsrst="brew services restart "
 # ===== Homebrew Cask
 alias bc="brew cask "
 alias bcd="brew cask doctor"
-alias bccln="brew cask cleanup"
+alias bccl="brew cask cleanup"
 alias bcinfo="brew cask info "
 alias bci="brew cask install "
-alias bcl="brew cask list "
+alias bcls="brew cask list "
 alias bcs="brew cask search "
 alias bcun="brew cask uninstall "
 
 
 # ===== Docker
-alias dup="docker-compose up"
-alias dub="docker-compose up --build"
+alias d="docker "
 alias dps="docker ps"
 alias dpsa="docker ps -a"
-alias di="docker images"
 alias ds="docker stop "
 alias dsa='docker stop $(docker ps -a -q)'
-alias dr="docker rm "
-alias dra='docker rm $(docker ps -a -q)'
-alias dri="docker rmi "
+alias di="docker images"
+alias dpr="docker image prune -f && docker volume prune -f && docker network prune -f"
+alias dspr="docker system prune"
+alias drm="docker rm "
+alias drmi="docker rmi "
+
+alias dc="docker-compose "
+alias dcd="docker-compose -f docker-compose.dev.yml "
+alias dcp="docker-compose -f docker-compose.prod.yml "
+alias dcup="docker-compose up --build"
+alias dcdup="dcd up --build"
+alias dcpup="dcp up --build -d"
+dc-exec() { docker-compose exec $@ /bin/bash; }
+dc-exec-dev() { docker-compose -f docker-compose.dev.yml exec $@ /bin/bash; }
+dc-exec-prod() { docker-compose -f docker-compose.prod.yml exec $@ /bin/bash; }
+
+alias dm="docker-machine "
+alias dma="docker-machine active"
+alias dmls="docker-machine ls"
+alias dmre="docker-machine restart "
+alias dmrm="docker-machine rm "
+alias dmscp="docker-machine scp "
+dm-blog() { eval "$(docker-machine env alexfedoseev.com)"; }
+dmssh() {
+  MACHINE="$(docker-machine active)"
+  docker-machine ssh $MACHINE
+}
+dmu() { eval "$(docker-machine env -u)"; }
 
 
 # ===== Git

@@ -28,7 +28,7 @@ function o() {
   fi
 }
 
-# `p 3000` will print listners of port 3000
+# `p 3000` prints listners of port 3000
 function p() {
   lsof -n -i:$@ | grep LISTEN
 }
@@ -60,9 +60,21 @@ function x() {
   clear
 }
 
-# Create a new directory and enter it
+# Creates a new directory and enters it
 function mkd() {
   mkdir -p $@ && cd $_
+}
+
+# Generates a new ssh entity
+function gen-ssh() {
+  ssh-keygen -f ~/.ssh/$@ -C "$@"
+  echo "Host $@" >> ~/.ssh/config
+  echo " HostName __IP__" >> ~/.ssh/config
+  echo " ForwardAgent yes" >> ~/.ssh/config
+  echo " PreferredAuthentications publickey" >> ~/.ssh/config
+  echo " IdentityFile ~/.ssh/$@" >> ~/.ssh/config
+  echo "" >> ~/.ssh/config
+  vim ~/.ssh/config
 }
 
 # `ruby-up 2.0.0` will update ruby to v2.0.0 using rvm
