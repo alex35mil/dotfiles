@@ -116,8 +116,7 @@
       "index\\.|styles\\.s?css"
     ]
   nuclide:
-    "nuclide-code-format":
-      formatOnSave: true
+    "nuclide-code-format": {}
     "nuclide-diagnostics-ui": {}
     "nuclide-flow":
       canUseFlowBin: true
@@ -179,7 +178,9 @@
   "prettier-atom":
     formatOnSaveOptions:
       enabled: true
+    prettierEslintOptions: {}
     prettierOptions:
+      printWidth: 100
       singleQuote: true
       trailingComma: "all"
     silenceErrors: true

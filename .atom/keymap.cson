@@ -95,6 +95,7 @@
 
   'cmd-l s': 'set-syntax:Shell Script'
   'cmd-l j': 'set-syntax:Babel ES6 JavaScript'
+  'cmd-l d': 'set-syntax:Dockerfile'
 
   'cmd-d': 'editor:duplicate-lines'
   'shift-up': 'vim-mode-plus:scroll-half-screen-up'
