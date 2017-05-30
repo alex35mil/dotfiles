@@ -1,5 +1,5 @@
 # ===== Shell
-alias ish="$HOME/Dev/System/dotfiles/install.sh"
+alias install="$HOME/Dev/System/dotfiles/install.sh"
 
 [[ -n $BASH_VERSION ]] && alias reload="source ~/.bashrc"
 [[ -n $ZSH_VERSION ]]  && alias reload="source ~/.zshrc"
