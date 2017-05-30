@@ -70,7 +70,7 @@
       "nucleus-dark-ui"
       "base16-tomorrow-dark-theme"
     ]
-    titleBar: "custom"
+    titleBar: "hidden"
   "custom-title":
     template: "atom/<%= projectName %>"
   editor:
@@ -180,7 +180,6 @@
       enabled: true
     prettierEslintOptions: {}
     prettierOptions:
-      printWidth: 100
       singleQuote: true
       trailingComma: "all"
     silenceErrors: true
