@@ -1,0 +1,40 @@
+#!/usr/bin/env osascript -l JavaScript
+
+function run() {
+  Minima.run('~/Dev/Projects/minima.pro/minima', {
+    web: 'cd web && git status',
+    api: 'cd api && git status',
+    root: 'git status',
+    servers: 'yarn start',
+  });
+}
+
+const iTerm = Application('iTerm');
+const Utils = Library('utils');
+
+iTerm.includeStandardAdditions = true;
+iTerm.activate();
+
+const Minima = {
+  run(path, cmd) {
+    const container = iTerm.createWindowWithDefaultProfile();
+
+    const webSession = container.currentSession;
+    const rootSession = webSession.splitVerticallyWithDefaultProfile();
+    const apiSession = webSession.splitHorizontallyWithDefaultProfile();
+    const serversSession = rootSession.splitHorizontallyWithDefaultProfile();
+
+    Utils.prepareSessions(path, [
+      webSession,
+      apiSession,
+      rootSession,
+      serversSession,
+    ]);
+
+    webSession.write({ text: cmd.web });
+    apiSession.write({ text: cmd.api });
+    rootSession.write({ text: cmd.root });
+    serversSession.write({ text: cmd.servers, newline: false });
+    serversSession.select();
+  },
+};

@@ -11,13 +11,10 @@ function run(path, cmd) {
   const buildSession = rootSession.splitHorizontallyWithDefaultProfile();
   const serverSession = buildSession.splitVerticallyWithDefaultProfile();
 
-  Utils.prepareSessions(path, [
-    rootSession,
-    buildSession,
-    serverSession,
-  ]);
+  Utils.prepareSessions(path, [rootSession, buildSession, serverSession]);
 
   rootSession.write({ text: cmd.root });
-  buildSession.write({ text: cmd.build });
+  buildSession.write({ text: cmd.build, newline: false });
   serverSession.write({ text: cmd.server });
+  buildSession.select();
 }

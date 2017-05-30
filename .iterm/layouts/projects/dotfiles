@@ -1,0 +1,28 @@
+#!/usr/bin/env osascript -l JavaScript
+
+function run() {
+  Dotfiles.run('~/Dev/System/dotfiles', {
+    vim: 'vim',
+    cli: 'git status',
+  });
+}
+
+const iTerm = Application('iTerm');
+const Utils = Library('utils');
+
+iTerm.includeStandardAdditions = true;
+iTerm.activate();
+
+const Dotfiles = {
+  run(path, cmd) {
+    const container = iTerm.createWindowWithDefaultProfile();
+
+    const vimSession = container.currentSession;
+    const cliSession = vimSession.splitHorizontallyWithDefaultProfile();
+
+    Utils.prepareSessions(path, [vimSession, cliSession]);
+
+    vimSession.write({ text: cmd.vim, newline: false });
+    cliSession.write({ text: cmd.cli });
+  },
+};
