@@ -90,7 +90,7 @@
     projectSearchResultsPaneSplitDirection: "right"
   "flex-tool-bar": {}
   "git-blame":
-    columnWidth: 250
+    columnWidth: 350
     showOnlyLastNames: false
   "git-diff": {}
   "git-plus":
@@ -116,6 +116,7 @@
       "index\\.|styles\\.s?css"
     ]
   nuclide:
+    "atom-ide-diagnostics-ui": {}
     "nuclide-code-format": {}
     "nuclide-diagnostics-ui": {}
     "nuclide-flow":
@@ -177,6 +178,9 @@
       "nuclide-working-sets": false
   "prettier-atom":
     formatOnSaveOptions:
+      cssScopes: [
+        "source.css"
+      ]
       enabled: true
     prettierEslintOptions: {}
     prettierOptions:
