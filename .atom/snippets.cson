@@ -245,7 +245,7 @@
     'body': 'import _ from \'lodash/fp\';'
 
   'import.classnames':
-    'prefix': 'ic'
+    'prefix': 'icn'
     'body': 'import cn from \'classnames\';'
 
   'import.styles':
@@ -274,25 +274,45 @@
     'prefix': 'e'
     'body': 'event'
 
+  'event.target.name.value':
+    'prefix': 'etnv'
+    'body': 'const { name, value } = event.target;'
+
+  'event.target.name':
+    'prefix': 'etn'
+    'body': 'event.target.name'
+
   'event.target.value':
     'prefix': 'etv'
     'body': 'event.target.value'
-
-  'this.props':
-    'prefix': 'tp'
-    'body': 'this.props'
 
   'props':
     'prefix': 'p'
     'body': 'props'
 
-  'this.context':
-    'prefix': 'tc'
-    'body': 'this.context'
+  'this.props':
+    'prefix': 'tp'
+    'body': 'this.props'
+
+  'const.this.props':
+    'prefix': 'ctp'
+    'body': 'const { ${0} } = this.props;'
 
   'this.state':
     'prefix': 'ts'
     'body': 'this.state'
+
+  'const.this.state':
+    'prefix': 'cts'
+    'body': 'const { ${0} } = this.state;'
+
+  'this.context':
+    'prefix': 'tc'
+    'body': 'this.context'
+
+  'const.this.context':
+    'prefix': 'ctc'
+    'body': 'const { ${0} } = this.context;'
 
   'this.setState':
     'prefix': 'tss'
