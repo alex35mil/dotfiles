@@ -7,7 +7,9 @@ apm install custom-title
 apm install file-icons
 apm install flex-tool-bar
 apm install git-blame
+apm install git-plus
 apm install highlight-selected
+apm install hyperclick
 apm install language-applescript
 apm install language-babel
 apm install language-docker
@@ -25,7 +27,9 @@ apm install merge-conflicts
 apm install nice-index
 apm install nucleus-dark-ui
 apm install nuclide
+apm install prettier-atom
 apm install pretty-json
+apm install relative-numbers
 apm install set-syntax
 apm install todo-show
 apm install tool-bar
