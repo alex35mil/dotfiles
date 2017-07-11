@@ -64,6 +64,7 @@
       "todo-show"
       "git-blame"
       "git-plus"
+      "highlight-selected"
     ]
     telemetryConsent: "limited"
     themes: [
@@ -74,8 +75,8 @@
   "custom-title":
     template: "atom/<%= projectName %>"
   editor:
-    fontFamily: "Source Code Pro"
-    fontSize: 16
+    fontFamily: "Menlo"
+    fontSize: 15
     invisibles:
       eol: " "
       space: " "
@@ -83,7 +84,7 @@
     showIndentGuide: true
     showInvisibles: true
   "exception-reporting":
-    userId: "f07c48e3-36eb-b22e-de8c-423ac96973dd"
+    userId: "9ff2ff58-de25-458a-a6d5-b4e2e4a30393"
   "file-icons":
     coloured: false
   "find-and-replace":

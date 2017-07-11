@@ -38,9 +38,6 @@ echo "===> ⌛️  Applying OSX settings..."
 echo "===> ⌛️  Installing brew packages..."
 ./brew.sh
 
-echo "===> ⌛️  Installing cask apps..."
-./cask.sh
-
 echo "===> ⌛️  Installing global npm packages..."
 ./yarn.sh
 

@@ -13,27 +13,20 @@ brew update
 brew upgrade --all
 
 # Install tools
-brew install zsh
-brew install zsh-completions
-brew install bash-completion
-brew install cmake
-brew install git
-brew install git-lfs
-brew install nginx
-brew install tmux
-brew install reattach-to-user-namespace
-brew install vim --with-override-system-vi
-brew install wget --with-iri
-brew install curl
-brew install tree
-brew install pstree
-brew install imagemagick --with-webp
-brew install node
-brew install yarn
-brew install postgresql
-brew install mongodb
-brew install koekeishiya/formulae/kwm
-brew install koekeishiya/formulae/khd
+brew install \
+  zsh \
+  zsh-completions \
+  git \
+  vim --with-lua --with-override-system-vi \
+  curl \
+  tree \
+  pstree \
+  node \
+  yarn
+
+# Install windows manager
+brew tap crisidev/homebrew-chunkwm
+brew install chunkwm koekeishiya/formulae/khd
 
 # Remove outdated versions from the cellar
 brew cleanup

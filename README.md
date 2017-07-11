@@ -1,5 +1,5 @@
 # .dotfiles
-Bash, Zsh, iTerm, Atom, Vim, Tmux, Git, OSX, Brew, npm, rvm etc.
+Bash, Zsh, iTerm, Atom, Vim, Git, OSX, Brew, npm, rvm etc.
 
 ![Console](./screens/console.png?raw=true)
 
@@ -26,7 +26,7 @@ chsh -s $(which zsh)
 ```
 
 ### Others
-I use [`kwm`](https://github.com/koekeishiya/kwm) to manage windows. And [`Übersicht`](http://tracesof.net/uebersicht/) to reduce the noise from menu bar.
+I use [`chunkwm`](https://github.com/koekeishiya/chunkwm) to manage windows.
 
 
 ## Keyboard Shortcuts
@@ -56,12 +56,6 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
 #### Global
 
 ```
-* <Cmd-F1>                Toggle Console                      Alfred
-* <Cmd-F2>                Toggle Atom                         Alfred
-* <Cmd-F3>                Toggle Browser                      Alfred
-
-  <Ctrl-F2>               Show menu bar
-  <Ctrl-F3>               Show dock
 * <Alt-Space>             Show Alfred                         Alfred
 * <Ctrl-Space>            Create TODO in Things               Things
 * <Ctrl-Alt-Space>        Run Project in Term                 Alfred
@@ -72,20 +66,16 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
 * <Ctrl-Cmd-S>            Set Space Tiling Mode To Monocle    KWM
 * <Ctrl-Cmd-D>            Set Space Tiling Mode To Float      KWM
 * <Ctrl-Cmd-F>            Set current window to float         KWM
-* <Ctrl-Cmd-B>            Toggle active border                KWM
-* <Ctrl-Cmd-M>            Mark/Swap current window            KWM
 * <Ctrl-Cmd-Enter>        Maximize/Restore current window     KWM
 * <Ctrl-Cmd-Arrow>        Focus window in direction           KWM
 * <Ctrl-Alt-Arrow>        Swap w/ next window                 KWM
-* <Cmd-Shift-←/→>         Change pane-ratio                   KWM
-* <Ctrl-Cmd-0>            Focus primary display               KWM
-* <Ctrl-Cmd-9>            Focus secondary display             KWM
-* <Ctrl-Alt-0>            Move window to primary display      KWM
-* <Ctrl-Alt-9>            Move window to secondary display    KWM
+* <Ctrl-Cmd-1>            Focus primary display               KWM
+* <Ctrl-Cmd-2>            Focus secondary display             KWM
+* <Ctrl-Alt-1>            Move window to primary display      KWM
+* <Ctrl-Alt-2>            Move window to secondary display    KWM
 
 * <Ctrl-Shift-←>          Go to the left space                System Preferences > Mission Control
 * <Ctrl-Shift-→>          Go to the right space               System Preferences > Mission Control
-* <Cmd-§>                 Go to Space 1                       System Preferences > Mission Control
   F3                      Toggle Mission Control              System Preferences > Mission Control
   F4                      Toggle Launchpad                    System Preferences > Keyboard > Shortcuts > Launchpad & Dock
 * F5                      Toggle Full Screen Mode             System Preferences > Keyboard > Shortcuts > App Shortcuts

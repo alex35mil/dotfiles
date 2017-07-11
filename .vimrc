@@ -10,26 +10,17 @@ Plugin 'VundleVim/Vundle.vim'                       " Vim's Bundler
 
 Plugin 'scrooloose/nerdtree'                        " File manager
 Plugin 'godlygeek/csapprox'                         " Transparent vim
-" Plugin 'bling/vim-airline'                        " Status bars
-" Plugin 'edkolev/tmuxline.vim'                     " tmux status line
-" Plugin 'ryanoasis/vim-devicons'                   " Icons
-" Plugin 'tmux-plugins/vim-tmux-focus-events'       " iTerm & tmux focus events
 Plugin 'ctrlpvim/ctrlp.vim'                         " Finder
 Plugin 'Shougo/neocomplete.vim'                     " Autocompletion
-Plugin 'Shougo/neosnippet.vim'                      " Snippets
 Plugin 'jszakmeister/vim-togglecursor'              " Change cursor shape in Insert mode
 Plugin 'vim-scripts/BufOnly.vim'                    " Close all buffers except current
 Plugin 'wesQ3/vim-windowswap'                       " Splits swapper
 Plugin 'scrooloose/nerdcommenter'                   " Commenter
 Plugin 'jiangmiao/auto-pairs'                       " Insert/delete brackets, parens, quotes in pair
-Plugin 'scrooloose/syntastic'                       " Linter
-Plugin 'mtscout6/syntastic-local-eslint.vim'        " Prefer local eslint
 Plugin 'Xuyuanp/nerdtree-git-plugin'                " Git files status in NERDTree
 Plugin 'airblade/vim-gitgutter'                     " Git line status in the gutter area
 Plugin 'tpope/vim-fugitive'                         " Git wrapper
 Plugin 'tpope/vim-surround'                         " Fancy text wrappings
-Plugin 'pangloss/vim-javascript'                    " JS Syntax
-Plugin 'mxw/vim-jsx'                                " JSX Syntax
 
 call vundle#end()
 
@@ -162,42 +153,6 @@ endif
 let NERDTreeMinimalUI = 1
 let NERDTreeShowHidden = 1
 
-" Devicons setup
-" let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
-" let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
-" let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-" let g:DevIconsEnableFoldersOpenClose = 0  " Broken: https://github.com/ryanoasis/vim-devicons/issues/130
-" let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
-" let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['jsx'] = ''
-
-" Airline setup
-" let g:airline_powerline_fonts = 1
-" let g:airline_symbols = {}
-
-" let g:airline_left_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-" let g:airline_symbols.branch = ''
-" let g:airline_symbols.readonly = ''
-" let g:airline_symbols.linenr = ''
-
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#buffer_nr_show = 1
-
-" let g:airline#extensions#syntastic#enabled = 1
-
-" tmuxline setup
-" let g:tmuxline_separators = {
-    " \ 'left_alt': '',
-    " \ 'right' : '',
-    " \ 'right_alt' : '',
-    " \ 'space' : ' '
-    " \ }
-
-" netrw setup
-let g:netrw_localrmdir='rm -r'
-
 " NERDTree Git setup
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "~",
@@ -239,14 +194,6 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 1
 
-" neosnippet setup
-let g:neosnippet#disable_runtime_snippets = {'_' : 1}
-let g:neosnippet#enable_snipmate_compatibility = 0
-let g:neosnippet#snippets_directory = '~/.vim/snippets'
-
-let g:neosnippet#scope_aliases = {}
-let g:neosnippet#scope_aliases['scss'] = 'scss,css'
-
 " togglecursor setup
 let g:togglecursor_default = 'block'
 
@@ -259,17 +206,6 @@ let NERDCreateDefaultMappings=0
 let g:NERDCustomDelimiters = {
   \ 'scss': { 'left': '//' },
   \ }
-
-" Syntastic setup
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_scss_checkers = ['scss_lint']
-
-" vim-javascript setup
-let b:javascript_fold = 0
 
 
 " ======= Mappings
@@ -378,5 +314,5 @@ nnoremap <Space> :noh<CR><Esc>
 " Show .vimrc
 nnoremap <Leader>vii :vsp $MYVIMRC<CR>
 
-" Without this Command-T do wierd stuff
+" Without this Command-T do weird stuff
 " nnoremap <Esc>^[ <Esc>^[

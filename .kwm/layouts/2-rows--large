@@ -1,7 +1,0 @@
-kwmc tree root create parent
-kwmc tree split-mode 2
-kwmc tree split-ratio 0.800000
-kwmc tree child
-kwmc tree leaf create left
-kwmc tree child
-kwmc tree leaf create right

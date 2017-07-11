@@ -1,48 +1,35 @@
-# Enable kwm compatibility mode
-khd kwm on
-
 # Set space tiling mode
-ctrl + cmd - a   :   kwmc space -t bsp
-ctrl + cmd - s   :   kwmc space -t monocle
-ctrl + cmd - d   :   kwmc space -t float
+ctrl + cmd - a   :   chunkc tiling::desktop --layout bsp
+ctrl + cmd - s   :   chunkc tiling::desktop --layout monocle
+ctrl + cmd - d   :   chunkc tiling::desktop --layout float
 
 # Toggle float mode for window
-ctrl + cmd - f   :   kwmc window -t focused
+ctrl + cmd - f   :   chunkc tiling::window --toggle float
 
 # Give focus to screen
-ctrl + cmd - 0   :   kwmc display -f 0
-ctrl + cmd - 9   :   kwmc display -f 1
+ctrl + cmd - 1   :   chunkc tiling::monitor -f 1
+ctrl + cmd - 2   :   chunkc tiling::monitor -f 2
 
 # Move focused window to screen
-ctrl + alt - 0   :   kwmc window -m display 0
-ctrl + alt - 9   :   kwmc window -m display 1
+ctrl + alt - 1   :   chunkc tiling::window --send-to-monitor 1; chunkc tiling::monitor -f 1
+ctrl + alt - 2   :   chunkc tiling::window --send-to-monitor 2; chunkc tiling::monitor -f 2
 
 # Maximize / minimize window
-ctrl + cmd - return   ![iTerm2,Atom]   :   kwmc window -z fullscreen
+ctrl + cmd - return   ![iTerm2,Atom]   :   chunkc tiling::window --toggle fullscreen
 
 # Give focus to window
-ctrl + cmd - left     ![iTerm2,Atom]   :   kwmc window -f west
-ctrl + cmd - right    ![iTerm2,Atom]   :   kwmc window -f east
-ctrl + cmd - up       ![iTerm2,Atom]   :   kwmc window -f north
-ctrl + cmd - down     ![iTerm2,Atom]   :   kwmc window -f south
+ctrl + cmd - left     ![iTerm2,Atom]   :   chunkc tiling::window --focus west
+ctrl + cmd - right    ![iTerm2,Atom]   :   chunkc tiling::window --focus east
+ctrl + cmd - up       ![iTerm2,Atom]   :   chunkc tiling::window --focus north
+ctrl + cmd - down     ![iTerm2,Atom]   :   chunkc tiling::window --focus south
 
 # Move focused window
-ctrl + alt - left     ![iTerm2,Atom]   :   kwmc window -s west
-ctrl + alt - right    ![iTerm2,Atom]   :   kwmc window -s east
-ctrl + alt - up       ![iTerm2,Atom]   :   kwmc window -s north
-ctrl + alt - down     ![iTerm2,Atom]   :   kwmc window -s south
-
-# Toggle focused window border
-ctrl + cmd - b        ![iTerm2,Atom]   :   ~/.kwm/scripts/toggle-focused-border.sh
-
-# Mark and swap windows
-ctrl + cmd - m        ![iTerm2,Atom]   :   ~/.kwm/scripts/mark-and-swap-windows.sh
-
-# Change split-ratio
-cmd + shift - left    ![iTerm2,Atom]   :   ~/.kwm/scripts/expand-reduce-split-ratio-left.sh
-cmd + shift - right   ![iTerm2,Atom]   :   ~/.kwm/scripts/expand-reduce-split-ratio-right.sh
+ctrl + alt - left     ![iTerm2,Atom]   :   chunkc tiling::window --warp west
+ctrl + alt - right    ![iTerm2,Atom]   :   chunkc tiling::window --warp east
+ctrl + alt - up       ![iTerm2,Atom]   :   chunkc tiling::window --warp north
+ctrl + alt - down     ![iTerm2,Atom]   :   chunkc tiling::window --warp south
 
 # Switch view mode in Bear
-cmd - 1                [Bear]          :   khd -p "ctrl - 1"
-cmd - 2                [Bear]          :   khd -p "ctrl - 2"
-cmd - 3                [Bear]          :   khd -p "ctrl - 3"
+cmd - 1                [Bear]         :   khd -p "ctrl - 1"
+cmd - 2                [Bear]         :   khd -p "ctrl - 2"
+cmd - 3                [Bear]         :   khd -p "ctrl - 3"

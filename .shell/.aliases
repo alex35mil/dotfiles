@@ -76,17 +76,6 @@ alias bsrun="brew services run "
 alias bsrst="brew services restart "
 
 
-# ===== Homebrew Cask
-alias bc="brew cask "
-alias bcd="brew cask doctor"
-alias bccl="brew cask cleanup"
-alias bcinfo="brew cask info "
-alias bci="brew cask install "
-alias bcls="brew cask list "
-alias bcs="brew cask search "
-alias bcun="brew cask uninstall "
-
-
 # ===== Docker
 alias d="docker "
 alias dps="docker ps"
@@ -181,13 +170,8 @@ alias gpsd="git push --recurse-submodules=on-demand "
 [[ -n $BASH_VERSION ]] && __git_complete go _git_checkout
 
 
-# ===== kwm & khd
-alias k="kwmc "
-alias krst="brew services restart kwm && brew services restart khd"
-
-alias 211="kwmc tree restore 2-rows--medium"
-alias 212="kwmc tree restore 2-rows--large"
-alias 221="kwmc tree restore 2-cols--medium"
+# ===== chunkwm & khd
+alias krst="brew services restart chunkwm && brew services restart khd"
 
 
 # ===== Node
@@ -260,17 +244,6 @@ alias rgl="rvm gemset list"
 alias rgc="rvm gemset create "
 alias rgd="rvm gemset delete "
 alias rge="rvm gemset empty "
-
-
-# ===== tmux
-alias t="tmux "
-alias tns="tmux new -s "
-alias ta="tmux attach -t "
-alias tks="tmux kill-session -t "
-alias tgl="tmux list-windows"
-
-alias ts="tmuxinator start "
-alias tsapp="tmuxinator start app "
 
 
 # ===== Vim

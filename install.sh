@@ -10,30 +10,22 @@ FILES="\
   .shell \
   .profile \
 
-  .editorconfig \
+  .iterm \
 
-  .gemrc \
+  .editorconfig \
 
   .gitconfig \
   .gitignore \
 
+  .gemrc \
+
   .vimrc \
   .vim/colors \
-  .vim/snippets \
 
-  .tmux.conf \
-  .tmuxinator \
-
-  .hyper.js \
-
-  .iterm \
-
-  .kwm \
+  .chunkwmrc \
   .khdrc \
-  .ubersicht \
 
   .atom/config.cson \
-  .atom/init.coffee \
   .atom/keymap.cson \
   .atom/snippets.cson \
   .atom/styles.less \
@@ -81,10 +73,10 @@ echo ""
 echo "📋  Creating .hushlogin: $HOME/.hushlogin ... Done"
 
 
-# kwm scripts
-chmod -R +x "$HOME/.kwm/scripts/"
+# .chunkwmrc
+chmod +x "$HOME/.chunkwmrc"
 echo ""
-echo "🕹  Setting permissions for kwm scripts: $HOME/.kwm ... Done"
+echo "🕹  Setting permissions for chunkwm config: $HOME/.chunkwmrc ... Done"
 
 
 # Alfred filters
