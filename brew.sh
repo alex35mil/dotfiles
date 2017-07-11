@@ -22,7 +22,7 @@ brew install git-lfs
 brew install nginx
 brew install tmux
 brew install reattach-to-user-namespace
-brew install vim --override-system-vi
+brew install vim --with-override-system-vi
 brew install wget --with-iri
 brew install curl
 brew install tree
