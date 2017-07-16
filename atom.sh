@@ -25,7 +25,6 @@ apm install \
   linter-scss-lint \
   linter-stylelint \
   maximize-panes \
-  merge-conflicts \
   nice-index \
   nucleus-dark-ui \
   nuclide \

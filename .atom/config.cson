@@ -75,8 +75,8 @@
   "custom-title":
     template: "atom/<%= projectName %>"
   editor:
-    fontFamily: "Menlo"
-    fontSize: 15
+    fontFamily: "Source Code Pro"
+    fontSize: 16
     invisibles:
       eol: " "
       space: " "
@@ -117,6 +117,9 @@
       "index\\.|styles\\.s?css"
     ]
   nuclide:
+    "atom-ide-code-format":
+      formatOnSave: true
+      formatOnType: false
     "atom-ide-diagnostics-ui": {}
     "nuclide-code-format": {}
     "nuclide-diagnostics-ui": {}
@@ -162,7 +165,7 @@
       "nuclide-nux": false
       "nuclide-objc": false
       "nuclide-open-filenames-provider": false
-      "nuclide-outline-view": false
+      "nuclide-outline-view": true
       "nuclide-python": false
       "nuclide-quick-open": false
       "nuclide-recent-files-provider": false

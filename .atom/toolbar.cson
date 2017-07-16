@@ -57,7 +57,7 @@
     type: "button"
     iconset: "ion"
     icon: "merge"
-    callback: "merge-conflicts:detect"
+    callback: "github:toggle-git-tab"
     style:
       'border-radius': 0
   }
@@ -87,7 +87,7 @@
     type: "button"
     iconset: "ion"
     icon: "ios-pulse-strong"
-    callback: "settings-view:show-keybindings"
+    callback: "diagnostics:toggle-table"
     style:
       'border-radius': 0
   }
