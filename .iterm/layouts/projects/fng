@@ -4,8 +4,8 @@ function run() {
   const Shaka = Library('shaka');
 
   Shaka.run('~/Dev/Projects/shakacode.com/fng', {
-    root: 'git status',
-    client: 'cd client',
-    server: 'script/server',
+    root: 'cd friendsandguests && git status',
+    client: 'cd friendsandguests/client',
+    server: 'scripts/start',
   });
 }

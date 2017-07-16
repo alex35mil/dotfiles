@@ -5,7 +5,7 @@ function run() {
     web: 'cd web && git status',
     api: 'cd api && git status',
     root: 'git status',
-    servers: 'yarn start',
+    servers: './run:development',
   });
 }
 
