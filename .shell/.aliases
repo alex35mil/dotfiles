@@ -78,34 +78,63 @@ alias bsrst="brew services restart "
 
 # ===== Docker
 alias d="docker "
-alias dps="docker ps"
-alias dpsa="docker ps -a"
-alias ds="docker stop "
-alias dsa='docker stop $(docker ps -a -q)'
-alias di="docker images"
-alias dpr="docker image prune -f && docker volume prune -f && docker network prune -f"
-alias dspr="docker system prune"
-alias drm="docker rm "
-alias drmi="docker rmi "
+
+alias dps="docker ps "
+alias dpsa="docker ps -a "
+alias dsa='docker container stop $(docker ps -a -q)'
+
+alias di="docker image "
+alias dils="docker image ls "
+alias dirm="docker image rm "
+alias dipr="docker image prune "
+
+alias dct="docker container "
+alias dctls="docker container ls "
+alias dctrm="docker container rm "
+alias dctpr="docker container prune "
+
+alias dv="docker volume "
+alias dvls="docker volume ls "
+alias dvrm="docker volume rm "
+alias dvpr="docker volume prune "
+
+alias dn="docker network "
+alias dnls="docker network ls "
+alias dnrm="docker network rm "
+alias dnpr="docker network prune "
+
+alias dspr="docker system prune "
+alias dspra="docker system prune -a"
+
+dls() {
+  echo "--- Images:\n"
+  docker image ls
+  echo "\n\n--- Containers:\n"
+  docker container ls
+  echo "\n\n--- Volumes:\n"
+  docker volume ls
+  echo "\n\n--- Networks:\n"
+  docker network ls
+}
 
 alias dc="docker-compose "
-alias dcd="docker-compose -f docker-compose.dev.yml "
-alias dcp="docker-compose -f docker-compose.prod.yml "
+alias dcd="docker-compose -f development.yml "
+alias dcp="docker-compose -f production.yml "
 alias dcup="docker-compose up --build"
 alias dcdup="dcd up --build"
 alias dcpup="dcp up --build -d"
-dc-exec() { docker-compose exec $@ /bin/bash; }
-dc-exec-dev() { docker-compose -f docker-compose.dev.yml exec $@ /bin/bash; }
-dc-exec-prod() { docker-compose -f docker-compose.prod.yml exec $@ /bin/bash; }
+dc-shell() { docker-compose exec $@ /bin/bash; }
+dc-shell-dev() { docker-compose -f development.yml exec $@ /bin/bash; }
+dc-shell-prod() { docker-compose -f production.yml exec $@ /bin/bash; }
 
 alias dm="docker-machine "
 alias dma="docker-machine active"
-alias dmls="docker-machine ls"
+alias dmls="docker-machine ls "
 alias dmre="docker-machine restart "
 alias dmrm="docker-machine rm "
 alias dmscp="docker-machine scp "
 dm-blog() { eval "$(docker-machine env alexfedoseev.com)"; }
-dmssh() {
+dm-ssh() {
   MACHINE="$(docker-machine active)"
   docker-machine ssh $MACHINE
 }
@@ -135,6 +164,7 @@ alias gpt="git push --tags"
 alias gprq="git add . && git commit --amend --reuse-message=HEAD && git push --force-with-lease"
 alias gco="git checkout "
 alias gcob="git checkout -b "
+alias gcom="git checkout master"
 alias gu="git pull --rebase --prune"
 alias gf="git fetch "
 alias gfu="git fetch upstream"
