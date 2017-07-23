@@ -78,7 +78,7 @@
 
   'Flow.children':
     'prefix': 'fch'
-    'body': 'children?: React.Element<*>,'
+    'body': 'children: React.Element<*>,'
 
   'Flow.React.Element':
     'prefix': 'fre'
