@@ -19,6 +19,7 @@ brew install \
   git \
   vim --with-lua --with-override-system-vi \
   curl \
+  wget --with-iri \
   tree \
   pstree \
   node \
