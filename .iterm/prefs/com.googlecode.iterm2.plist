@@ -485,12 +485,17 @@
 	</data>
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
+	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
+	<dict>
+		<key>TB Is Shown</key>
+		<integer>1</integer>
+	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>910 263 510 319 0 0 1680 1050 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>261 479 796 473 0 0 1680 1050 </string>
+	<string>261 571 796 473 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 4 720 553 0 0 1680 1028 </string>
+	<string>0 4 720 553 0 0 1680 1050 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -740,12 +745,16 @@
 			<false/>
 			<key>Foreground Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.72798359394073486</real>
+				<real>0.77647058823529413</real>
+				<key>Color Space</key>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.73781722784042358</real>
+				<real>0.7686274509803922</real>
 				<key>Red Component</key>
-				<real>0.71933764219284058</real>
+				<real>0.76078431372549016</real>
 			</dict>
 			<key>Guid</key>
 			<string>2044F3B9-487E-4E03-B812-992302A7C312</string>
@@ -1201,7 +1210,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-07-14T18:26:55Z</date>
+	<date>2017-07-16T15:50:39Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1241,6 +1250,8 @@
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
+	<false/>
+	<key>kCPKUseSystemColorPicker</key>
 	<false/>
 </dict>
 </plist>
