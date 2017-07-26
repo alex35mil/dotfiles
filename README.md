@@ -31,23 +31,12 @@ I use [`chunkwm`](https://github.com/koekeishiya/chunkwm) to manage windows.
 
 ## Keyboard Shortcuts
 
-#### ProTip #1
+#### ProTip
 Remap your CapsLock to Ctrl.
 
 ```
 System Preferences > Keyboard > Keyboard > [Modifier Keys...]
 ```
-
-#### ProTip #2
-Use F1 – F5 keys as standard function keys for your keybindings.
-
-```
-System Preferences > Keyboard > Keyboard > [x] Use F1, F2, ...
-```
-
-#### ProTip #3
-Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
-
 
 ### Cheatsheets
 
@@ -58,26 +47,27 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
 ```
 * <Alt-Space>             Show Alfred                         Alfred
 * <Ctrl-Space>            Create TODO in Things               Things
-* <Ctrl-Alt-Space>        Run Project in Term                 Alfred
-* <Ctrl-Cmd-N>            Open New Term Window                Alfred
+* <Ctrl-Alt-Space>        Run Project in iTerm                Alfred
+* <Ctrl-Alt-T>            Open New iTerm Window               Alfred
+* <Ctrl-Cmd-V>            Open Clipboard History              Alfred
+* <Ctrl-Cmd-S>            Open Snippets                       Alfred
+* <Ctrl-Cmd-U>            Open Url                            Alfred
 * <Ctrl-Cmd-T>            Show/Hide Timer                     Billings Pro
 
-* <Ctrl-Cmd-A>            Set Space Tiling Mode To BSP        KWM
-* <Ctrl-Cmd-S>            Set Space Tiling Mode To Monocle    KWM
-* <Ctrl-Cmd-D>            Set Space Tiling Mode To Float      KWM
-* <Ctrl-Cmd-F>            Set current window to float         KWM
-* <Ctrl-Cmd-Enter>        Maximize/Restore current window     KWM
-* <Ctrl-Cmd-Arrow>        Focus window in direction           KWM
-* <Ctrl-Alt-Arrow>        Swap w/ next window                 KWM
-* <Ctrl-Cmd-1>            Focus primary display               KWM
-* <Ctrl-Cmd-2>            Focus secondary display             KWM
-* <Ctrl-Alt-1>            Move window to primary display      KWM
-* <Ctrl-Alt-2>            Move window to secondary display    KWM
+* <Ctrl-Alt-A>            Set Space Tiling Mode To BSP        chunkwm
+* <Ctrl-Alt-S>            Set Space Tiling Mode To Monocle    chunkwm
+* <Ctrl-Alt-D>            Set Space Tiling Mode To Float      chunkwm
+* <Ctrl-Alt-F>            Set current window to float         chunkwm
+* <Ctrl-Cmd-Enter>        Maximize/Restore current window     chunkwm
+* <Ctrl-Cmd-Arrow>        Focus window in direction           chunkwm
+* <Ctrl-Alt-Arrow>        Swap w/ next window                 chunkwm
+* <Ctrl-Cmd-1>            Focus primary display               chunkwm
+* <Ctrl-Cmd-2>            Focus secondary display             chunkwm
+* <Ctrl-Alt-1>            Move window to primary display      chunkwm
+* <Ctrl-Alt-2>            Move window to secondary display    chunkwm
 
-* <Ctrl-Shift-←>          Go to the left space                System Preferences > Mission Control
-* <Ctrl-Shift-→>          Go to the right space               System Preferences > Mission Control
-  F3                      Toggle Mission Control              System Preferences > Mission Control
-  F4                      Toggle Launchpad                    System Preferences > Keyboard > Shortcuts > Launchpad & Dock
+* <Ctrl-Shift-Left>       Go to the left space                System Preferences > Mission Control
+* <Ctrl-Shift-Right>      Go to the right space               System Preferences > Mission Control
 * F5                      Toggle Full Screen Mode             System Preferences > Keyboard > Shortcuts > App Shortcuts
 * F6                      Toggle Do Not Disturb Mode          System Preferences > Keyboard > Shortcuts > App Shortcuts
 ```
@@ -98,18 +88,18 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
 #### Atom
 
 ```
-                          ### Common
+                      ### Common
   <Cmd-.>                 Show keybinding resolver
 * <Ctrl-Cmd-P>            Toggle command palette
 
-                          ### File lists (Tree View, Fuzzy Finder etc.)
+                      ### File lists (Tree View, Fuzzy Finder etc.)
 * <Cmd-Enter>             New pane on the right
 * <Cmd-Shift-Enter>       New pane on the bottom
   <Cmd-K> Arrow           New pane on provided direction
 * s                       New pane on the right (Tree View only)
 * i                       New pane on the bottom (Tree View only)
 
-                          ### Tree View
+                      ### Tree View
 * F1                      Toggle Tree View
   a                       Add file
   A                       Add folder
@@ -120,11 +110,11 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
 * \                       Find current file in the tree (in Normal mode)
   <Cmd-\>                 Toggle focus on Tree view (in all modes)
 
-                          ### Fuzzy Finder
+                      ### Fuzzy Finder
 * <Cmd-R>                 Toggle buffer finder
 * <Cmd-T>                 Toggle file finder
 
-                          ### Advanced open file
+                      ### Advanced open file
 * <Cmd-O>                 Toggle dialog
   /                       Go to the user's root
   :/                      Go to the project's root
@@ -133,30 +123,20 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
   <Cmd-K> Arrow           New pane on provided direction
 
 
-                          ### Git
-* <Ctrl-Cmd-G>            Toggle commands panel
-* <Cmd-G> s               Git: Status
-* <Cmd-G> g               Git: Checkout
-* <Cmd-G> n               Git: New Branch
-* <Cmd-G> a               Git: Add Current File
-* <Cmd-G> u               Git: Checkout Current File (hard reset)
-* <Cmd-G> d               Git: Diff Current File
-* <Cmd-G> r               Git: Run Custom Command
-* <Cmd-G> b               Git: Blame
-
-* <Cmd-M> d               Git: Merge Conflict: Detect
-* <Cmd-M> n               Git: Merge Conflict: Next
-* <Cmd-M> p               Git: Merge Conflict: Previous
+                      ### Git
+* <Ctrl-Cmd-G>            Git: Toggle git panel
+* <Ctrl-Cmd-H>            Git: Toggle Github panel
+* <Ctrl-Cmd-B>            Git: Toggle git blame
 
 
-                          ### Panes / Buffers
+                      ### Panes / Buffers
 * <Ctrl-Cmd-Enter>        Maximize current
 * <Ctrl-Cmd-Arrow>        Move around
 * <Ctrl-Alt-Arrow>        Move current to new pane in provided direction
 * <Ctrl-Alt-Q>            Destroy pane
 * <Ctrl-Alt-W>            Close other buffers in current pane
 
-                          ### Editor - All modes
+                      ### Editor - All modes
 * <Cmd-O>                 Open file via `advanced-open-file`
 
 * <Ctrl-Cmd-T>            Find TODOs
@@ -169,12 +149,13 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
 * <Ctrl-Cmd-L>            Toggle syntax selector
 * <Cmd-L> s               Set Shell Script language
 * <Cmd-L> j               Set Babel ES6 JavaScript language
+* <Cmd-L> d               Set Docker language
 
-* <Ctrl-↑>                Add selection above
-* <Ctrl-↓>                Add selection below
+* <Ctrl-↑>                Add cursor/selection above
+* <Ctrl-↓>                Add cursor/selection below
 
-* <Ctrl-Shift-↑>          Scroll half screen up
-* <Ctrl-Shift-↓>          Scroll half screen down
+* <Shift-↑>               Scroll half screen up
+* <Shift-↓>               Scroll half screen down
 
 * <Cmd-D>                 Duplicate line
 * <Shift-Alt-↑>           Move line up
@@ -183,7 +164,7 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
 * <Cmd-Shift-A>           Select all entries that match selection
 * <Cmd-Shift-B>           Select all inside brackets
 
-                          ### Editor - Normal mode
+                      ### Editor - Normal mode
   Tab                     Indent
   <Shift-Tab>             Un-indent
   i                       Go to Insert mode (place cursor before char)
@@ -228,9 +209,13 @@ Use F7 – F12 keys for iTunes and volume controls (via Alfred or whatever).
   <num> G                 Go to the <num> line of the file
   <num> Enter             Go to the <num> line of the file
 
-                          ### Settings
+                      ### Settings
   <Cmd-,>                 Show default section
+* <Cmd-,> c               Show Core
+* <Cmd-,> e               Show Editor
 * <Cmd-,> k               Show Keybindings
 * <Cmd-,> p               Show Packages
+* <Cmd-,> t               Show Themes
+* <Cmd-,> u               Show Updates
 * <Cmd-,> i               Show Install
 ```
