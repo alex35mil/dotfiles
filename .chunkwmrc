@@ -32,3 +32,4 @@ chunkc set mouse_follows_focus 1
 # Set windows rules
 chunkc tiling::rule --owner \"System Preferences\" --state tile
 chunkc tiling::rule --owner Finder --name Copy --state float
+chunkc tiling::rule --owner iBooks --state float

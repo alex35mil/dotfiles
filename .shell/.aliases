@@ -57,6 +57,8 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 # Remove all DS_Store files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
+# Restart windows manager
+alias wmrst="brew services restart chunkwm && brew services restart khd"
 
 # ===== Homebrew
 alias b="brew "
@@ -165,7 +167,7 @@ alias gprq="git add . && git commit --amend --reuse-message=HEAD && git push --f
 alias gco="git checkout "
 alias gcob="git checkout -b "
 alias gcom="git checkout master"
-alias gu="git pull --rebase --prune"
+alias gup="git pull --rebase --prune"
 alias gf="git fetch "
 alias gfu="git fetch upstream"
 alias gm="git merge "
@@ -198,10 +200,6 @@ alias gpsd="git push --recurse-submodules=on-demand "
 
 [[ -n $BASH_VERSION ]] && __git_complete gb _git_branch
 [[ -n $BASH_VERSION ]] && __git_complete go _git_checkout
-
-
-# ===== chunkwm & khd
-alias krst="brew services restart chunkwm && brew services restart khd"
 
 
 # ===== Node
