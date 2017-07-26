@@ -76,7 +76,7 @@
     template: "atom/<%= projectName %>"
   editor:
     fontFamily: "Hermit"
-    fontSize: 18
+    fontSize: 17
     invisibles:
       eol: " "
       space: " "
