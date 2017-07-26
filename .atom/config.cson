@@ -75,8 +75,8 @@
   "custom-title":
     template: "atom/<%= projectName %>"
   editor:
-    fontFamily: "Source Code Pro"
-    fontSize: 16
+    fontFamily: "Hermit"
+    fontSize: 18
     invisibles:
       eol: " "
       space: " "
