@@ -23,7 +23,8 @@ brew install \
   tree \
   pstree \
   node \
-  yarn
+  yarn \
+  go
 
 # Install windows manager
 brew tap crisidev/homebrew-chunkwm

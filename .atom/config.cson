@@ -35,7 +35,6 @@
       "language-c"
       "language-clojure"
       "language-csharp"
-      "language-go"
       "language-java"
       "language-mustache"
       "language-objective-c"
@@ -100,6 +99,10 @@
     general:
       analytics: false
       splitPane: "Right"
+  "go-plus":
+    disabledBundledPackages: [
+      "go-debug"
+    ]
   "highlight-selected": {}
   linter:
     displayLinterInfo: false
@@ -210,3 +213,6 @@
   zentabs:
     maximumOpenedTabs: 20
     neverCloseNew: true
+".go.source":
+  editor:
+    showInvisibles: false

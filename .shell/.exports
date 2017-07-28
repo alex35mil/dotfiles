@@ -1,6 +1,3 @@
-# Add rvm to the $PATH
-export PATH="$PATH:$HOME/.rvm/bin"
-
 # Set vim as the default editor
 export EDITOR="vim"
 export VISUAL=$EDITOR
@@ -27,3 +24,9 @@ fi
 # Set history size
 export HISTSIZE=10000
 export SAVEHIST=10000
+
+# Go
+export GOROOT="/usr/local/opt/go/libexec"
+
+# PATH
+export PATH="$PATH:$GOROOT/bin"

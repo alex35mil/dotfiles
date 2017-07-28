@@ -10,6 +10,7 @@ apm install \
   file-icons \
   flex-tool-bar \
   git-blame \
+  go-plus \
   highlight-selected \
   hyperclick \
   language-applescript \
@@ -22,6 +23,7 @@ apm install \
   linter \
   linter-docker \
   linter-eslint \
+  linter-golinter \
   linter-scss-lint \
   linter-stylelint \
   maximize-panes \
