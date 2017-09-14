@@ -11,8 +11,8 @@ apm install \
   flex-tool-bar \
   git-blame \
   go-plus \
+  go-signature-statusbar \
   highlight-selected \
-  hyperclick \
   language-applescript \
   language-babel \
   language-docker \
@@ -20,18 +20,19 @@ apm install \
   language-nginx \
   language-pug \
   language-slim \
+  language-swift \
   linter \
   linter-docker \
   linter-eslint \
-  linter-golinter \
+  linter-refmt \
   linter-scss-lint \
   linter-stylelint \
   maximize-panes \
   nice-index \
   nucleus-dark-ui \
   nuclide \
+  pg-formatter \
   prettier-atom \
-  pretty-json \
   relative-numbers \
   set-syntax \
   todo-show \
