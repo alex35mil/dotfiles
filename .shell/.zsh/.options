@@ -2,6 +2,9 @@
 set -o vi
 bindkey -v
 
+# Turn on history search on Ctrl-R
+bindkey "^R" history-incremental-search-backward
+
 # Auto cd to dir, if it's exists and not a command
 setopt auto_cd
 
