@@ -3,9 +3,11 @@
 function run() {
   Minima.run('~/Dev/Projects/minima.pro/minima', {
     web: 'cd web && git status',
-    api: 'cd api && git status',
-    root: 'git status',
-    servers: './run:development',
+    api:
+      'cd api && export GOPATH=$(pwd) PATH=$(pwd)/bin:$PATH && cd src/api && git status',
+    root:
+      'export GOPATH=$(pwd)/api PATH=$(pwd)/api/bin:$PATH; atom . ./web ./api',
+    servers: 'scripts/up',
   });
 }
 
@@ -33,7 +35,7 @@ const Minima = {
 
     webSession.write({ text: cmd.web });
     apiSession.write({ text: cmd.api });
-    rootSession.write({ text: cmd.root });
+    rootSession.write({ text: cmd.root, newline: false });
     serversSession.write({ text: cmd.servers, newline: false });
     serversSession.select();
   },

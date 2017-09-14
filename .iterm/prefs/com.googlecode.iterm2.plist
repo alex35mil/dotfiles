@@ -257,6 +257,13 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
+		<key>0xd-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>25</integer>
+			<key>Text</key>
+			<string>Maximize Active Pane</string>
+		</dict>
 		<key>0xd-0x140000</key>
 		<dict>
 			<key>Action</key>
@@ -517,7 +524,7 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>910 220 510 94 0 0 1680 1050 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>161 495 916 416 0 0 1680 1050 </string>
+	<string>229 353 958 433 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 4 800 653 0 0 1680 1028 </string>
 	<key>New Bookmarks</key>
@@ -1236,7 +1243,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-07-25T16:01:05Z</date>
+	<date>2017-09-09T04:44:08Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
