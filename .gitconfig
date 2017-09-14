@@ -1,5 +1,5 @@
 [alias]
-  go = "checkout"
+  gco = "checkout"
   dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
   irebase = "!r() { git rebase -i HEAD~$1; }; r"
   history = log --pretty=format:'%C(yellow)%h%C(reset) - %s %C(dim)%ad <%an>' --date=relative
@@ -14,6 +14,7 @@
   email = alex.fedoseev@gmail.com
 [push]
   default = simple
+  followTags = true
 [filter "lfs"]
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
