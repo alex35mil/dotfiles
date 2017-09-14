@@ -74,7 +74,7 @@
   "custom-title":
     template: "atom/<%= projectName %>"
   editor:
-    fontFamily: "Hermit"
+    fontFamily: "Hermit, Menlo"
     fontSize: 17
     invisibles:
       eol: " "
@@ -102,7 +102,20 @@
   "go-plus":
     disabledBundledPackages: [
       "go-debug"
+      "linter"
     ]
+    lint:
+      args: [
+        "--vendor"
+        "--disable-all"
+        "--enable=vet"
+        "--enable=vetshadow"
+        "--enable=ineffassign"
+        "--enable=goconst"
+        "--tests"
+        "--json"
+        "."
+      ]
   "highlight-selected": {}
   linter:
     displayLinterInfo: false
@@ -123,6 +136,8 @@
     "atom-ide-code-format":
       formatOnSave: true
       formatOnType: false
+    "atom-ide-datatip":
+      datatipDebounceDelay: 400
     "atom-ide-diagnostics-ui": {}
     "nuclide-code-format": {}
     "nuclide-diagnostics-ui": {}
@@ -132,72 +147,80 @@
       enableStructuredTypeHints: true
       flowAutocompleteResultsFirst: false
       functionSnippetShouldIncludeArguments: false
+    "nuclide-health":
+      toolbarJewel: "None"
     use:
       "nuclide-adb-logcat": false
+      "nuclide-adb-sdb": false
+      "nuclide-arc-lint": false
       "nuclide-arcanist": false
       "nuclide-blame": false
       "nuclide-blame-provider-hg": false
       "nuclide-bookshelf": false
       "nuclide-buck": false
       "nuclide-buck-ios": false
-      "nuclide-busy-signal": false
       "nuclide-clang": false
       "nuclide-clipboard-path": false
       "nuclide-console": false
-      "nuclide-context-view": false
-      "nuclide-ctags": false
       "nuclide-debugger": false
-      "nuclide-debugger-iwdp": false
       "nuclide-debugger-native": false
-      "nuclide-debugger-node": false
       "nuclide-debugger-php": false
-      "nuclide-diff-view": false
+      "nuclide-device-panel": false
       "nuclide-distraction-free-mode": false
       "nuclide-file-tree": false
-      "nuclide-file-watcher": false
-      "nuclide-fuzzy-filename-provider": false
       "nuclide-hack": false
       "nuclide-health": false
-      "nuclide-hg-conflict-resolver": false
       "nuclide-hg-repository": false
-      "nuclide-hhvm": false
       "nuclide-home": false
       "nuclide-http-request-sender": false
-      "nuclide-ios-simulator-logs": false
       "nuclide-language-hack": false
-      "nuclide-nux": false
       "nuclide-objc": false
-      "nuclide-open-filenames-provider": false
-      "nuclide-outline-view": true
       "nuclide-python": false
       "nuclide-quick-open": false
-      "nuclide-recent-files-provider": false
-      "nuclide-recent-files-service": false
-      "nuclide-refactorizer": false
-      "nuclide-related-files": false
       "nuclide-remote-atom": false
       "nuclide-remote-projects": false
       "nuclide-settings": false
-      "nuclide-source-control-side-bar": false
-      "nuclide-swift": false
-      "nuclide-task-runner": false
+      "nuclide-ssh-tunnel": false
       "nuclide-vcs-log": false
       "nuclide-working-sets": false
+  "pg-formatter":
+    editorOptions: {}
+    pgFormatterOptions:
+      functionCase: "uppercase"
+      keywordCase: "uppercase"
+      placeholder: "(password|timezone|enum)"
+      spaces: 2
   "prettier-atom":
     formatOnSaveOptions:
-      cssScopes: [
-        "source.css"
-      ]
       enabled: true
     prettierEslintOptions: {}
     prettierOptions:
-      singleQuote: true
       trailingComma: "all"
     silenceErrors: true
-    useEslint: true
   tabs:
     enableVcsColoring: true
   "todo-show":
+    findTheseTodos: [
+      "XXX"
+      "TODO"
+      "FIXME"
+      "CHANGED"
+      "IDEA"
+      "HACK"
+      "NOTE"
+      "REVIEW"
+      "NB"
+      "BUG"
+      "QUESTION"
+      "COMBAK"
+      "TEMP"
+    ]
+    ignoreThesePaths: [
+      "node_modules"
+      "vendor"
+      "bower_components"
+      "flow-typed"
+    ]
     sortBy: "Type"
   "tool-bar":
     position: "Left"

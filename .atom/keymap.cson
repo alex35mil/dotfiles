@@ -51,6 +51,7 @@
   'cmd-g': 'unset!'
   'ctrl-cmd-g': 'unset!'
   'ctrl-cmd-m': 'unset!'
+  'ctrl-alt-f': 'unset!'
 
   'ctrl-alt-q': 'pane:close'
   'ctrl-alt-w': 'pane:close-other-items'

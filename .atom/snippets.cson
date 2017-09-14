@@ -1,3 +1,59 @@
+# ======= Go
+
+'.source.go':
+  'package':
+    'prefix': 'p'
+    'body': """
+      package ${1:main}
+
+      ${0}
+    """
+
+  'string':
+    'prefix': 's'
+    'body': 'string'
+
+  'int':
+    'prefix': 'i'
+    'body': 'int'
+
+  'float32':
+    'prefix': 'f3'
+    'body': 'float32'
+
+  'float64':
+    'prefix': 'f6'
+    'body': 'float64'
+
+  'type struct':
+    'prefix': 'ts'
+    'body': """
+      type ${1} struct {
+        ${0}
+      }
+    """
+
+  'log.Printf':
+    'prefix': 'l'
+    'body': 'log.Printf("${1:%#v}", ${0})'
+
+  'json tag':
+    'prefix': 'jt'
+    'body': 'json:"${0:tag}"'
+
+  'db tag':
+    'prefix': 'dbt'
+    'body': 'db:"${0:tag}"'
+
+  'validate tag':
+    'prefix': 'vt'
+    'body': 'validate:"${0:tag}"'
+
+  'conform tag':
+    'prefix': 'ct'
+    'body': 'conform:"${0:tag}"'
+
+
 # ======= JavaScript
 
 '.source.js':
@@ -60,7 +116,7 @@
     'prefix': 'fb'
     'body': 'boolean'
 
-  'Flow.function.no-args':
+  'Flow.function':
     'prefix': 'ff'
     'body': '() => ${0:void}'
 
@@ -68,65 +124,49 @@
     'prefix': 'ffa'
     'body': '(${1:arg}) => ${0:void}'
 
-  'Flow.no-args':
-    'prefix': 'fna'
-    'body': '...args: Array<void>'
+  'Flow.React.ComponentType':
+    'prefix': 'frct'
+    'body': 'React.ComponentType<${0}>'
 
-  'Flow.no-rest-args':
-    'prefix': 'fnra'
-    'body': '...rest: Array<void>'
-
-  'Flow.children':
-    'prefix': 'fch'
-    'body': 'children: React.Element<*>,'
+  'Flow.React.Node':
+    'prefix': 'frn'
+    'body': 'React.Node'
 
   'Flow.React.Element':
     'prefix': 'fre'
     'body': 'React.Element<*>'
 
+  'Flow.children':
+    'prefix': 'fch'
+    'body': 'children: React.Node,'
+
   'Flow.HTMLElement':
-    'prefix': 'fhtmle'
+    'prefix': 'fhe'
     'body': 'HTMLElement'
+
+  'Flow.HTMLInputElement':
+    'prefix': 'fhie'
+    'body': 'HTMLInputElement'
 
   'Flow.SyntheticEvent':
     'prefix': 'fse'
     'body': 'SyntheticEvent'
 
-  'Flow.$Event':
-    'prefix': 'fe'
-    'body': '$Event'
-
   'Flow.SyntheticInputEvent':
     'prefix': 'fsie'
     'body': 'SyntheticInputEvent'
-
-  'Flow.$InputEvent':
-    'prefix': 'fie'
-    'body': '$InputEvent'
 
   'Flow.SyntheticKeyboardEvent':
     'prefix': 'fske'
     'body': 'SyntheticKeyboardEvent'
 
-  'Flow.$KeyboardEvent':
-    'prefix': 'fke'
-    'body': '$KeyboardEvent'
-
   'Flow.SyntheticMouseEvent':
     'prefix': 'fsme'
     'body': 'SyntheticMouseEvent'
 
-  'Flow.$MouseEvent':
-    'prefix': 'fme'
-    'body': '$MouseEvent'
-
   'Flow.SyntheticTouchEvent':
     'prefix': 'fste'
     'body': 'SyntheticTouchEvent'
-
-  'Flow.$TouchEvent':
-    'prefix': 'fte'
-    'body': '$TouchEvent'
 
   'Flow.type':
     'prefix': 'ft'
@@ -135,13 +175,21 @@
   'Flow.type.Props':
     'prefix': 'ftp'
     'body': """
-      type $Props = {|
+      type Props = {|
+        ${0}
+      |};
+    """
+
+  'Flow.type.State':
+    'prefix': 'fts'
+    'body': """
+      type State = {|
         ${0}
       |};
     """
 
   'Flow.type.exact':
-    'prefix': 'fet'
+    'prefix': 'fte'
     'body': """
       type ${1:name} = {|
         ${0}
@@ -159,6 +207,66 @@
   'Flow.FlowFixMe':
     'prefix': 'ffm'
     'body': '// $FlowFixMe: ${0:fix what}'
+
+  'import.default':
+    'prefix': 'i'
+    'body': 'import ${0:module} from \'${1:location}\';'
+
+  'import.named':
+    'prefix': 'in'
+    'body': 'import { ${0:NamedExport} } from \'${1:location}\';'
+
+  'import.all':
+    'prefix': 'ia'
+    'body': 'import * as ${0:module} from \'${1:location}\';'
+
+  'import.type':
+    'prefix': 'it'
+    'body': 'import { type ${0:Type} } from \'${1:location}\';'
+
+  'import.typeof':
+    'prefix': 'ito'
+    'body': 'import { typeof ${2:thing} as ${0:TypeAlias} } from \'${1:location}\';'
+
+  'import.react':
+    'prefix': 'ir'
+    'body': 'import * as React from \'react\';'
+
+  'import.immutable':
+    'prefix': 'ii'
+    'body': 'import Immutable from \'immutable\';'
+
+  'import.immutable.Record':
+    'prefix': 'iir'
+    'body': 'import { Record } from \'immutable\';'
+
+  'import.immutable.Map':
+    'prefix': 'iim'
+    'body': 'import { Map } from \'immutable\';'
+
+  'import.immutable.List':
+    'prefix': 'iil'
+    'body': 'import { List } from \'immutable\';'
+
+  'import.immutable.Set':
+    'prefix': 'iis'
+    'body': 'import { Set } from \'immutable\';'
+
+  'import.immutable.OrderedSet':
+    'prefix': 'iios'
+    'body': 'import { OrderedSet } from \'immutable\';'
+
+  'import.lodash':
+    'prefix': 'il'
+    'body': 'import _ from \'lodash/fp\';'
+
+  'import.classnames':
+    'prefix': 'icn'
+    'body': 'import cn from \'classnames\';'
+
+  'import.css':
+    'prefix': 'icss'
+    'body': 'import css from \'./${0:ComponentStyles}.css\';'
 
   'export.named':
     'prefix': 'en'
@@ -199,62 +307,6 @@
         ${0}
       |};
     """
-
-  'import':
-    'prefix': 'i'
-    'body': 'import ${0:module} from \'${1:location}\';'
-
-  'import.type':
-    'prefix': 'it'
-    'body': 'import type { ${0:Type} } from \'${1:location}\';'
-
-  'import.typeof':
-    'prefix': 'ito'
-    'body': 'import typeof { ${0:Type} } from \'${1:location}\';'
-
-  'import.react':
-    'prefix': 'ir'
-    'body': 'import React from \'react\';'
-
-  'import.immutable':
-    'prefix': 'ii'
-    'body': 'import Immutable from \'immutable\';'
-
-  'import.immutable.Record':
-    'prefix': 'iir'
-    'body': 'import { Record } from \'immutable\';'
-
-  'import.immutable.Map':
-    'prefix': 'iim'
-    'body': 'import { Map } from \'immutable\';'
-
-  'import.immutable.List':
-    'prefix': 'iil'
-    'body': 'import { List } from \'immutable\';'
-
-  'import.immutable.Set':
-    'prefix': 'iis'
-    'body': 'import { Set } from \'immutable\';'
-
-  'import.immutable.OrderedSet':
-    'prefix': 'iios'
-    'body': 'import { OrderedSet } from \'immutable\';'
-
-  'import.lodash':
-    'prefix': 'il'
-    'body': 'import _ from \'lodash/fp\';'
-
-  'import.classnames':
-    'prefix': 'icn'
-    'body': 'import cn from \'classnames\';'
-
-  'import.styles':
-    'prefix': 'is'
-    'body': 'import styles from \'./styles.css\';'
-
-  'import.css':
-    'prefix': 'icss'
-    'body': 'import css from \'./index.scss\';'
 
   'require':
     'prefix': 'r'
@@ -318,10 +370,6 @@
     'prefix': 'tss'
     'body': 'this.setState({${1}});'
 
-  'styles':
-    'prefix': 's'
-    'body': 'styles'
-
   'constructor':
     'prefix': 'cnstr'
     'body': """
@@ -361,7 +409,7 @@
   'React.componentWillReceiveProps':
     'prefix': 'rcwrp'
     'body': """
-      componentWillReceiveProps = (nextProps: $Props) => {
+      componentWillReceiveProps = (nextProps: Props) => {
         ${0:// use it to update state or anything in response to next props...}
       };
     """
@@ -369,7 +417,7 @@
   'React.componentWillUpdate':
     'prefix': 'rcwup'
     'body': """
-      componentWillUpdate = (nextProps: $Props, nextState: $State) => {
+      componentWillUpdate = (nextProps: Props, nextState: State) => {
         ${0:// use it to do something before an update...}
       };
     """
@@ -377,7 +425,7 @@
   'React.componentDidUpdate':
     'prefix': 'rcdu'
     'body': """
-      componentDidUpdate = (prevProps: $Props, prevState: $State) => {
+      componentDidUpdate = (prevProps: Props, prevState: State) => {
         ${0:// use it to do something w/ the DOM after update...}
       };
     """
@@ -395,15 +443,13 @@
     'body': """
       /* @flow */
 
-      import React from 'react';
+      import * as React from 'react';
 
-      type $Props = {|
+      type Props = {|
 
       |};
 
-      export default class ${1:Component} extends React.Component {
-        props: $Props;
-
+      export default class ${1:Component} extends React.Component<Props> {
         render = () => (
           // jsx...
         );
@@ -415,19 +461,18 @@
     'body': """
       /* @flow */
 
-      import React from 'react';
+      import * as React from 'react';
 
-      type $Props = {|
-
-      |};
-
-      type $State = {|
+      type Props = {|
 
       |};
 
-      export default class ${1:Component} extends React.Component {
-        props: $Props;
-        state: $State = {};
+      type State = {|
+
+      |};
+
+      export default class ${1:Component} extends React.Component<Props, State> {
+        state = {};
 
         render = () => (
           ${0}
@@ -440,13 +485,13 @@
     'body': """
       /* @flow */
 
-      import React from 'react';
+      import * as React from 'react';
 
-      type $Props = {|
+      type Props = {|
 
       |};
 
-      const ${1:Component} = ({}: $Props) => (
+      const ${1:Component} = ({}: Props) => (
         ${0}
       );
 
@@ -458,27 +503,28 @@
     'body': """
       /* @flow */
 
-      import React from 'react';
+      import * as React from 'react';
 
-      type $Props = {|
+      type Props = {|
 
       |};
 
-      type $ChildProps = {
-        ...$Props,
-        ...$State,
-        ...$Handlers,
+      type State = {|
+
+      |};
+
+      type ChildProps = {
+        ...Props,
+        ...State,
+        ...Handlers,
       };
 
-      type $Child = (props: $ChildProps) => React.Element<*>;
-
-      const ${1:withHOC} = (${2:Child}: $Child) => class extends React.Component {
-        props: $Props;
-
-        render = () => (
-          <${2:Child} />
-        );
-      };
+      const ${1:withHOC} = (${2:Child}: React.ComponentType<ChildProps>) =>
+        class extends React.Component<Props> {
+          render = () => (
+            <${2:Child} />
+          );
+        };
 
       export default ${1:withHOC};
     """
@@ -495,21 +541,9 @@
     'prefix': 'cn'
     'body': 'className'
 
-  'JSX.className.styles':
-    'prefix': 'cns'
-    'body': 'className={styles.${0}}'
-
   'JSX.className.css':
     'prefix': 'cncss'
     'body': 'className={css.${0}}'
-
-  'JSX.div.className.styles':
-    'prefix': 'dcns'
-    'body': """
-      <div className={styles.${1}}>
-        ${0}
-      </div>
-    """
 
   'JSX.div.className.css':
     'prefix': 'dcncss'
@@ -528,39 +562,39 @@
     'body': 'onChange={${0}}'
 
   'interaction':
-    'prefix': 'in'
+    'prefix': 'int'
     'body': """
       /* @flow */
 
-      import type { $ActionHandler } from 'app/types/redux';
-      import type { $LeafState } from '../state';
+      import type { ActionHandler } from 'app/types/redux';
+      import type { LeafState } from '../state';
 
       ${0:// ins / inas / inr ...}
     """
 
   'interaction.sync':
-    'prefix': 'ins'
+    'prefix': 'ints'
     'body': """
       // --- ${1:Feature}
 
       const ${2:STATE_UPDATE}: '${2:STATE_UPDATE}' = '${2:STATE_UPDATE}';
 
       // Action creator
-      type $Action = {|
+      type Action = {|
         type: typeof ${2:STATE_UPDATE},
       |};
 
-      export const updateState = (): $Action => ({
+      export const updateState = (): Action => ({
         type: ${2:STATE_UPDATE},
       });
 
 
       // Action handler
-      type $OnStateUpdate = {
-        [typeof ${2:STATE_UPDATE}]: $ActionHandler<$LeafState, $Action>,
+      type OnStateUpdate = {
+        [typeof ${2:STATE_UPDATE}]: ActionHandler<LeafState, Action>,
       };
 
-      export const onStateUpdate: $OnStateUpdate = {
+      export const onStateUpdate: OnStateUpdate = {
         [${2:STATE_UPDATE}]:
           (state) =>
             state,
@@ -568,33 +602,33 @@
     """
 
   'interaction.async':
-    'prefix': 'inas'
+    'prefix': 'intas'
     'body': """
       // --- ${1:Async Feature}
 
       const ${2:ASYNC_STATE_UPDATE}: '${2:ASYNC_STATE_UPDATE}' = '${2:ASYNC_STATE_UPDATE}';
 
       // Action creator
-      type $Action = {|
+      type Action = {|
         type: typeof ${2:ASYNC_STATE_UPDATE},
       |};
 
-      const updateStateAsyncAction = (): $Action => ({
+      const updateStateAsyncAction = (): Action => ({
         type: ${2:ASYNC_STATE_UPDATE},
       });
 
-      export const updateStateAsync = (): $Thunk => (dispatch, getState) => {
+      export const updateStateAsync = (): Thunk => (dispatch, getState) => {
         // do stuff...
         dispatch(updateStateAsyncAction());
       };
 
 
       // Action handler
-      type $OnAsyncStateUpdate = {
-        [typeof ${2:ASYNC_STATE_UPDATE}]: $ActionHandler<$LeafState, $Action>,
+      type OnAsyncStateUpdate = {
+        [typeof ${2:ASYNC_STATE_UPDATE}]: ActionHandler<LeafState, Action>,
       };
 
-      export const onAsyncStateUpdate: $OnAsyncStateUpdate = {
+      export const onAsyncStateUpdate: OnAsyncStateUpdate = {
         [${2:ASYNC_STATE_UPDATE}]:
           (state) =>
             state,
@@ -602,7 +636,7 @@
     """
 
   'interaction.remote':
-    'prefix': 'inr'
+    'prefix': 'intr'
     'body': """
       const REQUESTED: 'REQUESTED' = 'REQUESTED';
       const SUCCEEDED: 'SUCCEEDED' = 'SUCCEEDED';
@@ -611,20 +645,20 @@
       // --- Request
 
       // Action creator
-      type $RequestAction = {|
+      type RequestAction = {|
         type: typeof REQUESTED,
       |};
 
-      const requestAction = (): $RequestAction => ({
+      const requestAction = (): RequestAction => ({
         type: REQUESTED,
       });
 
       // Action handler
-      type $OnRequest = {
-        [typeof REQUESTED]: $ActionHandler<$LeafState, $RequestAction>,
+      type OnRequest = {
+        [typeof REQUESTED]: ActionHandler<LeafState, RequestAction>,
       };
 
-      const onRequest: $OnRequest = {
+      const onRequest: OnRequest = {
         [UPDATE_REQUESTED]:
           (state) =>
             state.set('isProcessing', true),
@@ -634,23 +668,23 @@
       // --- Success
 
       // Action creator
-      type $SuccessAction = {|
+      type SuccessAction = {|
         type: typeof SUCCEEDED,
       |};
 
       const successAction = (
         // ...args
-      ): $SuccessAction => ({
+      ): SuccessAction => ({
         type: SUCCEEDED,
         // ...args
       });
 
       // Action handler
-      type $OnSuccess = {
-        [typeof SUCCEEDED]: $ActionHandler<$LeafState, $SuccessAction>,
+      type OnSuccess = {
+        [typeof SUCCEEDED]: ActionHandler<LeafState, SuccessAction>,
       };
 
-      const onSuccess: $OnSuccess = {
+      const onSuccess: OnSuccess = {
         [SUCCEEDED]:
           (state) =>
             state,
@@ -660,22 +694,22 @@
       // --- Failure
 
       // Action creator
-      type $FailureAction = {
+      type FailureAction = {
         type: typeof FAILED,
-        error: $ResponseError,
+        error: ResponseError,
       };
 
-      const failureAction = (error: $ResponseError): $FailureAction => ({
+      const failureAction = (error: ResponseError): FailureAction => ({
         type: FAILED,
         error,
       });
 
       // Action handler
-      type $OnFailure = {
-        [type: typeof FAILED]: $ActionHandler<$LeafState, $FailureAction>,
+      type OnFailure = {
+        [type: typeof FAILED]: ActionHandler<LeafState, FailureAction>,
       };
 
-      const onFailure: $OnFailure = {
+      const onFailure: OnFailure = {
         [FAILED]:
           (state) =>
             state,
@@ -699,7 +733,7 @@
             () => dispatch(successAction()),
 
             // failure
-            (error: $ResponseError) => dispatch(withApiErrorMiddleware(failureAction(error))),
+            (error: ResponseError) => dispatch(withApiErrorMiddleware(failureAction(error))),
           )
         ;
       };
@@ -841,8 +875,76 @@
        */
     """
 
+  'Flex':
+    'prefix': 'fx'
+    'body': """
+      <Flex ${1}>
+        ${0}
+      </Flex>
+    """
 
-# ======= Styles
+  'Flex.flow.row-wrap':
+    'prefix': 'ffrw'
+    'body': 'flow="row-wrap"'
+
+  'Flex.flow.row-nowrap':
+    'prefix': 'ffrnw'
+    'body': 'flow="row-nowrap"'
+
+  'Flex.flow.column-wrap':
+    'prefix': 'ffcw'
+    'body': 'flow="column-wrap"'
+
+  'Flex.flow.column-nowrap':
+    'prefix': 'ffcnw'
+    'body': 'flow="column-nowrap"'
+
+  'Flex.alignItems.flex-start':
+    'prefix': 'faifs'
+    'body': 'alignItems="flex-start"'
+
+  'Flex.alignItems.flex-end':
+    'prefix': 'faife'
+    'body': 'alignItems="flex-end"'
+
+  'Flex.alignItems.center':
+    'prefix': 'faic'
+    'body': 'alignItems="center"'
+
+  'Flex.alignItems.baseline':
+    'prefix': 'faib'
+    'body': 'alignItems="baseline"'
+
+  'Flex.alignItems.stretch':
+    'prefix': 'fais'
+    'body': 'alignItems="stretch"'
+
+  'Flex.justifyContent.flex-start':
+    'prefix': 'fjcfs'
+    'body': 'justifyContent="flex-start"'
+
+  'Flex.justifyContent.flex-end':
+    'prefix': 'fjcfe'
+    'body': 'justifyContent="flex-end"'
+
+  'Flex.justifyContent.center':
+    'prefix': 'fjcc'
+    'body': 'justifyContent="center"'
+
+  'Flex.justifyContent.space-between':
+    'prefix': 'fjcsb'
+    'body': 'justifyContent="space-between"'
+
+  'Flex.justifyContent.space-around':
+    'prefix': 'fjcsa'
+    'body': 'justifyContent="space-around"'
+
+  'Flex.justifyContent.space-evenly':
+    'prefix': 'fjcse'
+    'body': 'justifyContent="space-evenly"'
+
+
+# ======= CSS
 
 '.source.css, .source.sass':
   'display.flex':

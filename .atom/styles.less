@@ -9,6 +9,19 @@
 @panels-top-label-margins: 20px 20px 0;
 
 atom-workspace {
+  .tree-view {
+    .project-root-header {
+      span.name {
+        background-color: rgba(34, 153, 221, .7);
+        transition: background-color .1s ease-in;
+        padding: 5px 15px;
+        font-family: Menlo;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+    }
+  }
+
   // Get rid of Nuclide's panels noise
 
   // Get rid of top border of Nuclide's bottom panel
