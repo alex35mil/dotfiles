@@ -2,12 +2,9 @@
 
 function run() {
   Minima.run('~/Dev/Projects/minima.pro/minima', {
-    web: 'cd web && git status',
-    api:
-      'cd api && export GOPATH=$(pwd) PATH=$(pwd)/bin:$PATH && cd src/api && git status',
     root:
-      'export GOPATH=$(pwd)/api PATH=$(pwd)/api/bin:$PATH; atom . ./web ./api',
-    servers: 'scripts/up',
+      'export GOPATH=$(pwd) PATH=$(pwd)/bin:$PATH; atom . ./src/client ./src/server',
+    servers: 'scripts/start',
   });
 }
 
@@ -21,22 +18,15 @@ const Minima = {
   run(path, cmd) {
     const container = iTerm.createWindowWithDefaultProfile();
 
-    const webSession = container.currentSession;
-    const rootSession = webSession.splitVerticallyWithDefaultProfile();
-    const apiSession = webSession.splitHorizontallyWithDefaultProfile();
+    const rootSession = container.currentSession;
     const serversSession = rootSession.splitHorizontallyWithDefaultProfile();
 
     Utils.prepareSessions(path, [
-      webSession,
-      apiSession,
       rootSession,
       serversSession,
     ]);
 
-    webSession.write({ text: cmd.web });
-    apiSession.write({ text: cmd.api });
     rootSession.write({ text: cmd.root, newline: false });
     serversSession.write({ text: cmd.servers, newline: false });
-    serversSession.select();
   },
 };
