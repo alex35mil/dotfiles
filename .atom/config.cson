@@ -41,7 +41,6 @@
       "language-perl"
       "language-php"
       "language-python"
-      "language-toml"
       "language-xml"
       "linter"
     ]
@@ -75,7 +74,7 @@
     template: "atom/<%= projectName %>"
   editor:
     fontFamily: "Hermit, Menlo"
-    fontSize: 17
+    fontSize: 18
     invisibles:
       eol: " "
       space: " "
@@ -193,6 +192,8 @@
   "prettier-atom":
     formatOnSaveOptions:
       enabled: true
+      isDisabledIfNoConfigFile: true
+      isDisabledIfNotInPackageJson: true
     prettierEslintOptions: {}
     prettierOptions:
       trailingComma: "all"
@@ -227,7 +228,11 @@
   "tree-view":
     alwaysOpenExisting: true
   "vim-mode-plus":
-    dontUpdateRegisterOnChangeOrSubstitute: true
+    blackholeRegisteredOperators: [
+      "change*"
+      "substitute*"
+    ]
+    notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
     useClipboardAsDefaultRegister: true
   welcome:
     showOnStartup: false
@@ -239,3 +244,6 @@
 ".go.source":
   editor:
     showInvisibles: false
+".reason.source":
+  editor:
+    preferredLineLength: 110

@@ -118,11 +118,7 @@
 
   'Flow.function':
     'prefix': 'ff'
-    'body': '() => ${0:void}'
-
-  'Flow.function.args':
-    'prefix': 'ffa'
-    'body': '(${1:arg}) => ${0:void}'
+    'body': '(${0}) => void${1}'
 
   'Flow.React.ComponentType':
     'prefix': 'frct'
@@ -136,6 +132,10 @@
     'prefix': 'fre'
     'body': 'React.Element<*>'
 
+  'Flow.React.ElementRef':
+    'prefix': 'frer'
+    'body': 'React.ElementRef<${0}>'
+
   'Flow.children':
     'prefix': 'fch'
     'body': 'children: React.Node,'
@@ -144,29 +144,41 @@
     'prefix': 'fhe'
     'body': 'HTMLElement'
 
+  'Flow.HTMLDivElement':
+    'prefix': 'fhde'
+    'body': 'HTMLDivElement'
+
   'Flow.HTMLInputElement':
     'prefix': 'fhie'
     'body': 'HTMLInputElement'
 
+  'Flow.HTMLButtonElement':
+    'prefix': 'fhbe'
+    'body': 'HTMLButtonElement'
+
   'Flow.SyntheticEvent':
     'prefix': 'fse'
-    'body': 'SyntheticEvent'
+    'body': 'SyntheticEvent<${0}>'
 
   'Flow.SyntheticInputEvent':
     'prefix': 'fsie'
-    'body': 'SyntheticInputEvent'
+    'body': 'SyntheticInputEvent<${0}>'
+
+  'Flow.SyntheticFocusEvent':
+    'prefix': 'fsfe'
+    'body': 'SyntheticFocusEvent<${0}>'
 
   'Flow.SyntheticKeyboardEvent':
     'prefix': 'fske'
-    'body': 'SyntheticKeyboardEvent'
+    'body': 'SyntheticKeyboardEvent<${0}>'
 
   'Flow.SyntheticMouseEvent':
     'prefix': 'fsme'
-    'body': 'SyntheticMouseEvent'
+    'body': 'SyntheticMouseEvent<${0}>'
 
   'Flow.SyntheticTouchEvent':
     'prefix': 'fste'
-    'body': 'SyntheticTouchEvent'
+    'body': 'SyntheticTouchEvent<${0}>'
 
   'Flow.type':
     'prefix': 'ft'
@@ -234,11 +246,11 @@
 
   'import.immutable':
     'prefix': 'ii'
-    'body': 'import Immutable from \'immutable\';'
+    'body': 'import { ${0} } from \'immutable\';'
 
   'import.immutable.Record':
     'prefix': 'iir'
-    'body': 'import { Record } from \'immutable\';'
+    'body': 'import { Record, type RecordOf, type RecordFactory } from \'immutable\';'
 
   'import.immutable.Map':
     'prefix': 'iim'
@@ -264,9 +276,41 @@
     'prefix': 'icn'
     'body': 'import cn from \'classnames\';'
 
+  'import.api':
+    'prefix': 'iapi'
+    'body': 'import api from \'api\';'
+
+  'import.libs':
+    'prefix': 'ilibs'
+    'body': 'import { ${0:lib} } from \'libs/${1}\';'
+
+  'import.models':
+    'prefix': 'imodels'
+    'body': 'import { ${0:Model} } from \'models/${1}\';'
+
+  'import.routes':
+    'prefix': 'iroutes'
+    'body': 'import * as routes from \'routes\';'
+
+  'import.components':
+    'prefix': 'isc'
+    'body': 'import { ${0:Component} } from \'styleguide/components\';'
+
+  'import.forms':
+    'prefix': 'isf'
+    'body': 'import { ${0:Form} } from \'styleguide/forms\';'
+
+  'import.icons':
+    'prefix': 'isi'
+    'body': 'import * as Icons from \'styleguide/icons\';'
+
+  'import.types':
+    'prefix': 'itypes'
+    'body': 'import type { ${0:Type} } from \'types/${1}\';'
+
   'import.css':
     'prefix': 'icss'
-    'body': 'import css from \'./${0:ComponentStyles}.css\';'
+    'body': 'import css from \'.${0:ComponentStyles.css}\';'
 
   'export.named':
     'prefix': 'en'
@@ -900,47 +944,47 @@
     'body': 'flow="column-nowrap"'
 
   'Flex.alignItems.flex-start':
-    'prefix': 'faifs'
+    'prefix': 'aifs'
     'body': 'alignItems="flex-start"'
 
   'Flex.alignItems.flex-end':
-    'prefix': 'faife'
+    'prefix': 'aife'
     'body': 'alignItems="flex-end"'
 
   'Flex.alignItems.center':
-    'prefix': 'faic'
+    'prefix': 'aic'
     'body': 'alignItems="center"'
 
   'Flex.alignItems.baseline':
-    'prefix': 'faib'
+    'prefix': 'aib'
     'body': 'alignItems="baseline"'
 
   'Flex.alignItems.stretch':
-    'prefix': 'fais'
+    'prefix': 'ais'
     'body': 'alignItems="stretch"'
 
   'Flex.justifyContent.flex-start':
-    'prefix': 'fjcfs'
+    'prefix': 'jcfs'
     'body': 'justifyContent="flex-start"'
 
   'Flex.justifyContent.flex-end':
-    'prefix': 'fjcfe'
+    'prefix': 'jcfe'
     'body': 'justifyContent="flex-end"'
 
   'Flex.justifyContent.center':
-    'prefix': 'fjcc'
+    'prefix': 'jcc'
     'body': 'justifyContent="center"'
 
   'Flex.justifyContent.space-between':
-    'prefix': 'fjcsb'
+    'prefix': 'jcsb'
     'body': 'justifyContent="space-between"'
 
   'Flex.justifyContent.space-around':
-    'prefix': 'fjcsa'
+    'prefix': 'jcsa'
     'body': 'justifyContent="space-around"'
 
   'Flex.justifyContent.space-evenly':
-    'prefix': 'fjcse'
+    'prefix': 'jcse'
     'body': 'justifyContent="space-evenly"'
 
 

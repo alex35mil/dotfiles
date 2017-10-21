@@ -9,6 +9,7 @@
 @panels-top-label-margins: 20px 20px 0;
 
 atom-workspace {
+  // Style project name in tree view
   .tree-view {
     .project-root-header {
       span.name {
@@ -22,30 +23,15 @@ atom-workspace {
     }
   }
 
-  // Get rid of Nuclide's panels noise
-
-  // Get rid of top border of Nuclide's bottom panel
-  atom-panel.bottom {
-    border-top: 0;
-  }
-
-  .nuclide-workspace-views-panel-wrapper {
-    // I don't use these panels and they overlap editor's UI elements
-    &.left,
-    &.right {
-      display: none;
-    }
-
-    // Get rid of a 4px line above status bar
-    &.bottom {
-      bottom: -4px;
-    }
-  }
-
   // Adjust modal styles
   .overlay,
   atom-panel.modal {
-    background-color: @panels-bg-color;
+    &,
+    &::before {
+      border-radius: 0;
+      background-color: @panels-bg-color;
+      box-shadow: 0 0 70px rgba(0, 0, 0, .7);
+    }
 
     .tree-view-dialog label:first-child {
       margin: @panels-top-label-margins;
@@ -74,7 +60,6 @@ atom-workspace {
 
   // Adjust nuclide status bar styles
   .footer .status-bar {
-    border-top: 1px solid lighten(@panels-bg-color, 3%);
     background-color: @panels-bg-color;
 
     .highlight,
@@ -84,7 +69,7 @@ atom-workspace {
       font-size: inherit;
     }
 
-    .nuclide-diagnostics-status-bar-highlight {
+    .diagnostics-status-bar-highlight {
       padding: 0 8px;
       background-color: transparent;
 
@@ -150,11 +135,6 @@ atom-text-editor.editor {
   // Make selection visible
   .selection .region {
     background-color: rgba(255, 255, 255, .15);
-  }
-
-  // Remove little red arrow before removed lines
-  .line-number.git-line-removed:before {
-    border-left: none !important;
   }
 
   // Redefine some syntax colors

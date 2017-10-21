@@ -16,7 +16,7 @@
   'cmd-t': 'fuzzy-finder:toggle-file-finder'
 
   'ctrl-cmd-/': 'diagnostics:toggle-table'
-  'ctrl-cmd-.': 'nuclide-test-runner:toggle-panel'
+  'ctrl-cmd-,': 'nuclide-test-runner:toggle-panel'
 
   'ctrl-cmd-b': 'git-blame:toggle'
 
@@ -96,3 +96,9 @@
 '.advanced-open-file atom-text-editor':
   'cmd-enter': 'pane:split-right'
   'cmd-shift-enter': 'pane:split-down'
+
+'atom-text-editor[data-grammar~="go"]:not([mini])':
+  'ctrl-cmd-.': 'golang:toggle-panel'
+  'alt-u': 'golang:find-usage'
+  'alt-i': 'golang:implements'
+  'alt-r': 'golang:gorename'
