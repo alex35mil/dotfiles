@@ -1,13 +1,13 @@
 # Load plugins
-chunkc plugin_dir /usr/local/opt/chunkwm/share/chunkwm_plugins
-chunkc core::plugin_dir /usr/local/opt/chunkwm/share/chunkwm_plugins
+chunkc plugin_dir /usr/local/opt/chunkwm/share/chunkwm/plugins
+chunkc core::plugin_dir /usr/local/opt/chunkwm/share/chunkwm/plugins
 
 chunkc core::load tiling.so
 
 # Set default tiling mode (bsp | monocle | float)
 chunkc set global_desktop_mode monocle
 
-# Set default values for screen padding фтв container gaps
+# Set default values for screen padding and container gaps
 chunkc set global_desktop_offset_top    10
 chunkc set global_desktop_offset_bottom 10
 chunkc set global_desktop_offset_left   10
