@@ -120,14 +120,17 @@ dls() {
 }
 
 alias dc="docker-compose "
-alias dcd="docker-compose -f development.yml "
-alias dcp="docker-compose -f production.yml "
+alias dcd="docker-compose -f docker-compose.development.yml "
+alias dcp="docker-compose -f docker-compose.production.yml "
 alias dcup="docker-compose up --build"
 alias dcdup="dcd up --build"
 alias dcpup="dcp up --build -d"
 dc-shell() { docker-compose exec $@ /bin/bash; }
-dcd-shell() { docker-compose -f development.yml exec $@ /bin/bash; }
-dcp-shell() { docker-compose -f production.yml exec $@ /bin/bash; }
+dc-run-shell() { docker-compose run --rm $@ /bin/bash; }
+dcd-shell() { docker-compose -f docker-compose.development.yml exec $@ /bin/bash; }
+dcd-run-shell() { docker-compose -f docker-compose.development.yml run --rm $@ /bin/bash; }
+dcp-shell() { docker-compose -f docker-compose.production.yml exec $@ /bin/bash; }
+dcp-run-shell() { docker-compose -f docker-compose.production.yml run --rm $@ /bin/bash; }
 
 alias dm="docker-machine "
 alias dma="docker-machine active"
@@ -228,7 +231,7 @@ alias yid="yarn add --dev --exact "
 alias yrm="yarn remove "
 
 alias yo="yarn outdated"
-alias yup="yarn upgrade-interactive --exact"
+alias yup="yarn upgrade-interactive --exact --latest"
 
 alias yg="yarn global "
 alias ygls="yarn global ls"
@@ -291,20 +294,20 @@ alias sdrn="script/docker/run:nps"
 alias sdrs="script/docker/run:storybook"
 alias sdu="script/docker/update"
 
-alias sup="scripts/up"
-alias sbd="scripts/build:development"
-alias sbp="scripts/build:production"
-alias sdep="scripts/dep "
-alias sdepa="scripts/dep ensure -add "
+alias ss="scripts/start"
+alias sup="scripts/update"
+alias ssetup="scripts/setup"
+alias sddb="scripts/docker:development:build"
+alias sdpb="scripts/docker:production:build"
+alias ssdep="scripts/server:dep "
+alias ssdepa="scripts/server:dep ensure -add "
 alias sdb="scripts/db "
 alias sdbm="scripts/db migrate "
-alias sdbr="scripts/db rollback "
+alias sdbrb="scripts/db rollback "
 alias sdbmn="scripts/db migration "
 alias sdbrst="scripts/db reset "
-alias sy="scripts/yarn "
-alias sya="scripts/yarn:add "
-alias syad="scripts/yarn:add:dev "
-alias syup="scripts/yarn:up"
-alias sm="scripts/make "
-alias smr="scripts/make:report"
-alias sms="scripts/make:styleguide"
+alias scy="scripts/client:yarn "
+alias scya="scripts/client:yarn:add "
+alias scyad="scripts/client:yarn:add:dev "
+alias scyup="scripts/client:yarn:up"
+alias scm="scripts/client:make "
