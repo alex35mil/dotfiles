@@ -1,11 +1,10 @@
-/* Stylesheet */
-
 // Make tree view visible when pane is maximized
 .tree-view-resizer[data-autohide] {
   z-index: 1000;
 }
 
 @panels-bg-color: #141516;
+@status-line-bg-color: #232425;
 @panels-top-label-margins: 20px 20px 0;
 
 atom-workspace {
@@ -60,14 +59,7 @@ atom-workspace {
 
   // Adjust nuclide status bar styles
   .footer .status-bar {
-    background-color: @panels-bg-color;
-
-    .highlight,
-    .highlight-warning,
-    .highlight-error {
-      border-radius: 0;
-      font-size: inherit;
-    }
+    background-color: @status-line-bg-color;
 
     .diagnostics-status-bar-highlight {
       padding: 0 8px;
@@ -75,35 +67,6 @@ atom-workspace {
 
       .icon {
         display: none;
-      }
-    }
-
-    .highlight-warning {
-      border: 1px solid #de935f;
-      background-color: #de935f;
-
-      &:last-child {
-        border-left: 0;
-      }
-    }
-
-    .highlight-error {
-      border: 1px solid #cc6666;
-      background-color: #cc6666;
-    }
-
-    & > .flexbox-repaint-hack {
-      padding-top: 0;
-
-      .status-bar-left,
-      .status-bar-right {
-        display: flex;
-        flex-flow: row nowrap;
-        align-items: center;
-
-        .nuclide-navigation-stack-tile {
-          flex: initial;
-        }
       }
     }
   }
@@ -143,50 +106,6 @@ atom-text-editor.editor {
     color: #f0c674;
   }
 }
-
-// Adjust nuclide diagnostic message layout
-.nuclide-datatip-overlay {
-  .nuclide-datatip-container {
-    .nuclide-datatip-content {
-      .nuclide-diagnostics-datatip {
-        padding: 0 10px 5px;
-      }
-    }
-  }
-}
-.nuclide-datatip-overlay,
-.nuclide-diagnostics-gutter-ui-popup {
-  .nuclide-diagnostics-gutter-ui-popup-header {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    padding: 5px 12px;
-    background-color: rgba(204, 102, 102, .2);
-  }
-
-  .highlight-error {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 2px;
-    padding: 3px 5px;
-    line-height: 1;
-  }
-
-  .btn-xs {
-    display: inline-flex;
-    align-self: center;
-    padding: 6px 8px;
-    height: auto;
-    line-height: 1.1;
-  }
-}
-
-.nuclide-navigation-stack-tile .nuclide-btn-group .btn {
-  border: 0;
-  border-radius: 0;
-}
-
 
 // Setup icons
 .icon[data-name$="package.json"]:before { font-family: "Devicons"; content: "\e681"; }

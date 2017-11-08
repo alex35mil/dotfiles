@@ -16,7 +16,7 @@
   'cmd-t': 'fuzzy-finder:toggle-file-finder'
 
   'ctrl-cmd-/': 'diagnostics:toggle-table'
-  'ctrl-cmd-,': 'nuclide-test-runner:toggle-panel'
+  'ctrl-cmd-.': 'golang:toggle-panel'
 
   'ctrl-cmd-b': 'git-blame:toggle'
 
@@ -70,10 +70,18 @@
   'ctrl-cmd-down': 'window:focus-pane-below'
   'ctrl-cmd-left': 'window:focus-pane-on-left'
 
-  'ctrl-alt-right': 'nuclide-move-item-to-available-pane:right'
-  'ctrl-alt-left': 'nuclide-move-item-to-available-pane:left'
-  'ctrl-alt-up': 'nuclide-move-item-to-available-pane:up'
-  'ctrl-alt-down': 'nuclide-move-item-to-available-pane:down'
+  'ctrl-alt-right': 'pane:split-right-and-move-active-item'
+  'ctrl-alt-left': 'pane:split-left-and-move-active-item'
+  'ctrl-alt-up': 'pane:split-up-and-move-active-item'
+  'ctrl-alt-down': 'pane:split-down-and-move-active-item'
+
+  'ctrl-shift-alt-right': 'window:move-active-item-to-pane-on-right'
+  'ctrl-shift-alt-left': 'window:move-active-item-to-pane-on-left'
+  'ctrl-shift-alt-up': 'window:move-active-item-to-pane-above'
+  'ctrl-shift-alt-down': 'window:move-active-item-to-pane-below'
+
+  'ctrl-.': 'cursor-history:next'
+  'ctrl-,': 'cursor-history:prev'
 
   'cmd-l s': 'set-syntax:Shell Script'
   'cmd-l j': 'set-syntax:Babel ES6 JavaScript'
@@ -98,7 +106,6 @@
   'cmd-shift-enter': 'pane:split-down'
 
 'atom-text-editor[data-grammar~="go"]:not([mini])':
-  'ctrl-cmd-.': 'golang:toggle-panel'
   'alt-u': 'golang:find-usage'
   'alt-i': 'golang:implements'
   'alt-r': 'golang:gorename'

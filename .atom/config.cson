@@ -3,6 +3,11 @@
     createDirectories: true
     createFileInstantly: true
     helmDirSwitch: true
+  "atom-ide-ui":
+    "atom-ide-code-format":
+      formatOnSave: true
+      formatOnType: false
+    hyperclick: {}
   "autocomplete-modules":
     babelPluginModuleResolver: true
   "autocomplete-plus":
@@ -116,12 +121,10 @@
         "."
       ]
   "highlight-selected": {}
-  linter:
-    displayLinterInfo: false
-    displayLinterStatus: false
-    showErrorTabFile: false
-    showErrorTabProject: false
-    statusIconScope: "File"
+  "ide-flowtype":
+    autoDownloadFlowBinaries: false
+    tryFlowBin: true
+  linter: {}
   "linter-eslint": {}
   "linter-scss-lint":
     disableWhenNoConfigFileInPath: true

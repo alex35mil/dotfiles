@@ -1,3 +1,259 @@
+# ======= Reason
+
+'.source.reason':
+  'string':
+    'prefix': 's'
+    'body': 'string'
+
+  'int':
+    'prefix': 'i'
+    'body': 'int'
+
+  'float':
+    'prefix': 'f'
+    'body': 'float'
+
+  'option':
+    'prefix': 'o'
+    'body': 'option'
+
+  '|>':
+    'prefix': '>'
+    'body': '|> ${0}'
+
+  'Js.t {.}':
+    'prefix': 'jst'
+    'body': '{. ${0}}'
+
+  'Js.t {..}':
+    'prefix': 'jsot'
+    'body': '{.. ${0}}'
+
+  'ReasonReact':
+    'prefix': 'rr'
+    'body': 'ReasonReact'
+
+  'ReasonReact.statelessComponent':
+    'prefix': 'rrsc'
+    'body': 'let component = ReasonReact.statelessComponent("${0:Component}");'
+
+  'ReasonReact.statelessComponentWithRetainedProps':
+    'prefix': 'rrscwrp'
+    'body': 'let component = ReasonReact.statelessComponentWithRetainedProps("${0:Component}");'
+
+  'ReasonReact.reducerComponent':
+    'prefix': 'rrrc'
+    'body': 'let component = ReasonReact.reducerComponent("${0:Component}");'
+
+  'ReasonReact.reducerComponentWithRetainedProps':
+    'prefix': 'rrrcwrp'
+    'body': 'let component = ReasonReact.reducerComponentWithRetainedProps("${0:Component}");'
+
+  'ReasonReact.stringToElement':
+    'prefix': 'rrste'
+    'body': 'ReasonReact.stringToElement(${0})'
+
+  'ReasonReact.arrayToElement':
+    'prefix': 'rrate'
+    'body': 'ReasonReact.arrayToElement'
+
+  'ReasonReact.nullElement':
+    'prefix': 'rrne'
+    'body': 'ReasonReact.nullElement'
+
+  'ReasonReact.Update':
+    'prefix': 'rru'
+    'body': 'ReasonReact.Update({...state, ${0}})'
+
+  'ReasonReact.SideEffects':
+    'prefix': 'rrse'
+    'body': 'ReasonReact.SideEffects(({${1}}) => {${0}})'
+
+  'ReasonReact.UpdateWithSideEffects':
+    'prefix': 'rruwse'
+    'body': 'ReasonReact.UpdateWithSideEffects(state, ({${1}}) => {${0}})'
+
+  'ReasonReact.NoUpdate':
+    'prefix': 'rrnu'
+    'body': 'ReasonReact.NoUpdate'
+
+  'ReactEventRe.Mouse.t':
+    'prefix': 'remt'
+    'body': 'ReactEventRe.Mouse.t'
+
+  'ReactEventRe.Mouse.t => unit':
+    'prefix': 'remtu'
+    'body': 'ReactEventRe.Mouse.t => unit'
+
+  'ReactEventRe.Keyboard.t':
+    'prefix': 'rekt'
+    'body': 'ReactEventRe.Keyboard.t'
+
+  'ReactEventRe.Keyboard.t => unit':
+    'prefix': 'rektu'
+    'body': 'ReactEventRe.Keyboard.t => unit'
+
+  'ReactEventRe.Form.t':
+    'prefix': 'reformt'
+    'body': 'ReactEventRe.Form.t'
+
+  'ReactEventRe.Form.t => unit':
+    'prefix': 'reformtu'
+    'body': 'ReactEventRe.Form.t => unit'
+
+  'ReactEventRe.Focus.t':
+    'prefix': 'refocust'
+    'body': 'ReactEventRe.Focus.t'
+
+  'ReactEventRe.Focus.t => unit':
+    'prefix': 'refocustu'
+    'body': 'ReactEventRe.Focus.t => unit'
+
+  'ReactEventRe.Selection.t':
+    'prefix': 'rest'
+    'body': 'ReactEventRe.Selection.t'
+
+  'ReactEventRe.Selection.t => unit':
+    'prefix': 'restu'
+    'body': 'ReactEventRe.Selection.t => unit'
+
+  'ReactEventRe.Touch.t':
+    'prefix': 'rett'
+    'body': 'ReactEventRe.Touch.t'
+
+  'ReactEventRe.Touch.t => unit':
+    'prefix': 'rettu'
+    'body': 'ReactEventRe.Touch.t => unit'
+
+  'make':
+    'prefix': 'm'
+    'body': """
+      let make = (~${1}, ${2:_}) => {
+        ...component,
+        render: (_) =>
+          ${0}
+      }
+    """
+
+  'make.reducer':
+    'prefix': 'mr'
+    'body': """
+      let make = (~${0}, _) => {
+        ...component,
+        initialState: () => {},
+        reducer: (action, state) =>
+          switch action {
+          | Action => ReasonReact.Update({...state, })
+          },
+        render: ({state, reduce}) =>
+
+      };
+    """
+
+  'JS.interface':
+    'prefix': 'jsi'
+    'body': """
+      /* JS interface */
+      type jsProps = {
+        .
+        ${1}
+      };
+
+      let default =
+        ReasonReact.wrapReasonForJs(
+          ~component,
+          (props: jsProps) =>
+            make(
+              ${0}
+            )
+        );
+    """
+
+  'children':
+    'prefix': 'ch'
+    'body': 'children'
+
+  'children.type':
+    'prefix': 'cht'
+    'body': 'children: array(ReasonReact.reactElement)'
+
+  'Js.boolean':
+    'prefix': 'jsb'
+    'body': 'Js.boolean'
+
+  'Js.null':
+    'prefix': 'jsn'
+    'body': 'Js.null(${0})'
+
+  'Js.nullable':
+    'prefix': 'jsnu'
+    'body': 'Js.nullable(${0})'
+
+  'Js.to_bool':
+    'prefix': 'jstob'
+    'body': 'Js.to_bool(${0})'
+
+  'Js.Boolean.to_js_boolean':
+    'prefix': 'jsbto'
+    'body': 'Js.Boolean.to_js_boolean(${0})'
+
+  'Js.Null.to_opt':
+    'prefix': 'jsnto'
+    'body': 'Js.Null.to_opt(${0})'
+
+  'Js.Null.from_opt':
+    'prefix': 'jsnfo'
+    'body': 'Js.Null.from_opt(${0})'
+
+  'Js.Nullable.to_opt':
+    'prefix': 'jsnuto'
+    'body': 'Js.Nullable.to_opt(${0})'
+
+  'Js.Nullable.from_opt':
+    'prefix': 'jsnufo'
+    'body': 'Js.Nullable.from_opt(${0})'
+
+  'ReasonReact.createDomElement':
+    'prefix': 'rrcde'
+    'body': 'ReasonReact.createDomElement("${1:element}", ~props={${0}}, children)'
+
+  'props':
+    'prefix': 'props'
+    'body': 'props##${0}'
+
+  'external.css':
+    'prefix': 'ecss'
+    'body': '[@bs.module] external css: Js.t({..}) = "./${0:Component}.styles.css";'
+
+  'css':
+    'prefix': 'css'
+    'body': 'css##${0}'
+
+  'className':
+    'prefix': 'cn'
+    'body': 'className'
+
+  'Css.cn':
+    'prefix': 'csscn'
+    'body': 'Css.cn([${0}])'
+
+  'Css.ifBool':
+    'prefix': 'cssifb'
+    'body': 'Css.ifBool(${1}, css##${0})'
+
+  'Css.ifOpt':
+    'prefix': 'cssifo'
+    'body': """
+      Css.ifOpt(
+        ${1:opt},
+        (${1:opt}) =>
+          switch ${1:opt} {
+          | ${2:Case} => css##${0}
+          }
+      )
+    """
+
+
 # ======= Go
 
 '.source.go':
