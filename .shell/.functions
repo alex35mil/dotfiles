@@ -8,6 +8,16 @@ function a() {
   fi
 }
 
+# `c` with no arguments opens the current directory in VS Code,
+# otherwise opens the given location
+function c() {
+  if [[ $# -eq 0 ]]; then
+    code .
+  else
+    code $@
+  fi
+}
+
 # `l` with no arguments lists contents of the current directory via `tree`,
 # otherwise lists contents of given directory
 function l() {

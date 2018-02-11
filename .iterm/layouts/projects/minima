@@ -3,8 +3,11 @@
 function run() {
   Minima.run('~/Dev/Projects/minima.pro/minima', {
     root:
-      'export GOPATH=$(pwd) PATH=$(pwd)/bin:$PATH; atom . ./src/client ./src/server',
-    servers: 'scripts/start',
+      'export GOPATH=$(pwd) PATH=$(pwd)/bin:$PATH; code .vscode/minima.code-workspace',
+    clientBs: 'scripts/start:client:bs',
+    clientWp: 'scripts/start:client:webpack',
+    server: 'scripts/start:server',
+    services: 'scripts/start:services',
   });
 }
 
@@ -19,14 +22,24 @@ const Minima = {
     const container = iTerm.createWindowWithDefaultProfile();
 
     const rootSession = container.currentSession;
-    const serversSession = rootSession.splitHorizontallyWithDefaultProfile();
+    const clientBsSession = rootSession.splitHorizontallyWithDefaultProfile();
+    const serverSession = clientBsSession.splitVerticallyWithDefaultProfile();
+    const servicesSession = serverSession.splitHorizontallyWithDefaultProfile();
+    const clientWpSession = clientBsSession.splitHorizontallyWithDefaultProfile();
 
     Utils.prepareSessions(path, [
       rootSession,
-      serversSession,
+      clientBsSession,
+      clientWpSession,
+      serverSession,
+      servicesSession,
     ]);
 
     rootSession.write({ text: cmd.root, newline: false });
-    serversSession.write({ text: cmd.servers, newline: false });
+    clientBsSession.write({ text: cmd.clientBs, newline: false });
+    clientWpSession.write({ text: cmd.clientWp, newline: false });
+    serverSession.write({ text: cmd.server, newline: false });
+    servicesSession.write({ text: cmd.services, newline: false });
+    servicesSession.select();
   },
 };

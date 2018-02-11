@@ -1,0 +1,74 @@
+{
+  "display: flex": {
+    "prefix": "df",
+    "body": "display: flex;"
+  },
+  "position: relative": {
+    "prefix": "pr",
+    "body": "position: relative;"
+  },
+  "position: absolute": {
+    "prefix": "pa",
+    "body": "position: absolute;"
+  },
+  "flex-flow: row-nowrap": {
+    "prefix": "ffrn",
+    "body": "flex-flow: row nowrap;"
+  },
+  "flex-flow: row-wrap": {
+    "prefix": "ffrw",
+    "body": "flex-flow: row wrap;"
+  },
+  "flex-flow: column-nowrap": {
+    "prefix": "ffcn",
+    "body": "flex-flow: column nowrap;"
+  },
+  "flex-flow: column-wrap": {
+    "prefix": "ffcw",
+    "body": "flex-flow: column wrap;"
+  },
+  "align-items: flex-start": {
+    "prefix": "aifs",
+    "body": "align-items: flex-start;"
+  },
+  "align-items: flex-end": {
+    "prefix": "aife",
+    "body": "align-items: flex-end;"
+  },
+  "align-items: center": {
+    "prefix": "aic",
+    "body": "align-items: center;"
+  },
+  "align-items: baseline": {
+    "prefix": "aib",
+    "body": "align-items: baseline;"
+  },
+  "align-items: stretch": {
+    "prefix": "ais",
+    "body": "align-items: stretch;"
+  },
+  "justify-content: flex-start": {
+    "prefix": "jcfs",
+    "body": "justify-content: flex-start;"
+  },
+  "justify-content: flex-end": {
+    "prefix": "jcfe",
+    "body": "justify-content: flex-end;"
+  },
+  "justify-content: center": {
+    "prefix": "jcc",
+    "body": "justify-content: center;"
+  },
+  "justify-content: space-around": {
+    "prefix": "jcsa",
+    "body": "justify-content: space-around;"
+  },
+  "justify-content: space-between": {
+    "prefix": "jcsb",
+    "body": "justify-content: space-between;"
+  },
+  "flex: 1": {
+    "prefix": "f1",
+    "body": "flex: 1;"
+  }
+}

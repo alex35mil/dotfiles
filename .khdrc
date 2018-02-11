@@ -1,33 +1,33 @@
 # Set space tiling mode
-ctrl + alt - a        ![iTerm2,Atom]   :   chunkc tiling::desktop --layout bsp
-ctrl + alt - s        ![iTerm2,Atom]   :   chunkc tiling::desktop --layout monocle
-ctrl + alt - d        ![iTerm2,Atom]   :   chunkc tiling::desktop --layout float
+ctrl + alt - a        ![iTerm2,Atom,Code]   :   chunkc tiling::desktop --layout bsp
+ctrl + alt - s        ![iTerm2,Atom,Code]   :   chunkc tiling::desktop --layout monocle
+ctrl + alt - d        ![iTerm2,Atom,Code]   :   chunkc tiling::desktop --layout float
 
 # Toggle float mode for window
-ctrl + alt - f        ![iTerm2,Atom]   :   chunkc tiling::window --toggle float
+ctrl + alt - f        ![iTerm2,Atom,Code]   :   chunkc tiling::window --toggle float
 
 # Give focus to screen
-ctrl + cmd - 1        ![iTerm2,Atom]   :   chunkc tiling::monitor -f 1
-ctrl + cmd - 2        ![iTerm2,Atom]   :   chunkc tiling::monitor -f 2
+ctrl + cmd - 1        ![iTerm2,Atom,Code]   :   chunkc tiling::monitor -f 1
+ctrl + cmd - 2        ![iTerm2,Atom,Code]   :   chunkc tiling::monitor -f 2
 
 # Move focused window to screen
-ctrl + alt - 1        ![iTerm2,Atom]   :   chunkc tiling::window --send-to-monitor 1; chunkc tiling::monitor -f 1
-ctrl + alt - 2        ![iTerm2,Atom]   :   chunkc tiling::window --send-to-monitor 2; chunkc tiling::monitor -f 2
+ctrl + alt - 1        ![iTerm2,Atom,Code]   :   chunkc tiling::window --send-to-monitor 1; chunkc tiling::monitor -f 1
+ctrl + alt - 2        ![iTerm2,Atom,Code]   :   chunkc tiling::window --send-to-monitor 2; chunkc tiling::monitor -f 2
 
 # Maximize / minimize window
-ctrl + cmd - return   ![iTerm2,Atom]   :   chunkc tiling::window --toggle fullscreen
+ctrl + cmd - return   ![iTerm2,Atom,Code]   :   chunkc tiling::window --toggle fullscreen
 
 # Give focus to window
-ctrl + cmd - left     ![iTerm2,Atom]   :   chunkc tiling::window --focus west
-ctrl + cmd - right    ![iTerm2,Atom]   :   chunkc tiling::window --focus east
-ctrl + cmd - up       ![iTerm2,Atom]   :   chunkc tiling::window --focus north
-ctrl + cmd - down     ![iTerm2,Atom]   :   chunkc tiling::window --focus south
+ctrl + cmd - left     ![iTerm2,Atom,Code]   :   chunkc tiling::window --focus west
+ctrl + cmd - right    ![iTerm2,Atom,Code]   :   chunkc tiling::window --focus east
+ctrl + cmd - up       ![iTerm2,Atom,Code]   :   chunkc tiling::window --focus north
+ctrl + cmd - down     ![iTerm2,Atom,Code]   :   chunkc tiling::window --focus south
 
 # Move focused window
-ctrl + alt - left     ![iTerm2,Atom]   :   chunkc tiling::window --warp west
-ctrl + alt - right    ![iTerm2,Atom]   :   chunkc tiling::window --warp east
-ctrl + alt - up       ![iTerm2,Atom]   :   chunkc tiling::window --warp north
-ctrl + alt - down     ![iTerm2,Atom]   :   chunkc tiling::window --warp south
+ctrl + alt - left     ![iTerm2,Atom,Code]   :   chunkc tiling::window --warp west
+ctrl + alt - right    ![iTerm2,Atom,Code]   :   chunkc tiling::window --warp east
+ctrl + alt - up       ![iTerm2,Atom,Code]   :   chunkc tiling::window --warp north
+ctrl + alt - down     ![iTerm2,Atom,Code]   :   chunkc tiling::window --warp south
 
 # Switch view mode in Bear
 cmd - 1                [Bear]          :   khd -p "ctrl - 1"
