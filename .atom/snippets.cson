@@ -35,23 +35,23 @@
 
   'ReasonReact.statelessComponent':
     'prefix': 'rrsc'
-    'body': 'let component = ReasonReact.statelessComponent("${0:Component}");'
+    'body': 'let component = "${0:Component}" |> ReasonReact.statelessComponent;'
 
   'ReasonReact.statelessComponentWithRetainedProps':
     'prefix': 'rrscwrp'
-    'body': 'let component = ReasonReact.statelessComponentWithRetainedProps("${0:Component}");'
+    'body': 'let component = "${0:Component}" |> ReasonReact.statelessComponentWithRetainedProps;'
 
   'ReasonReact.reducerComponent':
     'prefix': 'rrrc'
-    'body': 'let component = ReasonReact.reducerComponent("${0:Component}");'
+    'body': 'let component = "${0:Component}" |> ReasonReact.reducerComponent;'
 
   'ReasonReact.reducerComponentWithRetainedProps':
     'prefix': 'rrrcwrp'
-    'body': 'let component = ReasonReact.reducerComponentWithRetainedProps("${0:Component}");'
+    'body': 'let component = "${0:Component}" |> ReasonReact.reducerComponentWithRetainedProps;'
 
   'ReasonReact.stringToElement':
     'prefix': 'rrste'
-    'body': 'ReasonReact.stringToElement(${0})'
+    'body': 'ReasonReact.stringToElement'
 
   'ReasonReact.arrayToElement':
     'prefix': 'rrate'
@@ -71,7 +71,12 @@
 
   'ReasonReact.UpdateWithSideEffects':
     'prefix': 'rruwse'
-    'body': 'ReasonReact.UpdateWithSideEffects(state, ({${1}}) => {${0}})'
+    'body': """
+      ReasonReact.UpdateWithSideEffects(
+        {...state, ${1}},
+        ({${2}}) => {${0}}
+      )
+    """
 
   'ReasonReact.NoUpdate':
     'prefix': 'rrnu'
@@ -126,7 +131,7 @@
     'body': 'ReactEventRe.Touch.t => unit'
 
   'make':
-    'prefix': 'm'
+    'prefix': 'lm'
     'body': """
       let make = (~${1}, ${2:_}) => {
         ...component,
@@ -136,7 +141,7 @@
     """
 
   'make.reducer':
-    'prefix': 'mr'
+    'prefix': 'lmr'
     'body': """
       let make = (~${0}, _) => {
         ...component,
@@ -145,7 +150,7 @@
           switch action {
           | Action => ReasonReact.Update({...state, })
           },
-        render: ({state, reduce}) =>
+        render: ({state, send}) =>
 
       };
     """
@@ -181,37 +186,25 @@
     'prefix': 'jsb'
     'body': 'Js.boolean'
 
-  'Js.null':
-    'prefix': 'jsn'
-    'body': 'Js.null(${0})'
-
   'Js.nullable':
-    'prefix': 'jsnu'
+    'prefix': 'jsn'
     'body': 'Js.nullable(${0})'
 
   'Js.to_bool':
     'prefix': 'jstob'
-    'body': 'Js.to_bool(${0})'
+    'body': 'Js.to_bool'
 
   'Js.Boolean.to_js_boolean':
     'prefix': 'jsbto'
-    'body': 'Js.Boolean.to_js_boolean(${0})'
-
-  'Js.Null.to_opt':
-    'prefix': 'jsnto'
-    'body': 'Js.Null.to_opt(${0})'
-
-  'Js.Null.from_opt':
-    'prefix': 'jsnfo'
-    'body': 'Js.Null.from_opt(${0})'
+    'body': 'Js.Boolean.to_js_boolean'
 
   'Js.Nullable.to_opt':
-    'prefix': 'jsnuto'
-    'body': 'Js.Nullable.to_opt(${0})'
+    'prefix': 'jsnto'
+    'body': 'Js.Nullable.to_opt'
 
   'Js.Nullable.from_opt':
-    'prefix': 'jsnufo'
-    'body': 'Js.Nullable.from_opt(${0})'
+    'prefix': 'jsnfo'
+    'body': 'Js.Nullable.from_opt'
 
   'ReasonReact.createDomElement':
     'prefix': 'rrcde'
@@ -233,18 +226,18 @@
     'prefix': 'cn'
     'body': 'className'
 
-  'Css.cn':
-    'prefix': 'csscn'
-    'body': 'Css.cn([${0}])'
+  'Cn.make':
+    'prefix': 'cnm'
+    'body': 'Cn.make([${0}])'
 
-  'Css.ifBool':
-    'prefix': 'cssifb'
+  'Cn.ifBool':
+    'prefix': 'cnifb'
     'body': 'Css.ifBool(${1}, css##${0})'
 
-  'Css.ifOpt':
-    'prefix': 'cssifo'
+  'Cn.mapOpt':
+    'prefix': 'cnmo'
     'body': """
-      Css.ifOpt(
+      Css.mapOpt(
         ${1:opt},
         (${1:opt}) =>
           switch ${1:opt} {

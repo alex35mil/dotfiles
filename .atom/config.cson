@@ -12,7 +12,6 @@
     babelPluginModuleResolver: true
   "autocomplete-plus":
     backspaceTriggersAutocomplete: true
-    defaultProvider: "Fuzzy"
     enableAutoConfirmSingleSuggestion: false
     minimumWordLength: 2
     useLocalityBonus: false
@@ -235,7 +234,6 @@
       "change*"
       "substitute*"
     ]
-    notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
     useClipboardAsDefaultRegister: true
   welcome:
     showOnStartup: false

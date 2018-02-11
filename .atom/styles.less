@@ -12,8 +12,8 @@ atom-workspace {
   .tree-view {
     .project-root-header {
       span.name {
-        background-color: rgba(34, 153, 221, .7);
-        transition: background-color .1s ease-in;
+        background-color: rgba(34, 153, 221, 0.7);
+        transition: background-color 0.1s ease-in;
         padding: 5px 15px;
         font-family: Menlo;
         text-transform: uppercase;
@@ -29,7 +29,7 @@ atom-workspace {
     &::before {
       border-radius: 0;
       background-color: @panels-bg-color;
-      box-shadow: 0 0 70px rgba(0, 0, 0, .7);
+      box-shadow: 0 0 70px rgba(0, 0, 0, 0.7);
     }
 
     .tree-view-dialog label:first-child {
@@ -72,7 +72,6 @@ atom-workspace {
   }
 }
 
-
 @white: #e6e6bd;
 
 atom-text-editor,
@@ -97,7 +96,7 @@ atom-text-editor.editor {
 
   // Make selection visible
   .selection .region {
-    background-color: rgba(255, 255, 255, .15);
+    background-color: rgba(255, 255, 255, 0.15);
   }
 
   // Redefine some syntax colors
@@ -108,11 +107,35 @@ atom-text-editor.editor {
 }
 
 // Setup icons
-.icon[data-name$="package.json"]:before { font-family: "Devicons"; content: "\e681"; }
-.icon[data-name$=".js"]:before          { font-family: "Devicons"; content: "\e618"; }
-.icon[data-name$=".jsx"]:before         { font-family: "Devicons"; content: "\e618"; }
-.icon[data-name$=".spec.js"]:before     { font-family: "Octicons Regular"; content: "\f076"; }
-.icon[data-name$=".spec.jsx"]:before    { font-family: "Octicons Regular"; content: "\f076"; }
-.icon[data-name$=".css"]:before         { font-family: "Octicons Regular"; content: "\f0d1"; }
-.icon[data-name$=".scss"]:before        { font-family: "Octicons Regular"; content: "\f0d1"; }
-.icon[data-name$=".less"]:before        { font-family: "Octicons Regular"; content: "\f0d1"; }
+.icon[data-name$="package.json"]:before {
+  font-family: "Devicons";
+  content: "\e681";
+}
+.icon[data-name$=".js"]:before {
+  font-family: "Devicons";
+  content: "\e618";
+}
+.icon[data-name$=".jsx"]:before {
+  font-family: "Devicons";
+  content: "\e618";
+}
+.icon[data-name$=".spec.js"]:before {
+  font-family: "Octicons Regular";
+  content: "\f076";
+}
+.icon[data-name$=".spec.jsx"]:before {
+  font-family: "Octicons Regular";
+  content: "\f076";
+}
+.icon[data-name$=".css"]:before {
+  font-family: "Octicons Regular";
+  content: "\f0d1";
+}
+.icon[data-name$=".scss"]:before {
+  font-family: "Octicons Regular";
+  content: "\f0d1";
+}
+.icon[data-name$=".less"]:before {
+  font-family: "Octicons Regular";
+  content: "\f0d1";
+}
