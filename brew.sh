@@ -20,6 +20,7 @@ brew install \
   vim --with-lua --with-override-system-vi \
   curl \
   wget --with-iri \
+  coreutils \
   tree \
   pstree \
   node \
