@@ -7,16 +7,10 @@
 *.o
 *.so
 
-
-
-
 # ===== JetBrains #
 ###################
 *.iml
 .idea/
-
-
-
 
 # ===== Leiningen #
 ###################
@@ -33,9 +27,6 @@ pom.xml.asc
 .lein-failures
 .nrepl-port
 
-
-
-
 # ===== MacOS X #
 #################
 .DS_Store
@@ -43,7 +34,7 @@ pom.xml.asc
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
 
 # Thumbnails
 ._*
@@ -62,9 +53,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-
-
-
 
 # ===== Node #
 ##############
@@ -102,9 +90,6 @@ node_modules
 # Optional REPL history
 .node_repl_history
 
-
-
-
 # ===== Packages #
 ##################
 # it's better to unpack these files and commit the raw source
@@ -117,9 +102,6 @@ node_modules
 *.rar
 *.tar
 *.zip
-
-
-
 
 # ===== Rails #
 ###############
@@ -159,16 +141,10 @@ bower.json
 # Ignore pow environment settings
 .powenv
 
-
-
-
 # ===== Redis #
 ###############
 # Ignore redis binary dump (dump.rdb) files
 *.rdb
-
-
-
 
 # ===== Ruby #
 ##############
@@ -203,16 +179,10 @@ bower.json
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
-
-
-
 # ===== Sass #
 ##############
 .sass-cache/
 *.css.map
-
-
-
 
 # ===== Vim #
 #############
@@ -222,9 +192,6 @@ bower.json
 Session.vim
 .netrwhist
 *~
-
-
-
 
 # ===== Windows #
 #################
@@ -246,9 +213,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
-
-
 
 # ===== Xcode #
 ###############
