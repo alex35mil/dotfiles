@@ -64,12 +64,6 @@ function w() {
   fi
 }
 
-# Clears output w/o new line being added by PROMPT
-function x() {
-  export PROMPT_ADD_NEW_LINE="false"
-  clear
-}
-
 # Creates a new directory and enters it
 function mkd() {
   mkdir -p $@ && cd $_
