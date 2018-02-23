@@ -1,18 +1,17 @@
 #!/usr/bin/env osascript -l JavaScript
 
 function run() {
-  Minima.run('~/Dev/Projects/minima.pro/minima', {
+  Minima.run("~/Dev/Projects/minima.pro/minima", {
     root:
-      'export GOPATH=$(pwd) PATH=$(pwd)/bin:$PATH; code .vscode/minima.code-workspace',
-    clientBs: 'scripts/start:client:bs',
-    clientWp: 'scripts/start:client:webpack',
-    server: 'scripts/start:server',
-    services: 'scripts/start:services',
+      "export GOPATH=$(pwd) PATH=$(pwd)/bin:$PATH; atom . src/client src/server",
+    client: "scripts/start.client",
+    server: "scripts/start.server",
+    services: "scripts/start.services"
   });
 }
 
-const iTerm = Application('iTerm');
-const Utils = Library('utils');
+const iTerm = Application("iTerm");
+const Utils = Library("utils");
 
 iTerm.includeStandardAdditions = true;
 iTerm.activate();
@@ -22,24 +21,21 @@ const Minima = {
     const container = iTerm.createWindowWithDefaultProfile();
 
     const rootSession = container.currentSession;
-    const clientBsSession = rootSession.splitHorizontallyWithDefaultProfile();
-    const serverSession = clientBsSession.splitVerticallyWithDefaultProfile();
-    const servicesSession = serverSession.splitHorizontallyWithDefaultProfile();
-    const clientWpSession = clientBsSession.splitHorizontallyWithDefaultProfile();
+    const clientSession = rootSession.splitHorizontallyWithDefaultProfile();
+    const serverSession = clientSession.splitVerticallyWithDefaultProfile();
+    const servicesSession = serverSession.splitVerticallyWithDefaultProfile();
 
     Utils.prepareSessions(path, [
       rootSession,
-      clientBsSession,
-      clientWpSession,
+      clientSession,
       serverSession,
-      servicesSession,
+      servicesSession
     ]);
 
     rootSession.write({ text: cmd.root, newline: false });
-    clientBsSession.write({ text: cmd.clientBs, newline: false });
-    clientWpSession.write({ text: cmd.clientWp, newline: false });
+    clientSession.write({ text: cmd.client, newline: false });
     serverSession.write({ text: cmd.server, newline: false });
     servicesSession.write({ text: cmd.services, newline: false });
-    servicesSession.select();
-  },
+    rootSession.select();
+  }
 };

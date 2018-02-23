@@ -2,7 +2,7 @@
 
 function run() {
   Dotfiles.run('~/Dev/System/dotfiles', {
-    vim: 'vim',
+    vim: 'atom .',
     cli: 'git status',
   });
 }

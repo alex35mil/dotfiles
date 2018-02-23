@@ -1,7 +1,7 @@
 #!/usr/bin/env osascript -l JavaScript
 
 function run() {
-  const Lib = Library('lib');
+  const Lib = Library('lib-js');
 
   Lib.run('~/Dev/Libs/react-validation-layer', {
     root: 'git status',

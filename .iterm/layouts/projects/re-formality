@@ -1,0 +1,11 @@
+#!/usr/bin/env osascript -l JavaScript
+
+function run() {
+  const Lib = Library("lib-re");
+
+  Lib.run("~/Dev/Libs/re-formality", {
+    root: "atom .",
+    bs: "yarn run bs:watch",
+    wp: "yarn run wp:watch",
+  });
+}

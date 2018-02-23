@@ -4,8 +4,8 @@ function run() {
   const Shaka = Library('shaka');
 
   Shaka.run('~/Dev/Projects/shakacode.com/friendsandguests', {
-    root: 'code . ./client',
+    root: 'atom . ./client',
     client: 'cd client && git status',
-    server: 'script/docker/run:dev',
+    server: 'script/docker/up',
   });
 }

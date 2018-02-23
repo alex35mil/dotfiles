@@ -13,8 +13,8 @@ function run(path, cmd) {
 
   Utils.prepareSessions(path, [rootSession, buildSession, serverSession]);
 
-  rootSession.write({ text: cmd.root });
+  rootSession.write({ text: cmd.root, newline: false });
   buildSession.write({ text: cmd.build, newline: false });
-  serverSession.write({ text: cmd.server });
-  buildSession.select();
+  serverSession.write({ text: cmd.server, newline: false });
+  rootSession.select();
 }
