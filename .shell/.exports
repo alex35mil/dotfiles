@@ -25,6 +25,9 @@ fi
 export HISTSIZE=10000
 export SAVEHIST=10000
 
+# Node
+export NODE="/usr/local/opt/node@8"
+
 # Yarn
 export YARN_MODULES="$HOME/.config/yarn/global/node_modules"
 
@@ -38,4 +41,4 @@ export GOROOT="/usr/local/opt/go/libexec"
 export SWIFT="/Library/Developer/Toolchains/swift-latest.xctoolchain"
 
 # PATH
-export PATH="$GOROOT/bin:$RUBY_GEMS/bin:$YARN_MODULES/.bin:$SWIFT/usr/bin:$PATH"
+export PATH="$GOROOT/bin:$NODE/bin:$RUBY_GEMS/bin:$YARN_MODULES/.bin:$SWIFT/usr/bin:$PATH"
