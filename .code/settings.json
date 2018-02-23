@@ -18,6 +18,7 @@
   "editor.suggestSelection": "recentlyUsed",
   "editor.snippetSuggestions": "inline",
   "editor.acceptSuggestionOnEnter": "on",
+  "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.suggestOnTriggerCharacters": true,
   "editor.quickSuggestions": {
     "other": true,
@@ -94,9 +95,13 @@
   "extensions.autoUpdate": false,
   "simpleIcons.hideArrows": false,
   "vim.useSystemClipboard": true,
-  "reason.format.width": 100,
+  "reason.codelens.enabled": false,
+  "reason.diagnostics.tools": [
+    "bsb"
+  ],
   "go.formatTool": "goimports",
   "javascript.validate.enable": false,
+  "flow.enabled": false,
   "flow.useNPMPackagedFlow": true,
   "docker.showExplorer": false,
   "todohighlight.keywords": [
@@ -149,6 +154,7 @@
   ],
   "cSpell.userWords": [
     "signup",
+    "todos",
     "graphql",
     "styleguide",
     "unmount",
@@ -169,6 +175,11 @@
       ]
     }
   ],
+  "[reason]": {
+    "editor.rulers": [
+      80
+    ]
+  },
   "[markdown]": {
     "editor.formatOnSave": false,
     "editor.wordWrap": "on",

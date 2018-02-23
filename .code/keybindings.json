@@ -297,14 +297,12 @@
   {
     "key": "shift+cmd+f",
     "command": "editor.action.referenceSearch.trigger",
-    "when":
-      "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+    "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
   },
   {
     "key": "shift+f12",
     "command": "-editor.action.referenceSearch.trigger",
-    "when":
-      "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+    "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
   },
   {
     "key": "shift+cmd+f",
@@ -315,5 +313,30 @@
     "key": "shift+cmd+f",
     "command": "-workbench.action.findInFiles",
     "when": "!searchInputBoxFocus"
+  },
+  {
+    "key": "n",
+    "command": "explorer.newFile",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
+  },
+  {
+    "key": "ctrl+alt+w",
+    "command": "workbench.action.closeOtherEditors"
+  },
+  {
+    "key": "ctrl+cmd+w",
+    "command": "-workbench.action.toggleTabsVisibility"
+  },
+  {
+    "key": "alt+cmd+t",
+    "command": "-workbench.action.closeOtherEditors"
+  },
+  {
+    "key": "ctrl+alt+q",
+    "command": "workbench.action.closeEditorsInGroup"
+  },
+  {
+    "key": "cmd+k w",
+    "command": "-workbench.action.closeEditorsInGroup"
   }
 ]
