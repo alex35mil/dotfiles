@@ -48,7 +48,7 @@
   {
     type: "button"
     iconset: "ion"
-    icon: "ios-barcode-outline"
+    icon: "map"
     callback: "markdown-preview:toggle"
     style:
       'border-radius': 0
@@ -58,25 +58,6 @@
     iconset: "ion"
     icon: "merge"
     callback: "github:toggle-git-tab"
-    style:
-      'border-radius': 0
-  }
-  {
-    type: "spacer"
-  }
-  {
-    type: "button"
-    iconset: "devicon"
-    icon: "nodejs-plain"
-    callback: "set-syntax:Babel ES6 JavaScript"
-    style:
-      'border-radius': 0
-  }
-  {
-    type: "button"
-    iconset: "devicon"
-    icon: "react-original"
-    callback: "set-syntax:JavaScript (JSX)"
     style:
       'border-radius': 0
   }

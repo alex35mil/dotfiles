@@ -9,11 +9,14 @@
   'cmd-, i': 'settings-view:install-packages-and-themes'
 
 '.platform-darwin':
-  'ctrl-cmd-f': 'tree-view:toggle'
+  'ctrl-cmd-e': 'tree-view:toggle'
   'cmd-\\': 'tree-view:toggle-focus'
 
   'cmd-r': 'fuzzy-finder:toggle-buffer-finder'
   'cmd-t': 'fuzzy-finder:toggle-file-finder'
+
+  'cmd-f': 'find-and-replace:toggle'
+  'ctrl-cmd-f': 'project-find:toggle'
 
   'ctrl-cmd-/': 'diagnostics:toggle-table'
   'ctrl-cmd-.': 'golang:toggle-panel'
@@ -39,8 +42,6 @@
 '.platform-darwin .tree-view':
   'cmd-enter': 'tree-view:open-selected-entry-right'
   'cmd-shift-enter': 'tree-view:open-selected-entry-down'
-  's': 'tree-view:open-selected-entry-right'
-  'i': 'tree-view:open-selected-entry-down'
   'r': 'tree-view:rename'
   'd': 'tree-view:remove'
   'c': 'tree-view:duplicate'
@@ -90,8 +91,8 @@
   'cmd-d': 'editor:duplicate-lines'
   'shift-up': 'vim-mode-plus:scroll-half-screen-up'
   'shift-down': 'vim-mode-plus:scroll-half-screen-down'
-  'ctrl-up': 'editor:add-selection-above'
-  'ctrl-down': 'editor:add-selection-below'
+  'alt-up': 'editor:add-selection-above'
+  'alt-down': 'editor:add-selection-below'
   'shift-alt-up': 'editor:move-line-up'
   'shift-alt-down': 'editor:move-line-down'
 

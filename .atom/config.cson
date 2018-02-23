@@ -35,6 +35,7 @@
       "source.python": [
         "BUCK"
       ]
+    debugLSP: false
     disabledPackages: [
       "language-c"
       "language-clojure"
@@ -65,24 +66,22 @@
       "color-picker"
       "todo-show"
       "git-blame"
-      "git-plus"
       "highlight-selected"
     ]
     telemetryConsent: "limited"
     themes: [
-      "nucleus-dark-ui"
-      "base16-tomorrow-dark-theme"
+      "minima-ui"
+      "minima-syntax"
     ]
     titleBar: "hidden"
   "custom-title":
     template: "atom/<%= projectName %>"
   editor:
     fontFamily: "Hermit, Menlo"
-    fontSize: 18
+    fontSize: 17
     invisibles:
       eol: " "
       space: " "
-    preferredLineLength: 100
     showIndentGuide: true
     showInvisibles: true
   "exception-reporting":
@@ -95,13 +94,6 @@
   "git-blame":
     columnWidth: 350
     showOnlyLastNames: false
-  "git-diff": {}
-  "git-plus":
-    diffs:
-      syntaxHighlighting: false
-    general:
-      analytics: false
-      splitPane: "Right"
   "go-plus":
     disabledBundledPackages: [
       "go-debug"
@@ -133,57 +125,6 @@
     fileNames: [
       "index\\.|styles\\.s?css"
     ]
-  nuclide:
-    "atom-ide-code-format":
-      formatOnSave: true
-      formatOnType: false
-    "atom-ide-datatip":
-      datatipDebounceDelay: 400
-    "atom-ide-diagnostics-ui": {}
-    "nuclide-code-format": {}
-    "nuclide-diagnostics-ui": {}
-    "nuclide-flow":
-      canUseFlowBin: true
-      enablePushDiagnostics: true
-      enableStructuredTypeHints: true
-      flowAutocompleteResultsFirst: false
-      functionSnippetShouldIncludeArguments: false
-    "nuclide-health":
-      toolbarJewel: "None"
-    use:
-      "nuclide-adb-logcat": false
-      "nuclide-adb-sdb": false
-      "nuclide-arc-lint": false
-      "nuclide-arcanist": false
-      "nuclide-blame": false
-      "nuclide-blame-provider-hg": false
-      "nuclide-bookshelf": false
-      "nuclide-buck": false
-      "nuclide-buck-ios": false
-      "nuclide-clang": false
-      "nuclide-clipboard-path": false
-      "nuclide-console": false
-      "nuclide-debugger": false
-      "nuclide-debugger-native": false
-      "nuclide-debugger-php": false
-      "nuclide-device-panel": false
-      "nuclide-distraction-free-mode": false
-      "nuclide-file-tree": false
-      "nuclide-hack": false
-      "nuclide-health": false
-      "nuclide-hg-repository": false
-      "nuclide-home": false
-      "nuclide-http-request-sender": false
-      "nuclide-language-hack": false
-      "nuclide-objc": false
-      "nuclide-python": false
-      "nuclide-quick-open": false
-      "nuclide-remote-atom": false
-      "nuclide-remote-projects": false
-      "nuclide-settings": false
-      "nuclide-ssh-tunnel": false
-      "nuclide-vcs-log": false
-      "nuclide-working-sets": false
   "pg-formatter":
     editorOptions: {}
     pgFormatterOptions:
@@ -246,5 +187,12 @@
   editor:
     showInvisibles: false
 ".reason.source":
+  "bracket-matcher":
+    autocompleteCharacters: [
+      "()"
+      "[]"
+      "{}"
+      "\"\""
+    ]
   editor:
-    preferredLineLength: 110
+    preferredLineLength: 80
