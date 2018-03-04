@@ -4,8 +4,10 @@ apm install \
   --compatible \
   --production \
   advanced-open-file \
+  atom-ide-ui \
   autocomplete-modules \
   color-picker \
+  cursor-history \
   custom-title \
   file-icons \
   flex-tool-bar \
@@ -13,27 +15,30 @@ apm install \
   go-plus \
   go-signature-statusbar \
   highlight-selected \
+  ide-flowtype \
+  ide-reason \
   language-applescript \
   language-babel \
   language-docker \
   language-jade \
   language-nginx \
+  language-ocaml \
   language-pug \
+  language-reason \
   language-slim \
   language-swift \
   linter \
   linter-docker \
   linter-eslint \
-  linter-refmt \
   linter-scss-lint \
   linter-stylelint \
   maximize-panes \
+  minima-ui \
+  minima-syntax \
   nice-index \
-  nucleus-dark-ui \
-  nuclide \
   pg-formatter \
   prettier-atom \
-  relative-numbers \
+  reason-refmt \
   set-syntax \
   todo-show \
   tool-bar \
