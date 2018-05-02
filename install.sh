@@ -6,6 +6,7 @@ FILES="\
 
   .zshrc \
   .zsh_profile \
+  .zprofile \
 
   .shell \
   .profile \

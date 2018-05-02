@@ -34,6 +34,9 @@ export YARN_MODULES="$HOME/.config/yarn/global/node_modules"
 # Ruby
 export RUBY_GEMS="$HOME/.gem/ruby/2.0.0"
 
+# Rust
+export CARGO="$HOME/.cargo"
+
 # Go
 export GOROOT="/usr/local/opt/go/libexec"
 
@@ -41,4 +44,4 @@ export GOROOT="/usr/local/opt/go/libexec"
 export SWIFT="/Library/Developer/Toolchains/swift-latest.xctoolchain"
 
 # PATH
-export PATH="$GOROOT/bin:$NODE/bin:$RUBY_GEMS/bin:$YARN_MODULES/.bin:$SWIFT/usr/bin:$PATH"
+export PATH="$CARGO/bin:$GOROOT/bin:$NODE/bin:$RUBY_GEMS/bin:$YARN_MODULES/.bin:$SWIFT/usr/bin:$PATH"
