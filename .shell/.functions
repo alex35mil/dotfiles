@@ -80,12 +80,3 @@ function gen-ssh() {
   echo "" >> ~/.ssh/config
   vim ~/.ssh/config
 }
-
-# `ruby-up 2.0.0` will update ruby to v2.0.0 using rvm
-function ruby-up() {
-  rvm get stable && \
-  rvm install ruby-$@ --disable-binary && \
-  rvm --default use $@ && \
-  gem install bundler && \
-  gem install foreman
-}

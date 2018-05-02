@@ -6,7 +6,6 @@ BASH_SOURCES+=~/.shell/.bash/.completions # Shell completions
 BASH_SOURCES+=~/.shell/.bash/.prompts     # Shell prompts
 BASH_SOURCES+=~/.shell/.aliases           # Shell aliases
 BASH_SOURCES+=~/.shell/.functions         # Shell functions
-BASH_SOURCES+=~/.rvm/scripts/rvm          # RVM
 BASH_SOURCES+=~/.nvm/nvm.sh               # NVM
 
 for file in ${BASH_SOURCES[@]}

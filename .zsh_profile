@@ -6,7 +6,6 @@ ZSH_SOURCES+=~/.shell/.zsh/.completions       # Shell completions
 ZSH_SOURCES+=~/.shell/.zsh/.prompts           # Shell prompts
 ZSH_SOURCES+=~/.shell/.aliases                # Shell aliases
 ZSH_SOURCES+=~/.shell/.functions              # Shell functions
-ZSH_SOURCES+=~/.rvm/scripts/rvm               # RVM
 ZSH_SOURCES+=~/.nvm/nvm.sh                    # NVM
 ZSH_SOURCES+=~/.iterm2_shell_integration.zsh  # iTerm
 

@@ -1,5 +1,5 @@
 # .dotfiles
-Bash, Zsh, iTerm, Atom, Vim, Git, OSX, Brew, npm, rvm etc.
+Bash, Zsh, iTerm, Atom, Vim, Git, OSX, Brew, npm etc.
 
 ![Console](./screens/console.png?raw=true)
 

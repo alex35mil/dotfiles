@@ -257,30 +257,8 @@ alias no="npm outdated"
 alias nlg="npm ls -g --depth=0"
 
 
-# ===== Rails
-alias rs="rails server "
-alias rc="rails console "
-
-alias ri="bundle install "
-
-alias rr="rake routes"
-alias rdbm="rake db:migrate"
-alias rdbr="rake db:reset"
-
-
 # ===== Ruby
-alias rl="rvm list"
-alias rlk="rvm list known"
-
-alias gems="gem list"
-alias gemi="gem install "
-alias gemu="gem uninstall "
-
-alias rgl="rvm gemset list"
-alias rgc="rvm gemset create "
-alias rgd="rvm gemset delete "
-alias rge="rvm gemset empty "
-
+alias rr="rbenv rehash"
 
 # ===== Vim
 alias v="vim "
