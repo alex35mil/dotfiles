@@ -8,8 +8,8 @@ function run(path, cmd) {
   const container = iTerm.createWindowWithDefaultProfile();
 
   const rootSession = container.currentSession;
-  const serverSession = rootSession.splitVerticallyWithDefaultProfile();
-  const clientSession = rootSession.splitHorizontallyWithDefaultProfile();
+  const serverSession = rootSession.splitHorizontallyWithDefaultProfile();
+  const clientSession = rootSession.splitVerticallyWithDefaultProfile();
 
   Utils.prepareSessions(path, [rootSession, clientSession, serverSession]);
 

@@ -8,13 +8,11 @@ function run(path, cmd) {
   const container = iTerm.createWindowWithDefaultProfile();
 
   const rootSession = container.currentSession;
-  const bsSession = rootSession.splitHorizontallyWithDefaultProfile();
-  const wpSession = bsSession.splitVerticallyWithDefaultProfile();
+  const watcherSession = rootSession.splitHorizontallyWithDefaultProfile();
 
-  Utils.prepareSessions(path, [rootSession, bsSession, wpSession]);
+  Utils.prepareSessions(path, [rootSession, watcherSession]);
 
   rootSession.write({ text: cmd.root, newline: false });
-  bsSession.write({ text: cmd.bs, newline: false });
-  wpSession.write({ text: cmd.wp, newline: false });
+  watcherSession.write({ text: cmd.watcher, newline: false });
   rootSession.select();
 }

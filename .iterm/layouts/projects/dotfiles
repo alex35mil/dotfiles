@@ -2,7 +2,7 @@
 
 function run() {
   Dotfiles.run('~/Dev/System/dotfiles', {
-    vim: 'atom .',
+    editor: 'atom .',
     cli: 'git status',
   });
 }
@@ -17,12 +17,12 @@ const Dotfiles = {
   run(path, cmd) {
     const container = iTerm.createWindowWithDefaultProfile();
 
-    const vimSession = container.currentSession;
-    const cliSession = vimSession.splitHorizontallyWithDefaultProfile();
+    const editorSession = container.currentSession;
+    const cliSession = editorSession.splitHorizontallyWithDefaultProfile();
 
-    Utils.prepareSessions(path, [vimSession, cliSession]);
+    Utils.prepareSessions(path, [editorSession, cliSession]);
 
-    vimSession.write({ text: cmd.vim, newline: false });
+    editorSession.write({ text: cmd.editor, newline: false });
     cliSession.write({ text: cmd.cli });
   },
 };

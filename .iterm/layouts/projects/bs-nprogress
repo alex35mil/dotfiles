@@ -3,7 +3,7 @@
 function run() {
   const Lib = Library("lib-re");
 
-  Lib.run("~/Dev/Libs/re-formality", {
+  Lib.run("~/Dev/Libs/bs-nprogress", {
     root: "atom .",
     watcher: "yarn start",
   });

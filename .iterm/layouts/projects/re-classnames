@@ -5,7 +5,6 @@ function run() {
 
   Lib.run("~/Dev/Libs/re-classnames", {
     root: "atom .",
-    bs: "yarn run bs:watch",
-    wp: "yarn run wp:watch",
+    watcher: "yarn start",
   });
 }
