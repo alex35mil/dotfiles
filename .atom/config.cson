@@ -7,8 +7,10 @@
     "atom-ide-code-format":
       formatOnSave: true
       formatOnType: false
-    "atom-ide-diagnostics-ui": {}
+    "atom-ide-diagnostics-ui":
+      showDiagnosticTraces: true
     hyperclick: {}
+    use: {}
   "autocomplete-modules":
     babelPluginModuleResolver: true
   "autocomplete-plus":
@@ -49,6 +51,7 @@
       "language-python"
       "language-xml"
       "linter"
+      "ide-typescript"
     ]
     ignoredNames: [
       ".git"
@@ -96,6 +99,8 @@
     columnWidth: 350
     showOnlyLastNames: false
   "go-plus":
+    config:
+      compileOnSave: false
     disabledBundledPackages: [
       "go-debug"
       "linter"
@@ -112,6 +117,8 @@
         "--json"
         "."
       ]
+    panel:
+      displayMode: "closed"
   "highlight-selected": {}
   "ide-flowtype":
     autoDownloadFlowBinaries: false
@@ -123,6 +130,10 @@
       ]
     format: {}
     path: {}
+  "ide-rust":
+    checkForToolchainUpdates: false
+  "ide-typescript":
+    javascriptSupport: false
   linter: {}
   "linter-eslint": {}
   "linter-scss-lint":
@@ -185,6 +196,7 @@
       "change*"
       "substitute*"
     ]
+    groupChangesWhenLeavingInsertMode: false
     useClipboardAsDefaultRegister: true
   welcome:
     showOnStartup: false
@@ -206,3 +218,6 @@
     ]
   editor:
     preferredLineLength: 80
+".rust.source":
+  editor:
+    tabLength: 2

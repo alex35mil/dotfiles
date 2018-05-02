@@ -17,6 +17,7 @@ apm install \
   highlight-selected \
   ide-flowtype \
   ide-reason \
+  ide-rust \
   language-applescript \
   language-babel \
   language-docker \
@@ -25,6 +26,7 @@ apm install \
   language-ocaml \
   language-pug \
   language-reason \
+  language-rust \
   language-slim \
   language-swift \
   linter \

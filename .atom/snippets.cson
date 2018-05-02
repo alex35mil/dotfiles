@@ -35,31 +35,23 @@
 
   'ReasonReact.statelessComponent':
     'prefix': 'rrsc'
-    'body': 'let component = "${0:Component}" |> ReasonReact.statelessComponent;'
-
-  'ReasonReact.statelessComponentWithRetainedProps':
-    'prefix': 'rrscwrp'
-    'body': 'let component = "${0:Component}" |> ReasonReact.statelessComponentWithRetainedProps;'
+    'body': 'let component = ReasonReact.statelessComponent(${0:__MODULE__});'
 
   'ReasonReact.reducerComponent':
     'prefix': 'rrrc'
-    'body': 'let component = "${0:Component}" |> ReasonReact.reducerComponent;'
+    'body': 'let component = ReasonReact.reducerComponent(${0:__MODULE__});'
 
-  'ReasonReact.reducerComponentWithRetainedProps':
-    'prefix': 'rrrcwrp'
-    'body': 'let component = "${0:Component}" |> ReasonReact.reducerComponentWithRetainedProps;'
+  'ReasonReact.string':
+    'prefix': 'rrs'
+    'body': 'ReasonReact.string'
 
-  'ReasonReact.stringToElement':
-    'prefix': 'rrste'
-    'body': 'ReasonReact.stringToElement'
+  'ReasonReact.array':
+    'prefix': 'rra'
+    'body': 'ReasonReact.array'
 
-  'ReasonReact.arrayToElement':
-    'prefix': 'rrate'
-    'body': 'ReasonReact.arrayToElement'
-
-  'ReasonReact.nullElement':
-    'prefix': 'rrne'
-    'body': 'ReasonReact.nullElement'
+  'ReasonReact.null':
+    'prefix': 'rrn'
+    'body': 'ReasonReact.null'
 
   'ReasonReact.Update':
     'prefix': 'rru'
@@ -182,29 +174,17 @@
     'prefix': 'cht'
     'body': 'children: array(ReasonReact.reactElement)'
 
-  'Js.boolean':
-    'prefix': 'jsb'
-    'body': 'Js.boolean'
-
   'Js.nullable':
     'prefix': 'jsn'
     'body': 'Js.nullable(${0})'
 
-  'Js.to_bool':
-    'prefix': 'jstob'
-    'body': 'Js.to_bool'
-
-  'Js.Boolean.to_js_boolean':
-    'prefix': 'jsbto'
-    'body': 'Js.Boolean.to_js_boolean'
-
-  'Js.Nullable.to_opt':
+  'Js.Nullable.toOption':
     'prefix': 'jsnto'
-    'body': 'Js.Nullable.to_opt'
+    'body': 'Js.Nullable.toOption'
 
-  'Js.Nullable.from_opt':
+  'Js.Nullable.fromOption':
     'prefix': 'jsnfo'
-    'body': 'Js.Nullable.from_opt'
+    'body': 'Js.Nullable.fromOption'
 
   'ReasonReact.createDomElement':
     'prefix': 'rrcde'
@@ -244,6 +224,17 @@
           | ${2:Case} => css##${0}
           }
       )
+    """
+
+
+# ======= Rust
+
+'.source.rust':
+  'debug_sql':
+    'prefix': 'dsql'
+    'body': """
+      use diesel::{self, pg::Pg};
+      println!("{}", diesel::debug_query::<Pg, _>(&${0:result}));
     """
 
 
