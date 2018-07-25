@@ -1,0 +1,10 @@
+#!/usr/bin/env osascript -l JavaScript
+
+function run() {
+  const Lib = Library("lib-re");
+
+  Lib.run("~/Dev/Libs/re-dnd", {
+    root: "atom .",
+    watcher: "yarn start",
+  });
+}

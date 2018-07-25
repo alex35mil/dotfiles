@@ -2,11 +2,9 @@
 
 function run() {
   Minima.run("~/Dev/Projects/minima.pro/minima", {
-    root:
-      "export GOPATH=$(pwd) PATH=$(pwd)/bin:$PATH; atom . src/client src/server",
-    client: "scripts/start.client",
-    server: "scripts/start.server",
-    services: "scripts/start.services"
+    root: "atom client server specs .",
+    servers: "scripts/up",
+    specs: "cd specs",
   });
 }
 
@@ -21,21 +19,18 @@ const Minima = {
     const container = iTerm.createWindowWithDefaultProfile();
 
     const rootSession = container.currentSession;
-    const clientSession = rootSession.splitHorizontallyWithDefaultProfile();
-    const serverSession = clientSession.splitVerticallyWithDefaultProfile();
-    const servicesSession = serverSession.splitVerticallyWithDefaultProfile();
+    const serversSession = rootSession.splitHorizontallyWithDefaultProfile();
+    const specsSession = serversSession.splitVerticallyWithDefaultProfile();
 
     Utils.prepareSessions(path, [
       rootSession,
-      clientSession,
-      serverSession,
-      servicesSession
+      serversSession,
+      specsSession,
     ]);
 
     rootSession.write({ text: cmd.root, newline: false });
-    clientSession.write({ text: cmd.client, newline: false });
-    serverSession.write({ text: cmd.server, newline: false });
-    servicesSession.write({ text: cmd.services, newline: false });
+    serversSession.write({ text: cmd.servers, newline: false });
+    specsSession.write({ text: cmd.specs, newline: true });
     rootSession.select();
   }
 };
