@@ -10,7 +10,23 @@
     "atom-ide-diagnostics-ui":
       showDiagnosticTraces: true
     hyperclick: {}
-    use: {}
+    use:
+      "atom-ide-busy-signal": "default"
+      "atom-ide-code-actions": "default"
+      "atom-ide-code-format": "default"
+      "atom-ide-code-highlight": "default"
+      "atom-ide-console": "default"
+      "atom-ide-datatip": "default"
+      "atom-ide-debugger": "default"
+      "atom-ide-definitions": "default"
+      "atom-ide-diagnostics": "default"
+      "atom-ide-diagnostics-ui": "default"
+      "atom-ide-find-references": "default"
+      "atom-ide-global": "default"
+      "atom-ide-outline-view": "default"
+      "atom-ide-signature-help": "default"
+      "atom-ide-terminal": "default"
+      hyperclick: "default"
   "autocomplete-modules":
     babelPluginModuleResolver: true
   "autocomplete-plus":
@@ -122,6 +138,7 @@
   "highlight-selected": {}
   "ide-flowtype":
     autoDownloadFlowBinaries: false
+    flowAutocompleteResultsFirst: false
     tryFlowBin: true
   "ide-reason":
     diagnostics:
@@ -132,6 +149,9 @@
     path: {}
   "ide-rust":
     checkForToolchainUpdates: false
+    rlsDefaultConfig:
+      allTargets: "On"
+      clippyPreference: "On"
   "ide-typescript":
     javascriptSupport: false
   linter: {}

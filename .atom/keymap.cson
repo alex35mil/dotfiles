@@ -9,6 +9,8 @@
   'cmd-, i': 'settings-view:install-packages-and-themes'
 
 '.platform-darwin':
+  'cmd-shift-r': 'unset!'
+
   'ctrl-cmd-e': 'tree-view:toggle'
   'cmd-\\': 'tree-view:toggle-focus'
 
@@ -105,6 +107,12 @@
 '.advanced-open-file atom-text-editor':
   'cmd-enter': 'pane:split-right'
   'cmd-shift-enter': 'pane:split-down'
+
+'atom-text-editor[data-grammar~="reason"]:not([mini])':
+  'cmd-shift-r': 'ide-reason:restart-all-servers'
+
+'atom-text-editor[data-grammar~="rust"]:not([mini])':
+  'cmd-shift-r': 'ide-rust:restart-all-language-servers'
 
 'atom-text-editor[data-grammar~="go"]:not([mini])':
   'alt-u': 'golang:find-usage'

@@ -17,6 +17,10 @@
     'prefix': 'o'
     'body': 'option'
 
+  '|.':
+    'prefix': '.'
+    'body': '|. ${0}'
+
   '|>':
     'prefix': '>'
     'body': '|> ${0}'
@@ -205,6 +209,18 @@
   'className':
     'prefix': 'cn'
     'body': 'className'
+
+  'div.className.css':
+    'prefix': 'dcncss'
+    'body': """
+      <div className=css##${1}>
+        ${0}
+      </div>
+    """
+
+  'className.css':
+    'prefix': 'cncss'
+    'body': 'className=css##${0}'
 
   'Cn.make':
     'prefix': 'cnm'
