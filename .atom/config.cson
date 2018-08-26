@@ -141,17 +141,17 @@
     flowAutocompleteResultsFirst: false
     tryFlowBin: true
   "ide-reason":
-    diagnostics:
-      tools: [
-        "bsb"
-      ]
-    format: {}
-    path: {}
+    ols:
+      diagnostics: {}
+      format: {}
+    rls: {}
+    server: {}
   "ide-rust":
     checkForToolchainUpdates: false
     rlsDefaultConfig:
       allTargets: "On"
       clippyPreference: "On"
+    rlsToolchain: "nightly-2018-08-19"
   "ide-typescript":
     javascriptSupport: false
   linter: {}

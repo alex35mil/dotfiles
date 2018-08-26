@@ -40,7 +40,6 @@ apm install \
   nice-index \
   pg-formatter \
   prettier-atom \
-  reason-refmt \
   set-syntax \
   todo-show \
   tool-bar \

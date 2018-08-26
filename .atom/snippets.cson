@@ -17,12 +17,12 @@
     'prefix': 'o'
     'body': 'option'
 
-  '|.':
-    'prefix': '.'
-    'body': '|. ${0}'
+  '->':
+    'prefix': '>'
+    'body': '->${0}'
 
   '|>':
-    'prefix': '>'
+    'prefix': '>>'
     'body': '|> ${0}'
 
   'Js.t {.}':
@@ -33,98 +33,98 @@
     'prefix': 'jsot'
     'body': '{.. ${0}}'
 
-  'ReasonReact':
-    'prefix': 'rr'
-    'body': 'ReasonReact'
+  'React':
+    'prefix': 'r'
+    'body': 'React'
 
-  'ReasonReact.statelessComponent':
-    'prefix': 'rrsc'
-    'body': 'let component = ReasonReact.statelessComponent(${0:__MODULE__});'
+  'React.statelessComponent':
+    'prefix': 'rsc'
+    'body': 'let component = React.statelessComponent(${0:__MODULE__});'
 
-  'ReasonReact.reducerComponent':
-    'prefix': 'rrrc'
-    'body': 'let component = ReasonReact.reducerComponent(${0:__MODULE__});'
+  'React.reducerComponent':
+    'prefix': 'rrc'
+    'body': 'let component = React.reducerComponent(${0:__MODULE__});'
 
-  'ReasonReact.string':
-    'prefix': 'rrs'
-    'body': 'ReasonReact.string'
+  'React.string':
+    'prefix': 'rs'
+    'body': 'React.string'
 
-  'ReasonReact.array':
-    'prefix': 'rra'
-    'body': 'ReasonReact.array'
+  'React.array':
+    'prefix': 'ra'
+    'body': 'React.array'
 
-  'ReasonReact.null':
-    'prefix': 'rrn'
-    'body': 'ReasonReact.null'
+  'React.null':
+    'prefix': 'rn'
+    'body': 'React.null'
 
-  'ReasonReact.Update':
-    'prefix': 'rru'
-    'body': 'ReasonReact.Update({...state, ${0}})'
+  'React.Update':
+    'prefix': 'ru'
+    'body': 'React.Update({...state, ${0}})'
 
-  'ReasonReact.SideEffects':
-    'prefix': 'rrse'
-    'body': 'ReasonReact.SideEffects(({${1}}) => {${0}})'
+  'React.SideEffects':
+    'prefix': 'rse'
+    'body': 'React.SideEffects(({${1}}) => {${0}})'
 
-  'ReasonReact.UpdateWithSideEffects':
-    'prefix': 'rruwse'
+  'React.UpdateWithSideEffects':
+    'prefix': 'ruwse'
     'body': """
-      ReasonReact.UpdateWithSideEffects(
+      React.UpdateWithSideEffects(
         {...state, ${1}},
         ({${2}}) => {${0}}
       )
     """
 
-  'ReasonReact.NoUpdate':
-    'prefix': 'rrnu'
-    'body': 'ReasonReact.NoUpdate'
+  'React.NoUpdate':
+    'prefix': 'rnu'
+    'body': 'React.NoUpdate'
 
-  'ReactEventRe.Mouse.t':
+  'ReactEvent.Mouse.t':
     'prefix': 'remt'
-    'body': 'ReactEventRe.Mouse.t'
+    'body': 'ReactEvent.Mouse.t'
 
-  'ReactEventRe.Mouse.t => unit':
+  'ReactEvent.Mouse.t => unit':
     'prefix': 'remtu'
-    'body': 'ReactEventRe.Mouse.t => unit'
+    'body': 'ReactEvent.Mouse.t => unit'
 
-  'ReactEventRe.Keyboard.t':
+  'ReactEvent.Keyboard.t':
     'prefix': 'rekt'
-    'body': 'ReactEventRe.Keyboard.t'
+    'body': 'ReactEvent.Keyboard.t'
 
-  'ReactEventRe.Keyboard.t => unit':
+  'ReactEvent.Keyboard.t => unit':
     'prefix': 'rektu'
-    'body': 'ReactEventRe.Keyboard.t => unit'
+    'body': 'ReactEvent.Keyboard.t => unit'
 
-  'ReactEventRe.Form.t':
+  'ReactEvent.Form.t':
     'prefix': 'reformt'
-    'body': 'ReactEventRe.Form.t'
+    'body': 'ReactEvent.Form.t'
 
-  'ReactEventRe.Form.t => unit':
+  'ReactEvent.Form.t => unit':
     'prefix': 'reformtu'
-    'body': 'ReactEventRe.Form.t => unit'
+    'body': 'ReactEvent.Form.t => unit'
 
-  'ReactEventRe.Focus.t':
+  'ReactEvent.Focus.t':
     'prefix': 'refocust'
-    'body': 'ReactEventRe.Focus.t'
+    'body': 'ReactEvent.Focus.t'
 
-  'ReactEventRe.Focus.t => unit':
+  'ReactEvent.Focus.t => unit':
     'prefix': 'refocustu'
-    'body': 'ReactEventRe.Focus.t => unit'
+    'body': 'ReactEvent.Focus.t => unit'
 
-  'ReactEventRe.Selection.t':
+  'ReactEvent.Selection.t':
     'prefix': 'rest'
-    'body': 'ReactEventRe.Selection.t'
+    'body': 'ReactEvent.Selection.t'
 
-  'ReactEventRe.Selection.t => unit':
+  'ReactEvent.Selection.t => unit':
     'prefix': 'restu'
-    'body': 'ReactEventRe.Selection.t => unit'
+    'body': 'ReactEvent.Selection.t => unit'
 
-  'ReactEventRe.Touch.t':
+  'ReactEvent.Touch.t':
     'prefix': 'rett'
-    'body': 'ReactEventRe.Touch.t'
+    'body': 'ReactEvent.Touch.t'
 
-  'ReactEventRe.Touch.t => unit':
+  'ReactEvent.Touch.t => unit':
     'prefix': 'rettu'
-    'body': 'ReactEventRe.Touch.t => unit'
+    'body': 'ReactEvent.Touch.t => unit'
 
   'make':
     'prefix': 'lm'
@@ -144,7 +144,7 @@
         initialState: () => {},
         reducer: (action, state) =>
           switch action {
-          | Action => ReasonReact.Update({...state, })
+          | Action => React.Update({...state, })
           },
         render: ({state, send}) =>
 
@@ -161,7 +161,7 @@
       };
 
       let default =
-        ReasonReact.wrapReasonForJs(
+        React.wrapReasonForJs(
           ~component,
           (props: jsProps) =>
             make(
@@ -176,7 +176,7 @@
 
   'children.type':
     'prefix': 'cht'
-    'body': 'children: array(ReasonReact.reactElement)'
+    'body': 'children: array(React.reactElement)'
 
   'Js.nullable':
     'prefix': 'jsn'
@@ -189,10 +189,6 @@
   'Js.Nullable.fromOption':
     'prefix': 'jsnfo'
     'body': 'Js.Nullable.fromOption'
-
-  'ReasonReact.createDomElement':
-    'prefix': 'rrcde'
-    'body': 'ReasonReact.createDomElement("${1:element}", ~props={${0}}, children)'
 
   'props':
     'prefix': 'props'
@@ -226,14 +222,14 @@
     'prefix': 'cnm'
     'body': 'Cn.make([${0}])'
 
-  'Cn.ifBool':
-    'prefix': 'cnifb'
-    'body': 'Css.ifBool(${1}, css##${0})'
+  'Cn.ifTrue':
+    'prefix': 'cnift'
+    'body': 'css##${1} |> Css.ifTrue(${0})'
 
-  'Cn.mapOpt':
-    'prefix': 'cnmo'
+  'Cn.mapSome':
+    'prefix': 'cnms'
     'body': """
-      Css.mapOpt(
+      Css.mapSome(
         ${1:opt},
         (${1:opt}) =>
           switch ${1:opt} {
