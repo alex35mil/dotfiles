@@ -1,7 +1,5 @@
 # Load plugins
-chunkc plugin_dir /usr/local/opt/chunkwm/share/chunkwm/plugins
 chunkc core::plugin_dir /usr/local/opt/chunkwm/share/chunkwm/plugins
-
 chunkc core::load tiling.so
 
 # Set default tiling mode (bsp | monocle | float)
@@ -30,7 +28,7 @@ chunkc set window_focus_cycle monitor
 chunkc set mouse_follows_focus 1
 
 # Set windows rules
-chunkc tiling::rule --owner \"System Preferences\" --state tile
-chunkc tiling::rule --owner Finder --name Copy --state float
-chunkc tiling::rule --owner iBooks --state float
-chunkc tiling::rule --owner TogglDesktop --state float
+chunkc tiling::rule --owner \"System Preferences\" --state tile &
+chunkc tiling::rule --owner Finder --name Copy --state float &
+chunkc tiling::rule --owner iBooks --state float &
+chunkc tiling::rule --owner TogglDesktop --state float &
