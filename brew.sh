@@ -23,6 +23,8 @@ brew install \
   coreutils \
   tree \
   pstree \
+  mkcert \
+  nss \
   node \
   yarn \
   go \
