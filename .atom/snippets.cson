@@ -17,6 +17,14 @@
     'prefix': 'o'
     'body': 'option'
 
+  'j':
+    'prefix': 'j'
+    'body': '{j|${0}|j}'
+
+  '[||]':
+    'prefix': '['
+    'body': '[| ${0} |'
+
   '->':
     'prefix': '>'
     'body': '->${0}'
@@ -200,7 +208,11 @@
 
   'css':
     'prefix': 'css'
-    'body': 'css##${0}'
+    'body': 'Css'
+
+  'module Css':
+    'prefix': 'mcss'
+    'body': 'module Css = ${0};'
 
   'className':
     'prefix': 'cn'
@@ -209,14 +221,14 @@
   'div.className.css':
     'prefix': 'dcncss'
     'body': """
-      <div className=css##${1}>
+      <div className=Css${1}>
         ${0}
       </div>
     """
 
   'className.css':
     'prefix': 'cncss'
-    'body': 'className=css##${0}'
+    'body': 'className=Css${0}'
 
   'Cn.make':
     'prefix': 'cnm'
