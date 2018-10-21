@@ -151,7 +151,7 @@
     rlsDefaultConfig:
       allTargets: "On"
       clippyPreference: "On"
-    rlsToolchain: "nightly-2018-08-19"
+    rlsToolchain: "stable"
   "ide-typescript":
     javascriptSupport: false
   linter: {}
