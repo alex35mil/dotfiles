@@ -1,3 +1,6 @@
+# Set locale
+export LANG=en_US.UTF-8
+
 # Set vim as the default editor
 export EDITOR="vim"
 export VISUAL=$EDITOR
