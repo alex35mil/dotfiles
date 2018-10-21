@@ -25,6 +25,8 @@ brew install \
   pstree \
   mkcert \
   nss \
+  ocaml \
+  opam \
   node \
   yarn \
   go \

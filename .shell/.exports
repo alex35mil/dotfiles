@@ -25,6 +25,10 @@ fi
 export HISTSIZE=10000
 export SAVEHIST=10000
 
+# Ocaml
+source $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+eval "$(opam config env)"
+
 # Ruby
 eval "$(rbenv init -)"
 

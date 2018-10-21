@@ -228,6 +228,16 @@
 ".go.source":
   editor:
     showInvisibles: false
+".ocaml.source":
+  "bracket-matcher":
+    autocompleteCharacters: [
+      "()"
+      "[]"
+      "{}"
+      "\"\""
+    ]
+  editor:
+    preferredLineLength: 80
 ".reason.source":
   "bracket-matcher":
     autocompleteCharacters: [

@@ -111,6 +111,9 @@
 'atom-text-editor[data-grammar~="reason"]:not([mini])':
   'cmd-shift-r': 'ide-reason:restart-all-servers'
 
+'atom-text-editor[data-grammar~="ocaml"]:not([mini])':
+  'cmd-shift-r': 'ide-reason:restart-all-servers'
+
 'atom-text-editor[data-grammar~="rust"]:not([mini])':
   'cmd-shift-r': 'ide-rust:restart-all-language-servers'
 

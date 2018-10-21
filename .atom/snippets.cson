@@ -239,6 +239,22 @@
     """
 
 
+# ======= OCaml
+
+'.source.ocaml':
+  'open Css':
+    'prefix': 'ocss'
+    'body': """
+      open Css
+
+      ${0}
+    """
+
+  'j':
+    'prefix': 'j'
+    'body': '{j|${0}|j}'
+
+
 # ======= Rust
 
 '.source.rust':
