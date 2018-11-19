@@ -262,6 +262,23 @@
       ${0}
     """
 
+  'css':
+    'prefix': 'css'
+    'body': """
+      let ${1:className} = [%css [
+        ${0}
+      ]]
+    """
+
+  'css.match':
+    'prefix': 'cssm'
+    'body': """
+      let ${1:className} ${2:arg} = [%css (
+        match ${2:arg} with
+        ${0}
+      )]
+    """
+
   'j':
     'prefix': 'j'
     'body': '{j|${0}|j}'

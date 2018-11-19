@@ -97,8 +97,8 @@
   "custom-title":
     template: "atom/<%= projectName %>"
   editor:
-    fontFamily: "Hermit, Menlo"
-    fontSize: 17
+    fontFamily: "\"Ubuntu Mono\", Menlo"
+    fontSize: 20
     invisibles:
       eol: " "
       space: " "
