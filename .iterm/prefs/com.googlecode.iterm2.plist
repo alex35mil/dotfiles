@@ -524,13 +524,13 @@
 		</array>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>910 220 510 94 0 0 1680 1050 </string>
+	<string>910 103 510 77 0 0 1680 1027 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>530 494 620 392 0 0 1680 1050 </string>
+	<string>530 476 620 392 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>884 138 796 473 0 0 1680 1050 </string>
+	<string>581 464 918 423 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 4 800 653 0 0 1680 1050 </string>
+	<string>0 0 800 653 0 0 1680 1050 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1085,7 +1085,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Hermit-medium 14</string>
+			<string>UbuntuMono-Regular 18</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prevent Opening in a Tab</key>
@@ -1099,7 +1099,7 @@
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
-			<integer>1000</integer>
+			<integer>0</integer>
 			<key>Selected Text Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -1150,11 +1150,13 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Thin Strokes</key>
-			<integer>0</integer>
+			<integer>1</integer>
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Triggers</key>
 			<array/>
+			<key>Unicode Version</key>
+			<integer>9</integer>
 			<key>Unlimited Scrollback</key>
 			<true/>
 			<key>Use Bold Font</key>
@@ -1168,7 +1170,7 @@
 			<key>Use Non-ASCII Font</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>1</real>
+			<real>1.4034320877259037</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -1177,6 +1179,8 @@
 			<string>/Users/Alex</string>
 		</dict>
 	</array>
+	<key>NoSyncHaveRequestedFullDiskAccess</key>
+	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
@@ -1247,7 +1251,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-02-10T19:32:32Z</date>
+	<date>2018-12-31T09:21:31Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1283,7 +1287,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.5</string>
+	<string>3.2.6</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

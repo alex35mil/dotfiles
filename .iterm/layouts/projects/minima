@@ -2,10 +2,10 @@
 
 function run() {
   Minima.run("~/Dev/Projects/minima/minima", {
-    root: "atom .",
+    root: "BS_LOG=* atom .",
     core: "cd core",
     web: "cd web",
-    log: "scripts/up",
+    log: "m up",
   });
 }
 
