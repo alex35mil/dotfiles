@@ -13,33 +13,77 @@
     'prefix': 'f'
     'body': 'float'
 
+  'bool':
+    'prefix': 'b'
+    'body': 'bool'
+
   'option':
     'prefix': 'o'
-    'body': 'option'
+    'body': 'option($0)'
 
   'j':
     'prefix': 'j'
-    'body': '{j|${0}|j}'
+    'body': '{j|$0|j}'
 
   '[||]':
     'prefix': '['
-    'body': '[| ${0} |'
+    'body': '[| $0 |'
 
   '->':
     'prefix': '>'
-    'body': '->${0}'
+    'body': '->$0'
 
   '|>':
     'prefix': '>>'
-    'body': '|> ${0}'
+    'body': '|> $0'
+
+  'Option.getExn':
+    'prefix': 'oge'
+    'body': 'Option.getExn'
+
+  'Option.getWithDefault':
+    'prefix': 'ogwd'
+    'body': 'Option.getWithDefault($0)'
+
+  'Option.map':
+    'prefix': 'om'
+    'body': 'Option.map($0)'
+
+  'Option.mapWithDefault':
+    'prefix': 'omwd'
+    'body': 'Option.mapWithDefault($0)'
+
+  'Option.flatMap':
+    'prefix': 'ofm'
+    'body': 'Option.flatMap($0)'
+
+  'Map.get':
+    'prefix': 'mg'
+    'body': 'Map.get($0)'
+
+  'Map.getExn':
+    'prefix': 'mge'
+    'body': 'Map.getExn($0)'
 
   'Js.t {.}':
     'prefix': 'jst'
-    'body': '{. ${0}}'
+    'body': '{. $0}'
 
   'Js.t {..}':
     'prefix': 'jsot'
-    'body': '{.. ${0}}'
+    'body': '{.. $0}'
+
+  'Js.nullable':
+    'prefix': 'jsn'
+    'body': 'Js.nullable($0)'
+
+  'Js.Nullable.toOption':
+    'prefix': 'jsnto'
+    'body': 'Js.Nullable.toOption'
+
+  'Js.Nullable.fromOption':
+    'prefix': 'jsnfo'
+    'body': 'Js.Nullable.fromOption'
 
   'React':
     'prefix': 'r'
@@ -47,11 +91,11 @@
 
   'React.statelessComponent':
     'prefix': 'rsc'
-    'body': 'let component = React.statelessComponent(${0:__MODULE__});'
+    'body': 'let component = React.statelessComponent(__MODULE__);'
 
   'React.reducerComponent':
     'prefix': 'rrc'
-    'body': 'let component = React.reducerComponent(${0:__MODULE__});'
+    'body': 'let component = React.reducerComponent(__MODULE__);'
 
   'React.string':
     'prefix': 'rs'
@@ -67,18 +111,22 @@
 
   'React.Update':
     'prefix': 'ru'
-    'body': 'React.Update({...state, ${0}})'
+    'body': 'React.Update'
+
+  'React.Update({...state})':
+    'prefix': 'rus'
+    'body': 'React.Update({...state, $0})'
 
   'React.SideEffects':
     'prefix': 'rse'
-    'body': 'React.SideEffects(({${1}}) => {${0}})'
+    'body': 'React.SideEffects(({$1}) => {$0})'
 
   'React.UpdateWithSideEffects':
     'prefix': 'ruwse'
     'body': """
       React.UpdateWithSideEffects(
-        {...state, ${1}},
-        ({${2}}) => {${0}}
+        {...state, $1},
+        ({$2}) => $0
       )
     """
 
@@ -86,68 +134,28 @@
     'prefix': 'rnu'
     'body': 'React.NoUpdate'
 
-  'ReactEvent.Mouse.t':
-    'prefix': 'remt'
-    'body': 'ReactEvent.Mouse.t'
+  'ReactEvent':
+    'prefix': 're'
+    'body': 'ReactEvent'
 
-  'ReactEvent.Mouse.t => unit':
-    'prefix': 'remtu'
-    'body': 'ReactEvent.Mouse.t => unit'
-
-  'ReactEvent.Keyboard.t':
-    'prefix': 'rekt'
-    'body': 'ReactEvent.Keyboard.t'
-
-  'ReactEvent.Keyboard.t => unit':
-    'prefix': 'rektu'
-    'body': 'ReactEvent.Keyboard.t => unit'
-
-  'ReactEvent.Form.t':
-    'prefix': 'reformt'
-    'body': 'ReactEvent.Form.t'
-
-  'ReactEvent.Form.t => unit':
-    'prefix': 'reformtu'
-    'body': 'ReactEvent.Form.t => unit'
-
-  'ReactEvent.Focus.t':
-    'prefix': 'refocust'
-    'body': 'ReactEvent.Focus.t'
-
-  'ReactEvent.Focus.t => unit':
-    'prefix': 'refocustu'
-    'body': 'ReactEvent.Focus.t => unit'
-
-  'ReactEvent.Selection.t':
-    'prefix': 'rest'
-    'body': 'ReactEvent.Selection.t'
-
-  'ReactEvent.Selection.t => unit':
-    'prefix': 'restu'
-    'body': 'ReactEvent.Selection.t => unit'
-
-  'ReactEvent.Touch.t':
-    'prefix': 'rett'
-    'body': 'ReactEvent.Touch.t'
-
-  'ReactEvent.Touch.t => unit':
-    'prefix': 'rettu'
-    'body': 'ReactEvent.Touch.t => unit'
+  'ReactEvent.Form.target##value':
+    'prefix': 'reftv'
+    'body': 'ReactEvent.Form.target##value'
 
   'make':
     'prefix': 'lm'
     'body': """
-      let make = (~${1}, ${2:_}) => {
+      let make = (${1:_}) => {
         ...component,
-        render: (_) =>
-          ${0}
-      }
+        render: _ =>
+          $0
+      };
     """
 
   'make.reducer':
     'prefix': 'lmr'
     'body': """
-      let make = (~${0}, _) => {
+      let make = (~$0, _) => {
         ...component,
         initialState: () => {},
         reducer: (action, state) =>
@@ -165,16 +173,13 @@
       /* JS interface */
       type jsProps = {
         .
-        ${1}
+        $1
       };
 
       let default =
         React.wrapReasonForJs(
           ~component,
-          (props: jsProps) =>
-            make(
-              ${0}
-            )
+          (props: jsProps) => make($0)
         );
     """
 
@@ -182,29 +187,9 @@
     'prefix': 'ch'
     'body': 'children'
 
-  'children.type':
-    'prefix': 'cht'
-    'body': 'children: array(React.reactElement)'
-
-  'Js.nullable':
-    'prefix': 'jsn'
-    'body': 'Js.nullable(${0})'
-
-  'Js.Nullable.toOption':
-    'prefix': 'jsnto'
-    'body': 'Js.Nullable.toOption'
-
-  'Js.Nullable.fromOption':
-    'prefix': 'jsnfo'
-    'body': 'Js.Nullable.fromOption'
-
-  'props':
-    'prefix': 'props'
-    'body': 'props##${0}'
-
   'external.css':
     'prefix': 'ecss'
-    'body': '[@bs.module] external css: Js.t({..}) = "./${0:Component}.styles.css";'
+    'body': '[@bs.module] external css: Js.t({..}) = "./${0:Component}.scss";'
 
   'css':
     'prefix': 'css'
@@ -212,31 +197,31 @@
 
   'module Css':
     'prefix': 'mcss'
-    'body': 'module Css = ${0};'
+    'body': 'module Css = $0;'
 
   'className':
     'prefix': 'cn'
     'body': 'className'
 
+  'className.css':
+    'prefix': 'cncss'
+    'body': 'className=Css$0'
+
   'div.className.css':
     'prefix': 'dcncss'
     'body': """
-      <div className=Css${1}>
-        ${0}
+      <div className=Css$1>
+        $0
       </div>
     """
 
-  'className.css':
-    'prefix': 'cncss'
-    'body': 'className=Css${0}'
-
   'Cn.make':
     'prefix': 'cnm'
-    'body': 'Cn.make([${0}])'
+    'body': 'Cn.make([$0])'
 
   'Cn.ifTrue':
     'prefix': 'cnift'
-    'body': 'css##${1} |> Css.ifTrue(${0})'
+    'body': 'Css$1->Cn.ifTrue($0)'
 
   'Cn.mapSome':
     'prefix': 'cnms'
@@ -245,10 +230,30 @@
         ${1:opt},
         (${1:opt}) =>
           switch ${1:opt} {
-          | ${2:Case} => css##${0}
+          | ${2:Case} => Css$0
           }
       )
     """
+
+  '[@log]':
+    'prefix': 'l'
+    'body': '[@log]'
+
+  '[%log.debug]':
+    'prefix': 'ld'
+    'body': '[%log.debug "$0"];'
+
+  '[%log.info]':
+    'prefix': 'li'
+    'body': '[%log.info "$0"];'
+
+  '[%log.warn]':
+    'prefix': 'lw'
+    'body': '[%log.warn "$0"];'
+
+  '[%log.error]':
+    'prefix': 'le'
+    'body': '[%log.error "$0"];'
 
 
 # ======= OCaml
@@ -393,6 +398,10 @@
   'typeof':
     'prefix': 'to'
     'body': 'typeof '
+
+  '${}':
+    'prefix': '{'
+    'body': '${$0'
 
   'Flow':
     'prefix': 'f'
@@ -540,30 +549,6 @@
   'import.react':
     'prefix': 'ir'
     'body': 'import * as React from \'react\';'
-
-  'import.immutable':
-    'prefix': 'ii'
-    'body': 'import { ${0} } from \'immutable\';'
-
-  'import.immutable.Record':
-    'prefix': 'iir'
-    'body': 'import { Record, type RecordOf, type RecordFactory } from \'immutable\';'
-
-  'import.immutable.Map':
-    'prefix': 'iim'
-    'body': 'import { Map } from \'immutable\';'
-
-  'import.immutable.List':
-    'prefix': 'iil'
-    'body': 'import { List } from \'immutable\';'
-
-  'import.immutable.Set':
-    'prefix': 'iis'
-    'body': 'import { Set } from \'immutable\';'
-
-  'import.immutable.OrderedSet':
-    'prefix': 'iios'
-    'body': 'import { OrderedSet } from \'immutable\';'
 
   'import.lodash':
     'prefix': 'il'
@@ -779,97 +764,6 @@
       };
     """
 
-  'React.Component':
-    'prefix': 'rc'
-    'body': """
-      /* @flow */
-
-      import * as React from 'react';
-
-      type Props = {|
-
-      |};
-
-      export default class ${1:Component} extends React.Component<Props> {
-        render = () => (
-          // jsx...
-        );
-      }
-    """
-
-  'React.Component.withState':
-    'prefix': 'rcs'
-    'body': """
-      /* @flow */
-
-      import * as React from 'react';
-
-      type Props = {|
-
-      |};
-
-      type State = {|
-
-      |};
-
-      export default class ${1:Component} extends React.Component<Props, State> {
-        state = {};
-
-        render = () => (
-          ${0}
-        );
-      }
-    """
-
-  'React.SFC':
-    'prefix': 'rsfc'
-    'body': """
-      /* @flow */
-
-      import * as React from 'react';
-
-      type Props = {|
-
-      |};
-
-      const ${1:Component} = ({}: Props) => (
-        ${0}
-      );
-
-      export default ${1:Component};
-    """
-
-  'React.HOC':
-    'prefix': 'rhoc'
-    'body': """
-      /* @flow */
-
-      import * as React from 'react';
-
-      type Props = {|
-
-      |};
-
-      type State = {|
-
-      |};
-
-      type ChildProps = {
-        ...Props,
-        ...State,
-        ...Handlers,
-      };
-
-      const ${1:withHOC} = (${2:Child}: React.ComponentType<ChildProps>) =>
-        class extends React.Component<Props> {
-          render = () => (
-            <${2:Child} />
-          );
-        };
-
-      export default ${1:withHOC};
-    """
-
   'React.children':
     'prefix': 'ch'
     'body': 'children'
@@ -902,191 +796,6 @@
     'prefix': 'och'
     'body': 'onChange={${0}}'
 
-  'interaction':
-    'prefix': 'int'
-    'body': """
-      /* @flow */
-
-      import type { ActionHandler } from 'app/types/redux';
-      import type { LeafState } from '../state';
-
-      ${0:// ins / inas / inr ...}
-    """
-
-  'interaction.sync':
-    'prefix': 'ints'
-    'body': """
-      // --- ${1:Feature}
-
-      const ${2:STATE_UPDATE}: '${2:STATE_UPDATE}' = '${2:STATE_UPDATE}';
-
-      // Action creator
-      type Action = {|
-        type: typeof ${2:STATE_UPDATE},
-      |};
-
-      export const updateState = (): Action => ({
-        type: ${2:STATE_UPDATE},
-      });
-
-
-      // Action handler
-      type OnStateUpdate = {
-        [typeof ${2:STATE_UPDATE}]: ActionHandler<LeafState, Action>,
-      };
-
-      export const onStateUpdate: OnStateUpdate = {
-        [${2:STATE_UPDATE}]:
-          (state) =>
-            state,
-      };
-    """
-
-  'interaction.async':
-    'prefix': 'intas'
-    'body': """
-      // --- ${1:Async Feature}
-
-      const ${2:ASYNC_STATE_UPDATE}: '${2:ASYNC_STATE_UPDATE}' = '${2:ASYNC_STATE_UPDATE}';
-
-      // Action creator
-      type Action = {|
-        type: typeof ${2:ASYNC_STATE_UPDATE},
-      |};
-
-      const updateStateAsyncAction = (): Action => ({
-        type: ${2:ASYNC_STATE_UPDATE},
-      });
-
-      export const updateStateAsync = (): Thunk => (dispatch, getState) => {
-        // do stuff...
-        dispatch(updateStateAsyncAction());
-      };
-
-
-      // Action handler
-      type OnAsyncStateUpdate = {
-        [typeof ${2:ASYNC_STATE_UPDATE}]: ActionHandler<LeafState, Action>,
-      };
-
-      export const onAsyncStateUpdate: OnAsyncStateUpdate = {
-        [${2:ASYNC_STATE_UPDATE}]:
-          (state) =>
-            state,
-      };
-    """
-
-  'interaction.remote':
-    'prefix': 'intr'
-    'body': """
-      const REQUESTED: 'REQUESTED' = 'REQUESTED';
-      const SUCCEEDED: 'SUCCEEDED' = 'SUCCEEDED';
-      const FAILED: 'FAILED' = 'FAILED';
-
-      // --- Request
-
-      // Action creator
-      type RequestAction = {|
-        type: typeof REQUESTED,
-      |};
-
-      const requestAction = (): RequestAction => ({
-        type: REQUESTED,
-      });
-
-      // Action handler
-      type OnRequest = {
-        [typeof REQUESTED]: ActionHandler<LeafState, RequestAction>,
-      };
-
-      const onRequest: OnRequest = {
-        [UPDATE_REQUESTED]:
-          (state) =>
-            state.set('isProcessing', true),
-      };
-
-
-      // --- Success
-
-      // Action creator
-      type SuccessAction = {|
-        type: typeof SUCCEEDED,
-      |};
-
-      const successAction = (
-        // ...args
-      ): SuccessAction => ({
-        type: SUCCEEDED,
-        // ...args
-      });
-
-      // Action handler
-      type OnSuccess = {
-        [typeof SUCCEEDED]: ActionHandler<LeafState, SuccessAction>,
-      };
-
-      const onSuccess: OnSuccess = {
-        [SUCCEEDED]:
-          (state) =>
-            state,
-      };
-
-
-      // --- Failure
-
-      // Action creator
-      type FailureAction = {
-        type: typeof FAILED,
-        error: ResponseError,
-      };
-
-      const failureAction = (error: ResponseError): FailureAction => ({
-        type: FAILED,
-        error,
-      });
-
-      // Action handler
-      type OnFailure = {
-        [type: typeof FAILED]: ActionHandler<LeafState, FailureAction>,
-      };
-
-      const onFailure: OnFailure = {
-        [FAILED]:
-          (state) =>
-            state,
-      };
-
-
-      // --- Exports
-
-      // Thunk
-      export const updateServerState = (): Thunk => (dispatch, getState) => {
-        // Perform local checks...
-
-        dispatch(requestAction());
-
-        const nextServerData = formStateSelector(state);
-
-        api
-          .patch({ url, data })
-          .then(
-            // success
-            () => dispatch(successAction()),
-
-            // failure
-            (error: ResponseError) => dispatch(withApiErrorMiddleware(failureAction(error))),
-          )
-        ;
-      };
-
-      // Action handlers
-      export const onServerStateUpdate = {
-        ...onRequest,
-        ...onSuccess,
-        ...onFailure,
-      };
-    """
-
   'Eslint.disable':
     'prefix': 'esld'
     'body': '/* eslint-disable ${1:rule} */'
@@ -1103,110 +812,6 @@
     'prefix': 'esldnl'
     'body': '// eslint-disable-next-line ${1:rule}'
 
-  'PropTypes.shape':
-    'prefix': 'ptsh'
-    'body': """
-      PropTypes.shape({
-        ${1:property}: ${0}
-      }),
-    """
-
-  'PropTypes.shape.isRequired':
-    'prefix': 'ptshr'
-    'body': """
-      PropTypes.shape({
-        ${1:property}: pt${0}
-      }).isRequired,
-    """
-
-  'PropTypes.bool':
-    'prefix': 'ptb'
-    'body': 'PropTypes.bool,'
-
-  'PropTypes.bool.isRequired':
-    'prefix': 'ptbr'
-    'body': 'PropTypes.bool.isRequired,'
-
-  'PropTypes.string':
-    'prefix': 'pts'
-    'body': 'PropTypes.string,'
-
-  'PropTypes.string.isRequired':
-    'prefix': 'ptsr'
-    'body': 'PropTypes.string.isRequired,'
-
-  'PropTypes.number':
-    'prefix': 'ptn'
-    'body': 'PropTypes.number,'
-
-  'PropTypes.number.isRequired':
-    'prefix': 'ptnr'
-    'body': 'PropTypes.number.isRequired,'
-
-  'PropTypes.array':
-    'prefix': 'pta'
-    'body': 'PropTypes.array,'
-
-  'PropTypes.array.isRequired':
-    'prefix': 'ptar'
-    'body': 'PropTypes.array.isRequired,'
-
-  'PropTypes.object':
-    'prefix': 'pto'
-    'body': 'PropTypes.object,'
-
-  'PropTypes.object.isRequired':
-    'prefix': 'ptor'
-    'body': 'PropTypes.object.isRequired,'
-
-  'PropTypes.func':
-    'prefix': 'ptf'
-    'body': 'PropTypes.func,'
-
-  'PropTypes.func.isRequired':
-    'prefix': 'ptfr'
-    'body': 'PropTypes.func.isRequired,'
-
-  'PropTypes.instanceOf':
-    'prefix': 'pti'
-    'body': 'PropTypes.instanceOf(${0}),'
-
-  'PropTypes.instanceOf.isRequired':
-    'prefix': 'ptir'
-    'body': 'PropTypes.instanceOf(${0}).isRequired,'
-
-  'PropTypes.oneOf':
-    'prefix': 'ptoo'
-    'body': 'PropTypes.oneOf([${0}]),'
-
-  'PropTypes.oneOf.isRequired':
-    'prefix': 'ptoor'
-    'body': 'PropTypes.oneOf([${0}]).isRequired,'
-
-  'PropTypes.oneOfType':
-    'prefix': 'ptoot'
-    'body': 'PropTypes.oneOfType([pt${0}]),'
-
-  'PropTypes.oneOfType.isRequired':
-    'prefix': 'ptootr'
-    'body': 'PropTypes.oneOfType([pt${0}]).isRequired,'
-
-  'PropTypes.arrayOf':
-    'prefix': 'ptao'
-    'body': 'PropTypes.arrayOf(pt${0}),'
-
-  'PropTypes.arrayOf.isRequired':
-    'prefix': 'ptaor'
-    'body': 'PropTypes.arrayOf(pt${0}).isRequired,'
-
-  'PropTypes.any':
-    'prefix': 'ptany'
-    'body': 'PropTypes.any,'
-
-  'PropTypes.any.isRequired':
-    'prefix': 'ptanyr'
-    'body': 'PropTypes.any.isRequired,'
-
   'JSDoc':
     'prefix': '@@'
     'body': """
@@ -1216,81 +821,17 @@
        */
     """
 
-  'Flex':
-    'prefix': 'fx'
-    'body': """
-      <Flex ${1}>
-        ${0}
-      </Flex>
-    """
-
-  'Flex.flow.row-wrap':
-    'prefix': 'ffrw'
-    'body': 'flow="row-wrap"'
-
-  'Flex.flow.row-nowrap':
-    'prefix': 'ffrnw'
-    'body': 'flow="row-nowrap"'
-
-  'Flex.flow.column-wrap':
-    'prefix': 'ffcw'
-    'body': 'flow="column-wrap"'
-
-  'Flex.flow.column-nowrap':
-    'prefix': 'ffcnw'
-    'body': 'flow="column-nowrap"'
-
-  'Flex.alignItems.flex-start':
-    'prefix': 'aifs'
-    'body': 'alignItems="flex-start"'
-
-  'Flex.alignItems.flex-end':
-    'prefix': 'aife'
-    'body': 'alignItems="flex-end"'
-
-  'Flex.alignItems.center':
-    'prefix': 'aic'
-    'body': 'alignItems="center"'
-
-  'Flex.alignItems.baseline':
-    'prefix': 'aib'
-    'body': 'alignItems="baseline"'
-
-  'Flex.alignItems.stretch':
-    'prefix': 'ais'
-    'body': 'alignItems="stretch"'
-
-  'Flex.justifyContent.flex-start':
-    'prefix': 'jcfs'
-    'body': 'justifyContent="flex-start"'
-
-  'Flex.justifyContent.flex-end':
-    'prefix': 'jcfe'
-    'body': 'justifyContent="flex-end"'
-
-  'Flex.justifyContent.center':
-    'prefix': 'jcc'
-    'body': 'justifyContent="center"'
-
-  'Flex.justifyContent.space-between':
-    'prefix': 'jcsb'
-    'body': 'justifyContent="space-between"'
-
-  'Flex.justifyContent.space-around':
-    'prefix': 'jcsa'
-    'body': 'justifyContent="space-around"'
-
-  'Flex.justifyContent.space-evenly':
-    'prefix': 'jcse'
-    'body': 'justifyContent="space-evenly"'
-
 
 # ======= CSS
 
-'.source.css, .source.sass':
+'.source.js, .source.css, .source.sass':
   'display.flex':
     'prefix': 'df'
     'body': 'display: flex;'
+
+  'display.grid':
+    'prefix': 'dg'
+    'body': 'display: grid;'
 
   'position.relative':
     'prefix': 'pr'
@@ -1359,3 +900,47 @@
   'flex.1':
     'prefix': 'f1'
     'body': 'flex: 1;'
+
+  'grid-auto-flow: row':
+    'prefix': 'gafr'
+    'body': 'grid-auto-flow: row;'
+
+  'grid-auto-flow: column':
+    'prefix': 'gafc'
+    'body': 'grid-auto-flow: column;'
+
+  'grid-template-rows':
+    'prefix': 'gtr'
+    'body': 'grid-template-rows: $0;'
+
+  'grid-template-columns':
+    'prefix': 'gtc'
+    'body': 'grid-template-columns: $0;'
+
+  'grid-row-gap':
+    'prefix': 'grg'
+    'body': 'grid-row-gap: $0;'
+
+  'grid-column-gap':
+    'prefix': 'gcg'
+    'body': 'grid-column-gap: $0;'
+
+  'grid-template-areas':
+    'prefix': 'gta'
+    'body': 'grid-template-areas: $0;'
+
+  'grid-area':
+    'prefix': 'ga'
+    'body': 'grid-area: $0;'
+
+  'minmax':
+    'prefix': 'mm'
+    'body': 'minmax($0);'
+
+  'min-content':
+    'prefix': 'mnc'
+    'body': 'min-content'
+
+  'max-content':
+    'prefix': 'mxc'
+    'body': 'max-content'

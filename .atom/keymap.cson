@@ -21,7 +21,6 @@
   'ctrl-cmd-f': 'project-find:toggle'
 
   'ctrl-cmd-/': 'diagnostics:toggle-table'
-  'ctrl-cmd-.': 'golang:toggle-panel'
 
   'ctrl-cmd-b': 'git-blame:toggle'
 

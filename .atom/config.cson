@@ -54,7 +54,7 @@
       "source.python": [
         "BUCK"
       ]
-    debugLSP: false
+    debugLSP: true
     disabledPackages: [
       "language-c"
       "language-clojure"
@@ -87,7 +87,9 @@
       "todo-show"
       "git-blame"
       "highlight-selected"
+      "autoclose-html"
     ]
+    packagesWithSnippetsDisabled: []
     telemetryConsent: "limited"
     themes: [
       "minima-ui"
@@ -98,7 +100,7 @@
     template: "atom/<%= projectName %>"
   editor:
     fontFamily: "\"Ubuntu Mono\", Menlo"
-    fontSize: 20
+    fontSize: 21
     invisibles:
       eol: " "
       space: " "
@@ -141,10 +143,12 @@
     flowAutocompleteResultsFirst: false
     tryFlowBin: true
   "ide-reason":
+    autocompleteResultsFirst: false
     ols:
       diagnostics: {}
       format: {}
-    rls: {}
+    rls:
+      autoRebuild: false
     server: {}
   "ide-rust":
     checkForToolchainUpdates: false
@@ -173,9 +177,10 @@
       spaces: 2
   "prettier-atom":
     formatOnSaveOptions:
-      enabled: true
       isDisabledIfNoConfigFile: true
       isDisabledIfNotInPackageJson: true
+      respectEslintignore: false
+      showInStatusBar: true
     prettierEslintOptions: {}
     prettierOptions:
       trailingComma: "all"
