@@ -76,7 +76,7 @@
     "command": "-workbench.action.toggleSidebarVisibility"
   },
   {
-    "key": "ctrl+cmd+/",
+    "key": "ctrl+cmd+e",
     "command": "workbench.files.action.focusFilesExplorer"
   },
   {
@@ -84,7 +84,7 @@
     "command": "-workbench.view.explorer"
   },
   {
-    "key": "ctrl+cmd+\\",
+    "key": "\\",
     "command": "workbench.files.action.showActiveFileInExplorer",
     "when": "editorFocus"
   },
@@ -195,10 +195,6 @@
     "command": "-workbench.action.focusPreviousGroup"
   },
   {
-    "key": "ctrl+cmd+e",
-    "command": "workbench.action.focusActiveEditorGroup"
-  },
-  {
     "key": "cmd+d",
     "command": "editor.action.copyLinesDownAction",
     "when": "editorTextFocus && !editorReadonly"
@@ -285,16 +281,6 @@
     "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
   },
   {
-    "key": "shift+cmd+r",
-    "command": "editor.action.changeAll",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "cmd+f2",
-    "command": "-editor.action.changeAll",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
     "key": "shift+cmd+f",
     "command": "editor.action.referenceSearch.trigger",
     "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
@@ -338,5 +324,23 @@
   {
     "key": "cmd+k w",
     "command": "-workbench.action.closeEditorsInGroup"
+  },
+  {
+    "key": "r",
+    "command": "renameFile",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "enter",
+    "command": "-renameFile",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "shift+cmd+r",
+    "command": "reason-language-server.restart"
+  },
+  {
+    "key": "ctrl+enter",
+    "command": "git.stage"
   }
 ]

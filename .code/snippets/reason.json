@@ -11,12 +11,28 @@
     "prefix": "f",
     "body": "float"
   },
+  "bool": {
+    "prefix": "b",
+    "body": "bool"
+  },
   "option": {
     "prefix": "o",
     "body": "option($0)"
   },
-  "|>": {
+  "j": {
+    "prefix": "j",
+    "body": "{j|$0|j}"
+  },
+  "[||]": {
+    "prefix": "[",
+    "body": "[| $0 |"
+  },
+  "->": {
     "prefix": ">",
+    "body": "->$0"
+  },
+  "|>": {
+    "prefix": ">>",
     "body": "|> $0"
   },
   "Js.t {.}": {
@@ -27,155 +43,78 @@
     "prefix": "jsot",
     "body": "{.. $0}"
   },
-  "Js.boolean": {
-    "prefix": "jsb",
-    "body": "Js.boolean"
-  },
   "Js.nullable": {
     "prefix": "jsn",
     "body": "Js.nullable($0)"
   },
-  "Js.to_bool": {
-    "prefix": "jstob",
-    "body": "Js.to_bool"
-  },
-  "Js.Boolean.to_js_boolean": {
-    "prefix": "jsbto",
-    "body": "Js.Boolean.to_js_boolean"
-  },
-  "Js.Nullable.to_opt": {
+  "Js.Nullable.toOption": {
     "prefix": "jsnto",
-    "body": "Js.Nullable.to_opt"
+    "body": "Js.Nullable.toOption"
   },
-  "Js.Nullable.from_opt": {
+  "Js.Nullable.fromOption": {
     "prefix": "jsnfo",
-    "body": "Js.Nullable.from_opt"
+    "body": "Js.Nullable.fromOption"
   },
   "React": {
     "prefix": "r",
     "body": "React"
   },
-  "ReasonReact": {
-    "prefix": "rr",
-    "body": "ReasonReact"
+  "React.statelessComponent": {
+    "prefix": "rsc",
+    "body": "let component = React.statelessComponent(__MODULE__);"
   },
-  "ReasonReact.statelessComponent": {
-    "prefix": "rrsc",
-    "body":
-      "let component = \"${0:Component}\" |> ReasonReact.statelessComponent;"
+  "React.reducerComponent": {
+    "prefix": "rrc",
+    "body": "let component = React.reducerComponent(__MODULE__)"
   },
-  "ReasonReact.statelessComponentWithRetainedProps": {
-    "prefix": "rrscwrp",
-    "body":
-      "let component = \"${0:Component}\" |> ReasonReact.statelessComponentWithRetainedProps;"
+  "React.string": {
+    "prefix": "rs",
+    "body": "React.string"
   },
-  "ReasonReact.reducerComponent": {
-    "prefix": "rrrc",
-    "body":
-      "let component = \"${0:Component}\" |> ReasonReact.reducerComponent;"
+  "React.array": {
+    "prefix": "ra",
+    "body": "React.array"
   },
-  "ReasonReact.reducerComponentWithRetainedProps": {
-    "prefix": "rrrcwrp",
-    "body":
-      "let component = \"${0:Component}\" |> ReasonReact.reducerComponentWithRetainedProps;"
+  "React.null": {
+    "prefix": "rn",
+    "body": "React.null"
   },
-  "ReasonReact.stringToElement": {
-    "prefix": "rrste",
-    "body": "ReasonReact.stringToElement"
+  "React.Update": {
+    "prefix": "ru",
+    "body": "React.Update"
   },
-  "ReasonReact.arrayToElement": {
-    "prefix": "rrate",
-    "body": "ReasonReact.arrayToElement"
+  "React.Update({...state})": {
+    "prefix": "rus",
+    "body": "React.Update({...state, $0})"
   },
-  "ReasonReact.nullElement": {
-    "prefix": "rrne",
-    "body": "ReasonReact.nullElement"
+  "React.SideEffects": {
+    "prefix": "rse",
+    "body": "React.SideEffects(({$1}) => {$0})"
   },
-  "ReasonReact.Update": {
-    "prefix": "rru",
-    "body": "ReasonReact.Update({...state, $0})"
-  },
-  "ReasonReact.SideEffects": {
-    "prefix": "rrse",
-    "body": "ReasonReact.SideEffects(({$1}) => {$0})"
-  },
-  "ReasonReact.UpdateWithSideEffects": {
-    "prefix": "rruwse",
+  "React.UpdateWithSideEffects": {
+    "prefix": "ruwse",
     "body": [
-      "ReasonReact.UpdateWithSideEffects(",
+      "React.UpdateWithSideEffects(",
       "  {...state, $1},",
-      "  ({$2}) => {$0}",
+      "  ({$2}) => $0",
       ")"
     ]
   },
-  "ReasonReact.NoUpdate": {
-    "prefix": "rrnu",
-    "body": "ReasonReact.NoUpdate"
-  },
-  "ReactEventRe.Mouse.t": {
-    "prefix": "remt",
-    "body": "ReactEventRe.Mouse.t"
-  },
-  "ReactEventRe.Mouse.t => unit": {
-    "prefix": "remtu",
-    "body": "ReactEventRe.Mouse.t => unit"
-  },
-  "ReactEventRe.Keyboard.t": {
-    "prefix": "rekt",
-    "body": "ReactEventRe.Keyboard.t"
-  },
-  "ReactEventRe.Keyboard.t => unit": {
-    "prefix": "rektu",
-    "body": "ReactEventRe.Keyboard.t => unit"
-  },
-  "ReactEventRe.Form.t": {
-    "prefix": "reformt",
-    "body": "ReactEventRe.Form.t"
-  },
-  "ReactEventRe.Form.t => unit": {
-    "prefix": "reformtu",
-    "body": "ReactEventRe.Form.t => unit"
-  },
-  "ReactEventRe.Focus.t": {
-    "prefix": "refocust",
-    "body": "ReactEventRe.Focus.t"
-  },
-  "ReactEventRe.Focus.t => unit": {
-    "prefix": "refocustu",
-    "body": "ReactEventRe.Focus.t => unit"
-  },
-  "ReactEventRe.Selection.t": {
-    "prefix": "rest",
-    "body": "ReactEventRe.Selection.t"
-  },
-  "ReactEventRe.Selection.t => unit": {
-    "prefix": "restu",
-    "body": "ReactEventRe.Selection.t => unit"
-  },
-  "ReactEventRe.Touch.t": {
-    "prefix": "rett",
-    "body": "ReactEventRe.Touch.t"
-  },
-  "ReactEventRe.Touch.t => unit": {
-    "prefix": "rettu",
-    "body": "ReactEventRe.Touch.t => unit"
-  },
-  "ReasonReact.createDomElement": {
-    "prefix": "rrcde",
-    "body":
-      "ReasonReact.createDomElement(\"${1:element}\", ~props={$0}, children)"
+  "React.NoUpdate": {
+    "prefix": "rnu",
+    "body": "React.NoUpdate"
   },
   "make": {
     "prefix": "lm",
     "body": [
-      "let make = (~$1, ${2:_}) => {",
+      "let make = (${1:_}) => {",
       "  ...component,",
-      "  render: (_) =>",
+      "  render: _ =>",
       "    $0",
       "};"
     ]
   },
-  "make reducer": {
+  "make.reducer": {
     "prefix": "lmr",
     "body": [
       "let make = (~$0, _) => {",
@@ -183,11 +122,23 @@
       "  initialState: () => {},",
       "  reducer: (action, state) =>",
       "    switch action {",
-      "    | Action => ReasonReact.Update({...state, })",
+      "    | Action => React.Update({...state, })",
       "    },",
       "  render: ({state, send}) =>",
       "",
       "};"
+    ]
+  },
+  "JS.interface": {
+    "prefix": "jsi",
+    "body": [
+      "/* JS interface */",
+      "type jsProps = {",
+      "  .",
+      "  ${1}",
+      "};",
+      "",
+      "let default = React.wrapReasonForJs(~component, (props: jsProps) => make($0));"
     ]
   },
   "children": {
@@ -196,35 +147,30 @@
   },
   "external.css": {
     "prefix": "ecss",
-    "body":
-      "[@bs.module] external css: Js.t({..}) = \"./${0:Component}.styles.css\";"
+    "body": "[@bs.module] external css: Js.t({..}) = \"./${0:Component}.scss\";"
   },
   "css": {
     "prefix": "css",
-    "body": "css##$0"
+    "body": "Css"
+  },
+  "module Css": {
+    "prefix": "mcss",
+    "body": "module Css = $0;"
   },
   "className": {
     "prefix": "cn",
     "body": "className"
   },
+  "className.css": {
+    "prefix": "cncss",
+    "body": "className=Css$0"
+  },
+  "div.className.css": {
+    "prefix": "dcncss",
+    "body": ["<div className=Css${1}>", "  $0", "</div>"]
+  },
   "Cn.make": {
     "prefix": "cnm",
     "body": "Cn.make([$0])"
-  },
-  "Cn.ifBool": {
-    "prefix": "cnifb",
-    "body": "Css.ifBool($1, css##$0)"
-  },
-  "Cn.mapOpt": {
-    "prefix": "cnmo",
-    "body": [
-      "Css.mapOpt(",
-      "  ${1:opt},",
-      "  (${1:opt}) =>",
-      "    switch ${1:opt} {",
-      "    | ${2:Case} => css##$0",
-      "    }",
-      ")"
-    ]
   }
 }

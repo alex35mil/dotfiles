@@ -1,13 +1,14 @@
 {
-  "editor.fontFamily": "Hermit, Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontSize": 18,
+  "editor.fontFamily": "'Ubuntu Mono', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 20,
   "editor.suggestFontSize": 14,
   "editor.fontWeight": "500",
   "editor.tabSize": 2,
+  "editor.codeLens": false,
   "editor.accessibilitySupport": "off",
+  "editor.cursorStyle": "line-thin",
   "editor.cursorBlinking": "solid",
   "editor.fontLigatures": false,
-  "editor.formatOnPaste": true,
   "editor.formatOnType": false,
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
@@ -25,24 +26,25 @@
     "comments": false,
     "strings": false
   },
-  "editor.rulers": [
-    100
-  ],
+  "editor.rulers": [100],
   "workbench.colorTheme": "Tomorrow Night",
   "workbench.iconTheme": "minimalistic-icons",
+  "workbench.tree.horizontalScrolling": true,
   "workbench.panel.defaultLocation": "bottom",
   "workbench.statusBar.visible": true,
+  "workbench.statusBar.feedback.visible": false,
   "workbench.startupEditor": "none",
   "workbench.editor.labelFormat": "medium",
   "workbench.editor.tabSizing": "shrink",
-  "workbench.statusBar.feedback.visible": false,
   "workbench.colorCustomizations": {
     "editor.background": "#292929",
     "editor.selectionBackground": "#ffffff40",
-    "editor.selectionHighlightBackground": "#ffffff20",
+    "editor.selectionHighlightBackground": "#ffffff15",
     "editor.lineHighlightBackground": "#ffffff08",
     "editorIndentGuide.background": "#393939",
     "editorRuler.foreground": "#444",
+    "editorLineNumber.foreground": "#555",
+    "editorLineNumber.activeForeground": "#888",
     "editorHoverWidget.border": "#373737",
     "editorHoverWidget.background": "#373737",
     "editorInfo.foreground": "#3091ec",
@@ -50,11 +52,11 @@
     "editorSuggestWidget.background": "#444",
     "editorSuggestWidget.border": "#444",
     "editorSuggestWidget.selectedBackground": "#333",
-    "sideBar.background": "#212121",
-    "sideBar.border": "#212121",
+    "sideBar.background": "#292929",
+    "sideBar.border": "#282828",
     "gitDecoration.ignoredResourceForeground": "#676767",
     "gitDecoration.untrackedResourceForeground": "#b5bd68",
-    "statusBar.background": "#232425",
+    "statusBar.background": "#292929",
     "statusBar.foreground": "#999",
     "statusBar.noFolderBackground": "#232425",
     "statusBar.debuggingBackground": "#511f1f",
@@ -96,9 +98,7 @@
   "simpleIcons.hideArrows": false,
   "vim.useSystemClipboard": true,
   "reason.codelens.enabled": false,
-  "reason.diagnostics.tools": [
-    "bsb"
-  ],
+  "reason.diagnostics.tools": ["bsb"],
   "go.formatTool": "goimports",
   "javascript.validate.enable": false,
   "flow.enabled": false,
@@ -108,22 +108,22 @@
     {
       "text": "TODO:",
       "color": "#b294bb",
-      "backgroundColor": "#292929",
+      "backgroundColor": "#292929"
     },
     {
       "text": "FIXME:",
       "color": "#b294bb",
-      "backgroundColor": "#292929",
+      "backgroundColor": "#292929"
     },
     {
       "text": "HACK:",
       "color": "#b294bb",
-      "backgroundColor": "#292929",
+      "backgroundColor": "#292929"
     },
     {
       "text": "XXX:",
       "color": "#b294bb",
-      "backgroundColor": "#292929",
+      "backgroundColor": "#292929"
     }
   ],
   "todohighlight.include": [
@@ -163,26 +163,18 @@
     "regexes",
     "nbsp"
   ],
-  "cSpell.languageSettings": [
-    {
-      "languageId": "go",
-      "allowCompoundWords": true,
-      "dictionaries": [
-        "go"
-      ],
-      "userWords": [
-        "gonic"
-      ]
-    }
-  ],
   "[reason]": {
-    "editor.rulers": [
-      80
-    ]
+    "editor.rulers": [80]
   },
   "[markdown]": {
     "editor.formatOnSave": false,
     "editor.wordWrap": "on",
     "editor.quickSuggestions": false
-  }
+  },
+  "reason_language_server.dependencies_codelens": false,
+  "diffEditor.renderSideBySide": false,
+  "diffEditor.ignoreTrimWhitespace": true,
+  "ActiveFileInStatusBar.fullpath": false,
+  "reason_language_server.show_module_path_on_hover": false,
+  "editor.dragAndDrop": false
 }
