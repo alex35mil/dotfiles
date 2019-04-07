@@ -13,3 +13,6 @@ setopt auto_pushd
 
 # Append shell session history list to the history file
 setopt inc_append_history
+
+# Glob matching won't fail in case if some of the patterns weren't found
+setopt null_glob

@@ -69,6 +69,11 @@ function mkd() {
   mkdir -p $@ && cd $_
 }
 
+# Clones git repository and enters it
+function gcl() {
+  git clone $1 && cd $(basename "$1" .git)
+}
+
 # Generates a new ssh entity
 function gen-ssh() {
   ssh-keygen -f ~/.ssh/$@ -C "$@"

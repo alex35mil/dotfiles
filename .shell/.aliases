@@ -77,7 +77,6 @@ alias bsls="brew services list"
 alias bsrun="brew services run "
 alias bsrst="brew services restart "
 
-
 # ===== Docker
 alias d="docker "
 
@@ -145,7 +144,6 @@ dm-ssh() {
 }
 dmu() { eval "$(docker-machine env -u)"; }
 
-
 # ===== Git
 alias g="git "
 
@@ -205,11 +203,9 @@ alias gpsd="git push --recurse-submodules=on-demand "
 [[ -n $BASH_VERSION ]] && __git_complete gb _git_branch
 [[ -n $BASH_VERSION ]] && __git_complete go _git_checkout
 
-
 # ===== Go
 alias gor="go run "
 alias gob="go build "
-
 
 # ===== Node
 alias y="yarn "
@@ -264,6 +260,8 @@ alias rr="rbenv rehash"
 # ===== Vim
 alias v="vim "
 
+# ===== m
+alias m="$HOME/Dev/Projects/minima/minima/target/release/m"
 
 # ===== Scripts
 alias sddbm="script/docker/db:migrate"

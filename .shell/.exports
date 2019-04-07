@@ -37,6 +37,7 @@ eval "$(rbenv init -)"
 
 # Rust
 export CARGO="$HOME/.cargo"
+export LIBPQ="/usr/local/opt/libpq" # diesel needs this
 
 # Go
 export GOROOT="/usr/local/opt/go/libexec"
@@ -45,4 +46,4 @@ export GOROOT="/usr/local/opt/go/libexec"
 export SWIFT="/Library/Developer/Toolchains/swift-latest.xctoolchain"
 
 # PATH
-export PATH="$CARGO/bin:$GOROOT/bin:$SWIFT/usr/bin:$PATH"
+export PATH="$CARGO/bin:$GOROOT/bin:$SWIFT/usr/bin:$LIBPQ/bin:$PATH"
