@@ -28,10 +28,6 @@ fi
 export HISTSIZE=10000
 export SAVEHIST=10000
 
-# Ocaml
-source $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-eval "$(opam config env)"
-
 # Ruby
 eval "$(rbenv init -)"
 
@@ -45,5 +41,15 @@ export GOROOT="/usr/local/opt/go/libexec"
 # Swift
 export SWIFT="/Library/Developer/Toolchains/swift-latest.xctoolchain"
 
+# Android
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+
 # PATH
-export PATH="$CARGO/bin:$GOROOT/bin:$SWIFT/usr/bin:$LIBPQ/bin:$PATH"
+export PATH=$LIBPQ/bin:$PATH
+export PATH=$SWIFT/usr/bin:$PATH
+export PATH=$GOROOT/bin:$PATH
+export PATH=$CARGO/bin:$PATH
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools

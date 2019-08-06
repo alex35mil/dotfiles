@@ -207,6 +207,12 @@ alias gpsd="git push --recurse-submodules=on-demand "
 alias gor="go run "
 alias gob="go build "
 
+# ===== Digital Ocean
+alias dio="doctl "
+
+# ===== K8s
+alias k="kubectl "
+
 # ===== Node
 alias y="yarn "
 
@@ -253,7 +259,6 @@ alias nfuck="rm -rf node_modules && npm cache clean && npm install"
 alias no="npm outdated"
 alias nlg="npm ls -g --depth=0"
 
-
 # ===== Ruby
 alias rr="rbenv rehash"
 
@@ -262,29 +267,3 @@ alias v="vim "
 
 # ===== m
 alias m="$HOME/Dev/Projects/minima/minima/target/release/m"
-
-# ===== Scripts
-alias sddbm="script/docker/db:migrate"
-alias sddbr="script/docker/db:reset"
-alias sdrd="script/docker/run:dev"
-alias sdrn="script/docker/run:nps"
-alias sdrs="script/docker/run:storybook"
-alias sdu="script/docker/update"
-
-alias ss="scripts/start"
-alias sup="scripts/update"
-alias ssetup="scripts/setup"
-alias sddb="scripts/docker:development:build"
-alias sdpb="scripts/docker:production:build"
-alias ssdep="scripts/server:dep "
-alias ssdepa="scripts/server:dep ensure -add "
-alias sdb="scripts/db "
-alias sdbm="scripts/db migrate "
-alias sdbrb="scripts/db rollback "
-alias sdbmn="scripts/db migration "
-alias sdbrst="scripts/db reset "
-alias scy="scripts/client:yarn "
-alias scya="scripts/client:yarn:add "
-alias scyad="scripts/client:yarn:add:dev "
-alias scyup="scripts/client:yarn:up"
-alias scm="scripts/client:make "
