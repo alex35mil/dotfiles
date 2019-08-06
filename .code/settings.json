@@ -15,7 +15,7 @@
   "editor.scrollBeyondLastLine": false,
   "editor.renderLineHighlight": "all",
   "editor.roundedSelection": true,
-  "editor.tabCompletion": true,
+  "editor.tabCompletion": "on",
   "editor.suggestSelection": "recentlyUsed",
   "editor.snippetSuggestions": "inline",
   "editor.acceptSuggestionOnEnter": "on",
@@ -29,7 +29,7 @@
   "editor.rulers": [100],
   "workbench.colorTheme": "Tomorrow Night",
   "workbench.iconTheme": "minimalistic-icons",
-  "workbench.tree.horizontalScrolling": true,
+  "workbench.list.horizontalScrolling": true,
   "workbench.panel.defaultLocation": "bottom",
   "workbench.statusBar.visible": true,
   "workbench.statusBar.feedback.visible": false,
@@ -97,9 +97,6 @@
   "extensions.autoUpdate": false,
   "simpleIcons.hideArrows": false,
   "vim.useSystemClipboard": true,
-  "reason.codelens.enabled": false,
-  "reason.diagnostics.tools": ["bsb"],
-  "go.formatTool": "goimports",
   "javascript.validate.enable": false,
   "flow.enabled": false,
   "flow.useNPMPackagedFlow": true,
@@ -135,34 +132,6 @@
     "**/*.css",
     "**/*.scss"
   ],
-  "cSpell.showStatus": false,
-  "cSpell.enabledLanguageIds": [
-    "css",
-    "go",
-    "html",
-    "jade",
-    "javascript",
-    "javascriptreact",
-    "json",
-    "markdown",
-    "plaintext",
-    "reason",
-    "restructuredtext",
-    "scss",
-    "text",
-    "yml"
-  ],
-  "cSpell.userWords": [
-    "signup",
-    "todos",
-    "graphql",
-    "styleguide",
-    "unmount",
-    "validators",
-    "stringify",
-    "regexes",
-    "nbsp"
-  ],
   "[reason]": {
     "editor.rulers": [80]
   },
@@ -176,5 +145,6 @@
   "diffEditor.ignoreTrimWhitespace": true,
   "ActiveFileInStatusBar.fullpath": false,
   "reason_language_server.show_module_path_on_hover": false,
-  "editor.dragAndDrop": false
+  "editor.dragAndDrop": false,
+  "reason_language_server.autoRebuild": false
 }
