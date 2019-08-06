@@ -30,6 +30,8 @@ brew install \
   node \
   yarn \
   go \
+  doctl \
+  kubernetes-cli \
   rbenv
 
 # Install windows manager
