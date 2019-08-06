@@ -113,6 +113,9 @@
   "find-and-replace":
     projectSearchResultsPaneSplitDirection: "right"
   "flex-tool-bar": {}
+  "fuzzy-finder":
+    scoringSystem: "fast"
+    useRipGrep: true
   "git-blame":
     columnWidth: 350
     showOnlyLastNames: false
@@ -177,6 +180,7 @@
       spaces: 2
   "prettier-atom":
     formatOnSaveOptions:
+      enabled: true
       isDisabledIfNoConfigFile: true
       isDisabledIfNotInPackageJson: true
       respectEslintignore: false

@@ -89,13 +89,41 @@
     'prefix': 'r'
     'body': 'React'
 
-  'React.statelessComponent':
-    'prefix': 'rsc'
-    'body': 'let component = React.statelessComponent(__MODULE__);'
+  '[@react.component]':
+    'prefix': 'rc'
+    'body': '[@react.component]'
 
-  'React.reducerComponent':
+  'make':
+    'prefix': 'lm'
+    'body': """
+      let make = (${1}) => {
+        $0
+      };
+    """
+
+  'react.component.make':
+    'prefix': 'rclm'
+    'body': """
+      [@react.component]
+      let make = (${1}) => {
+        $0
+      };
+    """
+
+  '[@bs.config {jsx: 3}]':
+    'prefix': 'jsx'
+    'body': """
+      [@bs.config {jsx: 3}];
+
+    """
+
+  'React.Ref.current':
     'prefix': 'rrc'
-    'body': 'let component = React.reducerComponent(__MODULE__);'
+    'body': 'React.Ref.current'
+
+  'React.Ref.setCurrent':
+    'prefix': 'rrsc'
+    'body': 'React.Ref.setCurrent($0)'
 
   'React.string':
     'prefix': 'rs'
@@ -108,6 +136,46 @@
   'React.null':
     'prefix': 'rn'
     'body': 'React.null'
+
+  'dispatch':
+    'prefix': 'd'
+    'body': 'dispatch'
+
+  'let (state, dispatch)':
+    'prefix': 'lsd'
+    'body': 'let (state, dispatch) = $0;'
+
+  'React.useReducer':
+    'prefix': 'rur'
+    'body': 'React.useReducer($0)'
+
+  'React.useRef':
+    'prefix': 'ruref'
+    'body': 'React.useRef($0)'
+
+  'React.useRef(Js.Nullable.null)':
+    'prefix': 'rudref'
+    'body': 'React.useRef(Js.Nullable.null);'
+
+  'ReactDom.Ref.domRef':
+    'prefix': 'rrdr'
+    'body': 'ReactDom.Ref.domRef'
+
+  'React.useEffect':
+    'prefix': 'rue'
+    'body': """
+      React.useEffect$1(() => {
+        $0
+      });
+    """
+
+  'React.useMemo':
+    'prefix': 'rum'
+    'body': 'React.useMemo$1(() => $0);'
+
+  'React.useCallback':
+    'prefix': 'ruc'
+    'body': 'React.useCallback$1($0);'
 
   'React.Update':
     'prefix': 'ru'
@@ -141,16 +209,6 @@
   'ReactEvent.Form.target##value':
     'prefix': 'reftv'
     'body': 'ReactEvent.Form.target##value'
-
-  'make':
-    'prefix': 'lm'
-    'body': """
-      let make = (${1:_}) => {
-        ...component,
-        render: _ =>
-          $0
-      };
-    """
 
   'make.reducer':
     'prefix': 'lmr'
@@ -857,6 +915,70 @@
     'prefix': 'ffcw'
     'body': 'flex-flow: column wrap;'
 
+  'align-self.start':
+    'prefix': 'ass'
+    'body': 'align-self: start;'
+
+  'align-self.end':
+    'prefix': 'ase'
+    'body': 'align-self: end;'
+
+  'align-self.flex-start':
+    'prefix': 'asfs'
+    'body': 'align-self: flex-start;'
+
+  'align-self.flex-end':
+    'prefix': 'asfe'
+    'body': 'align-self: flex-end;'
+
+  'align-self.center':
+    'prefix': 'asc'
+    'body': 'align-self: center;'
+
+  'align-self.baseline':
+    'prefix': 'asb'
+    'body': 'align-self: baseline;'
+
+  'align-self.stretch':
+    'prefix': 'ass'
+    'body': 'align-self: stretch;'
+
+  'align-content.start':
+    'prefix': 'acs'
+    'body': 'align-content: start;'
+
+  'align-content.end':
+    'prefix': 'ace'
+    'body': 'align-content: end;'
+
+  'align-content.flex-start':
+    'prefix': 'acfs'
+    'body': 'align-content: flex-start;'
+
+  'align-content.flex-end':
+    'prefix': 'acfe'
+    'body': 'align-content: flex-end;'
+
+  'align-content.center':
+    'prefix': 'acc'
+    'body': 'align-content: center;'
+
+  'align-content.baseline':
+    'prefix': 'acb'
+    'body': 'align-content: baseline;'
+
+  'align-content.stretch':
+    'prefix': 'acs'
+    'body': 'align-content: stretch;'
+
+  'align-items.start':
+    'prefix': 'ais'
+    'body': 'align-items: start;'
+
+  'align-items.end':
+    'prefix': 'aie'
+    'body': 'align-items: end;'
+
   'align-items.flex-start':
     'prefix': 'aifs'
     'body': 'align-items: flex-start;'
@@ -876,6 +998,42 @@
   'align-items.stretch':
     'prefix': 'ais'
     'body': 'align-items: stretch;'
+
+  'justify-self.start':
+    'prefix': 'jss'
+    'body': 'justify-self: start;'
+
+  'justify-self.end':
+    'prefix': 'jse'
+    'body': 'justify-self: end;'
+
+  'justify-self.flex-start':
+    'prefix': 'jsfs'
+    'body': 'justify-self: flex-start;'
+
+  'justify-self.flex-end':
+    'prefix': 'jsfe'
+    'body': 'justify-self: flex-end;'
+
+  'justify-self.center':
+    'prefix': 'jsc'
+    'body': 'justify-self: center;'
+
+  'justify-self.space-around':
+    'prefix': 'jssa'
+    'body': 'justify-self: space-around;'
+
+  'justify-self.space-between':
+    'prefix': 'jssb'
+    'body': 'justify-self: space-between;'
+
+  'justify-content.start':
+    'prefix': 'jcs'
+    'body': 'justify-content: start;'
+
+  'justify-content.end':
+    'prefix': 'jce'
+    'body': 'justify-content: end;'
 
   'justify-content.flex-start':
     'prefix': 'jcfs'
@@ -897,6 +1055,34 @@
     'prefix': 'jcsb'
     'body': 'justify-content: space-between;'
 
+  'justify-items.start':
+    'prefix': 'jis'
+    'body': 'justify-items: start;'
+
+  'justify-items.end':
+    'prefix': 'jie'
+    'body': 'justify-items: end;'
+
+  'justify-items.flex-start':
+    'prefix': 'jifs'
+    'body': 'justify-items: flex-start;'
+
+  'justify-items.flex-end':
+    'prefix': 'jife'
+    'body': 'justify-items: flex-end;'
+
+  'justify-items.center':
+    'prefix': 'jic'
+    'body': 'justify-items: center;'
+
+  'justify-items.space-around':
+    'prefix': 'jisa'
+    'body': 'justify-items: space-around;'
+
+  'justify-items.space-between':
+    'prefix': 'jisb'
+    'body': 'justify-items: space-between;'
+
   'flex.1':
     'prefix': 'f1'
     'body': 'flex: 1;'
@@ -908,6 +1094,14 @@
   'grid-auto-flow: column':
     'prefix': 'gafc'
     'body': 'grid-auto-flow: column;'
+
+  'grid-auto-rows':
+    'prefix': 'gar'
+    'body': 'grid-auto-rows: $0;'
+
+  'grid-auto-columns':
+    'prefix': 'gac'
+    'body': 'grid-auto-columns: $0;'
 
   'grid-template-rows':
     'prefix': 'gtr'
