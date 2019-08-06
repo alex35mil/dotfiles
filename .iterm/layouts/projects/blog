@@ -1,9 +1,11 @@
 #!/usr/bin/env osascript -l JavaScript
 
 function run() {
-  Blog.run('~/Dev/Projects/alexfedoseev.com/blog', {
+  Blog.run('~/Dev/Projects/alexfedoseev.com', {
     root: 'git status',
-    server: 'yarn start',
+    bsb: 'yarn run bsb:clean:watch',
+    css: 'yarn run css:watch',
+    server: 'yarn run webpack:server',
   });
 }
 
@@ -18,12 +20,16 @@ const Blog = {
     const container = iTerm.createWindowWithDefaultProfile();
 
     const rootSession = container.currentSession;
-    const serverSession = rootSession.splitHorizontallyWithDefaultProfile();
+    const bsbSession = rootSession.splitHorizontallyWithDefaultProfile();
+    const cssSession = bsbSession.splitVerticallyWithDefaultProfile();
+    const serverSession = cssSession.splitVerticallyWithDefaultProfile();
 
-    Utils.prepareSessions(path, [rootSession, serverSession]);
+    Utils.prepareSessions(path, [rootSession, bsbSession, cssSession, serverSession]);
 
     rootSession.write({ text: cmd.root });
+    bsbSession.write({ text: cmd.bsb, newline: false });
+    cssSession.write({ text: cmd.css, newline: false });
     serverSession.write({ text: cmd.server, newline: false });
-    serverSession.select();
+    bsbSession.select();
   },
 };

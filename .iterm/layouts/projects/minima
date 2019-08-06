@@ -3,8 +3,6 @@
 function run() {
   Minima.run("~/Dev/Projects/minima/minima", {
     root: "BS_LOG=* atom .",
-    core: "cd core",
-    web: "cd web",
     log: "m up",
   });
 }
@@ -20,20 +18,14 @@ const Minima = {
     const container = iTerm.createWindowWithDefaultProfile();
 
     const rootSession = container.currentSession;
-    const coreSession = rootSession.splitHorizontallyWithDefaultProfile();
-    const logSession = coreSession.splitHorizontallyWithDefaultProfile();
-    const webSession = coreSession.splitVerticallyWithDefaultProfile();
+    const logSession = rootSession.splitHorizontallyWithDefaultProfile();
 
     Utils.prepareSessions(path, [
       rootSession,
-      coreSession,
-      webSession,
       logSession,
     ]);
 
     rootSession.write({ text: cmd.root, newline: false });
-    coreSession.write({ text: cmd.core, newline: true });
-    webSession.write({ text: cmd.web, newline: true });
     logSession.write({ text: cmd.log, newline: false });
     rootSession.select();
   }
