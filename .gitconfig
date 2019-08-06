@@ -19,3 +19,5 @@
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
   required = true
+[http]
+	postBuffer = 524288000
