@@ -17,12 +17,6 @@ FILES="\
   .gitignore \
 "
 
-VSCODE_FILES="
-  snippets \
-  keybindings.json \
-  settings.json \
-"
-
 DOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Symlink configs
@@ -35,18 +29,6 @@ do
   ln -sfn "$DOTFILES/$FILE" "$HOME/$FILE"
 
   echo "   $DOTFILES/$FILE -> $HOME/$FILE ... Done"
-done
-
-# Symlink VS Code configs
-echo ""
-echo "🔖  Symlinking VS Code configs:"
-for VSCODE_FILE in $VSCODE_FILES
-do
-  [ -r "$DOTFILES/.code/$VSCODE_FILE" ] && \
-  [ -e "$DOTFILES/.code/$VSCODE_FILE" ] && \
-  ln -sfn "$DOTFILES/.code/$VSCODE_FILE" "$HOME/Library/Application Support/Code/User/$VSCODE_FILE"
-
-  echo "   $DOTFILES/.code/$VSCODE_FILE -> $HOME/Library/Application Support/Code/User/$VSCODE_FILE ... Done"
 done
 
 # Source installed configs
