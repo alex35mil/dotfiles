@@ -34,9 +34,5 @@ brew install \
   kubernetes-cli \
   rbenv
 
-# Install windows manager
-brew tap crisidev/homebrew-chunkwm
-brew install chunkwm koekeishiya/formulae/khd
-
 # Remove outdated versions from the cellar
 brew cleanup
