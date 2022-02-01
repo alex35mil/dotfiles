@@ -1,74 +1,258 @@
 {
-  "display: flex": {
+  "display.flex": {
     "prefix": "df",
     "body": "display: flex;"
   },
-  "position: relative": {
+  "display.grid": {
+    "prefix": "dg",
+    "body": "display: grid;"
+  },
+  "position.relative": {
     "prefix": "pr",
     "body": "position: relative;"
   },
-  "position: absolute": {
+  "position.absolute": {
     "prefix": "pa",
     "body": "position: absolute;"
   },
-  "flex-flow: row-nowrap": {
+  "flex-flow.row-nowrap": {
     "prefix": "ffrn",
     "body": "flex-flow: row nowrap;"
   },
-  "flex-flow: row-wrap": {
+  "flex-flow.row-wrap": {
     "prefix": "ffrw",
     "body": "flex-flow: row wrap;"
   },
-  "flex-flow: column-nowrap": {
+  "flex-flow.column-nowrap": {
     "prefix": "ffcn",
     "body": "flex-flow: column nowrap;"
   },
-  "flex-flow: column-wrap": {
+  "flex-flow.column-wrap": {
     "prefix": "ffcw",
     "body": "flex-flow: column wrap;"
   },
-  "align-items: flex-start": {
+  "align-self.start": {
+    "prefix": "ass",
+    "body": "align-self: start;"
+  },
+  "align-self.end": {
+    "prefix": "ase",
+    "body": "align-self: end;"
+  },
+  "align-self.flex-start": {
+    "prefix": "asfs",
+    "body": "align-self: flex-start;"
+  },
+  "align-self.flex-end": {
+    "prefix": "asfe",
+    "body": "align-self: flex-end;"
+  },
+  "align-self.center": {
+    "prefix": "asc",
+    "body": "align-self: center;"
+  },
+  "align-self.baseline": {
+    "prefix": "asb",
+    "body": "align-self: baseline;"
+  },
+  "align-self.stretch": {
+    "prefix": "ass",
+    "body": "align-self: stretch;"
+  },
+  "align-content.start": {
+    "prefix": "acs",
+    "body": "align-content: start;"
+  },
+  "align-content.end": {
+    "prefix": "ace",
+    "body": "align-content: end;"
+  },
+  "align-content.flex-start": {
+    "prefix": "acfs",
+    "body": "align-content: flex-start;"
+  },
+  "align-content.flex-end": {
+    "prefix": "acfe",
+    "body": "align-content: flex-end;"
+  },
+  "align-content.center": {
+    "prefix": "acc",
+    "body": "align-content: center;"
+  },
+  "align-content.baseline": {
+    "prefix": "acb",
+    "body": "align-content: baseline;"
+  },
+  "align-content.stretch": {
+    "prefix": "acs",
+    "body": "align-content: stretch;"
+  },
+  "align-items.start": {
+    "prefix": "ais",
+    "body": "align-items: start;"
+  },
+  "align-items.end": {
+    "prefix": "aie",
+    "body": "align-items: end;"
+  },
+  "align-items.flex-start": {
     "prefix": "aifs",
     "body": "align-items: flex-start;"
   },
-  "align-items: flex-end": {
+  "align-items.flex-end": {
     "prefix": "aife",
     "body": "align-items: flex-end;"
   },
-  "align-items: center": {
+  "align-items.center": {
     "prefix": "aic",
     "body": "align-items: center;"
   },
-  "align-items: baseline": {
+  "align-items.baseline": {
     "prefix": "aib",
     "body": "align-items: baseline;"
   },
-  "align-items: stretch": {
+  "align-items.stretch": {
     "prefix": "ais",
     "body": "align-items: stretch;"
   },
-  "justify-content: flex-start": {
+  "justify-self.start": {
+    "prefix": "jss",
+    "body": "justify-self: start;"
+  },
+  "justify-self.end": {
+    "prefix": "jse",
+    "body": "justify-self: end;"
+  },
+  "justify-self.flex-start": {
+    "prefix": "jsfs",
+    "body": "justify-self: flex-start;"
+  },
+  "justify-self.flex-end": {
+    "prefix": "jsfe",
+    "body": "justify-self: flex-end;"
+  },
+  "justify-self.center": {
+    "prefix": "jsc",
+    "body": "justify-self: center;"
+  },
+  "justify-self.space-around": {
+    "prefix": "jssa",
+    "body": "justify-self: space-around;"
+  },
+  "justify-self.space-between": {
+    "prefix": "jssb",
+    "body": "justify-self: space-between;"
+  },
+  "justify-content.start": {
+    "prefix": "jcs",
+    "body": "justify-content: start;"
+  },
+  "justify-content.end": {
+    "prefix": "jce",
+    "body": "justify-content: end;"
+  },
+  "justify-content.flex-start": {
     "prefix": "jcfs",
     "body": "justify-content: flex-start;"
   },
-  "justify-content: flex-end": {
+  "justify-content.flex-end": {
     "prefix": "jcfe",
     "body": "justify-content: flex-end;"
   },
-  "justify-content: center": {
+  "justify-content.center": {
     "prefix": "jcc",
     "body": "justify-content: center;"
   },
-  "justify-content: space-around": {
+  "justify-content.space-around": {
     "prefix": "jcsa",
     "body": "justify-content: space-around;"
   },
-  "justify-content: space-between": {
+  "justify-content.space-between": {
     "prefix": "jcsb",
     "body": "justify-content: space-between;"
   },
-  "flex: 1": {
+  "justify-items.start": {
+    "prefix": "jis",
+    "body": "justify-items: start;"
+  },
+  "justify-items.end": {
+    "prefix": "jie",
+    "body": "justify-items: end;"
+  },
+  "justify-items.flex-start": {
+    "prefix": "jifs",
+    "body": "justify-items: flex-start;"
+  },
+  "justify-items.flex-end": {
+    "prefix": "jife",
+    "body": "justify-items: flex-end;"
+  },
+  "justify-items.center": {
+    "prefix": "jic",
+    "body": "justify-items: center;"
+  },
+  "justify-items.space-around": {
+    "prefix": "jisa",
+    "body": "justify-items: space-around;"
+  },
+  "justify-items.space-between": {
+    "prefix": "jisb",
+    "body": "justify-items: space-between;"
+  },
+  "flex.1": {
     "prefix": "f1",
     "body": "flex: 1;"
+  },
+  "grid-auto-flow: row": {
+    "prefix": "gafr",
+    "body": "grid-auto-flow: row;"
+  },
+  "grid-auto-flow: column": {
+    "prefix": "gafc",
+    "body": "grid-auto-flow: column;"
+  },
+  "grid-auto-rows": {
+    "prefix": "gar",
+    "body": "grid-auto-rows: $0;"
+  },
+  "grid-auto-columns": {
+    "prefix": "gac",
+    "body": "grid-auto-columns: $0;"
+  },
+  "grid-template-rows": {
+    "prefix": "gtr",
+    "body": "grid-template-rows: $0;"
+  },
+  "grid-template-columns": {
+    "prefix": "gtc",
+    "body": "grid-template-columns: $0;"
+  },
+  "grid-row-gap": {
+    "prefix": "grg",
+    "body": "grid-row-gap: $0;"
+  },
+  "grid-column-gap": {
+    "prefix": "gcg",
+    "body": "grid-column-gap: $0;"
+  },
+  "grid-template-areas": {
+    "prefix": "gta",
+    "body": "grid-template-areas: $0;"
+  },
+  "grid-area": {
+    "prefix": "ga",
+    "body": "grid-area: $0;"
+  },
+  "minmax": {
+    "prefix": "mm",
+    "body": "minmax($0);"
+  },
+  "min-content": {
+    "prefix": "mnc",
+    "body": "min-content"
+  },
+  "max-content": {
+    "prefix": "mxc",
+    "body": "max-content"
   }
 }

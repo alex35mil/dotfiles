@@ -10,8 +10,8 @@
 [color]
   ui = true
 [user]
-  name = Alex Fedoseev
-  email = alex.fedoseev@gmail.com
+	name = Alex Fedoseev
+	email = alex@fedoseev.mx
 [push]
   default = simple
   followTags = true

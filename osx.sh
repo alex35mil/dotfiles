@@ -68,15 +68,6 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 
-# ===== Dock
-
-# Show indicator lights for open applications in the Dock
-defaults write com.apple.dock show-process-indicators -bool true
-
-# Add spacer to Dock
-# defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
-
-
 # ===== TextEdit
 
 # Use plain text mode for new TextEdit documents
@@ -85,27 +76,6 @@ defaults write com.apple.TextEdit RichText -int 0
 # Open and save files as UTF-8 in TextEdit
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
-
-
-# ===== Sketch
-
-# Remove junk from exported SVGs
-defaults write ~/Library/Preferences/com.bohemiancoding.sketch3.plist svgExportCompact -bool no
-
-
-# ===== Transmission
-
-# Don’t prompt for confirmation before downloading
-defaults write org.m0k.transmission DownloadAsk -bool false
-
-# Trash original torrent files
-defaults write org.m0k.transmission DeleteOriginalTorrent -bool true
-
-# Hide the donate message
-defaults write org.m0k.transmission WarningDonate -bool false
-
-# Hide the legal disclaimer
-defaults write org.m0k.transmission WarningLegal -bool false
 
 
 # ===== Apply changes

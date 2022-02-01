@@ -84,7 +84,7 @@
     "command": "-workbench.view.explorer"
   },
   {
-    "key": "\\",
+    "key": "cmd+\\",
     "command": "workbench.files.action.showActiveFileInExplorer",
     "when": "editorFocus"
   },
@@ -155,7 +155,7 @@
     "when": "!terminalFocus"
   },
   {
-    "key": "ctrl+cmd+enter",
+    "key": "ctrl+cmd+z",
     "command": "workbench.action.toggleZenMode"
   },
   {

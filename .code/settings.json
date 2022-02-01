@@ -1,6 +1,6 @@
 {
-  "editor.fontFamily": "'Ubuntu Mono', Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontSize": 20,
+  "editor.fontFamily": "\"JetBrains Mono ExtraLight\", \"Iosevka-Fixed-Light\", Menlo",
+  "editor.fontSize": 17,
   "editor.suggestFontSize": 14,
   "editor.fontWeight": "500",
   "editor.tabSize": 2,
@@ -81,7 +81,6 @@
   "window.newWindowDimensions": "fullscreen",
   "window.restoreFullscreen": true,
   "window.restoreWindows": "all",
-  "window.zoomLevel": 0,
   "explorer.autoReveal": false,
   "explorer.openEditors.visible": 0,
   "search.useIgnoreFiles": true,
@@ -126,6 +125,8 @@
   "todohighlight.include": [
     "**/*.re",
     "**/*.rei",
+    "**/*.res",
+    "**/*.resi",
     "**/*.go",
     "**/*.js",
     "**/*.jsx",
@@ -140,11 +141,39 @@
     "editor.wordWrap": "on",
     "editor.quickSuggestions": false
   },
-  "reason_language_server.dependencies_codelens": false,
-  "diffEditor.renderSideBySide": false,
   "diffEditor.ignoreTrimWhitespace": true,
   "ActiveFileInStatusBar.fullpath": false,
-  "reason_language_server.show_module_path_on_hover": false,
   "editor.dragAndDrop": false,
-  "reason_language_server.autoRebuild": false
+  "reason_language_server.dependencies_codelens": false,
+  "reason_language_server.show_module_path_on_hover": false,
+  "reason_language_server.autoRebuild": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "languageServerExample.trace.server": "verbose",
+  "rust-client.engine": "rust-analyzer",
+  "rust.clippy_preference": "on",
+  "rust-analyzer.checkOnSave.command": "clippy",
+  "prettier.enable": false,
+  "git.confirmSync": false,
+  "git.allowForcePush": true,
+  "git.confirmForcePush": false,
+  "vim.overrideCopy": false,
+  "vs-kubernetes": {
+    "vscode-kubernetes.helm-path.mac": "/Users/Alex/.vs-kubernetes/tools/helm/darwin-amd64/helm",
+    "vscode-kubernetes.minikube-path.mac": "/Users/Alex/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
+  },
+  "json.format.enable": false,
+  "html.format.enable": false,
+  "redhat.telemetry.enabled": false,
+  "diffEditor.renderSideBySide": false,
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "XXX",
+    "NOTE"
+  ],
+  "todo-tree.regex.enableMultiLine": true
 }

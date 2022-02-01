@@ -35,6 +35,34 @@
     "prefix": ">>",
     "body": "|> $0"
   },
+  "Option.getExn": {
+    "prefix": "oge",
+    "body": "Option.getExn"
+  },
+  "Option.getWithDefault": {
+    "prefix": "ogwd",
+    "body": "Option.getWithDefault($0)"
+  },
+  "Option.map": {
+    "prefix": "om",
+    "body": "Option.map($0)"
+  },
+  "Option.mapWithDefault": {
+    "prefix": "omwd",
+    "body": "Option.mapWithDefault($0)"
+  },
+  "Option.flatMap": {
+    "prefix": "ofm",
+    "body": "Option.flatMap($0)"
+  },
+  "Map.get": {
+    "prefix": "mg",
+    "body": "Map.get($0)"
+  },
+  "Map.getExn": {
+    "prefix": "mge",
+    "body": "Map.getExn($0)"
+  },
   "Js.t {.}": {
     "prefix": "jst",
     "body": "{. $0}"
@@ -59,13 +87,29 @@
     "prefix": "r",
     "body": "React"
   },
-  "React.statelessComponent": {
-    "prefix": "rsc",
-    "body": "let component = React.statelessComponent(__MODULE__);"
+  "[@react.component]": {
+    "prefix": "rc",
+    "body": "[@react.component]"
   },
-  "React.reducerComponent": {
+  "make": {
+    "prefix": "lm",
+    "body": "let make = (${1}) => {\n  $0\n};"
+  },
+  "react.component.make": {
+    "prefix": "rclm",
+    "body": "[@react.component]\nlet make = (${1}) => {\n  $0\n};"
+  },
+  "[@bs.config {jsx: 3}]": {
+    "prefix": "jsx",
+    "body": "[@bs.config {jsx: 3}];\n"
+  },
+  "React.Ref.current": {
     "prefix": "rrc",
-    "body": "let component = React.reducerComponent(__MODULE__)"
+    "body": "React.Ref.current"
+  },
+  "React.Ref.setCurrent": {
+    "prefix": "rrsc",
+    "body": "React.Ref.setCurrent($0)"
   },
   "React.string": {
     "prefix": "rs",
@@ -78,6 +122,42 @@
   "React.null": {
     "prefix": "rn",
     "body": "React.null"
+  },
+  "dispatch": {
+    "prefix": "d",
+    "body": "dispatch"
+  },
+  "let (state, dispatch)": {
+    "prefix": "lsd",
+    "body": "let (state, dispatch) = $0;"
+  },
+  "React.useReducer": {
+    "prefix": "rur",
+    "body": "React.useReducer($0)"
+  },
+  "React.useRef": {
+    "prefix": "ruref",
+    "body": "React.useRef($0)"
+  },
+  "React.useRef(Js.Nullable.null)": {
+    "prefix": "rudref",
+    "body": "React.useRef(Js.Nullable.null);"
+  },
+  "ReactDom.Ref.domRef": {
+    "prefix": "rrdr",
+    "body": "ReactDom.Ref.domRef"
+  },
+  "React.useEffect": {
+    "prefix": "rue",
+    "body": "React.useEffect$1(() => {\n  $0\n});"
+  },
+  "React.useMemo": {
+    "prefix": "rum",
+    "body": "React.useMemo$1(() => $0);"
+  },
+  "React.useCallback": {
+    "prefix": "ruc",
+    "body": "React.useCallback$1($0);"
   },
   "React.Update": {
     "prefix": "ru",
@@ -93,53 +173,27 @@
   },
   "React.UpdateWithSideEffects": {
     "prefix": "ruwse",
-    "body": [
-      "React.UpdateWithSideEffects(",
-      "  {...state, $1},",
-      "  ({$2}) => $0",
-      ")"
-    ]
+    "body": "React.UpdateWithSideEffects(\n  {...state, $1},\n  ({$2}) => $0\n)"
   },
   "React.NoUpdate": {
     "prefix": "rnu",
     "body": "React.NoUpdate"
   },
-  "make": {
-    "prefix": "lm",
-    "body": [
-      "let make = (${1:_}) => {",
-      "  ...component,",
-      "  render: _ =>",
-      "    $0",
-      "};"
-    ]
+  "ReactEvent": {
+    "prefix": "re",
+    "body": "ReactEvent"
+  },
+  "ReactEvent.Form.target##value": {
+    "prefix": "reftv",
+    "body": "ReactEvent.Form.target##value"
   },
   "make.reducer": {
     "prefix": "lmr",
-    "body": [
-      "let make = (~$0, _) => {",
-      "  ...component,",
-      "  initialState: () => {},",
-      "  reducer: (action, state) =>",
-      "    switch action {",
-      "    | Action => React.Update({...state, })",
-      "    },",
-      "  render: ({state, send}) =>",
-      "",
-      "};"
-    ]
+    "body": "let make = (~$0, _) => {\n  ...component,\n  initialState: () => {},\n  reducer: (action, state) =>\n    switch action {\n    | Action => React.Update({...state, })\n    },\n  render: ({state, send}) =>\n\n};"
   },
   "JS.interface": {
     "prefix": "jsi",
-    "body": [
-      "/* JS interface */",
-      "type jsProps = {",
-      "  .",
-      "  ${1}",
-      "};",
-      "",
-      "let default = React.wrapReasonForJs(~component, (props: jsProps) => make($0));"
-    ]
+    "body": "/* JS interface */\ntype jsProps = {\n  .\n  $1\n};\n\nlet default =\n  React.wrapReasonForJs(\n    ~component,\n    (props: jsProps) => make($0)\n  );"
   },
   "children": {
     "prefix": "ch",
@@ -167,10 +221,38 @@
   },
   "div.className.css": {
     "prefix": "dcncss",
-    "body": ["<div className=Css${1}>", "  $0", "</div>"]
+    "body": "<div className=Css$1>\n  $0\n</div>"
   },
   "Cn.make": {
     "prefix": "cnm",
     "body": "Cn.make([$0])"
+  },
+  "Cn.ifTrue": {
+    "prefix": "cnift",
+    "body": "Css$1->Cn.ifTrue($0)"
+  },
+  "Cn.mapSome": {
+    "prefix": "cnms",
+    "body": "Css.mapSome(\n  ${1:opt},\n  (${1:opt}) =>\n    switch ${1:opt} {\n    | ${2:Case} => Css$0\n    }\n)"
+  },
+  "[@log]": {
+    "prefix": "l",
+    "body": "[@log]"
+  },
+  "[%log.debug]": {
+    "prefix": "ld",
+    "body": "[%log.debug \"$0\"];"
+  },
+  "[%log.info]": {
+    "prefix": "li",
+    "body": "[%log.info \"$0\"];"
+  },
+  "[%log.warn]": {
+    "prefix": "lw",
+    "body": "[%log.warn \"$0\"];"
+  },
+  "[%log.error]": {
+    "prefix": "le",
+    "body": "[%log.error \"$0\"];"
   }
 }

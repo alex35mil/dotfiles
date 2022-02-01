@@ -8,6 +8,7 @@ alias install="$HOME/Dev/System/dotfiles/install.sh"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+alias .....="cd ../../../.."
 
 [[ -n $BASH_VERSION ]] && alias ~="cd ~"
 
@@ -16,9 +17,6 @@ alias pro="cd ~/Dev/Projects"
 alias sys="cd ~/Dev/System"
 alias libs="cd ~/Dev/Libs"
 alias sand="cd ~/Dev/Sandboxes"
-
-alias fng="cd ~/Dev/Projects/shakacode.com/fng"
-alias mnm="cd ~/Dev/Projects/minima.pro/minima"
 alias dots="cd ~/Dev/System/dotfiles"
 
 alias hosts="sudo $EDITOR /etc/hosts"
@@ -47,8 +45,8 @@ alias netcfg="sudo ifconfig"
 alias netrst="sudo ifconfig en0 down; sudo route flush; sudo ifconfig en0 up;"
 
 # Show/hide hidden files in Finder
-alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+alias showhfiles="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hidehfiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
 # Hide/show all desktop icons (useful when presenting)
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
@@ -56,9 +54,6 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 
 # Remove all DS_Store files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-
-# Restart windows manager
-alias wmrst="brew services restart chunkwm && brew services restart khd"
 
 # ===== Homebrew
 alias b="brew "
@@ -203,10 +198,6 @@ alias gpsd="git push --recurse-submodules=on-demand "
 [[ -n $BASH_VERSION ]] && __git_complete gb _git_branch
 [[ -n $BASH_VERSION ]] && __git_complete go _git_checkout
 
-# ===== Go
-alias gor="go run "
-alias gob="go build "
-
 # ===== Digital Ocean
 alias dio="doctl "
 
@@ -233,6 +224,10 @@ alias yi="yarn add --exact "
 alias yid="yarn add --dev --exact "
 alias yrm="yarn remove "
 
+ywi() { yarn workspace $1 add --exact $2 }
+ywid() { yarn workspace $1 add --dev --exact $2 }
+ywrm() { yarn workspace $1 remove $2 }
+
 alias yo="yarn outdated"
 alias yup="yarn upgrade-interactive --exact --latest"
 
@@ -246,24 +241,14 @@ alias ns="npm start"
 alias nt="npm test"
 alias nr="npm run "
 alias nrb="npm run build"
-alias nrp="npm run prod"
-alias nrl="npm run lint"
-alias nrf="npm run flow"
-alias ni="npm install "
-alias nis="npm install --save "
+alias ni="npm install --save-exact "
 alias nid="npm install --save-dev --save-exact "
-alias nrs="npm remove --save "
-alias nrd="npm remove --save-dev "
+alias nrm="npm remove --save "
+alias nrmd="npm remove --save-dev "
 alias nsw="npm shrinkwrap "
 alias nfuck="rm -rf node_modules && npm cache clean && npm install"
 alias no="npm outdated"
 alias nlg="npm ls -g --depth=0"
 
-# ===== Ruby
-alias rr="rbenv rehash"
-
 # ===== Vim
 alias v="vim "
-
-# ===== m
-alias m="$HOME/Dev/Projects/minima/minima/target/release/m"

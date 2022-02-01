@@ -28,28 +28,14 @@ fi
 export HISTSIZE=10000
 export SAVEHIST=10000
 
-# Ruby
-eval "$(rbenv init -)"
-
 # Rust
-export CARGO="$HOME/.cargo"
-export LIBPQ="/usr/local/opt/libpq" # diesel needs this
-
-# Go
-export GOROOT="/usr/local/opt/go/libexec"
+CARGO="$HOME/.cargo"
+LIBPQ="/usr/local/opt/libpq" # diesel needs this
 
 # Swift
-export SWIFT="/Library/Developer/Toolchains/swift-latest.xctoolchain"
-
-# Android
-export ANDROID_HOME="$HOME/Library/Android/sdk"
+SWIFT="/Library/Developer/Toolchains/swift-latest.xctoolchain"
 
 # PATH
 export PATH=$LIBPQ/bin:$PATH
 export PATH=$SWIFT/usr/bin:$PATH
-export PATH=$GOROOT/bin:$PATH
 export PATH=$CARGO/bin:$PATH
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools

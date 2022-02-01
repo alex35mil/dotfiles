@@ -149,7 +149,6 @@ bower.json
 ##############
 *.gem
 *.rbc
-/.config
 /coverage/
 /InstalledFiles
 /spec/reports/

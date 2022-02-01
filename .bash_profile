@@ -6,7 +6,7 @@ BASH_SOURCES+=~/.shell/.bash/.completions # Shell completions
 BASH_SOURCES+=~/.shell/.bash/.prompts     # Shell prompts
 BASH_SOURCES+=~/.shell/.aliases           # Shell aliases
 BASH_SOURCES+=~/.shell/.functions         # Shell functions
-BASH_SOURCES+=~/.nvm/nvm.sh               # NVM
+BASH_SOURCES+=~/.shell/.initializers      # Shell initializers
 
 for file in ${BASH_SOURCES[@]}
 do
