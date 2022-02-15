@@ -12,7 +12,7 @@
 
   extraConfig = {
     core = {
-      editor = "vim";
+      editor = "nvim";
       ignorecase = false;
     };
 
