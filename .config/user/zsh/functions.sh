@@ -28,21 +28,10 @@ function o() {
   fi
 }
 
-# `p 3000` prints listners of port 3000
+# Prints listners on a specific port. E.g. `p 3000`
 function p() {
   lsof -n -i:$@ | grep LISTEN
 }
-
-# [ currently handled by NERDTree ]
-# `v` with no arguments opens the current directory in Vim,
-# otherwise opens the given location
-# function v() {
-#   if [[ $# -eq 0 ]]; then
-#     vim .
-#   else
-#     vim $@
-#   fi
-# }
 
 # `w` with no arguments lists all shell aliases,
 # otherwise lists aliases, that start with the given chars
@@ -66,7 +55,19 @@ function gcl() {
 
 # Initializes git repository and creates initial commit
 function ginit() {
-  git init && git commit -m "Initial commit" --allow-empty
+  mkd && git init && git commit -m "Initial commit" --allow-empty
+}
+
+# Prints Docker stuff
+function dls() {
+  echo "--- Images:\n"
+  docker image ls
+  echo "\n\n--- Containers:\n"
+  docker container ls
+  echo "\n\n--- Volumes:\n"
+  docker volume ls
+  echo "\n\n--- Networks:\n"
+  docker network ls
 }
 
 # Generates a new ssh entity

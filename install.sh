@@ -1,58 +1,48 @@
 #!/bin/bash
 
 FILES="\
-  .bashrc \
-  .bash_profile \
-
-  .zshrc \
-  .zsh_profile \
-  .zprofile \
-
-  .shell \
-  .profile \
-
-  .editorconfig \
-
-  .gitconfig \
-  .gitignore \
+  .config/nix \
+  .config/nixpkgs \
+  .config/user \
 "
 
 DOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Ensure config dir
+echo ""
+echo "🛠   Ensuring config directory: $HOME/.config..."
+mkdir -p "$HOME/.config"
+echo "🛠   Ensuring config directory: $HOME/.config... done."
 
 # Symlink configs
 echo ""
 echo "🔖  Symlinking configs:"
 for FILE in $FILES
 do
+  echo "      $DOTFILES/$FILE -> $HOME/$FILE..."
   [ -r "$DOTFILES/$FILE" ] && \
   [ -e "$DOTFILES/$FILE" ] && \
   ln -sfn "$DOTFILES/$FILE" "$HOME/$FILE"
-
-  echo "   $DOTFILES/$FILE -> $HOME/$FILE ... Done"
+  echo "      $DOTFILES/$FILE -> $HOME/$FILE... done."
 done
 
-# Source installed configs
-if [[ -n $BASH_VERSION ]]; then
-  source "$HOME/.bashrc"
-elif [[ -n $ZSH_VERSION ]]; then
-  source "$HOME/.zshrc"
-fi
+# Ensure history file
 echo ""
-echo "🌟  Loaded!"
+echo "📜  Ensuring history file: $HOME/.zsh_history..."
+touch "$HOME/.zsh_history"
+echo "📜  Ensuring history file: $HOME/.zsh_history... done."
 
-
-# History file
-touch $HISTFILE
+# Ensure .hushlogin (to get rid of "Last login...")
 echo ""
-echo "📜  Makeing history file: $HISTFILE ... Done"
-
-
-# .hushlogin (to get rid of "Last login...")
+echo "📋  Ensuring .hushlogin: $HOME/.hushlogin..."
 touch "$HOME/.hushlogin"
-echo ""
-echo "📋  Creating .hushlogin: $HOME/.hushlogin ... Done"
+echo "📋  Ensuring .hushlogin: $HOME/.hushlogin... done."
 
-
-# All done
+# Apply Home Manager configuration
 echo ""
-echo "👊  All done!"
+echo "🚀  Applying Home Manager configuration..."
+home-manager switch
+echo "🚀  Applying Home Manager configuration... done."
+
+echo ""
+echo "👊  All done."
