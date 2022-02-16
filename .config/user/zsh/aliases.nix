@@ -4,10 +4,11 @@
 
   # Nix
   xx = "home-manager switch";
-  xl = "home-manager packages";
-  xc = "nix-env --delete-generations old && nix-store --gc";
   xs = "nix-env --query --available --attr-path ";
-  xu = "nix-channel --update";
+  xsp = "nix-env --file '<nixpkgs>' --query --available --attr-path -A ";
+  xup = "nix-channel --update";
+  xls = "home-manager packages";
+  xc = "nix-env --delete-generations old && nix-store --gc";
   xi = "nix-shell -p nix-info --run 'nix-info -m'";
 
   # General
