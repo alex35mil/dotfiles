@@ -1,0 +1,13 @@
+[package]
+name = "statusbar"
+version = "0.1.0"
+authors = ["Alex Fedoseev <alex@fedoseev.mx>"]
+edition = "2021"
+
+[dependencies]
+zellij-tile = "0.34"
+zellij-tile-utils = "0.34"
+chrono = "0.4.23"
+colored = "2"
+ansi_term = "0.12"
+unicode-width = "0.1.8"

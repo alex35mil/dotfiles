@@ -1,9 +1,17 @@
 #!/bin/bash
 
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ "${TRACE-0}" == "1" ]]; then
+    set -o xtrace
+fi
+
 FILES="\
-  .config/nix \
-  .config/nixpkgs \
-  .config/user \
+    nix \
+    nixpkgs \
+    user \
 "
 
 DOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -19,11 +27,11 @@ echo ""
 echo "🔖  Symlinking configs:"
 for FILE in $FILES
 do
-  echo "      $DOTFILES/$FILE -> $HOME/$FILE..."
-  [ -r "$DOTFILES/$FILE" ] && \
-  [ -e "$DOTFILES/$FILE" ] && \
-  ln -sfn "$DOTFILES/$FILE" "$HOME/$FILE"
-  echo "      $DOTFILES/$FILE -> $HOME/$FILE... done."
+    echo "      $DOTFILES/$FILE -> $HOME/.config/$FILE..."
+    [ -r "$DOTFILES/$FILE" ] && \
+    [ -e "$DOTFILES/$FILE" ] && \
+    ln -sfn "$DOTFILES/$FILE" "$HOME/.config/$FILE"
+    echo "      $DOTFILES/$FILE -> $HOME/.config/$FILE... done."
 done
 
 # Ensure history file
@@ -37,6 +45,12 @@ echo ""
 echo "📋  Ensuring .hushlogin: $HOME/.hushlogin..."
 touch "$HOME/.hushlogin"
 echo "📋  Ensuring .hushlogin: $HOME/.hushlogin... done."
+
+# Build binaries
+echo ""
+echo "🛠️  Building binaries..."
+$DOTFILES/build.sh
+echo "🛠️  Building binaries... done."
 
 # Apply Home Manager configuration
 echo ""
