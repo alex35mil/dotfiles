@@ -25,7 +25,7 @@ local palette = {
     beige = "#ebd2a7",
     yellow = "#f0c674",
     orange = "#de935f",
-    purple = "#b294bb",
+    purple = "#b08cba",
     red = "#cc6666",
 }
 
