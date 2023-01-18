@@ -1,6 +1,7 @@
 local plugin = require "lualine"
 local mode = require "lualine.utils.mode"
 local color = require "theme/palette"
+local lsp = require "utils/lsp"
 
 local theme = {
     normal = {
@@ -59,7 +60,15 @@ plugin.setup {
         },
         lualine_b = {
             "diff",
-            "diagnostics",
+            {
+                "diagnostics",
+                symbols = {
+                    error = lsp.signs.Error .. " ",
+                    warn = lsp.signs.Warn .. " ",
+                    info = lsp.signs.Info .. " ",
+                    hint = lsp.signs.Hint .. " ",
+                },
+            },
             {
                 "filename",
                 path = 0,
