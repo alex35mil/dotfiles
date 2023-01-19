@@ -1,4 +1,4 @@
-local plugin = require "comment"
+local plugin = require "Comment"
 
 plugin.setup {
     -- Add a space b/w comment and the line
