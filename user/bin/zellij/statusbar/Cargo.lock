@@ -1863,18 +1863,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "statusbar"
-version = "0.1.0"
-dependencies = [
- "ansi_term",
- "chrono",
- "colored",
- "unicode-width",
- "zellij-tile",
- "zellij-tile-utils",
-]
-
-[[package]]
 name = "strip-ansi-escapes"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2519,6 +2507,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "56c1936c4cc7a1c9ab21a1ebb602eb942ba868cbd44a99cb7cdc5892335e1c85"
 dependencies = [
  "linked-hash-map",
+]
+
+[[package]]
+name = "zellij-statusbar"
+version = "0.1.0"
+dependencies = [
+ "ansi_term",
+ "chrono",
+ "colored",
+ "unicode-width",
+ "zellij-tile",
+ "zellij-tile-utils",
 ]
 
 [[package]]
