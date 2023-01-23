@@ -3,7 +3,7 @@
     reload = "exec zsh -l";
 
     c = "clear";
-    x = "exit";
+    q = "exit";
 
     # Nix
     xx = "home-manager switch && reload";
@@ -162,6 +162,7 @@
 
     # Zellij
     z = "zellij";
+    t = "zellij-runner";
     tls = "zellij list-sessions";
     ta = "zellij attach ";
     tk = "zellij kill-session ";

@@ -8,16 +8,6 @@ function c() {
   fi
 }
 
-# `t` with no arguments starts new unnamed Zellij session in the current directory in,
-# otherwise it starts a session with the provided name
-function t() {
-  if [[ $# -eq 0 ]]; then
-    zellij
-  else
-    zellij --session $@
-  fi
-}
-
 # `l` with no arguments lists contents of the current directory via `tree`,
 # otherwise lists contents of given directory
 function l() {

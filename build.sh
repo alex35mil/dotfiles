@@ -26,4 +26,14 @@ cp "target/wasm32-wasi/release/$ZELLIJ_STATUSBAR_BIN" "$ZELLIJ_STATUSBAR_DEST/"
 echo "🛠   Building Zellij statusbar... done."
 
 echo ""
+echo "🛠   Building Zellij runner..."
+
+ZELLIJ_RUNNER_SRC="$DOTFILES/user/bin/zellij/runner"
+
+cd $ZELLIJ_RUNNER_SRC
+cargo install --path .
+
+echo "🛠   Building Zellij runner... done."
+
+echo ""
 echo "👊  All done."

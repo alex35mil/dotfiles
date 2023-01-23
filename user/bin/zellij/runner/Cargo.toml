@@ -1,0 +1,10 @@
+[package]
+name = "zellij-runner"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+dialoguer = { version = "0.10.3", features = ["fuzzy-select"] }
+dirs = "4.0.0"
+ignore = "0.4.20"
+once_cell = "1.17.0"
