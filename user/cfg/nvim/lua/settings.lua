@@ -31,6 +31,8 @@ opt.timeoutlen = 500
 opt.splitright = true
 opt.splitbelow = true
 
+opt.wrap = false
+
 opt.whichwrap:append {
     ["<"] = true,
     [">"] = true,
