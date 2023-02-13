@@ -18,14 +18,15 @@ plugin.setup {
     mapping = mapping.preset.insert({
         ["<C-k>"] = mapping.scroll_docs(-4),
         ["<C-j>"] = mapping.scroll_docs(4),
-        ["<C-Space>"] = mapping.complete(),
-        ["<C-e>"] = mapping.abort(),
+        ["<C-c>"] = mapping.complete(),
+        ["<Esc>"] = mapping.abort(),
         ["<Tab>"] = mapping(
             function(fallback)
                 if plugin.visible() then
                     plugin.select_next_item()
-                elseif require("luasnip").expand_or_jumpable() then
-                    vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+                    -- FIXME: Tab causes weird jumps in insert mode
+                    -- elseif require("luasnip").expand_or_jumpable() then
+                    -- vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
                 else
                     fallback()
                 end
@@ -36,8 +37,9 @@ plugin.setup {
             function(fallback)
                 if plugin.visible() then
                     plugin.select_prev_item()
-                elseif require("luasnip").jumpable(-1) then
-                    vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+                    -- FIXME: Tab causes weird jumps in insert mode
+                    -- elseif require("luasnip").jumpable(-1) then
+                    -- vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
                 else
                     fallback()
                 end
