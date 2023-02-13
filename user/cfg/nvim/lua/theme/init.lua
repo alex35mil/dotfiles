@@ -143,7 +143,7 @@ local theme = lush(function(injected_functions)
         -- See :h highlight-groups
         --
         -- Conceal      { }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
-        -- Cursor       { }, -- Character under the cursor
+        Cursor { reverse = true }, -- Character under the cursor
         -- lCursor      { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
         -- CursorIM     { }, -- Like Cursor, but used when in IME mode |CursorIM|
         CursorColumn { bg = Normal.bg.lighten(20) }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
@@ -166,7 +166,7 @@ local theme = lush(function(injected_functions)
         -- Substitute   { }, -- |:substitute| replacement text highlighting
         LineNr { fg = color.strong_faded_text }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
         CursorLineNr { fg = LineNr.fg.lighten(15), bold = true }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
-        MatchParen { fg = color.white, bg = color.cyan }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
+        MatchParen { fg = color.white, bg = color.cyan.darken(50) }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
         MsgArea { fg = color.strong_text }, -- Area for messages and cmdline
         ModeMsg { MsgArea }, -- 'showmode' message (e.g., "-- INSERT -- ")
         -- MsgSeparator { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
@@ -249,6 +249,8 @@ local theme = lush(function(injected_functions)
         TelescopeMatching { fg = color.charcoal },
         TelescopeSelection { bg = Normal.bg.lighten(9) },
         TelescopeBorder { FloatBorder },
+
+        SagaNormal { bg = color.popover_bg },
 
         NvimTreeRootFolder { fg = color.strong_text, bold = true },
         NvimTreeIndentMarker { IndentBlanklineChar },
