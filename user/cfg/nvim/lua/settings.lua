@@ -45,5 +45,7 @@ opt.whichwrap:append {
 opt.autowrite = true
 opt.autowriteall = true
 
+opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
 g.loadednetrw = 1
 g.loaded_netrwPlugin = 1
