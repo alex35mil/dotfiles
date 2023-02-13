@@ -12,7 +12,7 @@ local autocmds = {
         {
             callback = function()
                 if vim.v.vim_did_enter then
-                    local view = require "utils/view"
+                    local view = require "utils.view"
                     local windows = view.get_tab_windows_without_filetree()
 
                     if #windows == 1 then

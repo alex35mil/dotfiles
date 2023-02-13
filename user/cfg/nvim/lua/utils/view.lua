@@ -17,7 +17,7 @@ function M.get_tab_windows()
 end
 
 function M.get_tab_windows_without_filetree()
-    local filetree = require "utils/filetree"
+    local filetree = require "utils.filetree"
 
     local windows = M.get_tab_windows()
 

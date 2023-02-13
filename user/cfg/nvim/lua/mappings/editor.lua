@@ -1,9 +1,9 @@
 local M = {}
 
 function M.zenmode()
-    local filetree = require "utils/filetree"
-    local zenmode = require "utils/zenmode"
-    local view = require "utils/view"
+    local filetree = require "utils.filetree"
+    local zenmode = require "utils.zenmode"
+    local view = require "utils.view"
 
     if not filetree.is_active() then
         zenmode.toggle()
@@ -38,14 +38,14 @@ end
 function M.close_buffer()
     local current_buf = vim.api.nvim_get_current_buf()
 
-    local filetree = require "utils/filetree"
+    local filetree = require "utils.filetree"
 
     if filetree.is_tree(current_buf) then
         vim.api.nvim_err_writeln "To hide filetree, use corresponding keymap"
         return
     end
 
-    local zenmode = require "utils/zenmode"
+    local zenmode = require "utils.zenmode"
 
     if zenmode.is_active() then
         zenmode.deactivate()
@@ -70,7 +70,7 @@ function M.close_buffer()
         keys.send_keys "<Esc>"
     end
 
-    local view = require "utils/view"
+    local view = require "utils.view"
 
     local tab_windows = view.get_tab_windows_without_filetree()
 
@@ -119,7 +119,7 @@ function M.close_buffer()
 end
 
 function M.close_all_bufs_except_current(opts)
-    local filetree = require "utils/filetree"
+    local filetree = require "utils.filetree"
 
     local incl_unsaved = opts.incl_unsaved
 
@@ -140,7 +140,7 @@ function M.close_all_bufs_except_current(opts)
         end
     end
 
-    local view = require "utils/view"
+    local view = require "utils.view"
 
     local current_win = vim.api.nvim_get_current_win()
     local wins = view.get_tab_windows_without_filetree()
@@ -159,11 +159,11 @@ function M.quit()
     local mode = vim.fn.mode()
 
     if mode == "i" or mode == "v" then
-        local keys = require "utils/keys"
+        local keys = require "utils.keys"
         keys.send_keys "<Esc>"
     end
 
-    local zenmode = require "utils/zenmode"
+    local zenmode = require "utils.zenmode"
 
     if zenmode.is_active() then
         zenmode.deactivate()
