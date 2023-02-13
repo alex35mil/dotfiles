@@ -246,6 +246,9 @@ local theme = lush(function(injected_functions)
         IndentBlanklineChar { fg = color.thin_line },
         IndentBlanklineContextChar { fg = IndentBlanklineChar.fg.lighten(25) },
 
+        LeapMatch { fg = color.magenta },
+        LeapLabelPrimary { fg = color.bg, bg = color.purple },
+
         TelescopeMatching { fg = color.charcoal },
         TelescopeSelection { bg = Normal.bg.lighten(9) },
         TelescopeBorder { FloatBorder },

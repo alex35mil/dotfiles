@@ -38,10 +38,10 @@ local plugins = {
     },
 
     {
-        "phaazon/hop.nvim",
-        branch = "v2",
+        "ggandor/leap.nvim",
+        version = "*",
         event = "BufEnter",
-        config = function() require "plugins/hop" end,
+        config = function() require "plugins/leap" end,
     },
 
     {
