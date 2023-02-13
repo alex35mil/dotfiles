@@ -16,7 +16,9 @@ local autocmds = {
                     local windows = view.get_tab_windows_without_filetree()
 
                     if #windows == 1 then
-                        require "utils/zenmode".activate()
+                        require("utils.zenmode").activate()
+                    else
+                        require("nvim-tree.api").tree.open()
                     end
                 end
             end,
