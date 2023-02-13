@@ -5,6 +5,9 @@ with pkgs;
 [
   jq
   fd
+  bat
+  fzf
+  skim
   htop
   tree
   curl
