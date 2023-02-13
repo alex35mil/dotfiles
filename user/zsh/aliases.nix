@@ -25,9 +25,10 @@
     "...." = "cd ../../..";
     "....." = "cd ../../../..";
 
-    dev = "cd ~/Dev";
+    dv = "cd ~/Dev";
     df = "cd ~/Dev/dotfiles";
-    devnull = "cd ~/Dev/__devnull";
+    dn = "cd ~/Dev/null";
+    icd = "cd ~/Library/Mobile\\ Documents/com~apple~CloudDocs";
 
     # Network
     hosts = "sudo $EDITOR /etc/hosts";
@@ -42,25 +43,25 @@
     dpsa = "docker ps -a ";
     dsa = "docker container stop $(docker ps -a -q)";
 
-    di = "docker image ";
-    dils = "docker image ls ";
-    dirm = "docker image rm ";
-    dipr = "docker image prune ";
+    dimg = "docker image ";
+    dimgls = "docker image ls ";
+    dimgrm = "docker image rm ";
+    dimgpr = "docker image prune ";
 
     dct = "docker container ";
     dctls = "docker container ls ";
     dctrm = "docker container rm ";
     dctpr = "docker container prune ";
 
-    dv = "docker volume ";
-    dvls = "docker volume ls ";
-    dvrm = "docker volume rm ";
-    dvpr = "docker volume prune ";
+    dvol = "docker volume ";
+    dvolls = "docker volume ls ";
+    dvolrm = "docker volume rm ";
+    dvolpr = "docker volume prune ";
 
-    dn = "docker network ";
-    dnls = "docker network ls ";
-    dnrm = "docker network rm ";
-    dnpr = "docker network prune ";
+    dnet = "docker network ";
+    dnetls = "docker network ls ";
+    dnetrm = "docker network rm ";
+    dnetpr = "docker network prune ";
 
     dspr = "docker system prune ";
     dspra = "docker system prune -a";
