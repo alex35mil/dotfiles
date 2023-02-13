@@ -70,6 +70,22 @@ function dls() {
   docker network ls
 }
 
+# Adds fingerprint to the filename
+function fp() {
+  FILENAME=$1
+  HASH=$(shasum -a 256 "$FILENAME" | awk '{print $1}' | xxd -r -p | base64 | head -c 10)
+
+  if [[ $FILENAME == *.* ]]; then
+    NEXT_FILENAME="${FILENAME%.*}-${HASH}.${FILENAME##*.}"
+  else
+    NEXT_FILENAME="${FILENAME}-${HASH}"
+  fi
+
+  mv "$FILENAME" "$NEXT_FILENAME"
+
+  echo "$NEXT_FILENAME"
+}
+
 # Generates a new ssh entity
 function gen-ssh() {
   ssh-keygen -f ~/.ssh/$@ -C "$@"
