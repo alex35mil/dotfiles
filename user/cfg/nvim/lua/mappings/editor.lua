@@ -45,13 +45,14 @@ function M.close_buffer()
         return
     end
 
+    local buffers = require "utils.buffers"
     local zenmode = require "utils.zenmode"
 
     if zenmode.is_active() then
         zenmode.deactivate()
     end
 
-    local current_buf_info = vim.fn.getbufinfo(current_buf)[1]
+    local current_buf_info = buffers.get_buf_info(current_buf)
 
     if current_buf_info == nil then
         vim.api.nvim_err_writeln "Can't get current buffer info"
@@ -87,7 +88,7 @@ function M.close_buffer()
 
         vim.cmd.bdelete(current_buf)
     else
-        local bufs = vim.fn.getbufinfo({ buflisted = 1 })
+        local bufs = buffers.get_listed_bufs({ sort_lastused = true })
 
         local next_buf = nil
 

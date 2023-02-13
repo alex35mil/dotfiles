@@ -15,8 +15,13 @@ function M.browser()
 end
 
 function M.buffer()
+    local buffers = require "utils.buffers"
+    local bufs = buffers.get_listed_bufs()
+
     builtin.buffers({
         initial_mode = "normal",
+        sort_mru = true,
+        ignore_current_buffer = #bufs > 1,
     })
 end
 
