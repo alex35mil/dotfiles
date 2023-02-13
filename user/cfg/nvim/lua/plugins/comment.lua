@@ -8,14 +8,14 @@ plugin.setup {
     -- LHS of toggle mappings in NORMAL mode
     toggler = {
         -- Line-comment toggle keymap
-        line = "<C-c>",
-        -- Block-comment toggle keyma
+        line = "gc",
+        -- Block-comment toggle keymap
         block = "<Leader>bc",
     },
     -- LHS of operator-pending mappings in NORMAL and VISUAL mode
     opleader = {
         -- Line-comment keymap
-        line = "<C-c>",
+        line = "gc",
         -- Block-comment keymap
         block = "<Leader>bc",
     },

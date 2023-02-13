@@ -399,7 +399,7 @@ impl Action {
             .collect::<Vec<StyledObject<String>>>();
 
         entries.push(console::style(" create".to_string()).dim());
-        entries.push(console::style(" cancel (or hit Esc)".to_string()).dim());
+        entries.push(console::style(" exit (or hit Esc)".to_string()).dim());
 
         let new_session_idx = sessions.len();
         let exit_idx = new_session_idx + 1;
