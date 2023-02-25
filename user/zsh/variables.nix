@@ -14,4 +14,6 @@
   ZELLIJ_RUNNER_ROOT_DIR = "Dev";
   ZELLIJ_RUNNER_IGNORE_DIRS = "node_modules,target";
   ZELLIJ_RUNNER_MAX_DIRS_DEPTH = "3";
+  ZELLIJ_RUNNER_LAYOUTS_DIR = ".config/zellij/layouts";
+  ZELLIJ_RUNNER_BANNERS_DIR = ".config/zellij/banners";
 }
