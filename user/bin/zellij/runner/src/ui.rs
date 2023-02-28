@@ -5,7 +5,9 @@ use std::{
 };
 
 use crossterm::{
-    event::{self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode},
+    event::{
+        self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode, KeyEvent, KeyModifiers,
+    },
     execute,
     terminal::{self, EnterAlternateScreen, LeaveAlternateScreen},
 };
@@ -459,6 +461,17 @@ where
         self.state.select(position);
     }
 
+    fn select_by<F>(&mut self, f: F)
+    where
+        F: Fn(&T) -> bool,
+    {
+        let position = self.items.iter().position(|i| match &i.value {
+            SelectorValue::Selectable(v) => f(v),
+            SelectorValue::Decortive => false,
+        });
+        self.state.select(position);
+    }
+
     fn next(&mut self) {
         let i = match self.state.selected() {
             Some(i) => Self::find_first_selectable(&self.items, i + 1, false).unwrap_or(i),
@@ -567,7 +580,7 @@ impl<'a> ActionSelectorScreen<'a> {
             });
         }
         items.push(SelectorItem {
-            label: " create".into(),
+            label: " create (or hit Ctrl-N)".into(),
             value: SelectorValue::Selectable(ActionSelectorItem::NewSession { input: None }),
         });
         items.push(SelectorItem {
@@ -598,23 +611,50 @@ impl<'a> ActionSelectorScreen<'a> {
 
     fn listen(&mut self, ctx: &UIContext) -> io::Result<EventResult> {
         if let Event::Key(key) = event::read()? {
-            match key.code {
-                KeyCode::Char(char) => {
+            match key {
+                KeyEvent {
+                    code: KeyCode::Char('n'),
+                    modifiers: KeyModifiers::CONTROL,
+                    ..
+                } => {
+                    self.selector.select_by(|value| match value {
+                        ActionSelectorItem::NewSession { input: _ } => true,
+                        ActionSelectorItem::Session { .. } | ActionSelectorItem::Exit => false,
+                    });
+                    return Ok(EventResult::Return);
+                }
+                KeyEvent {
+                    code: KeyCode::Char(char),
+                    ..
+                } => {
                     self.input.insert(char);
                     self.filter(ctx);
                 }
-                KeyCode::Backspace => {
+                KeyEvent {
+                    code: KeyCode::Backspace,
+                    ..
+                } => {
                     self.input.delete();
                     self.filter(ctx);
                 }
-                KeyCode::Down => {
+                KeyEvent {
+                    code: KeyCode::Down,
+                    ..
+                } => {
                     self.selector.next();
                 }
-                KeyCode::Up => {
+                KeyEvent {
+                    code: KeyCode::Up, ..
+                } => {
                     self.selector.previous();
                 }
-                KeyCode::Enter => return Ok(EventResult::Return),
-                KeyCode::Esc => return Ok(EventResult::Exit),
+                KeyEvent {
+                    code: KeyCode::Enter,
+                    ..
+                } => return Ok(EventResult::Return),
+                KeyEvent {
+                    code: KeyCode::Esc, ..
+                } => return Ok(EventResult::Exit),
                 _ => (),
             }
         }
