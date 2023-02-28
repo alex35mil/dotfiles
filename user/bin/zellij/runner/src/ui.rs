@@ -398,7 +398,11 @@ where
                         Ok(None) => continue,
                     };
                 }
-                EventResult::Exit => break Ok(ScreenResult::Action(Action::Exit(Ok(())))),
+                EventResult::Exit => {
+                    break Ok(ScreenResult::NextScreen(Box::new(
+                        ActionSelectorScreen::new(&ctx.sessions),
+                    )))
+                }
             };
         }
     }
@@ -881,7 +885,11 @@ impl<'a> Screen for DirSelectorScreen<'a> {
                         Err(error) => return Err(io::Error::new(io::ErrorKind::Other, error)),
                     };
                 }
-                EventResult::Exit => return Ok(ScreenResult::Action(Action::Exit(Ok(())))),
+                EventResult::Exit => {
+                    return Ok(ScreenResult::NextScreen(Box::new(
+                        ActionSelectorScreen::new(&ctx.sessions),
+                    )))
+                }
             }
         }
     }
@@ -991,7 +999,11 @@ impl Screen for SessionNameScreen {
                         }
                     };
                 }
-                EventResult::Exit => return Ok(ScreenResult::Action(Action::Exit(Ok(())))),
+                EventResult::Exit => {
+                    return Ok(ScreenResult::NextScreen(Box::new(
+                        ActionSelectorScreen::new(&ctx.sessions),
+                    )))
+                }
             }
         }
     }
@@ -1166,7 +1178,11 @@ impl<'a> Screen for LayoutSelectorScreen<'a> {
                         Err(error) => return Err(io::Error::new(io::ErrorKind::Other, error)),
                     };
                 }
-                EventResult::Exit => return Ok(ScreenResult::Action(Action::Exit(Ok(())))),
+                EventResult::Exit => {
+                    return Ok(ScreenResult::NextScreen(Box::new(
+                        ActionSelectorScreen::new(&ctx.sessions),
+                    )))
+                }
             }
         }
     }
