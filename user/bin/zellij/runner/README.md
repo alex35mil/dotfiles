@@ -22,7 +22,7 @@ zellij-runner my-session
 zellij-runner my-session my-layout
 ```
 
-To exit the runner, hit `Esc` at any point.
+To exit the runner, hit `Esc` on session selector screen, or `Ctrl-C` on any screen.
 
 ## Configuration
 ### Layouts
