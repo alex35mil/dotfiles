@@ -5,9 +5,7 @@ use std::{
 };
 
 use crossterm::{
-    event::{
-        self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode, KeyEvent, KeyModifiers,
-    },
+    event::{self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode, KeyModifiers},
     execute,
     terminal::{self, EnterAlternateScreen, LeaveAlternateScreen},
 };
@@ -357,23 +355,24 @@ where
 
     fn listen(&mut self) -> io::Result<EventResult> {
         if let Event::Key(key) = event::read()? {
-            match key.code {
-                KeyCode::Char('y') => {
+            match (key.code, key.modifiers) {
+                (KeyCode::Char('c'), KeyModifiers::CONTROL) => return Ok(EventResult::Exit),
+                (KeyCode::Char('y'), _) => {
                     self.selector.select(true);
                     return Ok(EventResult::Return);
                 }
-                KeyCode::Char('n') => {
+                (KeyCode::Char('n'), _) => {
                     self.selector.select(false);
                     return Ok(EventResult::Return);
                 }
-                KeyCode::Down => {
+                (KeyCode::Down, _) => {
                     self.selector.next();
                 }
-                KeyCode::Up => {
+                (KeyCode::Up, _) => {
                     self.selector.previous();
                 }
-                KeyCode::Enter => return Ok(EventResult::Return),
-                KeyCode::Esc => return Ok(EventResult::Exit),
+                (KeyCode::Enter, _) => return Ok(EventResult::Return),
+                (KeyCode::Esc, _) => return Ok(EventResult::Cancel),
                 _ => (),
             }
         }
@@ -398,11 +397,12 @@ where
                         Ok(None) => continue,
                     };
                 }
-                EventResult::Exit => {
+                EventResult::Cancel => {
                     break Ok(ScreenResult::NextScreen(Box::new(
                         ActionSelectorScreen::new(&ctx.sessions),
                     )))
                 }
+                EventResult::Exit => break Ok(ScreenResult::Action(Action::Exit(Ok(())))),
             };
         }
     }
@@ -541,6 +541,7 @@ where
 enum EventResult {
     Continue,
     Return,
+    Cancel,
     Exit,
 }
 
@@ -615,50 +616,31 @@ impl<'a> ActionSelectorScreen<'a> {
 
     fn listen(&mut self, ctx: &UIContext) -> io::Result<EventResult> {
         if let Event::Key(key) = event::read()? {
-            match key {
-                KeyEvent {
-                    code: KeyCode::Char('n'),
-                    modifiers: KeyModifiers::CONTROL,
-                    ..
-                } => {
+            match (key.code, key.modifiers) {
+                (KeyCode::Char('c'), KeyModifiers::CONTROL) => return Ok(EventResult::Exit),
+                (KeyCode::Char('n'), KeyModifiers::CONTROL) => {
                     self.selector.select_by(|value| match value {
                         ActionSelectorItem::NewSession { input: _ } => true,
                         ActionSelectorItem::Session { .. } | ActionSelectorItem::Exit => false,
                     });
                     return Ok(EventResult::Return);
                 }
-                KeyEvent {
-                    code: KeyCode::Char(char),
-                    ..
-                } => {
+                (KeyCode::Char(char), _) => {
                     self.input.insert(char);
                     self.filter(ctx);
                 }
-                KeyEvent {
-                    code: KeyCode::Backspace,
-                    ..
-                } => {
+                (KeyCode::Backspace, _) => {
                     self.input.delete();
                     self.filter(ctx);
                 }
-                KeyEvent {
-                    code: KeyCode::Down,
-                    ..
-                } => {
+                (KeyCode::Down, _) => {
                     self.selector.next();
                 }
-                KeyEvent {
-                    code: KeyCode::Up, ..
-                } => {
+                (KeyCode::Up, _) => {
                     self.selector.previous();
                 }
-                KeyEvent {
-                    code: KeyCode::Enter,
-                    ..
-                } => return Ok(EventResult::Return),
-                KeyEvent {
-                    code: KeyCode::Esc, ..
-                } => return Ok(EventResult::Exit),
+                (KeyCode::Enter, _) => return Ok(EventResult::Return),
+                (KeyCode::Esc, _) => return Ok(EventResult::Exit),
                 _ => (),
             }
         }
@@ -712,7 +694,9 @@ impl<'a> Screen for ActionSelectorScreen<'a> {
                         Err(error) => return Err(io::Error::new(io::ErrorKind::Other, error)),
                     };
                 }
-                EventResult::Exit => return Ok(ScreenResult::Action(Action::Exit(Ok(())))),
+                EventResult::Cancel | EventResult::Exit => {
+                    return Ok(ScreenResult::Action(Action::Exit(Ok(()))))
+                }
             }
         }
     }
@@ -822,23 +806,24 @@ impl<'a> DirSelectorScreen<'a> {
 
     fn listen(&mut self) -> io::Result<EventResult> {
         if let Event::Key(key) = event::read()? {
-            match key.code {
-                KeyCode::Char(char) => {
+            match (key.code, key.modifiers) {
+                (KeyCode::Char('c'), KeyModifiers::CONTROL) => return Ok(EventResult::Exit),
+                (KeyCode::Char(char), _) => {
                     self.input.insert(char);
                     self.filter();
                 }
-                KeyCode::Backspace => {
+                (KeyCode::Backspace, _) => {
                     self.input.delete();
                     self.filter();
                 }
-                KeyCode::Down => {
+                (KeyCode::Down, _) => {
                     self.selector.next();
                 }
-                KeyCode::Up => {
+                (KeyCode::Up, _) => {
                     self.selector.previous();
                 }
-                KeyCode::Enter => return Ok(EventResult::Return),
-                KeyCode::Esc => return Ok(EventResult::Exit),
+                (KeyCode::Enter, _) => return Ok(EventResult::Return),
+                (KeyCode::Esc, _) => return Ok(EventResult::Cancel),
                 _ => (),
             }
         }
@@ -885,11 +870,12 @@ impl<'a> Screen for DirSelectorScreen<'a> {
                         Err(error) => return Err(io::Error::new(io::ErrorKind::Other, error)),
                     };
                 }
-                EventResult::Exit => {
+                EventResult::Cancel => {
                     return Ok(ScreenResult::NextScreen(Box::new(
                         ActionSelectorScreen::new(&ctx.sessions),
                     )))
                 }
+                EventResult::Exit => return Ok(ScreenResult::Action(Action::Exit(Ok(())))),
             }
         }
     }
@@ -931,15 +917,16 @@ impl SessionNameScreen {
 
     fn listen(&mut self) -> io::Result<EventResult> {
         if let Event::Key(key) = event::read()? {
-            match key.code {
-                KeyCode::Char(char) => {
+            match (key.code, key.modifiers) {
+                (KeyCode::Char('c'), KeyModifiers::CONTROL) => return Ok(EventResult::Exit),
+                (KeyCode::Char(char), _) => {
                     self.input.insert(char);
                 }
-                KeyCode::Backspace => {
+                (KeyCode::Backspace, _) => {
                     self.input.delete();
                 }
-                KeyCode::Enter => return Ok(EventResult::Return),
-                KeyCode::Esc => return Ok(EventResult::Exit),
+                (KeyCode::Enter, _) => return Ok(EventResult::Return),
+                (KeyCode::Esc, _) => return Ok(EventResult::Cancel),
                 _ => (),
             }
         }
@@ -999,10 +986,13 @@ impl Screen for SessionNameScreen {
                         }
                     };
                 }
-                EventResult::Exit => {
+                EventResult::Cancel => {
                     return Ok(ScreenResult::NextScreen(Box::new(
                         ActionSelectorScreen::new(&ctx.sessions),
                     )))
+                }
+                EventResult::Exit => {
+                    return Ok(ScreenResult::Action(Action::Exit(Ok(()))));
                 }
             }
         }
@@ -1113,23 +1103,24 @@ impl<'a> LayoutSelectorScreen<'a> {
 
     fn listen(&mut self) -> io::Result<EventResult> {
         if let Event::Key(key) = event::read()? {
-            match key.code {
-                KeyCode::Char(char) => {
+            match (key.code, key.modifiers) {
+                (KeyCode::Char('c'), KeyModifiers::CONTROL) => return Ok(EventResult::Exit),
+                (KeyCode::Char(char), _) => {
                     self.input.insert(char);
                     self.filter();
                 }
-                KeyCode::Backspace => {
+                (KeyCode::Backspace, _) => {
                     self.input.delete();
                     self.filter();
                 }
-                KeyCode::Down => {
+                (KeyCode::Down, _) => {
                     self.selector.next();
                 }
-                KeyCode::Up => {
+                (KeyCode::Up, _) => {
                     self.selector.previous();
                 }
-                KeyCode::Enter => return Ok(EventResult::Return),
-                KeyCode::Esc => return Ok(EventResult::Exit),
+                (KeyCode::Enter, _) => return Ok(EventResult::Return),
+                (KeyCode::Esc, _) => return Ok(EventResult::Exit),
                 _ => (),
             }
         }
@@ -1178,10 +1169,13 @@ impl<'a> Screen for LayoutSelectorScreen<'a> {
                         Err(error) => return Err(io::Error::new(io::ErrorKind::Other, error)),
                     };
                 }
-                EventResult::Exit => {
+                EventResult::Cancel => {
                     return Ok(ScreenResult::NextScreen(Box::new(
                         ActionSelectorScreen::new(&ctx.sessions),
                     )))
+                }
+                EventResult::Exit => {
+                    return Ok(ScreenResult::Action(Action::Exit(Ok(()))));
                 }
             }
         }
