@@ -237,9 +237,9 @@ dependencies = [
 
 [[package]]
 name = "base64"
-version = "0.13.1"
+version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9e1b586273c5702936fe7b7d6896644d8be71e6314cfe09d3167c95f712589e8"
+checksum = "a4a4ddaa51a5bc52a6948f74c06d20aaaddb71924eab79b8c97a8c556e942d6a"
 
 [[package]]
 name = "bitflags"
@@ -311,9 +311,9 @@ checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
 name = "chrono"
-version = "0.4.23"
+version = "0.4.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "16b0a3d9ed01224b22057780a37bb8c5dbfe1be8ba48678e7bf57ec4b385411f"
+checksum = "4e3c5919066adf22df73762e50cffcde3a758f2a848b113b586d1f86728b673b"
 dependencies = [
  "iana-time-zone",
  "js-sys",
@@ -1991,9 +1991,9 @@ dependencies = [
 
 [[package]]
 name = "termwiz"
-version = "0.19.0"
+version = "0.20.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1c18a622b077791579bcf2a631c29d552fedba6816701296dbe465ad01845fda"
+checksum = "9509a978a10fcbace4991deae486ae10885e0f4c2c465123e08c9714a90648fa"
 dependencies = [
  "anyhow",
  "base64",
@@ -2523,9 +2523,9 @@ dependencies = [
 
 [[package]]
 name = "zellij-tile"
-version = "0.34.4"
+version = "0.35.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ffc63515193768736a5e18fd885f224839f24b821ae8d4e2f0580ec65c3d3f40"
+checksum = "97e7041b097741af6ac0087e26db29408b488dfda5a32008246b35b9acbe525b"
 dependencies = [
  "clap",
  "serde",
@@ -2537,18 +2537,18 @@ dependencies = [
 
 [[package]]
 name = "zellij-tile-utils"
-version = "0.34.4"
+version = "0.35.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "81db90772241d18aab6abdea1960a1152c522dc5b84e2f6c121750b966f1eba7"
+checksum = "f64e286b6dd96d0f2db9f932e67ba7169f07697ace318401099221f051c8b88f"
 dependencies = [
  "ansi_term",
 ]
 
 [[package]]
 name = "zellij-utils"
-version = "0.34.4"
+version = "0.35.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f5f426332f324f52085687ee69e9863a2feba1ec85f492cd73e822cf75d996bf"
+checksum = "63d11b9d8529cc8813bd6c2fbee1a4ceebf8a2a1caa2ed04c17037df55eb2e4c"
 dependencies = [
  "anyhow",
  "async-std",
@@ -2568,6 +2568,7 @@ dependencies = [
  "miette 3.3.0",
  "nix 0.23.2",
  "once_cell",
+ "percent-encoding",
  "regex",
  "rmp-serde",
  "serde",
