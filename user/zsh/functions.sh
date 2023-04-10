@@ -43,6 +43,13 @@ function w() {
   fi
 }
 
+# Creates new Zellij session or attaches to existing one
+# based on the current directory name
+function s() {
+  dir=$(basename "$(pwd)")
+  zellij attach --create "$dir"
+}
+
 # Creates a new directory and enters it
 function mkd() {
   mkdir -p $@ && cd $_
@@ -55,7 +62,7 @@ function gcl() {
 
 # Initializes git repository and creates initial commit
 function ginit() {
-  mkd && git init && git commit -m "Initial commit" --allow-empty
+  git init && git commit -m "Initial commit" --allow-empty
 }
 
 # Prints Docker stuff

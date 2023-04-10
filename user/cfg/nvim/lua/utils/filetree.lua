@@ -12,4 +12,8 @@ function M.is_active()
     return M.is_tree(active_buf)
 end
 
+function M.close()
+    vim.cmd "NvimTreeClose"
+end
+
 return M

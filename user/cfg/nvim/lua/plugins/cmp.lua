@@ -19,33 +19,7 @@ plugin.setup {
         ["<C-k>"] = mapping.scroll_docs(-4),
         ["<C-j>"] = mapping.scroll_docs(4),
         ["<C-c>"] = mapping.complete(),
-        ["<Esc>"] = mapping.abort(),
-        ["<Tab>"] = mapping(
-            function(fallback)
-                if plugin.visible() then
-                    plugin.select_next_item()
-                    -- FIXME: Tab causes weird jumps in insert mode
-                    -- elseif require("luasnip").expand_or_jumpable() then
-                    -- vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
-                else
-                    fallback()
-                end
-            end,
-            { "i", "s" }
-        ),
-        ["<S-Tab>"] = mapping(
-            function(fallback)
-                if plugin.visible() then
-                    plugin.select_prev_item()
-                    -- FIXME: Tab causes weird jumps in insert mode
-                    -- elseif require("luasnip").jumpable(-1) then
-                    -- vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
-                else
-                    fallback()
-                end
-            end,
-            { "i", "s" }
-        ),
+        ["<D-Esc>"] = mapping.abort(),
         ["<CR>"] = mapping.confirm({
             behavior = plugin.ConfirmBehavior.Insert,
             select = true,
@@ -74,7 +48,11 @@ plugin.setup {
             })(entry, vim_item)
             local strings = vim.split(kind.kind, "%s", { trimempty = true })
             kind.kind = " " .. strings[1] .. " "
-            kind.menu = "    [" .. kind.menu .. ": " .. strings[2] .. "]"
+            if strings[2] then
+                kind.menu = "    [" .. kind.menu .. ": " .. strings[2] .. "]"
+            else
+                kind.menu = "    [" .. kind.menu .. "]"
+            end
             return kind
         end,
     },

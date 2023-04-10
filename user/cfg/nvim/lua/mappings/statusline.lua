@@ -17,6 +17,8 @@ function M.toggle_filename()
     end
 
     plugin.setup(config)
+
+    vim.cmd "set showtabline=1"
 end
 
 return M

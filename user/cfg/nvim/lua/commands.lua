@@ -13,13 +13,15 @@ local autocmds = {
             callback = function()
                 if vim.v.vim_did_enter then
                     local view = require "utils.view"
-                    local windows = view.get_tab_windows_without_filetree()
+                    local windows = view.get_tab_windows_with_listed_buffers()
 
                     if #windows == 1 then
-                        require("utils.zenmode").activate()
+                        require("utils.zenmode").toggle()
                     else
                         require("nvim-tree.api").tree.open()
                     end
+
+                    vim.cmd "LualineRenameTab editor"
                 end
             end,
         },
@@ -27,7 +29,17 @@ local autocmds = {
     { { "BufEnter" }, { pattern = { "*.md", "*.mdx" }, command = "setlocal wrap" } },
     { { "Filetype" }, { pattern = "markdown", command = "lua vim.b.minitrailspace_disable = true" } },
     { { "TermOpen" }, { pattern = "*", command = "lua vim.b.minitrailspace_disable = true" } },
-    { { "FocusLost" }, { pattern = "*", command = "silent! wa" } },
+    {
+        { "FocusLost" },
+        {
+            pattern = "*",
+            callback = function()
+                -- for some reason, ++nested doesn't trigger BufWritePre
+                vim.cmd "doautocmd BufWritePre <afile>"
+                vim.cmd "silent! wa"
+            end,
+        },
+    },
     {
         { "BufWritePre" },
         {
@@ -39,10 +51,12 @@ local autocmds = {
                 local client
 
                 for _, c in ipairs(clients) do
-                    for _, ft in ipairs(c.config.filetypes) do
-                        if ft == filetype then
-                            client = c
-                            break
+                    if c.config ~= nil and c.config.filetypes ~= nil then
+                        for _, ft in ipairs(c.config.filetypes) do
+                            if ft == filetype and c.server_capabilities.documentFormattingProvider then
+                                client = c
+                                break
+                            end
                         end
                     end
 
@@ -51,19 +65,27 @@ local autocmds = {
                     end
                 end
 
-                if client and client.server_capabilities.documentFormattingProvider then
+                if client then
                     vim.lsp.buf.format { async = false }
                 else
-                    local trimmer = require "mini.trailspace"
+                    local bufname = vim.fn.expand "<afile>"
+                    local bufnr = vim.fn.bufnr(bufname)
 
-                    vim.api.nvim_buf_set_lines(0, 0, vim.fn.nextnonblank(1) - 1, true, {})
+                    if bufnr == -1 then return end
 
-                    if filetype ~= "markdown" then
-                        trimmer.trim()
+                    local modifiable = vim.api.nvim_buf_get_option(bufnr, "modifiable")
+
+                    if modifiable then
+                        local trimmer = require "mini.trailspace"
+
+                        vim.api.nvim_buf_set_lines(0, 0, vim.fn.nextnonblank(1) - 1, true, {})
+
+                        if filetype ~= "markdown" then
+                            trimmer.trim()
+                        end
+
+                        trimmer.trim_last_lines()
                     end
-
-                    trimmer.trim_last_lines()
-
                 end
             end,
         },

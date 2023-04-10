@@ -20,7 +20,7 @@ opt.smartindent = true
 opt.tabstop = 4
 opt.softtabstop = 4
 
-opt.fillchars = { eob = " " }
+opt.fillchars = { eob = " ", diff = "" }
 opt.ignorecase = true
 opt.smartcase = true
 opt.mouse = "a"
@@ -30,6 +30,8 @@ opt.timeoutlen = 500
 
 opt.splitright = true
 opt.splitbelow = true
+
+opt.showtabline = 1
 
 opt.wrap = false
 
@@ -42,6 +44,7 @@ opt.whichwrap:append {
     l = true,
 }
 
+opt.autoread = true
 opt.autowrite = true
 opt.autowriteall = true
 

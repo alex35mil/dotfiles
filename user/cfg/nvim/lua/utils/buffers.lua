@@ -1,7 +1,12 @@
 local M = {}
 
-function M.get_buf_info(buf)
-    return vim.fn.getbufinfo(buf)[1]
+function M.get_buf_info(bufnr)
+    return vim.fn.getbufinfo(bufnr)[1]
+end
+
+function M.is_buf_listed(bufnr)
+    local buf = M.get_buf_info(bufnr)
+    return buf.listed == 1
 end
 
 function M.get_listed_bufs(opts)

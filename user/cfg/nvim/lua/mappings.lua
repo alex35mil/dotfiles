@@ -1,7 +1,9 @@
 local editor = require "mappings.editor"
 local git = require "mappings.git"
+local lsp = require "mappings.lsp"
 local telescope = require "mappings.telescope"
 local statusline = require "mappings.statusline"
+local terminal = require "mappings.terminal"
 
 local function map(mappings)
     local wk = require "which-key"
@@ -22,89 +24,188 @@ local function map(mappings)
     wk.register(mappings, { noremap = true, silent = true })
 end
 
----@format disable
-
 -- NB!: `which-key` freaks out when `mode = ""`
--- NB!: sometimes, when arg to `map` has multiple keys, one or more keys don't apply
+-- NB!: Sometimes, when arg of `map` has multiple keys, one or more keys don't apply
 
-map { ["<M-k>"] = { "Insert new line above", "O<Esc>", mode = "n" } }
-map { ["<M-j>"] = { "Insert new line below", "o<Esc>", mode = "n" } }
-map { ["<M-k>"] = { "Insert new line above", "<Esc>O", mode = "i" } }
-map { ["<M-j>"] = { "Insert new line below", "<Esc>o", mode = "i" } }
+map { ["<D-c>"] = { "Copy selected text", [["+y]], mode = "v" } }
+map { ["<D-v>"] = { "Paste text", [["+P]], mode = { "n", "v" } } }
+map { ["<D-v>"] = { "Paste text", "<C-r>+", mode = { "i", "c" } } }
+map { ["<D-v>"] = { "Paste text", terminal.paste, mode = "t", expr = true } }
 
-map { ["<M-d>"] = { "Duplicate line", "yyp",      mode = "n" } }
-map { ["<M-d>"] = { "Duplicate line", "<Esc>yyp", mode = "i" } }
-map { ["<M-d>"] = { "Duplicate line", "y'>p",     mode = "v" } }
+map {
+    ["p"] = {
+        "Don't replace clipboard content when pasting",
+        function() return 'pgv"' .. vim.v.register .. "ygv" end,
+        mode = "v",
+        expr = true,
+    },
+}
+map { ["d"] = { "Don't replace clipboard content when deleting", [["_d]], mode = { "n", "v" } } }
+map { ["s"] = { "Don't replace clipboard content when inserting", [["xs]], mode = "v" } }
+map { ["c"] = { "Don't replace clipboard content when changing", [["xc]], mode = { "n", "v" } } }
 
-map { ["<M-Up>"]   = { "Move line up",   "<Cmd>m .-2<CR>==",        mode = "n" } }
-map { ["<M-Down>"] = { "Move line down", "<Cmd>m .+1<CR>==",        mode = "n" } }
-map { ["<M-Up>"]   = { "Move line up",   "<Esc><Cmd>m .-2<CR>==gi", mode = "i" } }
+map { ["<C-k>"] = { "Insert new line above", "O<Esc>", mode = "n" } }
+map { ["<C-j>"] = { "Insert new line below", "o<Esc>", mode = "n" } }
+map { ["<C-k>"] = { "Insert new line above", "<Esc>O", mode = "i" } }
+map { ["<C-j>"] = { "Insert new line below", "<Esc>o", mode = "i" } }
+
+map { ["<C-d>"] = { "Duplicate line", [["yyy"yp]], mode = "n" } }
+map { ["<C-d>"] = { "Duplicate line", [[<Esc>"yyy"ypgi]], mode = "i" } }
+map { ["<C-d>"] = { "Duplicate selection", [["yy'>"ypgv]], mode = "v" } }
+
+map { ["<M-Up>"] = { "Move line up", "<Cmd>m .-2<CR>==", mode = "n" } }
+map { ["<M-Down>"] = { "Move line down", "<Cmd>m .+1<CR>==", mode = "n" } }
+map { ["<M-Up>"] = { "Move line up", "<Esc><Cmd>m .-2<CR>==gi", mode = "i" } }
 map { ["<M-Down>"] = { "Move line down", "<Esc><Cmd>m .+1<CR>==gi", mode = "i" } }
-map { ["<M-Up>"]   = { "Move line up",   "<Cmd>m '<-2<CR>gv=gv",    mode = "v" } }
-map { ["<M-Down>"] = { "Move line down", "<Cmd>m '>+1<CR>gv=gv",    mode = "v" } }
+map { ["<M-Up>"] = { "Move selected lines up", "<Cmd>m '<-2<CR>gv=gv", mode = "v" } }
+map { ["<M-Down>"] = { "Move selected lines down", "<Cmd>m '>+1<CR>gv=gv", mode = "v" } }
 
-map { ["<Tab>"]   = { "Indent",   ">>",  mode = "n" } }
-map { ["<M-Tab>"] = { "Unindent", "<<",  mode = "n" } }
-map { ["<Tab>"]   = { "Indent",   ">gv", mode = "v" } }
-map { ["<M-Tab>"] = { "Unindent", "<gv", mode = "v" } }
+map { ["<Tab>"] = { "Indent", ">>", mode = "n" } }
+map { ["<S-Tab>"] = { "Unindent", "<<", mode = "n" } }
+map { ["<Tab>"] = { "Indent", ">gv", mode = "v" } }
+map { ["<S-Tab>"] = { "Unindent", "<gv", mode = "v" } }
 
-map { ["<C-a>"] = { "Select all", "ggVG",      mode = "n"          } }
-map { ["<C-a>"] = { "Select all", "<Esc>ggVG", mode = { "i", "v" } } }
+map { ["<D-a>"] = { "Select all", "ggVG", mode = "n" } }
+map { ["<D-a>"] = { "Select all", "<Esc>ggVG", mode = { "i", "v" } } }
 
-map { ["<C-k>"] = { "Move cursor half-screen up",   "<C-u>", mode = "n" } }
-map { ["<C-j>"] = { "Move cursor half-screen down", "<C-d>", mode = "n" } }
+map { ["<D-k>"] = { "Move cursor half-screen up", "<C-u>", mode = { "n", "v" } } }
+map { ["<D-j>"] = { "Move cursor half-screen down", "<C-d>", mode = { "n", "v" } } }
 
-map { ["<C-h>h"] = { "Hop: 1 chars", "<Cmd>HopChar2<CR>", mode = { "n", "i", "v" } } }
-map { ["<C-h>w"] = { "Hop: word",    "<Cmd>HopWord<CR>",  mode = { "n", "i", "v" } } }
-
-map { ["<Leader>m"]   = { "History: back",                 "<C-o>",         mode = "n" } }
-map { ["<Leader>,"]   = { "History: forward",              "<C-i>",         mode = "n" } }
+map { ["<D-h>"] = { "History: back", "<C-o>", mode = "n" } }
+map { ["<D-l>"] = { "History: forward", "<C-i>", mode = "n" } }
 map { ["<LeftMouse>"] = { "History: include mouse clicks", "m'<LeftMouse>", mode = "n" } }
 
-map { ["*"]     = { "Don't jump on *",                                  "<Cmd>keepjumps normal! mi*`i<CR>", mode = "n"                 } }
-map { ["<Esc>"] = { "Drop search highlight and clear the command line", "<Cmd>silent noh<CR>:<BS>",         mode = "n", silent = false } }
+map { ["s"] = { "Start pounce motion", "<Cmd>Pounce<CR>", mode = "n" } }
+map { ["S"] = { "Start pounce motion", "<Cmd>Pounce<CR>", mode = "v" } }
 
-map { ["<C-u>"] = { "Undo", "<Esc>ui",     mode = "i" } }
-map { ["<C-r>"] = { "Redo", "<Esc><C-r>i", mode = "i" } }
+map { ["*"] = { "Don't jump on *", "<Cmd>keepjumps normal! mi*`i<CR>", mode = { "n", "v" } } }
+map { ["<Esc>"] = { "Drop search highlight and clear the command line", "<Cmd>silent noh<CR>:<BS>", mode = "n", silent = false } }
 
-map { ["<C-c>"] = { "Toggle comments", "<Esc><Cmd>normal <C-c><CR>gi", mode = "i" } }
+map { ["<D-u>"] = { "Undo", "<Esc>ui", mode = "i" } }
+map { ["<D-r>"] = { "Redo", "<Esc><C-r>i", mode = "i" } }
+map { ["<D-r>"] = { "Redo", "<C-r>", mode = { "n", "v" } } }
 
-map { ["<C-s>"] = { "Save file", "<Cmd>w<CR>",      mode = "n"          } }
-map { ["<C-s>"] = { "Save file", "<Esc><Cmd>w<CR>", mode = { "i", "v" } } }
+map { ["<D-/>"] = { "Toggle comments", "<Plug>(comment_toggle_linewise_current)", mode = "n" } }
+map { ["<D-/>"] = { "Toggle comments", "<Plug>(comment_toggle_linewise_visual)", mode = "v" } }
+map { ["<D-/>"] = { "Toggle comments", "<Esc><Plug>(comment_toggle_linewise_current)gi", mode = "i" } }
 
-map { ["<C-Left>"]  = { "Move to window on the left",  "<Cmd>wincmd h<CR>", mode = { "n", "t" } } }
-map { ["<C-Down>"]  = { "Move to window below",        "<Cmd>wincmd j<CR>", mode = { "n", "t" } } }
-map { ["<C-Up>"]    = { "Move to window above",        "<Cmd>wincmd k<CR>", mode = { "n", "t" } } }
-map { ["<C-Right>"] = { "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "t" } } }
+map { ["<D-s>"] = { "Save files", "<Cmd>silent! wa<CR>", mode = "n" } }
+map { ["<D-s>"] = { "Save files", "<Esc><Cmd>silent! wa<CR>", mode = { "i", "v" } } }
 
-map { ["<C-z>"]  = { "Toggle zen mode",                            editor.zenmode,                                                                mode = { "n", "i", "v"      } } }
-map { ["<C-w>"]  = { "Close current buffer",                       editor.close_buffer,                                                           mode = { "n", "i", "v"      } } }
-map { ["<M-w>w"] = { "Close all buffers except current & unsaved", function() editor.close_all_bufs_except_current({ incl_unsaved = false }) end, mode = { "n", "i", "v"      } } }
-map { ["<M-w>a"] = { "Close all buffers except current",           function() editor.close_all_bufs_except_current({ incl_unsaved = true })  end, mode = { "n", "i", "v"      } } }
-map { ["<C-q>"]  = { "Quit editor",                                editor.quit,                                                                   mode = { "n", "i", "v", "t" } } }
+map { ["<D-Left>"] = { "Move to window on the left", "<Cmd>wincmd h<CR>", mode = { "n", "t" } } }
+map { ["<D-Down>"] = { "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n", "t" } } }
+map { ["<D-Up>"] = { "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "t" } } }
+map { ["<D-Right>"] = { "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "t" } } }
 
-map { ["<C-o>"]  = { "Open file browser", telescope.browser, mode = { "n", "t" } } } -- FIXME: "t" needs proper cwd
-map { ["<C-p>"]  = { "Find command",      telescope.command, mode = "n"          } }
-map { ["<C-b>"]  = { "Find buffer",       telescope.buffer,  mode = "n"          } }
-map { ["<C-f>f"] = { "Find file",         telescope.file,    mode = "n"          } }
-map { ["<C-f>t"] = { "Find text",         telescope.text,    mode = "n"          } }
+map { ["<D-z>"] = { "Toggle zen mode", editor.zenmode, mode = { "n", "i", "v" } } }
+map { ["<D-n>"] = { "Open new buffer in the current window", "<Cmd>enew<CR>", mode = { "n", "i", "v" } } }
+map { ["<M-w>j"] = { "Open new horizontal split", "<Cmd>new<CR>", mode = "n" } }
+map { ["<M-w>l"] = { "Open new vertical split", "<Cmd>vnew<CR>", mode = "n" } }
+map {
+    ["<D-w>"] = {
+        "Close current buffer and close current window if there are multiple",
+        function() editor.close_buffer({ should_close_window = true }) end,
+        mode = { "n", "i", "v", "t" },
+    },
+}
+map {
+    ["<M-w>"] = {
+        "Close current buffer, but do not close current window when there are multiple",
+        function() editor.close_buffer({ should_close_window = false }) end,
+        mode = { "n", "i", "v" },
+    },
+}
+map {
+    ["<Leader>ww"] = {
+        "Close all buffers except current & unsaved",
+        function() editor.close_all_bufs_except_current({ incl_unsaved = false }) end,
+        mode = "n"
+    },
+}
+map {
+    ["<Leader>wa"] = {
+        "Close all buffers except current",
+        function() editor.close_all_bufs_except_current({ incl_unsaved = true }) end,
+        mode = "n"
+    },
+}
+map { ["<C-q>"] = { "Quit editor", editor.quit, mode = { "n", "i", "v", "t" } } }                       -- It is actually <D-q> remapped via Karabiner
 
-map { ["<Leader>e"] = { "Toggle file tree",       "<Cmd>NvimTreeToggle<CR>",   mode = { "n", "v" } } } -- NOTE: Requires disabling of the default keymap edit_in_place
-map { ["<Leader>/"] = { "Find file in file tree", "<Cmd>NvimTreeindFile<CR>", mode = { "n", "v" } } }
+map { ["<D-o>"] = { "Open file browser", telescope.open_file_browser, mode = { "n", "i", "v", "t" } } } -- FIXME: "t" needs proper cwd
+map { ["<D-b>"] = { "Find buffer", telescope.buffer, mode = { "n", "i", "v" } } }
+map { ["<D-f>f"] = { "Find file", telescope.find_file, mode = { "n", "i", "v" } } }
+map { ["<D-f>t"] = { "Find text", telescope.find_text, mode = { "n", "i", "v" } } }
 
-map { ["<C-t>"] = { "Toggle terminal", "<Cmd>ToggleTerm<CR>", mode = { "n", "t" } } }
+map { ["<Leader>tc"] = { "Find command", telescope.command, mode = "n" } }
+map { ["<Leader>th"] = { "Open highlights list", "<Cmd>Telescope highlights<CR>", mode = "n" } }
 
-map { ["<C-g>"] = { "Git: Show lazygit", git.toggle,                       mode = "n" } }
-map { ["<M-g>"] = { "Git: Stage buffer", "<Cmd>Gitsigns stage_buffer<CR>", mode = "n" } }
+map {
+    ["<D-d>a"] = {
+        "List all LSP diagnostics for the whole workspace",
+        function() telescope.diagnostics({ current_buffer = false }) end,
+        mode = { "n", "i", "v" },
+    },
+}
+map {
+    ["<D-d>e"] = {
+        "List LSP diagnostics with ERROR severity for the whole workspace",
+        function() telescope.diagnostics({ min_severity = "ERROR", current_buffer = false }) end,
+        mode = { "n", "i", "v" },
+    },
+}
+map {
+    ["<D-d>w"] = {
+        "List LSP diagnostics with WARN & ERROR severities for the whole workspace",
+        function() telescope.diagnostics({ min_severity = "WARN", current_buffer = false }) end,
+        mode = { "n", "i", "v" },
+    },
+}
+map {
+    ["<D-d>ca"] = {
+        "List all LSP diagnostics for the current buffer only",
+        function() telescope.diagnostics({ current_buffer = true }) end,
+        mode = { "n", "i", "v" },
+    },
+}
+map {
+    ["<D-d>ce"] = {
+        "List LSP diagnostics with ERROR severity for the current buffer only",
+        function() telescope.diagnostics({ min_severity = "ERROR", current_buffer = true }) end,
+        mode = { "n", "i", "v" },
+    },
+}
+map {
+    ["<D-d>cw"] = {
+        "List LSP diagnostics with WARN & ERROR severities for the current buffer only",
+        function() telescope.diagnostics({ min_severity = "WARN", current_buffer = true }) end,
+        mode = { "n", "i", "v" },
+    },
+}
+
+map { ["<D-p>"] = { "Open plugins manager", "<Cmd>Lazy<CR>", mode = "n" } }
+map { ["<C-p>"] = { "Open package manager", "<Cmd>Mason<CR>", mode = "n" } }
+
+map { ["<D-e>"] = { "Toggle file tree", "<Cmd>NvimTreeToggle<CR>", mode = { "n", "i", "v" } } }
+
+map { ["<D-t>"] = { "Toggle terminal", terminal.toggle_tab, mode = { "n", "i", "v", "t" } } }
+map { ["<C-t>"] = { "Toggle terminal", terminal.toggle_float, mode = { "n", "i", "v", "t" } } }
+map { ["<C-n>"] = { "Exit terminal mode", "<C-\\><C-n>", mode = "t" } }
+
+map { ["<D-g>m"] = { "Git: Show lazygit", "<Cmd>LazyGit<CR>", mode = "n" } }
+map { ["<D-g>d"] = { "Git: Toggle diff", git.toggle_diff, mode = "n" } }
+map { ["<D-g>j"] = { "Git: Jump to the next hunk", "<Cmd>Gitsigns next_hunk<CR>", mode = "n" } }
+map { ["<D-g>k"] = { "Git: Jump to the previous hunk", "<Cmd>Gitsigns prev_hunk<CR>", mode = "n" } }
+map { ["<D-g>b"] = { "Git: Show line blame", "<Cmd>Gitsigns blame_line<CR>", mode = "n" } }
 
 map { ["<M-l>"] = { "Toggle filename in statusline", statusline.toggle_filename, mode = { "n", "i", "v" } } }
 
-map { ["<C-d>"]      = { "LSP: Toggle diagnostics",  "<Cmd>TroubleToggle<CR>",                mode = "n" } }
-map { ["<Leader>j"]  = { "LSP: Jump to definition",  "<Cmd>Lspsaga goto_definition<CR>",      mode = "n" } }
-map { ["<Leader>r"]  = { "LSP: Rename",              "<Cmd>Lspsaga rename<CR>",               mode = "n" } }
-map { ["<Leader>o"]  = { "LSP: Outline",             "<Cmd>Lspsaga outline<CR>",              mode = "n" } }
-map { ["<Leader>a"]  = { "LSP: Code actions",        "<Cmd>Lspsaga code_action<CR>",          mode = "n" } }
-map { ["<Leader>h"]  = { "LSP: Hint",                "<Cmd>Lspsaga hover_doc<CR>",            mode = "n" } }
-map { ["<Leader>f"]  = { "LSP: Finder",              "<Cmd>Lspsaga lsp_finder<CR>",           mode = "n" } }
-map { ["<Leader>dj"] = { "LSP: Diagnostic next",     "<Cmd>Lspsaga diagnostic_jump_next<CR>", mode = "n" } }
-map { ["<Leader>dk"] = { "LSP: Diagnostic previous", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", mode = "n" } }
+map { ["<D-Enter>"] = { "LSP: Jump to definition", "<Cmd>Lspsaga goto_definition<CR>", mode = "n" } }
+map { ["<C-r>"] = { "LSP: Rename", "<Cmd>Lspsaga rename<CR>", mode = "n" } }
+map { ["<C-o>"] = { "LSP: Outline", "<Cmd>Lspsaga outline<CR>", mode = "n" } }
+map { ["<C-a>"] = { "LSP: Code actions", "<Cmd>Lspsaga code_action<CR>", mode = "n" } }
+map { ["<C-h>"] = { "LSP: Hint", "<Cmd>Lspsaga hover_doc<CR>", mode = "n" } }
+map { ["<C-f>"] = { "LSP: Finder", "<Cmd>Lspsaga lsp_finder<CR>", mode = "n" } }
+map { ["}"] = { "LSP: Diagnostic next error", lsp.jump_to_next_error, mode = "n" } }
+map { ["{"] = { "LSP: Diagnostic previous error", lsp.jump_to_prev_error, mode = "n" } }
+map { ["<C-}>"] = { "LSP: Diagnostic next warning", lsp.jump_to_next_warning, mode = "n" } }
+map { ["<C-{>"] = { "LSP: Diagnostic previous warning", lsp.jump_to_prev_warning, mode = "n" } }

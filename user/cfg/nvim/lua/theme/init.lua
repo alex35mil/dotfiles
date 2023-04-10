@@ -10,6 +10,23 @@ for key, value in pairs(palette) do
     color[key] = hsl(value)
 end
 
+vim.g.terminal_color_0 = palette.bg             -- Black
+vim.g.terminal_color_1 = palette.red            -- Red
+vim.g.terminal_color_2 = palette.green          -- Green
+vim.g.terminal_color_3 = palette.yellow         -- Yellow
+vim.g.terminal_color_4 = palette.blue           -- Blue
+vim.g.terminal_color_5 = palette.magenta        -- Magenta
+vim.g.terminal_color_6 = palette.cyan           -- Cyan
+vim.g.terminal_color_7 = palette.white          -- White
+vim.g.terminal_color_8 = palette.brightBlack    -- Bright Black
+vim.g.terminal_color_9 = palette.brightRed      -- Bright Red
+vim.g.terminal_color_10 = palette.brightGreen   -- Bright Green
+vim.g.terminal_color_11 = palette.brightYellow  -- Bright Yellow
+vim.g.terminal_color_12 = palette.brightBlue    -- Bright Blue
+vim.g.terminal_color_13 = palette.brightMagenta -- Bright Magenta
+vim.g.terminal_color_14 = palette.brightCyan    -- Bright Cyan
+vim.g.terminal_color_15 = palette.brightWhite   -- Bright White
+
 -- LSP/Linters mistakenly show `undefined global` errors in the spec, they may
 -- support an annotation like the following. Consult your server documentation.
 ---@diagnostic disable: undefined-global
@@ -28,32 +45,32 @@ local theme = lush(function(injected_functions)
 
         Comment { fg = color.faded_text }, -- Any comment
 
-        Constant { fg = color.silver }, -- (*) Any constant
-        String { fg = color.green }, --   A string constant: "this is a string"
-        Character { fg = color.teal }, --   A character constant: 'c', '\n'
-        Number { fg = color.yellow }, --   A number constant: 234, 0xff
-        Boolean { fg = color.yellow }, --   A boolean constant: TRUE, false
-        Float { fg = color.yellow }, --   A floating point constant: 2.3e10
+        Constant { fg = color.silver },    -- (*) Any constant
+        String { fg = color.green },       --   A string constant: "this is a string"
+        Character { fg = color.teal },     --   A character constant: 'c', '\n'
+        Number { fg = color.yellow },      --   A number constant: 234, 0xff
+        Boolean { fg = color.yellow },     --   A boolean constant: TRUE, false
+        Float { fg = color.yellow },       --   A floating point constant: 2.3e10
 
-        Identifier { fg = color.beige }, -- (*) Any variable name
-        Function { fg = color.cyan }, --   Function name (also: methods for classes)
+        Identifier { fg = color.beige },   -- (*) Any variable name
+        Function { fg = color.cyan },      --   Function name (also: methods for classes)
 
-        Statement { fg = color.purple }, -- (*) Any statement
+        Statement { fg = color.purple },   -- (*) Any statement
         -- Conditional    { }, --   if, then, else, endif, switch, etc.
         -- Repeat         { }, --   for, do, while, etc.
         -- Label          { }, --   case, default, etc.
-        Operator { fg = Normal.fg }, --   "sizeof", "+", "*", etc.
+        Operator { fg = Normal.fg },   --   "sizeof", "+", "*", etc.
         Keyword { fg = color.purple }, --   any other keyword
         -- Exception      { }, --   try, catch, throw
 
         -- PreProc        { }, -- (*) Generic Preprocessor
         Include { fg = color.blue, bold = true }, --   Preprocessor #include
         -- Define         { }, --   Preprocessor #define
-        Macro { fg = color.orange }, --   Same as Define
+        Macro { fg = color.orange },              --   Same as Define
         -- PreCondit      { }, --   Preprocessor #if, #else, #endif, etc.
 
         Type { fg = color.cyan }, -- (*) int, long, char, etc.
-        Typedef { Type }, --   A typedef
+        Typedef { Type },         --   A typedef
         -- StorageClass   { }, --   static, register, volatile, etc.
         -- Structure      { }, --   struct, union, enum, etc.
 
@@ -92,22 +109,22 @@ local theme = lush(function(injected_functions)
         -- sym"@text.uri"          { }, -- Underlined
         -- sym"@text.underline"    { }, -- Underlined
         -- sym"@text.todo"         { }, -- Todo
-        sym "@comment" { Comment }, -- Comment
+        sym "@comment" { Comment },   -- Comment
         -- sym "@punctuation"      { }, -- Delimiter
         sym "@constant" { Constant }, -- Constant
         -- sym"@constant.builtin"  { }, -- Special
         -- sym"@constant.macro"    { }, -- Define
         -- sym"@define"            { }, -- Define
-        sym "@macro" { Macro }, -- Macro
+        sym "@macro" { Macro },   -- Macro
         sym "@string" { String }, -- String
         -- sym"@string.escape"     { }, -- SpecialChar
         -- sym"@string.special"    { }, -- SpecialChar
         sym "@character" { Character }, -- Character
         -- sym "@character.special" { }, -- SpecialChar
-        sym "@number" { Number }, -- Number
-        sym "@boolean" { Boolean }, -- Boolean
-        sym "@float" { Float }, -- Float
-        sym "@function" { Function }, -- Function
+        sym "@number" { Number },       -- Number
+        sym "@boolean" { Boolean },     -- Boolean
+        sym "@float" { Float },         -- Float
+        sym "@function" { Function },   -- Function
         -- sym"@function.builtin"  { }, -- Special
         -- sym"@function.macro"    { }, -- Macro
         -- sym"@parameter"         { }, -- Identifier
@@ -118,11 +135,11 @@ local theme = lush(function(injected_functions)
         -- sym"@conditional"       { }, -- Conditional
         -- sym"@repeat"            { }, -- Repeat
         -- sym"@label"             { }, -- Label
-        sym "@operator" { Operator }, -- Operator
-        sym "@keyword" { Keyword }, -- Keyword
+        sym "@operator" { Operator },       -- Operator
+        sym "@keyword" { Keyword },         -- Keyword
         -- sym"@exception"         { }, -- Exception
-        sym "@variable" { Identifier }, -- Identifier
-        sym "@type" { Type }, -- Type
+        sym "@variable" { Identifier },     -- Identifier
+        sym "@type" { Type },               -- Type
         sym "@type.definition" { Typedef }, -- Typedef
         -- sym"@storageclass"      { }, -- StorageClass
         -- sym"@structure"         { }, -- Structure
@@ -142,42 +159,48 @@ local theme = lush(function(injected_functions)
         --
         -- See :h highlight-groups
         --
-        -- Conceal      { }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
-        Cursor { reverse = true }, -- Character under the cursor
+        Conceal { fg = color.faded_text }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
+        Cursor { reverse = true },         -- Character under the cursor
         -- lCursor      { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
         -- CursorIM     { }, -- Like Cursor, but used when in IME mode |CursorIM|
-        CursorColumn { bg = Normal.bg.lighten(20) }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
-        CursorLine { bg = Normal.bg.lighten(5) }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
-        ColorColumn { fg = color.thin_line }, -- Columns set with 'colorcolumn'
-        Directory { fg = color.text }, -- Directory names (and other special names in listings)
-        DiffAdd { fg = color.green, bg = color.bg }, -- Diff mode: Added line |diff.txt|
-        DiffChange { fg = color.blue, bg = color.bg }, -- Diff mode: Changed line |diff.txt|
-        DiffDelete { fg = color.red, bg = color.bg }, -- Diff mode: Deleted line |diff.txt|
-        DiffText { fg = color.bg, bg = color.orange }, -- Diff mode: Changed text within a changed line |diff.txt|
+        CursorColumn { bg = Normal.bg.lighten(20) },                    -- Screen-column at the cursor, when 'cursorcolumn' is set.
+        CursorLine { bg = Normal.bg.lighten(6) },                       -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+        ColorColumn { fg = color.thin_line },                           -- Columns set with 'colorcolumn'
+        Directory { fg = color.text },                                  -- Directory names (and other special names in listings)
+
+        DiffAdd { bg = color.diff_add_bg.mix(Normal.bg, 80) },          -- Diff mode: Added line |diff.txt|
+        DiffChange { bg = color.blue.saturate(20).mix(Normal.bg, 85) }, -- Diff mode: Changed line |diff.txt|
+        DiffDelete { fg = color.faded_text, bg = color.bg },            -- Diff mode: Deleted line |diff.txt|
+        DiffText { bg = color.cyan.mix(Normal.bg, 70) },                -- Diff mode: Changed text within a changed line |diff.txt|
+
+        diffAdded { fg = color.green, bg = color.bg },
+        diffChanged { fg = color.blue, bg = color.bg },
+        diffRemoved { fg = color.red, bg = color.bg },
+
         -- EndOfBuffer  { }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
         -- TermCursor   { }, -- Cursor in a focused terminal
         -- TermCursorNC { }, -- Cursor in an unfocused terminal
         -- ErrorMsg     { }, -- Error messages on the command line
         -- VertSplit    { }, -- Column separating vertically split windows
-        -- Folded       { }, -- Line used for closed folds
-        -- FoldColumn   { }, -- 'foldcolumn'
-        SignColumn { fg = color.text, bg = color.bg }, -- Column where |signs| are displayed
+        Folded { fg = color.bg, bg = color.charcoal },     -- Line used for closed folds
+        FoldColumn { fg = color.charcoal, bg = color.bg }, -- 'foldcolumn'
+        SignColumn { fg = color.text, bg = color.bg },     -- Column where |signs| are displayed
         -- IncSearch    { }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
         -- Substitute   { }, -- |:substitute| replacement text highlighting
-        LineNr { fg = color.strong_faded_text }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
-        CursorLineNr { fg = LineNr.fg.lighten(15), bold = true }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
+        LineNr { fg = color.strong_faded_text },                     -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+        CursorLineNr { fg = LineNr.fg.lighten(15), bold = true },    -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
         MatchParen { fg = color.white, bg = color.cyan.darken(50) }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
-        MsgArea { fg = color.strong_text }, -- Area for messages and cmdline
-        ModeMsg { MsgArea }, -- 'showmode' message (e.g., "-- INSERT -- ")
+        MsgArea { fg = color.strong_text },                          -- Area for messages and cmdline
+        ModeMsg { MsgArea },                                         -- 'showmode' message (e.g., "-- INSERT -- ")
         -- MsgSeparator { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
         -- MoreMsg      { }, -- |more-prompt|
-        NonText { fg = color.thin_line }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
+        NonText { fg = color.thin_line },                               -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
         NormalFloat { fg = color.popover_text, bg = color.popover_bg }, -- Normal text in floating windows.
         -- NormalNC     { }, -- normal text in non-current windows
-        Pmenu { fg = color.popover_text, bg = color.popover_bg }, -- Popup menu: Normal item.
-        PmenuSel { Pmenu, bg = Pmenu.bg.lighten(10) }, -- Popup menu: Selected item.
-        PmenuSbar { bg = Pmenu.bg.lighten(5) }, -- Popup menu: Scrollbar.d
-        PmenuThumb { bg = Pmenu.bg.lighten(15) }, -- Popup menu: Thumb of the scrollbar.
+        Pmenu { fg = color.popover_text, bg = color.popover_bg },       -- Popup menu: Normal item.
+        PmenuSel { Pmenu, bg = Pmenu.bg.lighten(10) },                  -- Popup menu: Selected item.
+        PmenuSbar { bg = Pmenu.bg.lighten(5) },                         -- Popup menu: Scrollbar.d
+        PmenuThumb { bg = Pmenu.bg.lighten(15) },                       -- Popup menu: Thumb of the scrollbar.
         -- Question     { }, -- |hit-enter| prompt and yes/no questions
         -- QuickFixLine { }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
         Search { fg = color.bg, bg = color.cyan }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
@@ -188,12 +211,12 @@ local theme = lush(function(injected_functions)
         -- SpellRare    { }, -- Word that is recognized by the spellchecker as one that is hardly ever used. |spell| Combined with the highlighting used otherwise.
         -- StatusLine   { }, -- Status line of current window
         -- StatusLineNC { }, -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-        -- TabLine      { }, -- Tab pages line, not active tab page label
-        -- TabLineFill  { }, -- Tab pages line, where there are no labels
-        -- TabLineSel   { }, -- Tab pages line, active tab page label
+        TabLine { bg = color.bg },                 -- Tab pages line, not active tab page label
+        TabLineFill { bg = TabLine.bg },           -- Tab pages line, where there are no labels
+        TabLineSel { bg = TabLine.bg.lighten(5) }, -- Tab pages line, active tab page label
         -- Title        { }, -- Titles for output from ":set all", ":autocmd" etc.
-        VertSplit { fg = color.thin_line }, -- Vertical split line
-        Visual { bg = Normal.bg.lighten(18) }, -- Visual mode selection
+        VertSplit { fg = color.thin_line },        -- Vertical split line
+        Visual { bg = Normal.bg.lighten(18) },     -- Visual mode selection
         -- VisualNOS    { }, -- Visual mode selection when vim is "Not Owning the Selection".
         -- WarningMsg   { }, -- Warning messages
         Whitespace { fg = color.thin_line }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
@@ -215,18 +238,18 @@ local theme = lush(function(injected_functions)
 
         -- See :h diagnostic-highlights, some groups may not be listed, submit a PR fix to lush-template!
         --
-        DiagnosticError { fg = color.red }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+        DiagnosticError { fg = color.red },   -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
         DiagnosticWarn { fg = color.yellow }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-        DiagnosticInfo { fg = color.blue }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-        DiagnosticHint { fg = color.text }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+        DiagnosticInfo { fg = color.blue },   -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+        DiagnosticHint { fg = color.text },   -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
         -- DiagnosticVirtualTextError { } , -- Used for "Error" diagnostic virtual text.
         -- DiagnosticVirtualTextWarn  { } , -- Used for "Warn" diagnostic virtual text.
         -- DiagnosticVirtualTextInfo  { } , -- Used for "Info" diagnostic virtual text.
         -- DiagnosticVirtualTextHint  { } , -- Used for "Hint" diagnostic virtual text.
         DiagnosticUnderlineError { DiagnosticError, undercurl = true }, -- Used to underline "Error" diagnostics.
-        DiagnosticUnderlineWarn { DiagnosticWarn, undercurl = true }, -- Used to underline "Warn" diagnostics.
-        DiagnosticUnderlineInfo { DiagnosticInfo, undercurl = true }, -- Used to underline "Info" diagnostics.
-        DiagnosticUnderlineHint { DiagnosticHint, undercurl = true }, -- Used to underline "Hint" diagnostics.
+        DiagnosticUnderlineWarn { DiagnosticWarn, undercurl = true },   -- Used to underline "Warn" diagnostics.
+        DiagnosticUnderlineInfo { DiagnosticInfo, undercurl = true },   -- Used to underline "Info" diagnostics.
+        DiagnosticUnderlineHint { DiagnosticHint, undercurl = true },   -- Used to underline "Hint" diagnostics.
         -- DiagnosticFloatingError    { } , -- Used to color "Error" diagnostic messages in diagnostics float. See |vim.diagnostic.open_float()|
         -- DiagnosticFloatingWarn     { } , -- Used to color "Warn" diagnostic messages in diagnostics float.
         -- DiagnosticFloatingInfo     { } , -- Used to color "Info" diagnostic messages in diagnostics float.
@@ -238,16 +261,19 @@ local theme = lush(function(injected_functions)
 
         FloatBorder { fg = color.thick_line, bg = color.bg },
 
+        IndentBlanklineChar { fg = color.thin_line },
+        IndentBlanklineContextChar { fg = IndentBlanklineChar.fg.lighten(25) },
+
         TodoComment { fg = color.purple },
         FixmeComment { fg = color.orange },
 
         ZenBg { fg = color.text, bg = color.bg },
 
-        IndentBlanklineChar { fg = color.thin_line },
-        IndentBlanklineContextChar { fg = IndentBlanklineChar.fg.lighten(25) },
-
-        LeapMatch { fg = color.magenta },
-        LeapLabelPrimary { fg = color.bg, bg = color.purple },
+        PounceMatch { fg = Normal.bg, bg = color.cyan },
+        PounceGap { fg = Normal.bg.lighten(50), bg = Normal.bg.lighten(10) },
+        PounceAccept { fg = Normal.bg, bg = color.purple, bold = true },
+        PounceAcceptBest { fg = Normal.bg, bg = color.green, bold = true },
+        MiniCursorword { bg = Normal.bg.lighten(10) },
 
         TelescopeMatching { fg = color.charcoal },
         TelescopeSelection { bg = Normal.bg.lighten(9) },

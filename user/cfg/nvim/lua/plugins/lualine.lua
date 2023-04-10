@@ -45,15 +45,24 @@ plugin.setup {
             {
                 function()
                     local m = mode.get_mode()
-                    if m == "NORMAL" then return "N"
-                    elseif m == "VISUAL" then return "V"
-                    elseif m == "SELECT" then return "S"
-                    elseif m == "INSERT" then return "I"
-                    elseif m == "REPLACE" then return "R"
-                    elseif m == "COMMAND" then return "C"
-                    elseif m == "EX" then return "X"
-                    elseif m == "TERMINAL" then return "T"
-                    else return m
+                    if m == "NORMAL" then
+                        return "N"
+                    elseif m == "VISUAL" then
+                        return "V"
+                    elseif m == "SELECT" then
+                        return "S"
+                    elseif m == "INSERT" then
+                        return "I"
+                    elseif m == "REPLACE" then
+                        return "R"
+                    elseif m == "COMMAND" then
+                        return "C"
+                    elseif m == "EX" then
+                        return "X"
+                    elseif m == "TERMINAL" then
+                        return "T"
+                    else
+                        return m
                     end
                 end,
             },
@@ -110,5 +119,15 @@ plugin.setup {
         lualine_y = { "location" },
         lualine_z = {},
     },
-    tabline = {},
+    tabline = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = { { "tabs", mode = 2 } },
+    },
 }
+
+-- lualine overrides this
+vim.cmd "set showtabline=1"

@@ -5,6 +5,10 @@
         source = ./cfg/nvim;
         recursive = true;
     };
+    ".config/karabiner/assets/complex_modifications" = {
+        source = ./cfg/karabiner/modifications;
+        recursive = true;
+    };
     ".config/zellij" = {
         source = ./cfg/zellij;
         recursive = true;

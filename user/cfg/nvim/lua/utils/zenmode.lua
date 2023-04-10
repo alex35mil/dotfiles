@@ -11,7 +11,9 @@ function M.toggle()
 end
 
 function M.activate()
-    plugin.toggle()
+    if not M.is_active() then
+        plugin.toggle()
+    end
 end
 
 function M.deactivate()
@@ -36,6 +38,17 @@ function M.is_active()
         return false
     else
         return is_open
+    end
+end
+
+function M.parent_window()
+    local zenmode = require "zen-mode.view"
+    return zenmode.parent
+end
+
+function M.ensure_deacitvated()
+    if M.is_active() then
+        M.deactivate()
     end
 end
 

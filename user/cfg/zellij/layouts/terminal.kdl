@@ -1,0 +1,10 @@
+layout {
+    tab name="terminal" {
+        pane
+        pane size="20%"
+        pane size=1 borderless=true {
+            // FIXME: Zellij wants absolute path only
+            plugin location="file:/Users/Alex/.config/user/cfg/zellij/plugins/statusbar.wasm"
+        }
+    }
+}

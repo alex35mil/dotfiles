@@ -4,7 +4,7 @@ local color = require "theme/palette"
 plugin.setup {
     ui = {
         theme = "round",
-        border = "solid",
+        border = "rounded",
         title = true,
         winblend = 0,
         expand = "",
@@ -61,6 +61,10 @@ plugin.setup {
         sign = true,
         sign_priority = 40,
         virtual_text = true,
+    },
+    beacon = {
+        enable = true,
+        frequency = 7,
     },
     request_timeout = 5000,
 }

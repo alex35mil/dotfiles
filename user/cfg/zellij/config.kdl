@@ -226,11 +226,11 @@ theme "default"
 
 // The name of the default layout to load on startup
 // Default: "default"
-default_layout "editor"
+default_layout "terminal"
 
 // Choose the mode that zellij uses when starting up.
 // Default: normal
-default_mode "locked"
+default_mode "normal"
 
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could

@@ -26,7 +26,12 @@ plugin.setup {
         hide_root_folder = false,
         mappings = {
             list = {
+                { key = "s",     action = "" },
                 { key = "<C-e>", action = "" },
+                { key = "<C-k>", action = "" },
+                { key = "<C-t>", action = "" },
+                { key = "<D-j>", action = "split" },
+                { key = "<D-l>", action = "vsplit" },
             },
         },
     },
@@ -50,16 +55,13 @@ plugin.setup {
     renderer = {
         highlight_git = true,
         highlight_opened_files = "none",
-
         root_folder_label = function(path)
             local project = vim.fn.fnamemodify(path, ":t")
             return string.upper(project)
         end,
-
         indent_markers = {
             enable = true,
         },
-
         icons = {
             webdev_colors = false,
             show = {

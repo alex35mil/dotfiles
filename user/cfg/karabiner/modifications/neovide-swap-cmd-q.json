@@ -1,0 +1,37 @@
+{
+    "title": "Neovide: Swap Cmd-Q / Ctrl-Q",
+    "rules": [
+        {
+            "description": "Neovide: Swap Cmd-Q / Ctrl-Q",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "q",
+                        "modifiers": {
+                            "mandatory": [
+                                "left_command"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "q",
+                            "modifiers": [
+                                "left_control"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "file_paths": [
+                                "^.*\/\\.cargo\/bin\/neovide$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

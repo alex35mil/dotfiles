@@ -36,6 +36,10 @@
     ip = "dig +short myip.opendns.com @resolver1.opendns.com";
     localip = "ipconfig getifaddr en0";
 
+    # Rust / Cargo
+    cr = "cargo run -- ";
+    crr = "cargo run --release -- ";
+
     # Docker
     d = "docker ";
 
@@ -159,7 +163,8 @@
     yarr = "rm -rf node_modules && yarn cache clean && yarn";
 
     # Vim
-    v = "nvim ";
+    v = "neovide ";
+    vcc = "rm -rf ~/.cache/nvim/luac/";
 
     # Zellij
     z = "zellij";

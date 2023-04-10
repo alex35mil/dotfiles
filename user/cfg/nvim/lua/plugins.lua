@@ -29,6 +29,13 @@ local plugins = {
         lazy = false,
     },
 
+    -- keymaps
+    {
+        "folke/which-key.nvim",
+        version = "*",
+        config = function() require "plugins/which-key" end,
+    },
+
     -- essentials
     {
         "echasnovski/mini.trailspace",
@@ -38,10 +45,10 @@ local plugins = {
     },
 
     {
-        "ggandor/leap.nvim",
+        "rlane/pounce.nvim",
         version = "*",
         event = "BufEnter",
-        config = function() require "plugins/leap" end,
+        config = function() require "plugins/pounce" end,
     },
 
     {
@@ -71,7 +78,7 @@ local plugins = {
     },
 
     {
-        "kyazdani42/nvim-web-devicons",
+        "nvim-tree/nvim-web-devicons",
         version = "*",
         config = function() require "plugins/devicons" end,
     },
@@ -121,7 +128,7 @@ local plugins = {
 
     {
         "neovim/nvim-lspconfig",
-        version = "*",
+        branch = "master",
         event = "BufEnter",
         config = function() require "plugins/lspconfig" end,
     },
@@ -134,16 +141,18 @@ local plugins = {
     },
 
     {
-        "folke/trouble.nvim",
-        version = "*",
-        dependencies = { "kyazdani42/nvim-web-devicons" },
-        config = function() require "plugins/trouble" end,
-    },
-
-    {
         "simrat39/rust-tools.nvim",
         version = "*",
         event = "BufEnter *.rs",
+    },
+
+
+    {
+        "jose-elias-alvarez/null-ls.nvim",
+        version = "*",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        event = "BufEnter",
+        config = function() require "plugins/null-ls" end,
     },
 
     {
@@ -168,6 +177,11 @@ local plugins = {
     },
 
     {
+        "github/copilot.vim",
+        version = "*",
+    },
+
+    {
         "L3MON4D3/LuaSnip",
         version = "*",
         event = "InsertEnter",
@@ -178,7 +192,7 @@ local plugins = {
     {
         "nvim-tree/nvim-tree.lua",
         version = "*",
-        dependencies = { "kyazdani42/nvim-web-devicons" },
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function() require "plugins/tree" end,
     },
 
@@ -200,7 +214,7 @@ local plugins = {
         "nvim-lualine/lualine.nvim",
         version = "*",
         event = "VimEnter",
-        dependencies = { "kyazdani42/nvim-web-devicons" },
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function() require "plugins/lualine" end,
     },
 
@@ -212,6 +226,18 @@ local plugins = {
     },
 
     -- git
+    {
+        "kdheepak/lazygit.nvim",
+        version = "*",
+    },
+
+    {
+        "sindrets/diffview.nvim",
+        version = "*",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function() require "plugins/diffview" end,
+    },
+
     {
         "lewis6991/gitsigns.nvim",
         version = "*",
@@ -248,12 +274,6 @@ local plugins = {
     },
 
     -- misc
-    {
-        "folke/which-key.nvim",
-        version = "*",
-        config = function() require "plugins/which-key" end,
-    },
-
     {
         "norcalli/nvim-colorizer.lua",
         version = "*",

@@ -1,4 +1,5 @@
 local plugin = require "telescope"
+local actions = require "telescope.actions"
 
 local extensions = {
     "file_browser",
@@ -52,7 +53,19 @@ plugin.setup {
         -- Developer configurations: Not meant for general override
         buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
         mappings = {
-            n = { ["q"] = require("telescope.actions").close },
+            n = {
+                ["<D-j>"] = actions.file_split,
+                ["<D-l>"] = actions.file_vsplit,
+                ["<C-k>"] = actions.preview_scrolling_up,
+                ["<C-j>"] = actions.preview_scrolling_down,
+                ["q"] = actions.close,
+            },
+            i = {
+                ["<D-j>"] = actions.file_split,
+                ["<D-l>"] = actions.file_vsplit,
+                ["<C-k>"] = actions.preview_scrolling_up,
+                ["<C-j>"] = actions.preview_scrolling_down,
+            },
         },
     },
     extensions_list = extensions,
