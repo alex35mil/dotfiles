@@ -11,6 +11,7 @@ fi
 FILES="\
     nix \
     nixpkgs \
+    home-manager \
     user \
 "
 
