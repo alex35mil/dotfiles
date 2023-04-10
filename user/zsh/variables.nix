@@ -11,6 +11,8 @@
 
   DISABLE_AUTO_TITLE = "true";
 
+  XDG_CONFIG_HOME = "$HOME/.config";
+
   ZELLIJ_RUNNER_ROOT_DIR = "Dev";
   ZELLIJ_RUNNER_IGNORE_DIRS = "node_modules,target";
   ZELLIJ_RUNNER_MAX_DIRS_DEPTH = "3";

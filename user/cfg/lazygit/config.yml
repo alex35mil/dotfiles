@@ -1,0 +1,7 @@
+keybinding:
+  universal:
+    scrollUpMain: "<C-k>"
+    scrollDownMain: "<C-j>"
+  commits:
+    moveUpCommit: "<pgup>"
+    moveDownCommit: "<pgdown>"
