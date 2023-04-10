@@ -18,4 +18,6 @@ with pkgs;
   ripgrep
   fortune
   lazygit
+  watchman
+  bitwarden-cli
 ]
