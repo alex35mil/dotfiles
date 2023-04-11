@@ -25,9 +25,6 @@ function M.toggle_float()
     if active_term ~= nil then
         term.hide(active_term)
     else
-        local zenmode = require "utils.zenmode"
-
-        zenmode.ensure_deacitvated()
         term.toggle_float()
     end
 end
