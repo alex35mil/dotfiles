@@ -35,7 +35,8 @@ local autocmds = {
             pattern = "*",
             callback = function()
                 -- for some reason, ++nested doesn't trigger BufWritePre
-                vim.cmd "doautocmd BufWritePre <afile>"
+                -- also, when loosing focus when filetree is active, neovide panics - hence `silent!`
+                vim.cmd "silent! doautocmd BufWritePre <afile>"
                 vim.cmd "silent! wa"
             end,
         },
