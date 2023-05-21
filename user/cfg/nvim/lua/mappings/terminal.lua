@@ -17,6 +17,22 @@ function M.toggle_tab()
     end
 end
 
+function M.toggle_horizontal()
+    local term = require "utils.terminal"
+
+    local active_term = term.get_active()
+
+    if active_term ~= nil then
+        term.hide(active_term)
+    else
+        local zenmode = require "utils.zenmode"
+        local statusline = require "utils.statusline"
+
+        zenmode.ensure_deacitvated()
+        term.toggle_horizontal()
+    end
+end
+
 function M.toggle_float()
     local term = require "utils.terminal"
 

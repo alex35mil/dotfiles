@@ -8,6 +8,10 @@ function M.toggle_float()
     vim.cmd "ToggleTerm direction=float"
 end
 
+function M.toggle_horizontal()
+    vim.cmd "ToggleTerm direction=horizontal"
+end
+
 function M.get_active()
     local terms = require("toggleterm.terminal").get_all()
     local current_window = vim.api.nvim_get_current_win()
@@ -30,6 +34,8 @@ function M.hide(term)
         M.toggle_tab()
     elseif term.direction == "float" then
         M.toggle_float()
+    elseif term.direction == "horizontal" then
+        M.toggle_horizontal()
     end
 end
 

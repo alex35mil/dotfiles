@@ -187,8 +187,10 @@ map { ["<C-p>"] = { "Open package manager", "<Cmd>Mason<CR>", mode = "n" } }
 
 map { ["<D-e>"] = { "Toggle file tree", "<Cmd>NvimTreeToggle<CR>", mode = { "n", "i", "v" } } }
 
-map { ["<D-t>"] = { "Toggle terminal", terminal.toggle_tab, mode = { "n", "i", "v", "t" } } }
-map { ["<C-t>"] = { "Toggle terminal", terminal.toggle_float, mode = { "n", "i", "v", "t" } } }
+map { ["<D-t>"] = { "Toggle terminal", terminal.toggle_float, mode = { "n", "i", "v", "t" } } }
+map { ["<M-t>t"] = { "Toggle tab terminal", terminal.toggle_tab, mode = { "n", "i", "v", "t" } } }
+map { ["<M-t>f"] = { "Toggle float terminal", terminal.toggle_float, mode = { "n", "i", "v", "t" } } }
+map { ["<M-t>h"] = { "Toggle horizontal terminal", terminal.toggle_horizontal, mode = { "n", "i", "v", "t" } } }
 map { ["<C-n>"] = { "Exit terminal mode", "<C-\\><C-n>", mode = "t" } }
 
 map { ["<D-g>m"] = { "Git: Show lazygit", "<Cmd>LazyGit<CR>", mode = "n" } }
