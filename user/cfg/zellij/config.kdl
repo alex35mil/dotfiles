@@ -1,15 +1,12 @@
 keybinds clear-defaults=true {
     shared {
-        bind "Home" { Detach; } // until it's possible to switch/create sessions from within
+        bind "Ctrl d" { Detach; }
+        bind "Ctrl q" { Quit; }
     }
 
     normal {
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
-    }
-
-    locked {
-        bind "Insert" { SwitchToMode "Normal"; }
     }
 
     shared_except "normal" "locked" "search" "scroll" {
@@ -33,8 +30,6 @@ keybinds clear-defaults=true {
     }
 
     shared_except "locked" {
-        bind "End" { Quit; }
-        bind "Insert" { SwitchToMode "Locked"; }
         bind "Ctrl w" { CloseFocus; SwitchToMode "Normal"; }
         bind "Ctrl n" { NewPane "Down"; SwitchToMode "Normal"; }
         // bind "Ctrl r" { NewPane "Right"; SwitchToMode "Normal"; }
