@@ -13,8 +13,8 @@ quote_style = double
 # only support number
 continuation_indent_size = 4
 
-# optional crlf/lf/cr/auto, if it is 'auto', in windows it is crlf other platforms are lf
-end_of_line = auto
+# optional crlf/lf/cr, if it is 'auto', in windows it is crlf other platforms are lf
+end_of_line = lf
 
 detect_end_of_line = false
 
