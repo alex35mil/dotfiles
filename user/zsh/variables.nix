@@ -13,6 +13,9 @@
 
   XDG_CONFIG_HOME = "$HOME/.config";
 
+  NEOVIDE_FRAME = "buttonless";
+  NEOVIDE_MAXIMIZED="true";
+
   ZELLIJ_RUNNER_ROOT_DIR = "Dev";
   ZELLIJ_RUNNER_IGNORE_DIRS = "node_modules,target";
   ZELLIJ_RUNNER_MAX_DIRS_DEPTH = "3";

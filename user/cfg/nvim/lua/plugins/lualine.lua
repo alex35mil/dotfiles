@@ -112,12 +112,12 @@ plugin.setup {
         },
     },
     inactive_sections = {
-        lualine_a = {},
-        lualine_b = { "filename" },
+        lualine_a = { "filename" },
+        lualine_b = {},
         lualine_c = {},
         lualine_x = {},
-        lualine_y = { "location" },
-        lualine_z = {},
+        lualine_y = {},
+        lualine_z = { "location" },
     },
     tabline = {
         lualine_a = {},
