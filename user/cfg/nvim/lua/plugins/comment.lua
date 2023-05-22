@@ -22,9 +22,9 @@ plugin.setup {
     -- LHS of extra mappings
     extra = {
         -- Add comment on the line above
-        above = "<Leader>ck",
+        above = "<Leader>ct",
         -- Add comment on the line below
-        below = "<Leader>cj",
+        below = "<Leader>ch",
         -- Add comment at the end of line
         eol = "<Leader>cl",
     },

@@ -1,0 +1,64 @@
+{
+    "title": "Neovide: Swap system keymaps",
+    "rules": [
+        {
+            "description": "Neovide: Swap system keymaps",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "x",
+                        "modifiers": {
+                            "mandatory": [
+                                "left_command"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "x",
+                            "modifiers": [
+                                "left_control"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "file_paths": [
+                                "^.*\/\\.cargo\/bin\/neovide$"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "j",
+                        "modifiers": {
+                            "mandatory": [
+                                "left_command"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "j",
+                            "modifiers": [
+                                "left_option"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "file_paths": [
+                                "^.*\/\\.cargo\/bin\/neovide$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

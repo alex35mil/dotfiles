@@ -16,8 +16,8 @@ plugin.setup {
         end,
     },
     mapping = mapping.preset.insert({
-        ["<C-k>"] = mapping.scroll_docs(-4),
-        ["<C-j>"] = mapping.scroll_docs(4),
+        ["<C-t>"] = mapping.scroll_docs(-4),
+        ["<C-h>"] = mapping.scroll_docs(4),
         ["<C-c>"] = mapping.complete(),
         ["<D-Esc>"] = mapping.abort(),
         ["<CR>"] = mapping.confirm({
