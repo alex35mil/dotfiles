@@ -1,13 +1,13 @@
 {
-    "title": "Neovide: Swap system keymaps",
+    "title": "Xcode configuration",
     "rules": [
         {
-            "description": "Neovide: Swap system keymaps",
+            "description": "Xcode: PageUp/Down -> Cmd+T/H (move half page up/down)",
             "manipulators": [
                 {
                     "type": "basic",
                     "from": {
-                        "key_code": "x",
+                        "key_code": "k",
                         "modifiers": {
                             "mandatory": [
                                 "left_command"
@@ -16,17 +16,14 @@
                     },
                     "to": [
                         {
-                            "key_code": "x",
-                            "modifiers": [
-                                "left_control"
-                            ]
+                            "key_code": "page_up"
                         }
                     ],
                     "conditions": [
                         {
                             "type": "frontmost_application_if",
-                            "file_paths": [
-                                "^.*\/\\.cargo\/bin\/neovide$"
+                            "bundle_identifiers": [
+                                "^com.apple.dt.Xcode$"
                             ]
                         }
                     ]
@@ -43,17 +40,14 @@
                     },
                     "to": [
                         {
-                            "key_code": "j",
-                            "modifiers": [
-                                "left_option"
-                            ]
+                            "key_code": "page_down"
                         }
                     ],
                     "conditions": [
                         {
                             "type": "frontmost_application_if",
-                            "file_paths": [
-                                "^.*\/\\.cargo\/bin\/neovide$"
+                            "bundle_identifiers": [
+                                "^com.apple.dt.Xcode$"
                             ]
                         }
                     ]
