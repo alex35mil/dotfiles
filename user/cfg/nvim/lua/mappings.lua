@@ -28,9 +28,11 @@ end
 -- NB!: Sometimes, when arg of `map` has multiple keys, one or more keys don't apply
 
 map { ["<D-c>"] = { "Copy selected text", [["+y]], mode = "v" } }
-map { ["<D-v>"] = { "Paste text", [["+P]], mode = { "n", "v" } } }
+map { ["<D-v>"] = { "Paste text", [["+P]], mode = { "v" } } }
 map { ["<D-v>"] = { "Paste text", "<C-r>+", mode = { "i", "c" } } }
 map { ["<D-v>"] = { "Paste text", terminal.paste, mode = "t", expr = true } }
+
+map { ["<D-v>"] = { "Start visual selection", "<C-v>", mode = "n" } }
 
 map {
     ["p"] = {
@@ -121,22 +123,22 @@ map {
     ["<Leader>ww"] = {
         "Close all buffers except current & unsaved",
         function() editor.close_all_bufs_except_current({ incl_unsaved = false }) end,
-        mode = "n"
+        mode = "n",
     },
 }
 map {
     ["<Leader>wa"] = {
         "Close all buffers except current",
         function() editor.close_all_bufs_except_current({ incl_unsaved = true }) end,
-        mode = "n"
+        mode = "n",
     },
 }
 map { ["<C-q>"] = { "Quit editor", editor.quit, mode = { "n", "i", "v", "t" } } }                       -- It is <D-q> remapped via Karabiner
 
 map { ["<D-o>"] = { "Open file browser", telescope.open_file_browser, mode = { "n", "i", "v", "t" } } } -- FIXME: "t" needs proper cwd
-map { ["<D-b>"] = { "Find buffer", telescope.buffer, mode = { "n", "i", "v" } } }
-map { ["<D-f>f"] = { "Find file", telescope.find_file, mode = { "n", "i", "v" } } }
-map { ["<D-f>t"] = { "Find text", telescope.find_text, mode = { "n", "i", "v" } } }
+map { ["<D-b>"] = { "Open buffer selector", telescope.buffer, mode = { "n", "i", "v" } } }
+map { ["<D-f>f"] = { "Open file finder", telescope.find_file, mode = { "n", "i", "v" } } }
+map { ["<D-f>t"] = { "Open project-wide text search", telescope.find_text, mode = { "n", "i", "v" } } }
 
 map { ["<Leader>tc"] = { "Find command", telescope.command, mode = "n" } }
 map { ["<Leader>th"] = { "Open highlights list", "<Cmd>Telescope highlights<CR>", mode = "n" } }
@@ -185,8 +187,8 @@ map {
     },
 }
 
-map { ["<D-p>"] = { "Open plugins manager", "<Cmd>Lazy<CR>", mode = "n" } }
-map { ["<C-p>"] = { "Open package manager", "<Cmd>Mason<CR>", mode = "n" } }
+map { ["<D-p>p"] = { "Open plugins manager", "<Cmd>Lazy<CR>", mode = "n" } }
+map { ["<D-p>l"] = { "Open package manager", "<Cmd>Mason<CR>", mode = "n" } }
 
 map { ["<D-e>"] = { "Toggle file tree", "<Cmd>NvimTreeToggle<CR>", mode = { "n", "i", "v" } } }
 
