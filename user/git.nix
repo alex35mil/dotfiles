@@ -17,7 +17,7 @@
     };
 
     color = {
-      ui = true;
+      ui = "auto";
     };
 
     push = {

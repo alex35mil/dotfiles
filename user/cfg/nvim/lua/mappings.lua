@@ -195,11 +195,13 @@ map { ["<M-t>f"] = { "Toggle float terminal", terminal.toggle_float, mode = { "n
 map { ["<M-t>h"] = { "Toggle horizontal terminal", terminal.toggle_horizontal, mode = { "n", "i", "v", "t" } } }
 map { ["<C-n>"] = { "Exit terminal mode", "<C-\\><C-n>", mode = "t" } }
 
-map { ["<D-g>m"] = { "Git: Show lazygit", "<Cmd>LazyGit<CR>", mode = "n" } }
+map { ["<D-g>g"] = { "Git: Show lazygit", "<Cmd>LazyGit<CR>", mode = "n" } }
 map { ["<D-g>d"] = { "Git: Toggle diff", git.toggle_diff, mode = "n" } }
 map { ["<D-g>j"] = { "Git: Jump to the next hunk", "<Cmd>Gitsigns next_hunk<CR>", mode = "n" } }
 map { ["<D-g>k"] = { "Git: Jump to the previous hunk", "<Cmd>Gitsigns prev_hunk<CR>", mode = "n" } }
 map { ["<D-g>b"] = { "Git: Show line blame", "<Cmd>Gitsigns blame_line<CR>", mode = "n" } }
+map { ["<C-Space>"] = { "Git: Stage hunk", "<Cmd>Gitsigns stage_hunk<CR>", mode = "n" } }
+map { ["<C-S-Space>"] = { "Git: Unstage hunk", "<Cmd>Gitsigns undo_stage_hunk<CR>", mode = "n" } }
 
 map { ["<M-l>"] = { "Toggle filename in statusline", statusline.toggle_filename, mode = { "n", "i", "v" } } }
 
