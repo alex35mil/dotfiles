@@ -18,7 +18,7 @@ local autocmds = {
                     if #windows == 1 then
                         require("utils.zenmode").toggle()
                     else
-                        require("nvim-tree.api").tree.open()
+                        require("utils.filetree").open()
                     end
 
                     vim.cmd "LualineRenameTab editor"

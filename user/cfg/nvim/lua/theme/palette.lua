@@ -41,7 +41,7 @@ local palette = {
     brightBlue = "#5d7f9a",
     brightMagenta = "#82658c",
     brightCyan = "#5e8d87",
-    brightWhite = "#6d757d"
+    brightWhite = "#6d757d",
 }
 
 return palette

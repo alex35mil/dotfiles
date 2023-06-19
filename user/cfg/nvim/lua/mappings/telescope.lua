@@ -7,10 +7,12 @@ function M.open_file_browser()
     extensions.file_browser.file_browser({
         cwd = "%:p:h",
         hidden = true,
+        git_status = true,
         respect_gitignore = false,
         grouped = true,
         select_buffer = true,
         initial_mode = "normal",
+        file_ignore_patterns = { "%.git/" },
     })
 end
 

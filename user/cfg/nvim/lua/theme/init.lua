@@ -278,16 +278,19 @@ local theme = lush(function(injected_functions)
         TelescopeMatching { fg = color.charcoal },
         TelescopeSelection { bg = Normal.bg.lighten(9) },
         TelescopeBorder { FloatBorder },
+        TelescopeResultsDiffChange { fg = color.blue },
 
         SagaNormal { bg = color.popover_bg },
 
-        NvimTreeRootFolder { fg = color.strong_text, bold = true },
-        NvimTreeIndentMarker { IndentBlanklineChar },
-        NvimTreeFolderIcon { fg = color.faded_text },
-        NvimTreeGitStaged { fg = color.green },
-        NvimTreeGitNew { fg = color.green },
-        NvimTreeFileDirty { fg = color.blue },
-        NvimTreeSpecialFile { fg = color.text, bold = true },
+        NeoTreeRootName { fg = color.strong_text, bold = true },
+        NeoTreeDirectoryIcon { fg = color.faded_text },
+        NeoTreeFileIcon { fg = color.faded_text },
+        NeoTreeIndentMarker { IndentBlanklineChar },
+        NeoTreeGitAdded { fg = color.green },
+        NeoTreeGitUntracked { fg = color.green },
+        NeoTreeGitModified { fg = color.blue },
+        NeoTreeGitStaged { fg = color.green },
+        NeoTreeGitIgnored { fg = color.faded_text },
     }
 end)
 

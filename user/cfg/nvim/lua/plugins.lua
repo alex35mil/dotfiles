@@ -190,10 +190,20 @@ local plugins = {
 
     -- file tree
     {
-        "nvim-tree/nvim-tree.lua",
-        version = "*",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function() require "plugins/tree" end,
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons",
+            "MunifTanjim/nui.nvim",
+            {
+                "s1n7ax/nvim-window-picker",
+                event = "VeryLazy",
+                version = "2.*",
+                config = function() require "plugins/window-picker" end,
+            },
+        },
+        config = function() require "plugins/neo-tree" end,
     },
 
     -- fuzzy finders

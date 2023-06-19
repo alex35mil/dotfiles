@@ -7,8 +7,9 @@ plugin.setup {
         delete       = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
         topdelete    = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
         changedelete = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-        untracked    = { hl = "GitSignsAdd", text = "", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+        untracked    = { hl = "GitSignsAdd", text = "⋅", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
     },
+    _signs_staged_enable = true,
     signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
     numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`
     linehl = false,    -- Toggle with `:Gitsigns toggle_linehl`

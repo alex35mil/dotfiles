@@ -1,6 +1,7 @@
 local editor = require "mappings.editor"
 local git = require "mappings.git"
 local lsp = require "mappings.lsp"
+local filetree = require "mappings.filetree"
 local telescope = require "mappings.telescope"
 local statusline = require "mappings.statusline"
 local terminal = require "mappings.terminal"
@@ -102,9 +103,11 @@ map { ["<D-Up>"] = { "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", 
 map { ["<D-Right>"] = { "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "t" } } }
 
 map { ["<D-z>"] = { "Toggle zen mode", editor.zenmode, mode = { "n", "i", "v" } } }
-map { ["<M-n>"] = { "Open new buffer in the current window", "<Cmd>enew<CR>", mode = { "n", "i", "v" } } }
-map { ["<M-w>j"] = { "Open new horizontal split", "<Cmd>new<CR>", mode = "n" } }
-map { ["<M-w>l"] = { "Open new vertical split", "<Cmd>vnew<CR>", mode = "n" } }
+
+map { ["<C-n>c"] = { "Open new buffer in the current window", "<Cmd>enew<CR>", mode = "n" } }
+map { ["<C-n>h"] = { "Open new horizontal split", "<Cmd>new<CR>", mode = "n" } }
+map { ["<C-n>n"] = { "Open new vertical split", "<Cmd>vnew<CR>", mode = "n" } }
+
 map {
     ["<D-w>"] = {
         "Close current buffer and close current window if there are multiple",
@@ -190,7 +193,7 @@ map {
 map { ["<D-p>p"] = { "Open plugins manager", "<Cmd>Lazy<CR>", mode = "n" } }
 map { ["<D-p>l"] = { "Open package manager", "<Cmd>Mason<CR>", mode = "n" } }
 
-map { ["<D-e>"] = { "Toggle file tree", "<Cmd>NvimTreeToggle<CR>", mode = { "n", "i", "v" } } }
+map { ["<D-e>"] = { "Toggle file tree", filetree.toggle, mode = { "n", "i", "v" } } }
 
 map { ["<M-t>t"] = { "Toggle tab terminal", terminal.toggle_tab, mode = { "n", "i", "v", "t" } } }
 map { ["<M-t>f"] = { "Toggle float terminal", terminal.toggle_float, mode = { "n", "i", "v", "t" } } }

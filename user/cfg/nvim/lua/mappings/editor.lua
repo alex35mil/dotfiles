@@ -201,6 +201,7 @@ function M.quit()
     local git = require "utils.git"
     local term = require "utils.terminal"
     local zenmode = require "utils.zenmode"
+    local filetree = require "utils.filetree"
 
     local mode = vim.fn.mode()
 
@@ -211,6 +212,7 @@ function M.quit()
 
     git.ensure_hidden()
     term.ensure_hidden()
+    filetree.ensure_hidden()
     zenmode.ensure_deacitvated()
 
     -- NOTE: Not `wqa` due to toggleterm issue

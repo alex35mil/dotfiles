@@ -30,6 +30,7 @@ opt.timeoutlen = 500
 
 opt.splitright = true
 opt.splitbelow = true
+opt.equalalways = true
 
 opt.showtabline = 1
 
