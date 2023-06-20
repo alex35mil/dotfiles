@@ -21,7 +21,7 @@ function M.buffer()
     local bufs = buffers.get_listed_bufs()
 
     builtin.buffers({
-        initial_mode = "normal",
+        initial_mode = "insert",
         sort_mru = true,
         ignore_current_buffer = #bufs > 1,
     })

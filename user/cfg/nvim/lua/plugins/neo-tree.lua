@@ -97,20 +97,20 @@ plugin.setup {
         },
         mappings = {
             ["<CR>"] = "open",
-            ["<D-CR>"] = "open_with_window_picker",
-            ["<2-LeftMouse>"] = "open_with_window_picker",
-            ["P"] = { "toggle_preview", config = { use_float = true } },
-            ["l"] = "focus_preview",
-            ["<D-h>"] = "open_split",
-            ["<D-n>"] = "open_vsplit",
+            ["<D-CR>p"] = "open_with_window_picker",
+            ["<D-CR>h"] = "open_split",
+            ["<D-CR>n"] = "open_vsplit",
+            ["<2-LeftMouse>"] = "open",
+            ["<D-p>"] = { "toggle_preview", config = { use_float = true } },
+            ["p"] = "focus_preview",
             -- ["t"] = "open_tabnew",
             -- ["<cr>"] = "open_drop",
             -- ["t"] = "open_tab_drop",
-            ["C"] = "close_node",
+            ["<Space>"] = "close_node",
             -- ['C'] = 'close_all_subnodes',
-            ["z"] = "close_all_nodes",
+            ["<C-Space>"] = "close_all_nodes",
             --["Z"] = "expand_all_nodes",
-            ["a"] = {
+            ["<D-n>"] = {
                 "add",
                 -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
                 -- some commands may take optional config options, see `:h neo-tree-mappings` for details
@@ -118,28 +118,28 @@ plugin.setup {
                     show_path = "none", -- "none", "relative", "absolute"
                 },
             },
-            ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
-            ["d"] = "delete",
-            ["r"] = "rename",
-            ["y"] = "copy_to_clipboard",
-            ["x"] = "cut_to_clipboard",
-            ["p"] = "paste_from_clipboard",
-            ["c"] = {
+            ["<D-S-n>"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
+            ["<D-BS>"] = "delete",
+            ["<D-r>"] = "rename",
+            ["<D-c>"] = "copy_to_clipboard",
+            ["<D-x>"] = "cut_to_clipboard",
+            ["<D-v>"] = "paste_from_clipboard",
+            ["<D-d>"] = {
                 "copy",
                 config = {
                     show_path = "none", -- "none", "relative", "absolute"
                 },
             },
-            ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
+            ["<D-m>"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
             -- ["q"] = "close_window",
             ["R"] = "refresh",
             ["?"] = "show_help",
             [">"] = "next_source",
             ["<"] = "prev_source",
-            ["<C-c>a"] = function(state) copy_path(state, "absolute") end,
-            ["<C-c>r"] = function(state) copy_path(state, "relative") end,
-            ["<C-c>n"] = function(state) copy_path(state, "filename") end,
-            ["<C-c>s"] = function(state) copy_path(state, "filestem") end,
+            ["ya"] = function(state) copy_path(state, "absolute") end,
+            ["yr"] = function(state) copy_path(state, "relative") end,
+            ["yn"] = function(state) copy_path(state, "filename") end,
+            ["ys"] = function(state) copy_path(state, "filestem") end,
         },
     },
     nesting_rules = {},
