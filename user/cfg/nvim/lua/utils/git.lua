@@ -1,5 +1,14 @@
 local M = {}
 
+function M.is_lazygit_active()
+    return vim.bo.filetype == "lazygit"
+end
+
+function M.close_lazygit()
+    local keys = require "utils.keys"
+    keys.send_in_t_mode("q")
+end
+
 function M.open_diff()
     vim.cmd "DiffviewOpen"
 end
@@ -32,7 +41,7 @@ function M.inactive_diff()
     return nil
 end
 
-function M.ensure_hidden()
+function M.ensure_diff_hidden()
     local current_diff = M.current_diff()
 
     if current_diff ~= nil then

@@ -45,10 +45,29 @@ end
 function M.close_buffer(opts)
     local git = require "utils.git"
 
-    local current_diff = git.current_diff()
+    if git.is_lazygit_active() then
+        git.close_lazygit()
+        return
+    end
 
-    if current_diff ~= nil then
+    local current_git_diff = git.current_diff()
+
+    if current_git_diff ~= nil then
         git.hide_current_diff()
+        return
+    end
+
+    local lazy = require "utils.lazy"
+
+    if lazy.is_active() then
+        lazy.close()
+        return
+    end
+
+    local mason = require "utils.mason"
+
+    if mason.is_active() then
+        mason.close()
         return
     end
 
@@ -91,8 +110,8 @@ function M.close_buffer(opts)
     local mode = vim.fn.mode()
 
     if mode ~= "n" then
-        local keys = require "utils/keys"
-        keys.send_keys "<Esc>"
+        local keys = require "utils.keys"
+        keys.send_in_x_mode "<Esc>"
     end
 
     local view = require "utils.view"
@@ -207,10 +226,10 @@ function M.quit()
 
     if mode == "i" or mode == "v" then
         local keys = require "utils.keys"
-        keys.send_keys "<Esc>"
+        keys.send_in_x_mode "<Esc>"
     end
 
-    git.ensure_hidden()
+    git.ensure_diff_hidden()
     term.ensure_hidden()
     filetree.ensure_hidden()
     zenmode.ensure_deacitvated()
