@@ -141,6 +141,13 @@ local plugins = {
     },
 
     {
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        branch = "main",
+        event = "BufEnter",
+        config = function() require "plugins/lsp-lines" end,
+    },
+
+    {
         "simrat39/rust-tools.nvim",
         version = "*",
         event = "BufEnter *.rs",
