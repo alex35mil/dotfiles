@@ -1,6 +1,6 @@
 local plugin = require "lsp_lines"
 
--- Disable virtual_text since it's redundant due to lsp_lines.
-vim.diagnostic.config({ virtual_text = false })
+-- Disabling virtual lines by deafult as they are too annoying when editing
+vim.diagnostic.config({ virtual_lines = false })
 
 plugin.setup {}

@@ -146,6 +146,7 @@ map { ["<D-f>t"] = { "Open project-wide text search", telescope.find_text, mode 
 map { ["<Leader>tc"] = { "Find command", telescope.command, mode = "n" } }
 map { ["<Leader>th"] = { "Open highlights list", "<Cmd>Telescope highlights<CR>", mode = "n" } }
 
+map { ["<M-d>l"] = { "Toggle LSP diagnostic lines", lsp.toggle_lines, mode = "n" } }
 map {
     ["<M-d>a"] = {
         "List all LSP diagnostics for the whole workspace",

@@ -19,4 +19,10 @@ function M.jump_to_next_error()
     diagnostic:goto_next({ severity = severity.ERROR })
 end
 
+function M.toggle_lines()
+    local lines = require "lsp_lines"
+    local visible = lines.toggle()
+    vim.diagnostic.config({ virtual_text = not visible })
+end
+
 return M
