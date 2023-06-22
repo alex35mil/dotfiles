@@ -1,7 +1,7 @@
 local plugin = require "lualine"
 local mode = require "lualine.utils.mode"
-local color = require "theme/palette"
-local lsp = require "utils/lsp"
+local color = require "theme.palette"
+local lsp = require "utils.lsp"
 
 local theme = {
     normal = {

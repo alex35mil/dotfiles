@@ -3,7 +3,7 @@ local mason_cfg = require "mason-lspconfig"
 local lsp_cfg = require "lspconfig"
 local neodev = require "neodev"
 
-local signs = require "utils/lsp".signs
+local signs = require "utils.lsp".signs
 
 vim.diagnostic.config {
     signs = true,

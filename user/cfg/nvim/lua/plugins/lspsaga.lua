@@ -1,5 +1,5 @@
 local plugin = require "lspsaga"
-local color = require "theme/palette"
+local color = require "theme.palette"
 
 plugin.setup {
     ui = {
