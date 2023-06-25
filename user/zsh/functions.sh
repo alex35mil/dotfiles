@@ -77,6 +77,26 @@ function dls() {
   docker network ls
 }
 
+# Removes Neovim swap files: all or of provided project
+function vcs() {
+    if [ -z "$1" ]; then
+        echo "Provide a project name or '!' to remove all swap files"
+        exit 1
+    fi
+
+    SWAPROOT="$HOME/.local/state/nvim/swap/"
+
+    # If the input argument is !, remove all swap files
+    if [[ "$1" == "!" ]]; then
+        find $SWAPROOT -type f -name "*.sw[klmnop]" -delete
+        echo "All swap files deleted"
+    else
+        SEARCHTERM=$(echo "%Users%Alex%Dev%$1" | tr '/' '%')
+        find $SWAPROOT -type f -name "$SEARCHTERM*.sw[klmnop]" -delete
+        echo "Swap files for $1 deleted"
+    fi
+}
+
 # Adds fingerprint to the filename
 function fp() {
   FILENAME=$1
