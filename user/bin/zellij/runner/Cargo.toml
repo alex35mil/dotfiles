@@ -2,7 +2,7 @@
 name = "zellij-runner"
 description = "Session runner/switcher for Zellij"
 authors = ["Alex Fedoseev <alex@fedoseev.mx>"]
-version = "0.2.0"
+version = "0.3.0"
 readme = "README.md"
 documentation = "https://docs.rs/zellij-runner"
 repository = "https://github.com/alex35mil/dotfiles"
