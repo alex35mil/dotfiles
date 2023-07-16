@@ -839,7 +839,11 @@ impl<'a> DirSelectorScreen<'a> {
                 .dirs
                 .iter()
                 .filter_map(|dir| {
-                    if dir.to_string().contains(&self.input.value) {
+                    if dir
+                        .to_string()
+                        .to_lowercase()
+                        .contains(&self.input.value.to_lowercase())
+                    {
                         Some(dir.clone())
                     } else {
                         None
