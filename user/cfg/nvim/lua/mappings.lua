@@ -47,6 +47,10 @@ map { ["d"] = { "Don't replace clipboard content when deleting", [["_d]], mode =
 map { ["s"] = { "Don't replace clipboard content when inserting", [["xs]], mode = "v" } }
 map { ["c"] = { "Don't replace clipboard content when changing", [["xc]], mode = { "n", "v" } } }
 
+map { ["<CR>"] = { "Change inner word", "ciw", mode = "n" } }
+map { ["<M-CR>"] = { "Select inner word", "viw", mode = "n" } }
+map { ["<D-CR>"] = { "Yank inner word", "yiw", mode = "n" } }
+
 map { ["<C-t>"] = { "Insert new line above", "O<Esc>", mode = "n" } }
 map { ["<C-h>"] = { "Insert new line below", "o<Esc>", mode = "n" } }
 map { ["<C-t>"] = { "Insert new line above", "<Esc>O", mode = "i" } }
