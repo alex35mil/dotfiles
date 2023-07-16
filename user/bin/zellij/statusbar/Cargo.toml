@@ -9,9 +9,9 @@ name = "statusbar"
 path = "src/main.rs"
 
 [dependencies]
-zellij-tile = "0.35.2"
-zellij-tile-utils = "0.35.2"
-chrono = "0.4.24"
+zellij-tile = "0.37.2"
+zellij-tile-utils = "0.37.2"
+chrono = "0.4.26"
 colored = "2"
 ansi_term = "0.12"
 unicode-width = "0.1.8"
