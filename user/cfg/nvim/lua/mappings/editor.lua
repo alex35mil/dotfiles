@@ -107,6 +107,12 @@ function M.close_buffer(opts)
         return
     end
 
+    if current_buf_info.name == "" and current_buf_info.changed == 0 and current_buf_info.listed == 0 then
+        -- Most likely a documontation buffer
+        vim.cmd.quit()
+        return
+    end
+
     local mode = vim.fn.mode()
 
     if mode ~= "n" then

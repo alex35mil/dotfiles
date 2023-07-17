@@ -1,3 +1,4 @@
+local lsp = vim.lsp
 local mason = require "mason"
 local mason_cfg = require "mason-lspconfig"
 local lsp_cfg = require "lspconfig"
@@ -9,6 +10,8 @@ vim.diagnostic.config {
     signs = true,
     severity_sort = true,
 }
+
+lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "rounded" })
 
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type

@@ -221,6 +221,7 @@ map { ["<C-o>"] = { "LSP: Outline", "<Cmd>Lspsaga outline<CR>", mode = "n" } }
 map { ["<C-a>"] = { "LSP: Code actions", "<Cmd>Lspsaga code_action<CR>", mode = "n" } }
 map { ["<C-i>"] = { "LSP: Hint", "<Cmd>Lspsaga hover_doc<CR>", mode = "n" } }
 map { ["<C-f>"] = { "LSP: Finder", "<Cmd>Lspsaga lsp_finder<CR>", mode = "n" } }
+map { ["<C-s>"] = { "LSP: Doc", vim.lsp.buf.hover, mode = "n" } }
 map { ["}"] = { "LSP: Diagnostic next error", lsp.jump_to_next_error, mode = "n" } }
 map { ["{"] = { "LSP: Diagnostic previous error", lsp.jump_to_prev_error, mode = "n" } }
 map { ["<C-}>"] = { "LSP: Diagnostic next warning", lsp.jump_to_next_warning, mode = "n" } }
