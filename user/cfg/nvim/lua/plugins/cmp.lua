@@ -19,7 +19,7 @@ plugin.setup {
         ["<C-t>"] = mapping.scroll_docs(-4),
         ["<C-h>"] = mapping.scroll_docs(4),
         ["<C-c>"] = mapping.complete(),
-        ["<D-Esc>"] = mapping.abort(),
+        ["<D-w>"] = mapping.abort(),
         ["<CR>"] = mapping.confirm({
             behavior = plugin.ConfirmBehavior.Insert,
             select = true,
