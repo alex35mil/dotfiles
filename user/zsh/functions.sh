@@ -80,8 +80,8 @@ function dls() {
 # Removes Neovim swap files: all or of provided project
 function vsc() {
     if [ -z "$1" ]; then
-        echo "Provide a project name or '!' to remove all swap files"
-        exit 1
+        echo "Provide a project path or '!' to remove all swap files"
+        return 1
     fi
 
     SWAPROOT="$HOME/.local/state/nvim/swap/"
