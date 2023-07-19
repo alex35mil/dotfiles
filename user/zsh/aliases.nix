@@ -165,7 +165,7 @@
     # Vim
     v = "neovide ";
     vcc = "rm -rf ~/.cache/nvim/luac/";
-    vlss = "ls -1 ~/.local/state/nvim/swap/";
+    vsls = "ls -1 ~/.local/state/nvim/swap/";
 
     # Zellij
     z = "zellij";

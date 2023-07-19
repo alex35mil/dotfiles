@@ -78,7 +78,7 @@ function dls() {
 }
 
 # Removes Neovim swap files: all or of provided project
-function vcs() {
+function vsc() {
     if [ -z "$1" ]; then
         echo "Provide a project name or '!' to remove all swap files"
         exit 1
