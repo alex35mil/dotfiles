@@ -291,6 +291,14 @@ local theme = lush(function(injected_functions)
         NeoTreeGitModified { fg = color.blue },
         NeoTreeGitStaged { fg = color.green },
         NeoTreeGitIgnored { fg = color.faded_text },
+
+        SpectreHeader { Comment },
+        SpectreBorder { Comment },
+        SpectreDir { fg = color.strong_text, bold = true },
+        SpectreFile { fg = color.cyan, bold = true },
+        SpectreBody { fg = color.charcoal, bold = true },
+        SpectreSearch { fg = color.bg, bg = color.green },
+        SpectreReplace { fg = color.bg, bg = color.orange },
     }
 end)
 

@@ -262,6 +262,13 @@ local plugins = {
         config = function() require "plugins/gitsigns" end,
     },
 
+    -- search/replace
+    {
+        "nvim-pack/nvim-spectre",
+        version = "*",
+        config = function() require "plugins/spectre" end,
+    },
+
     -- comments
     {
         "numToStr/Comment.nvim",

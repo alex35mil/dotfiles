@@ -92,6 +92,13 @@ function M.close_buffer(opts)
         return
     end
 
+    local search = require "utils.search"
+
+    if search.is_active() then
+        search.close()
+        return
+    end
+
     local buffers = require "utils.buffers"
     local zenmode = require "utils.zenmode"
 
@@ -108,7 +115,7 @@ function M.close_buffer(opts)
     end
 
     if current_buf_info.name == "" and current_buf_info.changed == 0 and current_buf_info.listed == 0 then
-        -- Most likely a documontation buffer
+        -- Most likely LSP documontation modal buffer
         vim.cmd.quit()
         return
     end
@@ -227,6 +234,7 @@ function M.quit()
     local term = require "utils.terminal"
     local zenmode = require "utils.zenmode"
     local filetree = require "utils.filetree"
+    local search = require "utils.search"
 
     local mode = vim.fn.mode()
 
@@ -239,6 +247,7 @@ function M.quit()
     term.ensure_hidden()
     filetree.ensure_hidden()
     zenmode.ensure_deacitvated()
+    search.ensure_closed()
 
     -- NOTE: Not `wqa` due to toggleterm issue
     vim.cmd "wa"

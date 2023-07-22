@@ -5,6 +5,7 @@ local filetree = require "mappings.filetree"
 local telescope = require "mappings.telescope"
 local statusline = require "mappings.statusline"
 local terminal = require "mappings.terminal"
+local search = require "mappings.search"
 
 local function map(mappings)
     local wk = require "which-key"
@@ -48,6 +49,7 @@ map { ["s"] = { "Don't replace clipboard content when inserting", [["xs]], mode 
 map { ["c"] = { "Don't replace clipboard content when changing", [["xc]], mode = { "n", "v" } } }
 
 map { ["<CR>"] = { "Change inner word", "ciw", mode = "n" } }
+map { ["<C-c>"] = { "Change inner word", "ciw", mode = "n" } }
 map { ["<M-CR>"] = { "Select inner word", "viw", mode = "n" } }
 map { ["<D-CR>"] = { "Yank inner word", "yiw", mode = "n" } }
 
@@ -149,6 +151,7 @@ map { ["<D-f>t"] = { "Open project-wide text search", telescope.find_text, mode 
 
 map { ["<Leader>tc"] = { "Find command", telescope.command, mode = "n" } }
 map { ["<Leader>th"] = { "Open highlights list", "<Cmd>Telescope highlights<CR>", mode = "n" } }
+
 map {
     ["<Leader>tta"] = {
         "Find all TODO comments",
@@ -170,6 +173,11 @@ map {
         mode = "n",
     },
 }
+
+map { ["<Leader>sg"] = { "Open project search", search.open, mode = "n" } }
+map { ["<Leader>sc"] = { "Open search in current buffer", search.current_buffer, mode = "n" } }
+map { ["<Leader>swg"] = { "Search current word in project", search.word, mode = "n" } }
+map { ["<Leader>swc"] = { "Search current word in current buffer", search.word_in_current_buffer, mode = "n" } }
 
 map { ["<M-d>l"] = { "Toggle LSP diagnostic lines", lsp.toggle_lines, mode = "n" } }
 map {
