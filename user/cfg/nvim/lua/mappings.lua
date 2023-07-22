@@ -149,6 +149,27 @@ map { ["<D-f>t"] = { "Open project-wide text search", telescope.find_text, mode 
 
 map { ["<Leader>tc"] = { "Find command", telescope.command, mode = "n" } }
 map { ["<Leader>th"] = { "Open highlights list", "<Cmd>Telescope highlights<CR>", mode = "n" } }
+map {
+    ["<Leader>tta"] = {
+        "Find all TODO comments",
+        function() telescope.todos({ todo = true, fixme = true }) end,
+        mode = "n",
+    },
+}
+map {
+    ["<Leader>ttt"] = {
+        "Find TODOs",
+        function() telescope.todos({ todo = true }) end,
+        mode = "n",
+    },
+}
+map {
+    ["<Leader>ttf"] = {
+        "Find FIXMEs",
+        function() telescope.todos({ fixme = true }) end,
+        mode = "n",
+    },
+}
 
 map { ["<M-d>l"] = { "Toggle LSP diagnostic lines", lsp.toggle_lines, mode = "n" } }
 map {

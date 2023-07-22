@@ -65,6 +65,23 @@ function M.diagnostics(params)
     builtin.diagnostics(opts)
 end
 
+function M.todos(params)
+    if not params.todo and not params.fixme then
+        vim.api.nvim_err_writeln "No keywords specified"
+        return
+    end
+
+    local keywords = {}
+    if params.todo then table.insert(keywords, "TODO") end
+    if params.fixme then table.insert(keywords, "FIXME") end
+
+    vim.cmd(
+        "TodoTelescope " ..
+        "keywords=" .. table.concat(keywords, ",") .. " " ..
+        "layout_strategy=vertical"
+    )
+end
+
 function M.command()
     builtin.commands({
         initial_mode = "insert",
