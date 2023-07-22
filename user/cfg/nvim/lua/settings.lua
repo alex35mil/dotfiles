@@ -4,7 +4,7 @@ local opt = vim.opt
 opt.termguicolors = true
 
 opt.number = true
-opt.relativenumber = false -- `<N>j` is not a jump, so I prefer to `hop`
+opt.relativenumber = false -- `<N>j` is not a jump, so I prefer to `pounce`
 
 opt.cursorline = true
 opt.cursorcolumn = false
