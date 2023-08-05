@@ -48,8 +48,8 @@ map { ["d"] = { "Don't replace clipboard content when deleting", [["_d]], mode =
 map { ["s"] = { "Don't replace clipboard content when inserting", [["xs]], mode = "v" } }
 map { ["c"] = { "Don't replace clipboard content when changing", [["xc]], mode = { "n", "v" } } }
 
-map { ["<CR>"] = { "Change inner word", "ciw", mode = "n" } }
-map { ["<C-c>"] = { "Change inner word", "ciw", mode = "n" } }
+map { ["<CR>"] = { "Change inner word", [["xciw]], mode = "n" } }
+map { ["<C-c>"] = { "Change inner word", [["xciw]], mode = "n" } }
 map { ["<M-CR>"] = { "Select inner word", "viw", mode = "n" } }
 map { ["<D-CR>"] = { "Yank inner word", "yiw", mode = "n" } }
 
