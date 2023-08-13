@@ -36,7 +36,7 @@ keybinds clear-defaults=true {
         bind "Ctrl h" { MoveFocus "Left"; }
         bind "Ctrl l" { MoveFocus "Right"; }
         bind "Ctrl g" { FocusNextPane; }
-        bind "Ctrl e" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
+        bind "Ctrl z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
         bind "Alt >" { GoToNextTab; }
         bind "Alt k" { Resize "Increase"; }
         bind "Alt j" { Resize "Decrease"; }
