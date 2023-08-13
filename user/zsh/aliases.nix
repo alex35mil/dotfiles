@@ -147,6 +147,8 @@
     nrm = "npm remove --save ";
     nrmd = "npm remove --save-dev ";
     no = "npm outdated";
+    nup = "ncu --upgrade --interactive --format group";
+    nupw = "ncu --workspaces --upgrade --interactive --format group";
     nlg = "npm ls -g --depth=0";
     nfuck = "rm -rf node_modules && npm cache clean && npm install";
 

@@ -1,3 +1,5 @@
+lib:
+
 {
   enable = true;
 
@@ -18,5 +20,5 @@
   '';
 
   shellAliases = import ./zsh/aliases.nix;
-  sessionVariables = import ./zsh/variables.nix;
+  sessionVariables = import ./zsh/variables.nix lib;
 }

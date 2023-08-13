@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   home.username = "Alex";
@@ -12,7 +12,7 @@
 
   programs.home-manager = { enable = true; };
 
-  programs.zsh = import ./zsh.nix;
+  programs.zsh = import ./zsh.nix lib;
   programs.git = import ./git.nix;
   programs.neovim = import ./neovim.nix;
   programs.direnv = import ./direnv.nix;
