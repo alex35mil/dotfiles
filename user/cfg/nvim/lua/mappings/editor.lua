@@ -227,6 +227,12 @@ function M.close_all_bufs_except_current(opts)
             vim.api.nvim_win_close(win, false)
         end
     end
+
+    if incl_unsaved then
+        print "Closed all buffers except current"
+    else
+        print "Closed all buffers except current and unsaved"
+    end
 end
 
 function M.quit()
