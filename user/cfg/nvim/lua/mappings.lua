@@ -58,6 +58,7 @@ map { ["<C-t>"] = { "Insert new line above", "O<Esc>", mode = "n" } }
 map { ["<C-h>"] = { "Insert new line below", "o<Esc>", mode = "n" } }
 map { ["<C-t>"] = { "Insert new line above", "<Esc>O", mode = "i" } }
 map { ["<C-h>"] = { "Insert new line below", "<Esc>o", mode = "i" } }
+map { ["<D-CR>"] = { "Insert new line below", "<Esc>o", mode = "i" } }
 
 map { ["<C-d>"] = { "Duplicate line", [["yyy"yp]], mode = "n" } }
 map { ["<C-d>"] = { "Duplicate line", [[<Esc>"yyy"ypgi]], mode = "i" } }
