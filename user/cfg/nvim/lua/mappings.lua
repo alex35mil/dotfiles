@@ -49,9 +49,10 @@ map { ["s"] = { "Don't replace clipboard content when inserting", [["xs]], mode 
 map { ["c"] = { "Don't replace clipboard content when changing", [["xc]], mode = { "n", "v" } } }
 
 map { ["<CR>"] = { "Change inner word", [["xciw]], mode = "n" } }
+map { ["<CR>"] = { "Change seletion", [["xc]], mode = "v" } }
+map { ["<D-CR>"] = { "Select inner word", "viw", mode = "n" } }
 map { ["<C-c>"] = { "Change inner word", [["xciw]], mode = "n" } }
-map { ["<M-CR>"] = { "Select inner word", "viw", mode = "n" } }
-map { ["<D-CR>"] = { "Yank inner word", "yiw", mode = "n" } }
+map { ["<C-y>"] = { "Yank inner word", "yiw", mode = "n" } }
 
 map { ["<C-t>"] = { "Insert new line above", "O<Esc>", mode = "n" } }
 map { ["<C-h>"] = { "Insert new line below", "o<Esc>", mode = "n" } }
@@ -110,9 +111,9 @@ map { ["<D-Right>"] = { "Move to window on the right", "<Cmd>wincmd l<CR>", mode
 
 map { ["<D-z>"] = { "Toggle zen mode", editor.zenmode, mode = { "n", "i", "v" } } }
 
-map { ["<C-n>c"] = { "Open new buffer in the current window", "<Cmd>enew<CR>", mode = "n" } }
-map { ["<C-n>h"] = { "Open new horizontal split", "<Cmd>new<CR>", mode = "n" } }
-map { ["<C-n>n"] = { "Open new vertical split", "<Cmd>vnew<CR>", mode = "n" } }
+map { ["<C-n>"] = { "Open new buffer in the current window", "<Cmd>enew<CR>", mode = "n" } }
+map { ["<Leader>nh"] = { "Open new horizontal split", "<Cmd>new<CR>", mode = "n" } }
+map { ["<Leader>nv"] = { "Open new vertical split", "<Cmd>vnew<CR>", mode = "n" } }
 
 map {
     ["<D-w>"] = {
@@ -122,21 +123,21 @@ map {
     },
 }
 map {
-    ["<M-w>"] = {
+    ["<Leader>wc"] = {
         "Close current buffer, but do not close current window when there are multiple",
         function() editor.close_buffer({ should_close_window = false }) end,
-        mode = { "n", "i", "v" },
+        mode = { "n", "v" },
     },
 }
 map {
-    ["<Leader>ww"] = {
+    ["<Leader>wo"] = {
         "Close all buffers except current & unsaved",
         function() editor.close_all_bufs_except_current({ incl_unsaved = false }) end,
         mode = "n",
     },
 }
 map {
-    ["<Leader>wa"] = {
+    ["<Leader>wf"] = {
         "Close all buffers except current",
         function() editor.close_all_bufs_except_current({ incl_unsaved = true }) end,
         mode = "n",
@@ -179,48 +180,55 @@ map { ["<Leader>sc"] = { "Open search in current buffer", search.current_buffer,
 map { ["<Leader>swg"] = { "Search current word in project", search.word, mode = "n" } }
 map { ["<Leader>swc"] = { "Search current word in current buffer", search.word_in_current_buffer, mode = "n" } }
 
-map { ["<M-d>l"] = { "Toggle LSP diagnostic lines", lsp.toggle_lines, mode = "n" } }
+map { ["<Leader>dl"] = { "Toggle LSP diagnostic lines", lsp.toggle_lines, mode = "n" } }
 map {
-    ["<M-d>a"] = {
-        "List all LSP diagnostics for the whole workspace",
-        function() telescope.diagnostics({ current_buffer = false }) end,
-        mode = { "n", "i", "v" },
-    },
-}
-map {
-    ["<M-d>e"] = {
+    ["<C-e>"] = {
         "List LSP diagnostics with ERROR severity for the whole workspace",
         function() telescope.diagnostics({ min_severity = "ERROR", current_buffer = false }) end,
-        mode = { "n", "i", "v" },
+        mode = { "n", "v" },
     },
 }
 map {
-    ["<M-d>w"] = {
+    ["<Leader>da"] = {
+        "List all LSP diagnostics for the whole workspace",
+        function() telescope.diagnostics({ current_buffer = false }) end,
+        mode = { "n", "v" },
+    },
+}
+map {
+    ["<Leader>de"] = {
+        "List LSP diagnostics with ERROR severity for the whole workspace",
+        function() telescope.diagnostics({ min_severity = "ERROR", current_buffer = false }) end,
+        mode = { "n", "v" },
+    },
+}
+map {
+    ["<Leader>dw"] = {
         "List LSP diagnostics with WARN & ERROR severities for the whole workspace",
         function() telescope.diagnostics({ min_severity = "WARN", current_buffer = false }) end,
-        mode = { "n", "i", "v" },
+        mode = { "n", "v" },
     },
 }
 
 map {
-    ["<M-d>ca"] = {
+    ["<Leader>dca"] = {
         "List all LSP diagnostics for the current buffer only",
         function() telescope.diagnostics({ current_buffer = true }) end,
-        mode = { "n", "i", "v" },
+        mode = { "n", "v" },
     },
 }
 map {
-    ["<M-d>ce"] = {
+    ["<Leader>dce"] = {
         "List LSP diagnostics with ERROR severity for the current buffer only",
         function() telescope.diagnostics({ min_severity = "ERROR", current_buffer = true }) end,
-        mode = { "n", "i", "v" },
+        mode = { "n", "v" },
     },
 }
 map {
-    ["<M-d>cw"] = {
+    ["<Leader>dcw"] = {
         "List LSP diagnostics with WARN & ERROR severities for the current buffer only",
         function() telescope.diagnostics({ min_severity = "WARN", current_buffer = true }) end,
-        mode = { "n", "i", "v" },
+        mode = { "n", "v" },
     },
 }
 
@@ -228,6 +236,7 @@ map { ["<D-p>p"] = { "Open plugins manager", "<Cmd>Lazy<CR>", mode = "n" } }
 map { ["<D-p>l"] = { "Open package manager", "<Cmd>Mason<CR>", mode = "n" } }
 
 map { ["<D-e>"] = { "Toggle file tree", filetree.toggle, mode = { "n", "i", "v" } } }
+map { ["<Leader>e"] = { "Toggle file tree in float window", "<Cmd>NeoTreeFloatToggle<CR>", mode = { "n", "v" } } }
 
 map { ["<M-t>t"] = { "Toggle tab terminal", terminal.toggle_tab, mode = { "n", "i", "v", "t" } } }
 map { ["<M-t>f"] = { "Toggle float terminal", terminal.toggle_float, mode = { "n", "i", "v", "t" } } }
@@ -239,8 +248,8 @@ map { ["<D-g>d"] = { "Git: Toggle diff", git.toggle_diff, mode = "n" } }
 map { ["<D-g>j"] = { "Git: Jump to the next hunk", "<Cmd>Gitsigns next_hunk<CR>", mode = "n" } }
 map { ["<D-g>k"] = { "Git: Jump to the previous hunk", "<Cmd>Gitsigns prev_hunk<CR>", mode = "n" } }
 map { ["<D-g>b"] = { "Git: Show line blame", "<Cmd>Gitsigns blame_line<CR>", mode = "n" } }
-map { ["<C-Space>"] = { "Git: Stage hunk", "<Cmd>Gitsigns stage_hunk<CR>", mode = "n" } }
-map { ["<C-S-Space>"] = { "Git: Unstage hunk", "<Cmd>Gitsigns undo_stage_hunk<CR>", mode = "n" } }
+map { ["<C-Space>"] = { "Git: Stage hunk", "<Cmd>Gitsigns stage_hunk<CR>", mode = { "n", "v" } } }
+map { ["<D-C-Space>"] = { "Git: Unstage hunk", "<Cmd>Gitsigns undo_stage_hunk<CR>", mode = { "n", "v" } } }
 
 map { ["<M-l>"] = { "Toggle filename in statusline", statusline.toggle_filename, mode = { "n", "i", "v" } } }
 
@@ -250,7 +259,6 @@ map { ["<C-o>"] = { "LSP: Outline", "<Cmd>Lspsaga outline<CR>", mode = "n" } }
 map { ["<C-a>"] = { "LSP: Code actions", "<Cmd>Lspsaga code_action<CR>", mode = "n" } }
 map { ["<C-i>"] = { "LSP: Hint", "<Cmd>Lspsaga hover_doc<CR>", mode = "n" } }
 map { ["<C-f>"] = { "LSP: Finder", "<Cmd>Lspsaga lsp_finder<CR>", mode = "n" } }
-map { ["<C-s>"] = { "LSP: Doc", vim.lsp.buf.hover, mode = "n" } }
 map { ["}"] = { "LSP: Diagnostic next error", lsp.jump_to_next_error, mode = "n" } }
 map { ["{"] = { "LSP: Diagnostic previous error", lsp.jump_to_prev_error, mode = "n" } }
 map { ["<C-}>"] = { "LSP: Diagnostic next warning", lsp.jump_to_next_warning, mode = "n" } }
