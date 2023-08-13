@@ -265,7 +265,9 @@ local theme = lush(function(injected_functions)
         IndentBlanklineContextChar { fg = IndentBlanklineChar.fg.lighten(25) },
 
         TodoComment { fg = color.purple },
-        FixmeComment { fg = color.orange },
+        FixmeComment { fg = color.purple },
+        HackComment { fg = color.yellow },
+        PriorityComment { fg = color.orange },
 
         ZenBg { fg = color.text, bg = color.bg },
 

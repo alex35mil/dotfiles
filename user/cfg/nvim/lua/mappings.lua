@@ -162,15 +162,22 @@ map {
 }
 map {
     ["<Leader>ttt"] = {
-        "Find TODOs",
+        "Find all TODOs",
         function() telescope.todos({ todo = true }) end,
         mode = "n",
     },
 }
 map {
     ["<Leader>ttf"] = {
-        "Find FIXMEs",
+        "Find all FIXMEs",
         function() telescope.todos({ fixme = true }) end,
+        mode = "n",
+    },
+}
+map {
+    ["<Leader>ttp"] = {
+        "Find all high priority entries",
+        function() telescope.todos({ priority = true }) end,
         mode = "n",
     },
 }

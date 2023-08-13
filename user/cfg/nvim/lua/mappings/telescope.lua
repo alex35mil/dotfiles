@@ -66,14 +66,25 @@ function M.diagnostics(params)
 end
 
 function M.todos(params)
-    if not params.todo and not params.fixme then
+    if not params.todo and not params.fixme and not params.priority then
         vim.api.nvim_err_writeln "No keywords specified"
         return
     end
 
     local keywords = {}
-    if params.todo then table.insert(keywords, "TODO") end
-    if params.fixme then table.insert(keywords, "FIXME") end
+    if params.priority then
+        table.insert(keywords, "TODO!")
+        table.insert(keywords, "FIXME!")
+    else
+        if params.todo then
+            table.insert(keywords, "TODO")
+            table.insert(keywords, "TODO!")
+        end
+        if params.fixme then
+            table.insert(keywords, "FIXME")
+            table.insert(keywords, "FIXME!")
+        end
+    end
 
     vim.cmd(
         "TodoTelescope " ..

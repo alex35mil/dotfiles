@@ -4,12 +4,17 @@ plugin.setup {
     signs = false,
     colors = {
         todo = { "TodoComment" },
+        hack = { "HackComment" },
         fixme = { "FixmeComment" },
+        priority = { "PriorityComment" },
     },
     keywords = {
-        TODO = { icon = "", color = "todo" },
-        FIX = { icon = "", color = "fixme", alt = { "FIXME" } },
         NB = { icon = "", color = "hint", alt = { "NB!" } },
+        HACK = { icon = "", color = "hack" },
+        TODO = { icon = "", color = "todo" },
+        FIXME = { icon = "", color = "fixme" },
+        TODOP = { icon = "", color = "priority", alt = { "TODO!" } },
+        FIXMEP = { icon = "", color = "priority", alt = { "FIXME!" } },
     },
     search = {
         command = "rg",
