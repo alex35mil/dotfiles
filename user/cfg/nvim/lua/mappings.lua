@@ -188,7 +188,7 @@ map { ["<Leader>sc"] = { "Open search in current buffer", search.current_buffer,
 map { ["<Leader>swg"] = { "Search current word in project", search.word, mode = "n" } }
 map { ["<Leader>swc"] = { "Search current word in current buffer", search.word_in_current_buffer, mode = "n" } }
 
-map { ["<Leader>dl"] = { "Toggle LSP diagnostic lines", lsp.toggle_lines, mode = "n" } }
+map { ["<C-l>"] = { "Toggle LSP diagnostic lines", lsp.toggle_lines, mode = "n" } }
 map {
     ["<C-e>"] = {
         "List LSP diagnostics with ERROR severity for the whole workspace",
