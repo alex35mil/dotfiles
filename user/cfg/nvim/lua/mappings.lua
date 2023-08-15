@@ -81,6 +81,8 @@ map { ["<D-a>"] = { "Select all", "<Esc>ggVG", mode = { "i", "v" } } }
 
 map { ["<D-t>"] = { "Move cursor half-screen up", "<C-u>", mode = { "n", "v" } } }
 map { ["<M-h>"] = { "Move cursor half-screen down", "<C-d>", mode = { "n", "v" } } } -- It is <D-h> remapped via Karabiner
+map { ["<D-k>"] = { "Scroll up", "<C-y>", mode = { "n", "v", "i" } } }
+map { ["<D-j>"] = { "Scroll down", "<C-e>", mode = { "n", "v", "i" } } }
 
 map { ["<D-d>"] = { "History: back", "<C-o>", mode = "n" } }
 map { ["<D-n>"] = { "History: forward", "<C-i>", mode = "n" } }
@@ -190,9 +192,16 @@ map { ["<Leader>swc"] = { "Search current word in current buffer", search.word_i
 
 map { ["<C-l>"] = { "Toggle LSP diagnostic lines", lsp.toggle_lines, mode = "n" } }
 map {
-    ["<C-e>"] = {
+    ["<C-,>"] = {
         "List LSP diagnostics with ERROR severity for the whole workspace",
         function() telescope.diagnostics({ min_severity = "ERROR", current_buffer = false }) end,
+        mode = { "n", "v" },
+    },
+}
+map {
+    ["<C-.>"] = {
+        "List LSP diagnostics with WARN & ERROR severities for the whole workspace",
+        function() telescope.diagnostics({ min_severity = "WARN", current_buffer = false }) end,
         mode = { "n", "v" },
     },
 }
@@ -244,12 +253,12 @@ map { ["<D-p>p"] = { "Open plugins manager", "<Cmd>Lazy<CR>", mode = "n" } }
 map { ["<D-p>l"] = { "Open package manager", "<Cmd>Mason<CR>", mode = "n" } }
 
 map { ["<D-e>"] = { "Toggle file tree", filetree.toggle, mode = { "n", "i", "v" } } }
-map { ["<Leader>e"] = { "Toggle file tree in float window", "<Cmd>NeoTreeFloatToggle<CR>", mode = { "n", "v" } } }
+map { ["<C-e>"] = { "Toggle file tree in float window", "<Cmd>NeoTreeFloatToggle<CR>", mode = { "n", "v" } } }
 
 map { ["<M-t>t"] = { "Toggle tab terminal", terminal.toggle_tab, mode = { "n", "i", "v", "t" } } }
 map { ["<M-t>f"] = { "Toggle float terminal", terminal.toggle_float, mode = { "n", "i", "v", "t" } } }
 map { ["<M-t>h"] = { "Toggle horizontal terminal", terminal.toggle_horizontal, mode = { "n", "i", "v", "t" } } }
-map { ["<C-n>"] = { "Exit terminal mode", "<C-\\><C-n>", mode = "t" } }
+map { ["<D-Esc>"] = { "Exit terminal mode", "<C-\\><C-n>", mode = "t" } }
 
 map { ["<D-g>g"] = { "Git: Show lazygit", "<Cmd>LazyGit<CR>", mode = "n" } }
 map { ["<D-g>d"] = { "Git: Toggle diff", git.toggle_diff, mode = "n" } }
@@ -266,7 +275,7 @@ map { ["<C-r>"] = { "LSP: Rename", "<Cmd>Lspsaga rename<CR>", mode = "n" } }
 map { ["<C-o>"] = { "LSP: Outline", "<Cmd>Lspsaga outline<CR>", mode = "n" } }
 map { ["<C-a>"] = { "LSP: Code actions", "<Cmd>Lspsaga code_action<CR>", mode = "n" } }
 map { ["<C-i>"] = { "LSP: Hint", "<Cmd>Lspsaga hover_doc<CR>", mode = "n" } }
-map { ["<C-f>"] = { "LSP: Finder", "<Cmd>Lspsaga lsp_finder<CR>", mode = "n" } }
+map { ["<C-f>"] = { "LSP: Finder", "<Cmd>Lspsaga finder<CR>", mode = "n" } }
 map { ["}"] = { "LSP: Diagnostic next error", lsp.jump_to_next_error, mode = "n" } }
 map { ["{"] = { "LSP: Diagnostic previous error", lsp.jump_to_prev_error, mode = "n" } }
 map { ["<C-}>"] = { "LSP: Diagnostic next warning", lsp.jump_to_next_warning, mode = "n" } }
