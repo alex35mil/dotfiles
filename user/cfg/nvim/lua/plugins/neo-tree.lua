@@ -71,8 +71,8 @@ plugin.setup {
         git_status = {
             symbols = {
                 -- Change type
-                added     = "",  -- or "✚", but this is redundant info if you use git_status_colors on the name
-                modified  = "",  -- or "", but this is redundant info if you use git_status_colors on the name
+                added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+                modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
                 deleted   = "", -- this can only be used in the git_status source
                 renamed   = "", -- this can only be used in the git_status source
                 -- Status type
@@ -106,7 +106,7 @@ plugin.setup {
             -- ["t"] = "open_tabnew",
             -- ["<cr>"] = "open_drop",
             -- ["t"] = "open_tab_drop",
-            ["<Space>"] = "close_node",
+            -- ["<Space>"] = "close_node",
             -- ['C'] = 'close_all_subnodes',
             ["<C-Space>"] = "close_all_nodes",
             --["Z"] = "expand_all_nodes",
