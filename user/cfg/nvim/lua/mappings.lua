@@ -104,8 +104,8 @@ map { ["<D-/>"] = { "Toggle comments", "<Esc><Plug>(comment_toggle_linewise_curr
 
 map { ["<D-s>"] = { "Save current file", "<Cmd>silent w<CR>", mode = "n" } }
 map { ["<D-s>"] = { "Save current file", "<Esc><Cmd>silent w<CR>", mode = { "i", "v" } } }
-map { ["<D-M-s>"] = { "Save all files", "<Cmd>silent! wa<CR>", mode = "n" } }
-map { ["<D-M-s>"] = { "Save all files", "<Esc><Cmd>silent! wa<CR>", mode = { "i", "v" } } }
+map { ["<C-s>"] = { "Save all files", "<Cmd>silent! wa<CR>", mode = "n" } }
+map { ["<C-s>"] = { "Save all files", "<Esc><Cmd>silent! wa<CR>", mode = { "i", "v" } } }
 
 map { ["<D-Left>"] = { "Move to window on the left", "<Cmd>wincmd h<CR>", mode = { "n", "t" } } }
 map { ["<D-Down>"] = { "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n", "t" } } }
