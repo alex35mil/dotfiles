@@ -91,6 +91,16 @@ local autocmds = {
             end,
         },
     },
+    {
+        { "Filetype" },
+        {
+            pattern = "rust",
+            callback = function()
+                vim.api.nvim_buf_del_keymap(0, "n", "<D-r>")
+            end,
+
+        },
+    },
 }
 
 for _, c in ipairs(autocmds) do

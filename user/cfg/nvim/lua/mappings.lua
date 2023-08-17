@@ -271,7 +271,7 @@ map { ["<D-C-Space>"] = { "Git: Unstage hunk", "<Cmd>Gitsigns undo_stage_hunk<CR
 map { ["<M-l>"] = { "Toggle filename in statusline", statusline.toggle_filename, mode = { "n", "i", "v" } } }
 
 map { ["<D-C-h>"] = { "LSP: Jump to definition", "<Cmd>Lspsaga goto_definition<CR>", mode = "n" } }
-map { ["<C-r>"] = { "LSP: Rename", "<Cmd>Lspsaga rename<CR>", mode = "n" } }
+map { ["<D-r>"] = { "LSP: Rename", "<Cmd>Lspsaga rename<CR>", mode = "n" } }
 map { ["<C-o>"] = { "LSP: Outline", "<Cmd>Lspsaga outline<CR>", mode = "n" } }
 map { ["<C-a>"] = { "LSP: Code actions", "<Cmd>Lspsaga code_action<CR>", mode = "n" } }
 map { ["<C-i>"] = { "LSP: Hint", "<Cmd>Lspsaga hover_doc<CR>", mode = "n" } }
