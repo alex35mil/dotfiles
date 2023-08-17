@@ -15,6 +15,8 @@ local function copy_path(bufnr, fmt)
 
         if result ~= nil then
             clipboard.yank(result)
+            print("Copied to clipboard: " .. result)
+            vim.defer_fn(function() vim.cmd.echo('""') end, 5000)
         end
     else
         vim.api.nvim_err_writeln("No file selected")
