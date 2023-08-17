@@ -95,8 +95,7 @@ map { ["*"] = { "Don't jump on *", "<Cmd>keepjumps normal! mi*`i<CR>", mode = { 
 map { ["<Esc>"] = { "Drop search highlight and clear the command line", "<Cmd>silent noh<CR>:<BS>", mode = "n", silent = false } }
 
 map { ["<D-u>"] = { "Undo", "<Esc>ui", mode = "i" } }
-map { ["<C-u>"] = { "Redo", "<Esc><C-r>i", mode = "i" } }
-map { ["<C-u>"] = { "Redo", "<C-r>", mode = { "n", "v" } } }
+map { ["<C-r>"] = { "Redo", "<Esc><C-r>i", mode = "i" } }
 
 map { ["<D-/>"] = { "Toggle comments", "<Plug>(comment_toggle_linewise_current)", mode = "n" } }
 map { ["<D-/>"] = { "Toggle comments", "<Plug>(comment_toggle_linewise_visual)", mode = "v" } }
