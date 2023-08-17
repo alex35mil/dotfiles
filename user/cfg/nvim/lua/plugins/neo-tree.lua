@@ -13,6 +13,8 @@ local function copy_path(state, fmt)
 
     if result ~= nil then
         clipboard.yank(result)
+        print("Copied to clipboard: " .. result)
+        vim.defer_fn(function() vim.cmd.echo('""') end, 5000)
     end
 end
 
