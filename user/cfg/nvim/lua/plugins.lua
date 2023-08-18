@@ -33,7 +33,7 @@ local plugins = {
     {
         "folke/which-key.nvim",
         version = "*",
-        config = function() require "plugins/which-key" end,
+        config = require("plugins.which-key").setup,
     },
 
     -- essentials
@@ -41,58 +41,58 @@ local plugins = {
         "echasnovski/mini.trailspace",
         version = "*",
         event = "BufEnter",
-        config = function() require "plugins/mini-trailspace" end,
+        config = require("plugins.mini-trailspace").setup,
     },
 
     {
         "rlane/pounce.nvim",
         version = "*",
         event = "BufEnter",
-        config = function() require "plugins/pounce" end,
+        config = require("plugins.pounce").setup,
     },
 
     {
         "xiyaowong/virtcolumn.nvim",
         version = "*",
         event = "BufEnter",
-        config = function() require "plugins/virtcolumn" end,
+        config = require("plugins.virtcolumn").setup,
     },
 
     {
         "lukas-reineke/indent-blankline.nvim",
         version = "*",
-        config = function() require "plugins/indent-blankline" end,
+        config = require("plugins.indent-blankline").setup,
     },
 
 
     {
         "windwp/nvim-autopairs",
         version = "*",
-        config = function() require "plugins/autopairs" end,
+        config = require("plugins.autopairs").setup,
     },
 
     {
         "kylechui/nvim-surround",
         version = "*",
-        config = function() require "plugins/surround" end,
+        config = require("plugins.surround").setup,
     },
 
     {
         "nvim-tree/nvim-web-devicons",
         version = "*",
-        config = function() require "plugins/devicons" end,
+        config = require("plugins.devicons").setup,
     },
 
     {
         "shortcuts/no-neck-pain.nvim",
         version = "*",
-        config = function() require("plugins.no-neck-pain").setup() end,
+        config = require("plugins.no-neck-pain").setup,
     },
 
     {
         "folke/zen-mode.nvim",
         version = "*",
-        config = function() require "plugins/zen-mode" end,
+        config = require("plugins.zen-mode").setup,
     },
 
     -- NOTE: Doesn't work well with no-neck-pain:
@@ -100,7 +100,7 @@ local plugins = {
     -- {
     --     "rmagatti/auto-session",
     --     version = "*",
-    --     config = function() require "plugins/auto-session" end,
+    --     config = require("plugins.auto-session").setup,
     -- },
 
     -- treesitter
@@ -108,7 +108,7 @@ local plugins = {
         "nvim-treesitter/nvim-treesitter",
         version = "*",
         event = "BufEnter",
-        config = function() require "plugins/treesitter" end,
+        config = require("plugins.treesitter").setup,
         build = ":TSUpdate",
     },
 
@@ -138,21 +138,21 @@ local plugins = {
         "neovim/nvim-lspconfig",
         branch = "master",
         event = "BufEnter",
-        config = function() require "plugins/lspconfig" end,
+        config = require("plugins.lspconfig").setup,
     },
 
     {
         "glepnir/lspsaga.nvim",
         branch = "main", -- TODO: Go back to stable after the current version is released
         event = "BufEnter",
-        config = function() require "plugins/lspsaga" end,
+        config = require("plugins.lspsaga").setup,
     },
 
     {
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
         branch = "main",
         event = "BufEnter",
-        config = function() require "plugins/lsp-lines" end,
+        config = require("plugins.lsp-lines").setup,
     },
 
     {
@@ -167,7 +167,7 @@ local plugins = {
         version = "*",
         dependencies = { "nvim-lua/plenary.nvim" },
         event = "BufEnter",
-        config = function() require "plugins/null-ls" end,
+        config = require("plugins.null-ls").setup,
     },
 
     {
@@ -188,7 +188,7 @@ local plugins = {
             "hrsh7th/cmp-cmdline",
             "onsails/lspkind.nvim",
         },
-        config = function() require "plugins/cmp" end,
+        config = require("plugins.cmp").setup,
     },
 
     {
@@ -200,7 +200,7 @@ local plugins = {
         "L3MON4D3/LuaSnip",
         version = "*",
         event = "InsertEnter",
-        config = function() require "plugins/luasnip" end,
+        config = require("plugins.luasnip").setup,
     },
 
     -- file tree
@@ -215,10 +215,10 @@ local plugins = {
                 "s1n7ax/nvim-window-picker",
                 event = "VeryLazy",
                 version = "2.*",
-                config = function() require "plugins/window-picker" end,
+                config = require("plugins.window-picker").setup,
             },
         },
-        config = function() require "plugins/neo-tree" end,
+        config = require("plugins.neo-tree").setup,
     },
 
     -- fuzzy finders
@@ -226,7 +226,7 @@ local plugins = {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
         dependencies = { "nvim-lua/plenary.nvim" },
-        config = function() require "plugins/telescope" end,
+        config = require("plugins.telescope").setup,
     },
 
     {
@@ -240,14 +240,14 @@ local plugins = {
         version = "*",
         event = "VimEnter",
         dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function() require "plugins/lualine" end,
+        config = require("plugins.lualine").setup,
     },
 
     -- terminal
     {
         "akinsho/toggleterm.nvim",
         version = "*",
-        config = function() require "plugins/toggleterm" end,
+        config = require("plugins.toggleterm").setup,
     },
 
     -- git
@@ -260,21 +260,21 @@ local plugins = {
         "sindrets/diffview.nvim",
         version = "*",
         dependencies = { "nvim-lua/plenary.nvim" },
-        config = function() require "plugins/diffview" end,
+        config = require("plugins.diffview").setup,
     },
 
     {
         "lewis6991/gitsigns.nvim",
         version = "*",
         event = "BufEnter",
-        config = function() require "plugins/gitsigns" end,
+        config = require("plugins.gitsigns").setup,
     },
 
     -- search/replace
     {
         "nvim-pack/nvim-spectre",
         version = "*",
-        config = function() require "plugins/spectre" end,
+        config = require("plugins.spectre").setup,
     },
 
     -- comments
@@ -282,7 +282,7 @@ local plugins = {
         "numToStr/Comment.nvim",
         version = "*",
         event = "BufEnter",
-        config = function() require "plugins/comment" end,
+        config = require("plugins.comment").setup,
     },
 
     {
@@ -290,14 +290,14 @@ local plugins = {
         version = "*",
         event = "BufEnter",
         dependencies = { "nvim-lua/plenary.nvim" },
-        config = function() require "plugins/todo-comments" end,
+        config = require("plugins.todo-comments").setup,
     },
 
     -- markdown
     {
         "iamcco/markdown-preview.nvim",
         version = "*",
-        build = function() vim.fn["mkdp#util#install"]() end,
+        build = require("plugins.markdown-preview").setup,
     },
 
     {
@@ -310,7 +310,7 @@ local plugins = {
         "norcalli/nvim-colorizer.lua",
         version = "*",
         lazy = true,
-        config = function() require "plugins/colorizer" end,
+        config = require("plugins.colorizer").setup,
     },
 
 }

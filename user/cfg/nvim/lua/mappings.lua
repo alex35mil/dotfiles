@@ -5,7 +5,6 @@ local telescope = require "actions.telescope"
 local statusline = require "actions.statusline"
 local terminal = require "actions.terminal"
 local search = require "actions.search"
-local nnp = require "plugins.no-neck-pain"
 
 local function map(mappings)
     local wk = require "which-key"

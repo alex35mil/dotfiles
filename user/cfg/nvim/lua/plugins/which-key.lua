@@ -1,3 +1,7 @@
-local plugin = require "which-key"
+local M = {}
 
-plugin.setup {}
+function M.setup()
+    require("which-key").setup()
+end
+
+return M

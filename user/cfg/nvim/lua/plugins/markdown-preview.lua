@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup()
-    require("mini.trailspace").setup()
+    vim.fn["mkdp#util#install"]()
 end
 
 return M

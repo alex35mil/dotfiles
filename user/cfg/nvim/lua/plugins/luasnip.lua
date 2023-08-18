@@ -1,3 +1,8 @@
-local plugin = require "luasnip"
+local M = {}
 
--- TODO: Add snippets
+function M.setup()
+    local plugin = require "luasnip"
+    -- TODO: Add snippets
+end
+
+return M

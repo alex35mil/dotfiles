@@ -1,14 +1,21 @@
-local plugin = require "spectre"
+local M = {}
 
-plugin.setup {
-    default = {
-        find = {
-            cmd = "rg",
-            options = {},
+
+function M.setup()
+    local plugin = require "spectre"
+
+    plugin.setup {
+        default = {
+            find = {
+                cmd = "rg",
+                options = {},
+            },
+            replace = {
+                cmd = "sed",
+                options = {},
+            },
         },
-        replace = {
-            cmd = "sed",
-            options = {},
-        },
-    },
-}
+    }
+end
+
+return M

@@ -1,3 +1,11 @@
-local plugin = require "colorizer"
+local M = {}
 
-plugin.setup { "css" }
+function M.setup()
+    local plugin = require "colorizer"
+
+    plugin.setup {
+        "css",
+    }
+end
+
+return M

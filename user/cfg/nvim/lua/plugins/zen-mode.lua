@@ -1,8 +1,14 @@
-local plugin = require "zen-mode"
+local M = {}
 
-plugin.setup {
-    window = {
-        backdrop = 1,
-        width = 118,
-    },
-}
+function M.setup()
+    local plugin = require "zen-mode"
+
+    plugin.setup {
+        window = {
+            backdrop = 1,
+            width = 118,
+        },
+    }
+end
+
+return M

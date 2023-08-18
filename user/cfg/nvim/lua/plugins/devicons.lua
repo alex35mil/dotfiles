@@ -1,10 +1,16 @@
-local plugin = require "nvim-web-devicons"
+local M = {}
 
-plugin.setup {
-    color_icons = false,
-    default = true,
-    default_icon = {
-        icon = "",
-        name = "Default",
-    },
-}
+function M.setup()
+    local plugin = require "nvim-web-devicons"
+
+    plugin.setup {
+        color_icons = false,
+        default = true,
+        default_icon = {
+            icon = "",
+            name = "Default",
+        },
+    }
+end
+
+return M

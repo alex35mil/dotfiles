@@ -1,5 +1,9 @@
 -- TODO: Configure nvim-surround keybindings
 
-local plugin = require "nvim-surround"
+local M = {}
 
-plugin.setup {}
+function M.setup()
+    require("nvim-surround").setup()
+end
+
+return M

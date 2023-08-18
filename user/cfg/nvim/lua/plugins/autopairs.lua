@@ -1,5 +1,11 @@
-local plugin = require "nvim-autopairs"
+local M = {}
 
-plugin.setup {
-    check_ts = true,
-}
+function M.setup()
+    local plugin = require "nvim-autopairs"
+
+    plugin.setup {
+        check_ts = true,
+    }
+end
+
+return M
