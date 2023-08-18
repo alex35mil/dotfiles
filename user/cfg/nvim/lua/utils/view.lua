@@ -16,13 +16,11 @@ function M.get_tab_windows()
     return windows
 end
 
-function M.get_tab_windows_without_sidenotes()
+function M.are_sidenotes_visible()
     local nnp = require "plugins.no-neck-pain"
     local buffers = require "utils.buffers"
 
     local windows = M.get_tab_windows()
-
-    local result = {}
 
     for _, win in ipairs(windows) do
         local bufnr = vim.api.nvim_win_get_buf(win)
@@ -32,12 +30,12 @@ function M.get_tab_windows_without_sidenotes()
         local sidenotes_left = nnp.scratchpad_filename .. "-left." .. nnp.scratchpad_filetype
         local sidenotes_right = nnp.scratchpad_filename .. "-right." .. nnp.scratchpad_filetype
 
-        if string.sub(bufname, - #sidenotes_left) ~= sidenotes_left and string.sub(bufname, - #sidenotes_right) ~= sidenotes_right then
-            table.insert(result, win)
+        if string.sub(bufname, - #sidenotes_left) == sidenotes_left or string.sub(bufname, - #sidenotes_right) == sidenotes_right then
+            return true
         end
     end
 
-    return result
+    return false
 end
 
 function M.get_tab_windows_with_listed_buffers(opts)

@@ -2,16 +2,16 @@ local M = {}
 
 function M.change_window_width(direction)
     local view = require "utils.view"
-    local tab_windows = view.get_tab_windows_without_sidenotes()
+    local sidenotes_visible = view.are_sidenotes_visible()
 
     if direction == "up" then
-        if #tab_windows == 1 then
+        if sidenotes_visible then
             vim.cmd "NoNeckPainWidthUp"
         else
             vim.cmd "vertical resize +5"
         end
     elseif direction == "down" then
-        if #tab_windows == 1 then
+        if sidenotes_visible then
             vim.cmd "NoNeckPainWidthDown"
         else
             vim.cmd "vertical resize -5"
@@ -25,9 +25,9 @@ function M.restore_windows_layout()
     local nnp = require "plugins.no-neck-pain"
     local view = require "utils.view"
 
-    local tab_windows = view.get_tab_windows_without_sidenotes()
+    local sidenotes_visible = view.are_sidenotes_visible()
 
-    if #tab_windows == 1 then
+    if sidenotes_visible then
         vim.cmd("NoNeckPainResize " .. nnp.default_width)
     else
         vim.cmd "wincmd ="
