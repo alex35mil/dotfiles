@@ -84,9 +84,9 @@ local plugins = {
     },
 
     {
-        "rmagatti/auto-session",
+        "shortcuts/no-neck-pain.nvim",
         version = "*",
-        config = function() require "plugins/auto-session" end,
+        config = function() require("plugins.no-neck-pain").setup() end,
     },
 
     {
@@ -94,6 +94,14 @@ local plugins = {
         version = "*",
         config = function() require "plugins/zen-mode" end,
     },
+
+    -- NOTE: Doesn't work well with no-neck-pain:
+    -- https://github.com/shortcuts/no-neck-pain.nvim/issues/221
+    -- {
+    --     "rmagatti/auto-session",
+    --     version = "*",
+    --     config = function() require "plugins/auto-session" end,
+    -- },
 
     -- treesitter
     {

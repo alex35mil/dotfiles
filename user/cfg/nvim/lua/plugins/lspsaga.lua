@@ -48,6 +48,9 @@ plugin.setup {
         tabe = "t",
         quit = { "<Esc>", "q" },
     },
+    outline = {
+        layout = "float",
+    },
     code_action = {
         num_shortcut = true,
         keys = {

@@ -99,9 +99,9 @@ plugin.setup {
         },
         mappings = {
             ["<CR>"] = "open",
-            ["<D-CR>p"] = "open_with_window_picker",
-            ["<D-CR>h"] = "open_split",
-            ["<D-CR>n"] = "open_vsplit",
+            ["<D-CR>"] = "open_with_window_picker",
+            ["<D-Down>"] = "open_split",
+            ["<D-Right>"] = "open_vsplit",
             ["<2-LeftMouse>"] = "open",
             ["<D-p>"] = { "toggle_preview", config = { use_float = true } },
             ["p"] = "focus_preview",

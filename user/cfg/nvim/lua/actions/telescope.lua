@@ -3,6 +3,10 @@ local M = {}
 local builtin = require "telescope.builtin"
 local extensions = require "telescope".extensions
 
+local wide_layout_config = {
+    width = 0.8,
+}
+
 function M.open_file_browser()
     extensions.file_browser.file_browser({
         cwd = "%:p:h",
@@ -13,6 +17,11 @@ function M.open_file_browser()
         select_buffer = true,
         initial_mode = "normal",
         file_ignore_patterns = { "%.git/" },
+        layout_strategy = "horizontal",
+        layout_config = {
+            width = 0.8,
+            preview_width = 0.5,
+        },
     })
 end
 
@@ -32,6 +41,7 @@ function M.find_file()
         hidden = true,
         no_ignore = false,
         initial_mode = "insert",
+        layout_strategy = "vertical",
     })
 end
 
@@ -40,6 +50,7 @@ function M.find_text()
         hidden = true,
         no_ignore = false,
         initial_mode = "insert",
+        layout_strategy = "horizontal",
     })
 end
 
@@ -47,10 +58,7 @@ function M.diagnostics(params)
     local opts = {
         initial_mode = "normal",
         layout_strategy = "vertical",
-        layout_config = {
-            mirror = false,
-            preview_cutoff = 0,
-        },
+        layout_config = wide_layout_config,
     }
 
     if params.current_buffer then
@@ -89,13 +97,15 @@ function M.todos(params)
     vim.cmd(
         "TodoTelescope " ..
         "keywords=" .. table.concat(keywords, ",") .. " " ..
-        "layout_strategy=vertical"
+        "layout_strategy=vertical layout_config={width=0.7}"
     )
 end
 
 function M.command()
     builtin.commands({
         initial_mode = "insert",
+        layout_strategy = "vertical",
+        layout_config = wide_layout_config,
     })
 end
 

@@ -1,11 +1,11 @@
 local editor = require "actions.editor"
 local git = require "actions.git"
 local lsp = require "actions.lsp"
-local filetree = require "actions.filetree"
 local telescope = require "actions.telescope"
 local statusline = require "actions.statusline"
 local terminal = require "actions.terminal"
 local search = require "actions.search"
+local nnp = require "plugins.no-neck-pain"
 
 local function map(mappings)
     local wk = require "which-key"
@@ -111,6 +111,12 @@ map { ["<D-Down>"] = { "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n"
 map { ["<D-Up>"] = { "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "t" } } }
 map { ["<D-Right>"] = { "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "t" } } }
 
+map { ["<D-l>"] = { "Rotate windows", "<Cmd>wincmd r<CR>", mode = "n" } }
+
+map { ["<C-u>"] = { "Increase window width", function() editor.change_window_width("up") end, mode = "n" } }
+map { ["<C-e>"] = { "Decrease window width", function() editor.change_window_width("down") end, mode = "n" } }
+map { ["<C-Esc>"] = { "Restore window width", editor.restore_windows_layout, mode = "n" } }
+
 map { ["<D-z>"] = { "Toggle zen mode", editor.zenmode, mode = { "n", "i", "v" } } }
 
 map { ["<C-n>"] = { "Open new buffer in the current window", "<Cmd>enew<CR>", mode = "n" } }
@@ -125,7 +131,7 @@ map {
     },
 }
 map {
-    ["<Leader>wc"] = {
+    ["<C-w>"] = {
         "Close current buffer, but do not close current window when there are multiple",
         function() editor.close_buffer({ should_close_window = false }) end,
         mode = { "n", "v" },
@@ -251,8 +257,7 @@ map {
 map { ["<D-p>p"] = { "Open plugins manager", "<Cmd>Lazy<CR>", mode = "n" } }
 map { ["<D-p>l"] = { "Open package manager", "<Cmd>Mason<CR>", mode = "n" } }
 
-map { ["<D-e>"] = { "Toggle file tree", filetree.toggle, mode = { "n", "i", "v" } } }
-map { ["<C-e>"] = { "Toggle file tree in float window", "<Cmd>NeoTreeFloatToggle<CR>", mode = { "n", "v" } } }
+map { ["<D-e>"] = { "Toggle file tree", "<Cmd>NeoTreeFloatToggle<CR>", mode = { "n", "v" } } }
 
 map { ["<M-t>t"] = { "Toggle tab terminal", terminal.toggle_tab, mode = { "n", "i", "v", "t" } } }
 map { ["<M-t>f"] = { "Toggle float terminal", terminal.toggle_float, mode = { "n", "i", "v", "t" } } }
@@ -261,8 +266,8 @@ map { ["<D-Esc>"] = { "Exit terminal mode", "<C-\\><C-n>", mode = "t" } }
 
 map { ["<D-g>g"] = { "Git: Show lazygit", "<Cmd>LazyGit<CR>", mode = "n" } }
 map { ["<D-g>d"] = { "Git: Toggle diff", git.toggle_diff, mode = "n" } }
-map { ["<D-g>j"] = { "Git: Jump to the next hunk", "<Cmd>Gitsigns next_hunk<CR>", mode = "n" } }
-map { ["<D-g>k"] = { "Git: Jump to the previous hunk", "<Cmd>Gitsigns prev_hunk<CR>", mode = "n" } }
+map { ["<C-j>"] = { "Git: Jump to the next hunk", "<Cmd>Gitsigns next_hunk<CR>", mode = "n" } }
+map { ["<C-k>"] = { "Git: Jump to the previous hunk", "<Cmd>Gitsigns prev_hunk<CR>", mode = "n" } }
 map { ["<D-g>b"] = { "Git: Show line blame", "<Cmd>Gitsigns blame_line<CR>", mode = "n" } }
 map { ["<C-Space>"] = { "Git: Stage hunk", "<Cmd>Gitsigns stage_hunk<CR>", mode = { "n", "v" } } }
 map { ["<D-C-Space>"] = { "Git: Unstage hunk", "<Cmd>Gitsigns undo_stage_hunk<CR>", mode = { "n", "v" } } }

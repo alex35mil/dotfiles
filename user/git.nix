@@ -35,5 +35,6 @@
     ".direnv"
     ".idea"
     ".DS_Store"
+    "SIDENOTES-*.md"
   ];
 }

@@ -1,48 +1,52 @@
 local M = {}
 
-function M.zenmode()
-    local filetree = require "utils.filetree"
-    local zenmode = require "utils.zenmode"
+function M.change_window_width(direction)
     local view = require "utils.view"
+    local tab_windows = view.get_tab_windows_without_sidenotes()
 
-    if not filetree.is_active() then
-        zenmode.toggle()
-    elseif zenmode.is_active() then
-        zenmode.deactivate()
-    else
-        local tab_windows = view.get_tab_windows_with_listed_buffers()
-
-        if tab_windows == nil or #tab_windows == 0 then
-            vim.api.nvim_err_writeln "No windows available"
-            return
-        end
-
-
+    if direction == "up" then
         if #tab_windows == 1 then
-            -- When there is only one file buffer is visisble,
-            -- activating zenmode even if filetree has focus
-            local win = tab_windows[1]
-            if vim.api.nvim_get_current_win() ~= win then
-                vim.api.nvim_set_current_win(win)
-            end
-            zenmode.activate()
+            vim.cmd "NoNeckPainWidthUp"
         else
-            local current_buf = vim.api.nvim_get_current_buf()
-
-            for _, win in ipairs(tab_windows) do
-                local buf = vim.api.nvim_win_get_buf(win)
-                if buf == current_buf then
-                    zenmode.activate()
-                    return
-                end
-            end
-
-            print "Zen mode is not available for the current window. Select different window to activate zen mode."
+            vim.cmd "vertical resize +5"
         end
+    elseif direction == "down" then
+        if #tab_windows == 1 then
+            vim.cmd "NoNeckPainWidthDown"
+        else
+            vim.cmd "vertical resize -5"
+        end
+    else
+        vim.api.nvim_err_writeln "Unexpected direction"
     end
 end
 
+function M.restore_windows_layout()
+    local nnp = require "plugins.no-neck-pain"
+    local view = require "utils.view"
+
+    local tab_windows = view.get_tab_windows_without_sidenotes()
+
+    if #tab_windows == 1 then
+        vim.cmd("NoNeckPainResize " .. nnp.default_width)
+    else
+        vim.cmd "wincmd ="
+    end
+end
+
+function M.zenmode()
+    local zenmode = require "utils.zenmode"
+    zenmode.toggle()
+end
+
 function M.close_buffer(opts)
+    local zenmode = require "utils.zenmode"
+
+    if zenmode.is_active() then
+        zenmode.deactivate()
+        return
+    end
+
     local git = require "utils.git"
 
     if git.is_lazygit_active() then
@@ -54,6 +58,13 @@ function M.close_buffer(opts)
 
     if current_git_diff ~= nil then
         git.hide_current_diff()
+        return
+    end
+
+    local search = require "utils.search"
+
+    if search.is_active() then
+        search.close()
         return
     end
 
@@ -80,10 +91,7 @@ function M.close_buffer(opts)
         return
     end
 
-    local should_close_window = opts.should_close_window
-
     local current_buf = vim.api.nvim_get_current_buf()
-    local current_win = vim.api.nvim_get_current_win()
 
     local filetree = require "utils.filetree"
 
@@ -92,15 +100,7 @@ function M.close_buffer(opts)
         return
     end
 
-    local search = require "utils.search"
-
-    if search.is_active() then
-        search.close()
-        return
-    end
-
     local buffers = require "utils.buffers"
-    local zenmode = require "utils.zenmode"
 
     local current_buf_info = buffers.get_buf_info(current_buf)
 
@@ -129,9 +129,11 @@ function M.close_buffer(opts)
 
     local view = require "utils.view"
 
-    local tab_windows = view.get_tab_windows_with_listed_buffers()
+    local tab_windows = view.get_tab_windows_with_listed_buffers({ incl_help = true })
 
-    if #tab_windows > 1 and not zenmode.is_active() and should_close_window then
+    local should_close_window = opts.should_close_window
+
+    if #tab_windows > 1 and should_close_window then
         vim.cmd "silent! write"
 
         for _, win in ipairs(tab_windows) do
@@ -141,10 +143,6 @@ function M.close_buffer(opts)
                 return
             end
         end
-
-        if not view.is_other_window_with_buffer(tab_windows, current_win, current_buf) then
-            vim.cmd.bdelete(current_buf)
-        end
     else
         local bufs = buffers.get_listed_bufs({ sort_lastused = true })
 
@@ -152,27 +150,28 @@ function M.close_buffer(opts)
 
         for _, buf in ipairs(bufs) do
             if buf.bufnr ~= current_buf then
-                next_buf = buf.bufnr
-                break
+                local opened_else_where = false
+
+                for _, win in ipairs(tab_windows) do
+                    local win_buf = vim.api.nvim_win_get_buf(win)
+                    if win_buf == buf.bufnr then
+                        opened_else_where = true
+                        break
+                    end
+                end
+
+                if not opened_else_where then
+                    next_buf = buf.bufnr
+                    break
+                end
             end
         end
 
         if next_buf ~= nil then
             vim.cmd "silent! write"
             vim.api.nvim_set_current_buf(next_buf)
-            if zenmode.is_active() then
-                local parent_win = zenmode.parent_window()
-
-                if parent_win ~= nil then
-                    vim.api.nvim_win_set_buf(parent_win, next_buf)
-                end
-
-                vim.cmd.bdelete(current_buf)
-            elseif not view.is_other_window_with_buffer(tab_windows, current_win, current_buf) then
-                vim.cmd.bdelete(current_buf)
-            end
         else
-            if #tab_windows > 1 and not zenmode.is_active() then
+            if #tab_windows > 1 then
                 vim.cmd "silent! write"
                 vim.cmd.close()
             else
@@ -181,11 +180,9 @@ function M.close_buffer(opts)
                 if empty_buf == 0 then
                     vim.api.nvim_err_writeln "Failed to create empty buffer"
                     vim.cmd "silent! write"
-                    vim.cmd.bdelete(current_buf)
                 else
                     vim.cmd "silent! write"
                     vim.api.nvim_set_current_buf(empty_buf)
-                    vim.cmd.bdelete(current_buf)
                 end
             end
         end

@@ -141,19 +141,21 @@ plugin.setup {
         initial_mode = "insert",
         selection_strategy = "reset",
         sorting_strategy = "ascending",
-        layout_strategy = "horizontal",
+        layout_strategy = "vertical",
         layout_config = {
             horizontal = {
                 prompt_position = "top",
-                preview_width = 0.55,
-                results_width = 0.8,
+                width = 0.8,
+                preview_width = 0.5,
             },
             vertical = {
+                width = 0.5,
+                height = 0.7,
+                preview_cutoff = 1,
+                prompt_position = "top",
+                preview_height = 0.4,
                 mirror = true,
             },
-            width = 0.87,
-            height = 0.80,
-            preview_cutoff = 120,
         },
         file_sorter = require("telescope.sorters").get_fuzzy_file,
         file_ignore_patterns = { "%.git/", "node_modules" },
@@ -171,18 +173,26 @@ plugin.setup {
         buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
         mappings = {
             n = {
-                ["<D-CR>h"] = actions.file_split,
-                ["<D-CR>n"] = actions.file_vsplit,
+                ["<D-Down>"] = actions.file_split,
+                ["<D-Right>"] = actions.file_vsplit,
                 ["<C-t>"] = actions.preview_scrolling_up,
                 ["<C-h>"] = actions.preview_scrolling_down,
                 ["<D-w>"] = actions.close,
             },
             i = {
-                ["<D-CR>h"] = actions.file_split,
-                ["<D-CR>n"] = actions.file_vsplit,
+                ["<D-Down>"] = actions.file_split,
+                ["<D-Right>"] = actions.file_vsplit,
                 ["<C-t>"] = actions.preview_scrolling_up,
                 ["<C-h>"] = actions.preview_scrolling_down,
                 ["<D-w>"] = actions.close,
+            },
+        },
+    },
+    pickers = {
+        buffers = {
+            mappings = {
+                n = { ["<D-BS>"] = actions.delete_buffer },
+                i = { ["<D-BS>"] = actions.delete_buffer },
             },
         },
     },

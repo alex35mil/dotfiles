@@ -2,7 +2,7 @@ local plugin = require "window-picker"
 local colors = require "theme.palette"
 
 plugin.setup {
-    selection_chars = "HTNSABCDEFGIJKLMOPQRUVWXYZ1234567890",
+    selection_chars = "UHKMETJWNSABCDFGILOPQRVXYZ1234567890",
     filter_rules = {
         autoselect_one = true,
         include_current_win = false,

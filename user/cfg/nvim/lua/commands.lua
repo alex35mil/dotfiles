@@ -1,27 +1,28 @@
--- https://neovim.io/doc/user/api.html#nvim_create_user_command()
-
-local create = vim.api.nvim_create_user_command
-
-create("XTodo", "TodoTelescope keywords=TODO,FIXME layout_strategy=vertical initial_mode=normal", {})
-
--- autocmds
-
 local autocmds = {
     {
         { "VimEnter" },
         {
             callback = function()
                 if vim.v.vim_did_enter then
-                    local view = require "utils.view"
-                    local windows = view.get_tab_windows_with_listed_buffers()
-
-                    if #windows == 1 then
-                        require("utils.zenmode").toggle()
-                    else
-                        require("utils.filetree").open()
-                    end
-
+                    vim.defer_fn(
+                        function()
+                            local telescope = require "actions.telescope"
+                            telescope.find_file()
+                        end,
+                        500
+                    )
                     vim.cmd "LualineRenameTab editor"
+                end
+            end,
+        },
+    },
+    {
+        { "BufEnter" },
+        {
+            pattern = { "*" },
+            callback = function()
+                if vim.bo.ft == "help" then
+                    vim.api.nvim_command("wincmd L")
                 end
             end,
         },
