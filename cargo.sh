@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 cargo install \
     cargo-expand \
     cargo-outdated \
