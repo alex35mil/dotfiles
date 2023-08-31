@@ -23,24 +23,8 @@ function M.is_active()
     return M.is_tree(active_buf)
 end
 
-function M.open()
-    vim.cmd "NeoTreeShow"
-end
-
 function M.close()
-    vim.cmd "NeoTreeClose"
-end
-
-function M.toggle()
-    vim.cmd "NeoTreeShowToggle"
-end
-
-function M.ensure_opened()
-    local trees = get_active_trees()
-
-    if next(trees) == nil then
-        M.open()
-    end
+    vim.cmd "Neotree action=close"
 end
 
 function M.ensure_hidden()

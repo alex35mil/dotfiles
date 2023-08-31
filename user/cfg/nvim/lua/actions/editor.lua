@@ -1,5 +1,15 @@
 local M = {}
 
+function M.rotate_windows()
+    local view = require "utils.view"
+
+    local windows = view.get_tab_windows_with_listed_buffers({ incl_help = true })
+
+    if #windows > 1 then
+        vim.cmd "wincmd r"
+    end
+end
+
 function M.change_window_width(direction)
     local view = require "utils.view"
     local sidenotes_visible = view.are_sidenotes_visible()

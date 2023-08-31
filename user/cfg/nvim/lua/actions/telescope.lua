@@ -73,6 +73,20 @@ function M.diagnostics(params)
     builtin.diagnostics(opts)
 end
 
+function M.document_symbols()
+    builtin.lsp_document_symbols({
+        initial_mode = "insert",
+        layout_strategy = "vertical",
+    })
+end
+
+function M.workspace_symbols()
+    builtin.lsp_workspace_symbols({
+        initial_mode = "insert",
+        layout_strategy = "vertical",
+    })
+end
+
 function M.todos(params)
     if not params.todo and not params.fixme and not params.priority then
         vim.api.nvim_err_writeln "No keywords specified"
