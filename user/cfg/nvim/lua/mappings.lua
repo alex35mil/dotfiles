@@ -105,7 +105,13 @@ map { "<LeftMouse>", "History: include mouse clicks", "m'<LeftMouse>", mode = "n
 
 map { "<M-h>", "Start pounce motion", "<Cmd>Pounce<CR>", mode = { "n", "v" } } -- It's <D-h> remapped via Karabiner
 
-map { "*", "Don't jump on *", "<Cmd>keepjumps normal! mi*`i<CR>", mode = { "n", "v" } }
+map { "*", "Don't jump on *", "<Cmd>keepjumps normal! mi*`i<CR>", mode = "n" }
+map {
+    "*",
+    "Highlight selected text",
+    [["*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>]],
+    mode = "v",
+}
 map { "<Esc>", "Drop search highlight and clear the command line", "<Cmd>silent noh<CR>:<BS>", mode = "n", silent = false }
 
 map { "<C-u>", "Undo", "u", mode = { "n", "v" } }
@@ -163,7 +169,7 @@ mapseq {
     mode = "n",
 }
 
-map { "<C-q>", "Quit editor", editor.quit, mode = { "n", "i", "v", "t" } } -- It is <D-q> remapped via Karabiner
+map { "<C-q>", "Quit editor", editor.quit, mode = { "n", "i", "v", "t" } } -- It's <D-q> remapped via Karabiner
 
 map { "<D-b>", "Open buffer selector", telescope.buffer, mode = { "n", "i", "v" } }
 map { "<D-t>", "Open file finder", telescope.find_file, mode = { "n", "i", "v" } }
