@@ -2,6 +2,8 @@
     install = "$HOME/Dev/dotfiles/install.sh";
     reload = "exec zsh -l";
 
+    up = "home-manager switch && reload && rm -rf ~/.cache/nvim/luac/";
+
     c = "clear";
     q = "exit";
 
