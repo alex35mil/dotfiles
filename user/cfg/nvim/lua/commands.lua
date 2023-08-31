@@ -3,7 +3,7 @@ local autocmds = {
         { "VimEnter" },
         {
             callback = function()
-                if vim.v.vim_did_enter then
+                if vim.v.vim_did_enter and vim.g.neovide then
                     vim.defer_fn(
                         function()
                             local telescope = require "actions.telescope"

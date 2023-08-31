@@ -22,7 +22,7 @@ function M.setup()
         width = M.default_width,
 
         autocmds = {
-            enableOnVimEnter = true,
+            enableOnVimEnter = vim.g.neovide,
             enableOnTabEnter = false,
             reloadOnColorSchemeChange = false,
         },
