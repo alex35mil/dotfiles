@@ -2,13 +2,13 @@
     install = "$HOME/Dev/dotfiles/install.sh";
     reload = "exec zsh -l";
 
-    up = "home-manager switch && reload && rm -rf ~/.cache/nvim/luac/";
+    up = "home-manager switch && vcc && reload";
 
     c = "clear";
     q = "exit";
 
     # Nix
-    xx = "home-manager switch && reload";
+    xx = "home-manager switch";
     xs = "nix-env --query --available --attr-path ";
     xsp = "nix-env --file '<nixpkgs>' --query --available --attr-path -A ";
     xup = "nix-channel --update";
