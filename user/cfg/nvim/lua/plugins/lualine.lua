@@ -180,7 +180,15 @@ function M.setup()
                 },
             },
             lualine_b = {
-                "diff",
+                {
+                    "filename",
+                    path = 0,
+                    color = { fg = color.text, bg = color.lighter_gray },
+                },
+                {
+                    "branch",
+                    color = { fg = color.text, bg = color.darker_gray },
+                },
                 {
                     diagnostics,
                     sections = {
@@ -201,15 +209,6 @@ function M.setup()
                         info = lsp.signs.Info .. " ",
                         hint = lsp.signs.Hint .. " ",
                     },
-                },
-                {
-                    "filename",
-                    path = 0,
-                    color = { fg = color.text, bg = color.lighter_gray },
-                },
-                {
-                    "branch",
-                    color = { fg = color.text, bg = color.darker_gray },
                 },
             },
             lualine_c = {},
