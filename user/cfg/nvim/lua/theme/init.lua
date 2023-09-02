@@ -279,6 +279,8 @@ local theme = lush(function(injected_functions)
         PounceAcceptBest { fg = Normal.bg, bg = color.green, bold = true },
         MiniCursorword { bg = Normal.bg.lighten(10) },
 
+        NvimSurroundHighlight { fg = Normal.bg, bg = color.cyan },
+
         TelescopeMatching { fg = color.charcoal },
         TelescopeSelection { bg = Normal.bg.lighten(9) },
         TelescopeBorder { FloatBorder },
