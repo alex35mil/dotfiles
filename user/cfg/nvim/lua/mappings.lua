@@ -261,8 +261,8 @@ mapseq {
 mapseq { "<D-p>p", "Open plugins manager", "<Cmd>Lazy<CR>", mode = "n" }
 mapseq { "<D-p>l", "Open package manager", "<Cmd>Mason<CR>", mode = "n" }
 
-map { "<D-e>", "Open file tree", filetree.open_file_tree, mode = { "n", "v" } }
-map { "<C-e>", "Open file browser", telescope.open_file_browser, mode = { "n", "i", "v" } }
+map { "<D-e>", "Open file browser", telescope.open_file_browser, mode = { "n", "i", "v" } }
+map { "<C-e>", "Open file tree", filetree.open_file_tree, mode = { "n", "v" } }
 
 mapseq { "<M-t>t", "Toggle tab terminal", terminal.toggle_tab, mode = { "n", "i", "v", "t" } }
 mapseq { "<M-t>f", "Toggle float terminal", terminal.toggle_float, mode = { "n", "i", "v", "t" } }
