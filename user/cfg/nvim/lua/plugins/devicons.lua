@@ -10,6 +10,13 @@ function M.setup()
             icon = "",
             name = "Default",
         },
+        override = {
+            rs = {
+                icon = "",
+                color = "#e43717",
+                name = "Rs",
+            }
+        }
     }
 end
 
