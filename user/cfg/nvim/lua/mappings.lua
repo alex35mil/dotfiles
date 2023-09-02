@@ -68,10 +68,9 @@ map { "<D-CR>", "Select inner word", "viw", mode = "n" }
 map { "<C-c>", "Change inner word", [["xciw]], mode = "n" }
 map { "<C-y>", "Yank inner word", "yiw", mode = "n" }
 
-map { "<C-t>", "Insert new line above", "O<Esc>", mode = "n" }
-map { "<C-h>", "Insert new line below", "o<Esc>", mode = "n" }
-map { "<C-t>", "Insert new line above", "<Esc>O", mode = "i" }
-map { "<C-h>", "Insert new line below", "<Esc>o", mode = "i" }
+map { "<D-Del>", "Insert new line above", "O<Esc>", mode = "n" }
+map { "<D-CR>", "Insert new line below", "o<Esc>", mode = "n" }
+map { "<D-Del>", "Insert new line above", "<Esc>O", mode = "i" }
 map { "<D-CR>", "Insert new line below", "<Esc>o", mode = "i" }
 
 map { "<C-d>", "Duplicate line", [["yyy"yp]], mode = "n" }
@@ -93,11 +92,10 @@ map { "<S-Tab>", "Unindent", "<gv", mode = "v" }
 map { "<D-a>", "Select all", "ggVG", mode = "n" }
 map { "<D-a>", "Select all", "<Esc>ggVG", mode = { "i", "v" } }
 
-map { "T", "Move cursor half-screen up", "<C-u>", mode = { "n", "v" } }
-map { "H", "Move cursor half-screen down", "<C-d>", mode = { "n", "v" } }
-
-map { "<S-Up>", "Scroll up", "5<C-y>", mode = { "n", "v", "i" } }
-map { "<S-Down>", "Scroll down", "5<C-e>", mode = { "n", "v", "i" } }
+map { "<C-t>", "Scroll up", "5<C-y>", mode = { "n", "v", "i" } }
+map { "<C-h>", "Scroll down", "5<C-e>", mode = { "n", "v", "i" } }
+map { "<C-5>", "Move cursor half-screen up", "<C-u>", mode = { "n", "v" } }
+map { "<C-4>", "Move cursor half-screen down", "<C-d>", mode = { "n", "v" } }
 
 map { "<D-d>", "History: back", "<C-o>", mode = "n" }
 map { "<D-n>", "History: forward", "<C-i>", mode = "n" }
