@@ -122,8 +122,8 @@ map { "<D-/>", "Toggle comments", "<Plug>(comment_toggle_linewise_current)", mod
 map { "<D-/>", "Toggle comments", "<Plug>(comment_toggle_linewise_visual)", mode = "v" }
 map { "<D-/>", "Toggle comments", "<Esc><Plug>(comment_toggle_linewise_current)gi", mode = "i" }
 
-map { "<D-s>", "Save all files", "<Cmd>silent! wa<CR>", mode = "n" }
-map { "<D-s>", "Save all files", "<Esc><Cmd>silent! wa<CR>", mode = { "i", "v" } }
+map { "<D-s>", "Save all files", "<Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = "n" }
+map { "<D-s>", "Save all files", "<Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = { "i", "v" } }
 map { "<C-s>", "Save current file", "<Cmd>silent w<CR>", mode = "n" }
 map { "<C-s>", "Save current file", "<Esc><Cmd>silent w<CR>", mode = { "i", "v" } }
 
