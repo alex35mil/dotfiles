@@ -3,7 +3,7 @@ local M = {}
 function M.rotate_windows()
     local view = require "utils.view"
 
-    local windows = view.get_tab_windows_with_listed_buffers({ incl_help = true })
+    local windows = view.get_tab_windows({ incl_sidenotes = false })
 
     if #windows > 1 then
         vim.cmd "wincmd r"
