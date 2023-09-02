@@ -94,8 +94,8 @@ map { "<D-a>", "Select all", "<Esc>ggVG", mode = { "i", "v" } }
 
 map { "<C-t>", "Scroll up", "5<C-y>", mode = { "n", "v", "i" } }
 map { "<C-h>", "Scroll down", "5<C-e>", mode = { "n", "v", "i" } }
-map { "<C-5>", "Move cursor half-screen up", "<C-u>", mode = { "n", "v" } }
-map { "<C-4>", "Move cursor half-screen down", "<C-d>", mode = { "n", "v" } }
+map { "}", "Move cursor half-screen up", "<C-u>", mode = { "n", "v" } }
+map { "{", "Move cursor half-screen down", "<C-d>", mode = { "n", "v" } }
 
 map { "<D-d>", "History: back", "<C-o>", mode = "n" }
 map { "<D-n>", "History: forward", "<C-i>", mode = "n" }
@@ -285,7 +285,7 @@ map { "<C-o>", "LSP: Document symbols", telescope.document_symbols, mode = "n" }
 map { "<C-a>", "LSP: Code actions", "<Cmd>Lspsaga code_action<CR>", mode = "n" }
 map { "<C-i>", "LSP: Hint", "<Cmd>Lspsaga hover_doc<CR>", mode = "n" }
 map { "<C-f>", "LSP: Finder", "<Cmd>Lspsaga finder<CR>", mode = "n" }
-map { "}", "LSP: Diagnostic next error", lsp.jump_to_next_error, mode = "n" }
-map { "{", "LSP: Diagnostic previous error", lsp.jump_to_prev_error, mode = "n" }
-map { "<C-}>", "LSP: Diagnostic next warning", lsp.jump_to_next_warning, mode = "n" }
-map { "<C-{>", "LSP: Diagnostic previous warning", lsp.jump_to_prev_warning, mode = "n" }
+map { "<D-.>", "LSP: Diagnostic next error", lsp.jump_to_next_error, mode = "n" }
+map { "<D-,>", "LSP: Diagnostic previous error", lsp.jump_to_prev_error, mode = "n" }
+map { "<C-D-.>", "LSP: Diagnostic next warning", lsp.jump_to_next_warning, mode = "n" }
+map { "<C-D-,>", "LSP: Diagnostic previous warning", lsp.jump_to_prev_warning, mode = "n" }
