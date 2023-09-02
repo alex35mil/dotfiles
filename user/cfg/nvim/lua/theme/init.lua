@@ -258,7 +258,12 @@ local theme = lush(function(injected_functions)
         -- DiagnosticSignWarn         { } , -- Used for "Warn" signs in sign column.
         -- DiagnosticSignInfo         { } , -- Used for "Info" signs in sign column.
         -- DiagnosticSignHint         { } , -- Used for "Hint" signs in sign column.
+        StatusBarDiagnosticError { DiagnosticError, bg = color.darker_gray },
+        StatusBarDiagnosticWarn { DiagnosticWarn, bg = color.darker_gray },
+        StatusBarDiagnosticInfo { DiagnosticInfo, bg = color.darker_gray },
+        StatusBarDiagnosticHint { DiagnosticHint, bg = color.darker_gray },
 
+        -- Autocomplete modals border
         FloatBorder { fg = color.thick_line, bg = color.bg },
 
         IndentBlanklineChar { fg = color.thin_line },

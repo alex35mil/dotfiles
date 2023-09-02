@@ -10,7 +10,7 @@ function M.setup()
         normal = {
             a = { fg = color.bg, bg = color.cyan, gui = "bold" },
             b = { fg = color.text, bg = color.darker_gray },
-            c = { fg = color.text, bg = color.bg },
+            c = { fg = color.text, bg = color.darker_gray },
         },
         command = { a = { fg = color.bg, bg = color.yellow, gui = "bold" } },
         insert = { a = { fg = color.bg, bg = color.green, gui = "bold" } },
@@ -18,9 +18,9 @@ function M.setup()
         terminal = { a = { fg = color.bg, bg = color.cyan, gui = "bold" } },
         replace = { a = { fg = color.bg, bg = color.red, gui = "bold" } },
         inactive = {
-            a = { fg = color.strong_faded_text, bg = color.bg, gui = "bold" },
-            b = { fg = color.strong_faded_text, bg = color.bg },
-            c = { fg = color.strong_faded_text, bg = color.bg },
+            a = { fg = color.faded_text, bg = color.darker_gray, gui = "bold" },
+            b = { fg = color.faded_text, bg = color.darker_gray },
+            c = { fg = color.faded_text, bg = color.darker_gray },
         },
     }
 
@@ -93,7 +93,7 @@ function M.setup()
             return nil
         end
 
-        local output = {}
+        local output = { " " }
 
         local bufnr = vim.api.nvim_get_current_buf()
 
@@ -198,10 +198,10 @@ function M.setup()
                         "hint",
                     },
                     colors = {
-                        error = "DiagnosticError",
-                        warn  = "DiagnosticWarn",
-                        info  = "DiagnosticInfo",
-                        hint  = "DiagnosticHint",
+                        error = "StatusBarDiagnosticError",
+                        warn  = "StatusBarDiagnosticWarn",
+                        info  = "StatusBarDiagnosticInfo",
+                        hint  = "StatusBarDiagnosticHint",
                     },
                     symbols = {
                         error = lsp.signs.Error .. " ",
@@ -248,7 +248,7 @@ function M.setup()
             lualine_c = {},
             lualine_x = {},
             lualine_y = {},
-            lualine_z = { { "tabs", mode = 2 } },
+            lualine_z = { { "tabs", mode = 1 } },
         },
     }
 
