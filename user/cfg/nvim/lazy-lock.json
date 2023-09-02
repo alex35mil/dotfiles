@@ -47,5 +47,6 @@
   "vim-markdown-toc": { "branch": "master", "commit": "bde5df7b74a4786785119514abee25e76287e795" },
   "virtcolumn.nvim": { "branch": "main", "commit": "cd9485d64a0763c5572272e03d70cbff1f91fde0" },
   "which-key.nvim": { "branch": "main", "commit": "bf09a25bdc9a83bcc69d2cf078e680368676513b" },
+  "winshift.nvim": { "branch": "main", "commit": "37468ed6f385dfb50402368669766504c0e15583" },
   "zen-mode.nvim": { "branch": "main", "commit": "6e6c963d70a8e47854fa656987666bfb863f9c4e" }
 }

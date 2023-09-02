@@ -234,7 +234,15 @@ local plugins = {
         version = "*",
     },
 
-    -- bars
+    -- window management
+    {
+        "sindrets/winshift.nvim",
+        version = "*",
+        event = "VimEnter",
+        config = require("plugins.winshift").setup,
+    },
+
+    -- tab & status bar
     {
         "nvim-lualine/lualine.nvim",
         version = "*",

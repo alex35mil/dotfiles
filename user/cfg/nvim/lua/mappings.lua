@@ -64,7 +64,7 @@ map { "c", "Don't replace clipboard content when changing", [["xc]], mode = { "n
 
 map { "<CR>", "Change inner word", [["xciw]], mode = "n" }
 map { "<CR>", "Change seletion", [["xc]], mode = "v" }
-map { "<D-CR>", "Select inner word", "viw", mode = "n" }
+map { "<C-s>", "Select inner word", "viw", mode = "n" }
 map { "<C-c>", "Change inner word", [["xciw]], mode = "n" }
 map { "<C-y>", "Yank inner word", "yiw", mode = "n" }
 
@@ -120,21 +120,21 @@ map { "<D-/>", "Toggle comments", "<Plug>(comment_toggle_linewise_current)", mod
 map { "<D-/>", "Toggle comments", "<Plug>(comment_toggle_linewise_visual)", mode = "v" }
 map { "<D-/>", "Toggle comments", "<Esc><Plug>(comment_toggle_linewise_current)gi", mode = "i" }
 
-map { "<D-s>", "Save all files", "<Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = "n" }
-map { "<D-s>", "Save all files", "<Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = { "i", "v" } }
-map { "<C-s>", "Save current file", "<Cmd>silent w<CR>", mode = "n" }
-map { "<C-s>", "Save current file", "<Esc><Cmd>silent w<CR>", mode = { "i", "v" } }
+map { "<D-s>", "Save files", "<Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = "n" }
+map { "<D-s>", "Save files", "<Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = { "i", "v" } }
 
 map { "<D-Left>", "Move to window on the left", "<Cmd>wincmd h<CR>", mode = { "n", "t" } }
 map { "<D-Down>", "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n", "t" } }
 map { "<D-Up>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "t" } }
 map { "<D-Right>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "t" } }
 
+map { "<D-m>", "Move windows", editor.move_windows, mode = "n" }
+map { "<M-s>", "Swap windows", editor.swap_windows, mode = "n" }
+
 map { "<C-Up>", "Increase window width", function() editor.change_window_width("up") end, mode = "n" }
 map { "<C-Down>", "Decrease window width", function() editor.change_window_width("down") end, mode = "n" }
 map { "<C-Esc>", "Restore window width", editor.restore_windows_layout, mode = "n" }
-
-map { "<C-M-Right>", "Rotate windows", editor.rotate_windows, mode = "n" }
+map { "<D-Esc>", "Reset layout", editor.reset_layout, mode = "n" }
 
 map { "<D-z>", "Toggle zen mode", editor.zenmode, mode = { "n", "i", "v" } }
 

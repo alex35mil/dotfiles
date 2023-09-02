@@ -3,9 +3,10 @@ local M = {}
 function M.setup()
     local plugin = require "window-picker"
     local colors = require "theme.palette"
+    local view = require "utils.view"
 
     plugin.setup {
-        selection_chars = "UHKMETJWNSABCDFGILOPQRVXYZ1234567890",
+        selection_chars = view.window_picker_keys,
         filter_rules = {
             autoselect_one = true,
             include_current_win = false,

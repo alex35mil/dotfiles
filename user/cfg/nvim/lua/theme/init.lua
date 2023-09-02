@@ -211,12 +211,12 @@ local theme = lush(function(injected_functions)
         -- SpellRare    { }, -- Word that is recognized by the spellchecker as one that is hardly ever used. |spell| Combined with the highlighting used otherwise.
         -- StatusLine   { }, -- Status line of current window
         -- StatusLineNC { }, -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-        TabLine { bg = color.bg },                 -- Tab pages line, not active tab page label
-        TabLineFill { bg = TabLine.bg },           -- Tab pages line, where there are no labels
-        TabLineSel { bg = TabLine.bg.lighten(5) }, -- Tab pages line, active tab page label
+        TabLine { bg = color.bg },                     -- Tab pages line, not active tab page label
+        TabLineFill { bg = TabLine.bg },               -- Tab pages line, where there are no labels
+        TabLineSel { bg = TabLine.bg.lighten(5) },     -- Tab pages line, active tab page label
         -- Title        { }, -- Titles for output from ":set all", ":autocmd" etc.
-        VertSplit { fg = color.thin_line },        -- Vertical split line
-        Visual { bg = Normal.bg.lighten(18) },     -- Visual mode selection
+        VertSplit { fg = color.thin_line.lighten(5) }, -- Vertical split line
+        Visual { bg = Normal.bg.lighten(18) },         -- Visual mode selection
         -- VisualNOS    { }, -- Visual mode selection when vim is "Not Owning the Selection".
         -- WarningMsg   { }, -- Warning messages
         Whitespace { fg = color.thin_line }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
@@ -270,6 +270,8 @@ local theme = lush(function(injected_functions)
         PriorityComment { fg = color.orange },
 
         ZenBg { fg = color.text, bg = color.bg },
+
+        WinShiftMove { bg = Normal.bg.lighten(7) },
 
         PounceMatch { fg = Normal.bg, bg = color.cyan },
         PounceGap { fg = Normal.bg.lighten(50), bg = Normal.bg.lighten(10) },

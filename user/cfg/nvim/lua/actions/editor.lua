@@ -1,13 +1,18 @@
 local M = {}
 
-function M.rotate_windows()
+function M.move_windows()
     local view = require "utils.view"
+    view.reposition_windows({ action = "move" })
+end
 
-    local windows = view.get_tab_windows({ incl_sidenotes = false })
+function M.swap_windows()
+    local view = require "utils.view"
+    view.reposition_windows({ action = "swap" })
+end
 
-    if #windows > 1 then
-        vim.cmd "wincmd r"
-    end
+function M.reset_layout()
+    vim.cmd "NoNeckPain"
+    vim.cmd "NoNeckPain"
 end
 
 function M.change_window_width(direction)
