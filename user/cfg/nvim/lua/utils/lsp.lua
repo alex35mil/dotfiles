@@ -2,7 +2,7 @@ local M = {}
 
 M.signs = {
     Error = "ﮊ",
-    Warn  = "ﮊ",
+    Warn  = "",
     Hint  = "﮸",
     Info  = "",
 };
