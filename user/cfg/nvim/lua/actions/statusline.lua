@@ -2,6 +2,7 @@ local M = {}
 
 function M.toggle_filename()
     local plugin = require "lualine"
+    local statusline = require "plugins.lualine"
     local config = plugin.get_config()
 
     for _, section in pairs(config.sections) do
@@ -17,8 +18,7 @@ function M.toggle_filename()
     end
 
     plugin.setup(config)
-
-    vim.cmd "set showtabline=1"
+    statusline.ensure_tabline_visibility_mode()
 end
 
 return M

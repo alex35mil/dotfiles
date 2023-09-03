@@ -1,7 +1,7 @@
 if vim.g.neovide then
     vim.o.guifont = "BerkeleyMono Nerd Font:h16"
 
-    vim.g.neovide_padding_top = 40
+    vim.g.neovide_padding_top = 0 -- Set to 40 if the tabline is hidden
     vim.g.neovide_padding_bottom = 0
     vim.g.neovide_padding_right = 30
     vim.g.neovide_padding_left = 30

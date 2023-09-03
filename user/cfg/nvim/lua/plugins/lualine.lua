@@ -1,5 +1,14 @@
 local M = {}
 
+function M.ensure_tabline_visibility_mode()
+    -- Uncomment this if you want to show the tabline only when there are multiple tabs.
+    -- This line is required because lualine overrides this setting.
+    -- 0: never show tabline
+    -- 1: show tabline only when there are multiple tabs
+    -- 2: always show tabline
+    -- vim.cmd "set showtabline=1"
+end
+
 local function diagnostics_component()
     local diagnostics = require("lualine.components.filename"):extend()
 
@@ -132,26 +141,52 @@ end
 function M.setup()
     local plugin = require "lualine"
     local linemode = require "lualine.utils.mode"
-    local color = require "theme.palette"
+    local palette = require "theme.palette"
     local lsp = require "utils.lsp"
 
     local diagnostics = diagnostics_component()
 
+    local color = {
+        active_text = palette.text,
+        incative_text = palette.faded_text,
+        inverted_text = palette.darker_gray,
+        bg = palette.darker_gray,
+        emphasized_bg = palette.lighter_gray,
+    }
+
     local theme = {
         normal = {
-            a = { fg = color.bg, bg = color.cyan, gui = "bold" },
-            b = { fg = color.text, bg = color.darker_gray },
-            c = { fg = color.text, bg = color.darker_gray },
+            a = { fg = color.inverted_text, bg = palette.cyan, gui = "bold" },
+            b = { fg = color.active_text, bg = color.bg },
+            c = { fg = color.active_text, bg = color.bg },
         },
-        command = { a = { fg = color.bg, bg = color.yellow, gui = "bold" } },
-        insert = { a = { fg = color.bg, bg = color.green, gui = "bold" } },
-        visual = { a = { fg = color.bg, bg = color.purple, gui = "bold" } },
-        terminal = { a = { fg = color.bg, bg = color.cyan, gui = "bold" } },
-        replace = { a = { fg = color.bg, bg = color.red, gui = "bold" } },
+        command = { a = { fg = color.inverted_text, bg = palette.yellow, gui = "bold" } },
+        insert = { a = { fg = color.inverted_text, bg = palette.green, gui = "bold" } },
+        visual = { a = { fg = color.inverted_text, bg = palette.purple, gui = "bold" } },
+        terminal = { a = { fg = color.inverted_text, bg = palette.cyan, gui = "bold" } },
+        replace = { a = { fg = color.inverted_text, bg = palette.red, gui = "bold" } },
         inactive = {
-            a = { fg = color.faded_text, bg = color.darker_gray, gui = "bold" },
-            b = { fg = color.faded_text, bg = color.darker_gray },
-            c = { fg = color.faded_text, bg = color.darker_gray },
+            a = { fg = color.incative_text, bg = color.bg, gui = "bold" },
+            b = { fg = color.incative_text, bg = color.bg },
+            c = { fg = color.incative_text, bg = color.bg },
+        },
+    }
+
+    local project_section = {
+        function()
+            local cwd = vim.fn.getcwd()
+            local project = string.upper(vim.fn.fnamemodify(cwd, ":t"))
+            return project
+        end,
+        color = { fg = color.inverted_text, bg = palette.cyan, gui = "bold" },
+    }
+
+    local tabs_section = {
+        "tabs",
+        mode = 1,
+        tabs_color = {
+            active = { fg = color.active_text, bg = color.emphasized_bg },
+            inactive = { fg = color.incative_text, bg = color.bg },
         },
     }
 
@@ -183,7 +218,7 @@ function M.setup()
     local filename_section = {
         "filename",
         path = 0,
-        color = { fg = color.text, bg = color.lighter_gray },
+        color = { fg = color.active_text, bg = color.emphasized_bg },
         fmt = function(v, _ctx)
             if should_ignore_filetype() then
                 return nil
@@ -195,7 +230,7 @@ function M.setup()
 
     local branch_section = {
         "branch",
-        color = { fg = color.text, bg = color.darker_gray },
+        color = { fg = color.active_text, bg = color.bg },
     }
 
     local diagnostics_section = {
@@ -224,7 +259,7 @@ function M.setup()
 
     local encoding_section = {
         "encoding",
-        color = { fg = color.faded_text },
+        color = { fg = color.incative_text },
     }
 
     local filetype_section = {
@@ -246,13 +281,13 @@ function M.setup()
     local progress_section = {
         "progress",
         separator = { left = "" },
-        color = { fg = color.text, bg = color.lighter_gray },
+        color = { fg = color.active_text, bg = color.emphasized_bg },
     }
 
     local location_seciton = {
         "location",
         padding = { left = 0, right = 1 },
-        color = { fg = color.text, bg = color.lighter_gray },
+        color = { fg = color.active_text, bg = color.emphasized_bg },
     }
 
     plugin.setup {
@@ -292,17 +327,16 @@ function M.setup()
             }
         },
         tabline = {
-            lualine_a = {},
+            lualine_a = { project_section },
             lualine_b = {},
             lualine_c = {},
             lualine_x = {},
             lualine_y = {},
-            lualine_z = { { "tabs", mode = 1 } },
+            lualine_z = { tabs_section },
         },
     }
 
-    -- lualine overrides this
-    vim.cmd "set showtabline=1"
+    M.ensure_tabline_visibility_mode()
 end
 
 return M
