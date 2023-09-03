@@ -280,8 +280,8 @@ map { "<M-l>", "Toggle filename in statusline", statusline.toggle_filename, mode
 
 map { "<D-C-h>", "LSP: Jump to definition", "<Cmd>Lspsaga goto_definition<CR>", mode = "n" }
 map { "<D-r>", "LSP: Rename", "<Cmd>Lspsaga rename<CR>", mode = "n" }
-map { "<D-o>", "LSP: Workspace symbols", telescope.workspace_symbols, mode = "n" }
-map { "<C-o>", "LSP: Document symbols", telescope.document_symbols, mode = "n" }
+map { "<D-o>", "LSP: Document symbols", telescope.document_symbols, mode = "n" }
+map { "<C-o>", "LSP: Workspace symbols", telescope.workspace_symbols, mode = "n" }
 map { "<C-a>", "LSP: Code actions", "<Cmd>Lspsaga code_action<CR>", mode = "n" }
 map { "<C-i>", "LSP: Hint", "<Cmd>Lspsaga hover_doc<CR>", mode = "n" }
 map { "<C-f>", "LSP: Finder", "<Cmd>Lspsaga finder<CR>", mode = "n" }
