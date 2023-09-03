@@ -10,6 +10,7 @@ opt.cursorline = true
 opt.cursorcolumn = false
 opt.colorcolumn = "80,120"
 opt.signcolumn = "yes:1"
+opt.showmode = false
 
 opt.clipboard = "unnamedplus"
 opt.completeopt = "menu,menuone,noselect"
