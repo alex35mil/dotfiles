@@ -38,6 +38,10 @@ function M.setup()
         --   end , -- this sorts files and directories descendantly
         use_default_mappings = false,
         default_component_configs = {
+            file_size = { enabled = false },
+            type = { enabled = false },
+            last_modified = { enabled = false },
+            created = { enabled = false },
             container = {
                 enable_character_fade = true,
             },
