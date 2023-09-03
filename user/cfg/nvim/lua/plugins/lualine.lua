@@ -112,7 +112,7 @@ local function diagnostics_component()
                 local buffer_total = diagnostics_results[section][1] ~= 0 and diagnostics_results[section][1] or "-"
                 local workspace_total = diagnostics_results[section][2]
 
-                table.insert(output, colors[section] .. padding .. icon .. buffer_total .. "" .. workspace_total)
+                table.insert(output, colors[section] .. padding .. icon .. buffer_total .. "/" .. workspace_total)
             end
         end
 
