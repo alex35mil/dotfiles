@@ -36,6 +36,14 @@ local plugins = {
         config = require("plugins.which-key").setup,
     },
 
+    -- welcome screen
+    {
+        "goolord/alpha-nvim",
+        event = "VimEnter",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = require("plugins.alpha").setup,
+    },
+
     -- essentials
     {
         "echasnovski/mini.trailspace",

@@ -1,5 +1,19 @@
 local M = {}
 
+function M.show()
+    local plugin = require "lualine"
+
+    plugin.hide({ unhide = true })
+end
+
+function M.hide()
+    local plugin = require "lualine"
+
+    plugin.hide()
+    vim.o.laststatus = 0
+    vim.o.ruler = false
+end
+
 function M.ensure_tabline_visibility_mode()
     -- Uncomment this if you want to show the tabline only when there are multiple tabs.
     -- This line is required because lualine overrides this setting.
@@ -126,7 +140,8 @@ local function should_ignore_filetype()
     local ft = vim.bo.filetype
 
     return
-        ft == "lazy"
+        ft == "alpha"
+        or ft == "lazy"
         or ft == "mason"
         or ft == "neo-tree"
         or ft == "TelescopePrompt"
@@ -174,9 +189,8 @@ function M.setup()
 
     local project_section = {
         function()
-            local cwd = vim.fn.getcwd()
-            local project = string.upper(vim.fn.fnamemodify(cwd, ":t"))
-            return project
+            local fs = require "utils.fs"
+            return fs.root { capitalize = true }
         end,
         color = { fg = color.inverted_text, bg = palette.cyan, gui = "bold" },
     }

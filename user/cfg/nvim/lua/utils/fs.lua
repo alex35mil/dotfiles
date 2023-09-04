@@ -2,6 +2,18 @@ local M = {}
 
 local format = vim.fn.fnamemodify
 
+function M.root(opts)
+    local opts = opts or { capitalize = false }
+    local cwd = vim.fn.getcwd()
+    local root = format(cwd, ":t")
+
+    if opts.capitalize then
+        return root:upper()
+    else
+        return root
+    end
+end
+
 function M.relative_path(loc)
     return format(loc, ":.")
 end

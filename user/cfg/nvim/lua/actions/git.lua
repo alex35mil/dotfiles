@@ -17,10 +17,10 @@ function M.toggle_diff()
         if inactive_diff_tab ~= nil then
             vim.api.nvim_set_current_tabpage(inactive_diff_tab)
         else
-            local statusline = require "utils.statusline"
+            local tabline = require "utils.tabline"
 
             git.open_diff()
-            statusline.rename_tab("diff")
+            tabline.rename_tab("diff")
         end
     end
 end

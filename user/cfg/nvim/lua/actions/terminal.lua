@@ -9,11 +9,11 @@ function M.toggle_tab()
         term.hide(active_term)
     else
         local zenmode = require "utils.zenmode"
-        local statusline = require "utils.statusline"
+        local tabline = require "utils.tabline"
 
         zenmode.ensure_deacitvated()
         term.toggle_tab()
-        statusline.rename_tab("terminal")
+        tabline.rename_tab("terminal")
     end
 end
 
@@ -26,7 +26,6 @@ function M.toggle_horizontal()
         term.hide(active_term)
     else
         local zenmode = require "utils.zenmode"
-        local statusline = require "utils.statusline"
 
         zenmode.ensure_deacitvated()
         term.toggle_horizontal()

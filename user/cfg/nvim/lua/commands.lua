@@ -3,14 +3,7 @@ local autocmds = {
         { "VimEnter" },
         {
             callback = function()
-                if vim.v.vim_did_enter and vim.g.neovide then
-                    vim.defer_fn(
-                        function()
-                            local telescope = require "actions.telescope"
-                            telescope.find_file()
-                        end,
-                        500
-                    )
+                if vim.v.vim_did_enter then
                     vim.cmd "LualineRenameTab editor"
                 end
             end,
@@ -19,7 +12,7 @@ local autocmds = {
     {
         { "BufEnter" },
         {
-            pattern = { "*" },
+            pattern = "*",
             callback = function()
                 if vim.bo.ft == "help" then
                     vim.api.nvim_command("wincmd L")
@@ -102,8 +95,32 @@ local autocmds = {
 
         },
     },
+    {
+        { "User" },
+        {
+            pattern = "AlphaReady",
+            callback = require("plugins.alpha").on_open,
+        },
+    },
+    {
+        { "User" },
+        {
+            pattern = "AlphaClosed",
+            callback = require("plugins.alpha").on_close,
+        },
+    },
+    {
+        { "User" },
+        {
+            pattern = "LazyVimStarted",
+            once = true,
+            callback = require("plugins.alpha").update_footer,
+        },
+    },
 }
 
-for _, c in ipairs(autocmds) do
-    vim.api.nvim_create_autocmd(c[1], c[2])
+for _, x in ipairs(autocmds) do
+    for _, event in ipairs(x[1]) do
+        vim.api.nvim_create_autocmd(event, x[2])
+    end
 end
