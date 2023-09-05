@@ -217,10 +217,10 @@ function M.init()
             TabLine { bg = color.bg },                 -- Tab pages line, not active tab page label
             TabLineFill { bg = TabLine.bg },           -- Tab pages line, where there are no labels
             TabLineSel { bg = TabLine.bg.lighten(5) }, -- Tab pages line, active tab page label
-            -- Title        { }, -- Titles for output from ":set all", ":autocmd" etc.
+            Title { fg = color.magenta, bold = true }, -- Titles for output from ":set all", ":autocmd" etc.
             -- NB!: VertSplit is dynamic. See functions below.
-            VertSplit { fg = color.bg },           -- Vertical split line
-            Visual { bg = Normal.bg.lighten(18) }, -- Visual mode selection
+            VertSplit { fg = color.bg },               -- Vertical split line
+            Visual { bg = Normal.bg.lighten(18) },     -- Visual mode selection
             -- VisualNOS    { }, -- Visual mode selection when vim is "Not Owning the Selection".
             -- WarningMsg   { }, -- Warning messages
             Whitespace { fg = color.thin_line }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
