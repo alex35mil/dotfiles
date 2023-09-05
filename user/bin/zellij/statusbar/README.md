@@ -6,5 +6,5 @@ Minimal statusbar plugin for Zellij.
 ## Installation
 I didn't publish it anywhere, so you can pull this repo and build it from source.
 
-Checkout [my build script](../../../../build.sh) and [zellij config](../../../cfg/zellij/) for details.
+Checkout [my build script](../../../../build.sh) and [zellij config](../../../config/zellij/) for details.
 

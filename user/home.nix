@@ -12,9 +12,9 @@
 
   programs.home-manager = { enable = true; };
 
-  programs.zsh = import ./zsh.nix lib;
-  programs.git = import ./git.nix;
-  programs.neovim = import ./neovim.nix;
-  programs.direnv = import ./direnv.nix;
-  programs.starship = import ./starship.nix;
+  programs.zsh = import ./config/zsh.nix lib;
+  programs.git = import ./config/git.nix;
+  programs.neovim = import ./config/neovim.nix;
+  programs.direnv = import ./config/direnv.nix;
+  programs.starship = import ./config/starship.nix;
 }

@@ -7,7 +7,7 @@
     };
 
     rust = {
-      symbol = " ";
+      symbol = " ";
     };
   };
 }

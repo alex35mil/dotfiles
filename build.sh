@@ -14,7 +14,7 @@ echo ""
 echo "🛠   Building Zellij statusbar..."
 
 ZELLIJ_STATUSBAR_SRC="$DOTFILES/user/bin/zellij/statusbar"
-ZELLIJ_STATUSBAR_DEST="$DOTFILES/user/cfg/zellij/plugins"
+ZELLIJ_STATUSBAR_DEST="$DOTFILES/user/config/zellij/plugins"
 ZELLIJ_STATUSBAR_BIN="statusbar.wasm"
 
 mkdir -p "$ZELLIJ_STATUSBAR_DEST"

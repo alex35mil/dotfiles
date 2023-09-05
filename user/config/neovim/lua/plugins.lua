@@ -336,7 +336,7 @@ local options = {
         lazy = false,
         version = "*",
     },
-    lockfile = "~/.config/user/cfg/nvim/lazy-lock.json", -- FIXME: It would be great to have it under nix
+    lockfile = "~/.config/user/config/neovim/lazy-lock.json", -- FIXME: It would be great to have it under nix
 }
 
 lazy.setup(plugins, options)

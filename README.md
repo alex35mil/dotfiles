@@ -20,8 +20,8 @@
 
 <p align="center">
     <b>Quick links</b><br />
-    <a href="https://github.com/alex35mil/dotfiles/tree/master/user/cfg/nvim">Neovim config</a><br />
-    <a href="https://github.com/alex35mil/dotfiles/tree/master/user/cfg/zellij">Zellij config</a><br />
+    <a href="https://github.com/alex35mil/dotfiles/tree/master/user/config/neovim">Neovim config</a><br />
+    <a href="https://github.com/alex35mil/dotfiles/tree/master/user/config/zellij">Zellij config</a><br />
     <a href="https://github.com/alex35mil/dotfiles/tree/master/user/bin/zellij/runner">Zellij session switcher</a><br />
     <a href="https://github.com/alex35mil/dotfiles/tree/master/user/bin/zellij/statusbar">Zellij statusbar</a><br />
 </p>

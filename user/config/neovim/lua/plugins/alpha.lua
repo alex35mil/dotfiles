@@ -36,7 +36,7 @@ function M.setup()
     -- Terminal-based header
     section.header = {
         type = "terminal",
-        command = "~/.config/user/cfg/nvim/logo.sh -c",
+        command = "~/.config/user/config/neovim/logo.sh -c",
         width = 70,
         height = 10,
         opts = {

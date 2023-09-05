@@ -8,32 +8,54 @@ if [[ "${TRACE-0}" == "1" ]]; then
     set -o xtrace
 fi
 
-FILES="\
+HOME_CONFIG_DIR="$HOME/.config"
+
+USER_FILES="user"
+NIX_FILES="\
     nix \
     nixpkgs \
     home-manager \
-    user \
 "
 
 DOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Ensure config dir
+# Ensure .config dir
 echo ""
-echo "🛠   Ensuring config directory: $HOME/.config..."
-mkdir -p "$HOME/.config"
-echo "🛠   Ensuring config directory: $HOME/.config... done."
+echo "🛠   Ensuring config directory: $HOME_CONFIG_DIR..."
+mkdir -p "$HOME_CONFIG_DIR"
+echo "🛠   Ensuring config directory: $HOME_CONFIG_DIR... done."
 
 # Symlink configs
 echo ""
 echo "🔖  Symlinking configs:"
-for FILE in $FILES
+for FILES in $NIX_FILES
 do
-    echo "      $DOTFILES/$FILE -> $HOME/.config/$FILE..."
-    [ -r "$DOTFILES/$FILE" ] && \
-    [ -e "$DOTFILES/$FILE" ] && \
-    ln -sfn "$DOTFILES/$FILE" "$HOME/.config/$FILE"
-    echo "      $DOTFILES/$FILE -> $HOME/.config/$FILE... done."
+    NIX_FILES_ORIGIN="$DOTFILES/nix/$FILES"
+    NIX_FILES_DESTINATION="$HOME_CONFIG_DIR/$FILES"
+
+    echo "      $NIX_FILES_ORIGIN -> $NIX_FILES_DESTINATION..."
+
+    if [ ! -r "$NIX_FILES_ORIGIN" ] || [ ! -e "$NIX_FILES_ORIGIN" ]; then
+        echo "Error: File $NIX_FILES_ORIGIN is missing or unreadable."
+        exit 1
+    fi
+
+    ln -sfn "$NIX_FILES_ORIGIN" "$NIX_FILES_DESTINATION"
+    echo "      $NIX_FILES_ORIGIN -> $NIX_FILES_DESTINATION... done."
 done
+
+USER_FILES_ORIGIN="$DOTFILES/$USER_FILES"
+USER_FILES_DESTINATION="$HOME_CONFIG_DIR/$USER_FILES"
+
+echo "      $USER_FILES_ORIGIN -> $USER_FILES_DESTINATION..."
+
+if [ ! -r "$USER_FILES_ORIGIN" ] || [ ! -e "$USER_FILES_ORIGIN" ]; then
+    echo "Error: File $NIX_FILES_ORIGIN is missing or unreadable."
+    exit 1
+fi
+
+ln -sfn "$USER_FILES_ORIGIN" "$USER_FILES_DESTINATION"
+echo "      $USER_FILES_ORIGIN -> $USER_FILES_DESTINATION... done."
 
 # Ensure history file
 echo ""
