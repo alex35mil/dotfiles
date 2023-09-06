@@ -2,7 +2,8 @@
     install = "$HOME/Dev/dotfiles/install.sh";
     reload = "exec zsh -l";
 
-    up = "home-manager switch && vcc && reload";
+    up = "home-manager switch && reload";
+    upc = "home-manager switch && vcc && reload";
 
     c = "clear";
     q = "exit";
