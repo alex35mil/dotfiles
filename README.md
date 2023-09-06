@@ -1,7 +1,7 @@
 <h1 align="center">dotfiles</h1>
 
 <p align="center">
-    <img width="1728" alt="$EDITOR" src="https://user-images.githubusercontent.com/4244251/265584240-aec5d88a-50d8-4cdb-afc2-40129e25c9e6.png">
+    <img width="1728" alt="$EDITOR" src="https://user-images.githubusercontent.com/4244251/266051792-1c524e39-bf8f-4c27-a895-74b02db712b5.png">
     <sub>
         <code>$EDITOR</code>
     </sub>
@@ -30,15 +30,15 @@
 <h3 align="center">Terminal</h3>
 
 <p align="center">
-    <img width="1329" alt="Session switcher" src="https://user-images.githubusercontent.com/4244251/221364651-2011f53f-eaa4-445d-959e-86584ed1ad38.png">
-    <sub>Session switcher</sub>
+    <img width="1329" alt="Session switcher" src="https://user-images.githubusercontent.com/4244251/266051696-938608c5-d2ee-4ba2-9324-bc2118020d5f.png">
+    <sub>Session selector</sub>
 </p>
 
 <p>&nbsp;</p>
 
 <p align="center">
-    <img width="1728" alt="Terminal multiplexer" src="https://user-images.githubusercontent.com/4244251/213017876-62a7a987-c0ac-4515-87db-df1c809351ef.png">
-    <sub>Terminal multiplexer</sub>
+    <img width="1728" alt="Terminal multiplexer" src="https://user-images.githubusercontent.com/4244251/266051735-8daff1af-6530-481a-802a-be39c09e100e.png">
+    <sub>Session panes</sub>
 </p>
 
 <p>&nbsp;</p>
@@ -46,21 +46,21 @@
 <h3 align="center">Editor</h3>
 
 <p align="center">
-    <img width="1728" alt="Single buffer" src="https://user-images.githubusercontent.com/4244251/265584285-9175238a-8334-4766-a1d1-6daf1e120a0e.png">
+    <img width="1728" alt="Single buffer" src="https://user-images.githubusercontent.com/4244251/266051812-5adc68e7-e2ac-4f1e-9093-f995cbd0f561.png">
     <sub>Single buffer</sub>
 </p>
 
 <p>&nbsp;</p>
 
 <p align="center">
-    <img width="1728" alt="Buffer selector" src="https://user-images.githubusercontent.com/4244251/265584313-c3022843-8706-48ce-affe-08520aaaf2ce.png">
+    <img width="1728" alt="Buffer selector" src="https://user-images.githubusercontent.com/4244251/266051843-3e7a18de-e8c8-4a8e-96aa-c268648d913d.png">
     <sub>Buffer selector</sub>
 </p>
 
 <p>&nbsp;</p>
 
 <p align="center">
-    <img width="1728" alt="Multiple splits" src="https://user-images.githubusercontent.com/4244251/265584325-2fe0e398-3ccf-45c6-b146-861b8fd07ddc.png">
+    <img width="1728" alt="Multiple splits" src="https://user-images.githubusercontent.com/4244251/266051893-215de829-7a94-4b04-9be5-5cf9f8417c96.png">
     <sub>Multiple splits</sub>
 </p>
 
