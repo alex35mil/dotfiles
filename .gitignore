@@ -1,2 +1,4 @@
 target/
 /user/config/zellij/plugins/**
+/user/font/original/**
+/user/font/patched/**
