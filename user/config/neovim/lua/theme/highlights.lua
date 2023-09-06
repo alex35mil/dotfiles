@@ -280,6 +280,7 @@ function M.init()
 
             -- Welcome screen title
             AlphaTitle { fg = color.text, bg = color.bg, bold = true },
+            AlphaShortcut { fg = color.blue },
 
             ZenBg { fg = color.text, bg = color.bg },
 

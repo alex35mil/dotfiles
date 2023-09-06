@@ -70,6 +70,11 @@ function M.setup()
         },
     }
 
+    for _, button in ipairs(section.buttons.val) do
+        button.opts.hl = "Normal"
+        button.opts.hl_shortcut = "AlphaShortcut"
+    end
+
     section.footer = {
         type = "text",
         val = "",
