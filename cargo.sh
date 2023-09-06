@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cargo install \
+cargo install --locked \
     cargo-expand \
     cargo-outdated \
     cargo-sync-readme \
@@ -10,4 +10,5 @@ cargo install \
     sea-orm-cli \
     sqlx-cli \
     tree-sitter-cli \
-    zellij
+    zellij \
+    bottom
