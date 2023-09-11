@@ -20,7 +20,7 @@ detect_end_of_line = false
 
 # this mean utf8 length , if this is 'unset' then the line width is no longer checked
 # this option decides when to chopdown the code
-max_line_length = 120
+max_line_length = 140
 
 # this will check text end with new line
 insert_final_newline = true
