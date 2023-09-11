@@ -15,7 +15,7 @@ function M.send(keys, options)
 
         local tc = vim.api.nvim_replace_termcodes(keys, opts.from_part, opts.do_lt, opts.special)
 
-        vim.api.nvim_feedkeys(tc, "n", false)
+        vim.api.nvim_feedkeys(tc, opts.mode, false)
     elseif options.mode == "x" then
         local opts = vim.tbl_extend("keep", options, {
             from_part = true,
@@ -23,11 +23,11 @@ function M.send(keys, options)
             special = true,
         })
 
-        local tc = vim.api.nvim_replace_termcodes(keys, true, false, true)
+        local tc = vim.api.nvim_replace_termcodes(keys, opts.from_part, opts.do_lt, opts.special)
 
-        vim.api.nvim_feedkeys(tc, "x", false)
+        vim.api.nvim_feedkeys(tc, opts.mode, false)
     elseif options.mode == "t" then
-        vim.api.nvim_feedkeys(keys, "t", false)
+        vim.api.nvim_feedkeys(keys, options.mode, false)
     else
         vim.api.nvim_err_writeln("Unexpected mode")
     end
