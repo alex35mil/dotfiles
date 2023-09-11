@@ -6,7 +6,7 @@ end
 
 function M.close()
     local keys = require "utils.keys"
-    keys.send_in_x_mode("q")
+    keys.send("q", { mode = "x" })
 end
 
 return M

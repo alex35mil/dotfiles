@@ -6,7 +6,7 @@ end
 
 function M.close_lazygit()
     local keys = require "utils.keys"
-    keys.send_in_t_mode("q")
+    keys.send("q", { mode = "t" })
 end
 
 function M.open_diff()

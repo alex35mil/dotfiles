@@ -49,6 +49,51 @@ function M.restore_windows_layout()
     end
 end
 
+function M.scroll(direction)
+    local view = require "utils.view"
+    local keys = require "utils.keys"
+
+    local current_win = vim.api.nvim_get_current_win()
+
+    if view.is_window_floating(current_win) then
+        local keymap
+
+        if direction == "up" then
+            keymap = "<C-u>"
+        elseif direction == "down" then
+            keymap = "<C-d>"
+        else
+            vim.api.nvim_err_writeln "Unexpected scroll direction"
+            return
+        end
+
+        keys.send(keymap, { mode = "n" })
+    else
+        local lines = 5
+
+        local keymap
+
+        if direction == "up" then
+            keymap = "<C-y>"
+        elseif direction == "down" then
+            keymap = "<C-e>"
+        else
+            vim.api.nvim_err_writeln "Unexpected scroll direction"
+            return
+        end
+
+        local floating_windows = view.get_floating_tab_windows()
+
+        if floating_windows and #floating_windows == 1 and floating_windows[1] ~= current_win then
+            local win = floating_windows[1]
+            vim.api.nvim_set_current_win(win)
+            M.scroll(direction)
+        else
+            keys.send(tostring(lines) .. keymap, { mode = "n" })
+        end
+    end
+end
+
 function M.zenmode()
     local zenmode = require "utils.zenmode"
     zenmode.toggle()
@@ -106,12 +151,45 @@ function M.close_buffer(opts)
         return
     end
 
-    local current_buf = vim.api.nvim_get_current_buf()
-
     local filetree = require "utils.filetree"
+
+    local current_buf = vim.api.nvim_get_current_buf()
 
     if filetree.is_tree(current_buf) then
         filetree.close()
+        return
+    end
+
+    local view = require "utils.view"
+
+    local current_win = vim.api.nvim_get_current_win()
+    local floating_windows = view.get_floating_tab_windows()
+
+    if floating_windows and #floating_windows == 1 and floating_windows[1] ~= current_win then
+        -- Most likely LSP documentation floating window
+        local floating_win = floating_windows[1]
+
+        local cleanup = view.move_cursor_and_return()
+
+        if not cleanup then
+            vim.api.nvim_err_writeln "Failed to move cursor"
+            return
+        end
+
+        vim.defer_fn(
+            function()
+                cleanup()
+
+                local next_floating_windows = view.get_floating_tab_windows()
+
+                if #next_floating_windows > 0 then
+                    print("Floating window is not closed by cursor move. Trying to close it manually.")
+                    vim.api.nvim_win_close(floating_win, false)
+                end
+            end,
+            10
+        )
+
         return
     end
 
@@ -129,20 +207,12 @@ function M.close_buffer(opts)
         return
     end
 
-    if current_buf_info.name == "" and current_buf_info.changed == 0 and current_buf_info.listed == 0 then
-        -- Most likely LSP documontation modal buffer
-        vim.cmd.quit()
-        return
-    end
-
     local mode = vim.fn.mode()
 
     if mode ~= "n" then
         local keys = require "utils.keys"
-        keys.send_in_x_mode "<Esc>"
+        keys.send("<Esc>", { mode = "x" })
     end
-
-    local view = require "utils.view"
 
     local tab_windows = view.get_tab_windows_with_listed_buffers({ incl_help = true })
 
@@ -258,7 +328,7 @@ function M.quit()
 
     if mode == "i" or mode == "v" then
         local keys = require "utils.keys"
-        keys.send_in_x_mode "<Esc>"
+        keys.send("<Esc>", { mode = "x" })
     end
 
     git.ensure_diff_hidden()

@@ -92,8 +92,8 @@ map { "<S-Tab>", "Unindent", "<gv", mode = "v" }
 map { "<D-a>", "Select all", "ggVG", mode = "n" }
 map { "<D-a>", "Select all", "<Esc>ggVG", mode = { "i", "v" } }
 
-map { "<C-t>", "Scroll up", "5<C-y>", mode = { "n", "v", "i" } }
-map { "<C-h>", "Scroll down", "5<C-e>", mode = { "n", "v", "i" } }
+map { "<C-t>", "Scroll up", function() editor.scroll("up") end, mode = { "n", "v", "i" } }
+map { "<C-h>", "Scroll down", function() editor.scroll("down") end, mode = { "n", "v", "i" } }
 map { "}", "Move cursor half-screen up", "<C-u>", mode = { "n", "v" } }
 map { "{", "Move cursor half-screen down", "<C-d>", mode = { "n", "v" } }
 
