@@ -176,9 +176,17 @@ function M.init()
             DiffDelete { fg = color.faded_text, bg = color.bg },            -- Diff mode: Deleted line |diff.txt|
             DiffText { bg = color.cyan.mix(Normal.bg, 70) },                -- Diff mode: Changed text within a changed line |diff.txt|
 
+            -- Gitsigns
             diffAdded { fg = color.green, bg = color.bg },
             diffChanged { fg = color.blue, bg = color.bg },
             diffRemoved { fg = color.red, bg = color.bg },
+
+            -- Diffview
+            DiffviewDiffAdd { bg = color.diff_add_bg },
+            DiffviewDiffAddText { bg = color.diff_add_bg.mix(color.green, 30) },
+            DiffviewDiffDelete { bg = color.diff_delete_bg },
+            DiffviewDiffDeleteText { bg = color.diff_delete_bg.mix(color.red, 30) },
+            DiffviewDiffFill { fg = color.faded_text, bg = color.bg },
 
             -- EndOfBuffer  { }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
             -- TermCursor   { }, -- Cursor in a focused terminal
