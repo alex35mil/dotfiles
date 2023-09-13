@@ -1,5 +1,31 @@
 local M = {}
 
+function M.paste()
+    local keys = require "utils.keys"
+
+    local mode = vim.fn.mode()
+
+    if mode == "i" or mode == "c" then
+        local paste = vim.o.paste
+        local fopts = vim.o.formatoptions
+
+        vim.o.paste = true
+        vim.o.formatoptions = fopts:gsub("[crota]", "")
+
+        keys.send("<C-r>+", { mode = "n" })
+
+        vim.defer_fn(
+            function()
+                vim.o.paste = paste
+                vim.o.formatoptions = fopts
+            end,
+            10
+        )
+    else
+        vim.api.nvim_err_writeln "Unexpected mode"
+    end
+end
+
 function M.move_windows()
     local view = require "utils.view"
     view.reposition_windows({ action = "move" })

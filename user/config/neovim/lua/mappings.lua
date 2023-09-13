@@ -44,8 +44,7 @@ local function mapseq(mapping)
 end
 
 map { "<D-c>", "Copy selected text", [["+y]], mode = "v" }
-map { "<D-v>", "Paste text", [["+P]], mode = "v" }
-map { "<D-v>", "Paste text", "<C-r>+", mode = { "i", "c" } }
+map { "<D-v>", "Paste text", editor.paste, mode = { "i", "c" } }
 map { "<D-v>", "Paste text", terminal.paste, mode = "t", expr = true }
 
 map { "<D-v>", "Start visual selection", "<C-v>", mode = "n" }
