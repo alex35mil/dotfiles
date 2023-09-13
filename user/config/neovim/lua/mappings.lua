@@ -61,6 +61,15 @@ map { "d", "Don't replace clipboard content when deleting", [["_d]], mode = { "n
 map { "s", "Don't replace clipboard content when inserting", [["xs]], mode = "v" }
 map { "c", "Don't replace clipboard content when changing", [["xc]], mode = { "n", "v" } }
 
+map { "<M-Left>", "Jump one word to the left", "<C-o>b", mode = "i" }
+map { "<M-Right>", "Jump one word to the right", "<C-o>w", mode = "i" }
+map { "<D-Left>", "Jump to the beginning of the line", "<C-o>I", mode = "i" }
+map { "<D-Right>", "Jump to the end of the line", "<C-o>A", mode = "i" }
+map { "<M-BS>", "Delete word to the left", "<C-w>", mode = "i" }
+map { "<C-M-Right>", "Delete word to the right", "<C-o>dw", mode = "i" }
+map { "<D-BS>", "Delete everything to the left", "<C-u>", mode = "i" }
+map { "<C-D-Right>", "Delete everything to the right", "<C-o>D", mode = "i" }
+
 map { "<CR>", "Change inner word", [["xciw]], mode = "n" }
 map { "<CR>", "Change seletion", [["xc]], mode = "v" }
 map { "<C-s>", "Select inner word", "viw", mode = "n" }
