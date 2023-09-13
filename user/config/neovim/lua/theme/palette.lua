@@ -29,8 +29,8 @@ local palette = {
     darker_gray = "#2c323c",
     lighter_gray = "#3e4452",
     -- git
-    diff_add_bg = "#303a30",
-    diff_delete_bg = "#3a3030",
+    diff_add_bg = "#3a413b",
+    diff_delete_bg = "#443c3f",
     -- terminal
     brightBlack = "#636363",
     brightRed = "#a04041",

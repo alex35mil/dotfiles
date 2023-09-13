@@ -183,9 +183,9 @@ function M.init()
 
             -- Diffview
             DiffviewDiffAdd { bg = color.diff_add_bg },
-            DiffviewDiffAddText { bg = color.diff_add_bg.mix(color.green, 30) },
+            DiffviewDiffAddText { bg = color.diff_add_bg.mix(color.green, 25).lighten(3) },
             DiffviewDiffDelete { bg = color.diff_delete_bg },
-            DiffviewDiffDeleteText { bg = color.diff_delete_bg.mix(color.red, 30) },
+            DiffviewDiffDeleteText { bg = color.diff_delete_bg.mix(color.red, 35) },
             DiffviewDiffFill { fg = color.faded_text, bg = color.bg },
 
             -- EndOfBuffer  { }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
