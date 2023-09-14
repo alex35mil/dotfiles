@@ -20,9 +20,10 @@ local autocmds = {
             end,
         },
     },
-    { { "BufEnter" }, { pattern = { "*.md", "*.mdx" }, command = "setlocal wrap" } },
-    { { "Filetype" }, { pattern = "markdown", command = "lua vim.b.minitrailspace_disable = true" } },
-    { { "TermOpen" }, { pattern = "*", command = "lua vim.b.minitrailspace_disable = true" } },
+    { { "BufEnter" },    { pattern = { "*.md", "*.mdx" }, command = "setlocal wrap" } },
+    { { "Filetype" },    { pattern = "markdown", command = "lua vim.b.minitrailspace_disable = true" } },
+    { { "TermOpen" },    { pattern = "*", command = "lua vim.b.minitrailspace_disable = true" } },
+    { { "FocusGained" }, { pattern = "*", command = "checktime" } },
     {
         { "FocusLost" },
         {
