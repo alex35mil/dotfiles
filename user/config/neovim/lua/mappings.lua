@@ -6,6 +6,7 @@ local filetree = require "actions.filetree"
 local statusline = require "actions.statusline"
 local terminal = require "actions.terminal"
 local search = require "actions.search"
+local treesitter = require "nvim-treesitter.textobjects.repeatable_move"
 
 local default_options = { noremap = true, silent = true }
 
@@ -104,6 +105,15 @@ map { "<C-t>", "Scroll up", function() editor.scroll("up") end, mode = { "n", "v
 map { "<C-h>", "Scroll down", function() editor.scroll("down") end, mode = { "n", "v", "i" } }
 map { "}", "Move cursor half-screen up", "<C-u>", mode = { "n", "v" } }
 map { "{", "Move cursor half-screen down", "<C-d>", mode = { "n", "v" } }
+
+map { ";", "Repeat", ".", mode = { "n", "x", "o" } }
+
+map { ".", "Repeat last move forward", treesitter.repeat_last_move_next, mode = { "n", "x", "o" } }
+map { ",", "Repeat last move backward", treesitter.repeat_last_move_previous, mode = { "n", "x", "o" } }
+map { "f", "Repeat last move f", treesitter.builtin_f, mode = { "n", "x", "o" } }
+map { "F", "Repeat last move F", treesitter.builtin_F, mode = { "n", "x", "o" } }
+map { "t", "Repeat last move t", treesitter.builtin_t, mode = { "n", "x", "o" } }
+map { "T", "Repeat last move T", treesitter.builtin_T, mode = { "n", "x", "o" } }
 
 map { "<D-d>", "History: back", "<C-o>", mode = "n" }
 map { "<D-n>", "History: forward", "<C-i>", mode = "n" }
