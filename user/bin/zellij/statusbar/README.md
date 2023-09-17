@@ -8,3 +8,5 @@ I didn't publish it anywhere, so you can pull this repo and build it from source
 
 Checkout [my build script](../../../../build.sh) and [zellij config](../../../config/zellij/) for details.
 
+NOTE: On the first run, `zellij` asks the permission to run the plugin. Navigate to the plagin pane (it should be selectable) and hit `y`. You might need to restart the session for plugin to function properly.
+

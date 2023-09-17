@@ -4,7 +4,10 @@ mod session;
 mod tabs;
 mod view;
 
-use std::cmp::{max, min};
+use std::{
+    cmp::{max, min},
+    collections::BTreeMap,
+};
 
 use view::Error;
 use zellij_tile::prelude::*;
@@ -29,8 +32,12 @@ struct State {
 register_plugin!(State);
 
 impl ZellijPlugin for State {
-    fn load(&mut self) {
-        set_selectable(false);
+    fn load(&mut self, configuration: BTreeMap<String, String>) {
+        eprintln!("Loaded with configuration: {:#?}", configuration);
+
+        request_permission(&[PermissionType::ReadApplicationState]);
+
+        set_selectable(true); // selectable b/c we need a user input to grant the permissions
         set_timeout(1.0);
         subscribe(&[
             EventType::TabUpdate,
@@ -44,6 +51,14 @@ impl ZellijPlugin for State {
         let mut should_render = false;
 
         match event {
+            Event::PermissionRequestResult(status) => match status {
+                PermissionStatus::Granted => {
+                    set_selectable(false);
+                }
+                PermissionStatus::Denied => {
+                    eprintln!("Permission denied.");
+                }
+            },
             Event::ModeUpdate(mode_info) => {
                 should_render = self.mode_info != mode_info;
                 self.mode_info = mode_info;
