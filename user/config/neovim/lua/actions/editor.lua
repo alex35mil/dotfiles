@@ -125,7 +125,7 @@ function M.zenmode()
     zenmode.toggle()
 end
 
-function M.close_buffer(opts)
+function M.close_buffer(options)
     local zenmode = require "utils.zenmode"
 
     if zenmode.is_active() then
@@ -221,6 +221,8 @@ function M.close_buffer(opts)
 
     local buffers = require "utils.buffers"
 
+    local opts = vim.tbl_extend("keep", options, { force = false, should_close_window = false })
+
     local current_buf_info = buffers.get_buf_info(current_buf)
 
     if current_buf_info == nil then
@@ -228,7 +230,7 @@ function M.close_buffer(opts)
         return
     end
 
-    if current_buf_info.name == "" and current_buf_info.changed == 1 then
+    if current_buf_info.name == "" and current_buf_info.changed == 1 and not opts.force then
         vim.api.nvim_err_writeln "The buffer needs to be saved first"
         return
     end
@@ -242,16 +244,14 @@ function M.close_buffer(opts)
 
     local tab_windows = view.get_tab_windows_with_listed_buffers({ incl_help = true })
 
-    local should_close_window = opts.should_close_window
-
-    if #tab_windows > 1 and should_close_window then
+    if #tab_windows > 1 and opts.should_close_window then
         vim.cmd "silent! write"
 
         for _, win in ipairs(tab_windows) do
             local buf = vim.api.nvim_win_get_buf(win)
             if buf == current_buf then
                 vim.cmd.close()
-                return
+                return current_buf
             end
         end
     else
@@ -281,10 +281,12 @@ function M.close_buffer(opts)
         if next_buf ~= nil then
             vim.cmd "silent! write"
             vim.api.nvim_set_current_buf(next_buf)
+            return current_buf
         else
             if #tab_windows > 1 then
                 vim.cmd "silent! write"
                 vim.cmd.close()
+                return current_buf
             else
                 local empty_buf = vim.api.nvim_create_buf(true, false)
 
@@ -295,8 +297,19 @@ function M.close_buffer(opts)
                     vim.cmd "silent! write"
                     vim.api.nvim_set_current_buf(empty_buf)
                 end
+                return current_buf
             end
         end
+    end
+end
+
+function M.close_and_delete_buffer(options)
+    local opts = vim.tbl_extend("keep", options, { force = false })
+
+    local bufnr = M.close_buffer({ should_close_window = true, force = opts.force })
+
+    if bufnr ~= nil then
+        vim.api.nvim_buf_delete(bufnr, { force = opts.force })
     end
 end
 

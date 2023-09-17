@@ -161,6 +161,18 @@ mapseq { "<Leader>nh", "Open new horizontal split", "<Cmd>new<CR>", mode = "n" }
 mapseq { "<Leader>nv", "Open new vertical split", "<Cmd>vnew<CR>", mode = "n" }
 
 map {
+    "<D-BS>",
+    "Close and delete current buffer",
+    function() editor.close_and_delete_buffer({ force = false }) end,
+    mode = "n",
+}
+map {
+    "<D-M-BS>",
+    "Close and force delete current buffer",
+    function() editor.close_and_delete_buffer({ force = true }) end,
+    mode = "n",
+}
+map {
     "<D-w>",
     "Close current buffer and close current window if there are multiple",
     function() editor.close_buffer({ should_close_window = true }) end,
