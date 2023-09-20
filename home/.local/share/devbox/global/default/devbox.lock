@@ -1,0 +1,145 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "bat@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#bat",
+      "source": "devbox-search",
+      "version": "0.23.0"
+    },
+    "bottom@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#bottom",
+      "source": "devbox-search",
+      "version": "0.9.6"
+    },
+    "curl@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#curl",
+      "source": "devbox-search",
+      "version": "8.2.1"
+    },
+    "direnv@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#direnv",
+      "source": "devbox-search",
+      "version": "2.32.3"
+    },
+    "fd@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#fd",
+      "source": "devbox-search",
+      "version": "8.7.0"
+    },
+    "fortune@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#fortune",
+      "source": "devbox-search",
+      "version": "3.20.0"
+    },
+    "fzf@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#fzf",
+      "source": "devbox-search",
+      "version": "0.42.0"
+    },
+    "git@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#git",
+      "source": "devbox-search",
+      "version": "2.42.0"
+    },
+    "htop@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#htop",
+      "source": "devbox-search",
+      "version": "3.2.2"
+    },
+    "lazygit": {
+      "resolved": "github:NixOS/nixpkgs/f80ac848e3d6f0c12c52758c0f25c10c97ca3b62#lazygit",
+      "source": "nixpkg"
+    },
+    "mkcert@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#mkcert",
+      "source": "devbox-search",
+      "version": "1.4.4"
+    },
+    "neovim@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#neovim",
+      "source": "devbox-search",
+      "version": "0.9.2"
+    },
+    "pstree": {
+      "resolved": "github:NixOS/nixpkgs/f80ac848e3d6f0c12c52758c0f25c10c97ca3b62#pstree",
+      "source": "nixpkg"
+    },
+    "ripgrep@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#ripgrep",
+      "source": "devbox-search",
+      "version": "13.0.0"
+    },
+    "skim@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#skim",
+      "source": "devbox-search",
+      "version": "0.10.4"
+    },
+    "starship@latest": {
+      "last_modified": "2022-04-16T03:10:56Z",
+      "resolved": "github:NixOS/nixpkgs/3e2429381044368549efe4d91d482341db5e59f7#starship",
+      "source": "devbox-search",
+      "version": "2022-04-12"
+    },
+    "tree-sitter@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#tree-sitter",
+      "source": "devbox-search",
+      "version": "0.20.8"
+    },
+    "tree@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#tree",
+      "source": "devbox-search",
+      "version": "2.1.1"
+    },
+    "watchman@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#watchman",
+      "source": "devbox-search",
+      "version": "2023.08.14.00"
+    },
+    "wget@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#wget",
+      "source": "devbox-search",
+      "version": "1.21.4"
+    },
+    "zellij@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#zellij",
+      "source": "devbox-search",
+      "version": "0.38.2"
+    },
+    "zsh-autosuggestions@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#zsh-autosuggestions",
+      "source": "devbox-search",
+      "version": "0.7.0"
+    },
+    "zsh-completions@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#zsh-completions",
+      "source": "devbox-search",
+      "version": "0.35.0"
+    },
+    "zsh@latest": {
+      "last_modified": "2023-09-17T10:54:49Z",
+      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#zsh",
+      "source": "devbox-search",
+      "version": "5.9"
+    }
+  }
+}

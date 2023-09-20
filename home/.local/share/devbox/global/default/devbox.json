@@ -1,0 +1,28 @@
+{
+  "packages": [
+    "neovim@latest",
+    "direnv@latest",
+    "starship@latest",
+    "tree@latest",
+    "fd@latest",
+    "bat@latest",
+    "fzf@latest",
+    "skim@latest",
+    "htop@latest",
+    "curl@latest",
+    "wget@latest",
+    "pstree",
+    "mkcert@latest",
+    "ripgrep@latest",
+    "fortune@latest",
+    "watchman@latest",
+    "lazygit",
+    "bottom@latest",
+    "zellij@latest",
+    "tree-sitter@latest",
+    "git@latest",
+    "zsh@latest",
+    "zsh-autosuggestions@latest",
+    "zsh-completions@latest"
+  ]
+}

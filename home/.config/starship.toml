@@ -1,0 +1,8 @@
+[package]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[nix_shell]
+disabled = true

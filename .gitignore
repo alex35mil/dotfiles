@@ -1,4 +1,6 @@
 target/
-/user/config/zellij/plugins/**
-/user/font/original/**
-/user/font/patched/**
+/home/.config/zellij/plugins/**
+/script/font/original/**/*
+/script/font/patched/**/*
+!/script/font/original/**/.gitkeep
+!/script/font/patched/**/.gitkeep

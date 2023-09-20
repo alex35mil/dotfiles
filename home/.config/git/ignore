@@ -1,0 +1,6 @@
+.envrc
+.direnv
+.devbox
+.idea
+.DS_Store
+SIDENOTES-*.md

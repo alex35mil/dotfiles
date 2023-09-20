@@ -13,17 +13,17 @@
 </p>
 
 <p align="center">
-    Mostly everything is managed via <b>Nix</b>.
+    Packages are managed via <b>Nix</b> + <b>Devbox</b>.
 </p>
 
 <p />
 
 <p align="center">
     <b>Quick links</b><br />
-    <a href="https://github.com/alex35mil/dotfiles/tree/master/user/config/neovim">Neovim config</a><br />
-    <a href="https://github.com/alex35mil/dotfiles/tree/master/user/config/zellij">Zellij config</a><br />
-    <a href="https://github.com/alex35mil/dotfiles/tree/master/user/bin/zellij/runner">Zellij session switcher</a><br />
-    <a href="https://github.com/alex35mil/dotfiles/tree/master/user/bin/zellij/statusbar">Zellij statusbar</a><br />
+    <a href="https://github.com/alex35mil/dotfiles/tree/master/home/.config/nvim">Neovim config</a><br />
+    <a href="https://github.com/alex35mil/dotfiles/tree/master/home/.config/zellij">Zellij config</a><br />
+    <a href="https://github.com/alex35mil/dotfiles/tree/master/bin/zellij/runner">Zellij session switcher</a><br />
+    <a href="https://github.com/alex35mil/dotfiles/tree/master/bin/zellij/statusbar">Zellij statusbar</a><br />
 </p>
 
 <h2 align="center">Screenshots</h2>
