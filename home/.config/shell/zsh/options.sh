@@ -254,6 +254,20 @@ bindkey "^X" history-incremental-search-backward
 # This provides a quick way to recall and reuse previously entered commands.
 # ------------------------------------------
 
+bindkey "^[[Z" reverse-menu-complete
+# ------------------------------------------
+# - `"^[[Z"`: This is a key sequence representing the "Shift+Tab" key combination in many
+#   terminal emulators.
+#
+# - `reverse-menu-complete`: This is the action/command being bound to the key sequence.
+#   It triggers the completion system to cycle through possible matches in reverse order.
+#
+# By executing this command, you're configuring zsh to cycle backward through completion
+# options when you press the "Shift+Tab" key combination. This is especially useful when
+# you've gone past the desired completion with "Tab" and want to go back without cycling
+# through all the options again.
+# ------------------------------------------
+
 # ------------------------------------------
 # OPTIONS
 #
@@ -289,7 +303,6 @@ setopt autopushd
 
 setopt dotglob
 # ------------------------------------------
-# Explanation:
 # - `dotglob`: This option affects the behavior of filename pattern matching.
 #
 # By enabling the `dotglob` option with `setopt`, you're instructing zsh to treat
