@@ -23,6 +23,7 @@
     "git@latest",
     "zsh@latest",
     "zsh-autosuggestions@latest",
-    "zsh-completions@latest"
+    "zsh-completions@latest",
+    "libiconv@latest"
   ]
 }
