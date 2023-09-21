@@ -281,7 +281,7 @@ local plugins = {
 
     {
         "lewis6991/gitsigns.nvim",
-        version = "*",
+        branch = "main",
         event = "BufEnter",
         config = require("plugins.gitsigns").setup,
     },

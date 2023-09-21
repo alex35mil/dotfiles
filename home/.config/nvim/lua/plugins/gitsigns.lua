@@ -13,6 +13,14 @@ function M.setup()
             untracked    = { hl = "GitSignsAdd", text = "⋅", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
         },
         _signs_staged_enable = true,
+        _signs_staged = {
+            add          = { hl = "GitSignsStagedAdd", text = "▎", numhl = "GitSignsStagedAddNr", linehl = "GitSignsStagedAddLn" },
+            change       = { hl = "GitSignsStagedChange", text = "▎", numhl = "GitSignsStagedChangeNr", linehl = "GitSignsStagedChangeLn" },
+            delete       = { hl = "GitSignsStagedDelete", text = "契", numhl = "GitSignsStagedDeleteNr", linehl = "GitSignsStagedDeleteLn" },
+            topdelete    = { hl = "GitSignsStagedDelete", text = "契", numhl = "GitSignsStagedDeleteNr", linehl = "GitSignsStagedDeleteLn" },
+            changedelete = { hl = "GitSignsStagedChange", text = "▎", numhl = "GitSignsStagedChangeNr", linehl = "GitSignsStagedChangeLn" },
+            untracked    = { hl = "GitSignsStagedAdd", text = "⋅", numhl = "GitSignsStagedAddNr", linehl = "GitSignsStagedAddLn" },
+        },
         signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
         numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`
         linehl = false,    -- Toggle with `:Gitsigns toggle_linehl`
