@@ -70,10 +70,10 @@ function cleanup() {
       local target_dir="${1:-.}"
 
       # Remove .DS_Store files
-      find "$target_dir" -type f -name '*.DS_Store' -ls -delete
+      find "$target_dir" -type f -name '*.DS_Store' -exec echo "Removing: {}" 1>&2 \; -delete
 
       # Remove broken symlinks
-      find "$target_dir" -type l ! -exec test -e {} \; -delete
+      find "$target_dir" -type l ! -exec test -e {} \; -exec echo "Removing broken symlink: {}" 1>&2 \; -delete
 }
 
 # Adds fingerprint to the filename
