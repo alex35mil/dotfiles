@@ -323,6 +323,12 @@ local plugins = {
 
     -- misc
     {
+        "tenxsoydev/tabs-vs-spaces.nvim",
+        version = "*",
+        config = require("plugins.tabs-vs-spaces").setup,
+    },
+
+    {
         "norcalli/nvim-colorizer.lua",
         version = "*",
         lazy = true,

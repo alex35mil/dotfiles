@@ -15,10 +15,10 @@ typeset -U path cdpath fpath manpath
 # ------------------------------------------
 
 fpath+=(
-	$XDG_CONFIG_HOME/shell/zsh/completions
-	$DEVBOX_PROFILE/share/zsh/site-functions
-	$DEVBOX_PROFILE/share/zsh/$ZSH_VERSION/functions
-	$DEVBOX_PROFILE/share/zsh/vendor-completions
+    $XDG_CONFIG_HOME/shell/zsh/completions
+    $DEVBOX_PROFILE/share/zsh/site-functions
+    $DEVBOX_PROFILE/share/zsh/$ZSH_VERSION/functions
+    $DEVBOX_PROFILE/share/zsh/vendor-completions
 )
 # ------------------------------------------
 # `fpath` is a special array in zsh that specifies directories to search
@@ -40,7 +40,6 @@ alias help=run-help
 
 zmodload -i zsh/complist
 # ------------------------------------------
-# Explanation:
 # - `zmodload`: This is a zsh builtin command used to load or unload zsh modules.
 #   Zsh modules extend the functionality of the shell by providing additional commands,
 #   parameters, and features.
@@ -128,7 +127,6 @@ zstyle ':completion:*' group-name ''
 
 zstyle ':completion:*' list-colors ${(s.:.)LSCOLORS}
 # ------------------------------------------
-# Explanation:
 # - `list-colors`: This style is used to define the colors in which items in the
 #   completion list are displayed, based on their file type or other attributes.
 #

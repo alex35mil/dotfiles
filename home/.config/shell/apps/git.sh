@@ -56,10 +56,10 @@ alias gpsd="git push --recurse-submodules=on-demand "
 
 # Clones git repository and enters it
 function gcl() {
-	git clone $1 && cd $(basename "$1" .git)
+    git clone $1 && cd $(basename "$1" .git)
 }
 
 # Initializes git repository and creates initial commit
 function ginit() {
-	git init && git commit -m "Initial commit" --allow-empty
+    git init && git commit -m "Initial commit" --allow-empty
 }

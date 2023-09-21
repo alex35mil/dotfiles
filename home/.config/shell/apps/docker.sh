@@ -26,12 +26,12 @@ alias dcupb="docker-compose up --build"
 
 # Prints Docker stats
 function dls() {
-	echo "--- Images:\n"
-	docker image ls
-	echo "\n\n--- Containers:\n"
-	docker container ls
-	echo "\n\n--- Volumes:\n"
-	docker volume ls
-	echo "\n\n--- Networks:\n"
-	docker network ls
+    echo "--- Images:\n"
+    docker image ls
+    echo "\n\n--- Containers:\n"
+    docker container ls
+    echo "\n\n--- Volumes:\n"
+    docker volume ls
+    echo "\n\n--- Networks:\n"
+    docker network ls
 }

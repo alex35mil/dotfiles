@@ -168,6 +168,7 @@ function M.init()
             -- CursorIM     { }, -- Like Cursor, but used when in IME mode |CursorIM|
             CursorColumn { bg = Normal.bg.lighten(20) },                    -- Screen-column at the cursor, when 'cursorcolumn' is set.
             CursorLine { bg = Normal.bg.lighten(6) },                       -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+            VirtColumn { fg = color.thin_line },
             ColorColumn { fg = color.thin_line },                           -- Columns set with 'colorcolumn'
             Directory { fg = color.text },                                  -- Directory names (and other special names in listings)
 
@@ -205,7 +206,7 @@ function M.init()
             ModeMsg { MsgArea },                                         -- 'showmode' message (e.g., "-- INSERT -- ")
             -- MsgSeparator { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
             -- MoreMsg      { }, -- |more-prompt|
-            NonText { fg = color.thin_line },                               -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
+            NonText { fg = color.faded_text },                              -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
             NormalFloat { fg = color.popover_text, bg = color.popover_bg }, -- Normal text in floating windows.
             -- NormalNC     { }, -- normal text in non-current windows
             Pmenu { fg = color.popover_text, bg = color.popover_bg },       -- Popup menu: Normal item.
@@ -215,7 +216,7 @@ function M.init()
             -- Question     { }, -- |hit-enter| prompt and yes/no questions
             -- QuickFixLine { }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
             Search { fg = color.bg, bg = color.cyan }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
-            -- SpecialKey   { }, -- Unprintable characters: text displayed differently from what it really is. But not 'listchars' whitespace. |hl-Whitespace|
+            SpecialKey { fg = color.faded_text },      -- Unprintable characters: text displayed differently from what it really is. But not 'listchars' whitespace. |hl-Whitespace|
             -- SpellBad     { }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
             -- SpellCap     { }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
             -- SpellLocal   { }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
@@ -231,7 +232,7 @@ function M.init()
             Visual { bg = Normal.bg.lighten(18) },     -- Visual mode selection
             -- VisualNOS    { }, -- Visual mode selection when vim is "Not Owning the Selection".
             -- WarningMsg   { }, -- Warning messages
-            Whitespace { fg = color.thin_line }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
+            Whitespace { fg = color.faded_text }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
             -- Winseparator { }, -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
             -- WildMenu     { }, -- Current match in 'wildmenu' completion
 
@@ -293,6 +294,8 @@ function M.init()
             ZenBg { fg = color.text, bg = color.bg },
 
             WinShiftMove { bg = Normal.bg.lighten(7) },
+
+            TabsVsSpaces { fg = color.faded_text, underline = true },
 
             PounceMatch { fg = Normal.bg, bg = color.cyan },
             PounceGap { fg = Normal.bg.lighten(50), bg = Normal.bg.lighten(10) },

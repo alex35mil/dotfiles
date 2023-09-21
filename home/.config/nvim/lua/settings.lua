@@ -21,6 +21,16 @@ opt.smartindent = true
 opt.tabstop = 4
 opt.softtabstop = 4
 
+vim.opt.list = true
+vim.opt.listchars = {
+    tab = "▸ ",
+    trail = "·",
+    precedes = "←",
+    extends = "→",
+    nbsp = "+",
+    -- eol = "↲",
+}
+
 opt.fillchars = { eob = " ", diff = "" }
 opt.ignorecase = true
 opt.smartcase = true

@@ -41,6 +41,7 @@
   "plenary.nvim": { "branch": "master", "commit": "253d34830709d690f013daf2853a9d21ad7accab" },
   "pounce.nvim": { "branch": "master", "commit": "0c044cad69571d57d8f64a41cca95332859b6abc" },
   "rust-tools.nvim": { "branch": "master", "commit": "0cc8adab23117783a0292a0c8a2fbed1005dc645" },
+  "tabs-vs-spaces.nvim": { "branch": "main", "commit": "eb6e2d610bb541bdf6b698d076b9ed4acf403394" },
   "telescope-file-browser.nvim": { "branch": "master", "commit": "c3670c088bfb83e892ae69989875a1dfdd5cff99" },
   "telescope.nvim": { "branch": "0.1.x", "commit": "54930e1abfc94409e1bb9266e752ef8379008592" },
   "todo-comments.nvim": { "branch": "main", "commit": "8febc60a76feefd8203077ef78b6a262ea1a41f9" },
