@@ -122,6 +122,38 @@
                     ]
                 }
             ]
+        },
+        {
+            "description": "Alacritty: Restore Cmd+V",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "v",
+                        "modifiers": {
+                            "mandatory": [
+                                "left_control"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "v",
+                            "modifiers": [
+                                "left_command"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^org.alacritty$"
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
