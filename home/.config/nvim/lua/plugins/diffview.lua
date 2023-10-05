@@ -16,7 +16,7 @@ function M.setup()
             view = {
                 { "n", "<Tab>",   actions.select_next_entry, { desc = "Open the diff for the next file" } },
                 { "n", "<S-Tab>", actions.select_prev_entry, { desc = "Open the diff for the previous file" } },
-                { "n", "gf",      actions.goto_file,         { desc = "Open the file in a new split in the previous tabpage" } },
+                { "n", "gf",      actions.goto_file_edit,    { desc = "Open the file" } },
                 -- { "n", "",     actions.focus_files,       { desc = "Bring focus to the file panel" } },
                 { "n", "<C-z>",   actions.toggle_files,      { desc = "Toggle the file panel." } },
                 -- { "n", "",     actions.prev_conflict,             { desc = "In the merge-tool: jump to the previous conflict" } },
@@ -42,7 +42,7 @@ function M.setup()
                 { "n", "A",             actions.stage_all,           { desc = "Stage all entries." } },
                 { "n", "U",             actions.unstage_all,         { desc = "Unstage all entries." } },
                 { "n", "X",             actions.restore_entry,       { desc = "Restore entry to the state on the left side." } },
-                { "n", "gf",            actions.goto_file,           { desc = "Open the file" } },
+                { "n", "gf",            actions.goto_file_edit,      { desc = "Open the file" } },
                 { "n", "i",             actions.listing_style,       { desc = "Toggle between 'list' and 'tree' views" } },
                 { "n", "d",             actions.toggle_flatten_dirs, { desc = "Flatten empty subdirectories." } },
                 { "n", "L",             actions.open_commit_log,     { desc = "Open the commit log panel." } },
