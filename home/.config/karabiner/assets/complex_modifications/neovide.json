@@ -7,7 +7,7 @@
                 {
                     "type": "basic",
                     "from": {
-                        "key_code": "x",
+                        "key_code": "q",
                         "modifiers": {
                             "mandatory": [
                                 "left_command"
@@ -16,7 +16,7 @@
                     },
                     "to": [
                         {
-                            "key_code": "x",
+                            "key_code": "q",
                             "modifiers": [
                                 "left_control"
                             ]
@@ -39,7 +39,7 @@
                 {
                     "type": "basic",
                     "from": {
-                        "key_code": "j",
+                        "key_code": "h",
                         "modifiers": {
                             "mandatory": [
                                 "left_command"
@@ -48,7 +48,7 @@
                     },
                     "to": [
                         {
-                            "key_code": "j",
+                            "key_code": "h",
                             "modifiers": [
                                 "left_option"
                             ]
