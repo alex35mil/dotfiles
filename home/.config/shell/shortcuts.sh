@@ -100,7 +100,29 @@ alias localip="ipconfig getifaddr en0"
 
 # Prints listners on a specific port. E.g. `p 3000`
 function p() {
-    lsof -n -i:$@ | grep LISTEN
+    if [ -z "$1" ]; then
+        echo "Usage: p [port]"
+        return 1
+    fi
+
+    # Getting the protocol and the PID of the process listening on the specified port
+    read protocol pid <<<$(lsof -n -i:$1 | awk '/LISTEN/ {print $8, $2}' | head -1)
+
+    if [ -z "$pid" ]; then
+        echo "No process found listening on port $1"
+        return 1
+    fi
+
+    # Getting the command and time from ps
+    # etime = elapsed time since the process was started, in the form [[DD-]hh:]mm:ss
+    # command = command with all its arguments as a string
+    read etime command <<<$(ps -p $pid -o etime=,command=)
+
+    echo "Port: $1"
+    echo "Protocol: $protocol"
+    echo "PID: $pid"
+    echo "Command: $command"
+    echo "Age: $etime"
 }
 
 # Generates a new ssh entity
