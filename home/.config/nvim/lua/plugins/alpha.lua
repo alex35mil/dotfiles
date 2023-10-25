@@ -59,7 +59,7 @@ function M.setup()
     section.buttons = {
         type = "group",
         val = {
-            M.dashboard.button("⌃ N", "  Create file", "<Cmd>normal <C-n><CR>"),
+            M.dashboard.button("⌘ N", "  Create file", "<Cmd>normal <C-n><CR>"),
             M.dashboard.button("⌘ E", "  Explore project", "<Cmd>normal <D-e><CR>"),
             M.dashboard.button("⌘ T", "  Find file", "<Cmd>normal <D-t><CR>"),
             M.dashboard.button("⌘ F", "  Find text", "<Cmd>normal <D-f><CR>"),

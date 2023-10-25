@@ -77,14 +77,14 @@ map { "<C-s>", "Select inner word", "viw", mode = "n" }
 map { "<C-c>", "Change inner word", [["xciw]], mode = "n" }
 map { "<C-y>", "Yank inner word", "yiw", mode = "n" }
 
-map { "<D-Del>", "Insert new line above", "O<Esc>", mode = "n" }
+map { "<D-M-BS>", "Insert new line above", "O<Esc>", mode = "n" }
 map { "<D-CR>", "Insert new line below", "o<Esc>", mode = "n" }
-map { "<D-Del>", "Insert new line above", "<Esc>O", mode = "i" }
+map { "<D-M-BS>", "Insert new line above", "<Esc>O", mode = "i" }
 map { "<D-CR>", "Insert new line below", "<Esc>o", mode = "i" }
 
-map { "<C-d>", "Duplicate line", [["yyy"yp]], mode = "n" }
-map { "<C-d>", "Duplicate line", [[<Esc>"yyy"ypgi]], mode = "i" }
-map { "<C-d>", "Duplicate selection", [["yy'>"ypgv]], mode = "v" }
+map { "<D-d>", "Duplicate line", [["yyy"yp]], mode = "n" }
+map { "<D-d>", "Duplicate line", [[<Esc>"yyy"ypgi]], mode = "i" }
+map { "<D-d>", "Duplicate selection", [["yy'>"ypgv]], mode = "v" }
 
 map { "<M-Up>", "Move line up", "<Cmd>m .-2<CR>==", mode = "n" }
 map { "<M-Down>", "Move line down", "<Cmd>m .+1<CR>==", mode = "n" }
@@ -101,10 +101,12 @@ map { "<S-Tab>", "Unindent", "<gv", mode = "v" }
 map { "<D-a>", "Select all", "ggVG", mode = "n" }
 map { "<D-a>", "Select all", "<Esc>ggVG", mode = { "i", "v" } }
 
-map { "<C-t>", "Scroll up", function() editor.scroll("up") end, mode = { "n", "v", "i" } }
-map { "<C-h>", "Scroll down", function() editor.scroll("down") end, mode = { "n", "v", "i" } }
 map { "}", "Move cursor half-screen up", "<C-u>", mode = { "n", "v" } }
 map { "{", "Move cursor half-screen down", "<C-d>", mode = { "n", "v" } }
+map { "<C-t>", "Scroll up", function() editor.scroll("up") end, mode = { "n", "v", "i" } }
+map { "<C-h>", "Scroll down", function() editor.scroll("down") end, mode = { "n", "v", "i" } }
+map { "<C-d>", "Scroll left", "<Cmd>normal! 5zh<CR>", mode = { "n", "v", "i" } }
+map { "<C-n>", "Scroll right", "<Cmd>normal! 5zl<CR>", mode = { "n", "v", "i" } }
 
 map { ";", "Repeat", ".", mode = { "n", "x", "o" } }
 
@@ -115,8 +117,8 @@ map { "F", "Repeat last move F", treesitter.builtin_F, mode = { "n", "x", "o" } 
 map { "t", "Repeat last move t", treesitter.builtin_t, mode = { "n", "x", "o" } }
 map { "T", "Repeat last move T", treesitter.builtin_T, mode = { "n", "x", "o" } }
 
-map { "<D-d>", "History: back", "<C-o>", mode = "n" }
-map { "<D-n>", "History: forward", "<C-i>", mode = "n" }
+map { "<D-7>", "History: back", "<C-o>", mode = "n" }
+map { "<D-[>", "History: forward", "<C-i>", mode = "n" }
 map { "<LeftMouse>", "History: include mouse clicks", "m'<LeftMouse>", mode = "n" }
 
 map { "<M-h>", "Start pounce motion", "<Cmd>Pounce<CR>", mode = { "n", "v" } } -- It's <D-h> remapped via Karabiner
@@ -156,7 +158,7 @@ map { "<D-Esc>", "Reset layout", editor.reset_layout, mode = "n" }
 
 map { "<D-z>", "Toggle zen mode", editor.zenmode, mode = { "n", "i", "v" } }
 
-map { "<C-n>", "Open new buffer in the current window", "<Cmd>enew<CR>", mode = "n" }
+map { "<D-n>", "Open new buffer in the current window", "<Cmd>enew<CR>", mode = "n" }
 mapseq { "<Leader>nh", "Open new horizontal split", "<Cmd>new<CR>", mode = "n" }
 mapseq { "<Leader>nv", "Open new vertical split", "<Cmd>vnew<CR>", mode = "n" }
 
@@ -167,7 +169,7 @@ map {
     mode = "n",
 }
 map {
-    "<D-M-BS>",
+    "<D-M-Del>",
     "Close and force delete current buffer",
     function() editor.close_and_delete_buffer({ force = true }) end,
     mode = "n",
