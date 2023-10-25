@@ -25,6 +25,8 @@
     "zsh-autosuggestions@latest",
     "zsh-completions@latest",
     "libiconv@latest",
-    "btop@latest"
+    "btop@latest",
+    "goku@latest",
+    "watchexec@latest"
   ]
 }

@@ -1,0 +1,100 @@
+{
+    :applications {
+        :alacritty ["^org.alacritty$"]
+        :neovide [:paths "^.*\\.cargo/bin/neovide$"]
+        :xcode ["^com.apple.dt.Xcode$"]
+    }
+
+    :input-sources {
+        :ru { :language "ru" }
+    }
+
+    :main [
+
+        ;; !  | mandatory
+        ;; #  | optional
+        ;; C  | left_command
+        ;; T  | left_control
+        ;; O  | left_option
+        ;; S  | left_shift
+        ;; F  | fn
+        ;; Q  | right_command
+        ;; W  | right_control
+        ;; E  | right_option
+        ;; R  | right_shift
+        ;; P  | caps_lock
+        ;; !! | mandatory hyper
+        ;; ## | optional any
+
+        ;; !CTSequal_sign  | mandatory Cmd Ctrl Shift = (or Cmd Ctrl +)
+        ;; !O#Sright_arrow | mandatory Opt optional Shift right_arrow
+
+        ;; Karabiner definition of mandatory and optional
+        ;; https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-definition/from/modifiers/
+
+        {
+            :des "Alacritty configuration"
+            :rules [
+                [:##left_command :left_control [:alacritty]] ; Cmd -> Ctrl
+                [:##left_control :left_command [:alacritty]] ; Ctrl -> Cmd
+                [:!Ttab :!Ctab [:alacritty]] ; Restore Cmd+Tab
+                [:!Tleft_shift :!Cleft_shift [:alacritty]] ; Restore Cmd+Shift+Tab
+                [:!Tv :!Cv [:alacritty]] ; Restore Cmd+V
+            ]
+        }
+
+        {
+            :des "Neovide configuration"
+            :rules [
+                [:!Cq :!Tq [:neovide]] ; Cmd+Q -> Ctrl+Q: quit
+                [:!Ch :!Oh [:neovide]] ; Cmd+H -> Opt+H: move half page down
+            ]
+        }
+
+        {
+            :des "Xcode configuration"
+            :rules [
+                [:!Ct :page_up [:xcode]]
+                [:!Ch :page_down [:xcode]]
+            ]
+        }
+
+        {
+            :des "RU layout with Dvorak"
+            :rules [
+                ; Common mappings
+                [:#SOERquote :q [:ru]]
+                [:#SOERcomma :w [:ru]]
+                [:#SOERperiod :e [:ru]]
+                [:#SOERp :r [:ru]]
+                [:#SOERy :t [:ru]]
+                [:#SOERf :y [:ru]]
+                [:#SOERg :u [:ru]]
+                [:#SOERc :i [:ru]]
+                [:#SOERr :o [:ru]]
+                [:#SOERl :p [:ru]]
+                [:#SOERo :s [:ru]]
+                [:#SOERe :d [:ru]]
+                [:#SOERu :f [:ru]]
+                [:#SOERi :g [:ru]]
+                [:#SOERd :h [:ru]]
+                [:#SOERh :j [:ru]]
+                [:#SOERt :k [:ru]]
+                [:#SOERn :l [:ru]]
+                [:#SOERs :semicolon [:ru]]
+                [:#SOERsemicolon :z [:ru]]
+                [:#SOERq :x [:ru]]
+                [:#SOERj :c [:ru]]
+                [:#SOERk :v [:ru]]
+                [:#SOERx :b [:ru]]
+                [:#SOERb :n [:ru]]
+                [:#SOERw :comma [:ru]]
+                [:#SOERv :period [:ru]]
+                [:#SOERz :quote [:ru]]
+
+                ; Specific to my keyboard
+                [:!Shyphen :!Se [:ru]]
+            ]
+        }
+    ]
+}

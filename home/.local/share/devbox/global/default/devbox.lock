@@ -55,6 +55,12 @@
       "source": "devbox-search",
       "version": "2.42.0"
     },
+    "goku@latest": {
+      "last_modified": "2023-09-27T18:02:17Z",
+      "resolved": "github:NixOS/nixpkgs/517501bcf14ae6ec47efd6a17dda0ca8e6d866f9#goku",
+      "source": "devbox-search",
+      "version": "0.6.0"
+    },
     "htop@latest": {
       "last_modified": "2023-09-17T10:54:49Z",
       "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#htop",
@@ -116,6 +122,12 @@
       "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#tree",
       "source": "devbox-search",
       "version": "2.1.1"
+    },
+    "watchexec@latest": {
+      "last_modified": "2023-09-27T18:02:17Z",
+      "resolved": "github:NixOS/nixpkgs/517501bcf14ae6ec47efd6a17dda0ca8e6d866f9#watchexec",
+      "source": "devbox-search",
+      "version": "1.22.2"
     },
     "watchman@latest": {
       "last_modified": "2023-09-17T10:54:49Z",
