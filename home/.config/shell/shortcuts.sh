@@ -22,6 +22,7 @@ alias .....="cd ../../../.."
 alias dv="cd ~/Dev"
 alias dn="cd ~/Dev/null"
 alias icd="cd ~/Library/Mobile\\ Documents/com~apple~CloudDocs"
+alias ico="cd ~/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents"
 
 # === Files
 alias lsa="ls -lhFaG"
