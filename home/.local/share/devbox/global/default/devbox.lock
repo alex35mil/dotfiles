@@ -13,6 +13,12 @@
       "source": "devbox-search",
       "version": "0.9.6"
     },
+    "btop@latest": {
+      "last_modified": "2023-09-27T18:02:17Z",
+      "resolved": "github:NixOS/nixpkgs/517501bcf14ae6ec47efd6a17dda0ca8e6d866f9#btop",
+      "source": "devbox-search",
+      "version": "1.2.13"
+    },
     "curl@latest": {
       "last_modified": "2023-09-17T10:54:49Z",
       "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#curl",

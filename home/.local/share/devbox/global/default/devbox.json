@@ -24,6 +24,7 @@
     "zsh@latest",
     "zsh-autosuggestions@latest",
     "zsh-completions@latest",
-    "libiconv@latest"
+    "libiconv@latest",
+    "btop@latest"
   ]
 }
