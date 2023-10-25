@@ -17,22 +17,24 @@ function M.setup()
             diagnostic = "", -- or 
             incoming = " ",
             outgoing = " ",
+            lines = { "┗", "┣", "┃", "━", "┏" },
             colors = {
                 normal_bg = color.popover_bg,
                 title_bg = color.cyan,
             },
-            kind = {},
+            kind = nil,
         },
         symbol_in_winbar = {
             enable = false,
         },
         rename = {
-            quit = "<Esc>",
-            exec = "<CR>",
-            mark = "x",
-            confirm = "<CR>",
+            auto_save = true,
             in_select = false,
-            whole_project = true,
+            keys = {
+                quit = { "<Esc>", "<D-w>" },
+                exec = "<CR>",
+                select = "x",
+            },
         },
         diagnostic = {
             show_code_action = true,
@@ -40,7 +42,7 @@ function M.setup()
             jump_num_shortcut = true,
             keys = {
                 exec_action = "o",
-                quit = "<Esc>",
+                quit = { "<Esc>", "<D-w>" },
                 go_action = "g",
             },
         },
@@ -49,7 +51,7 @@ function M.setup()
             vsplit = "v",
             split = "h",
             tabe = "t",
-            quit = { "<Esc>", "q" },
+            quit = { "<Esc>", "<D-w>" },
         },
         outline = {
             layout = "float",
@@ -57,16 +59,12 @@ function M.setup()
         code_action = {
             num_shortcut = true,
             keys = {
-                quit = { "<Esc>", "q" },
+                quit = { "<Esc>", "<D-w>" },
                 exec = "<CR>",
             },
         },
         lightbulb = {
-            enable = false, -- FIXME: Lightbulb is broken
-            enable_in_insert = true,
-            sign = true,
-            sign_priority = 40,
-            virtual_text = true,
+            enable = false,
         },
         beacon = {
             enable = true,
