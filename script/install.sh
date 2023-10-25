@@ -63,6 +63,7 @@ UMBRELLA_DIRECTORIES=(
     ".config/nvim"
     ".config/shell"
     ".config/zellij"
+    ".config/raycast/scripts"
 )
 
 # Let's collect all the paths to configuration files in an associative array
