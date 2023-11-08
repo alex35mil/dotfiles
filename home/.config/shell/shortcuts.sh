@@ -67,21 +67,24 @@ alias lsa="ls -lhFaG"
 alias rmrf="rm -rf"
 
 # `i` stands for `inspect`.
-# With no arguments, it lists contents of the current directory via `tree`.
-# If given a directory, it lists contents of that directory via `tree`.
-# If given a file, it shows it with `bat`.
+# With no argument, it lists the contents of the current directory via `tree`.
+# If given a directory, it lists the contents of that directory.
+# If given a file, it shows its contents via `bat`.
 function i() {
     # If no argument is provided, use the current directory
     local target="${1:-.}"
 
     # If target is a directory
     if [[ -d "$target" ]]; then
+        # List its contents via `tree`
         tree -a -L 1 "$target"
     # If target is a file
     elif [[ -f "$target" ]]; then
+        # Show its contents via `bat`
         bat "$target"
     else
         echo "Error: $target is neither a directory nor a file."
+        return 1
     fi
 }
 
