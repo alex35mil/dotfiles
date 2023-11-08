@@ -1,12 +1,12 @@
 export NEOVIDE_FRAME="buttonless"
 export NEOVIDE_MAXIMIZED="true"
 
-alias v="neovide "
-alias vcc="rm -rf ~/.cache/nvim/luac/"
-alias vsls="ls -1 ~/.local/state/nvim/swap/"
+alias n="neohub "
+alias ncc="rm -rf ~/.cache/nvim/luac/"
+alias nsls="ls -1 ~/.local/state/nvim/swap/"
 
 # Removes Neovim swap files: all or of provided project
-function vsc() {
+function nsc() {
     if [ -z "$1" ]; then
         echo "Provide a project path or '!' to remove all swap files"
         return 1
