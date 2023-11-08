@@ -21,6 +21,7 @@
 <p align="center">
     <b>Quick links</b><br />
     <a href="https://github.com/alex35mil/dotfiles/tree/master/home/.config/nvim">Neovim config</a><br />
+    <a href="https://github.com/alex35mil/NeoHub">NeoHub</a><br />
     <a href="https://github.com/alex35mil/dotfiles/tree/master/home/.config/zellij">Zellij config</a><br />
     <a href="https://github.com/alex35mil/dotfiles/tree/master/bin/zellij/runner">Zellij session switcher</a><br />
     <a href="https://github.com/alex35mil/dotfiles/tree/master/bin/zellij/statusbar">Zellij statusbar</a><br />
