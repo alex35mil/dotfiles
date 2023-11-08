@@ -3,4 +3,6 @@
 .devbox
 .idea
 .DS_Store
+default.profraw
+neovide_backtraces.log
 SIDENOTES-*.md

@@ -111,6 +111,9 @@ function cleanup() {
       # Remove .DS_Store files
       find "$target_dir" -type f -name '*.DS_Store' -exec echo "Removing: {}" 1>&2 \; -delete
 
+      # Remove default.profraw files
+      find "$target_dir" -type f -name 'default.profraw' -exec echo "Removing: {}" 1>&2 \; -delete
+
       # Remove broken symlinks
       find "$target_dir" -type l ! -exec test -e {} \; -exec echo "Removing broken symlink: {}" 1>&2 \; -delete
 }
