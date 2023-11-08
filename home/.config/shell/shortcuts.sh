@@ -19,10 +19,48 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-alias dv="cd ~/Dev"
-alias dn="cd ~/Dev/null"
+alias dev="cd ~/Dev"
+alias devn="cd ~/Dev/null"
 alias icd="cd ~/Library/Mobile\\ Documents/com~apple~CloudDocs"
 alias ico="cd ~/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents"
+
+# === System
+alias mymac="system_profiler SPHardwareDataType | rg -i \"Model Identifier|Chip|Memory\" | awk '{\$1=\$1; print}'"
+
+function l() {
+    if [[ -z $1 ]]; then
+        echo "Usage: l <app> [rest...]"
+        return 1
+    fi
+
+    local app="$1"
+    shift
+
+    local timeframe="30m"
+
+    log show --predicate "process == \"$app\"" --last "$timeframe" --debug --info "$@"
+}
+
+alias dr="defaults read "
+alias dd="defaults delete "
+
+function dra() {
+    if [ -z "$1" ]; then
+        echo "Usage: dra [app]"
+        return 1
+    fi
+
+    defaults read com.alex35mil.$1
+}
+
+function dda() {
+    if [ -z "$1" ]; then
+        echo "Usage: dda [app]"
+        return 1
+    fi
+
+    defaults delete com.alex35mil.$1
+}
 
 # === Files
 alias lsa="ls -lhFaG"
@@ -139,12 +177,21 @@ function gen-ssh() {
 
 # === Misc
 # `w` with no arguments lists all shell aliases,
-# otherwise lists aliases, that start with the given chars
+# otherwise lists aliases, that start with the given chars.
+# If no alias is found, it runs `which` command.
 function w() {
+    local result=""
+
     if [[ $# -eq 0 ]]; then
-        alias
+        result=$(alias)
     else
-        alias | grep "^$@"
+        result=$(alias | rg "^$@")
+    fi
+
+    if [[ -z "$result" ]]; then
+        which "$@"
+    else
+        echo "$result"
     fi
 }
 
