@@ -48,7 +48,7 @@ map { "<D-c>", "Copy selected text", [["+y]], mode = "v" }
 map { "<D-v>", "Paste text", editor.paste, mode = { "i", "c" } }
 map { "<D-v>", "Paste text", terminal.paste, mode = "t", expr = true }
 
-map { "<D-v>", "Start visual selection", "<C-v>", mode = "n" }
+map { "<D-v>", "Paste text", "P", mode = "n" }
 
 map {
     "p",

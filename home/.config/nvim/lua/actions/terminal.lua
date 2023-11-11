@@ -45,12 +45,8 @@ function M.toggle_float()
 end
 
 function M.paste()
-    return vim.api.nvim_replace_termcodes(
-        [[<Cmd>lua vim.api.nvim_put({ vim.fn.getreg("*") }, "c", false, true)<CR>]],
-        true,
-        true,
-        true
-    )
+    local content = vim.fn.getreg("*")
+    vim.api.nvim_put({ content }, "", true, true)
 end
 
 return M
