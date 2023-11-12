@@ -1,4 +1,5 @@
 local M = {}
+local m = {}
 
 function M.setup()
     local plugin = require "diffview"
@@ -82,6 +83,92 @@ function M.setup()
             end,
         },
     }
+end
+
+function M.keymaps()
+    K.mapseq { "<D-g>d", "Git: Toggle diff", m.toggle_diff, mode = "n" }
+end
+
+function M.ensure_current_hidden()
+    local current_diff = m.current_diff()
+
+    if current_diff ~= nil then
+        m.hide_current_diff()
+        return true
+    else
+        return false
+    end
+end
+
+function M.ensure_all_hidden()
+    local current_diff = m.current_diff()
+
+    if current_diff ~= nil then
+        m.hide_current_diff()
+    end
+
+    local inactive_diff_tab = m.inactive_diff()
+
+    if inactive_diff_tab ~= nil then
+        vim.api.nvim_command("tabclose " .. inactive_diff_tab)
+    end
+end
+
+-- Private
+
+function m.toggle_diff()
+    local current_diff = m.current_diff()
+
+    if current_diff ~= nil then
+        m.hide_current_diff()
+    else
+        local zenmode = require "plugins.zen-mode"
+
+        zenmode.ensure_deacitvated()
+
+        local inactive_diff_tab = m.inactive_diff()
+
+        if inactive_diff_tab ~= nil then
+            vim.api.nvim_set_current_tabpage(inactive_diff_tab)
+        else
+            local lualine = require "plugins.lualine"
+
+            m.open_diff()
+            lualine.rename_tab "diff"
+        end
+    end
+end
+
+function m.open_diff()
+    vim.cmd "DiffviewOpen"
+end
+
+function m.hide_current_diff()
+    vim.cmd "DiffviewClose"
+end
+
+function m.current_diff()
+    local dv = require "diffview.lib"
+
+    local current_diff = dv.get_current_view()
+
+    return current_diff
+end
+
+function m.inactive_diff()
+    local dv = require "diffview.lib"
+
+    local tabs = vim.api.nvim_list_tabpages()
+
+    for _, tabpage in ipairs(tabs) do
+        for _, view in ipairs(dv.views) do
+            if view.tabpage == tabpage then
+                return tabpage
+            end
+        end
+    end
+
+    return nil
 end
 
 return M

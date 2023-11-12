@@ -43,4 +43,10 @@ function M.setup()
     }
 end
 
+function M.keymaps()
+    K.map { "<D-/>", "Toggle comments", "<Plug>(comment_toggle_linewise_current)", mode = "n" }
+    K.map { "<D-/>", "Toggle comments", "<Plug>(comment_toggle_linewise_visual)", mode = "v" }
+    K.map { "<D-/>", "Toggle comments", "<Esc><Plug>(comment_toggle_linewise_current)A", mode = "i" }
+end
+
 return M

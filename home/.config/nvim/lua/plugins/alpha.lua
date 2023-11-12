@@ -6,7 +6,7 @@ function M.setup()
     require "alpha.term"
 
     local plugin = require "alpha"
-    local fs = require "utils.fs"
+    local fs = require "editor.fs"
 
     M.dashboard = require "alpha.themes.dashboard"
 
@@ -98,6 +98,10 @@ function M.setup()
     M.dashboard.section = section
 
     plugin.setup(M.dashboard.config)
+end
+
+function M.is_active()
+    return vim.bo.filetype == "alpha"
 end
 
 function M.update_footer()

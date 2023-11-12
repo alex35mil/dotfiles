@@ -59,4 +59,12 @@ function M.setup()
     }
 end
 
+function M.keymaps()
+    K.map { "<D-j>", "Git: Jump to the next hunk", "<Cmd>Gitsigns next_hunk<CR>", mode = "n" }
+    K.map { "<D-k>", "Git: Jump to the previous hunk", "<Cmd>Gitsigns prev_hunk<CR>", mode = "n" }
+    K.mapseq { "<D-g>b", "Git: Show line blame", "<Cmd>Gitsigns blame_line<CR>", mode = "n" }
+    K.map { "<C-Space>", "Git: Stage hunk", "<Cmd>Gitsigns stage_hunk<CR>", mode = { "n", "v" } }
+    K.map { "<D-C-Space>", "Git: Unstage hunk", "<Cmd>Gitsigns undo_stage_hunk<CR>", mode = { "n", "v" } }
+end
+
 return M

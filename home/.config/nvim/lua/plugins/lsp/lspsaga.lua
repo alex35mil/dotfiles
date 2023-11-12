@@ -1,4 +1,5 @@
 local M = {}
+local m = {}
 
 function M.setup()
     local plugin = require "lspsaga"
@@ -47,11 +48,13 @@ function M.setup()
             },
         },
         finder = {
-            edit = "<CR>",
-            vsplit = "v",
-            split = "h",
-            tabe = "t",
-            quit = { "<Esc>", "<D-w>" },
+            keys = {
+                edit = "<CR>",
+                vsplit = "<D-Right>",
+                split = "<D-Down>",
+                tabe = nil,
+                quit = { "<Esc>", "<D-w>" },
+            },
         },
         outline = {
             layout = "float",
@@ -72,6 +75,43 @@ function M.setup()
         },
         request_timeout = 5000,
     }
+end
+
+function M.keymaps()
+    K.map { "<D-C-h>", "LSP: Jump to definition", "<Cmd>Lspsaga goto_definition<CR>", mode = "n" }
+    K.map { "<D-r>", "LSP: Rename", "<Cmd>Lspsaga rename<CR>", mode = "n" }
+    K.map { "<C-a>", "LSP: Code actions", "<Cmd>Lspsaga code_action<CR>", mode = "n" }
+    K.map { "<C-i>", "LSP: Hint", "<Cmd>Lspsaga hover_doc<CR>", mode = "n" }
+    K.map { "<C-f>", "LSP: Finder", "<Cmd>Lspsaga finder<CR>", mode = "n" }
+
+    K.map { "<D-.>", "LSP: Diagnostic next error", m.jump_to_next_error, mode = "n" }
+    K.map { "<D-,>", "LSP: Diagnostic previous error", m.jump_to_prev_error, mode = "n" }
+    K.map { "<C-D-.>", "LSP: Diagnostic next warning", m.jump_to_next_warning, mode = "n" }
+    K.map { "<C-D-,>", "LSP: Diagnostic previous warning", m.jump_to_prev_warning, mode = "n" }
+end
+
+-- Private
+
+local severity = vim.diagnostic.severity
+
+function m.jump_to_prev_warning()
+    local diagnostic = require "lspsaga.diagnostic"
+    diagnostic:goto_prev({ severity = severity.WARN })
+end
+
+function m.jump_to_next_warning()
+    local diagnostic = require "lspsaga.diagnostic"
+    diagnostic:goto_next({ severity = severity.WARN })
+end
+
+function m.jump_to_prev_error()
+    local diagnostic = require "lspsaga.diagnostic"
+    diagnostic:goto_prev({ severity = severity.ERROR })
+end
+
+function m.jump_to_next_error()
+    local diagnostic = require "lspsaga.diagnostic"
+    diagnostic:goto_next({ severity = severity.ERROR })
 end
 
 return M

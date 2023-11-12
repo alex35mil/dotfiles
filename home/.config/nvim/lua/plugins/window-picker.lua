@@ -2,11 +2,11 @@ local M = {}
 
 function M.setup()
     local plugin = require "window-picker"
+    local windows = require "editor.windows"
     local colors = require "theme.palette"
-    local view = require "utils.view"
 
     plugin.setup {
-        selection_chars = view.window_picker_keys,
+        selection_chars = windows.window_picker_keys,
         filter_rules = {
             autoselect_one = true,
             include_current_win = false,

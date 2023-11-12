@@ -103,13 +103,11 @@ local plugins = {
         config = require("plugins.zen-mode").setup,
     },
 
-    -- NOTE: Doesn't work well with no-neck-pain:
-    -- https://github.com/shortcuts/no-neck-pain.nvim/issues/221
-    -- {
-    --     "rmagatti/auto-session",
-    --     version = "*",
-    --     config = require("plugins.auto-session").setup,
-    -- },
+    {
+        "folke/persistence.nvim",
+        event = "BufReadPre",
+        config = require("plugins.persistence").setup,
+    },
 
     -- treesitter
     {
@@ -146,21 +144,21 @@ local plugins = {
         "neovim/nvim-lspconfig",
         branch = "master",
         event = "BufEnter",
-        config = require("plugins.lspconfig").setup,
+        config = require("plugins.lsp.lspconfig").setup,
     },
 
     {
         "glepnir/lspsaga.nvim",
         branch = "main", -- TODO: Go back to stable after the current version is released
         event = "BufEnter",
-        config = require("plugins.lspsaga").setup,
+        config = require("plugins.lsp.lspsaga").setup,
     },
 
     {
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
         branch = "main",
         event = "BufEnter",
-        config = require("plugins.lsp-lines").setup,
+        config = require("plugins.lsp.lsp-lines").setup,
     },
 
     {
@@ -175,7 +173,7 @@ local plugins = {
         version = "*",
         dependencies = { "nvim-lua/plenary.nvim" },
         event = "BufEnter",
-        config = require("plugins.null-ls").setup,
+        config = require("plugins.lsp.null-ls").setup,
     },
 
     {
@@ -276,14 +274,14 @@ local plugins = {
         "sindrets/diffview.nvim",
         version = "*",
         dependencies = { "nvim-lua/plenary.nvim" },
-        config = require("plugins.diffview").setup,
+        config = require("plugins.git.diffview").setup,
     },
 
     {
         "lewis6991/gitsigns.nvim",
         branch = "main",
         event = "BufEnter",
-        config = require("plugins.gitsigns").setup,
+        config = require("plugins.git.gitsigns").setup,
     },
 
     -- search/replace

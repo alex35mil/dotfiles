@@ -115,4 +115,17 @@ function M.setup()
     }
 end
 
+function M.keymaps()
+    local treesitter = require "nvim-treesitter.textobjects.repeatable_move"
+
+    K.map { ";", "Repeat", ".", mode = { "n", "x", "o" } }
+
+    K.map { ".", "Repeat last move forward", treesitter.repeat_last_move_next, mode = { "n", "x", "o" } }
+    K.map { ",", "Repeat last move backward", treesitter.repeat_last_move_previous, mode = { "n", "x", "o" } }
+    K.map { "f", "Repeat last move f", treesitter.builtin_f, mode = { "n", "x", "o" } }
+    K.map { "F", "Repeat last move F", treesitter.builtin_F, mode = { "n", "x", "o" } }
+    K.map { "t", "Repeat last move t", treesitter.builtin_t, mode = { "n", "x", "o" } }
+    K.map { "T", "Repeat last move T", treesitter.builtin_T, mode = { "n", "x", "o" } }
+end
+
 return M

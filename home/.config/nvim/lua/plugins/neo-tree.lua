@@ -1,4 +1,5 @@
 local M = {}
+local m = {}
 
 function M.setup()
     vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
@@ -6,8 +7,8 @@ function M.setup()
     local plugin = require "neo-tree"
 
     local function copy_path(state, fmt)
-        local fs = require "utils.fs"
-        local clipboard = require "utils.clipboard"
+        local fs = require "editor.fs"
+        local cb = require "editor.clipboard"
 
         local node = state.tree:get_node()
         local filepath = node:get_id()
@@ -15,7 +16,7 @@ function M.setup()
         local result = fs.format(filepath, fmt)
 
         if result ~= nil then
-            clipboard.yank(result)
+            cb.yank(result)
             print("Copied to clipboard: " .. result)
             vim.defer_fn(function() vim.cmd.echo('""') end, 5000)
         end
@@ -284,6 +285,68 @@ function M.setup()
             },
         },
     }
+end
+
+function M.keymaps()
+    K.map { "<C-e>", "Open file tree", m.open_file_tree, mode = { "n", "v" } }
+    K.mapseq { "<D-g>t", "Git: open change file tree", m.open_git_tree, mode = { "n", "v" } }
+end
+
+function M.is_tree(buf)
+    local trees = m.get_active_trees()
+    return trees[buf] ~= nil
+end
+
+function M.ensure_active_hidden()
+    if m.is_active() then
+        m.close()
+        return true
+    else
+        return false
+    end
+end
+
+function M.ensure_any_hidden()
+    local trees = m.get_active_trees()
+
+    if next(trees) ~= nil then
+        m.close()
+    end
+end
+
+-- Private
+
+function m.open_file_tree()
+    vim.cmd "Neotree source=filesystem position=float toggle=true reveal=true"
+end
+
+function m.open_git_tree()
+    vim.cmd "Neotree source=git_status position=float toggle=true reveal=true"
+end
+
+function m.get_active_trees()
+    local plugin = require "neo-tree"
+    local manager = require "neo-tree.sources.manager"
+
+    local trees = {}
+
+    for _, source in ipairs(plugin.config.sources) do
+        local state = manager.get_state(source)
+        if state and state.bufnr then
+            trees[state.bufnr] = state
+        end
+    end
+
+    return trees
+end
+
+function m.is_active()
+    local active_buf = vim.api.nvim_get_current_buf()
+    return M.is_tree(active_buf)
+end
+
+function m.close()
+    vim.cmd "Neotree action=close"
 end
 
 return M

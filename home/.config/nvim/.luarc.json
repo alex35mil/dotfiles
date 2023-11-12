@@ -1,3 +1,13 @@
 {
-    "workspace.checkThirdParty": false
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "workspace": {
+        "checkThirdParty": false
+    },
+    "diagnostics": {
+        "globals": [
+            "vim",
+            "K",
+            "NoNeckPain"
+        ]
+    }
 }

@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
     local plugin = require "winshift"
-    local view = require "utils.view"
+    local windows = require "editor.windows"
     local nnp = require "plugins.no-neck-pain"
 
     plugin.setup {
@@ -39,7 +39,7 @@ function M.setup()
         },
         window_picker = function()
             return require("winshift.lib").pick_window({
-                picker_chars = view.window_picker_keys,
+                picker_chars = windows.window_picker_keys,
                 filter_rules = {
                     cur_win = true, -- Filter out the current window
                     floats = true,  -- Filter out floating windows
@@ -53,6 +53,14 @@ function M.setup()
             })
         end,
     }
+end
+
+function M.move()
+    vim.cmd "WinShift"
+end
+
+function M.swap()
+    vim.cmd "WinShift swap"
 end
 
 return M

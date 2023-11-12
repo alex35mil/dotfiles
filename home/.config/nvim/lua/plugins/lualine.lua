@@ -1,4 +1,209 @@
 local M = {}
+local m = {}
+
+function M.setup()
+    local plugin = require "lualine"
+    local linemode = require "lualine.utils.mode"
+    local palette = require "theme.palette"
+    local lsp = require "plugins.lsp.lspconfig"
+
+    local diagnostics = m.diagnostics_component()
+
+    local color = {
+        active_text = palette.text,
+        incative_text = palette.faded_text,
+        inverted_text = palette.darker_gray,
+        bg = palette.darker_gray,
+        emphasized_bg = palette.lighter_gray,
+    }
+
+    local theme = {
+        normal = {
+            a = { fg = color.inverted_text, bg = palette.cyan, gui = "bold" },
+            b = { fg = color.active_text, bg = color.bg },
+            c = { fg = color.active_text, bg = color.bg },
+        },
+        command = { a = { fg = color.inverted_text, bg = palette.yellow, gui = "bold" } },
+        insert = { a = { fg = color.inverted_text, bg = palette.green, gui = "bold" } },
+        visual = { a = { fg = color.inverted_text, bg = palette.purple, gui = "bold" } },
+        terminal = { a = { fg = color.inverted_text, bg = palette.cyan, gui = "bold" } },
+        replace = { a = { fg = color.inverted_text, bg = palette.red, gui = "bold" } },
+        inactive = {
+            a = { fg = color.incative_text, bg = color.bg, gui = "bold" },
+            b = { fg = color.incative_text, bg = color.bg },
+            c = { fg = color.incative_text, bg = color.bg },
+        },
+    }
+
+    local project_section = {
+        function()
+            local fs = require "editor.fs"
+            return fs.root { capitalize = true }
+        end,
+        color = { fg = color.inverted_text, bg = palette.cyan, gui = "bold" },
+    }
+
+    local tabs_section = {
+        "tabs",
+        mode = 1,
+        tabs_color = {
+            active = { fg = color.active_text, bg = color.emphasized_bg },
+            inactive = { fg = color.incative_text, bg = color.bg },
+        },
+    }
+
+    local mode_section = {
+        function()
+            local m = linemode.get_mode()
+            if m == "NORMAL" then
+                return "N"
+            elseif m == "VISUAL" then
+                return "V"
+            elseif m == "SELECT" then
+                return "S"
+            elseif m == "INSERT" then
+                return "I"
+            elseif m == "REPLACE" then
+                return "R"
+            elseif m == "COMMAND" then
+                return "C"
+            elseif m == "EX" then
+                return "X"
+            elseif m == "TERMINAL" then
+                return "T"
+            else
+                return m
+            end
+        end,
+    }
+
+    local filename_section = {
+        "filename",
+        path = 0,
+        color = { fg = color.active_text, bg = color.emphasized_bg },
+        fmt = function(v, _ctx)
+            if m.should_ignore_filetype() then
+                return nil
+            else
+                return v
+            end
+        end,
+    }
+
+    local branch_section = {
+        "branch",
+        color = { fg = color.active_text, bg = color.bg },
+    }
+
+    local diagnostics_section = {
+        diagnostics,
+        sections = {
+            "error",
+            "warn",
+            "info",
+            "hint",
+        },
+        colors = {
+            error = "StatusBarDiagnosticError",
+            warn  = "StatusBarDiagnosticWarn",
+            info  = "StatusBarDiagnosticInfo",
+            hint  = "StatusBarDiagnosticHint",
+        },
+        symbols = {
+            error = lsp.signs.Error .. " ",
+            warn = lsp.signs.Warn .. " ",
+            info = lsp.signs.Info .. " ",
+            hint = lsp.signs.Hint .. " ",
+        },
+    }
+
+    local searchcount_section = "searchcount"
+
+    local encoding_section = {
+        "encoding",
+        color = { fg = color.incative_text },
+    }
+
+    local filetype_section = {
+        "filetype",
+        colored = false,
+        fmt = function(v, _ctx)
+            if m.should_ignore_filetype() then
+                return nil
+            else
+                if v == "markdown" then
+                    return "md"
+                else
+                    return v
+                end
+            end
+        end,
+    }
+
+    local progress_section = {
+        "progress",
+        separator = { left = "" },
+        color = { fg = color.active_text, bg = color.emphasized_bg },
+    }
+
+    local location_seciton = {
+        "location",
+        padding = { left = 0, right = 1 },
+        color = { fg = color.active_text, bg = color.emphasized_bg },
+    }
+
+    plugin.setup {
+        options = {
+            icons_enabled = true,
+            theme = theme,
+            component_separators = "",
+            section_separators = {
+                left = "",
+                -- left = "",
+                right = "",
+            },
+            disabled_filetypes = {},
+            ignore_focus = {},
+            always_divide_middle = true,
+            globalstatus = true,
+        },
+        sections = {
+            lualine_a = {
+                mode_section,
+            },
+            lualine_b = {
+                filename_section,
+                branch_section,
+                diagnostics_section,
+            },
+            lualine_c = {},
+            lualine_x = {},
+            lualine_y = {
+                searchcount_section,
+                encoding_section,
+                filetype_section,
+                progress_section,
+            },
+            lualine_z = {
+                location_seciton,
+            },
+        },
+        tabline = {
+            lualine_a = { project_section },
+            lualine_b = {},
+            lualine_c = {},
+            lualine_x = {},
+            lualine_y = {},
+            lualine_z = { tabs_section },
+        },
+    }
+
+    m.ensure_tabline_visibility_mode()
+end
+
+function M.keymaps()
+    K.map { "<M-l>", "Toggle filename in statusline", m.toggle_filename, mode = { "n", "i", "v" } }
+end
 
 function M.show()
     local plugin = require "lualine"
@@ -14,7 +219,33 @@ function M.hide()
     vim.o.ruler = false
 end
 
-function M.ensure_tabline_visibility_mode()
+function M.rename_tab(name)
+    vim.cmd("LualineRenameTab " .. name)
+end
+
+-- Private
+
+function m.toggle_filename()
+    local plugin = require "lualine"
+    local config = plugin.get_config()
+
+    for _, section in pairs(config.sections) do
+        for _, component in ipairs(section) do
+            if type(component) == "table" and component[1] == "filename" then
+                if component.path == 0 then
+                    component.path = 1
+                else
+                    component.path = 0
+                end
+            end
+        end
+    end
+
+    plugin.setup(config)
+    m.ensure_tabline_visibility_mode()
+end
+
+function m.ensure_tabline_visibility_mode()
     -- Uncomment this if you want to show the tabline only when there are multiple tabs.
     -- This line is required because lualine overrides this setting.
     -- 0: never show tabline
@@ -23,7 +254,7 @@ function M.ensure_tabline_visibility_mode()
     -- vim.cmd "set showtabline=1"
 end
 
-local function diagnostics_component()
+function m.diagnostics_component()
     local diagnostics = require("lualine.components.filename"):extend()
 
     function diagnostics:init(options)
@@ -136,7 +367,7 @@ local function diagnostics_component()
     return diagnostics
 end
 
-local function should_ignore_filetype()
+function m.should_ignore_filetype()
     local ft = vim.bo.filetype
 
     return
@@ -151,206 +382,6 @@ local function should_ignore_filetype()
         or ft == "sagarename"
         or ft == "sagafinder"
         or ft == "saga_codeaction"
-end
-
-function M.setup()
-    local plugin = require "lualine"
-    local linemode = require "lualine.utils.mode"
-    local palette = require "theme.palette"
-    local lsp = require "utils.lsp"
-
-    local diagnostics = diagnostics_component()
-
-    local color = {
-        active_text = palette.text,
-        incative_text = palette.faded_text,
-        inverted_text = palette.darker_gray,
-        bg = palette.darker_gray,
-        emphasized_bg = palette.lighter_gray,
-    }
-
-    local theme = {
-        normal = {
-            a = { fg = color.inverted_text, bg = palette.cyan, gui = "bold" },
-            b = { fg = color.active_text, bg = color.bg },
-            c = { fg = color.active_text, bg = color.bg },
-        },
-        command = { a = { fg = color.inverted_text, bg = palette.yellow, gui = "bold" } },
-        insert = { a = { fg = color.inverted_text, bg = palette.green, gui = "bold" } },
-        visual = { a = { fg = color.inverted_text, bg = palette.purple, gui = "bold" } },
-        terminal = { a = { fg = color.inverted_text, bg = palette.cyan, gui = "bold" } },
-        replace = { a = { fg = color.inverted_text, bg = palette.red, gui = "bold" } },
-        inactive = {
-            a = { fg = color.incative_text, bg = color.bg, gui = "bold" },
-            b = { fg = color.incative_text, bg = color.bg },
-            c = { fg = color.incative_text, bg = color.bg },
-        },
-    }
-
-    local project_section = {
-        function()
-            local fs = require "utils.fs"
-            return fs.root { capitalize = true }
-        end,
-        color = { fg = color.inverted_text, bg = palette.cyan, gui = "bold" },
-    }
-
-    local tabs_section = {
-        "tabs",
-        mode = 1,
-        tabs_color = {
-            active = { fg = color.active_text, bg = color.emphasized_bg },
-            inactive = { fg = color.incative_text, bg = color.bg },
-        },
-    }
-
-    local mode_section = {
-        function()
-            local m = linemode.get_mode()
-            if m == "NORMAL" then
-                return "N"
-            elseif m == "VISUAL" then
-                return "V"
-            elseif m == "SELECT" then
-                return "S"
-            elseif m == "INSERT" then
-                return "I"
-            elseif m == "REPLACE" then
-                return "R"
-            elseif m == "COMMAND" then
-                return "C"
-            elseif m == "EX" then
-                return "X"
-            elseif m == "TERMINAL" then
-                return "T"
-            else
-                return m
-            end
-        end,
-    }
-
-    local filename_section = {
-        "filename",
-        path = 0,
-        color = { fg = color.active_text, bg = color.emphasized_bg },
-        fmt = function(v, _ctx)
-            if should_ignore_filetype() then
-                return nil
-            else
-                return v
-            end
-        end,
-    }
-
-    local branch_section = {
-        "branch",
-        color = { fg = color.active_text, bg = color.bg },
-    }
-
-    local diagnostics_section = {
-        diagnostics,
-        sections = {
-            "error",
-            "warn",
-            "info",
-            "hint",
-        },
-        colors = {
-            error = "StatusBarDiagnosticError",
-            warn  = "StatusBarDiagnosticWarn",
-            info  = "StatusBarDiagnosticInfo",
-            hint  = "StatusBarDiagnosticHint",
-        },
-        symbols = {
-            error = lsp.signs.Error .. " ",
-            warn = lsp.signs.Warn .. " ",
-            info = lsp.signs.Info .. " ",
-            hint = lsp.signs.Hint .. " ",
-        },
-    }
-
-    local searchcount_section = "searchcount"
-
-    local encoding_section = {
-        "encoding",
-        color = { fg = color.incative_text },
-    }
-
-    local filetype_section = {
-        "filetype",
-        colored = false,
-        fmt = function(v, _ctx)
-            if should_ignore_filetype() then
-                return nil
-            else
-                if v == "markdown" then
-                    return "md"
-                else
-                    return v
-                end
-            end
-        end,
-    }
-
-    local progress_section = {
-        "progress",
-        separator = { left = "" },
-        color = { fg = color.active_text, bg = color.emphasized_bg },
-    }
-
-    local location_seciton = {
-        "location",
-        padding = { left = 0, right = 1 },
-        color = { fg = color.active_text, bg = color.emphasized_bg },
-    }
-
-    plugin.setup {
-        options = {
-            icons_enabled = true,
-            theme = theme,
-            component_separators = "",
-            section_separators = {
-                left = "",
-                -- left = "",
-                right = "",
-            },
-            disabled_filetypes = {},
-            ignore_focus = {},
-            always_divide_middle = true,
-            globalstatus = true,
-        },
-        sections = {
-            lualine_a = {
-                mode_section,
-            },
-            lualine_b = {
-                filename_section,
-                branch_section,
-                diagnostics_section,
-            },
-            lualine_c = {},
-            lualine_x = {},
-            lualine_y = {
-                searchcount_section,
-                encoding_section,
-                filetype_section,
-                progress_section,
-            },
-            lualine_z = {
-                location_seciton,
-            }
-        },
-        tabline = {
-            lualine_a = { project_section },
-            lualine_b = {},
-            lualine_c = {},
-            lualine_x = {},
-            lualine_y = {},
-            lualine_z = { tabs_section },
-        },
-    }
-
-    M.ensure_tabline_visibility_mode()
 end
 
 return M

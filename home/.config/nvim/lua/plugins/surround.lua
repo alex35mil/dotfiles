@@ -1,7 +1,9 @@
 local M = {}
 
 function M.setup()
-    require("nvim-surround").setup {
+    local plugin = require "nvim-surround"
+
+    plugin.setup {
         keymaps = {
             insert = "<C-s>s",
             insert_line = "<C-s>S",

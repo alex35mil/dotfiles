@@ -10,4 +10,8 @@ function M.setup()
     }
 end
 
+function M.keymaps()
+    K.map { "<M-h>", "Start pounce motion", "<Cmd>Pounce<CR>", mode = { "n", "v" } } -- It's <D-h> remapped via Karabiner
+end
+
 return M

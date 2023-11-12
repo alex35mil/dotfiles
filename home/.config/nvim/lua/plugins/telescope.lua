@@ -1,129 +1,11 @@
 local M = {}
+local X = {}
+local m = {}
 
 function M.setup()
     local plugin = require "telescope"
     local actions = require "telescope.actions"
-    local fb = require "telescope._extensions.file_browser.actions"
-
-    local function copy_path(bufnr, fmt)
-        local fs = require "utils.fs"
-        local clipboard = require "utils.clipboard"
-        local fb_utils = require "telescope._extensions.file_browser.utils"
-
-        local selections = fb_utils.get_selected_files(bufnr, true)
-        local entry = selections[1]
-
-        if entry ~= nil then
-            local result = fs.format(entry.filename, fmt)
-
-            if result ~= nil then
-                clipboard.yank(result)
-                print("Copied to clipboard: " .. result)
-                vim.defer_fn(function() vim.cmd.echo('""') end, 5000)
-            end
-        else
-            vim.api.nvim_err_writeln("No file selected")
-        end
-    end
-
-    local extensions = {
-        file_browser = {
-            -- path
-            -- cwd
-            cwd_to_path = false,
-            grouped = false,
-            files = true,
-            add_dirs = true,
-            depth = 1,
-            auto_depth = false,
-            select_buffer = false,
-            hidden = { file_browser = false, folder_browser = false },
-            respect_gitignore = false,
-            -- browse_files
-            -- browse_folders
-            hide_parent_dir = false,
-            collapse_dirs = false,
-            prompt_path = false,
-            quiet = false,
-            dir_icon = "",
-            dir_icon_hl = "Default",
-            display_stat = false,
-            hijack_netrw = false,
-            use_fd = true,
-            git_status = true,
-            mappings = {
-                ["i"] = {
-                    ["<D-n>"] = fb.create,
-                    ["<S-CR>"] = fb.create_from_prompt,
-                    ["<D-r>"] = fb.rename,
-                    ["<D-m>"] = fb.move,
-                    ["<D-d>"] = fb.copy,
-                    ["<D-BS>"] = fb.remove,
-                    ["<D-o>"] = fb.open,
-                    ["<D-u>"] = fb.goto_parent_dir,
-                    ["<D-M-u>"] = fb.goto_cwd,
-                    ["<D-f>"] = fb.toggle_browser,
-                    ["<D-h>"] = fb.toggle_hidden,
-                    ["<D-a>"] = fb.toggle_all,
-                    ["<BS>"] = fb.backspace,
-                    ["<CR>"] = "select_default",
-                    ["<C-c>"] = false,
-                    ["<A-c>"] = false,
-                    ["<A-r>"] = false,
-                    ["<A-m>"] = false,
-                    ["<A-y>"] = false,
-                    ["<A-d>"] = false,
-                    ["<C-o>"] = false,
-                    ["<C-g>"] = false,
-                    ["<C-e>"] = false,
-                    ["<C-w>"] = false,
-                    ["<C-t>"] = false,
-                    ["<C-f>"] = false,
-                    ["<C-h>"] = false,
-                    ["<C-s>"] = false,
-                    ["<C-d>"] = false,
-                    ["<C-u>"] = false,
-                },
-                ["n"] = {
-                    ["<D-n>"] = fb.create,
-                    ["<S-CR>"] = fb.create_from_prompt,
-                    ["<D-r>"] = fb.rename,
-                    ["<D-m>"] = fb.move,
-                    ["<D-d>"] = fb.copy,
-                    ["<D-BS>"] = fb.remove,
-                    ["<D-o>"] = fb.open,
-                    ["<D-u>"] = fb.goto_parent_dir,
-                    ["<D-M-u>"] = fb.goto_cwd,
-                    ["<D-f>"] = fb.toggle_browser,
-                    ["<D-h>"] = fb.toggle_hidden,
-                    ["<D-a>"] = fb.toggle_all,
-                    ["ya"] = function(bufnr) copy_path(bufnr, "absolute") end,
-                    ["yr"] = function(bufnr) copy_path(bufnr, "relative") end,
-                    ["yn"] = function(bufnr) copy_path(bufnr, "filename") end,
-                    ["ys"] = function(bufnr) copy_path(bufnr, "filestem") end,
-                    ["a"] = false,
-                    ["c"] = false,
-                    ["g"] = false,
-                    ["r"] = false,
-                    ["m"] = false,
-                    ["y"] = false,
-                    ["d"] = false,
-                    ["o"] = false,
-                    ["u"] = false,
-                    ["e"] = false,
-                    ["w"] = false,
-                    ["t"] = false,
-                    ["f"] = false,
-                    ["h"] = false,
-                    ["s"] = false,
-                    ["L"] = false,
-                    ["H"] = false,
-                    ["<C-d>"] = false,
-                    ["<C-u>"] = false,
-                },
-            },
-        },
-    }
+    local extensions = X.extensions()
 
     plugin.setup {
         defaults = {
@@ -207,6 +89,360 @@ function M.setup()
             plugin.load_extension(ext)
         end
     end)
+end
+
+-- Extensions
+
+function X.extensions()
+    local fb = require "telescope._extensions.file_browser.actions"
+
+    return {
+        file_browser = {
+            -- path
+            -- cwd
+            cwd_to_path = false,
+            grouped = false,
+            files = true,
+            add_dirs = true,
+            depth = 1,
+            auto_depth = false,
+            select_buffer = false,
+            hidden = { file_browser = false, folder_browser = false },
+            respect_gitignore = false,
+            -- browse_files
+            -- browse_folders
+            hide_parent_dir = false,
+            collapse_dirs = false,
+            prompt_path = false,
+            quiet = false,
+            dir_icon = "",
+            dir_icon_hl = "Default",
+            display_stat = false,
+            hijack_netrw = false,
+            use_fd = true,
+            git_status = true,
+            mappings = {
+                ["i"] = {
+                    ["<D-n>"] = fb.create,
+                    ["<S-CR>"] = fb.create_from_prompt,
+                    ["<D-r>"] = fb.rename,
+                    ["<D-m>"] = fb.move,
+                    ["<D-d>"] = fb.copy,
+                    ["<D-BS>"] = fb.remove,
+                    ["<D-o>"] = fb.open,
+                    ["<D-u>"] = fb.goto_parent_dir,
+                    ["<D-M-u>"] = fb.goto_cwd,
+                    ["<D-f>"] = fb.toggle_browser,
+                    ["<D-h>"] = fb.toggle_hidden,
+                    ["<D-a>"] = fb.toggle_all,
+                    ["<BS>"] = fb.backspace,
+                    ["<CR>"] = "select_default",
+                    ["<C-c>"] = false,
+                    ["<A-c>"] = false,
+                    ["<A-r>"] = false,
+                    ["<A-m>"] = false,
+                    ["<A-y>"] = false,
+                    ["<A-d>"] = false,
+                    ["<C-o>"] = false,
+                    ["<C-g>"] = false,
+                    ["<C-e>"] = false,
+                    ["<C-w>"] = false,
+                    ["<C-t>"] = false,
+                    ["<C-f>"] = false,
+                    ["<C-h>"] = false,
+                    ["<C-s>"] = false,
+                    ["<C-d>"] = false,
+                    ["<C-u>"] = false,
+                },
+                ["n"] = {
+                    ["<D-n>"] = fb.create,
+                    ["<S-CR>"] = fb.create_from_prompt,
+                    ["<D-r>"] = fb.rename,
+                    ["<D-m>"] = fb.move,
+                    ["<D-d>"] = fb.copy,
+                    ["<D-BS>"] = fb.remove,
+                    ["<D-o>"] = fb.open,
+                    ["<D-u>"] = fb.goto_parent_dir,
+                    ["<D-M-u>"] = fb.goto_cwd,
+                    ["<D-f>"] = fb.toggle_browser,
+                    ["<D-h>"] = fb.toggle_hidden,
+                    ["<D-a>"] = fb.toggle_all,
+                    ["ya"] = function(bufnr) m.copy_path(bufnr, "absolute") end,
+                    ["yr"] = function(bufnr) m.copy_path(bufnr, "relative") end,
+                    ["yn"] = function(bufnr) m.copy_path(bufnr, "filename") end,
+                    ["ys"] = function(bufnr) m.copy_path(bufnr, "filestem") end,
+                    ["a"] = false,
+                    ["c"] = false,
+                    ["g"] = false,
+                    ["r"] = false,
+                    ["m"] = false,
+                    ["y"] = false,
+                    ["d"] = false,
+                    ["o"] = false,
+                    ["u"] = false,
+                    ["e"] = false,
+                    ["w"] = false,
+                    ["t"] = false,
+                    ["f"] = false,
+                    ["h"] = false,
+                    ["s"] = false,
+                    ["L"] = false,
+                    ["H"] = false,
+                    ["<C-d>"] = false,
+                    ["<C-u>"] = false,
+                },
+            },
+        },
+    }
+end
+
+function M.keymaps()
+    K.map { "<D-e>", "Open file browser", m.open_file_browser, mode = { "n", "i", "v" } }
+
+    K.map { "<D-b>", "Open buffer selector", m.open_buffers, mode = { "n", "i", "v" } }
+    K.map { "<D-t>", "Open file finder", m.open_file_finder, mode = { "n", "i", "v" } }
+    K.map { "<D-f>", "Open project-wide text search", m.open_text_finder, mode = { "n", "i", "v" } }
+
+    K.mapseq { "<Leader>tc", "Open command finder", m.open_command_finder, mode = "n" }
+    K.mapseq { "<Leader>th", "Open highlights finder", "<Cmd>Telescope highlights<CR>", mode = "n" }
+
+    K.mapseq {
+        "<Leader>tta",
+        "Find all TODO comments",
+        function() m.open_todos({ todo = true, fixme = true }) end,
+        mode = "n",
+    }
+    K.mapseq {
+        "<Leader>ttt",
+        "Find all TODOs",
+        function() m.open_todos({ todo = true }) end,
+        mode = "n",
+    }
+    K.mapseq {
+        "<Leader>ttf",
+        "Find all FIXMEs",
+        function() m.open_todos({ fixme = true }) end,
+        mode = "n",
+    }
+    K.mapseq {
+        "<Leader>ttp",
+        "Find all high priority entries",
+        function() m.open_todos({ priority = true }) end,
+        mode = "n",
+    }
+
+    K.map { "<D-o>", "Open document symbols", m.open_document_symbols, mode = "n" }
+    K.map { "<C-o>", "Open workspace symbols", m.open_workspace_symbols, mode = "n" }
+
+    K.map {
+        "<C-,>",
+        "List LSP diagnostics with ERROR severity for the whole workspace",
+        function() m.open_diagnostics({ min_severity = "ERROR", current_buffer = false }) end,
+        mode = { "n", "v" },
+    }
+    K.map {
+        "<C-.>",
+        "List LSP diagnostics with WARN & ERROR severities for the whole workspace",
+        function() m.open_diagnostics({ min_severity = "WARN", current_buffer = false }) end,
+        mode = { "n", "v" },
+    }
+    K.mapseq {
+        "<Leader>da",
+        "List all LSP diagnostics for the whole workspace",
+        function() m.open_diagnostics({ current_buffer = false }) end,
+        mode = { "n", "v" },
+    }
+    K.mapseq {
+        "<Leader>de",
+        "List LSP diagnostics with ERROR severity for the whole workspace",
+        function() m.open_diagnostics({ min_severity = "ERROR", current_buffer = false }) end,
+        mode = { "n", "v" },
+    }
+    K.mapseq {
+        "<Leader>dw",
+        "List LSP diagnostics with WARN & ERROR severities for the whole workspace",
+        function() m.open_diagnostics({ min_severity = "WARN", current_buffer = false }) end,
+        mode = { "n", "v" },
+    }
+    K.mapseq {
+        "<Leader>dca",
+        "List all LSP diagnostics for the current buffer only",
+        function() m.open_diagnostics({ current_buffer = true }) end,
+        mode = { "n", "v" },
+    }
+    K.mapseq {
+        "<Leader>dce",
+        "List LSP diagnostics with ERROR severity for the current buffer only",
+        function() m.open_diagnostics({ min_severity = "ERROR", current_buffer = true }) end,
+        mode = { "n", "v" },
+    }
+    K.mapseq {
+        "<Leader>dcw",
+        "List LSP diagnostics with WARN & ERROR severities for the current buffer only",
+        function() m.open_diagnostics({ min_severity = "WARN", current_buffer = true }) end,
+        mode = { "n", "v" },
+    }
+end
+
+-- Private
+
+local wide_layout_config = {
+    width = 0.8,
+}
+
+function m.open_file_browser()
+    local extensions = require "telescope".extensions
+
+    extensions.file_browser.file_browser({
+        cwd = "%:p:h",
+        hidden = true,
+        git_status = true,
+        respect_gitignore = false,
+        grouped = true,
+        select_buffer = true,
+        initial_mode = "normal",
+        file_ignore_patterns = { "%.git/" },
+        layout_strategy = "horizontal",
+        layout_config = {
+            width = 0.8,
+            preview_width = 0.5,
+        },
+    })
+end
+
+function m.open_buffers()
+    local telescope = require "telescope.builtin"
+    local buffers = require "editor.buffers"
+
+    local listed_buffers = buffers.get_listed_bufs()
+
+    telescope.buffers({
+        initial_mode = "insert",
+        sort_mru = true,
+        ignore_current_buffer = #listed_buffers > 1,
+    })
+end
+
+function m.open_file_finder()
+    local telescope = require "telescope.builtin"
+
+    telescope.find_files({
+        hidden = true,
+        no_ignore = false,
+        initial_mode = "insert",
+        layout_strategy = "vertical",
+    })
+end
+
+function m.open_text_finder()
+    local telescope = require "telescope.builtin"
+
+    telescope.live_grep({
+        hidden = true,
+        no_ignore = false,
+        initial_mode = "insert",
+        layout_strategy = "horizontal",
+    })
+end
+
+function m.open_diagnostics(params)
+    local telescope = require "telescope.builtin"
+
+    local opts = {
+        initial_mode = "normal",
+        layout_strategy = "vertical",
+        layout_config = wide_layout_config,
+    }
+
+    if params.current_buffer then
+        opts.bufnr = 0
+    end
+
+    if params.min_severity then
+        opts.severity_bound = "ERROR"
+        opts.severity_limit = params.min_severity
+    end
+
+    telescope.diagnostics(opts)
+end
+
+function m.open_document_symbols()
+    local telescope = require "telescope.builtin"
+
+    telescope.lsp_document_symbols({
+        initial_mode = "insert",
+        layout_strategy = "vertical",
+    })
+end
+
+function m.open_workspace_symbols()
+    local telescope = require "telescope.builtin"
+
+    telescope.lsp_workspace_symbols({
+        initial_mode = "insert",
+        layout_strategy = "vertical",
+    })
+end
+
+function m.open_todos(params)
+    if not params.todo and not params.fixme and not params.priority then
+        vim.api.nvim_err_writeln "No keywords specified"
+        return
+    end
+
+    local keywords = {}
+    if params.priority then
+        table.insert(keywords, "TODO!")
+        table.insert(keywords, "FIXME!")
+    else
+        if params.todo then
+            table.insert(keywords, "TODO")
+            table.insert(keywords, "TODO!")
+        end
+        if params.fixme then
+            table.insert(keywords, "FIXME")
+            table.insert(keywords, "FIXME!")
+        end
+    end
+
+    vim.cmd(
+        "TodoTelescope " ..
+        "keywords=" .. table.concat(keywords, ",") .. " " ..
+        "layout_strategy=vertical layout_config={width=0.7}"
+    )
+end
+
+function m.open_command_finder()
+    local telescope = require "telescope.builtin"
+
+    telescope.commands({
+        initial_mode = "insert",
+        layout_strategy = "vertical",
+        layout_config = wide_layout_config,
+    })
+end
+
+-- Utils
+
+function m.copy_path(bufnr, fmt)
+    local cb = require "editor.clipboard"
+    local fs = require "editor.fs"
+    local fb = require "telescope._extensions.file_browser.utils"
+
+    local selections = fb.get_selected_files(bufnr, true)
+    local entry = selections[1]
+
+    if entry ~= nil then
+        local result = fs.format(entry.filename, fmt)
+
+        if result ~= nil then
+            cb.yank(result)
+            print("Copied to clipboard: " .. result)
+            vim.defer_fn(function() vim.cmd.echo('""') end, 5000)
+        end
+    else
+        vim.api.nvim_err_writeln("No file selected")
+    end
 end
 
 return M

@@ -1,6 +1,8 @@
 local g = vim.g
 local opt = vim.opt
 
+g.mapleader = " " -- must be set prior plugins initialization
+
 opt.termguicolors = true
 
 opt.number = true
@@ -21,8 +23,8 @@ opt.smartindent = true
 opt.tabstop = 4
 opt.softtabstop = 4
 
-vim.opt.list = true
-vim.opt.listchars = {
+opt.list = true
+opt.listchars = {
     tab = "▸ ",
     trail = "·",
     precedes = "←",
