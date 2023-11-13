@@ -12,8 +12,8 @@ function M.setup()
     local color = {
         active_text = palette.text,
         incative_text = palette.faded_text,
-        inverted_text = palette.darker_gray,
-        bg = palette.darker_gray,
+        inverted_text = palette.bar_bg,
+        bg = palette.bar_bg,
         emphasized_bg = palette.lighter_gray,
     }
 
@@ -372,6 +372,7 @@ function m.should_ignore_filetype()
 
     return
         ft == "alpha"
+        or ft == "noice"
         or ft == "lazy"
         or ft == "mason"
         or ft == "neo-tree"

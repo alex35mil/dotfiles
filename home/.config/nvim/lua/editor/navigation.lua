@@ -29,10 +29,11 @@ end
 function m.scroll_vertical(direction)
     local windows = require "editor.windows"
     local keys = require "editor.keys"
+    local noice = require "plugins.noice"
 
-    local current_win = vim.api.nvim_get_current_win()
-
-    if windows.is_window_floating(current_win) then
+    if noice.scroll_lsp_doc(direction) then
+        return
+    elseif windows.is_window_floating(vim.api.nvim_get_current_win()) then
         local keymap
 
         if direction == "up" then

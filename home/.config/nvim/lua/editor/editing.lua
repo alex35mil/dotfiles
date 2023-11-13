@@ -64,7 +64,10 @@ function M.keymaps()
         [["*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>]],
         mode = "v",
     }
-    K.map { "<Esc>", "Drop search highlight and clear the command line", "<Cmd>silent noh<CR>:<BS>", mode = "n", silent = false }
+
+    -- With Noice, cearing the command line doesn't make sense. Replacing it with just `noh`.
+    -- K.map { "<Esc>", "Drop search highlight and clear the command line", "<Cmd>silent noh<CR>:<BS>", mode = "n", silent = false }
+    K.map { "<Esc>", "Drop search highlight", "<Cmd>silent noh<CR>", mode = "n", silent = false }
 
     K.map { "<C-u>", "Undo", "u", mode = { "n", "v" } }
     K.map { "<C-u>", "Undo", "<Esc>ui", mode = "i" }

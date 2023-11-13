@@ -9,6 +9,7 @@ end
 
 function m.quit()
     local lazy = require "plugins.lazy"
+    local noice = require "plugins.noice"
     local zenmode = require "plugins.zen-mode"
     local spectre = require "plugins.spectre"
     local filetree = require "plugins.neo-tree"
@@ -25,6 +26,7 @@ function m.quit()
     end
 
     lazy.ensure_hidden()
+    noice.ensure_hidden()
     zenmode.ensure_deacitvated()
     spectre.ensure_any_closed()
     filetree.ensure_any_hidden()

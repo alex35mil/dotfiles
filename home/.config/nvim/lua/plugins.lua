@@ -109,6 +109,15 @@ local plugins = {
         config = require("plugins.persistence").setup,
     },
 
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        config = require("plugins.noice").setup,
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+        },
+    },
+
     -- treesitter
     {
         "nvim-treesitter/nvim-treesitter",

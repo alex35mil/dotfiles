@@ -46,9 +46,10 @@ end
 function M.get_tab_windows_with_listed_buffers(options)
     local opts = vim.tbl_extend("keep", options, {
         incl_help = false,
+        incl_sidenotes = false,
     })
 
-    local windows = m.get_normal_tab_windows()
+    local windows = m.get_normal_tab_windows({ incl_sidenotes = opts.incl_sidenotes })
 
     if not windows then return nil end
 

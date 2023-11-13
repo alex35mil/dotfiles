@@ -291,6 +291,8 @@ function M.init()
             AlphaTitle { fg = color.text, bg = color.bg, bold = true },
             AlphaShortcut { fg = color.blue },
 
+            NoiceCmdline { bg = color.bar_bg },
+
             ZenBg { fg = color.text, bg = color.bg },
 
             WinShiftMove { bg = Normal.bg.lighten(7) },

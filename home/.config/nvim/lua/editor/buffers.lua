@@ -6,7 +6,7 @@ function M.keymaps()
         "<D-w>",
         "Delete current buffer and close current window if there are multiple",
         function() m.delete_buf({ should_close_window = true, force = false }) end,
-        mode = { "n", "i", "v", "t" },
+        mode = { "n", "i", "v", "t", "c" },
     }
     K.map {
         "<C-w>",
@@ -63,6 +63,11 @@ function m.get_buf_info(bufnr)
 end
 
 function m.delete_buf(options)
+    local noice = require "plugins.noice"
+    if noice.ensure_hidden() then
+        return
+    end
+
     local alpha = require "plugins.alpha"
     if alpha.is_active() then
         return
@@ -109,46 +114,8 @@ function m.delete_buf(options)
     end
 
     local windows = require "editor.windows"
-    local cursor = require "editor.cursor"
 
     local current_win = vim.api.nvim_get_current_win()
-    local floating_windows = windows.get_floating_tab_windows()
-
-    if floating_windows and #floating_windows == 1 then
-        -- Most likely, it's LSP documentation floating window
-        if floating_windows[1] == current_win then
-            -- We're moving around in the floating window
-            vim.cmd.close()
-            return
-        else
-            -- We're just looking at the floating window, without focusing it.
-            -- In order to close it, we need to shake the cursor.
-            local floating_win = floating_windows[1]
-
-            local cleanup = cursor.shake()
-
-            if not cleanup then
-                vim.api.nvim_err_writeln "Failed to shake cursor"
-                return
-            end
-
-            vim.defer_fn(
-                function()
-                    cleanup()
-
-                    local next_floating_windows = windows.get_floating_tab_windows()
-
-                    if #next_floating_windows > 0 then
-                        print "Floating window is not closed by cursor shake. Trying to close it manually."
-                        vim.api.nvim_win_close(floating_win, false)
-                    end
-                end,
-                10
-            )
-
-            return
-        end
-    end
 
     local opts = vim.tbl_extend("keep", options, { force = false, should_close_window = false })
 

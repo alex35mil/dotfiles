@@ -84,11 +84,13 @@ function M.setup()
         extensions = extensions,
     }
 
-    pcall(function()
-        for ext, _ in pairs(extensions) do
-            plugin.load_extension(ext)
+    pcall(
+        function()
+            for ext, _ in pairs(extensions) do
+                plugin.load_extension(ext)
+            end
         end
-    end)
+    )
 end
 
 -- Extensions

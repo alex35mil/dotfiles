@@ -5,9 +5,11 @@ require("editor.navigation").keymaps()
 require("editor.buffers").keymaps()
 require("editor.windows").keymaps()
 require("editor.terminal").keymaps()
+require("editor.debug").keymaps()
 
 -- Plugins
 require("plugins.lazy").keymaps()
+require("plugins.noice").keymaps()
 require("plugins.pounce").keymaps()
 require("plugins.comment").keymaps()
 require("plugins.telescope").keymaps()

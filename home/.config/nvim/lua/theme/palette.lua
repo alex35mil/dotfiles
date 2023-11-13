@@ -21,6 +21,8 @@ local palette = {
     -- lines
     thin_line = "#2f3337",
     thick_line = "#73787d",
+    -- bars
+    bar_bg = "#2c323c",
     -- popover
     popover_bg = "#21262b",
     popover_text = "#aaafb4",

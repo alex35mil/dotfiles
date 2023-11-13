@@ -30,6 +30,7 @@ function M.setup()
             "nix",
             "ocaml",
             "ocaml_interface",
+            "regex",
             "rust",
             "scss",
             "sql",
