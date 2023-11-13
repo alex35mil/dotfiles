@@ -13,7 +13,7 @@ function M.setup()
 end
 
 function M.keymaps()
-    K.map { "<D-z>", "Toggle zen mode", m.toggle, mode = { "n", "i", "v" } }
+    K.map { "<D-m>", "Toggle zen mode", m.toggle, mode = { "n", "i", "v" } }
 end
 
 function M.ensure_deacitvated()

@@ -13,7 +13,7 @@ function M.keymaps()
     K.map { "<D-Up>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "t" } }
     K.map { "<D-Right>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "v", "t" } }
 
-    K.map { "<D-m>", "Move windows", function() m.reposition_windows({ action = "move" }) end, mode = "n" }
+    K.map { "<M-m>", "Move windows", function() m.reposition_windows({ action = "move" }) end, mode = "n" }
     K.map { "<M-s>", "Swap windows", function() m.reposition_windows({ action = "swap" }) end, mode = "n" }
 
     K.map { "<C-Up>", "Increase window width", function() m.change_window_width("up") end, mode = "n" }

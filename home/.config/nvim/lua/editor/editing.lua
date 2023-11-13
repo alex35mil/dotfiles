@@ -69,9 +69,9 @@ function M.keymaps()
     -- K.map { "<Esc>", "Drop search highlight and clear the command line", "<Cmd>silent noh<CR>:<BS>", mode = "n", silent = false }
     K.map { "<Esc>", "Drop search highlight", "<Cmd>silent noh<CR>", mode = "n", silent = false }
 
-    K.map { "<C-u>", "Undo", "u", mode = { "n", "v" } }
-    K.map { "<C-u>", "Undo", "<Esc>ui", mode = "i" }
-    K.map { "<C-r>", "Redo", "<Esc><C-r>i", mode = "i" }
+    K.map { "<D-z>", "Undo", "u", mode = { "n", "v" } }
+    K.map { "<D-z>", "Undo", "<Esc>ui", mode = "i" }
+    K.map { "<C-r>", "Redo", "<Esc><C-r>i", mode = "i" } -- Remaped from <D-S-z> to <C-r> via Karabiner
 
     K.map { "<D-s>", "Save files", "<Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = "n" }
     K.map { "<D-s>", "Save files", "<Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = { "i", "v" } }
