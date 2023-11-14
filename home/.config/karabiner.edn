@@ -48,7 +48,6 @@
             :rules [
                 [:!CSz :!Tr [:neovide]] ; Cmd+Shift+Z -> Ctrl+R: Redo
                 [:!Ch :!Oh [:neovide]] ; Cmd+H -> Opt+H: move half page down
-                [:!Cq :!Tq [:neovide]] ; Cmd+Q -> Ctrl+Q: quit
             ]
         }
 

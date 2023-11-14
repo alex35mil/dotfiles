@@ -1,5 +1,4 @@
 -- Core
-require("editor.app").keymaps()
 require("editor.editing").keymaps()
 require("editor.navigation").keymaps()
 require("editor.buffers").keymaps()
