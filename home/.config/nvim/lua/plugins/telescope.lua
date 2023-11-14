@@ -5,21 +5,21 @@ local m = {}
 function M.setup()
     local plugin = require "telescope"
     local actions = require "telescope.actions"
+    local editor = require "editor.searchreplace"
     local extensions = X.extensions()
+
+    local grepargs = { editor.search.cmd }
+
+    for _, arg in ipairs(editor.search.base_args) do
+        table.insert(grepargs, arg)
+    end
+
+    table.insert(grepargs, editor.search.optional_args.with_hidden)
+    table.insert(grepargs, editor.search.optional_args.smart_case)
 
     plugin.setup {
         defaults = {
-            vimgrep_arguments = {
-                "rg",
-                "-L",
-                "--color=never",
-                "--no-heading",
-                "--with-filename",
-                "--line-number",
-                "--column",
-                "--smart-case",
-                "--hidden",
-            },
+            vimgrep_arguments = grepargs,
             prompt_prefix = "   ",
             selection_caret = "  ",
             entry_prefix = "  ",

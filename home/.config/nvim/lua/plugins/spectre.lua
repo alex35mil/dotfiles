@@ -3,18 +3,59 @@ local m = {}
 
 function M.setup()
     local plugin = require "spectre"
+    local editor = require "editor.searchreplace"
+
+    local search = editor.search
+    local replace = editor.replace
 
     plugin.setup {
         default = {
             find = {
-                cmd = "rg",
-                options = {},
+                cmd = search.cmd,
+                options = {
+                    "hidden",
+                    "smart-case",
+                },
             },
             replace = {
-                cmd = "sed",
-                options = {},
+                cmd = replace.cmd,
             },
         },
+        find_engine = {
+            [search.cmd] = {
+                cmd = search.cmd,
+                args = search.args,
+                options = {
+                    ["hidden"] = {
+                        value = search.optional_args.with_hidden,
+                        desc = "hidden files",
+                        icon = "[H]",
+                    },
+                    ["ignored"] = {
+                        value = search.optional_args.with_ignored,
+                        desc = "search in ignored files",
+                        icon = "[G]",
+                    },
+                    ["smart-case"] = {
+                        value = search.optional_args.smart_case,
+                        icon = "[S]",
+                        desc = "smart case",
+                    },
+                    ["ignore-case"] = {
+                        value = search.optional_args.ignore_case,
+                        icon = "[I]",
+                        desc = "ignore case",
+                    },
+                },
+            },
+        },
+        replace_engine = {
+            [editor.replace.cmd] = {
+                cmd = editor.replace.cmd,
+                args = editor.replace.args,
+            },
+        },
+
     }
 end
 
