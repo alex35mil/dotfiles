@@ -162,9 +162,13 @@ function p() {
     # command = command with all its arguments as a string
     read etime command <<<$(ps -p $pid -o etime=,command=)
 
+    # Getting the working directory of the process
+    pwd=$(lsof -p $pid | awk '$4=="cwd" {print $9}')
+
     echo "Port: $1"
     echo "Protocol: $protocol"
     echo "PID: $pid"
+    echo "PWD: $pwd"
     echo "Command: $command"
     echo "Age: $etime"
 }
