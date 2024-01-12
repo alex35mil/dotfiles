@@ -18,13 +18,13 @@ function M.keymaps()
         "<Leader>wck",
         "Delete current buffer, even if unsaved, but do not close current window if there are multiple",
         function() m.delete_buf({ should_close_window = false, force = true }) end,
-        mode = { "n", "v" },
+        mode = "n",
     }
     K.map {
         "<Leader>wcc",
         "Delete current buffer, even if unsaved, and close current window if there are multiple",
         function() m.delete_buf({ should_close_window = true, force = true }) end,
-        mode = { "n", "i", "v" },
+        mode = "n",
     }
     K.mapseq {
         "<Leader>was",
