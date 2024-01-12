@@ -357,7 +357,7 @@ unsetopt hist_expire_dups_first
 # (the oldest commands are removed first) without specifically targeting duplicates.
 # ------------------------------------------
 
-setopt share_history
+unsetopt share_history
 # ------------------------------------------
 # - `share_history`: This is a specific zsh option that, when set, enables the
 #   sharing of command history across all active zsh sessions.
