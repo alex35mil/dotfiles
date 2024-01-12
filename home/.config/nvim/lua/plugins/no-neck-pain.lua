@@ -1,6 +1,6 @@
 local M = {}
 
-M.default_width = 120
+M.default_width = 140
 M.scratchpad_filename = "SIDENOTES"
 M.scratchpad_filetype = "md"
 
