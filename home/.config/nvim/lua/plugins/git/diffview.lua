@@ -10,7 +10,7 @@ function M.setup()
         show_help_hints = false,
         watch_index = true,
         file_panel = {
-            listing_style = "list", -- 'list' or 'tree'
+            listing_style = "tree", -- 'list' or 'tree'
         },
         keymaps = {
             disable_defaults = true,
@@ -29,13 +29,13 @@ function M.setup()
                 -- { "n", "",     actions.conflict_choose("none"),   { desc = "Delete the conflict region" } },
             },
             file_panel = {
-                { "n", "t",             actions.prev_entry,          { desc = "Bring the cursor to the previous file entry." } },
-                { "n", "h",             actions.next_entry,          { desc = "Bring the cursor to the next file entry" } },
-                { "n", "<Up>",          actions.select_prev_entry,   { desc = "Open the diff for the previous file" } },
-                { "n", "<Down>",        actions.select_next_entry,   { desc = "Open the diff for the next file" } },
+                { "n", "<Up>",          actions.prev_entry,          { desc = "Bring the cursor to the previous file entry." } },
+                { "n", "<Down>",        actions.next_entry,          { desc = "Bring the cursor to the next file entry" } },
+                { "n", "<M-Up>",        actions.select_prev_entry,   { desc = "Open the diff for the previous file" } },
+                { "n", "<M-Down>",      actions.select_next_entry,   { desc = "Open the diff for the next file" } },
                 { "n", "<S-Tab>",       actions.select_prev_entry,   { desc = "Open the diff for the previous file" } },
                 { "n", "<Tab>",         actions.select_next_entry,   { desc = "Open the diff for the next file" } },
-                { "n", "<CR>",          actions.select_entry,        { desc = "Open the diff for the selected entry." } },
+                { "n", "<Right>",       actions.select_entry,        { desc = "Open the diff for the selected entry." } },
                 { "n", "<2-LeftMouse>", actions.select_entry,        { desc = "Open the diff for the selected entry." } },
                 { "n", "<C-t>",         actions.scroll_view(-0.25),  { desc = "Scroll the view up" } },
                 { "n", "<C-h>",         actions.scroll_view(0.25),   { desc = "Scroll the view down" } },
@@ -43,7 +43,7 @@ function M.setup()
                 { "n", "A",             actions.stage_all,           { desc = "Stage all entries." } },
                 { "n", "U",             actions.unstage_all,         { desc = "Unstage all entries." } },
                 { "n", "X",             actions.restore_entry,       { desc = "Restore entry to the state on the left side." } },
-                { "n", "gf",            actions.goto_file_edit,      { desc = "Open the file" } },
+                { "n", "<CR>",          actions.goto_file_edit,      { desc = "Open the file" } },
                 { "n", "i",             actions.listing_style,       { desc = "Toggle between 'list' and 'tree' views" } },
                 { "n", "d",             actions.toggle_flatten_dirs, { desc = "Flatten empty subdirectories." } },
                 { "n", "L",             actions.open_commit_log,     { desc = "Open the commit log panel." } },
