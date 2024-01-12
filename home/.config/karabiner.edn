@@ -3,6 +3,9 @@
         :alacritty ["^org.alacritty$"]
         :neovide [:paths "^.*\\.cargo/bin/neovide$"]
         :xcode ["^com.apple.dt.Xcode$"]
+        :things ["^com.culturedcode.ThingsMac$"]
+        :chatgpt ["^com.sindresorhus.QuickGPT"]
+        :notion ["^notion.id$"]
     }
 
     :input-sources {
@@ -33,6 +36,14 @@
         ;; https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-definition/from/modifiers/
 
         {
+            :des "Global configuration"
+            :rules [
+                [:!CShyphen :!CSperiod] ; Cmd+_ -> Cmd+Shift+.: I remapped Shift+. to _ in Oryx, gettig Cmd+Shift+. back to reveal hidden files in Finder
+                [:f21 :!TFf8] ; F21 -> Ctrl + Fn + F8: toggle menubar no macOS
+            ]
+        }
+
+        {
             :des "Alacritty configuration"
             :rules [
                 [:##left_command :left_control [:alacritty]] ; Cmd -> Ctrl
@@ -40,6 +51,7 @@
                 [:!Ttab :!Ctab [:alacritty]] ; Restore Cmd+Tab
                 [:!Tleft_shift :!Cleft_shift [:alacritty]] ; Restore Cmd+Shift+Tab
                 [:!Tv :!Cv [:alacritty]] ; Restore Cmd+V
+                [:!Tm :!Tz [:alacritty]] ; Remap Ctrl+M to Ctrl+Z
             ]
         }
 
@@ -54,8 +66,33 @@
         {
             :des "Xcode configuration"
             :rules [
-                [:!Ct :page_up [:xcode]]
-                [:!Ch :page_down [:xcode]]
+                [:!Ct :!CSo [:xcode]]
+                ; [:!Ch :page_down [:xcode]]
+            ]
+        }
+
+        {
+            :des "Things configuration"
+            :rules [
+                [:!Cm :!CSm [:things]] ; Move
+                [:!Ct :!CSt [:things]] ; Tag
+                [:!Cp :!Cl [:things]] ; Show in Project
+            ]
+        }
+
+        {
+            :des "ChatGPT configuration"
+            :rules [
+                [:!Cn :!CSn [:chatgpt]]
+                [:!CSn :!Cn [:chatgpt]]
+            ]
+        }
+
+        {
+            :des "Notion configuration"
+            :rules [
+                [:!Ct :!Cp [:notion]]
+                [:!Cw :escape [:notion]]
             ]
         }
 

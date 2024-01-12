@@ -11,7 +11,7 @@ function M.setup()
 end
 
 function M.keymaps()
-    K.map { "<C-l>", "LSP: Toggle diagnostic lines", m.toggle, mode = "n" }
+    K.map { "<C-l>", "LSP: Toggle diagnostic lines", m.toggle, mode = { "n", "v" } }
 end
 
 -- Private
