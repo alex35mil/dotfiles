@@ -206,7 +206,7 @@ function M.init()
             ModeMsg { MsgArea },                                         -- 'showmode' message (e.g., "-- INSERT -- ")
             -- MsgSeparator { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
             -- MoreMsg      { }, -- |more-prompt|
-            NonText { fg = color.faded_text },                              -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
+            NonText { fg = color.cyan },                                    -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
             NormalFloat { fg = color.popover_text, bg = color.popover_bg }, -- Normal text in floating windows.
             -- NormalNC     { }, -- normal text in non-current windows
             Pmenu { fg = color.popover_text, bg = color.popover_bg },       -- Popup menu: Normal item.
