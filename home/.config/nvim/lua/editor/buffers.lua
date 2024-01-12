@@ -4,36 +4,36 @@ local m = {}
 function M.keymaps()
     K.map {
         "<D-w>",
-        "Delete current buffer and close current window if there are multiple",
-        function() m.delete_buf({ should_close_window = true, force = false }) end,
-        mode = { "n", "i", "v", "t", "c" },
-    }
-    K.map {
-        "<C-w>",
         "Delete current buffer, but do not close current window if there are multiple",
         function() m.delete_buf({ should_close_window = false, force = false }) end,
         mode = { "n", "v" },
     }
     K.map {
-        "<D-M-w>",
+        "<C-w>",
+        "Delete current buffer and close current window if there are multiple",
+        function() m.delete_buf({ should_close_window = true, force = false }) end,
+        mode = { "n", "i", "v", "t", "c" },
+    }
+    K.mapseq {
+        "<Leader>wck",
+        "Delete current buffer, even if unsaved, but do not close current window if there are multiple",
+        function() m.delete_buf({ should_close_window = false, force = true }) end,
+        mode = { "n", "v" },
+    }
+    K.map {
+        "<Leader>wcc",
         "Delete current buffer, even if unsaved, and close current window if there are multiple",
         function() m.delete_buf({ should_close_window = true, force = true }) end,
         mode = { "n", "i", "v", "t" },
     }
-    K.map {
-        "<C-M-w>",
-        "Delete current buffer, even if unsaved,, but do not close current window if there are multiple",
-        function() m.delete_buf({ should_close_window = false, force = true }) end,
-        mode = { "n", "v" },
-    }
     K.mapseq {
-        "<Leader>wo",
+        "<Leader>was",
         "Delete all buffers except current & unsaved",
         function() m.delete_all_bufs_except_current({ incl_unsaved = false }) end,
         mode = "n",
     }
     K.mapseq {
-        "<Leader>wf",
+        "<Leader>waf",
         "Delete all buffers except current",
         function() m.delete_all_bufs_except_current({ incl_unsaved = true }) end,
         mode = "n",
