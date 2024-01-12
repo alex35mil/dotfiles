@@ -1,4 +1,5 @@
 local M = {}
+local m = {}
 
 function M.setup()
     local plugin = require "gitsigns"
@@ -63,8 +64,22 @@ function M.keymaps()
     K.map { "<D-C-Down>", "Git: Jump to the next hunk", "<Cmd>Gitsigns next_hunk<CR>", mode = "n" }
     K.map { "<D-C-Up>", "Git: Jump to the previous hunk", "<Cmd>Gitsigns prev_hunk<CR>", mode = "n" }
     K.mapseq { "<D-g>b", "Git: Show line blame", "<Cmd>Gitsigns blame_line<CR>", mode = "n" }
-    K.map { "<C-Space>", "Git: Stage hunk", "<Cmd>Gitsigns stage_hunk<CR>", mode = { "n", "v" } }
+    K.map { "<C-Space>", "Git: Stage hunk", "<Cmd>Gitsigns stage_hunk<CR>", mode = "n" }
+    K.map { "<C-Space>", "Git: Stage hunk", m.visual_stage, mode = "v" }
     K.map { "<C-S-Space>", "Git: Unstage hunk", "<Cmd>Gitsigns undo_stage_hunk<CR>", mode = { "n", "v" } }
+end
+
+-- Private
+
+function m.visual_stage()
+    local plugin = require "gitsigns"
+    local keys = require "editor.keys"
+
+    local first_line = vim.fn.line("v")
+    local last_line = vim.fn.getpos(".")[2]
+
+    plugin.stage_hunk({ first_line, last_line })
+    keys.send("<Esc>", { mode = "x" })
 end
 
 return M
