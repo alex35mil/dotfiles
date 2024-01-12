@@ -66,7 +66,7 @@ function M.init()
             Keyword { fg = color.purple }, --   any other keyword
             -- Exception      { }, --   try, catch, throw
 
-            -- PreProc        { }, -- (*) Generic Preprocessor
+            PreProc { fg = color.magenta },           -- (*) Generic Preprocessor
             Include { fg = color.blue, bold = true }, --   Preprocessor #include
             -- Define         { }, --   Preprocessor #define
             Macro { fg = color.orange },              --   Same as Define
