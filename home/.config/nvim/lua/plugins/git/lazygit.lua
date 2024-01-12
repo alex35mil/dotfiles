@@ -22,7 +22,7 @@ end
 
 function m.close()
     local keys = require "editor.keys"
-    keys.send("q", { mode = "t" })
+    keys.send("w", { mode = "t" })
 end
 
 return M

@@ -108,8 +108,8 @@ function M.setup()
             mappings = {
                 ["<CR>"] = "open",
                 ["<D-CR>"] = "open_with_window_picker",
-                ["<D-Down>"] = "open_split",
-                ["<D-Right>"] = "open_vsplit",
+                ["<D-H>"] = "open_split",
+                ["<D-N>"] = "open_vsplit",
                 ["<2-LeftMouse>"] = "open",
                 ["<D-p>"] = { "toggle_preview", config = { use_float = true } },
                 ["p"] = "focus_preview",

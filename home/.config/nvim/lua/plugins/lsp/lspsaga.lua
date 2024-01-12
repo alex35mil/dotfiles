@@ -50,8 +50,8 @@ function M.setup()
         finder = {
             keys = {
                 edit = "<CR>",
-                vsplit = "<D-Right>",
-                split = "<D-Down>",
+                vsplit = "<D-N>",
+                split = "<D-H>",
                 tabe = nil,
                 quit = { "<Esc>", "<D-w>" },
             },
@@ -79,14 +79,15 @@ end
 
 function M.keymaps()
     K.map { "<D-C-h>", "LSP: Jump to definition", "<Cmd>Lspsaga goto_definition<CR>", mode = "n" }
+    K.map { "<D-C-g>", "LSP: Jump to type definition", "<Cmd>Lspsaga goto_type_definition<CR>", mode = "n" }
     K.map { "<D-r>", "LSP: Rename", "<Cmd>Lspsaga rename<CR>", mode = "n" }
     K.map { "<C-a>", "LSP: Code actions", "<Cmd>Lspsaga code_action<CR>", mode = "n" }
     K.map { "<C-f>", "LSP: Finder", "<Cmd>Lspsaga finder<CR>", mode = "n" }
 
-    K.map { "<D-.>", "LSP: Diagnostic next error", m.jump_to_next_error, mode = "n" }
-    K.map { "<D-,>", "LSP: Diagnostic previous error", m.jump_to_prev_error, mode = "n" }
-    K.map { "<C-D-.>", "LSP: Diagnostic next warning", m.jump_to_next_warning, mode = "n" }
-    K.map { "<C-D-,>", "LSP: Diagnostic previous warning", m.jump_to_prev_warning, mode = "n" }
+    K.map { "<D-M-Down>", "LSP: Diagnostic next error", m.jump_to_next_error, mode = "n" }
+    K.map { "<D-M-Up>", "LSP: Diagnostic previous error", m.jump_to_prev_error, mode = "n" }
+    K.map { "<D-M-Left>", "LSP: Diagnostic next warning", m.jump_to_next_warning, mode = "n" }
+    K.map { "<D-M-Right>", "LSP: Diagnostic previous warning", m.jump_to_prev_warning, mode = "n" }
 end
 
 -- Private

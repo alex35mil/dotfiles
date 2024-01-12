@@ -6,15 +6,20 @@ M.window_picker_keys = "UHKMETJWNSABCDFGILOPQRVXYZ1234567890"
 function M.keymaps()
     K.map { "<D-n>", "Create new buffer in the current window", "<Cmd>enew<CR>", mode = { "n", "v", "i" } }
     K.mapseq { "<Leader>nh", "Create new buffer in a horizontal split", "<Cmd>new<CR>", mode = "n" }
-    K.mapseq { "<Leader>nv", "Create new buffer in a vertical split", "<Cmd>vnew<CR>", mode = "n" }
+    K.mapseq { "<Leader>nn", "Create new buffer in a vertical split", "<Cmd>vnew<CR>", mode = "n" }
 
-    K.map { "<D-Left>", "Move to window on the left", "<Cmd>wincmd h<CR>", mode = { "n", "v", "t" } }
-    K.map { "<D-Down>", "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n", "v", "t" } }
-    K.map { "<D-Up>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "t" } }
-    K.map { "<D-Right>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "v", "t" } }
+    K.map { "<D-D>", "Move to window on the left", "<Cmd>wincmd h<CR>", mode = { "n", "v", "t" } }
+    K.map { "<D-H>", "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n", "v", "t" } }
+    K.map { "<D-T>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "t" } }
+    K.map { "<D-N>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "v", "t" } }
 
     K.map { "<M-m>", "Move windows", function() m.reposition_windows({ action = "move" }) end, mode = "n" }
     K.map { "<M-s>", "Swap windows", function() m.reposition_windows({ action = "swap" }) end, mode = "n" }
+
+    K.map { "<D-F>", "Move window to the left", function() m.reposition_windows({ action = "move_left" }) end, mode = "n" }
+    K.map { "<D-R>", "Move window to the right", function() m.reposition_windows({ action = "move_right" }) end, mode = "n" }
+    K.map { "<D-c>", "Move window up", function() m.reposition_windows({ action = "move_up" }) end, mode = "n" }
+    K.map { "<D-G>", "Move window down", function() m.reposition_windows({ action = "move_down" }) end, mode = "n" }
 
     K.map { "<C-Up>", "Increase window width", function() m.change_window_width("up") end, mode = "n" }
     K.map { "<C-Down>", "Decrease window width", function() m.change_window_width("down") end, mode = "n" }
@@ -96,6 +101,14 @@ function m.reposition_windows(opts)
             -- https://github.com/sindrets/winshift.nvim/issues/19
         elseif action == "swap" then
             winshift.swap()
+        elseif action == "move_left" then
+            winshift.move_left()
+        elseif action == "move_right" then
+            winshift.move_right()
+        elseif action == "move_up" then
+            winshift.move_up()
+        elseif action == "move_down" then
+            winshift.move_down()
         else
             vim.api.nvim_err_writeln "Unexpected windows action"
         end

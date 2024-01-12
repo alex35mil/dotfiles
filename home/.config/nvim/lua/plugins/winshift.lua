@@ -59,6 +59,22 @@ function M.move()
     vim.cmd "WinShift"
 end
 
+function M.move_right()
+    vim.cmd "WinShift right"
+end
+
+function M.move_left()
+    vim.cmd "WinShift left"
+end
+
+function M.move_up()
+    vim.cmd "WinShift up"
+end
+
+function M.move_down()
+    vim.cmd "WinShift down"
+end
+
 function M.swap()
     vim.cmd "WinShift swap"
 end
