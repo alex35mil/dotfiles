@@ -77,7 +77,7 @@ function i() {
     # If target is a directory
     if [[ -d "$target" ]]; then
         # List its contents via `tree`
-        tree -a -L 1 "$target"
+        tree -ahF --dirsfirst -L 1 "$target"
     # If target is a file
     elif [[ -f "$target" ]]; then
         # Show its contents via `bat`
