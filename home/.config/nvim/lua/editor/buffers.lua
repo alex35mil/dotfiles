@@ -24,7 +24,7 @@ function M.keymaps()
         "<Leader>wcc",
         "Delete current buffer, even if unsaved, and close current window if there are multiple",
         function() m.delete_buf({ should_close_window = true, force = true }) end,
-        mode = { "n", "i", "v", "t" },
+        mode = { "n", "i", "v" },
     }
     K.mapseq {
         "<Leader>was",
