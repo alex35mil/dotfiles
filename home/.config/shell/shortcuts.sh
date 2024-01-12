@@ -201,7 +201,11 @@ function w() {
     if [[ -z "$result" ]]; then
         which "$@"
     else
+        echo "Aliases:"
         echo "$result"
+        echo
+        echo "Which:"
+        which "$@"
     fi
 }
 
