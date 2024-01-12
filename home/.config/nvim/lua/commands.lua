@@ -40,8 +40,16 @@ local autocmds = {
         { "BufWritePre" },
         {
             pattern = "*",
-            callback = function()
+            callback = function(args)
                 local filetype = vim.bo.filetype
+
+                local do_not_autoformat = {
+                    "markdown",
+                    "json",
+                }
+
+                if vim.tbl_contains(do_not_autoformat, filetype) then return end
+
                 local clients = vim.lsp.get_active_clients()
 
                 local client
@@ -64,24 +72,22 @@ local autocmds = {
                 if client then
                     vim.lsp.buf.format { async = false }
                 else
-                    local bufname = vim.fn.expand "<afile>"
-                    local bufnr = vim.fn.bufnr(bufname)
-
-                    if bufnr == -1 then return end
-
+                    local bufnr = args.buf
                     local modifiable = vim.api.nvim_buf_get_option(bufnr, "modifiable")
 
-                    if modifiable then
-                        local trimmer = require "mini.trailspace"
+                    if bufnr == -1 or not modifiable then return end
 
-                        vim.api.nvim_buf_set_lines(0, 0, vim.fn.nextnonblank(1) - 1, true, {})
+                    local conform = require "conform"
 
-                        if filetype ~= "markdown" then
-                            trimmer.trim()
-                        end
+                    local formatted = conform.format({ bufnr = bufnr })
 
-                        trimmer.trim_last_lines()
-                    end
+                    if formatted then return end
+
+                    local trailspace = require "mini.trailspace"
+
+                    vim.api.nvim_buf_set_lines(0, 0, vim.fn.nextnonblank(1) - 1, true, {})
+                    trailspace.trim()
+                    trailspace.trim_last_lines()
                 end
             end,
         },
@@ -92,6 +98,7 @@ local autocmds = {
             pattern = "rust",
             callback = function()
                 vim.api.nvim_buf_del_keymap(0, "n", "<D-r>")
+                vim.api.nvim_buf_del_keymap(0, "n", "<D-R>")
             end,
 
         },

@@ -15,6 +15,8 @@ export XDG_DATA_HOME="$HOME/.local/share"
 
 export DEVBOX_PROFILE="$XDG_DATA_HOME/devbox/global/default/.devbox/virtenv/.wrappers"
 
+export PRETTIERD_DEFAULT_CONFIG="$XDG_CONFIG_HOME/prettier.yml"
+
 SWIFT_PATH="/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin"
 NPM_PATH="$HOME/.npm-global/bin"
 

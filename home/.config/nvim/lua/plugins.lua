@@ -178,11 +178,10 @@ local plugins = {
 
 
     {
-        "jose-elias-alvarez/null-ls.nvim",
+        "stevearc/conform.nvim",
         version = "*",
-        dependencies = { "nvim-lua/plenary.nvim" },
         event = "BufEnter",
-        config = require("plugins.lsp.null-ls").setup,
+        config = require("plugins.lsp.conform").setup,
     },
 
     {

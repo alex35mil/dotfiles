@@ -17,6 +17,7 @@ function M.setup()
     local rust = require "plugins.lsp.servers.rust"
     local rescript = require "plugins.lsp.servers.rescript"
     local typescript = require "plugins.lsp.servers.typescript"
+    local json = require "plugins.lsp.servers.json"
     local yaml = require "plugins.lsp.servers.yaml"
 
     vim.diagnostic.config {
@@ -37,6 +38,7 @@ function M.setup()
     rust.setup(config)
     rescript.setup(config)
     typescript.setup(config)
+    json.setup(config)
     yaml.setup(config)
 
     config.bashls.setup {}
@@ -44,7 +46,6 @@ function M.setup()
     config.dockerls.setup {}
     config.docker_compose_language_service.setup {}
     config.html.setup {}
-    config.jsonls.setup {}
     config.marksman.setup {}
     config.nil_ls.setup {}
     config.ocamllsp.setup {}

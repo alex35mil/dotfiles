@@ -27,6 +27,9 @@
     "libiconv@latest",
     "btop@latest",
     "goku@latest",
-    "watchexec@latest"
+    "watchexec@latest",
+    "prettierd@latest",
+    "yamlfmt@latest",
+    "jq@latest"
   ]
 }
