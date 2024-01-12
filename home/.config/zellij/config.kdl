@@ -4,20 +4,17 @@ keybinds clear-defaults=true {
         bind "Ctrl q" { Quit; }
     }
 
-    normal {
-        // uncomment this and adjust key if using copy_on_select=false
-        // bind "Alt c" { Copy; }
-    }
-
     shared_except "normal" "locked" "search" "scroll" {
         bind "Enter" "Esc" { SwitchToMode "Normal"; }
     }
     shared_among "search" "scroll" {
         bind "Esc" { ScrollToBottom; SwitchToMode "Normal"; }
     }
-
     shared_except "locked" "pane"   {
         bind "Ctrl p" { SwitchToMode "Pane"; }
+    }
+    shared_except "locked" "tab"   {
+        bind "Ctrl t" { SwitchToMode "Tab"; }
     }
     // shared_except "locked" "move"   {
     //    bind "Ctrl m" { SwitchToMode "Move"; }
@@ -37,8 +34,18 @@ keybinds clear-defaults=true {
         bind "Ctrl n" { NewPane "Right"; SwitchToMode "Normal"; }
         bind "Ctrl h" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "Ctrl g" { FocusNextPane; }
-        bind "Ctrl z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
+        bind "Ctrl z" { ToggleFocusFullscreen; SwitchToMode "Normal"; } // "Ctrl m" remapped via Karabiner
         bind "Ctrl o" { ToggleFloatingPanes; }
+        bind "Ctrl b" { TogglePaneFrames; SwitchToMode "Normal"; }
+        bind "Alt Left" { MoveFocusOrTab "Left"; }
+        bind "Alt Right" { MoveFocusOrTab "Right"; }
+        bind "Alt Down" { MoveFocus "Down"; }
+        bind "Alt Up" { MoveFocus "Up"; }
+    }
+
+    normal {
+        // uncomment this and adjust key if using copy_on_select=false
+        // bind "Alt c" { Copy; }
     }
 
     resize {
@@ -50,51 +57,38 @@ keybinds clear-defaults=true {
         bind "Down" { Resize "Decrease"; }
     }
     pane {
-        bind "d" "Left" { MoveFocusOrTab "Left"; }
-        bind "n" "Right" { MoveFocusOrTab "Right"; }
-        bind "h" "Down" { MoveFocus "Down"; }
-        bind "t" "Up" { MoveFocus "Up"; }
+        bind "h" { MovePane "Down"; }
+        bind "t" { MovePane "Up"; }
+        bind "n" { MovePane "Right"; }
+        bind "d" { MovePane "Left"; }
         bind "Down" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "Up" { NewPane "Up"; SwitchToMode "Normal"; }
         bind "Right" { NewPane "Right"; SwitchToMode "Normal"; }
         bind "Left" { NewPane "Left"; SwitchToMode "Normal"; }
-        bind "{" { MovePane "Down"; }
-        bind "}" { MovePane "Up"; }
-        bind "+" { MovePane "Right"; }
-        bind "&" { MovePane "Left"; }
         bind "g" { SwitchFocus; }
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
-        bind "z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
-        bind "f" { TogglePaneFrames; SwitchToMode "Normal"; }
+        bind "m" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
+        bind "b" { TogglePaneFrames; SwitchToMode "Normal"; }
         // bind "w" { ToggleFloatingPanes; SwitchToMode "Normal"; }
         // bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "Normal"; }
         // bind "c" { SwitchToMode "RenamePane"; PaneNameInput 0;}
     }
-    move {
-        bind "Tab" { MovePane; }
-        bind "d" "Left" { MovePane "Left"; }
-        bind "h" "Down" { MovePane "Down"; }
-        bind "t" "Up" { MovePane "Up"; }
-        bind "n" "Right" { MovePane "Right"; }
-    }
+    // move {
+    //     bind "Tab" { MovePane; }
+    //     bind "d" "Left" { MovePane "Left"; }
+    //     bind "h" "Down" { MovePane "Down"; }
+    //     bind "t" "Up" { MovePane "Up"; }
+    //     bind "n" "Right" { MovePane "Right"; }
+    // }
     tab {
-        // bind "Ctrl t" { SwitchToMode "Normal"; }
-        // bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
-        // bind "h" "Left" "Up" "k" { GoToPreviousTab; }
-        // bind "l" "Right" "Down" "j" { GoToNextTab; }
-        // bind "n" { NewTab; SwitchToMode "Normal"; }
-        // bind "x" { CloseTab; SwitchToMode "Normal"; }
-        // bind "s" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
-        // bind "0" { GoToTab 1; SwitchToMode "Normal"; }
-        // bind "2" { GoToTab 2; SwitchToMode "Normal"; }
-        // bind "3" { GoToTab 3; SwitchToMode "Normal"; }
-        // bind "4" { GoToTab 4; SwitchToMode "Normal"; }
-        // bind "5" { GoToTab 5; SwitchToMode "Normal"; }
-        // bind "6" { GoToTab 6; SwitchToMode "Normal"; }
-        // bind "7" { GoToTab 7; SwitchToMode "Normal"; }
-        // bind "8" { GoToTab 8; SwitchToMode "Normal"; }
-        // bind "9" { GoToTab 9; SwitchToMode "Normal"; }
-        // bind "Tab" { ToggleTab; }
+        bind "d" { GoToPreviousTab; }
+        bind "n" { GoToNextTab; }
+        bind "Left" { GoToPreviousTab; SwitchToMode "Normal"; }
+        bind "Right" { GoToNextTab; SwitchToMode "Normal"; }
+        bind "Ctrl n" { NewTab; SwitchToMode "Normal"; }
+        bind "Ctrl r" { SwitchToMode "RenameTab"; TabNameInput 0; }
+        bind "Ctrl x" { CloseTab; SwitchToMode "Normal"; }
+        bind "Tab" { ToggleTab; }
     }
     scroll {
         // bind "e" { EditScrollback; SwitchToMode "Normal"; }
@@ -167,9 +161,6 @@ keybinds clear-defaults=true {
     shared_except "session" "locked" {
         // bind "Ctrl o" { SwitchToMode "Session"; }
     }
-    shared_except "tab" "locked" {
-        // bind "Ctrl t" { SwitchToMode "Tab"; }
-    }
     shared_except "move" "locked" {
         // bind "Ctrl h" { SwitchToMode "Move"; }
     }
@@ -235,7 +226,7 @@ mouse_mode true
 // Valid values: positive integers
 // Default value: 10000
 //
-// scroll_buffer_size 10000
+scroll_buffer_size 100000
 
 // Provide a command to execute when copying text. The text will be piped to
 // the stdin of the program to perform the copy. This can be used with
