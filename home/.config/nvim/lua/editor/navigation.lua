@@ -59,14 +59,18 @@ function m.scroll_vertical(direction)
             return
         end
 
-        local floating_windows = windows.get_floating_tab_windows()
+        local mode = vim.fn.mode()
 
-        if floating_windows and #floating_windows == 1 and floating_windows[1] ~= current_win then
-            local win = floating_windows[1]
-            vim.api.nvim_set_current_win(win)
-            m.scroll_vertical(direction)
-        else
-            keys.send(tostring(lines) .. keymap, { mode = "n" })
+        local is_i_mode = mode == "i"
+
+        if is_i_mode then
+            keys.send("<Esc>", { mode = "n" })
+        end
+
+        keys.send(tostring(lines) .. keymap, { mode = "n" })
+
+        if is_i_mode then
+            keys.send("a", { mode = "n" })
         end
     end
 end
