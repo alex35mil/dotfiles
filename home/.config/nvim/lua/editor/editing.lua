@@ -46,7 +46,7 @@ function M.keymaps()
     K.map { "<S-Tab>", "Unindent", "<gv", mode = "v" }
 
     K.map { "<M-Left>", "Jump one word to the left", "<C-o>b", mode = "i" }
-    K.map { "<M-Right>", "Jump one word to the right", "<C-o>w", mode = "i" }
+    K.map { "<M-Right>", "Jump one word to the right", m.jump_to_end_of_word, mode = "i" }
     K.map { "<D-Left>", "Jump to the beginning of the line", "<C-o>I", mode = "i" }
     K.map { "<D-Right>", "Jump to the end of the line", "<C-o>A", mode = "i" }
     K.map { "<M-BS>", "Delete word to the left", "<C-w>", mode = "i" }
@@ -103,6 +103,20 @@ function m.paste()
         )
     else
         vim.api.nvim_err_writeln "Unexpected mode"
+    end
+end
+
+function m.jump_to_end_of_word()
+    vim.cmd("normal! e")
+
+    local current_col = vim.fn.col(".")
+    local end_col = vim.fn.col("$")
+
+    if current_col == end_col - 1 then
+        local keys = require "editor.keys"
+        keys.send("<Esc>A", { mode = "n" })
+    elseif current_col ~= end_col then
+        vim.cmd("normal! l")
     end
 end
 
