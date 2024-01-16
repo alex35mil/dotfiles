@@ -166,8 +166,9 @@ function M.init()
             Cursor { reverse = true },         -- Character under the cursor
             -- lCursor      { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
             -- CursorIM     { }, -- Like Cursor, but used when in IME mode |CursorIM|
-            CursorColumn { bg = Normal.bg.lighten(20) },                    -- Screen-column at the cursor, when 'cursorcolumn' is set.
-            CursorLine { bg = Normal.bg.lighten(6) },                       -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+            CursorColumn { bg = Normal.bg.lighten(20) }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
+            CursorLine { bg = Normal.bg.lighten(6) },    -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+            IblIndent { fg = color.thin_line },
             VirtColumn { fg = color.thin_line },
             ColorColumn { fg = color.thin_line },                           -- Columns set with 'colorcolumn'
             Directory { fg = color.text },                                  -- Directory names (and other special names in listings)

@@ -68,6 +68,7 @@ local plugins = {
 
     {
         "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
         version = "*",
         config = require("plugins.indent-blankline").setup,
     },
