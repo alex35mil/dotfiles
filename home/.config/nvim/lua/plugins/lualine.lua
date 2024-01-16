@@ -79,7 +79,7 @@ function M.setup()
 
     local filename_section = {
         "filename",
-        path = 0,
+        path = 1,
         color = { fg = color.active_text, bg = color.emphasized_bg },
         fmt = function(v, _ctx)
             if m.should_ignore_filetype() then
