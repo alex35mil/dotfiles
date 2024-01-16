@@ -50,8 +50,8 @@ function M.setup()
         finder = {
             keys = {
                 edit = "<CR>",
-                vsplit = "<D-N>",
-                split = "<D-H>",
+                vsplit = "<D-Right>",
+                split = "<D-Down>",
                 tabe = nil,
                 quit = { "<Esc>", "<D-w>" },
             },

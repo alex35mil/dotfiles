@@ -58,15 +58,15 @@ function M.setup()
             buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
             mappings = {
                 n = {
-                    ["<D-H>"] = actions.file_split,
-                    ["<D-N>"] = actions.file_vsplit,
+                    ["<D-Down>"] = actions.file_split,
+                    ["<D-Right>"] = actions.file_vsplit,
                     ["<C-t>"] = actions.preview_scrolling_up,
                     ["<C-h>"] = actions.preview_scrolling_down,
                     ["<D-w>"] = actions.close,
                 },
                 i = {
-                    ["<D-H>"] = actions.file_split,
-                    ["<D-N>"] = actions.file_vsplit,
+                    ["<D-Down>"] = actions.file_split,
+                    ["<D-Right>"] = actions.file_vsplit,
                     ["<C-t>"] = actions.preview_scrolling_up,
                     ["<C-h>"] = actions.preview_scrolling_down,
                     ["<D-w>"] = actions.close,
