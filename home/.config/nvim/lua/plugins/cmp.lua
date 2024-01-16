@@ -13,6 +13,7 @@ function M.setup()
             { name = "nvim_lua" },
             { name = "buffer" },
             { name = "path" },
+            { name = "crates" },
         },
         snippet = {
             expand = function(args)
@@ -47,6 +48,7 @@ function M.setup()
                         nvim_lsp = "LSP",
                         buffer = "Buf",
                         path = "Path",
+                        crates = "Crates",
                     },
                     maxwidth = 50,
                 })(entry, vim_item)

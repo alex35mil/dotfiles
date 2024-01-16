@@ -171,11 +171,18 @@ local plugins = {
     },
 
     {
-        "simrat39/rust-tools.nvim",
-        version = "*",
-        event = "BufEnter *.rs",
+        "mrcjkb/rustaceanvim",
+        version = "^3",
+        ft = { "rust" },
     },
 
+    {
+        "saecki/crates.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        branch = "main",
+        event = { "BufRead Cargo.toml" },
+        config = require "plugins.crates".setup,
+    },
 
     {
         "stevearc/conform.nvim",

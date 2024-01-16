@@ -1,11 +1,14 @@
 local M = {}
 
-function M.setup(config)
-    local rust_tools = require "rust-tools"
-
-    rust_tools.setup {
+function M.setup()
+    vim.g.rustaceanvim = {
+        -- Plugin configuration
+        tools = {},
+        -- LSP configuration
         server = {
-            cmd = { "rustup", "run", "stable", "rust-analyzer" },
+            on_attach = function(_client, _bufnr)
+                -- TODO: Add keymaps here
+            end,
             settings = {
                 ["rust-analyzer"] = {
                     checkOnSave = {
@@ -14,6 +17,8 @@ function M.setup(config)
                 },
             },
         },
+        -- DAP configuration
+        dap = {},
     }
 end
 
