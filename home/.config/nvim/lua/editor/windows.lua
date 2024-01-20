@@ -9,8 +9,8 @@ function M.keymaps()
     K.mapseq { "<Leader>nn", "Create new buffer in a vertical split", "<Cmd>vnew<CR>", mode = "n" }
 
     K.map { "<D-Left>", "Move to window on the left", "<Cmd>wincmd h<CR>", mode = { "n", "v", "t" } }
-    K.map { "<D-Up>", "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n", "v", "t" } }
-    K.map { "<D-Down>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "t" } }
+    K.map { "<D-Down>", "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n", "v", "t" } }
+    K.map { "<D-Up>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "t" } }
     K.map { "<D-Right>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "v", "t" } }
 
     K.map { "<M-m>", "Move windows", function() m.reposition_windows({ action = "move" }) end, mode = "n" }
