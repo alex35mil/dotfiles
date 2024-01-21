@@ -70,9 +70,9 @@ local plugins = {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         version = "*",
+        event = "User ThemeApplied",
         config = require("plugins.indent-blankline").setup,
     },
-
 
     {
         "windwp/nvim-autopairs",
@@ -339,6 +339,7 @@ local plugins = {
     {
         "tenxsoydev/tabs-vs-spaces.nvim",
         version = "*",
+        event = "User ThemeApplied",
         config = require("plugins.tabs-vs-spaces").setup,
     },
 

@@ -336,6 +336,8 @@ function M.init()
     end)
 
     lush(theme)
+
+    vim.api.nvim_exec_autocmds("User", { pattern = "ThemeApplied" })
 end
 
 function M.enable_VertSplit()

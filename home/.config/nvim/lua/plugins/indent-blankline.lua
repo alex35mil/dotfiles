@@ -9,6 +9,9 @@ function M.setup()
             char = "│",
             highlight = "IblIndent",
         },
+        scope = {
+            enabled = false,
+        },
     }
 end
 

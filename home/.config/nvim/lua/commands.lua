@@ -125,6 +125,13 @@ local autocmds = {
             callback = require("plugins.alpha").update_footer,
         },
     },
+    {
+        { "User" },
+        {
+            pattern = "ThemeApplied",
+            callback = function() print "Theme applied" end,
+        },
+    },
 }
 
 for _, x in ipairs(autocmds) do
