@@ -50,7 +50,7 @@ local autocmds = {
 
                 if vim.tbl_contains(do_not_autoformat, filetype) then return end
 
-                local clients = vim.lsp.get_active_clients()
+                local clients = vim.lsp.get_clients()
 
                 local client
 

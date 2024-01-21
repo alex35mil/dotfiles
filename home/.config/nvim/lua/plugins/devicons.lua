@@ -15,8 +15,8 @@ function M.setup()
                 icon = "",
                 color = "#e43717",
                 name = "Rs",
-            }
-        }
+            },
+        },
     }
 end
 
