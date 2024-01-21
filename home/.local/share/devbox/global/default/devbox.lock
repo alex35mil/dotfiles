@@ -89,12 +89,6 @@
       "source": "devbox-search",
       "version": "1.4.4"
     },
-    "neovim@latest": {
-      "last_modified": "2023-09-17T10:54:49Z",
-      "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#neovim",
-      "source": "devbox-search",
-      "version": "0.9.2"
-    },
     "prettierd@latest": {
       "last_modified": "2023-12-13T22:54:10Z",
       "resolved": "github:NixOS/nixpkgs/fd04bea4cbf76f86f244b9e2549fca066db8ddff#prettierd",

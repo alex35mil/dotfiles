@@ -234,7 +234,7 @@ function M.init()
             -- VisualNOS    { }, -- Visual mode selection when vim is "Not Owning the Selection".
             -- WarningMsg   { }, -- Warning messages
             Whitespace { fg = color.faded_text }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
-            -- Winseparator { }, -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
+            Winseparator { VertSplit },           -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
             -- WildMenu     { }, -- Current match in 'wildmenu' completion
 
             -- These groups are for the native LSP client and diagnostic system. Some

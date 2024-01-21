@@ -1,6 +1,5 @@
 {
   "packages": [
-    "neovim@latest",
     "direnv@latest",
     "starship@latest",
     "tree@latest",
