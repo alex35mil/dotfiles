@@ -93,17 +93,6 @@ local autocmds = {
         },
     },
     {
-        { "Filetype" },
-        {
-            pattern = "rust",
-            callback = function()
-                vim.api.nvim_buf_del_keymap(0, "n", "<D-r>")
-                vim.api.nvim_buf_del_keymap(0, "n", "<D-R>")
-            end,
-
-        },
-    },
-    {
         { "User" },
         {
             pattern = "AlphaReady",
