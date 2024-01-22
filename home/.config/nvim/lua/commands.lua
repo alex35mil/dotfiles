@@ -22,6 +22,7 @@ local autocmds = {
     },
     { { "BufEnter" },    { pattern = { "*.md", "*.mdx" }, command = "setlocal wrap" } },
     { { "Filetype" },    { pattern = "markdown", command = "lua vim.b.minitrailspace_disable = true" } },
+    { { "Filetype" },    { pattern = "rescript", command = "setlocal commentstring=//%s" } },
     { { "TermOpen" },    { pattern = "*", command = "lua vim.b.minitrailspace_disable = true" } },
     { { "FocusGained" }, { pattern = "*", command = "checktime" } },
     {
