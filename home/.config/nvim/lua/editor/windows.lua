@@ -1,6 +1,7 @@
 local M = {}
 local m = {}
 
+M.default_width = 140
 M.window_picker_keys = "UHKMETJWNSABCDFGILOPQRVXYZ1234567890"
 
 function M.keymaps()

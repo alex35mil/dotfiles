@@ -3,11 +3,15 @@ local m = {}
 
 function M.setup()
     local plugin = require "zen-mode"
+    local windows = require "editor.windows"
 
     plugin.setup {
         window = {
             backdrop = 1,
-            width = 118,
+            width = windows.default_width - 2, -- 2 since zen-mode removes borders
+        },
+        plugins = {
+            gitsigns = { enabled = true },
         },
     }
 end

@@ -1,11 +1,11 @@
 local M = {}
 
-M.default_width = 140
 M.scratchpad_filename = "SIDENOTES"
 M.scratchpad_filetype = "md"
 
 function M.setup()
     local plugin = require "no-neck-pain"
+    local windows = require "editor.windows"
 
     local sideBufOpts = {
         enabled = true,
@@ -19,7 +19,7 @@ function M.setup()
     }
 
     plugin.setup {
-        width = M.default_width,
+        width = windows.default_width,
 
         autocmds = {
             enableOnVimEnter = vim.g.neovide,
@@ -57,7 +57,8 @@ function M.decrease_window_width()
 end
 
 function M.set_default_window_width()
-    vim.cmd("NoNeckPainResize " .. M.default_width)
+    local windows = require "editor.windows"
+    vim.cmd("NoNeckPainResize " .. windows.default_width)
 end
 
 function M.get_sidenotes()
