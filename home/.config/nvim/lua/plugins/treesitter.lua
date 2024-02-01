@@ -1,7 +1,10 @@
 local M = {}
 
 function M.setup()
+    local install = require "nvim-treesitter.install"
     local plugin = require "nvim-treesitter.configs"
+
+    install.compilers = { "gcc" }
 
     plugin.setup {
         highlight = {
