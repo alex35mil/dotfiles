@@ -9,22 +9,23 @@ function M.keymaps()
     K.mapseq { "<Leader>nh", "Create new buffer in a horizontal split", "<Cmd>new<CR>", mode = "n" }
     K.mapseq { "<Leader>nn", "Create new buffer in a vertical split", "<Cmd>vnew<CR>", mode = "n" }
 
-    K.map { "<D-Left>", "Move to window on the left", "<Cmd>wincmd h<CR>", mode = { "n", "v", "t" } }
-    K.map { "<D-Down>", "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n", "v", "t" } }
-    K.map { "<D-Up>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "t" } }
-    K.map { "<D-Right>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "v", "t" } }
+    K.map { "<S-Left>", "Move to window on the left", "<Cmd>wincmd h<CR>", mode = { "n", "v", "t" } }
+    K.map { "<S-Down>", "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n", "v", "t" } }
+    K.map { "<S-Up>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "t" } }
+    K.map { "<S-Right>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "v", "t" } }
+
+    K.map { "<M-S-Left>", "Move window to the left", function() m.reposition_windows({ action = "move_left" }) end, mode = "n" }
+    K.map { "<M-S-Right>", "Move window to the right", function() m.reposition_windows({ action = "move_right" }) end, mode = "n" }
+    K.map { "<M-S-Up>", "Move window up", function() m.reposition_windows({ action = "move_up" }) end, mode = "n" }
+    K.map { "<M-S-Down>", "Move window down", function() m.reposition_windows({ action = "move_down" }) end, mode = "n" }
 
     K.map { "<M-m>", "Move windows", function() m.reposition_windows({ action = "move" }) end, mode = "n" }
     K.map { "<M-s>", "Swap windows", function() m.reposition_windows({ action = "swap" }) end, mode = "n" }
 
-    K.map { "<D-F>", "Move window to the left", function() m.reposition_windows({ action = "move_left" }) end, mode = "n" }
-    K.map { "<D-R>", "Move window to the right", function() m.reposition_windows({ action = "move_right" }) end, mode = "n" }
-    K.map { "<D-c>", "Move window up", function() m.reposition_windows({ action = "move_up" }) end, mode = "n" }
-    K.map { "<D-G>", "Move window down", function() m.reposition_windows({ action = "move_down" }) end, mode = "n" }
+    K.map { "<D-Up>", "Increase window width", function() m.change_window_width("up") end, mode = "n" }
+    K.map { "<D-Down>", "Decrease window width", function() m.change_window_width("down") end, mode = "n" }
 
-    K.map { "<C-Up>", "Increase window width", function() m.change_window_width("up") end, mode = "n" }
-    K.map { "<C-Down>", "Decrease window width", function() m.change_window_width("down") end, mode = "n" }
-    K.map { "<C-Esc>", "Restore windows width", m.restore_windows_layout, mode = "n" }
+    K.map { "<S-Esc>", "Restore windows width", m.restore_windows_layout, mode = "n" }
     K.map { "<D-Esc>", "Reset layout", m.reset_layout, mode = "n" }
 end
 

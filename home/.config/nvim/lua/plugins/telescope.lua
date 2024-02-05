@@ -58,15 +58,15 @@ function M.setup()
             buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
             mappings = {
                 n = {
-                    ["<D-Down>"] = actions.file_split,
-                    ["<D-Right>"] = actions.file_vsplit,
+                    ["<S-Down>"] = actions.file_split,
+                    ["<S-Right>"] = actions.file_vsplit,
                     ["<C-t>"] = actions.preview_scrolling_up,
                     ["<C-h>"] = actions.preview_scrolling_down,
                     ["<D-w>"] = actions.close,
                 },
                 i = {
-                    ["<D-Down>"] = actions.file_split,
-                    ["<D-Right>"] = actions.file_vsplit,
+                    ["<S-Down>"] = actions.file_split,
+                    ["<S-Right>"] = actions.file_vsplit,
                     ["<C-t>"] = actions.preview_scrolling_up,
                     ["<C-h>"] = actions.preview_scrolling_down,
                     ["<D-w>"] = actions.close,
@@ -237,13 +237,13 @@ function M.keymaps()
     K.map { "<C-o>", "Open workspace symbols", m.open_workspace_symbols, mode = "n" }
 
     K.map {
-        "<C-.>",
+        "<D-.>",
         "List LSP diagnostics with ERROR severity for the whole workspace",
         function() m.open_diagnostics({ min_severity = "ERROR", current_buffer = false }) end,
         mode = { "n", "v" },
     }
     K.map {
-        "<C-,>",
+        "<D-,>",
         "List LSP diagnostics with WARN & ERROR severities for the whole workspace",
         function() m.open_diagnostics({ min_severity = "WARN", current_buffer = false }) end,
         mode = { "n", "v" },

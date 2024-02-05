@@ -24,10 +24,10 @@ function M.keymaps()
     K.map { "<C-c>", "Change inner word", [["xciw]], mode = "n" }
     K.map { "<C-y>", "Yank inner word", "yiw", mode = "n" }
 
-    K.map { "<D-Del>", "Insert new line above", "O<Esc>", mode = "n" }
-    K.map { "<D-CR>", "Insert new line below", "o<Esc>", mode = "n" }
-    K.map { "<D-Del>", "Insert new line above", "<Esc>O", mode = "i" }
-    K.map { "<D-CR>", "Insert new line below", "<Esc>o", mode = "i" }
+    K.map { "<S-Del>", "Insert new line above", "O<Esc>", mode = "n" }
+    K.map { "<S-CR>", "Insert new line below", "o<Esc>", mode = "n" }
+    K.map { "<S-Del>", "Insert new line above", "<Esc>O", mode = "i" }
+    K.map { "<S-CR>", "Insert new line below", "<Esc>o", mode = "i" }
 
     K.map { "<D-d>", "Duplicate line", [["yyy"yp]], mode = "n" }
     K.map { "<D-d>", "Duplicate line", [[<Esc>"yyy"ypgi]], mode = "i" }
@@ -72,7 +72,8 @@ function M.keymaps()
     K.map { "u", "Unset undo", "<Nop>", mode = "n" }
     K.map { "<D-u>", "Undo", "u", mode = { "n", "v" } }
     K.map { "<D-u>", "Undo", "<Esc>ui", mode = "i" }
-    K.map { "<C-r>", "Redo", "<Esc><C-r>i", mode = "i" } -- Remaped from <D-S-z> to <C-r> via Karabiner
+    K.map { "<D-U>", "Redo", "<C-r>", mode = { "n", "v" } }
+    K.map { "<D-U>", "Redo", "<Esc><C-r>i", mode = "i" }
 
     K.map { "<D-s>", "Save files", "<Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = "n" }
     K.map { "<D-s>", "Save files", "<Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = { "i", "v" } }
