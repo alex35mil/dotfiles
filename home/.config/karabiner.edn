@@ -38,18 +38,67 @@
         {
             :des "Global configuration"
             :rules [
-                [:!CShyphen :!CSperiod] ; Cmd+_ -> Cmd+Shift+.: I remapped Shift+. to _ in Oryx, gettig Cmd+Shift+. back to reveal hidden files in Finder
-                [:f21 :!TFf8] ; F21 -> Ctrl + Fn + F8: toggle menubar no macOS
+                ; Homerow mods safety belt for Dvorak layout
+                [:!Qh [:t :h]]
+                [:!Qn [:t :n]]
+                [:!Eh [:s :h]]
+                [:!Et [:s :t]]
+                [:!Wt [:n :t]]
+                [:!Wd [:n :d]]
+                [:!Cu [:e :u]]
+                [:!Co [:e :o]]
+                [:!Ca [:e :a]]
+                [:!Ci [:e :i]]
+                [:!Se [:u :e]]
+                [:!Tu [:o :u]]
+                [:!Te [:o :e]]
+                [:!Ti [:o :i]]
+                [:!Ou [:a :u]]
+
+                ; F21 -> Ctrl + Fn + F8: toggle menubar no macOS
+                [:f21 :!TFf8]
             ]
         }
 
         {
             :des "Alacritty configuration"
             :rules [
-                [:##left_command :left_control [:alacritty]] ; Cmd -> Ctrl
-                [:##left_control :left_command [:alacritty]] ; Ctrl -> Cmd
+                ; Cmd -> Ctrl
+                [:##left_command :left_control [:alacritty]]
+                [:##right_command :right_control [:alacritty]]
+
+                ; Ctrl -> Cmd
+                [:##left_control :left_command [:alacritty]]
+                [:##right_control :right_command [:alacritty]]
+
+                ; Restore Cmd+Shift
+                ; It works only if Cmd is pressed first
+                [:!Tleft_shift :!Cleft_shift [:alacritty]]
+                [:!Wright_shift :!Qright_shift [:alacritty]]
+
+                ; If Shift is pressed first, I didn't find any other way
+                ; rather than explicitly defining all combinations
+                [:!WRy :!QRy [:alacritty]]
+                [:!WRp :!QRp [:alacritty]]
+                [:!WRe :!QRe [:alacritty]]
+                [:!WRa :!QRa [:alacritty]]
+                [:!WRx :!QRx [:alacritty]]
+                [:!WRk :!QRk [:alacritty]]
+                [:!WRj :!QRj [:alacritty]]
+                [:!WRspacebar :!QRspacebar [:alacritty]]
+
+                [:!TSf :!CSf [:alacritty]]
+                [:!TSd :!CSd [:alacritty]]
+                [:!TSt :!CSt [:alacritty]]
+                [:!TSs :!CSs [:alacritty]]
+                [:!TSb :!CSb [:alacritty]]
+                [:!TSm :!CSm [:alacritty]]
+                [:!TSw :!CSw [:alacritty]]
+                [:!TSv :!CSv [:alacritty]]
+                [:!TSdelete_or_backspace :!CSdelete_or_backspace [:alacritty]]
+
+                ; Restore os-specific combinations
                 [:!Ttab :!Ctab [:alacritty]] ; Restore Cmd+Tab
-                [:!Tleft_shift :!Cleft_shift [:alacritty]] ; Restore Cmd+Shift+Tab
                 [:!Tv :!Cv [:alacritty]] ; Restore Cmd+V
                 [:!Tm :!Tz [:alacritty]] ; Remap Ctrl+M to Ctrl+Z
             ]
@@ -58,8 +107,7 @@
         {
             :des "Neovide configuration"
             :rules [
-                [:!CSz :!Tr [:neovide]] ; Cmd+Shift+Z -> Ctrl+R: Redo
-                [:!Ch :!Oh [:neovide]] ; Cmd+H -> Opt+H: move half page down
+                [:!Ch :!Oh [:neovide]] ; Cmd+H -> Opt+H
             ]
         }
 
