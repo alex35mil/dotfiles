@@ -74,10 +74,12 @@ function M.get_sidenotes()
 
     local tab = nil
 
-    for _, t in ipairs(state.tabs) do
-        if t.id == current_tab then
-            tab = t
-            break
+    if state.tabs ~= nil then
+        for _, t in ipairs(state.tabs) do
+            if t.id == current_tab then
+                tab = t
+                break
+            end
         end
     end
 
