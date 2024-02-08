@@ -12,17 +12,19 @@ function M.keymaps()
         function() return 'pgv"' .. vim.v.register .. "ygv" end,
         mode = "v",
         expr = true,
-
     }
+
     K.map { "d", "Don't replace clipboard content when deleting", [["_d]], mode = { "n", "v" } }
+    K.map { "D", "Don't replace clipboard content when deleting", [["_D]], mode = { "n", "v" } }
     K.map { "s", "Don't replace clipboard content when inserting", [["xs]], mode = "v" }
     K.map { "c", "Don't replace clipboard content when changing", [["xc]], mode = { "n", "v" } }
 
+    K.map { "<M-h>", "Go to the top of the window", "H", mode = { "n", "v" } }
+
     K.map { "<CR>", "Change inner word", [["xciw]], mode = "n" }
     K.map { "<CR>", "Change seletion", [["xc]], mode = "v" }
-    K.map { "<C-s>", "Select inner word", "viw", mode = "n" }
-    K.map { "<C-c>", "Change inner word", [["xciw]], mode = "n" }
-    K.map { "<C-y>", "Yank inner word", "yiw", mode = "n" }
+    K.map { "<M-w>", "Select inner word", "viw", mode = "n" }
+    K.map { "<M-y>", "Yank inner word", "yiw", mode = "n" }
 
     K.map { "<S-Del>", "Insert new line above", "O<Esc>", mode = "n" }
     K.map { "<S-CR>", "Insert new line below", "o<Esc>", mode = "n" }
