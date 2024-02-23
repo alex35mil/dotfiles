@@ -12,9 +12,27 @@
 [http]
     postBuffer = 524288000
 
+[init]
+	defaultBranch = "main"
+
+[branch]
+    sort = "-committerdate"
+
 [push]
     default = "simple"
     followTags = true
+
+[pull]
+	rebase = true
+
+[diff]
+    algorithm = "histogram"
+
+[merge]
+    conflictStyle = "zdiff3"
+
+[rerere]
+    enabled = true
 
 [alias]
     # Delete all merged branches except for the currently checked out one.
