@@ -52,9 +52,9 @@ function M.keymaps()
     K.map { "<D-Left>", "Jump to the beginning of the line", "<C-o>I", mode = "i" }
     K.map { "<D-Right>", "Jump to the end of the line", "<C-o>A", mode = "i" }
     K.map { "<M-BS>", "Delete word to the left", "<C-w>", mode = "i" }
-    K.map { "<C-M-Right>", "Delete word to the right", "<C-o>dw", mode = "i" }
+    K.map { "<M-Del>", "Delete word to the right", "<C-o>de", mode = "i" }
     K.map { "<D-BS>", "Delete everything to the left", "<C-u>", mode = "i" }
-    K.map { "<C-D-Right>", "Delete everything to the right", "<C-o>D", mode = "i" }
+    K.map { "<D-Del>", "Delete everything to the right", "<C-o>D", mode = "i" }
 
     K.map { "<D-a>", "Select all", "ggVG", mode = "n" }
     K.map { "<D-a>", "Select all", "<Esc>ggVG", mode = { "i", "v" } }
