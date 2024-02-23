@@ -15,6 +15,7 @@ function M.setup()
 
     local lua = require "plugins.lsp.servers.lua"
     local rust = require "plugins.lsp.servers.rust"
+    local ocaml = require "plugins.lsp.servers.ocaml"
     local rescript = require "plugins.lsp.servers.rescript"
     local typescript = require "plugins.lsp.servers.typescript"
     local json = require "plugins.lsp.servers.json"
@@ -35,7 +36,8 @@ function M.setup()
     mason.setup()
 
     lua.setup(config)
-    rust.setup(config)
+    rust.setup()
+    ocaml.setup(config)
     rescript.setup(config)
     typescript.setup(config)
     json.setup(config)
