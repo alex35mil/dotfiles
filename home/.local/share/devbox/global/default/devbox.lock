@@ -89,6 +89,26 @@
       "source": "devbox-search",
       "version": "1.4.4"
     },
+    "nnn@latest": {
+      "last_modified": "2024-01-14T03:55:27Z",
+      "resolved": "github:NixOS/nixpkgs/dd5621df6dcb90122b50da5ec31c411a0de3e538#nnn",
+      "source": "devbox-search",
+      "version": "4.9",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/nn4axglngqz2wpr9rn9mkbdblfdm831i-nnn-4.9"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/49ll951w648fafx88h0n7bxf2mwifr13-nnn-4.9"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/a145i6kjyvvz3zjf2hb512j1vc590igg-nnn-4.9"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/prai5aq98hhrlhagvrwp4hkfp3s0qv2r-nnn-4.9"
+        }
+      }
+    },
     "prettierd@latest": {
       "last_modified": "2023-12-13T22:54:10Z",
       "resolved": "github:NixOS/nixpkgs/fd04bea4cbf76f86f244b9e2549fca066db8ddff#prettierd",
@@ -110,6 +130,26 @@
       "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#skim",
       "source": "devbox-search",
       "version": "0.10.4"
+    },
+    "spicetify-cli@latest": {
+      "last_modified": "2024-02-05T02:15:44Z",
+      "resolved": "github:NixOS/nixpkgs/0a254180b4cad6be45aa46dce896bdb8db5d2930#spicetify-cli",
+      "source": "devbox-search",
+      "version": "2.31.0",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/nx6kx68akm51na2ib1zag8mqfcqg381d-spicetify-cli-2.31.0"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/npdih4y4a53asg744xxagyh61avnrvh4-spicetify-cli-2.31.0"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/2v3qhsvx0palccxc0401b99sq359y4d6-spicetify-cli-2.31.0"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/3s355nvv9135zdk7v2gk0mz73ayflxxh-spicetify-cli-2.31.0"
+        }
+      }
     },
     "starship@latest": {
       "last_modified": "2022-04-16T03:10:56Z",
