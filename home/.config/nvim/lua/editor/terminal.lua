@@ -10,7 +10,8 @@ end
 
 function m.paste()
     local content = vim.fn.getreg("*")
-    vim.api.nvim_put({ content }, "", true, true)
+    content = vim.api.nvim_replace_termcodes(content, true, true, true)
+    vim.api.nvim_feedkeys(content, "t", true)
 end
 
 return M
