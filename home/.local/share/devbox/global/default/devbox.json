@@ -29,8 +29,6 @@
     "watchexec@latest",
     "prettierd@latest",
     "yamlfmt@latest",
-    "jq@latest",
-    "spicetify-cli@latest",
-    "nnn@latest"
+    "jq@latest"
   ]
 }
