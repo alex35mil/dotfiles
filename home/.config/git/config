@@ -38,6 +38,9 @@
     # Delete all merged branches except for the currently checked out one.
     dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
+    # Show parent branch
+    parent = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
+
     # Show log in a pretty format with relative dates, commit hash, message, author, and date.
     # The '%h' is the abbreviated hash, '%s' is the subject, '%ad' is the author date, and '%an' is the author name.
     history = "log --pretty=format:'%C(yellow)%h%C(reset) - %s %C(dim)%ad <%an>' --date=relative"
