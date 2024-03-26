@@ -9,7 +9,7 @@
 
 <h2 align="center">Notes</h2>
 <p align="center">
-    Primary tools: <b>Zsh</b>, <b>Alacritty</b> (with <b>Zellij</b>), <b>Neovim</b> (with <b>Neovide</b>). 
+    Primary tools: <b>Zsh</b>, <b>Alacritty</b> (with <b>Zellij</b>), <b>Neovim</b> (with <b>Neovide</b>).
 </p>
 
 <p align="center">

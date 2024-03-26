@@ -8,4 +8,5 @@ cargo install --locked \
     cargo-wasi \
     cargo-watch \
     sea-orm-cli \
-    sqlx-cli
+    sqlx-cli \
+    typos-cli

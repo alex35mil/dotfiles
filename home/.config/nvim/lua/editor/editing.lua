@@ -19,8 +19,6 @@ function M.keymaps()
     K.map { "s", "Don't replace clipboard content when inserting", [["xs]], mode = "v" }
     K.map { "c", "Don't replace clipboard content when changing", [["xc]], mode = { "n", "v" } }
 
-    K.map { "<M-h>", "Go to the top of the window", "H", mode = { "n", "v" } }
-
     K.map { "<CR>", "Change inner word", [["xciw]], mode = "n" }
     K.map { "<CR>", "Change seletion", [["xc]], mode = "v" }
     K.map { "<D-CR>", "Change inner word", [[<Esc>"xciw]], mode = "i" }
@@ -78,6 +76,8 @@ function M.keymaps()
     K.map { "<D-U>", "Redo", "<C-r>", mode = { "n", "v" } }
     K.map { "<D-U>", "Redo", "<Esc><C-r>i", mode = "i" }
 
+    K.map { "<M-h>", "Format and lint", m.format_and_lint, mode = { "n", "v", "i" } }
+
     K.map { "<D-s>", "Save files", "<Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = "n" }
     K.map { "<D-s>", "Save files", "<Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = { "i", "v" } }
 end
@@ -122,6 +122,14 @@ function m.jump_to_end_of_word()
     elseif current_col ~= end_col then
         vim.cmd("normal! l")
     end
+end
+
+function m.format_and_lint()
+    local formatter = require "plugins.conform"
+    local linter = require "plugins.lint"
+
+    formatter.format()
+    linter.lint()
 end
 
 return M

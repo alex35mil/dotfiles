@@ -30,66 +30,7 @@ local autocmds = {
         {
             pattern = "*",
             callback = function()
-                -- for some reason, ++nested doesn't trigger BufWritePre
-                -- also, when loosing focus when filetree is active, neovide panics - hence `silent!`
-                vim.cmd "silent! doautocmd BufWritePre <afile>"
                 vim.cmd "silent! wa"
-            end,
-        },
-    },
-    {
-        { "BufWritePre" },
-        {
-            pattern = "*",
-            callback = function(args)
-                local filetype = vim.bo.filetype
-
-                local do_not_autoformat = {
-                    "markdown",
-                    "json",
-                }
-
-                if vim.tbl_contains(do_not_autoformat, filetype) then return end
-
-                local clients = vim.lsp.get_clients()
-
-                local client
-
-                for _, c in ipairs(clients) do
-                    if c.config ~= nil and c.config.filetypes ~= nil then
-                        for _, ft in ipairs(c.config.filetypes) do
-                            if ft == filetype and c.server_capabilities.documentFormattingProvider then
-                                client = c
-                                break
-                            end
-                        end
-                    end
-
-                    if client then
-                        break
-                    end
-                end
-
-                if client then
-                    vim.lsp.buf.format { async = false }
-                else
-                    local bufnr = args.buf
-                    local modifiable = vim.api.nvim_buf_get_option(bufnr, "modifiable")
-
-                    if bufnr == -1 or not modifiable then return end
-
-                    local conform = require "conform"
-
-                    local formatted = conform.format({ bufnr = bufnr })
-
-                    if formatted then return end
-
-                    local trailspace = require "mini.trailspace"
-
-                    vim.api.nvim_buf_set_lines(0, 0, vim.fn.nextnonblank(1) - 1, true, {})
-                    trailspace.trim()
-                    trailspace.trim_last_lines()
-                end
             end,
         },
     },

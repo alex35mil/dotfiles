@@ -186,10 +186,17 @@ local plugins = {
     },
 
     {
+        "mfussenegger/nvim-lint",
+        version = "*",
+        event = "BufEnter",
+        config = require("plugins.lint").setup,
+    },
+
+    {
         "stevearc/conform.nvim",
         version = "*",
         event = "BufEnter",
-        config = require("plugins.lsp.conform").setup,
+        config = require("plugins.conform").setup,
     },
 
     {
