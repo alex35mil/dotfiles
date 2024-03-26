@@ -4,7 +4,6 @@
         :neovide [:paths "^.*\\.cargo/bin/neovide$"]
         :xcode ["^com.apple.dt.Xcode$"]
         :things ["^com.culturedcode.ThingsMac$"]
-        :chatgpt ["^com.sindresorhus.QuickGPT"]
         :notion ["^notion.id$"]
     }
 
@@ -122,17 +121,8 @@
         {
             :des "Things configuration"
             :rules [
-                [:!Cm :!CSm [:things]] ; Move
-                [:!Ct :!CSt [:things]] ; Tag
                 [:!Cp :!Cl [:things]] ; Show in Project
-            ]
-        }
-
-        {
-            :des "ChatGPT configuration"
-            :rules [
-                [:!Cn :!CSn [:chatgpt]]
-                [:!CSn :!Cn [:chatgpt]]
+                [:!Cw :escape [:things]] ; Close
             ]
         }
 
