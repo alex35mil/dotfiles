@@ -202,7 +202,7 @@ function M.setup()
 end
 
 function M.keymaps()
-    K.map { "<M-l>", "Toggle filename in statusline", m.toggle_filename, mode = { "n", "i", "v" } }
+    K.map { "<M-s>", "Toggle filename in statusline", m.toggle_filename, mode = { "n", "i", "v" } }
 end
 
 function M.show()
