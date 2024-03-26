@@ -13,14 +13,14 @@ function M.setup()
             -- Line-comment toggle keymap
             line = "gc",
             -- Block-comment toggle keymap
-            block = "<Leader>bc",
+            block = "<Leader>cb",
         },
         -- LHS of operator-pending mappings in NORMAL and VISUAL mode
         opleader = {
             -- Line-comment keymap
             line = "gc",
             -- Block-comment keymap
-            block = "<Leader>bc",
+            block = "<Leader>cb",
         },
         -- LHS of extra mappings
         extra = {
