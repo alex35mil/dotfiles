@@ -20,10 +20,12 @@ function M.keymaps()
     K.map { "<M-S-Down>", "Move window down", function() m.reposition_windows({ action = "move_down" }) end, mode = "n" }
 
     K.map { "<M-m>", "Move windows", function() m.reposition_windows({ action = "move" }) end, mode = "n" }
-    K.map { "<M-s>", "Swap windows", function() m.reposition_windows({ action = "swap" }) end, mode = "n" }
+    K.mapseq { "<Leader>ws", "Swap windows", function() m.reposition_windows({ action = "swap" }) end, mode = "n" }
 
     K.map { "<D-Up>", "Increase window width", function() m.change_window_width("up") end, mode = "n" }
     K.map { "<D-Down>", "Decrease window width", function() m.change_window_width("down") end, mode = "n" }
+    K.map { "<D-C-Up>", "Increase window height", function() m.change_window_height("up") end, mode = "n" }
+    K.map { "<D-C-Down>", "Decrease window height", function() m.change_window_height("down") end, mode = "n" }
 
     K.map { "<S-Esc>", "Restore windows width", m.restore_windows_layout, mode = "n" }
     K.map { "<D-Esc>", "Reset layout", m.reset_layout, mode = "n" }
@@ -137,6 +139,16 @@ function m.change_window_width(direction)
         else
             vim.cmd "vertical resize -5"
         end
+    else
+        vim.api.nvim_err_writeln "Unexpected direction"
+    end
+end
+
+function m.change_window_height(direction)
+    if direction == "up" then
+        vim.cmd "resize +5"
+    elseif direction == "down" then
+        vim.cmd "resize -5"
     else
         vim.api.nvim_err_writeln "Unexpected direction"
     end

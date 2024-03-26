@@ -15,25 +15,25 @@ function M.keymaps()
         mode = { "n", "i", "v", "t", "c" },
     }
     K.mapseq {
-        "<Leader>wck",
+        "<Leader>bck",
         "Delete current buffer, even if unsaved, but do not close current window if there are multiple",
         function() m.delete_buf({ should_close_window = false, force = true }) end,
         mode = "n",
     }
     K.map {
-        "<Leader>wcc",
+        "<Leader>bcc",
         "Delete current buffer, even if unsaved, and close current window if there are multiple",
         function() m.delete_buf({ should_close_window = true, force = true }) end,
         mode = "n",
     }
     K.mapseq {
-        "<Leader>was",
+        "<Leader>bas",
         "Delete all buffers except current & unsaved",
         function() m.delete_all_bufs_except_current({ incl_unsaved = false }) end,
         mode = "n",
     }
     K.mapseq {
-        "<Leader>waf",
+        "<Leader>baf",
         "Delete all buffers except current",
         function() m.delete_all_bufs_except_current({ incl_unsaved = true }) end,
         mode = "n",
