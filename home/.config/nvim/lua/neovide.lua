@@ -6,8 +6,10 @@ if vim.g.neovide then
     vim.g.neovide_padding_right = 30
     vim.g.neovide_padding_left = 30
 
-    vim.g.neovide_floating_blur_amount_x = 2.0
-    vim.g.neovide_floating_blur_amount_y = 2.0
+    vim.g.neovide_floating_shadow = false
+
+    vim.g.neovide_floating_blur_amount_x = 0
+    vim.g.neovide_floating_blur_amount_y = 0
 
     vim.g.neovide_hide_mouse_when_typing = true
 
