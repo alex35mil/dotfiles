@@ -1,5 +1,5 @@
 # === General
-alias install="PSHELL=zsh $HOME/Dev/dotfiles/script/install.sh"
+alias dup="PSHELL=zsh $HOME/Dev/dotfiles/script/install.sh"
 
 case "$SHELL" in
     */zsh)

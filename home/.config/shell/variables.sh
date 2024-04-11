@@ -1,14 +1,6 @@
 export LANG="en_US.UTF-8"
 
-export EDITOR="nvim"
-export VISUAL="$EDITOR"
-
 export TERM="xterm-256color"
-
-export CLICOLOR="1"
-export LSCOLORS="gxfxcxdxbxegedabagacad"
-
-export DISABLE_AUTO_TITLE="true"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -21,3 +13,16 @@ SWIFT_PATH="/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin"
 NPM_PATH="$HOME/.npm-global/bin"
 
 export PATH="$SWIFT_PATH:$NPM_PATH:$PATH"
+
+export DYLD_LIBRARY_PATH="$LD_LIBRARY_PATH" # LD_LIBRARY_PATH is set by devbox
+
+# if interactive shell
+if [[ $- == *i* ]]; then
+    export EDITOR="nvim"
+    export VISUAL="$EDITOR"
+
+    export CLICOLOR="1"
+    export LSCOLORS="gxfxcxdxbxegedabagacad"
+
+    export DISABLE_AUTO_TITLE="true"
+fi
