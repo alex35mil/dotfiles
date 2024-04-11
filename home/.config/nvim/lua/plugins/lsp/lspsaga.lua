@@ -20,7 +20,7 @@ function M.setup()
             outgoing = " ",
             lines = { "┗", "┣", "┃", "━", "┏" },
             colors = {
-                normal_bg = color.popover_bg,
+                normal_bg = color.bg,
                 title_bg = color.cyan,
             },
             kind = nil,

@@ -23,9 +23,6 @@ local palette = {
     thick_line = "#73787d",
     -- bars
     bar_bg = "#2c323c",
-    -- popover
-    popover_bg = "#21262b",
-    popover_text = "#aaafb4",
     -- shades
     white = "#ffffff",
     darker_gray = "#2c323c",

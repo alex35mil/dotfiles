@@ -1,10 +1,15 @@
 local M = {}
 
-
 function M.setup()
     local plugin = require "cmp"
 
     local mapping = plugin.mapping
+
+    local bordered_window = plugin.config.window.bordered({
+        winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+        col_offset = -3,
+        side_padding = 0,
+    })
 
     plugin.setup {
         sources = {
@@ -31,11 +36,8 @@ function M.setup()
             }),
         }),
         window = {
-            completion = {
-                winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-                col_offset = -3,
-                side_padding = 0,
-            },
+            completion = bordered_window,
+            documentation = bordered_window,
         },
         formatting = {
             fields = { "kind", "abbr", "menu" },

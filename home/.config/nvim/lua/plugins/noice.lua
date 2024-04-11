@@ -21,6 +21,7 @@ function M.setup()
         },
         presets = {
             cmdline_output_to_split = true,
+            lsp_doc_border = true,
         },
         views = {
             cmdline = {
