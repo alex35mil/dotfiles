@@ -6,6 +6,8 @@ if vim.g.neovide then
     vim.g.neovide_padding_right = 30
     vim.g.neovide_padding_left = 30
 
+    vim.g.neovide_scroll_animation_length = 0.2
+
     vim.g.neovide_floating_shadow = false
 
     vim.g.neovide_floating_blur_amount_x = 0

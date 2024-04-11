@@ -46,7 +46,7 @@ function m.scroll_vertical(direction)
 
         keys.send(keymap, { mode = "n" })
     else
-        local lines = 5
+        local lines = 10
 
         local keymap
 
