@@ -61,6 +61,26 @@
       "source": "devbox-search",
       "version": "0.6.0"
     },
+    "gpgme@latest": {
+      "last_modified": "2024-03-29T12:35:36Z",
+      "resolved": "github:NixOS/nixpkgs/807c549feabce7eddbf259dbdcec9e0600a0660d#gpgme",
+      "source": "devbox-search",
+      "version": "1.23.2",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/99fvdabqv2hi2jaxbc0cj5rv7f9rgqsh-gpgme-1.23.2"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/qd4hza4v8p7nib5jmkvisy07m3df7129-gpgme-1.23.2"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/ykxpjvd4kfk38r3y9mvp40b1glhzyw6f-gpgme-1.23.2"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/jkrrjfvyn2hjmbg97nx3x2gl95qib48j-gpgme-1.23.2"
+        }
+      }
+    },
     "htop@latest": {
       "last_modified": "2023-09-17T10:54:49Z",
       "resolved": "github:NixOS/nixpkgs/5148520bfab61f99fd25fb9ff7bfbb50dad3c9db#htop",
@@ -76,6 +96,26 @@
     "lazygit": {
       "resolved": "github:NixOS/nixpkgs/f80ac848e3d6f0c12c52758c0f25c10c97ca3b62#lazygit",
       "source": "nixpkg"
+    },
+    "libgit2@latest": {
+      "last_modified": "2024-03-22T11:26:23Z",
+      "resolved": "github:NixOS/nixpkgs/a3ed7406349a9335cb4c2a71369b697cecd9d351#libgit2",
+      "source": "devbox-search",
+      "version": "1.7.2",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/zm0an9h00zy9xy042hzv3c10bjgwzxb2-libgit2-1.7.2-lib"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/r91478n56inwbiva7b0w03lh1v0w1xy2-libgit2-1.7.2-lib"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/nynqwimh6f9lc0l3f5w0g16d4vz1m9yh-libgit2-1.7.2-lib"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/zc1m4qm905z24cdmhckdpvhn2vd03vjr-libgit2-1.7.2-lib"
+        }
+      }
     },
     "libiconv@latest": {
       "last_modified": "2023-09-17T10:54:49Z",

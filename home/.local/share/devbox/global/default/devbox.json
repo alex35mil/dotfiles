@@ -29,6 +29,8 @@
     "watchexec@latest",
     "prettierd@latest",
     "yamlfmt@latest",
-    "jq@latest"
+    "jq@latest",
+    "libgit2@latest",
+    "gpgme@latest"
   ]
 }

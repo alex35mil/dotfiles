@@ -294,6 +294,22 @@ local plugins = {
     },
 
     {
+        "SuperBo/fugit2.nvim",
+        version = "*",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "nvim-tree/nvim-web-devicons",
+            "nvim-lua/plenary.nvim",
+            {
+                "chrisgrieser/nvim-tinygit",
+                dependencies = { "stevearc/dressing.nvim" },
+            },
+        },
+        cmd = { "Fugit2", "Fugit2Graph" },
+        config = true,
+    },
+
+    {
         "sindrets/diffview.nvim",
         version = "*",
         dependencies = { "nvim-lua/plenary.nvim" },
