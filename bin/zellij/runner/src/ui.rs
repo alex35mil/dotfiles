@@ -23,12 +23,12 @@ use unicode_width::UnicodeWidthStr;
 
 use crate::{action::Action, dir::Dir, log, options::OPTIONS, zellij};
 
-pub(crate) fn action_selector(sessions: Vec<String>) -> Action {
-    let screen = ActionSelectorScreen::new(&sessions);
+pub(crate) fn action_selector(sessions: zellij::Sessions) -> Action {
+    let screen = ActionSelectorScreen::new(sessions.clone());
     UI::render(Box::new(screen), sessions)
 }
 
-pub(crate) fn new_session_prompt(sessions: Vec<String>) -> Action {
+pub(crate) fn new_session_prompt(sessions: zellij::Sessions) -> Action {
     let screen = ChangeCurrentDirPromptScreen;
     UI::render(Box::new(screen), sessions)
 }
@@ -50,7 +50,7 @@ struct UI<'a> {
 
 struct UIContext<'a> {
     cwd: Dir,
-    sessions: Vec<String>,
+    sessions: zellij::Sessions,
     banner: Option<Banner<'a>>,
 }
 
@@ -60,7 +60,7 @@ enum ScreenResult {
 }
 
 impl<'a> UI<'a> {
-    pub(crate) fn render(screen: Box<dyn Screen>, sessions: Vec<String>) -> Action {
+    pub(crate) fn render(screen: Box<dyn Screen>, sessions: zellij::Sessions) -> Action {
         let mut ui = Self {
             screen,
             context: UIContext {
@@ -218,7 +218,6 @@ impl Banners {
                 let banner = &banners[idx];
                 let lines = banner
                     .lines()
-                    .into_iter()
                     .map(|l| Spans(vec![Span::raw(l)]))
                     .collect::<Vec<Spans>>();
 
@@ -399,7 +398,7 @@ where
                 }
                 EventResult::Cancel => {
                     break Ok(ScreenResult::NextScreen(Box::new(
-                        ActionSelectorScreen::new(&ctx.sessions),
+                        ActionSelectorScreen::new(ctx.sessions.clone()),
                     )))
                 }
                 EventResult::Exit => break Ok(ScreenResult::Action(Action::Exit(Ok(())))),
@@ -416,6 +415,15 @@ enum SelectorValue<T> {
 struct SelectorItem<'a, T> {
     label: Text<'a>,
     value: SelectorValue<T>,
+}
+
+impl<'a, T> SelectorItem<'a, T> {
+    pub fn pad() -> Self {
+        Self {
+            label: " ".into(),
+            value: SelectorValue::Decortive,
+        }
+    }
 }
 
 struct Selector<'a, T> {
@@ -558,7 +566,7 @@ pub struct ActionSelectorScreen<'a> {
 }
 
 impl<'a> ActionSelectorScreen<'a> {
-    pub fn new(sessions: &[String]) -> Self {
+    pub fn new(sessions: zellij::Sessions) -> Self {
         let items = Self::build_selector_list(sessions);
 
         Self {
@@ -567,18 +575,42 @@ impl<'a> ActionSelectorScreen<'a> {
         }
     }
 
-    fn build_selector_list(sessions: &[String]) -> Vec<SelectorItem<'a, ActionSelectorItem>> {
-        let mut items = sessions
+    fn build_selector_list(
+        sessions: zellij::Sessions,
+    ) -> Vec<SelectorItem<'a, ActionSelectorItem>> {
+        let no_sessions = sessions.is_empty();
+
+        let (active_sessions, exited_sessions) = sessions.split();
+
+        let mut items = active_sessions
             .iter()
             .map(|session| SelectorItem {
-                label: session.clone().into(),
+                label: session.name.clone().into(),
                 value: SelectorValue::Selectable(ActionSelectorItem::Session {
-                    name: session.to_owned(),
+                    name: session.name.to_owned(),
                 }),
             })
             .collect::<Vec<SelectorItem<ActionSelectorItem>>>();
 
-        if !sessions.is_empty() {
+        if !exited_sessions.is_empty() {
+            if !active_sessions.is_empty() {
+                items.push(SelectorItem::pad());
+            }
+            items.push(SelectorItem {
+                value: SelectorValue::Decortive,
+                label: Span::styled("Exited sessions:", Style::default().fg(Color::DarkGray))
+                    .into(),
+            });
+            items.extend(exited_sessions.into_iter().map(|session| SelectorItem {
+                label: Span::styled(session.name.clone(), Style::default().fg(Color::Gray)).into(),
+                value: SelectorValue::Selectable(ActionSelectorItem::Session {
+                    name: session.name.clone(),
+                }),
+            }));
+        }
+
+        if !no_sessions {
+            items.push(SelectorItem::pad());
             items.push(SelectorItem {
                 value: SelectorValue::Decortive,
                 label: Span::styled("---", Style::default().fg(Color::DarkGray)).into(),
@@ -655,15 +687,15 @@ impl<'a> ActionSelectorScreen<'a> {
             ctx.sessions
                 .iter()
                 .filter_map(|session| {
-                    if session.contains(&self.input.value) {
+                    if session.name.contains(&self.input.value) {
                         Some(session.to_owned())
                     } else {
                         None
                     }
                 })
-                .collect::<Vec<String>>()
+                .collect::<zellij::Sessions>()
         };
-        let next_items = Self::build_selector_list(&next_sessions);
+        let next_items = Self::build_selector_list(next_sessions);
         self.selector = Selector::with_items(next_items);
     }
 }
@@ -879,7 +911,7 @@ impl<'a> Screen for DirSelectorScreen<'a> {
                 }
                 EventResult::Cancel => {
                     return Ok(ScreenResult::NextScreen(Box::new(
-                        ActionSelectorScreen::new(&ctx.sessions),
+                        ActionSelectorScreen::new(ctx.sessions.clone()),
                     )))
                 }
                 EventResult::Exit => return Ok(ScreenResult::Action(Action::Exit(Ok(())))),
@@ -1009,7 +1041,7 @@ impl Screen for SessionNameScreen {
                 }
                 EventResult::Cancel => {
                     return Ok(ScreenResult::NextScreen(Box::new(
-                        ActionSelectorScreen::new(&ctx.sessions),
+                        ActionSelectorScreen::new(ctx.sessions.clone()),
                     )))
                 }
                 EventResult::Exit => {
@@ -1192,7 +1224,7 @@ impl<'a> Screen for LayoutSelectorScreen<'a> {
                 }
                 EventResult::Cancel => {
                     return Ok(ScreenResult::NextScreen(Box::new(
-                        ActionSelectorScreen::new(&ctx.sessions),
+                        ActionSelectorScreen::new(ctx.sessions.clone()),
                     )))
                 }
                 EventResult::Exit => {

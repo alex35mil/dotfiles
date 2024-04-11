@@ -32,13 +32,13 @@ pub(crate) fn init() {
 
     let action = match zellij::list_sessions() {
         Err(error) => Action::Exit(Err(error)),
-        Ok(sessions) => match (input, sessions.as_slice()) {
-            (Some(Args { session, layout }), &[]) => Action::CreateNewSession {
+        Ok(sessions) => match (input, sessions.is_empty()) {
+            (Some(Args { session, layout }), true) => Action::CreateNewSession {
                 session,
                 layout,
                 dir: None,
             },
-            (None, &[]) => ui::new_session_prompt(sessions),
+            (None, true) => ui::new_session_prompt(sessions),
             (Some(Args { session, layout }), _) => {
                 if sessions.contains(&session) {
                     Action::AttachToSession(session)
@@ -60,10 +60,13 @@ pub(crate) fn init() {
 pub(crate) fn switch() {
     let action = match zellij::list_sessions() {
         Err(error) => Action::Exit(Err(error)),
-        Ok(sessions) => match sessions.as_slice() {
-            &[] => ui::new_session_prompt(sessions),
-            _ => ui::action_selector(sessions),
-        },
+        Ok(sessions) => {
+            if sessions.is_empty() {
+                ui::new_session_prompt(sessions)
+            } else {
+                ui::action_selector(sessions)
+            }
+        }
     };
 
     action.exec()
