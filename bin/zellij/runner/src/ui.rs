@@ -718,7 +718,10 @@ impl Screen for ChangeCurrentDirPromptScreen {
             if should_change_dir {
                 ScreenResult::NextScreen(Box::new(DirSelectorScreen::new()))
             } else {
-                ScreenResult::NextScreen(Box::new(SessionNameScreen::new(ctx.cwd.filename(), None)))
+                ScreenResult::NextScreen(Box::new(SessionNameScreen::new(
+                    SessionNameScreen::default(&ctx.cwd),
+                    None,
+                )))
             }
         };
 
@@ -867,7 +870,7 @@ impl<'a> Screen for DirSelectorScreen<'a> {
                         Ok(None) => continue,
                         Ok(Some(dir)) => {
                             let result = ScreenResult::NextScreen(Box::new(
-                                SessionNameScreen::new(dir.filename(), Some(dir)),
+                                SessionNameScreen::new(SessionNameScreen::default(&dir), Some(dir)),
                             ));
                             return Ok(result);
                         }
@@ -900,6 +903,20 @@ impl SessionNameScreen {
                 None => Input::new(label),
             },
             dir,
+        }
+    }
+
+    fn default(dir: &Dir) -> Option<String> {
+        if cfg!(target_os = "windows") {
+            dir.filename()
+        } else {
+            let home = Dir::home();
+
+            if &home == dir {
+                Some("~".to_owned())
+            } else {
+                dir.filename()
+            }
         }
     }
 
