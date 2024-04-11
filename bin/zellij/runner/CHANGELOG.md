@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+- Update to Zellij v0.10.
+- Use `~` as a default session name for a session at `HOME` directory.
+
 ## 0.3.0
 - When changing a current directory for the new session, lowercase both dir and input during a filtering of the directory list.
 
