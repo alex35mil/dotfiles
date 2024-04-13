@@ -94,24 +94,35 @@ end
 
 local severity = vim.diagnostic.severity
 
-function m.jump_to_prev_warning()
+function m.jump_to(opts)
     local diagnostic = require "lspsaga.diagnostic"
-    diagnostic:goto_prev({ severity = severity.WARN })
+
+    local goto_opts = { severity = opts.severity }
+
+    if opts.next then
+        diagnostic:goto_next(goto_opts)
+    else
+        diagnostic:goto_prev(goto_opts)
+    end
+
+    -- https://github.com/nvimdev/lspsaga.nvim/issues/1421
+    vim.cmd("normal! zz")
+end
+
+function m.jump_to_prev_warning()
+    m.jump_to({ next = false, severity = severity.WARN })
 end
 
 function m.jump_to_next_warning()
-    local diagnostic = require "lspsaga.diagnostic"
-    diagnostic:goto_next({ severity = severity.WARN })
+    m.jump_to({ next = true, severity = severity.WARN })
 end
 
 function m.jump_to_prev_error()
-    local diagnostic = require "lspsaga.diagnostic"
-    diagnostic:goto_prev({ severity = severity.ERROR })
+    m.jump_to({ next = false, severity = severity.ERROR })
 end
 
 function m.jump_to_next_error()
-    local diagnostic = require "lspsaga.diagnostic"
-    diagnostic:goto_next({ severity = severity.ERROR })
+    m.jump_to({ next = true, severity = severity.ERROR })
 end
 
 return M
