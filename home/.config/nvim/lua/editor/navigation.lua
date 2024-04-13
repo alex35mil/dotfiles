@@ -9,8 +9,8 @@ function M.keymaps()
     K.map { "<C-d>", "Scroll left", function() m.scroll_horizontal("left") end, mode = { "n", "v", "i" } }
     K.map { "<C-n>", "Scroll right", function() m.scroll_horizontal("right") end, mode = { "n", "v", "i" } }
 
-    K.map { "<C-Left>", "History: back", "<C-o>", mode = "n" }
-    K.map { "<C-Right>", "History: forward", "<C-i>", mode = "n" }
+    K.map { "<D-S-Left>", "History: back", "<C-o>", mode = "n" }
+    K.map { "<D-S-Right>", "History: forward", "<C-i>", mode = "n" }
 end
 
 -- Private

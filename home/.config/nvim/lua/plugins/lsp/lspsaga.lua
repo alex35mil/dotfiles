@@ -86,8 +86,8 @@ function M.keymaps()
 
     K.map { "<D-S-Down>", "LSP: Diagnostic next error", m.jump_to_next_error, mode = "n" }
     K.map { "<D-S-Up>", "LSP: Diagnostic previous error", m.jump_to_prev_error, mode = "n" }
-    K.map { "<D-S-Left>", "LSP: Diagnostic next warning", m.jump_to_next_warning, mode = "n" }
-    K.map { "<D-S-Right>", "LSP: Diagnostic previous warning", m.jump_to_prev_warning, mode = "n" }
+    K.map { "<D-C-S-Down>", "LSP: Diagnostic next warning", m.jump_to_next_warning, mode = "n" }
+    K.map { "<D-C-S-Up>", "LSP: Diagnostic previous warning", m.jump_to_prev_warning, mode = "n" }
 end
 
 -- Private
