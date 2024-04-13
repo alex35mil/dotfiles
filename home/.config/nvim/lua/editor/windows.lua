@@ -14,18 +14,17 @@ function M.keymaps()
     K.map { "<S-Up>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "t" } }
     K.map { "<S-Right>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "v", "t" } }
 
-    K.map { "<M-S-Left>", "Move window to the left", function() m.reposition_windows({ action = "move_left" }) end, mode = "n" }
-    K.map { "<M-S-Right>", "Move window to the right", function() m.reposition_windows({ action = "move_right" }) end, mode = "n" }
-    K.map { "<M-S-Up>", "Move window up", function() m.reposition_windows({ action = "move_up" }) end, mode = "n" }
-    K.map { "<M-S-Down>", "Move window down", function() m.reposition_windows({ action = "move_down" }) end, mode = "n" }
+    K.map { "<C-Left>", "Move window to the left", function() m.reposition_windows({ action = "move_left" }) end, mode = "n" }
+    K.map { "<C-Right>", "Move window to the right", function() m.reposition_windows({ action = "move_right" }) end, mode = "n" }
+    K.map { "<C-Up>", "Move window up", function() m.reposition_windows({ action = "move_up" }) end, mode = "n" }
+    K.map { "<C-Down>", "Move window down", function() m.reposition_windows({ action = "move_down" }) end, mode = "n" }
 
-    K.map { "<M-m>", "Move windows", function() m.reposition_windows({ action = "move" }) end, mode = "n" }
     K.mapseq { "<Leader>ws", "Swap windows", function() m.reposition_windows({ action = "swap" }) end, mode = "n" }
 
-    K.map { "<D-Up>", "Increase window width", function() m.change_window_width("up") end, mode = "n" }
-    K.map { "<D-Down>", "Decrease window width", function() m.change_window_width("down") end, mode = "n" }
-    K.map { "<D-C-Up>", "Increase window height", function() m.change_window_height("up") end, mode = "n" }
-    K.map { "<D-C-Down>", "Decrease window height", function() m.change_window_height("down") end, mode = "n" }
+    K.map { "<D-Left>", "Increase window width", function() m.change_window_width("up") end, mode = "n" }
+    K.map { "<D-Right>", "Decrease window width", function() m.change_window_width("down") end, mode = "n" }
+    K.map { "<D-Up>", "Increase window height", function() m.change_window_height("up") end, mode = "n" }
+    K.map { "<D-Down>", "Decrease window height", function() m.change_window_height("down") end, mode = "n" }
 
     K.map { "<S-Esc>", "Restore windows width", m.restore_windows_layout, mode = "n" }
     K.map { "<D-Esc>", "Reset layout", m.reset_layout, mode = "n" }
@@ -84,35 +83,36 @@ end
 function m.reposition_windows(opts)
     local nnp = require "plugins.no-neck-pain"
 
+    local action = opts.action
+
     local windows = m.get_normal_tab_windows({ incl_sidenotes = false })
     local sidenotes_visible = nnp.are_sidenotes_visible()
 
-    if #windows == 2 then
+    if #windows == 2 and action == "swap" then
         if sidenotes_visible then nnp.disable() end
         vim.cmd "wincmd r"
         if sidenotes_visible then nnp.enable() end
-    elseif #windows > 2 then
+    elseif #windows > 1 then
         local winshift = require "plugins.winshift"
 
-        local action = opts.action
-
-        if action == "move" then
-            if sidenotes_visible then nnp.disable() end
-            winshift.move()
-            -- FIXME: With sidenotes visible, layout messes up.
-            -- It makes sense to disable nnp while moving, and re-enable it afterwards,
-            -- but winshift doesn't provide an api to do that:
-            -- https://github.com/sindrets/winshift.nvim/issues/19
-        elseif action == "swap" then
+        if action == "swap" then
             winshift.swap()
         elseif action == "move_left" then
+            nnp.disable()
             winshift.move_left()
+            nnp.enable()
         elseif action == "move_right" then
+            nnp.disable()
             winshift.move_right()
+            nnp.enable()
         elseif action == "move_up" then
+            nnp.disable()
             winshift.move_up()
+            nnp.enable()
         elseif action == "move_down" then
+            nnp.disable()
             winshift.move_down()
+            nnp.enable()
         else
             vim.api.nvim_err_writeln "Unexpected windows action"
         end
