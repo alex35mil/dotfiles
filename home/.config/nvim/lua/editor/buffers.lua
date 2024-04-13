@@ -153,8 +153,11 @@ function m.delete_buf(options)
     end
 
     if #tab_windows > 1 and opts.should_close_window then
+        local nnp = require "plugins.no-neck-pain"
+
         vim.cmd "silent! write"
         vim.cmd.close()
+        nnp.reload()
 
         -- We don't want to destroy the buffer that is shown in another window
         if not is_opened_elsewhere then
