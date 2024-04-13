@@ -17,9 +17,9 @@ end
 
 function m.scroll_horizontal(direction)
     if direction == "left" then
-        vim.cmd "normal! 5zh"
+        vim.cmd "normal! 7zh"
     elseif direction == "right" then
-        vim.cmd "normal! 5zl"
+        vim.cmd "normal! 7zl"
     else
         vim.api.nvim_err_writeln "Unexpected scroll direction"
     end
@@ -46,7 +46,7 @@ function m.scroll_vertical(direction)
 
         keys.send(keymap, { mode = "n" })
     else
-        local lines = 10
+        local lines = 15
 
         local keymap
 
