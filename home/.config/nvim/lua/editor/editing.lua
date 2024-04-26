@@ -73,10 +73,10 @@ function M.keymaps()
     K.map { "<Esc>", "Drop search highlight", "<Cmd>silent noh<CR>", mode = "n", silent = false }
 
     K.map { "u", "Unset undo", "<Nop>", mode = "n" }
-    K.map { "<D-u>", "Undo", "u", mode = { "n", "v" } }
-    K.map { "<D-u>", "Undo", "<Esc>ui", mode = "i" }
-    K.map { "<D-U>", "Redo", "<C-r>", mode = { "n", "v" } }
-    K.map { "<D-U>", "Redo", "<Esc><C-r>i", mode = "i" }
+    K.map { "<C-u>", "Undo", "u", mode = { "n", "v" } }
+    K.map { "<C-u>", "Undo", "<Esc>ui", mode = "i" }
+    K.map { "<C-r>", "Redo", "<C-r>", mode = { "n", "v" } }
+    K.map { "<C-r>", "Redo", "<Esc><C-r>i", mode = "i" }
 
     K.map { "<M-h>", "Format and lint", m.format_and_lint, mode = { "n", "v", "i" } }
 
