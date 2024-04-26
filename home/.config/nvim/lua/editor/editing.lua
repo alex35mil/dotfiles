@@ -46,6 +46,8 @@ function M.keymaps()
     K.map { "<Tab>", "Indent", ">gv", mode = "v" }
     K.map { "<S-Tab>", "Unindent", "<gv", mode = "v" }
 
+    K.map { "<M-Left>", "Jump one word to the left", "b", mode = { "n", "v" } }
+    K.map { "<M-Right>", "Jump one word to the right", "w", mode = { "n", "v" } }
     K.map { "<M-Left>", "Jump one word to the left", "<C-o>b", mode = "i" }
     K.map { "<M-Right>", "Jump one word to the right", m.jump_to_end_of_word, mode = "i" }
     K.map { "<D-Left>", "Jump to the beginning of the line", "<C-o>I", mode = "i" }
