@@ -34,6 +34,9 @@
         ;; Karabiner definition of mandatory and optional
         ;; https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-definition/from/modifiers/
 
+        ;; Goku keys
+        ;; https://github.com/yqrashawn/GokuRakuJoudo/blob/master/src/karabiner_configurator/keys_info.clj
+
         {
             :des "Global configuration"
             :rules [
