@@ -10,6 +10,7 @@ function M.setup()
             },
         },
         popup = {
+            border = "rounded",
             keys = {
                 hide = { "<Esc>", "<D-w>" },
                 open_url = { "<Cr>" },

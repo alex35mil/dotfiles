@@ -380,6 +380,9 @@ local options = {
         lazy = false,
         version = "*",
     },
+    ui = {
+        border = "rounded",
+    },
     lockfile = "~/.config/nvim/lazy-lock.json",
 }
 

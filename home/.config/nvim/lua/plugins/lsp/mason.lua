@@ -5,7 +5,11 @@ function M.setup()
     local mason = require "mason"
     local config = require "mason-lspconfig"
 
-    mason.setup {}
+    mason.setup {
+        ui = {
+            border = "rounded",
+        },
+    }
 
     config.setup {
         -- NOTE: rust is handled by the `rust-tools`
