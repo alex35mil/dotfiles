@@ -14,20 +14,20 @@ function M.keymaps()
     K.map { "<S-Up>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "t" } }
     K.map { "<S-Right>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "v", "t" } }
 
-    K.map { "<C-Left>", "Move window to the left", function() m.reposition_windows({ action = "move_left" }) end, mode = "n" }
-    K.map { "<C-Right>", "Move window to the right", function() m.reposition_windows({ action = "move_right" }) end, mode = "n" }
-    K.map { "<C-Up>", "Move window up", function() m.reposition_windows({ action = "move_up" }) end, mode = "n" }
-    K.map { "<C-Down>", "Move window down", function() m.reposition_windows({ action = "move_down" }) end, mode = "n" }
+    K.map { "<D-C-S-Left>", "Move window to the left", function() m.reposition_windows({ action = "move_left" }) end, mode = "n" }
+    K.map { "<D-C-S-Right>", "Move window to the right", function() m.reposition_windows({ action = "move_right" }) end, mode = "n" }
+    K.map { "<D-C-S-Up>", "Move window up", function() m.reposition_windows({ action = "move_up" }) end, mode = "n" }
+    K.map { "<D-C-S-Down>", "Move window down", function() m.reposition_windows({ action = "move_down" }) end, mode = "n" }
 
     K.mapseq { "<Leader>ws", "Swap windows", function() m.reposition_windows({ action = "swap" }) end, mode = "n" }
 
-    K.map { "<D-Left>", "Increase window width", function() m.change_window_width("up") end, mode = "n" }
-    K.map { "<D-Right>", "Decrease window width", function() m.change_window_width("down") end, mode = "n" }
-    K.map { "<D-Up>", "Increase window height", function() m.change_window_height("up") end, mode = "n" }
-    K.map { "<D-Down>", "Decrease window height", function() m.change_window_height("down") end, mode = "n" }
+    K.map { "<D-S-Up>", "Increase window width", function() m.change_window_width("up") end, mode = "n" }
+    K.map { "<D-S-Down>", "Decrease window width", function() m.change_window_width("down") end, mode = "n" }
+    K.map { "<D-S-Right>", "Increase window height", function() m.change_window_height("up") end, mode = "n" }
+    K.map { "<D-S-Left>", "Decrease window height", function() m.change_window_height("down") end, mode = "n" }
 
-    K.map { "<S-Esc>", "Restore windows width", m.restore_windows_layout, mode = "n" }
-    K.map { "<D-Esc>", "Reset layout", m.reset_layout, mode = "n" }
+    K.map { "<D-Esc>", "Justify layout", m.justify_layout, mode = "n" }
+    K.map { "<D-S-Esc>", "Reset layout", m.reset_layout, mode = "n" }
 end
 
 function M.is_window_floating(winid)
@@ -154,7 +154,7 @@ function m.change_window_height(direction)
     end
 end
 
-function m.restore_windows_layout()
+function m.justify_layout()
     local nnp = require "plugins.no-neck-pain"
 
     local sidenotes_visible = nnp.are_sidenotes_visible()
@@ -168,6 +168,7 @@ end
 
 function m.reset_layout()
     local nnp = require "plugins.no-neck-pain"
+    m.justify_layout()
     nnp.reload()
 end
 

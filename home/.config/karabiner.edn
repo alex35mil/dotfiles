@@ -106,7 +106,8 @@
         {
             :des "Neovide configuration"
             :rules [
-                [:!Ch :!Oh [:neovide]] ; Cmd+H -> Opt+H
+                [:!Ch :!TOh [:neovide]] ; Cmd+H -> Cmd+Opt+H
+                [:!Cm :!TOm [:neovide]] ; Cmd+M -> Cmd+Opt+M
             ]
         }
 

@@ -22,8 +22,8 @@ function M.keymaps()
     K.map { "<CR>", "Change inner word", [["xciw]], mode = "n" }
     K.map { "<CR>", "Change seletion", [["xc]], mode = "v" }
     K.map { "<D-CR>", "Change inner word", [[<Esc>"xciw]], mode = "i" }
-    K.map { "<M-w>", "Select inner word", "viw", mode = "n" }
-    K.map { "<M-y>", "Yank inner word", "yiw", mode = "n" }
+    K.map { "<D-W>", "Select inner word", "viw", mode = "n" }
+    K.map { "<D-Y>", "Yank inner word", "yiw", mode = "n" }
 
     K.map { "<S-Del>", "Insert new line above", "O<Esc>", mode = "n" }
     K.map { "<S-CR>", "Insert new line below", "o<Esc>", mode = "n" }
@@ -73,10 +73,10 @@ function M.keymaps()
     K.map { "<Esc>", "Drop search highlight", "<Cmd>silent noh<CR>", mode = "n", silent = false }
 
     K.map { "u", "Unset undo", "<Nop>", mode = "n" }
-    K.map { "<C-u>", "Undo", "u", mode = { "n", "v" } }
-    K.map { "<C-u>", "Undo", "<Esc>ui", mode = "i" }
-    K.map { "<C-r>", "Redo", "<C-r>", mode = { "n", "v" } }
-    K.map { "<C-r>", "Redo", "<Esc><C-r>i", mode = "i" }
+    K.map { "<D-u>", "Undo", "u", mode = { "n", "v" } }
+    K.map { "<D-u>", "Undo", "<Esc>ui", mode = "i" }
+    K.map { "<D-r>", "Redo", "<C-r>", mode = { "n", "v" } }
+    K.map { "<D-r>", "Redo", "<Esc><C-r>i", mode = "i" }
 
     K.map { "<M-h>", "Format and lint", m.format_and_lint, mode = { "n", "v", "i" } }
 

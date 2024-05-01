@@ -73,7 +73,7 @@ function M.setup()
 end
 
 function M.keymaps()
-    K.map { "<C-i>", "LSP: Doc", require("noice.lsp").hover, mode = { "n", "v", "i" } }
+    K.map { "<D-I>", "LSP: Doc", require("noice.lsp").hover, mode = { "n", "v", "i" } }
 end
 
 function M.scroll_lsp_doc(direction)

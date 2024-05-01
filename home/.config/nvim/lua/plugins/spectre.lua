@@ -60,7 +60,7 @@ function M.setup()
 end
 
 function M.keymaps()
-    K.mapseq { "<Leader>sp", "Open search in project", m.open_project_search, mode = "n" }
+    K.mapseq { "<D-S>", "Open search in project", m.open_project_search, mode = "n" }
     K.mapseq { "<Leader>sc", "Open search in current buffer", m.open_current_buffer_search, mode = "n" }
     K.mapseq { "<Leader>swg", "Search current word in project", m.search_word_in_project, mode = "n" }
     K.mapseq { "<Leader>swc", "Search current word in current buffer", m.search_word_in_current_buffer, mode = "n" }

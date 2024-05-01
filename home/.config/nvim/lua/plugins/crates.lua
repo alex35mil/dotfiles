@@ -35,7 +35,7 @@ function M.keymaps()
     K.mapseq { "<Leader>cf", "Crates: Show features popup", plugin.show_features_popup, mode = "n" }
     K.mapseq { "<Leader>cd", "Crates: Show dependencies popup", plugin.show_dependencies_popup, mode = "n" }
 
-    K.map { "<C-g>", "Crates: Focus popup", plugin.focus_popup, mode = "n" }
+    K.map { "<C-Tab>", "Crates: Focus popup", plugin.focus_popup, mode = "n" }
 
     K.mapseq { "<Leader>cu", "Crates: Upgrade crate", plugin.upgrade_crate, mode = "n" }
     K.mapseq { "<Leader>cu", "Crates: Upgrade selected crates", plugin.upgrade_crates, mode = "v" }

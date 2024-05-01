@@ -78,16 +78,16 @@ function M.setup()
 end
 
 function M.keymaps()
-    K.map { "<D-H>", "LSP: Jump to definition", "<Cmd>Lspsaga goto_definition<CR>", mode = "n" }
-    K.map { "<D-G>", "LSP: Jump to type definition", "<Cmd>Lspsaga goto_type_definition<CR>", mode = "n" }
-    K.map { "<D-r>", "LSP: Rename", "<Cmd>Lspsaga rename<CR>", mode = "n" }
-    K.map { "<C-a>", "LSP: Code actions", "<Cmd>Lspsaga code_action<CR>", mode = "n" }
-    K.map { "<C-f>", "LSP: Finder", "<Cmd>Lspsaga finder<CR>", mode = "n" }
+    K.map { "<D-G>", "LSP: Jump to definition", "<Cmd>Lspsaga goto_definition<CR>", mode = "n" }
+    K.map { "<D-C-S-g>", "LSP: Jump to type definition", "<Cmd>Lspsaga goto_type_definition<CR>", mode = "n" }
+    K.map { "<D-R>", "LSP: Rename", "<Cmd>Lspsaga rename<CR>", mode = "n" }
+    K.map { "<D-A>", "LSP: Code actions", "<Cmd>Lspsaga code_action<CR>", mode = "n" }
+    K.map { "<D-F>", "LSP: Finder", "<Cmd>Lspsaga finder<CR>", mode = "n" }
 
-    K.map { "<D-S-Down>", "LSP: Diagnostic next error", m.jump_to_next_error, mode = "n" }
-    K.map { "<D-S-Up>", "LSP: Diagnostic previous error", m.jump_to_prev_error, mode = "n" }
-    K.map { "<D-C-S-Down>", "LSP: Diagnostic next warning", m.jump_to_next_warning, mode = "n" }
-    K.map { "<D-C-S-Up>", "LSP: Diagnostic previous warning", m.jump_to_prev_warning, mode = "n" }
+    K.map { "<D-Down>", "LSP: Diagnostic next error", m.jump_to_next_error, mode = "n" }
+    K.map { "<D-Up>", "LSP: Diagnostic previous error", m.jump_to_prev_error, mode = "n" }
+    K.map { "<D-C-Down>", "LSP: Diagnostic next warning", m.jump_to_next_warning, mode = "n" }
+    K.map { "<D-C-Up>", "LSP: Diagnostic previous warning", m.jump_to_prev_warning, mode = "n" }
 end
 
 -- Private

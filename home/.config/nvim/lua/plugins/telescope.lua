@@ -234,7 +234,7 @@ function M.keymaps()
     }
 
     K.map { "<D-o>", "Open document symbols", m.open_document_symbols, mode = "n" }
-    K.map { "<C-o>", "Open workspace symbols", m.open_workspace_symbols, mode = "n" }
+    K.map { "<D-O>", "Open workspace symbols", m.open_workspace_symbols, mode = "n" }
 
     K.map {
         "<D-.>",
