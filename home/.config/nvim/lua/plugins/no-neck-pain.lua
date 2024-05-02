@@ -1,4 +1,5 @@
 local M = {}
+local m = {}
 
 M.scratchpad_filename = "SIDENOTES"
 M.scratchpad_filetype = "md"
@@ -25,6 +26,7 @@ function M.setup()
             enableOnVimEnter = vim.g.neovide,
             enableOnTabEnter = false,
             reloadOnColorSchemeChange = false,
+            skipEnteringNoNeckPainBuffer = true,
         },
 
         mappings = {
@@ -108,19 +110,36 @@ function M.ensure_sidenotes_hidden()
 end
 
 function M.disable()
-    local plugin = _G.NoNeckPain
-    plugin.disable()
+    m.ensure_cursor_position(
+        _G.NoNeckPain.disable
+    )
 end
 
 function M.enable()
-    local plugin = _G.NoNeckPain
-    plugin.enable()
+    m.ensure_cursor_position(
+        _G.NoNeckPain.enable
+    )
 end
 
 function M.reload()
-    local plugin = _G.NoNeckPain
-    pcall(plugin.disable)
-    plugin.enable()
+    m.ensure_cursor_position(function()
+        local plugin = _G.NoNeckPain
+
+        pcall(plugin.disable)
+        plugin.enable()
+    end)
+end
+
+-- Private
+
+function m.ensure_cursor_position(f)
+    local cursor = require "editor.cursor"
+
+    local current_cursor = cursor.get()
+
+    f()
+
+    pcall(cursor.set, current_cursor)
 end
 
 return M

@@ -1,5 +1,18 @@
 local M = {}
 
+function M.get()
+    local win = vim.api.nvim_get_current_win()
+    local pos = vim.api.nvim_win_get_cursor(win)
+
+    return { win, pos }
+end
+
+function M.set(cursor)
+    local row, col = cursor.pos[1], cursor.pos[2]
+
+    vim.api.nvim_win_set_cursor(cursor.win, { row, col })
+end
+
 function M.shake()
     local cursor = vim.api.nvim_win_get_cursor(0)
 
