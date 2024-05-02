@@ -128,7 +128,7 @@ function X.extensions()
                     ["<D-n>"] = fb.create,
                     ["<S-CR>"] = fb.create_from_prompt,
                     ["<D-r>"] = fb.rename,
-                    ["<C-M-m>"] = fb.move, -- <D-m> remapped via Karabiner
+                    ["<C-M-S-m>"] = fb.move, -- <D-m> remapped via Karabiner
                     ["<D-d>"] = fb.copy,
                     ["<D-BS>"] = fb.remove,
                     ["<D-o>"] = fb.open,
@@ -160,7 +160,7 @@ function X.extensions()
                     ["<D-n>"] = fb.create,
                     ["<S-CR>"] = fb.create_from_prompt,
                     ["<D-r>"] = fb.rename,
-                    ["<C-M-m>"] = fb.move, -- <D-m> remapped via Karabiner
+                    ["<C-M-S-m>"] = fb.move, -- <D-m> remapped via Karabiner
                     ["<D-d>"] = fb.copy,
                     ["<D-BS>"] = fb.remove,
                     ["<D-o>"] = fb.open,

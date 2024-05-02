@@ -78,7 +78,8 @@ function M.keymaps()
     K.map { "<D-r>", "Redo", "<C-r>", mode = { "n", "v" } }
     K.map { "<D-r>", "Redo", "<Esc><C-r>i", mode = "i" }
 
-    K.map { "<M-h>", "Format and lint", m.format_and_lint, mode = { "n", "v", "i" } }
+    -- <D-h> remapped via Karabiner
+    K.map { "<C-M-S-h>", "Format and lint", m.format_and_lint, mode = { "n", "v", "i" } }
 
     K.map { "<D-s>", "Save files", "<Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = "n" }
     K.map { "<D-s>", "Save files", "<Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = { "i", "v" } }
