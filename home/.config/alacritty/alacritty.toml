@@ -1,0 +1,80 @@
+[env]
+TERM = "alacritty"
+
+[window]
+opacity = 1.0
+startup_mode = "Windowed"
+decorations = "Buttonless"
+padding = { x = 20, y = 20 }
+
+[font]
+size = 15.0
+normal = { family = "BerkeleyMono Nerd Font", style = "Regular" }
+bold = { family = "BerkeleyMono Nerd Font", style = "Bold" }
+italic = { family = "BerkeleyMono Nerd Font", style = "Italic" }
+bold_italic = { family = "BerkeleyMono Nerd Font", style = "Bold Italic" }
+
+[colors.primary]
+background = "#272b30"
+foreground = "#afb4c3"
+
+[colors.normal]
+black = "#272b30"
+red = "#cc6666"
+green = "#bdb968"
+yellow = "#f0c674"
+blue = "#81a2be"
+magenta = "#b08cba"
+cyan = "#7fb2c8"
+white = "#afb4c3"
+
+[selection]
+save_to_clipboard = true
+
+[keyboard]
+bindings = [
+    ### Zellij
+
+    # Print char: `printf '\uE021'`
+
+    { key = "T", mods = "Command",       chars = "\uF429" },
+    { key = "N", mods = "Control",       chars = "\uF89C" },
+    { key = "N", mods = "Command|Shift", chars = "\uF0FE" },
+    { key = "R", mods = "Command",       chars = "\uF1FC" },
+    { key = "B", mods = "Command",       chars = "\uF5CC" },
+    { key = "M", mods = "Command",       chars = "\uF792" },
+    { key = "O", mods = "Command",       chars = "\uF826" },
+    { key = "F", mods = "Command",       chars = "\uF422" },
+    { key = "W", mods = "Control",       chars = "\uF2D3" },
+    { key = "Q", mods = "Control",       chars = "\uF090" },
+
+    { key = "Left",  mods = "Shift", chars = "\uFC2F" },
+    { key = "Right", mods = "Shift", chars = "\uFC32" },
+    { key = "Up",    mods = "Shift", chars = "\uFC35" },
+    { key = "Down",  mods = "Shift", chars = "\uFC2C" },
+
+    { key = "Left",  mods = "Command|Shift", chars = "\uEA9B" },
+    { key = "Right", mods = "Command|Shift", chars = "\uEA9C" },
+    { key = "Up",    mods = "Command|Shift", chars = "\uEAA1" },
+    { key = "Down",  mods = "Command|Shift", chars = "\uEA9A" },
+
+    { key = "Left",  mods = "Command|Control|Shift", chars = "\uF0D9" },
+    { key = "Right", mods = "Command|Control|Shift", chars = "\uF0DA" },
+    { key = "Up",    mods = "Command|Control|Shift", chars = "\uF0D8" },
+    { key = "Down",  mods = "Command|Control|Shift", chars = "\uF0D7" },
+
+    { key = "Up",    mods = "Option",       chars = "\uF271" },
+    { key = "R",     mods = "Option",       chars = "\uF448" },
+    { key = "W",     mods = "Option",       chars = "\uF273" },
+    { key = "Left",  mods = "Option",       chars = "\uF04A" },
+    { key = "Right", mods = "Option",       chars = "\uF04E" },
+    { key = "Left",  mods = "Option|Shift", chars = "\uF049" },
+    { key = "Right", mods = "Option|Shift", chars = "\uF050" },
+
+    { key = "T", mods = "Control",        chars = "\uF106" },
+    { key = "H", mods = "Control",        chars = "\uF107" },
+    { key = "T", mods = "Control|Option", chars = "\uF102" },
+    { key = "H", mods = "Control|Option", chars = "\uF103" },
+    { key = "N", mods = "Control|Option", chars = "\uF6BB" },
+    { key = "D", mods = "Control|Option", chars = "\uF6BA" },
+]

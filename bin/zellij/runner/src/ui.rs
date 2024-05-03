@@ -650,7 +650,8 @@ impl<'a> ActionSelectorScreen<'a> {
         if let Event::Key(key) = event::read()? {
             match (key.code, key.modifiers) {
                 (KeyCode::Char('c'), KeyModifiers::CONTROL) => return Ok(EventResult::Exit),
-                (KeyCode::Char('n'), KeyModifiers::CONTROL) => {
+                (KeyCode::Char('\u{F89C}'), KeyModifiers::NONE) // This is specific to my config, sorry!
+                | (KeyCode::Char('n'), KeyModifiers::CONTROL) => {
                     self.selector.select_by(|value| match value {
                         ActionSelectorItem::NewSession { input: _ } => true,
                         ActionSelectorItem::Session { .. } | ActionSelectorItem::Exit => false,
