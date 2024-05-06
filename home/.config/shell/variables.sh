@@ -9,10 +9,10 @@ export DEVBOX_PROFILE="$DEVBOX_PROJECT_ROOT/.devbox/virtenv/.wrappers"
 
 export PRETTIERD_DEFAULT_CONFIG="$XDG_CONFIG_HOME/prettier.yml"
 
-SWIFT_PATH="/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin"
-NPM_PATH="$HOME/.npm-global/bin"
+SWIFT_BIN_PATH="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"
+NPM_BIN_PATH="$HOME/.npm-global/bin"
 
-export PATH="$SWIFT_PATH:$NPM_PATH:$PATH"
+export PATH="$SWIFT_BIN_PATH:$NPM_BIN_PATH:$PATH"
 
 export LD_LIBRARY_PATH="$DEVBOX_PACKAGES_DIR/lib:$LD_LIBRARY_PATH"
 export DYLD_LIBRARY_PATH="$LD_LIBRARY_PATH:$DYLD_LIBRARY_PATH"

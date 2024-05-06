@@ -52,6 +52,7 @@ function M.setup()
     config.nil_ls.setup {}
     config.ocamllsp.setup {}
     config.reason_ls.setup {}
+    config.sourcekit.setup {}
     config.sqlls.setup {}
     config.tailwindcss.setup {}
 end
