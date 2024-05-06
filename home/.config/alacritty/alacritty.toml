@@ -8,7 +8,7 @@ decorations = "Buttonless"
 padding = { x = 20, y = 20 }
 
 [font]
-size = 15.0
+size = 16.0
 normal = { family = "BerkeleyMono Nerd Font", style = "Regular" }
 bold = { family = "BerkeleyMono Nerd Font", style = "Bold" }
 italic = { family = "BerkeleyMono Nerd Font", style = "Italic" }
