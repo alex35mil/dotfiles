@@ -135,6 +135,7 @@ function m.toggle_diff()
 
             m.open_diff()
             lualine.rename_tab "diff"
+            lualine.show()
         end
     end
 end
