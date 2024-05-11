@@ -26,8 +26,8 @@ function M.setup()
             end,
         },
         mapping = mapping.preset.insert({
-            ["<C-t>"] = mapping.scroll_docs(-4),
-            ["<C-h>"] = mapping.scroll_docs(4),
+            ["<D-Up>"] = mapping.scroll_docs(-4),
+            ["<D-Down>"] = mapping.scroll_docs(4),
             ["<C-c>"] = mapping.complete(),
             ["<D-w>"] = mapping.abort(),
             ["<CR>"] = mapping.confirm({

@@ -21,10 +21,10 @@ function M.keymaps()
 
     K.mapseq { "<Leader>ws", "Swap windows", function() m.reposition_windows({ action = "swap" }) end, mode = "n" }
 
-    K.map { "<D-S-Up>", "Increase window width", function() m.change_window_width("up") end, mode = "n" }
-    K.map { "<D-S-Down>", "Decrease window width", function() m.change_window_width("down") end, mode = "n" }
-    K.map { "<D-S-Right>", "Increase window height", function() m.change_window_height("up") end, mode = "n" }
-    K.map { "<D-S-Left>", "Decrease window height", function() m.change_window_height("down") end, mode = "n" }
+    K.map { "<M-S-Up>", "Increase window width", function() m.change_window_width("up") end, mode = "n" }
+    K.map { "<M-S-Down>", "Decrease window width", function() m.change_window_width("down") end, mode = "n" }
+    K.map { "<M-S-Right>", "Increase window height", function() m.change_window_height("up") end, mode = "n" }
+    K.map { "<M-S-Left>", "Decrease window height", function() m.change_window_height("down") end, mode = "n" }
 
     K.map { "<D-Esc>", "Justify layout", m.justify_layout, mode = "n" }
     K.map { "<D-S-Esc>", "Reset layout", m.reset_layout, mode = "n" }

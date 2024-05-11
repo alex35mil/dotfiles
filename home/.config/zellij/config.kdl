@@ -35,10 +35,10 @@ keybinds clear-defaults=true {
         bind "ﰵ" { MoveFocus "Up"; }         // Shift ↑
         bind "ﰬ" { MoveFocus "Down"; }       // Shift ↓
 
-        bind "" { Resize "Left"; }  // Cmd Shift ←
-        bind "" { Resize "Right"; } // Cmd Shift →
-        bind "" { Resize "Up"; }    // Cmd Shift ↑
-        bind "" { Resize "Down"; }  // Cmd Shift ↓
+        bind "" { Resize "Left"; }  // Opt Shift ←
+        bind "" { Resize "Right"; } // Opt Shift →
+        bind "" { Resize "Up"; }    // Opt Shift ↑
+        bind "" { Resize "Down"; }  // Opt Shift ↓
 
         bind "" { MovePane "Left"; }  // Cmd Ctrl Shift ←
         bind "" { MovePane "Right"; } // Cmd Ctrl Shift →
@@ -58,12 +58,12 @@ keybinds clear-defaults=true {
     }
 
     shared_except "locked" {
-        bind "" { ScrollUp; }           // Ctrl T
-        bind "" { ScrollDown; }         // Ctrl H
-        bind "" { HalfPageScrollUp; }   // Ctrl Opt T
-        bind "" { HalfPageScrollDown; } // Ctrl Opt H
-        bind "" { PageScrollUp; }       // Ctrl Opt N
-        bind "" { PageScrollDown; }     // Ctrl Opt D
+        bind "" { ScrollUp; }           // Cmd ↑
+        bind "" { ScrollDown; }         // Cmd ↓
+        bind "" { HalfPageScrollUp; }   // Cmd Shift ↑
+        bind "" { HalfPageScrollDown; } // Cmd Shift ↓
+        bind "" { PageScrollUp; }       // Cmd Shift →
+        bind "" { PageScrollDown; }     // Cmd Shift ←
     }
 
     search {

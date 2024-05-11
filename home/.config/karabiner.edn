@@ -40,6 +40,16 @@
         {
             :des "Global configuration"
             :rules [
+                ; Cmd+Esc -> Cmd+S: saving with a thumb instead of a pinky
+                [:!Cescape :!Cs]
+                ; F21 -> Ctrl+Fn+F8: toggle menubar no macOS
+                [:f21 :!TFf8]
+            ]
+        }
+
+        {
+            :des "Dvorak configuration"
+            :rules [
                 ; Homerow mods safety belt for Dvorak layout
                 [:!Qh [:t :h]]
                 [:!Qn [:t :n]]
@@ -57,67 +67,7 @@
                 [:!Ti [:o :i]]
                 [:!Ou [:a :u]]
 
-                ; F21 -> Ctrl + Fn + F8: toggle menubar no macOS
-                [:f21 :!TFf8]
-            ]
-        }
-
-        {
-            :des "Alacritty configuration"
-            :rules [
-                ; Cmd+C -> Ctrl+C
-                [:!Cc :!Tc [:alacritty]]
-
-                ; Cmd+N <-> Ctrl+N
-                [:!Cn :!Tn [:alacritty]]
-                [:!Tn :!Cn [:alacritty]]
-
-                ; Cmd+W <-> Ctrl+W
-                [:!Cw :!Tw [:alacritty]]
-                [:!Tw :!Cw [:alacritty]]
-
-                ; Cmd+Q <-> Ctrl+Q
-                [:!Qq :!Wq [:alacritty]]
-                [:!Wq :!Qq [:alacritty]]
-            ]
-        }
-
-        {
-            :des "Neovide configuration"
-            :rules [
-                [:!Ch :!TOSh [:neovide]] ; Cmd+H -> Cmd+Opt+H
-                [:!Cm :!TOSm [:neovide]] ; Cmd+M -> Cmd+Opt+M
-            ]
-        }
-
-        {
-            :des "Xcode configuration"
-            :rules [
-                [:!Ct :!CSo [:xcode]]
-                ; [:!Ch :page_down [:xcode]]
-            ]
-        }
-
-        {
-            :des "Things configuration"
-            :rules [
-                [:!Cp :!Cl [:things]] ; Show in Project
-                [:!Cw :escape [:things]] ; Close
-            ]
-        }
-
-        {
-            :des "Notion configuration"
-            :rules [
-                [:!Ct :!Cp [:notion]]
-                [:!Cw :escape [:notion]]
-            ]
-        }
-
-        {
-            :des "RU layout with Dvorak"
-            :rules [
-                ; Common mappings
+                ; RU
                 [:#SOERquote :q [:ru]]
                 [:#SOERcomma :w [:ru]]
                 [:#SOERperiod :e [:ru]]
@@ -146,9 +96,80 @@
                 [:#SOERw :comma [:ru]]
                 [:#SOERv :period [:ru]]
                 [:#SOERz :quote [:ru]]
-
                 ; Specific to my keyboard
                 [:!Shyphen :!Se [:ru]]
+            ]
+        }
+
+        {
+            :des "Scrolla configuration"
+            :rules [
+                ; Activate scrolla layer
+                [:!Og [:!Og ["scrolla" 1]] [:!neovide]]
+
+                ; Remap keys
+                [:down_arrow :j ["scrolla" 1]]
+                [:up_arrow :k ["scrolla" 1]]
+                [:left_arrow :h ["scrolla" 1]]
+                [:right_arrow :l ["scrolla" 1]]
+                [:!Odown_arrow :d ["scrolla" 1]]
+                [:!Oup_arrow :u ["scrolla" 1]]
+
+                ; Deactivate scrolla layer
+                [:escape [:escape ["scrolla" 0]] ["scrolla" 1]]
+            ]
+        }
+
+        {
+            :des "Alacritty configuration"
+            :rules [
+                ; Cmd+C -> Ctrl+C
+                [:!Cc :!Tc [:alacritty]]
+
+                ; Cmd+N <-> Ctrl+N
+                [:!Cn :!Tn [:alacritty]]
+                [:!Tn :!Cn [:alacritty]]
+
+                ; Cmd+W <-> Ctrl+W
+                [:!Cw :!Tw [:alacritty]]
+                [:!Tw :!Cw [:alacritty]]
+
+                ; Cmd+Q <-> Ctrl+Q
+                [:!Qq :!Wq [:alacritty]]
+                [:!Wq :!Qq [:alacritty]]
+            ]
+        }
+
+        {
+            :des "Neovide configuration"
+            :rules [
+                [:!Oh :!TOh  [:neovide]] ; Opt+H -> Opt+Ctrl+H
+                [:!Ch :!TOSh [:neovide]] ; Cmd+H -> Cmd+Opt+H
+                [:!Cm :!TOSm [:neovide]] ; Cmd+M -> Cmd+Opt+M
+            ]
+        }
+
+        {
+            :des "Xcode configuration"
+            :rules [
+                [:!Ct :!CSo [:xcode]]
+                ; [:!Ch :page_down [:xcode]]
+            ]
+        }
+
+        {
+            :des "Things configuration"
+            :rules [
+                [:!Cp :!Cl [:things]] ; Show in Project
+                [:!Cw :escape [:things]] ; Close
+            ]
+        }
+
+        {
+            :des "Notion configuration"
+            :rules [
+                [:!Ct :!Cp [:notion]]
+                [:!Cw :escape [:notion]]
             ]
         }
     ]

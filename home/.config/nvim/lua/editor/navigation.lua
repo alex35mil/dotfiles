@@ -2,16 +2,16 @@ local M = {}
 local m = {}
 
 function M.keymaps()
-    K.map { "<C-t>", "Scroll up", function() m.scroll_vertical("up") end, mode = { "n", "v", "i" } }
-    K.map { "<C-h>", "Scroll down", function() m.scroll_vertical("down") end, mode = { "n", "v", "i" } }
-    K.map { "<C-d>", "Scroll left", function() m.scroll_horizontal("left") end, mode = { "n", "v", "i" } }
-    K.map { "<C-n>", "Scroll right", function() m.scroll_horizontal("right") end, mode = { "n", "v", "i" } }
+    K.map { "<D-Up>", "Scroll up", function() m.scroll_vertical("up") end, mode = { "n", "v", "i" } }
+    K.map { "<D-Down>", "Scroll down", function() m.scroll_vertical("down") end, mode = { "n", "v", "i" } }
+    K.map { "<C-Left>", "Scroll left", function() m.scroll_horizontal("left") end, mode = { "n", "v", "i" } }
+    K.map { "<C-Right>", "Scroll right", function() m.scroll_horizontal("right") end, mode = { "n", "v", "i" } }
 
-    K.map { "<C-M-t>", "Move cursor half-screen up", "<C-u>", mode = { "n", "v" } }
-    K.map { "<C-M-h>", "Move cursor half-screen down", "<C-d>", mode = { "n", "v" } }
+    K.map { "<D-S-Up>", "Move cursor half-screen up", "<C-u>", mode = { "n", "v" } }
+    K.map { "<D-S-Down>", "Move cursor half-screen down", "<C-d>", mode = { "n", "v" } }
 
-    K.map { "<D-Left>", "History: back", "<C-o>", mode = "n" }
-    K.map { "<D-Right>", "History: forward", "<C-i>", mode = "n" }
+    K.map { "<M-Left>", "History: back", "<C-o>", mode = "n" }
+    K.map { "<M-Right>", "History: forward", "<C-i>", mode = "n" }
 end
 
 -- Private

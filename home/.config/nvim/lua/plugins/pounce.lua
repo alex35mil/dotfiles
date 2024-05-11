@@ -11,8 +11,9 @@ function M.setup()
 end
 
 function M.keymaps()
-    K.map { "<M-h>", "Start pounce motion", "<Cmd>Pounce<CR>", mode = { "n", "v" } }
-    K.map { "<M-h>", "Start pounce motion", "<Esc><Cmd>Pounce<CR>", mode = "i" }
+    -- Remapped via Karabiner to <M-h> (same keymap as Wooshy)
+    K.map { "<C-M-h>", "Start pounce motion", "<Cmd>Pounce<CR>", mode = { "n", "v" } }
+    K.map { "<C-M-h>", "Start pounce motion", "<Esc><Cmd>Pounce<CR>", mode = "i" }
 end
 
 return M
