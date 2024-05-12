@@ -3,7 +3,7 @@ local m = {}
 
 function M.keymaps()
     K.map { "<D-v>", "Paste text", m.paste, mode = "t", expr = true }
-    K.map { "<D-Esc>", "Exit terminal mode", "<C-\\><C-n>", mode = "t" }
+    K.map { "<S-Esc>", "Exit terminal mode", "<C-\\><C-n>", mode = "t" }
 end
 
 -- Private
