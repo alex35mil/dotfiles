@@ -11,7 +11,7 @@ function M.setup()
             normal_cur = "yss",
             normal_line = "yS",
             normal_cur_line = "ySS",
-            visual = "<D-W>",
+            visual = "<M-w>",
             visual_line = "gS",
             delete = "ds",
             change = "cs",

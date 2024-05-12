@@ -15,13 +15,13 @@ function M.keymaps()
         mode = { "n", "i", "v", "t", "c" },
     }
     K.mapseq {
-        "<Leader>bck",
+        "<D-W>",
         "Delete current buffer, even if unsaved, but do not close current window if there are multiple",
         function() m.delete_buf({ should_close_window = false, force = true }) end,
         mode = "n",
     }
     K.map {
-        "<Leader>bcc",
+        "<C-S-w>",
         "Delete current buffer, even if unsaved, and close current window if there are multiple",
         function() m.delete_buf({ should_close_window = true, force = true }) end,
         mode = "n",
