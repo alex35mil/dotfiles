@@ -35,15 +35,15 @@ keybinds clear-defaults=true {
         bind "ﰵ" { MoveFocus "Up"; }         // Shift ↑
         bind "ﰬ" { MoveFocus "Down"; }       // Shift ↓
 
-        bind "" { Resize "Left"; }  // Opt Shift ←
-        bind "" { Resize "Right"; } // Opt Shift →
-        bind "" { Resize "Up"; }    // Opt Shift ↑
-        bind "" { Resize "Down"; }  // Opt Shift ↓
+        bind "" { Resize "Left"; }  // Ctrl Shift ←
+        bind "" { Resize "Right"; } // Ctrl Shift →
+        bind "" { Resize "Up"; }    // Ctrl Shift ↑
+        bind "" { Resize "Down"; }  // Ctrl Shift ↓
 
-        bind "" { MovePane "Left"; }  // Cmd Ctrl Shift ←
-        bind "" { MovePane "Right"; } // Cmd Ctrl Shift →
-        bind "" { MovePane "Up"; }    // Cmd Ctrl Shift ↑
-        bind "" { MovePane "Down"; }  // Cmd Ctrl Shift ↓
+        bind "" { MovePane "Left"; }  // Opt Shift ←
+        bind "" { MovePane "Right"; } // Opt Shift →
+        bind "" { MovePane "Up"; }    // Opt Shift ↑
+        bind "" { MovePane "Down"; }  // Opt Shift ↓
 
         bind "" {
             NewTab { layout "terminal"; }

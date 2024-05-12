@@ -53,15 +53,15 @@ bindings = [
     { key = "Up",    mods = "Shift", chars = "\uFC35" },
     { key = "Down",  mods = "Shift", chars = "\uFC2C" },
 
-    { key = "Left",  mods = "Option|Shift", chars = "\uEA9B" },
-    { key = "Right", mods = "Option|Shift", chars = "\uEA9C" },
-    { key = "Up",    mods = "Option|Shift", chars = "\uEAA1" },
-    { key = "Down",  mods = "Option|Shift", chars = "\uEA9A" },
+    { key = "Left",  mods = "Control|Shift", chars = "\uEA9B" },
+    { key = "Right", mods = "Control|Shift", chars = "\uEA9C" },
+    { key = "Up",    mods = "Control|Shift", chars = "\uEAA1" },
+    { key = "Down",  mods = "Control|Shift", chars = "\uEA9A" },
 
-    { key = "Left",  mods = "Command|Control|Shift", chars = "\uF0D9" },
-    { key = "Right", mods = "Command|Control|Shift", chars = "\uF0DA" },
-    { key = "Up",    mods = "Command|Control|Shift", chars = "\uF0D8" },
-    { key = "Down",  mods = "Command|Control|Shift", chars = "\uF0D7" },
+    { key = "Left",  mods = "Option|Shift", chars = "\uF0D9" },
+    { key = "Right", mods = "Option|Shift", chars = "\uF0DA" },
+    { key = "Up",    mods = "Option|Shift", chars = "\uF0D8" },
+    { key = "Down",  mods = "Option|Shift", chars = "\uF0D7" },
 
     { key = "Up",    mods = "Option",       chars = "\uF271" },
     { key = "R",     mods = "Option",       chars = "\uF448" },

@@ -14,17 +14,17 @@ function M.keymaps()
     K.map { "<S-Up>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "t" } }
     K.map { "<S-Right>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "v", "t" } }
 
-    K.map { "<D-C-S-Left>", "Move window to the left", function() m.reposition_windows({ action = "move_left" }) end, mode = "n" }
-    K.map { "<D-C-S-Right>", "Move window to the right", function() m.reposition_windows({ action = "move_right" }) end, mode = "n" }
-    K.map { "<D-C-S-Up>", "Move window up", function() m.reposition_windows({ action = "move_up" }) end, mode = "n" }
-    K.map { "<D-C-S-Down>", "Move window down", function() m.reposition_windows({ action = "move_down" }) end, mode = "n" }
+    K.map { "<M-S-Left>", "Move window to the left", function() m.reposition_windows({ action = "move_left" }) end, mode = "n" }
+    K.map { "<M-S-Right>", "Move window to the right", function() m.reposition_windows({ action = "move_right" }) end, mode = "n" }
+    K.map { "<M-S-Up>", "Move window up", function() m.reposition_windows({ action = "move_up" }) end, mode = "n" }
+    K.map { "<M-S-Down>", "Move window down", function() m.reposition_windows({ action = "move_down" }) end, mode = "n" }
 
     K.mapseq { "<Leader>ws", "Swap windows", function() m.reposition_windows({ action = "swap" }) end, mode = "n" }
 
-    K.map { "<M-S-Up>", "Increase window width", function() m.change_window_width("up") end, mode = "n" }
-    K.map { "<M-S-Down>", "Decrease window width", function() m.change_window_width("down") end, mode = "n" }
-    K.map { "<M-S-Right>", "Increase window height", function() m.change_window_height("up") end, mode = "n" }
-    K.map { "<M-S-Left>", "Decrease window height", function() m.change_window_height("down") end, mode = "n" }
+    K.map { "<C-S-Up>", "Increase window width", function() m.change_window_width("up") end, mode = "n" }
+    K.map { "<C-S-Down>", "Decrease window width", function() m.change_window_width("down") end, mode = "n" }
+    K.map { "<D-C-S-Up>", "Increase window height", function() m.change_window_height("up") end, mode = "n" }
+    K.map { "<D-C-S-Down>", "Decrease window height", function() m.change_window_height("down") end, mode = "n" }
 
     K.map { "<D-E>", "Equalize layout", m.equalize_layout, mode = "n" }
     K.map { "<D-X>", "Reset layout", m.reset_layout, mode = "n" }
