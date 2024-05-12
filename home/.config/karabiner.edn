@@ -105,19 +105,13 @@
         {
             :des "Scrolla configuration"
             :rules [
-                ; Activate scrolla layer
-                [:!Og [:!Og ["scrolla" 1]] [:!neovide]]
-
-                ; Remap keys
+                ; Enabling/disabling is done via CLI from Hammerspoon
                 [:down_arrow :j ["scrolla" 1]]
                 [:up_arrow :k ["scrolla" 1]]
                 [:left_arrow :h ["scrolla" 1]]
                 [:right_arrow :l ["scrolla" 1]]
                 [:!Odown_arrow :d ["scrolla" 1]]
                 [:!Oup_arrow :u ["scrolla" 1]]
-
-                ; Deactivate scrolla layer
-                [:escape [:escape ["scrolla" 0]] ["scrolla" 1]]
             ]
         }
 
