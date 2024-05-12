@@ -3,6 +3,8 @@ local m = {}
 
 function M.keymaps()
     K.mapseq { "<D-g>g", "Git: Show lazygit", "<Cmd>LazyGit<CR>", mode = "n" }
+    K.map { "<D-Up>", "Lazygit: Scroll up main panel", "<C-\\><C-t>", mode = "t" }
+    K.map { "<D-Down>", "Lazygit: Scroll down main panel", "<C-\\><C-h>", mode = "t" }
 end
 
 function M.ensure_hidden()
