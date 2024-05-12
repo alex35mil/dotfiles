@@ -26,8 +26,8 @@ function M.keymaps()
     K.map { "<M-S-Right>", "Increase window height", function() m.change_window_height("up") end, mode = "n" }
     K.map { "<M-S-Left>", "Decrease window height", function() m.change_window_height("down") end, mode = "n" }
 
-    K.map { "<D-Esc>", "Justify layout", m.justify_layout, mode = "n" }
-    K.map { "<D-S-Esc>", "Reset layout", m.reset_layout, mode = "n" }
+    K.map { "<D-E>", "Equalize layout", m.equalize_layout, mode = "n" }
+    K.map { "<D-X>", "Reset layout", m.reset_layout, mode = "n" }
 end
 
 function M.is_window_floating(winid)
@@ -154,13 +154,14 @@ function m.change_window_height(direction)
     end
 end
 
-function m.justify_layout()
+function m.equalize_layout()
     local nnp = require "plugins.no-neck-pain"
 
     local sidenotes_visible = nnp.are_sidenotes_visible()
 
     if sidenotes_visible then
         nnp.set_default_window_width()
+        vim.cmd "vert wincmd ="
     else
         vim.cmd "wincmd ="
     end
@@ -168,7 +169,7 @@ end
 
 function m.reset_layout()
     local nnp = require "plugins.no-neck-pain"
-    m.justify_layout()
+    m.equalize_layout()
     nnp.reload()
 end
 
