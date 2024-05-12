@@ -68,6 +68,9 @@
                 [:!Ou [:a :u]]
 
                 ; RU
+                ; Specific to my keyboard
+                [:!Squote :!S7 [:ru]] ; period
+                ; General mappings
                 [:#SOERquote :q [:ru]]
                 [:#SOERcomma :w [:ru]]
                 [:#SOERperiod :e [:ru]]
@@ -96,8 +99,6 @@
                 [:#SOERw :comma [:ru]]
                 [:#SOERv :period [:ru]]
                 [:#SOERz :quote [:ru]]
-                ; Specific to my keyboard
-                [:!Shyphen :!Se [:ru]]
             ]
         }
 
