@@ -112,6 +112,8 @@
                 [:right_arrow :l ["scrolla" 1]]
                 [:!Odown_arrow :d ["scrolla" 1]]
                 [:!Oup_arrow :u ["scrolla" 1]]
+                [:!Sright_arrow :tab ["scrolla" 1]]
+                [:!Sleft_arrow :!Stab ["scrolla" 1]]
             ]
         }
 
