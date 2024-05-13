@@ -3,7 +3,7 @@
 
 --- Mouse
 
-local function move_pointer(direction)
+function MovePointer(direction)
     local pos = hs.mouse.getAbsolutePosition()
     local screen = hs.screen.mainScreen():fullFrame()
     local step_factor = 4
@@ -22,14 +22,14 @@ local function move_pointer(direction)
     hs.mouse.setAbsolutePosition(pos)
 end
 
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "Left", function() move_pointer("left") end)
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "Right", function() move_pointer("right") end)
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "Up", function() move_pointer("up") end)
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "Down", function() move_pointer("down") end)
+hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "Left", function() MovePointer("left") end)
+hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "Right", function() MovePointer("right") end)
+hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "Up", function() MovePointer("up") end)
+hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "Down", function() MovePointer("down") end)
 
 --- Scrolla
 
-local function toggle_scrolla(status)
+function ToggleScrolla(status)
     local karabiner = "/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"
     local enabled
 
@@ -44,8 +44,8 @@ local function toggle_scrolla(status)
     hs.execute(cmd)
 end
 
-local scrolla_on_watcher = hs.distributednotifications.new(function() toggle_scrolla("on") end, "ScrollaDidEngage")
-local scrolla_off_watcher = hs.distributednotifications.new(function() toggle_scrolla("off") end, "ScrollaDidDisengage")
+ScrollaOnWatcher = hs.distributednotifications.new(function() ToggleScrolla("on") end, "ScrollaDidEngage")
+ScrollaOffWatcher = hs.distributednotifications.new(function() ToggleScrolla("off") end, "ScrollaDidDisengage")
 
-scrolla_on_watcher:start()
-scrolla_off_watcher:start()
+ScrollaOnWatcher:start()
+ScrollaOffWatcher:start()
