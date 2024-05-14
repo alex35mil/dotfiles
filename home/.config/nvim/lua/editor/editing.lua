@@ -78,9 +78,6 @@ function M.keymaps()
     K.map { "<D-r>", "Redo", "<C-r>", mode = { "n", "v" } }
     K.map { "<D-r>", "Redo", "<Esc><C-r>i", mode = "i" }
 
-    -- <D-h> remapped via Karabiner
-    K.map { "<C-M-S-h>", "Format and lint", m.format_and_lint, mode = { "n", "v", "i" } }
-
     K.map { "<D-s>", "Save files", "<Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = "n" }
     K.map { "<D-s>", "Save files", "<Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = { "i", "v" } }
 end
@@ -125,14 +122,6 @@ function m.jump_to_end_of_word()
     elseif current_col ~= end_col then
         vim.cmd("normal! l")
     end
-end
-
-function m.format_and_lint()
-    local formatter = require "plugins.conform"
-    local linter = require "plugins.lint"
-
-    formatter.format()
-    linter.lint()
 end
 
 return M

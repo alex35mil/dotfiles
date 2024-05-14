@@ -140,7 +140,7 @@
         {
             :des "Neovide configuration"
             :rules [
-                [:!Qspacebar :!TOSspacebar [:neovide]] ; Cmd+Space -> Ctrl+Opt+Shift+H
+                [:!Th :!TOSh [:neovide]] ; Ctrl+H -> Ctrl+Opt+Shift+H
                 [:!Cm :!TOSm [:neovide]] ; Cmd+M -> Ctrl+Opt+Shift+M
             ]
         }
