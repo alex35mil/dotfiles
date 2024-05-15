@@ -156,6 +156,8 @@
         {
             :des "Things configuration"
             :rules [
+                [:!Cg :!Ck [:things]] ; Complete
+                [:!CSg :!COk [:things]] ; Cancel
                 [:!Cp :!Cl [:things]] ; Show in Project
                 [:!Cw :escape [:things]] ; Close
             ]
