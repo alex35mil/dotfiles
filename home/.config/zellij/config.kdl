@@ -190,3 +190,6 @@ copy_on_select true
 // The folder in which Zellij will look for themes
 //
 // theme_dir "/path/to/my/theme_dir"
+
+session_serialization false
+disable_session_metadata true
