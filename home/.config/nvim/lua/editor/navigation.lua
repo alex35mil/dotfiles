@@ -10,8 +10,8 @@ function M.keymaps()
     K.map { "<D-S-Up>", "Move cursor half-screen up", "<C-u>", mode = { "n", "v" } }
     K.map { "<D-S-Down>", "Move cursor half-screen down", "<C-d>", mode = { "n", "v" } }
 
-    K.map { "<M-Left>", "History: back", "<C-o>", mode = "n" }
-    K.map { "<M-Right>", "History: forward", "<C-i>", mode = "n" }
+    K.map { "<D-Left>", "History: back", "<C-o>", mode = "n" }
+    K.map { "<D-Right>", "History: forward", "<C-i>", mode = "n" }
 end
 
 -- Private
