@@ -15,7 +15,7 @@ App = {
 }
 
 Capslock = {
-    label = ""
+    label = "󰃸"
 }
 
 InputSource = {
