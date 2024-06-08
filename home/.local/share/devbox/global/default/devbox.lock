@@ -129,6 +129,54 @@
       "source": "devbox-search",
       "version": "1.4.4"
     },
+    "neovim@latest": {
+      "last_modified": "2024-05-23T08:10:22Z",
+      "resolved": "github:NixOS/nixpkgs/3305b2b25e4ae4baee872346eae133cf6f611783#neovim",
+      "source": "devbox-search",
+      "version": "0.10.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/8hpd8vkdjyv73lw14js1j9ypdx7d7l1g-neovim-0.10.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/8hpd8vkdjyv73lw14js1j9ypdx7d7l1g-neovim-0.10.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/hk2knz25kdw9fyrd66ii6z7lr85g1m65-neovim-0.10.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/hk2knz25kdw9fyrd66ii6z7lr85g1m65-neovim-0.10.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/qg1shksxa71vda6z714zrhpds00hdn6v-neovim-0.10.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/qg1shksxa71vda6z714zrhpds00hdn6v-neovim-0.10.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/y9q7qxdrsb6p1sypc0yq6zxlnzz582jy-neovim-0.10.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/y9q7qxdrsb6p1sypc0yq6zxlnzz582jy-neovim-0.10.0"
+        }
+      }
+    },
     "prettierd@latest": {
       "last_modified": "2023-12-13T22:54:10Z",
       "resolved": "github:NixOS/nixpkgs/fd04bea4cbf76f86f244b9e2549fca066db8ddff#prettierd",

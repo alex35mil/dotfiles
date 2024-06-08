@@ -207,13 +207,13 @@ function M.init()
             ModeMsg { MsgArea },                                         -- 'showmode' message (e.g., "-- INSERT -- ")
             -- MsgSeparator { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
             -- MoreMsg      { }, -- |more-prompt|
-            NonText { fg = color.cyan },                                    -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
+            NonText { fg = color.cyan },                    -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
             NormalFloat { fg = color.text, bg = color.bg }, -- Normal text in floating windows.
             -- NormalNC     { }, -- normal text in non-current windows
             Pmenu { fg = color.text, bg = color.bg },       -- Popup menu: Normal item.
-            PmenuSel { Pmenu, bg = Pmenu.bg.lighten(10) },                  -- Popup menu: Selected item.
-            PmenuSbar { bg = Pmenu.bg.lighten(5) },                         -- Popup menu: Scrollbar.d
-            PmenuThumb { bg = Pmenu.bg.lighten(15) },                       -- Popup menu: Thumb of the scrollbar.
+            PmenuSel { Pmenu, bg = Pmenu.bg.lighten(10) },  -- Popup menu: Selected item.
+            PmenuSbar { bg = Pmenu.bg.lighten(5) },         -- Popup menu: Scrollbar.d
+            PmenuThumb { bg = Pmenu.bg.lighten(15) },       -- Popup menu: Thumb of the scrollbar.
             -- Question     { }, -- |hit-enter| prompt and yes/no questions
             -- QuickFixLine { }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
             Search { fg = color.bg, bg = color.cyan }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.

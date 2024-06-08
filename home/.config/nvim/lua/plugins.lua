@@ -165,13 +165,6 @@ local plugins = {
     },
 
     {
-        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-        branch = "main",
-        event = "BufEnter",
-        config = require("plugins.lsp.lsp-lines").setup,
-    },
-
-    {
         "mrcjkb/rustaceanvim",
         version = "^3",
         ft = { "rust" },
@@ -183,13 +176,6 @@ local plugins = {
         branch = "main",
         event = { "BufRead Cargo.toml" },
         config = require "plugins.crates".setup,
-    },
-
-    {
-        "mfussenegger/nvim-lint",
-        version = "*",
-        event = "BufEnter",
-        config = require("plugins.lint").setup,
     },
 
     {

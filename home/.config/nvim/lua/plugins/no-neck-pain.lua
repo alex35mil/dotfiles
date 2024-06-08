@@ -37,7 +37,7 @@ function M.setup()
             left = sideBufOpts,
             right = sideBufOpts,
             scratchPad = {
-                enabled = true,
+                enabled = false,
                 fileName = M.scratchpad_filename,
             },
         },

@@ -21,7 +21,7 @@ if vim.g.neovide then
     vim.g.neovide_fullscreen = false
 
     vim.g.neovide_input_use_logo = true
-    vim.g.neovide_input_macos_alt_is_meta = true
+    vim.g.neovide_input_macos_option_key_is_meta = "both"
 
     vim.g.neovide_cursor_antialiasing = false
     vim.g.neovide_cursor_animate_in_insert_mode = true
