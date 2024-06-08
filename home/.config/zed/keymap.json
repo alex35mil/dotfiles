@@ -110,8 +110,6 @@
             "shift-alt-down": ["workspace::SwapPaneInDirection", "Down"]
         }
     },
-    // TODO: When registers are supported, add d, s, c, etc bindings
-    // to avoid cluttering the system clipboard
     {
         "context": "Editor && vim_mode == insert && !VimWaiting && !VimObject",
         "bindings": {

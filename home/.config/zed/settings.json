@@ -53,7 +53,7 @@
     },
     "vim_mode": true,
     "vim": {
-        "use_system_clipboard": "never",
+        "use_system_clipboard": "on_yank",
         "use_multiline_find": true
     },
     "git": {
