@@ -1,4 +1,6 @@
 target/
+/.lsp/
+/.clj-kondo/
 /home/.config/zellij/plugins/**
 /script/font/original/**/*
 /script/font/patched/**/*
