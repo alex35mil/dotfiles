@@ -2,6 +2,7 @@
     :applications {
         :alacritty ["^org.alacritty$"]
         :neovide [:paths "^.*\\.cargo/bin/neovide$"]
+        :zed ["^dev.zed.Zed$"]
         :xcode ["^com.apple.dt.Xcode$"]
         :things ["^com.culturedcode.ThingsMac$"]
         :notion ["^notion.id$"]
@@ -40,8 +41,6 @@
         {
             :des "Global configuration"
             :rules [
-                ; Cmd+Esc -> Cmd+S: saving with a thumb instead of a pinky
-                [:!Cescape :!Cs]
                 ; F21 -> Ctrl+Fn+F8: toggle menubar no macOS
                 [:f21 :!TFf8]
             ]
@@ -149,6 +148,14 @@
             :rules [
                 [:!Th :!TOSh [:neovide]] ; Ctrl+H -> Ctrl+Opt+Shift+H
                 [:!Cm :!TOSm [:neovide]] ; Cmd+M -> Ctrl+Opt+Shift+M
+            ]
+        }
+
+        {
+            :des "Zed configuration"
+            :rules [
+                [:!Cs [:escape :!Cs] [:zed]] ; Cmd+S -> Esc Cmd+S
+                [:!CTOh :slash [:zed]] ; Whooshy -> /
             ]
         }
 

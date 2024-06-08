@@ -1,0 +1,102 @@
+{
+    "theme": "35mil Dark Theme",
+    "ui_font_family": "Berkeley Mono",
+    "buffer_font_family": "Berkeley Mono",
+    "buffer_font_size": 16,
+    "tab_size": 4,
+    "preferred_line_length": 100,
+    "show_wrap_guides": true,
+    "wrap_guides": [80, 120],
+    "autosave": "on_focus_change",
+    "auto_update": true,
+    "ensure_final_newline_on_save": true,
+    "remove_trailing_whitespace_on_save": true,
+    "format_on_save": "on",
+    "current_line_highlight": "all",
+    "cursor_blink": false,
+    "vertical_scroll_margin": 0,
+    "multi_cursor_modifier": "cmd_or_ctrl",
+    "use_autoclose": true,
+    "always_treat_brackets_as_autoclosed": false,
+    "when_closing_with_no_tabs": "keep_window_open",
+    "hover_popover_enabled": false,
+    "show_copilot_suggestions": true,
+    "inlay_hints": {
+        "enabled": true,
+        "show_type_hints": true,
+        "show_parameter_hints": true,
+        "show_other_hints": true,
+        "edit_debounce_ms": 700,
+        "scroll_debounce_ms": 50
+    },
+    "indent_guides": {
+        "enabled": true,
+        "line_width": 1,
+        "coloring": "fixed",
+        "background_coloring": "disabled"
+    },
+    "tab_bar": {
+        "show": false
+    },
+    "toolbar": {
+        "breadcrumbs": true,
+        "quick_actions": false
+    },
+    "centered_layout": {
+        "left_padding": 0.27,
+        "right_padding": 0.27
+    },
+    "preview_tabs": {
+        "enabled": true,
+        "enable_preview_from_file_finder": true,
+        "enable_preview_from_code_navigation": true
+    },
+    "vim_mode": true,
+    "vim": {
+        "use_system_clipboard": "never",
+        "use_multiline_find": true
+    },
+    "git": {
+        "git_gutter": "tracked_files",
+        "inline_blame": {
+            "enabled": false
+        }
+    },
+    "terminal": {
+        "alternate_scroll": "off",
+        "blinking": "off",
+        "copy_on_select": true,
+        "option_as_meta": false,
+        "button": true,
+        "toolbar": {
+            "title": true
+        },
+        "working_directory": "current_project_directory"
+    },
+    "lsp": {
+        "rust-analyzer": {
+            "initialization_options": {
+                "check": {
+                    "command": "clippy"
+                }
+            }
+        }
+    },
+    "languages": {
+        "JSON": {
+            "format_on_save": "off"
+        },
+        "TOML": {
+            "format_on_save": "off"
+        },
+        "YAML": {
+            "format_on_save": "off"
+        },
+        "Clojure": {
+            "format_on_save": "off"
+        },
+        "Markdown": {
+            "format_on_save": "off"
+        }
+    }
+}

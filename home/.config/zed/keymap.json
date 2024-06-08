@@ -1,0 +1,224 @@
+[
+    {
+        "bindings": {
+            "cmd-m": "workspace::ToggleZoom",
+            "cmd-p": "command_palette::Toggle",
+            "cmd-t": "file_finder::Toggle",
+            "cmd-shift-e": "workspace::ToggleLeftDock",
+            "cmd-shift-alt-e": "project_panel::ToggleFocus",
+            "cmd-shift-a": "workspace::ToggleRightDock",
+            "cmd-shift-alt-a": "assistant::ToggleFocus",
+            "cmd-shift-t": "workspace::ToggleBottomDock",
+            "cmd-shift-alt-t": "terminal_panel::ToggleFocus",
+            "cmd-escape": "workspace::CloseAllDocks",
+            "cmd-shift-p": "projects::OpenRecent",
+            "cmd-shift-f": "pane::DeploySearch",
+            "cmd-shift-d": "diagnostics::Deploy",
+            "shift-alt-r": "workspace::Restart",
+            "shift-alt-c": "workspace::ToggleCenteredLayout",
+            "shift-alt-f": "zed::ToggleFullScreen",
+            "cmd-w": "menu::Cancel",
+            "cmd-shift-w": "menu::Cancel",
+            "cmd-shift-q": "workspace::CloseWindow"
+        }
+    },
+    {
+        "context": "Editor && mode == full",
+        "bindings": {
+            "ctrl-up": "editor::AddSelectionAbove",
+            "ctrl-down": "editor::AddSelectionBelow",
+            "cmd-d": "editor::DuplicateLineDown",
+            "cmd-f": ["buffer_search::Deploy", { "focus": true }],
+            "cmd-h": ["buffer_search::Deploy", { "focus": false }],
+            "cmd-shift-h": "editor::SelectAllMatches",
+            "cmd-shift-n": "editor::SelectNext",
+            "cmd-r": "editor::Rename",
+            "cmd-u": "editor::FindAllReferences",
+            "cmd-i": "editor::Hover",
+            "cmd-o": "outline::Toggle",
+            "cmd-shift-o": "project_symbols::Toggle",
+            "cmd-shift-i": "assistant::InlineAssist",
+            "cmd-shift-l": "language_selector::Toggle",
+            "ctrl-c": "editor::ShowCompletions",
+            "ctrl-f": "editor::Format",
+            "ctrl-a": "editor::ToggleCodeActions",
+            "ctrl-x": "editor::ExpandMacroRecursively",
+            "alt-c": "copilot::Suggest",
+            "alt-shift-c": "copilot::NextSuggestion",
+            "ctrl-left": "pane::GoBack",
+            "ctrl-right": "pane::GoForward",
+            "cmd-up": "vim::ScrollUp",
+            "cmd-down": "vim::ScrollDown",
+            "cmd-shift-up": "vim::LineUp",
+            "cmd-shift-down": "vim::LineDown",
+            "ctrl-shift-h": "editor::GoToDiagnostic",
+            "ctrl-shift-t": "editor::GoToPrevDiagnostic",
+            "alt-shift-h": "editor::GoToHunk",
+            "alt-shift-t": "editor::GoToPrevHunk",
+            "cmd-space": "editor::ToggleHunkDiff",
+            "cmd-shift-space": "editor::ExpandAllHunkDiffs",
+            "cmd-shift-backspace": "editor::RevertSelectedHunks",
+            "cmd-shift-w": "pane::CloseAllItems"
+        }
+    },
+    {
+        "context": "Editor",
+        "bindings": {
+            "alt-n": "vim::NextSubwordStart",
+            "alt-d": "vim::PreviousSubwordStart",
+            "ctrl-n": "vim::NextSubwordEnd",
+            "ctrl-d": "vim::PreviousSubwordEnd"
+        }
+    },
+    {
+        "context": "Editor && vim_mode != insert && !VimWaiting && !VimObject",
+        "bindings": {
+            "g d": "editor::GoToDefinition",
+            "g shift-d": "editor::GoToDefinitionSplit",
+            "g t": "editor::GoToTypeDefinition",
+            "g shift-t": "editor::GoToTypeDefinitionSplit",
+            "space left": "pane::SplitLeft",
+            "space right": "pane::SplitRight",
+            "space up": "pane::SplitUp",
+            "space down": "pane::SplitDown",
+        }
+    },
+    {
+        "context": "Dock",
+        "bindings": {
+            "shift-left": ["workspace::ActivatePaneInDirection", "Left"],
+            "shift-right": ["workspace::ActivatePaneInDirection", "Right"],
+            "shift-up": ["workspace::ActivatePaneInDirection", "Up"],
+            "shift-down": ["workspace::ActivatePaneInDirection", "Down"]
+        }
+    },
+    {
+        "context": "Editor",
+        "bindings": {
+            "shift-left": ["workspace::ActivatePaneInDirection", "Left"],
+            "shift-right": ["workspace::ActivatePaneInDirection", "Right"],
+            "shift-up": ["workspace::ActivatePaneInDirection", "Up"],
+            "shift-down": ["workspace::ActivatePaneInDirection", "Down"]
+        }
+    },
+    {
+        "context": "Editor && vim_mode != insert",
+        "bindings": {
+            "shift-alt-left": ["workspace::SwapPaneInDirection", "Left"],
+            "shift-alt-right": ["workspace::SwapPaneInDirection", "Right"],
+            "shift-alt-up": ["workspace::SwapPaneInDirection", "Up"],
+            "shift-alt-down": ["workspace::SwapPaneInDirection", "Down"]
+        }
+    },
+    // TODO: When registers are supported, add d, s, c, etc bindings
+    // to avoid cluttering the system clipboard
+    {
+        "context": "Editor && vim_mode == insert && !VimWaiting && !VimObject",
+        "bindings": {
+            "shift-delete": "vim::InsertLineAbove",
+            "shift-enter": "vim::InsertLineBelow"
+        }
+    },
+    {
+        "context": "Editor && vim_mode == normal && !VimWaiting && !VimObject",
+        "bindings": {
+            "shift-delete": ["workspace::SendKeystrokes", "shift-o escape"],
+            "shift-enter": ["workspace::SendKeystrokes", "o escape"]
+        }
+    },
+    {
+        "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !VimObject",
+        "bindings": {
+            "tab": "editor::Indent",
+            "shift-tab": "editor::Outdent"
+        }
+    },
+    {
+        "context": "Editor && vim_mode == normal && !VimWaiting && !VimObject",
+        "bindings": {
+            "enter": ["workspace::SendKeystrokes", "c i w"]
+        }
+    },
+    {
+        "context": "Editor && vim_mode == visual && !VimWaiting && !VimObject",
+        "bindings": {
+            "enter": ["workspace::SendKeystrokes", "c"]
+        }
+    },
+    {
+        "context": "Editor && vim_mode == visual && !VimWaiting && !VimObject",
+        "bindings": {
+            // TODO: Surround in visual mode
+        }
+    },
+    {
+        "context": "BufferSearchBar",
+        "bindings": {
+            "alt-c": "search::ToggleCaseSensitive",
+            "alt-w": "search::ToggleWholeWord",
+            "alt-x": "search::ToggleRegex",
+            "alt-r": "search::ToggleReplace",
+            "alt-i": "search::ToggleIncludeIgnored"
+        }
+    },
+    {
+        "context": "ProjectSearchBar",
+        "bindings": {
+            "alt-c": "search::ToggleCaseSensitive",
+            "alt-w": "search::ToggleWholeWord",
+            "alt-x": "search::ToggleRegex",
+            "alt-r": "search::ToggleReplace",
+            "alt-i": "search::ToggleIncludeIgnored"
+        }
+    },
+    // TODO: It should be scoped to Diagnostics, but it seems like there is no such context
+    {
+        "context": "Workspace",
+        "bindings": {
+            "alt-w": "diagnostics::ToggleWarnings"
+        }
+    },
+    {
+        "context": "ProjectPanel",
+        "bindings": {
+            "left": "project_panel::CollapseSelectedEntry",
+            "cmd-left": "project_panel::CollapseAllEntries",
+            "right": "project_panel::ExpandSelectedEntry",
+            "cmd-n": "project_panel::NewFile",
+            "alt-n": "project_panel::NewDirectory",
+            "cmd-x": "project_panel::Cut",
+            "cmd-c": "project_panel::Copy",
+            "cmd-v": "project_panel::Paste",
+            "cmd-d": "project_panel::Duplicate",
+            "cmd-r": "project_panel::Rename",
+            "cmd-u": "project_panel::SelectParent",
+            "cmd-f": "project_panel::NewSearchInDirectory",
+            "alt-r": "project_panel::RevealInFinder",
+            "ctrl-c": "project_panel::CopyRelativePath",
+            "ctrl-shift-c": "project_panel::CopyPath",
+            "backspace": ["project_panel::Trash", { "skip_prompt": false }],
+            "delete": ["project_panel::Trash", { "skip_prompt": false }],
+            "cmd-backspace": ["project_panel::Delete", { "skip_prompt": false }],
+            "cmd-delete": ["project_panel::Delete", { "skip_prompt": false }],
+            "shift-down": "menu::SelectNext",
+            "shift-up": "menu::SelectPrev",
+            "escape": "menu::Cancel",
+            "cmd-w": "workspace::ToggleLeftDock",
+            "cmd-shift-w": "workspace::ToggleLeftDock"
+        }
+    },
+    {
+        "context": "AssistantPanel",
+        "bindings": {
+            "cmd-h": "assistant::ToggleHistory",
+            "cmd-w": "workspace::ToggleRightDock",
+            "cmd-shift-w": "workspace::ToggleRightDock"
+        }
+    },
+    {
+        "context": "Terminal",
+        "bindings": {
+            "cmd-shift-w": "workspace::ToggleBottomDock"
+        }
+    }
+]

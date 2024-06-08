@@ -3,6 +3,7 @@
 
 App = {
     ALACRITTY = "Alacritty",
+    ZED = "Zed",
     NEOVIDE = "Neovide",
     XCODE = "Xcode",
     ARC = "Arc",
@@ -48,6 +49,7 @@ function HandleAppEvent(app, event)
 
     if
         app == App.ALACRITTY
+        or app == App.ZED
         or app == App.NEOVIDE
         or app == App.XCODE
         or app == App.ARC
