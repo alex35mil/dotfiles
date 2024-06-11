@@ -60,8 +60,8 @@
                 // elements
                 "element.background": "#3a3d43",
                 "element.hover": "#363c46",
-                "element.active": "#ff0000",
-                "element.selected": "#ff0000",
+                "element.active": "#454a5680",
+                "element.selected": "#454a5680",
                 "element.disabled": "#ff0000",
 
                 "ghost_element.background": "#00000000",
@@ -86,11 +86,11 @@
                 "editor.highlighted_line.background": "#ff0000",
                 "editor.invisible": "#696d76",
                 "editor.wrap_guide": "#2f3337",
-                "editor.active_wrap_guide": "#ff0000",
+                "editor.active_wrap_guide": "#2f3337",
                 "editor.document_highlight.read_background": "#7fb2c81a",
                 "editor.document_highlight.write_background": "#7fb2c866",
 
-                "link_text.hover": "#ff0000",
+                "link_text.hover": "#81a2be",
 
                 // scrollbars
                 "scrollbar.thumb.background": "#777b804c",
