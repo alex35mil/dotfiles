@@ -1,7 +1,7 @@
 {
     "theme": "35mil Dark Theme",
-    "ui_font_family": "Berkeley Mono",
-    "buffer_font_family": "Berkeley Mono",
+    "ui_font_family": "BerkeleyMono Nerd Font",
+    "buffer_font_family": "BerkeleyMono Nerd Font",
     "buffer_font_size": 16,
     "tab_size": 4,
     "preferred_line_length": 100,
