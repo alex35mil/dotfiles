@@ -1,27 +1,16 @@
-local M = {}
-local m = {}
+local fn = {}
 
-function M.setup()
-    local plugin = require "noice"
-
-    plugin.setup {
+NVNoice = {
+    "folke/noice.nvim",
+    keys = {
+        { "<D-i>", require("noice.lsp").hover, mode = { "n", "v", "i" }, desc = "LSP: Doc" },
+    },
+    opts = {
         cmdline = {
             format = {
                 search_down = { view = "cmdline" },
                 search_up = { view = "cmdline" },
             },
-        },
-        lsp = {
-            -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-            override = {
-                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                ["vim.lsp.util.stylize_markdown"] = true,
-                ["cmp.entry.get_documentation"] = true,
-            },
-        },
-        presets = {
-            cmdline_output_to_split = true,
-            lsp_doc_border = true,
         },
         views = {
             cmdline = {
@@ -34,9 +23,6 @@ function M.setup()
                     height = 1,
                 },
             },
-            cmdline_output = {
-                enter = true,
-            },
             cmdline_popup = {
                 position = {
                     row = "30%",
@@ -47,37 +33,15 @@ function M.setup()
                     height = "auto",
                 },
             },
-            popupmenu = {
-                relative = "editor",
-                position = {
-                    row = "42%",
-                    col = "50%",
-                },
-                size = {
-                    width = 60,
-                    height = 15,
-                },
-                border = {
-                    style = "rounded",
-                    padding = { 0, 1 },
-                },
-                win_options = {
-                    winhighlight = {
-                        Normal = "Normal",
-                        FloatBorder = "DiagnosticInfo",
-                    },
-                },
+            cmdline_output = {
+                enter = true,
             },
         },
-    }
-end
+    },
+}
 
-function M.keymaps()
-    K.map { "<D-I>", "LSP: Doc", require("noice.lsp").hover, mode = { "n", "v", "i" } }
-end
-
-function M.scroll_lsp_doc(direction)
-    local plugin = require "noice.lsp"
+function NVNoice.scroll_lsp_doc(direction)
+    local plugin = require("noice.lsp")
 
     if direction == "up" then
         return plugin.scroll(-4)
@@ -89,44 +53,38 @@ function M.scroll_lsp_doc(direction)
     end
 end
 
-function M.ensure_hidden()
-    if m.is_cmdline_active() then
-        m.exit_cmdline()
+function NVNoice.ensure_hidden()
+    if fn.is_cmdline_active() then
+        fn.exit_cmdline()
         return true
     end
 
     local current_win = vim.api.nvim_get_current_win()
-    local hover_win = m.get_lsp_hover_win()
+    local hover_win = fn.get_lsp_hover_win()
 
     if hover_win ~= nil and hover_win ~= current_win then
-        local cursor = require "editor.cursor"
-
-        local cleanup = cursor.shake()
+        local cleanup = NVCursor.shake()
 
         if not cleanup then
-            vim.api.nvim_err_writeln "Failed to shake cursor"
+            vim.api.nvim_err_writeln("Failed to shake cursor")
             return true
         end
 
-        vim.defer_fn(cleanup, 10)
+        vim.schedule(cleanup)
 
         return true
-    elseif m.is_win_active() then
-        local windows = require "editor.windows"
-
-        if windows.is_window_floating(current_win) then
-            m.close_split()
+    elseif fn.is_win_active() then
+        if NVWindows.is_window_floating(current_win) then
+            fn.close_split()
             return true
         else
-            local nnp = require "plugins.no-neck-pain"
-
-            if nnp.are_sidenotes_visible() then
-                nnp.disable()
-                vim.api.nvim_set_current_win(current_win)
-                m.close_split()
-                nnp.enable()
+            if NVNoNeckPain.are_sidepads_visible() then
+                NVNoNeckPain.update_layout_with(function()
+                    vim.api.nvim_set_current_win(current_win)
+                    fn.close_split()
+                end, { check_sidepads_visibility = false })
             else
-                m.close_split()
+                fn.close_split()
             end
 
             return true
@@ -136,20 +94,18 @@ function M.ensure_hidden()
     end
 end
 
--- Private
-
-function m.is_win_active()
+function fn.is_win_active()
     return vim.bo.filetype == "noice"
 end
 
-function m.is_cmdline_active()
+function fn.is_cmdline_active()
     local mode = vim.fn.mode()
     return mode == "c"
 end
 
-function m.get_lsp_hover_win()
-    local lsp = require "noice.lsp"
-    local docs = require "noice.lsp.docs"
+function fn.get_lsp_hover_win()
+    local lsp = require("noice.lsp")
+    local docs = require("noice.lsp.docs")
 
     local hover = docs.get(lsp.kinds.hover)
 
@@ -160,13 +116,12 @@ function m.get_lsp_hover_win()
     return hover.win(hover)
 end
 
-function m.close_split()
+function fn.close_split()
     vim.cmd.close()
 end
 
-function m.exit_cmdline()
-    local keys = require "editor.keys"
-    keys.send("<Esc>", { mode = "n" })
+function fn.exit_cmdline()
+    NVKeys.send("<Esc>", { mode = "n" })
 end
 
-return M
+return { NVNoice }

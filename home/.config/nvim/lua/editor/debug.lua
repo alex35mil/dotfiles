@@ -1,39 +1,40 @@
-local M = {}
-local m = {}
+NVDebug = {}
 
-function M.keymaps()
-    K.mapseq { "<M-d>w", "DEBUG: Print current window and buffer info", m.print_current_window_and_buffer_info, mode = "n" }
-    K.mapseq { "<M-d>b", "DEBUG: Print all buffers info", m.print_all_buffers_info, mode = "n" }
+local fn = {}
+
+function NVDebug.keymaps()
+    K.map({ "<M-d>w", "DEBUG: Print current window and buffer info", fn.print_current_window_and_buffer_info, mode = "n" })
+    K.map({ "<M-d>b", "DEBUG: Print all buffers info", fn.print_all_buffers_info, mode = "n" })
 end
 
--- Private
+function fn.print(data)
+    vim.notify(data, vim.log.levels.INFO, { timeout = false })
+end
 
-function m.print_window_info(winnr)
+function fn.print_window_info(winnr)
     local win_info = vim.api.nvim_win_get_config(winnr)
 
-    print("winnr: " .. winnr)
-    print("win info: " .. vim.inspect(win_info))
+    fn.print("winnr: " .. winnr)
+    fn.print("win info: " .. vim.inspect(win_info))
 end
 
-function m.print_buffer_info(bufnr)
+function fn.print_buffer_info(bufnr)
     local buf_info = vim.fn.getbufinfo(bufnr)[1]
 
-    print("bufnr: " .. bufnr)
-    print("buf info: " .. vim.inspect(buf_info))
+    fn.print("bufnr: " .. bufnr)
+    fn.print("buf info: " .. vim.inspect(buf_info))
 end
 
-function m.print_current_window_and_buffer_info()
+function fn.print_current_window_and_buffer_info()
     local winnr = vim.api.nvim_get_current_win()
     local bufnr = vim.api.nvim_get_current_buf()
 
-    m.print_window_info(winnr)
-    m.print_buffer_info(bufnr)
+    fn.print_window_info(winnr)
+    fn.print_buffer_info(bufnr)
 end
 
-function m.print_all_buffers_info()
+function fn.print_all_buffers_info()
     local bufs = vim.fn.getbufinfo()
 
-    print("bufs: " .. vim.inspect(bufs))
+    fn.print("bufs: " .. vim.inspect(bufs))
 end
-
-return M

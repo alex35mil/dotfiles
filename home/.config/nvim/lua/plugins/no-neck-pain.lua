@@ -1,76 +1,40 @@
-local M = {}
-local m = {}
+local fn = {}
 
-M.scratchpad_filename = "SIDENOTES"
-M.scratchpad_filetype = "md"
-
-function M.setup()
-    local plugin = require "no-neck-pain"
-    local windows = require "editor.windows"
-
-    local sideBufOpts = {
-        enabled = true,
-        bo = {
-            filetype = M.scratchpad_filetype,
-            buftype = "nofile",
-            bufhidden = "hide",
-            buflisted = false,
-            swapfile = false,
-        },
-    }
-
-    plugin.setup {
-        width = windows.default_width,
-
+NVNoNeckPain = {
+    "shortcuts/no-neck-pain.nvim",
+    opts = {
+        width = NVWindows.default_width,
         autocmds = {
-            enableOnVimEnter = vim.g.neovide,
-            enableOnTabEnter = false,
-            reloadOnColorSchemeChange = false,
+            enableOnVimEnter = false,
             skipEnteringNoNeckPainBuffer = true,
         },
+    },
+}
 
-        mappings = {
-            enabled = false,
-        },
-
-        buffers = {
-            left = sideBufOpts,
-            right = sideBufOpts,
-            scratchPad = {
-                enabled = false,
-                fileName = M.scratchpad_filename,
-            },
-        },
-
-        integrations = {
-            NeoTree = {
-                reopen = false,
-            },
-        },
-    }
+function NVNoNeckPain.increase_window_width()
+    vim.cmd("NoNeckPainWidthUp")
 end
 
-function M.increase_window_width()
-    vim.cmd "NoNeckPainWidthUp"
+function NVNoNeckPain.decrease_window_width()
+    vim.cmd("NoNeckPainWidthDown")
 end
 
-function M.decrease_window_width()
-    vim.cmd "NoNeckPainWidthDown"
+function NVNoNeckPain.set_default_window_width()
+    vim.cmd("NoNeckPainResize " .. NVWindows.default_width)
 end
 
-function M.set_default_window_width()
-    local windows = require "editor.windows"
-    vim.cmd("NoNeckPainResize " .. windows.default_width)
-end
-
-function M.get_sidenotes()
+function NVNoNeckPain.get_sidepads()
     local plugin = _G.NoNeckPain
 
-    if not plugin then return nil end
+    if not plugin then
+        return nil
+    end
 
     local state = plugin.state
 
-    if not state then return nil end
+    if not state then
+        return nil
+    end
 
     local current_tab = vim.api.nvim_get_current_tabpage()
 
@@ -85,7 +49,9 @@ function M.get_sidenotes()
         end
     end
 
-    if not tab then return nil end
+    if not tab then
+        return nil
+    end
 
     local win = tab.wins.main
 
@@ -95,51 +61,63 @@ function M.get_sidenotes()
     }
 end
 
-function M.are_sidenotes_visible()
-    local sidenotes = M.get_sidenotes()
+function NVNoNeckPain.are_sidepads_visible()
+    local sidepads = NVNoNeckPain.get_sidepads()
 
-    if not sidenotes then return false end
+    if not sidepads then
+        return false
+    end
 
-    return sidenotes.left ~= nil or sidenotes.right ~= nil
+    return sidepads.left ~= nil or sidepads.right ~= nil
 end
 
-function M.ensure_sidenotes_hidden()
-    if M.are_sidenotes_visible() then
-        vim.cmd "NoNeckPain"
+function NVNoNeckPain.ensure_sidepads_hidden()
+    if NVNoNeckPain.are_sidepads_visible() then
+        vim.cmd("NoNeckPain")
     end
 end
 
-function M.disable()
-    m.ensure_cursor_position(
-        _G.NoNeckPain.disable
-    )
+function NVNoNeckPain.disable()
+    fn.ensure_cursor_position(NoNeckPain.disable)
 end
 
-function M.enable()
-    m.ensure_cursor_position(
-        _G.NoNeckPain.enable
-    )
+function NVNoNeckPain.enable()
+    fn.ensure_cursor_position(NoNeckPain.enable)
 end
 
-function M.reload()
-    m.ensure_cursor_position(function()
-        local plugin = _G.NoNeckPain
+function NVNoNeckPain.update_layout_with(fn, opts)
+    local sidepads_visible
 
-        pcall(plugin.disable)
-        plugin.enable()
+    if opts and opts.check_sidepads_visibility then
+        sidepads_visible = NVNoNeckPain.are_sidepads_visible()
+    else
+        sidepads_visible = true
+    end
+
+    if sidepads_visible then
+        NVNoNeckPain.disable()
+    end
+
+    fn()
+
+    if sidepads_visible then
+        NVNoNeckPain.enable()
+    end
+end
+
+function NVNoNeckPain.reload()
+    fn.ensure_cursor_position(function()
+        pcall(NoNeckPain.disable)
+        NoNeckPain.enable()
     end)
 end
 
--- Private
-
-function m.ensure_cursor_position(f)
-    local cursor = require "editor.cursor"
-
-    local current_cursor = cursor.get()
+function fn.ensure_cursor_position(f)
+    local current_cursor = NVCursor.get()
 
     f()
 
-    pcall(cursor.set, current_cursor)
+    pcall(NVCursor.set, current_cursor)
 end
 
-return M
+return { NVNoNeckPain }

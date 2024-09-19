@@ -1,29 +1,32 @@
--- Core
-require("editor.editing").keymaps()
-require("editor.navigation").keymaps()
-require("editor.buffers").keymaps()
-require("editor.windows").keymaps()
-require("editor.terminal").keymaps()
-require("editor.debug").keymaps()
+K = {}
 
--- Plugins
-require("plugins.lazy").keymaps()
-require("plugins.noice").keymaps()
-require("plugins.pounce").keymaps()
-require("plugins.comment").keymaps()
-require("plugins.conform").keymaps()
-require("plugins.crates").keymaps()
-require("plugins.telescope").keymaps()
-require("plugins.treesitter").keymaps()
-require("plugins.zen-mode").keymaps()
-require("plugins.spectre").keymaps()
-require("plugins.lualine").keymaps()
-require("plugins.neo-tree").keymaps()
-require("plugins.persistence").keymaps()
-require("plugins.toggleterm").keymaps()
-require("plugins.lsp.mason").keymaps()
-require("plugins.lsp.lspsaga").keymaps()
-require("plugins.git.lazygit").keymaps()
-require("plugins.git.fugit2").keymaps()
-require("plugins.git.gitsigns").keymaps()
-require("plugins.git.diffview").keymaps()
+NVKeymaps = {
+    scroll = {
+        up = "<D-Up>",
+        down = "<D-Down>",
+    },
+    close = "<D-w>",
+}
+
+NVKarabiner = {
+    ["<D-h>"] = "<C-A-h>",
+    ["<D-m>"] = "<C-A-m>",
+}
+
+local default_keymap_options = { noremap = true, silent = true }
+
+function K.map(mapping)
+    -- NB!: it is important to remove items in reverse order to avoid shifting
+    local cmd = table.remove(mapping, 3)
+    local desc = table.remove(mapping, 2)
+    local key = table.remove(mapping, 1)
+
+    local mode = mapping["mode"]
+
+    mapping["mode"] = nil
+    mapping["desc"] = desc
+
+    local options = vim.tbl_extend("force", default_keymap_options, mapping)
+
+    vim.keymap.set(mode, key, cmd, options)
+end

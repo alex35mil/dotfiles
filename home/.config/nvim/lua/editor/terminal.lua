@@ -1,17 +1,14 @@
-local M = {}
-local m = {}
+NVTerminal = {}
 
-function M.keymaps()
-    K.map { "<D-v>", "Paste text", m.paste, mode = "t", expr = true }
-    K.map { "<S-Esc>", "Exit terminal mode", "<C-\\><C-n>", mode = "t" }
+local fn = {}
+
+function NVTerminal.keymaps()
+    K.map({ "<D-v>", "Paste text", fn.paste, mode = "t", expr = true })
+    K.map({ "<S-Esc>", "Exit terminal mode", "<C-\\><C-n>", mode = "t" })
 end
 
--- Private
-
-function m.paste()
+function fn.paste()
     local content = vim.fn.getreg("*")
     content = vim.api.nvim_replace_termcodes(content, true, true, true)
     vim.api.nvim_feedkeys(content, "t", true)
 end
-
-return M

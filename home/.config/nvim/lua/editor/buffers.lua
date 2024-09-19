@@ -1,170 +1,181 @@
-local M = {}
-local m = {}
+NVBuffers = {}
 
-function M.keymaps()
-    K.map {
-        "<D-w>",
+local fn = {}
+
+function NVBuffers.keymaps()
+    K.map({
+        NVKeymaps.close,
         "Delete current buffer, but do not close current window if there are multiple",
-        function() m.delete_buf({ should_close_window = false, force = false }) end,
-        mode = { "n", "v" },
-    }
-    K.map {
-        "<C-w>",
+        function()
+            fn.delete_buf({ should_close_window = false, force = false })
+        end,
+        mode = { "n", "v", "i", "c" },
+    })
+
+    K.map({
+        "<D-S-w>",
         "Delete current buffer and close current window if there are multiple",
-        function() m.delete_buf({ should_close_window = true, force = false }) end,
+        function()
+            fn.delete_buf({ should_close_window = true, force = false })
+        end,
         mode = { "n", "i", "v", "t", "c" },
-    }
-    K.mapseq {
-        "<D-W>",
-        "Delete current buffer, even if unsaved, but do not close current window if there are multiple",
-        function() m.delete_buf({ should_close_window = false, force = true }) end,
-        mode = "n",
-    }
-    K.map {
+    })
+
+    -- TODO: Revisit these keymaps
+
+    K.map({
         "<C-S-w>",
-        "Delete current buffer, even if unsaved, and close current window if there are multiple",
-        function() m.delete_buf({ should_close_window = true, force = true }) end,
+        "Delete current buffer, even if unsaved, but do not close current window if there are multiple",
+        function()
+            fn.delete_buf({ should_close_window = false, force = true })
+        end,
         mode = "n",
-    }
-    K.mapseq {
+    })
+
+    K.map({
+        "<C-S-M-w>",
+        "Delete current buffer, even if unsaved, and close current window if there are multiple",
+        function()
+            fn.delete_buf({ should_close_window = true, force = true })
+        end,
+        mode = "n",
+    })
+
+    K.map({
         "<Leader>bas",
         "Delete all buffers except current & unsaved",
-        function() m.delete_all_bufs_except_current({ incl_unsaved = false }) end,
+        function()
+            fn.delete_all_bufs_except_current({ incl_unsaved = false })
+        end,
         mode = "n",
-    }
-    K.mapseq {
+    })
+    K.map({
         "<Leader>baf",
         "Delete all buffers except current",
-        function() m.delete_all_bufs_except_current({ incl_unsaved = true }) end,
+        function()
+            fn.delete_all_bufs_except_current({ incl_unsaved = true })
+        end,
         mode = "n",
-    }
+    })
 end
 
-function M.is_buf_listed(bufnr)
-    local buf = m.get_buf_info(bufnr)
+function NVBuffers.is_buf_listed(bufnr)
+    local buf = fn.get_buf_info(bufnr)
     return buf.listed == 1
 end
 
-function M.get_listed_bufs(opts)
+function NVBuffers.get_listed_bufs(opts)
     local o = opts or {}
     local bufs = vim.fn.getbufinfo({ buflisted = 1 })
 
     if o.sort_lastused then
-        table.sort(bufs, function(a, b) return a.lastused > b.lastused end)
+        table.sort(bufs, function(a, b)
+            return a.lastused > b.lastused
+        end)
     end
 
     return bufs
 end
 
--- Private
-
-function m.get_buf_info(bufnr)
+function fn.get_buf_info(bufnr)
     return vim.fn.getbufinfo(bufnr)[1]
 end
 
-function m.delete_buf(options)
-    local noice = require "plugins.noice"
-    if noice.ensure_hidden() then
+function fn.delete_buf(options)
+    if NVNoice.ensure_hidden() then
         return
     end
 
-    local alpha = require "plugins.alpha"
-    if alpha.is_active() then
+    -- TODO: Handle mini.starter here
+    -- if NVAlpha.is_active() then
+    --     return
+    -- end
+
+    -- local zenmode = require("plugins.zen-mode")
+    -- if zenmode.ensure_deacitvated() then
+    --     return
+    -- end
+
+    -- local lazygit = require("plugins.git.lazygit")
+    -- if lazygit.ensure_hidden() then
+    --     return
+    -- end
+
+    if NVDiffview.ensure_current_hidden() then
         return
     end
 
-    local zenmode = require "plugins.zen-mode"
-    if zenmode.ensure_deacitvated() then
+    -- local spectre = require("plugins.spectre")
+    -- if spectre.ensure_active_closed() then
+    --     return
+    -- end
+
+    if NVLazy.ensure_hidden() then
         return
     end
 
-    local lazygit = require "plugins.git.lazygit"
-    if lazygit.ensure_hidden() then
-        return
-    end
+    -- local mason = require("plugins.lsp.mason")
+    -- if mason.ensure_hidden() then
+    --     return
+    -- end
 
-    local diffview = require "plugins.git.diffview"
-    if diffview.ensure_current_hidden() then
-        return
-    end
+    -- local term = require("plugins.toggleterm")
+    -- if term.ensure_active_hidden() then
+    --     return
+    -- end
 
-    local spectre = require "plugins.spectre"
-    if spectre.ensure_active_closed() then
-        return
-    end
-
-    local lazy = require "plugins.lazy"
-    if lazy.ensure_hidden() then
-        return
-    end
-
-    local mason = require "plugins.lsp.mason"
-    if mason.ensure_hidden() then
-        return
-    end
-
-    local term = require "plugins.toggleterm"
-    if term.ensure_active_hidden() then
-        return
-    end
-
-    local filetree = require "plugins.neo-tree"
-    if filetree.ensure_active_hidden() then
-        return
-    end
-
-    local windows = require "editor.windows"
+    -- local filetree = require("plugins.neo-tree")
+    -- if filetree.ensure_active_hidden() then
+    --     return
+    -- end
 
     local current_win = vim.api.nvim_get_current_win()
 
     local opts = vim.tbl_extend("keep", options, { force = false, should_close_window = false })
 
     local current_buf = vim.api.nvim_get_current_buf()
-    local current_buf_info = m.get_buf_info(current_buf)
+    local current_buf_info = fn.get_buf_info(current_buf)
 
     if current_buf_info == nil then
-        vim.api.nvim_err_writeln "Can't get current buffer info"
+        vim.api.nvim_err_writeln("Can't get current buffer info")
         return
     end
 
     if current_buf_info.name == "" and current_buf_info.changed == 1 and not opts.force then
-        vim.api.nvim_err_writeln "The buffer needs to be saved first"
+        vim.api.nvim_err_writeln("The buffer needs to be saved first")
         return
     end
 
     local mode = vim.fn.mode()
 
     if mode ~= "n" then
-        local keys = require "editor.keys"
-        keys.send("<Esc>", { mode = "x" })
+        NVKeys.send("<Esc>", { mode = "x" })
     end
 
-    local tab_windows = windows.get_tab_windows_with_listed_buffers({ incl_help = true })
+    local tab_windows = NVWindows.get_tab_windows_with_listed_buffers({ incl_help = true })
 
     if tab_windows == nil then
-        vim.api.nvim_err_writeln "No windows in the current tab"
+        vim.api.nvim_err_writeln("No windows in the current tab")
         return
     end
 
     local is_opened_elsewhere = false
 
     if #tab_windows > 1 then
-        is_opened_elsewhere = m.is_opened_elsewhere(tab_windows, current_win, current_buf)
+        is_opened_elsewhere = fn.is_opened_elsewhere(tab_windows, current_win, current_buf)
     end
 
     if #tab_windows > 1 and opts.should_close_window then
-        local nnp = require "plugins.no-neck-pain"
-
-        vim.cmd "silent! write"
+        vim.cmd("silent! write")
         vim.cmd.close()
-        nnp.reload()
+        NVNoNeckPain.reload()
 
         -- We don't want to destroy the buffer that is shown in another window
         if not is_opened_elsewhere then
             vim.api.nvim_buf_delete(current_buf, { force = opts.force })
         end
     else
-        local bufs = M.get_listed_bufs({ sort_lastused = true })
+        local bufs = NVBuffers.get_listed_bufs({ sort_lastused = true })
 
         -- Searching for the next buffer to show in the current window
         local next_buf = nil
@@ -185,7 +196,7 @@ function m.delete_buf(options)
                 end
 
                 if not opened_else_where then
-                    -- that's the one
+                    -- that's the one 🖤
                     next_buf = buf.bufnr
                     break
                 end
@@ -193,14 +204,14 @@ function m.delete_buf(options)
         end
 
         if next_buf ~= nil then
-            vim.cmd "silent! write"
+            vim.cmd("silent! write")
             vim.api.nvim_set_current_buf(next_buf)
             if not is_opened_elsewhere then
                 vim.api.nvim_buf_delete(current_buf, { force = opts.force })
             end
         else
             if #tab_windows > 1 then
-                vim.cmd "silent! write"
+                vim.cmd("silent! write")
                 vim.cmd.close()
                 if not is_opened_elsewhere then
                     vim.api.nvim_buf_delete(current_buf, { force = opts.force })
@@ -209,10 +220,10 @@ function m.delete_buf(options)
                 local empty_buf = vim.api.nvim_create_buf(true, false)
 
                 if empty_buf == 0 then
-                    vim.api.nvim_err_writeln "Failed to create empty buffer"
-                    vim.cmd "silent! write"
+                    vim.api.nvim_err_writeln("Failed to create empty buffer")
+                    vim.cmd("silent! write")
                 else
-                    vim.cmd "silent! write"
+                    vim.cmd("silent! write")
                     vim.api.nvim_set_current_buf(empty_buf)
                 end
 
@@ -222,15 +233,16 @@ function m.delete_buf(options)
     end
 end
 
-function m.delete_all_bufs_except_current(opts)
-    local filetree = require "plugins.neo-tree"
+function fn.delete_all_bufs_except_current(opts)
+    -- FIXME: Handle NeoTree
+    local filetree = require("plugins.neo-tree")
 
     local incl_unsaved = opts.incl_unsaved
 
     local current_buf = vim.api.nvim_get_current_buf()
     local bufs = vim.fn.getbufinfo({ buflisted = 1 })
 
-    vim.cmd "silent! wa"
+    vim.cmd("silent! wa")
 
     for _, buf in ipairs(bufs) do
         if buf.bufnr ~= current_buf and not filetree.is_tree(buf.bufnr) then
@@ -244,13 +256,11 @@ function m.delete_all_bufs_except_current(opts)
         end
     end
 
-    local windows = require "editor.windows"
-
     local current_win = vim.api.nvim_get_current_win()
-    local windows_with_listed_buffers = windows.get_tab_windows_with_listed_buffers()
+    local windows_with_listed_buffers = NVWindows.get_tab_windows_with_listed_buffers()
 
     if windows_with_listed_buffers == nil then
-        print "No windows with listed buffers"
+        print("No windows with listed buffers")
         return
     end
 
@@ -264,13 +274,13 @@ function m.delete_all_bufs_except_current(opts)
     end
 
     if incl_unsaved then
-        print "Closed all buffers except current"
+        print("Closed all buffers except current")
     else
-        print "Closed all buffers except current and unsaved"
+        print("Closed all buffers except current and unsaved")
     end
 end
 
-function m.is_opened_elsewhere(tab_wins, current_win, current_buf)
+function fn.is_opened_elsewhere(tab_wins, current_win, current_buf)
     for _, win in ipairs(tab_wins) do
         if win ~= current_win then
             local win_buf = vim.api.nvim_win_get_buf(win)
@@ -282,5 +292,3 @@ function m.is_opened_elsewhere(tab_wins, current_win, current_buf)
 
     return false
 end
-
-return M

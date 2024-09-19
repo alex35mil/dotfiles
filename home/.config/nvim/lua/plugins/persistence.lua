@@ -1,59 +1,49 @@
-local M = {}
-local m = {}
+NVPersistence = {}
 
-function M.setup()
-    local plugin = require "persistence"
-
-    plugin.setup {
-        pre_save = function()
-            local lazy = require "plugins.lazy"
-            local nnp = require "plugins.no-neck-pain"
-            local noice = require "plugins.noice"
-            local zenmode = require "plugins.zen-mode"
-            local spectre = require "plugins.spectre"
-            local filetree = require "plugins.neo-tree"
-            local toggleterm = require "plugins.toggleterm"
-            local mason = require "plugins.lsp.mason"
-            local lazygit = require "plugins.git.lazygit"
-            local diffview = require "plugins.git.diffview"
-
+function NVPersistence.autocmds()
+    vim.api.nvim_create_autocmd("User", {
+        pattern = "PersistenceSavePre",
+        callback = function()
             local mode = vim.fn.mode()
 
             if mode == "i" or mode == "v" then
-                local keys = require "editor.keys"
-                keys.send("<Esc>", { mode = "x" })
+                NVKeys.send("<Esc>", { mode = "x" })
             end
 
-            lazy.ensure_hidden()
-            noice.ensure_hidden()
-            zenmode.ensure_deacitvated()
-            spectre.ensure_any_closed()
-            filetree.ensure_any_hidden()
-            toggleterm.ensure_any_hidden()
-            mason.ensure_hidden()
-            lazygit.ensure_hidden()
-            diffview.ensure_all_hidden()
-            nnp.disable()
-
-            -- For some reason, it breaks persistence so that the session is not saved
-            -- vim.cmd "wa"
+            -- TODO: Complete this list
+            NVLazy.ensure_hidden()
+            NVNoice.ensure_hidden()
+            NVZenMode.ensure_deacitvated()
+            NVDiffview.ensure_all_hidden()
+            NVNoNeckPain.disable()
         end,
-        save_empty = true,
-    }
+    })
+
+    vim.api.nvim_create_autocmd("User", {
+        pattern = "PersistenceLoadPost",
+        callback = function()
+            NVNoNeckPain.reload()
+        end,
+    })
 end
 
-function M.keymaps()
-    K.map { "<M-r>", "Restore last session", m.restore_session, mode = "n" }
+function NVPersistence.has_session()
+    local plugin = require("persistence")
+
+    local sessions = plugin.list()
+    local current_session = plugin.current()
+
+    for _, session in ipairs(sessions) do
+        if session == current_session then
+            return true
+        end
+    end
+
+    return false
 end
 
--- Private
-
-function m.restore_session()
-    local persistence = require "persistence"
-    local nnp = require "plugins.no-neck-pain"
-
-    persistence.load { last = true }
-    nnp.reload()
+function NVPersistence.restore()
+    require("persistence").load()
 end
 
-return M
+return {}

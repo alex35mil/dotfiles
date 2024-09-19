@@ -1,19 +1,19 @@
-local M = {}
+NVCursor = {}
 
-function M.get()
+function NVCursor.get()
     local win = vim.api.nvim_get_current_win()
     local pos = vim.api.nvim_win_get_cursor(win)
 
     return { win, pos }
 end
 
-function M.set(cursor)
+function NVCursor.set(cursor)
     local row, col = cursor.pos[1], cursor.pos[2]
 
     vim.api.nvim_win_set_cursor(cursor.win, { row, col })
 end
 
-function M.shake()
+function NVCursor.shake()
     local cursor = vim.api.nvim_win_get_cursor(0)
 
     local cur_line = cursor[1]
@@ -26,9 +26,9 @@ function M.shake()
     elseif cur_line > 1 then
         direction = "Up"
     else
-        local lines = vim.api.nvim_buf_line_count(0)
+        local total_lines = vim.api.nvim_buf_line_count(0)
 
-        if cur_line < lines then
+        if cur_line < total_lines then
             direction = "Down"
         else
             local lines = vim.api.nvim_buf_get_lines(0, cur_line - 1, cur_line, false)
@@ -40,30 +40,22 @@ function M.shake()
         end
     end
 
-    if not direction then return nil end
-
-    vim.cmd("normal mz")
+    if not direction then
+        return nil
+    end
 
     vim.cmd.execute([["normal \<]] .. direction .. [[>"]])
 
-    vim.wait(
-        500,
-        function()
-            local next_cursor = vim.api.nvim_win_get_cursor(0)
-            local next_line = next_cursor[1]
-            local next_col = next_cursor[2]
-            local moved = next_line ~= cur_line or next_col ~= cur_col
+    vim.wait(1000, function()
+        local next_cursor = vim.api.nvim_win_get_cursor(0)
+        local next_line = next_cursor[1]
+        local next_col = next_cursor[2]
+        local moved = next_line ~= cur_line or next_col ~= cur_col
 
-            return moved
-        end,
-        10,
-        false
-    )
+        return moved
+    end, 10, false)
 
     return function()
-        vim.cmd "normal `z"
-        vim.cmd "delmarks z"
+        vim.api.nvim_win_set_cursor(0, cursor)
     end
 end
-
-return M

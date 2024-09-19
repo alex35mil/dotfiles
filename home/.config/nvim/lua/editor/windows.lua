@@ -1,49 +1,118 @@
-local M = {}
-local m = {}
+NVWindows = {
+    default_width = 120,
+    maximized_width = 1,
+    window_picker_keys = "UHKMETJWNSABCDFGILOPQRVXYZ1234567890",
+}
 
-M.default_width = 140
-M.window_picker_keys = "UHKMETJWNSABCDFGILOPQRVXYZ1234567890"
+local fn = {}
 
-function M.keymaps()
-    K.map { "<D-n>", "Create new buffer in the current window", "<Cmd>enew<CR>", mode = { "n", "v", "i" } }
-    K.mapseq { "<Leader>nh", "Create new buffer in a horizontal split", "<Cmd>new<CR>", mode = "n" }
-    K.mapseq { "<Leader>nn", "Create new buffer in a vertical split", "<Cmd>vnew<CR>", mode = "n" }
+-- TODO: Revisit windows keymaps
 
-    K.map { "<S-Left>", "Move to window on the left", "<Cmd>wincmd h<CR>", mode = { "n", "v", "t" } }
-    K.map { "<S-Down>", "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n", "v", "t" } }
-    K.map { "<S-Up>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "t" } }
-    K.map { "<S-Right>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "v", "t" } }
+function NVWindows.keymaps()
+    K.map({ "<D-n>", "Create new buffer in the current window", "<Cmd>enew<CR>", mode = { "n", "v", "i" } })
+    K.map({ "<Leader>nh", "Create new buffer in a horizontal split", "<Cmd>new<CR>", mode = "n" })
+    K.map({ "<Leader>nn", "Create new buffer in a vertical split", "<Cmd>vnew<CR>", mode = "n" })
 
-    K.map { "<M-S-Left>", "Move window to the left", function() m.reposition_windows({ action = "move_left" }) end, mode = "n" }
-    K.map { "<M-S-Right>", "Move window to the right", function() m.reposition_windows({ action = "move_right" }) end, mode = "n" }
-    K.map { "<M-S-Up>", "Move window up", function() m.reposition_windows({ action = "move_up" }) end, mode = "n" }
-    K.map { "<M-S-Down>", "Move window down", function() m.reposition_windows({ action = "move_down" }) end, mode = "n" }
+    K.map({ "<S-Left>", "Move to window on the left", "<Cmd>wincmd h<CR>", mode = { "n", "v", "t" } })
+    K.map({ "<S-Down>", "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n", "v", "t" } })
+    K.map({ "<S-Up>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "t" } })
+    K.map({ "<S-Right>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "v", "t" } })
 
-    K.mapseq { "<Leader>ws", "Swap windows", function() m.reposition_windows({ action = "swap" }) end, mode = "n" }
+    K.map({
+        "<M-S-Left>",
+        "Move window to the left",
+        function()
+            fn.reposition_windows({ action = "move_left" })
+        end,
+        mode = "n",
+    })
+    K.map({
+        "<M-S-Right>",
+        "Move window to the right",
+        function()
+            fn.reposition_windows({ action = "move_right" })
+        end,
+        mode = "n",
+    })
+    K.map({
+        "<M-S-Up>",
+        "Move window up",
+        function()
+            fn.reposition_windows({ action = "move_up" })
+        end,
+        mode = "n",
+    })
+    K.map({
+        "<M-S-Down>",
+        "Move window down",
+        function()
+            fn.reposition_windows({ action = "move_down" })
+        end,
+        mode = "n",
+    })
 
-    K.map { "<C-S-Up>", "Increase window width", function() m.change_window_width("up") end, mode = "n" }
-    K.map { "<C-S-Down>", "Decrease window width", function() m.change_window_width("down") end, mode = "n" }
-    K.map { "<D-C-S-Up>", "Increase window height", function() m.change_window_height("up") end, mode = "n" }
-    K.map { "<D-C-S-Down>", "Decrease window height", function() m.change_window_height("down") end, mode = "n" }
+    K.map({
+        "<Leader>ws",
+        "Swap windows",
+        function()
+            fn.reposition_windows({ action = "swap" })
+        end,
+        mode = "n",
+    })
 
-    K.map { "<D-E>", "Equalize layout", m.equalize_layout, mode = "n" }
-    K.map { "<D-X>", "Reset layout", m.reset_layout, mode = "n" }
+    K.map({
+        "<C-S-Up>",
+        "Increase window width",
+        function()
+            fn.change_window_width("up")
+        end,
+        mode = "n",
+    })
+    K.map({
+        "<C-S-Down>",
+        "Decrease window width",
+        function()
+            fn.change_window_width("down")
+        end,
+        mode = "n",
+    })
+    K.map({
+        "<D-C-S-Up>",
+        "Increase window height",
+        function()
+            fn.change_window_height("up")
+        end,
+        mode = "n",
+    })
+    K.map({
+        "<D-C-S-Down>",
+        "Decrease window height",
+        function()
+            fn.change_window_height("down")
+        end,
+        mode = "n",
+    })
+
+    K.map({ "<D-E>", "Equalize layout", fn.equalize_layout, mode = "n" })
+    K.map({ "<D-X>", "Reset layout", fn.reset_layout, mode = "n" })
 end
 
-function M.is_window_floating(winid)
+function NVWindows.is_window_floating(winid)
     local win = vim.api.nvim_win_get_config(winid)
     return win.relative ~= ""
 end
 
-function M.get_floating_tab_windows()
-    local windows = m.get_tab_windows()
+function NVWindows.get_floating_tab_windows()
+    local windows = fn.get_tab_windows()
 
-    if not windows then return nil end
+    if not windows then
+        return nil
+    end
 
     local result = {}
 
     for _, winnr in ipairs(windows) do
-        if M.is_window_floating(winnr) then
+        if NVWindows.is_window_floating(winnr) then
             table.insert(result, winnr)
         end
     end
@@ -51,26 +120,22 @@ function M.get_floating_tab_windows()
     return result
 end
 
-function M.get_tab_windows_with_listed_buffers(options)
-    local opts = vim.tbl_extend("keep", options, {
-        incl_help = false,
-        incl_sidenotes = false,
-    })
+function NVWindows.get_tab_windows_with_listed_buffers(options)
+    local opts = vim.tbl_extend("keep", options, { incl_help = false })
 
-    local windows = m.get_normal_tab_windows({ incl_sidenotes = opts.incl_sidenotes })
+    local windows = fn.get_normal_tab_windows()
 
-    if not windows then return nil end
-
-    local buffers = require "editor.buffers"
-    local help = require "editor.help"
+    if not windows then
+        return nil
+    end
 
     local result = {}
 
     for _, win in ipairs(windows) do
         local buf = vim.api.nvim_win_get_buf(win)
-        local incl_if_help = opts.incl_help and help.is_help(buf)
+        local incl_if_help = opts.incl_help and NVHelp.is_help(buf)
 
-        if buffers.is_buf_listed(buf) or incl_if_help then
+        if NVBuffers.is_buf_listed(buf) or incl_if_help then
             table.insert(result, win)
         end
     end
@@ -78,102 +143,85 @@ function M.get_tab_windows_with_listed_buffers(options)
     return result
 end
 
--- Private
-
-function m.reposition_windows(opts)
-    local nnp = require "plugins.no-neck-pain"
-
+function fn.reposition_windows(opts)
     local action = opts.action
 
-    local windows = m.get_normal_tab_windows({ incl_sidenotes = false })
-    local sidenotes_visible = nnp.are_sidenotes_visible()
+    local windows = fn.get_normal_tab_windows()
 
     if #windows == 2 and action == "swap" then
-        if sidenotes_visible then nnp.disable() end
-        vim.cmd "wincmd r"
-        if sidenotes_visible then nnp.enable() end
+        NVNoNeckPain.update_layout_with(function()
+            vim.cmd("wincmd r")
+        end)
     elseif #windows > 1 then
-        local winshift = require "plugins.winshift"
+        -- FIXME: Handle winshift
+        local winshift = require("plugins.winshift")
 
         if action == "swap" then
             winshift.swap()
         elseif action == "move_left" then
-            nnp.disable()
-            winshift.move_left()
-            nnp.enable()
+            NVNoNeckPain.update_layout_with(winshift.move_left)
         elseif action == "move_right" then
-            nnp.disable()
-            winshift.move_right()
-            nnp.enable()
+            NVNoNeckPain.update_layout_with(winshift.move_right)
         elseif action == "move_up" then
-            nnp.disable()
-            winshift.move_up()
-            nnp.enable()
+            NVNoNeckPain.update_layout_with(winshift.move_up)
         elseif action == "move_down" then
-            nnp.disable()
-            winshift.move_down()
-            nnp.enable()
+            NVNoNeckPain.update_layout_with(winshift.move_down)
         else
-            vim.api.nvim_err_writeln "Unexpected windows action"
+            vim.api.nvim_err_writeln("Unexpected windows action")
         end
     else
-        print "No windows to rotate"
+        print("No windows to rotate")
         return
     end
 end
 
-function m.change_window_width(direction)
-    local nnp = require "plugins.no-neck-pain"
-
-    local sidenotes_visible = nnp.are_sidenotes_visible()
+function fn.change_window_width(direction)
+    local sidepads_visible = NVNoNeckPain.are_sidepads_visible()
 
     if direction == "up" then
-        if sidenotes_visible then
-            nnp.increase_window_width()
+        if sidepads_visible then
+            NVNoNeckPain.increase_window_width()
         else
-            vim.cmd "vertical resize +5"
+            vim.cmd("vertical resize +5")
         end
     elseif direction == "down" then
-        if sidenotes_visible then
-            nnp.decrease_window_width()
+        if sidepads_visible then
+            NVNoNeckPain.decrease_window_width()
         else
-            vim.cmd "vertical resize -5"
+            vim.cmd("vertical resize -5")
         end
     else
-        vim.api.nvim_err_writeln "Unexpected direction"
+        vim.api.nvim_err_writeln("Unexpected direction")
     end
 end
 
-function m.change_window_height(direction)
+function fn.change_window_height(direction)
     if direction == "up" then
-        vim.cmd "resize +5"
+        vim.cmd("resize +5")
     elseif direction == "down" then
-        vim.cmd "resize -5"
+        vim.cmd("resize -5")
     else
-        vim.api.nvim_err_writeln "Unexpected direction"
+        vim.api.nvim_err_writeln("Unexpected direction")
     end
 end
 
-function m.equalize_layout()
-    local nnp = require "plugins.no-neck-pain"
+function fn.equalize_layout()
+    local sidepads_visible = NVNoNeckPain.are_sidepads_visible()
 
-    local sidenotes_visible = nnp.are_sidenotes_visible()
-
-    if sidenotes_visible then
-        nnp.set_default_window_width()
-        vim.cmd "vert wincmd ="
+    if sidepads_visible then
+        NVNoNeckPain.set_default_window_width()
+        vim.cmd("vert wincmd =")
     else
-        vim.cmd "wincmd ="
+        vim.cmd("wincmd =")
     end
 end
 
-function m.reset_layout()
-    local nnp = require "plugins.no-neck-pain"
-    m.equalize_layout()
-    nnp.reload()
+function fn.reset_layout()
+    fn.equalize_layout()
+    NVNoNeckPain.reload()
 end
 
-function m.get_tab_windows(options)
+function fn.get_tab_windows()
     local tabs = vim.fn.gettabinfo()
     local current_tab = vim.fn.tabpagenr()
 
@@ -189,29 +237,21 @@ function m.get_tab_windows(options)
     return windows
 end
 
-function m.get_normal_tab_windows(options)
-    local opts
+function fn.get_normal_tab_windows()
+    local windows = fn.get_tab_windows()
 
-    if options and options.incl_sidenotes ~= nil then
-        opts = { skip_sidenotes = not options.incl_sidenotes }
-    else
-        opts = { skip_sidenotes = true }
+    if not windows then
+        return nil
     end
-
-    local windows = m.get_tab_windows()
-
-    if not windows then return nil end
-
-    local nnp = require "plugins.no-neck-pain"
 
     local result = {}
 
-    local sidenotes = nnp.get_sidenotes()
+    local sidepads = NVNoNeckPain.get_sidepads()
 
     for _, winid in ipairs(windows) do
-        if not M.is_window_floating(winid) then
-            if opts.skip_sidenotes and sidenotes ~= nil then
-                if winid ~= sidenotes.left and winid ~= sidenotes.right then
+        if not NVWindows.is_window_floating(winid) then
+            if sidepads ~= nil then
+                if winid ~= sidepads.left and winid ~= sidepads.right then
                     table.insert(result, winid)
                 end
             else
@@ -222,5 +262,3 @@ function m.get_normal_tab_windows(options)
 
     return result
 end
-
-return M

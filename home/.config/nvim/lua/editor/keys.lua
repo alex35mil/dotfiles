@@ -1,6 +1,6 @@
-local M = {}
+NVKeys = {}
 
-function M.send(keys, options)
+function NVKeys.send(keys, options)
     local mode = options.mode
 
     if mode == nil then
@@ -36,5 +36,3 @@ function M.send(keys, options)
         vim.api.nvim_err_writeln("Unexpected mode")
     end
 end
-
-return M

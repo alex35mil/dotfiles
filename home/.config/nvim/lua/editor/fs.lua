@@ -1,9 +1,10 @@
-local M = {}
+NVFS = {}
 
 local format = vim.fn.fnamemodify
 
-function M.root(opts)
-    local opts = opts or { capitalize = false }
+function NVFS.root(options)
+    local opts = options or { capitalize = false }
+
     local cwd = vim.fn.getcwd()
     local root = format(cwd, ":t")
 
@@ -14,31 +15,29 @@ function M.root(opts)
     end
 end
 
-function M.relative_path(loc)
+function NVFS.relative_path(loc)
     return format(loc, ":.")
 end
 
-function M.filename(loc)
+function NVFS.filename(loc)
     return format(loc, ":t")
 end
 
-function M.filestem(loc)
+function NVFS.filestem(loc)
     return format(loc, ":t:r")
 end
 
-function M.format(loc, fmt)
+function NVFS.format(loc, fmt)
     if fmt == "absolute" then
         return loc
     elseif fmt == "relative" then
-        return M.relative_path(loc)
+        return NVFS.relative_path(loc)
     elseif fmt == "filename" then
-        return M.filename(loc)
+        return NVFS.filename(loc)
     elseif fmt == "filestem" then
-        return M.filestem(loc)
+        return NVFS.filestem(loc)
     else
         vim.api.nvim_err_writeln("Invalid path format: " .. fmt)
         return nil
     end
 end
-
-return M

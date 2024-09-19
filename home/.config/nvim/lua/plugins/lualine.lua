@@ -1,23 +1,77 @@
-local M = {}
-local m = {}
+local Theme = {}
+local Sections = {}
 
-function M.setup()
-    local plugin = require "lualine"
-    local linemode = require "lualine.utils.mode"
-    local palette = require "theme.palette"
-    local lsp = require "plugins.lsp.lspconfig"
+local fn = {}
 
-    local diagnostics = m.diagnostics_component()
+NVLualine = {
+    "nvim-lualine/lualine.nvim",
+    opts = function()
+        -- PERF: we don't need this lualine require madness 🤷
+        local lualine_require = require("lualine_require")
+        lualine_require.require = require
 
-    local color = {
-        active_text = palette.text,
-        incative_text = palette.faded_text,
-        inverted_text = palette.bar_bg,
-        bg = palette.bar_bg,
-        emphasized_bg = palette.lighter_gray,
-    }
+        vim.o.laststatus = vim.g.lualine_laststatus
 
-    local theme = {
+        return {
+            options = {
+                theme = Theme.build(),
+                section_separators = Theme.no_separators(),
+                component_separators = Theme.no_separators(),
+                icons_enabled = true,
+                disabled_filetypes = { "ministarter" },
+                ignore_focus = {},
+                always_divide_middle = true,
+                globalstatus = vim.o.laststatus == 3,
+            },
+            tabline = {
+                lualine_a = { Sections.project() },
+                lualine_b = {},
+                lualine_c = {},
+                lualine_x = {},
+                lualine_y = {},
+                lualine_z = { Sections.tabs() },
+            },
+            sections = {
+                lualine_a = {
+                    Sections.mode(),
+                },
+                lualine_b = {
+                    Sections.branch(),
+                    LazyVim.lualine.pretty_path(), -- FIXME: Respect ignored filytypes
+                    -- Sections.symbol(), -- NOTE: Broken https://github.com/folke/trouble.nvim/issues/569
+                },
+                lualine_c = {
+                    Sections.diagnostics(),
+                },
+                lualine_x = {
+                    Sections.updates(),
+                },
+                lualine_y = {
+                    Sections.searchcount(),
+                    Sections.progress(),
+                    Sections.location(),
+                    Sections.filetype(),
+                },
+                lualine_z = {
+                    Sections.time(),
+                },
+            },
+        }
+    end,
+}
+
+local palette = require("theme").palette
+
+local color = {
+    active_text = palette.text,
+    incative_text = palette.faded_text,
+    inverted_text = palette.bar_bg,
+    bg = palette.bar_bg,
+    emphasized_bg = palette.lighter_gray,
+}
+
+function Theme.build()
+    return {
         normal = {
             a = { fg = color.inverted_text, bg = palette.cyan, gui = "bold" },
             b = { fg = color.active_text, bg = color.bg },
@@ -34,16 +88,23 @@ function M.setup()
             c = { fg = color.incative_text, bg = color.bg },
         },
     }
+end
 
-    local project_section = {
+function Theme.no_separators()
+    return { left = "", right = "" }
+end
+
+function Sections.project()
+    return {
         function()
-            local fs = require "editor.fs"
-            return fs.root { capitalize = true }
+            return NVFS.root({ capitalize = true })
         end,
         color = { fg = color.inverted_text, bg = palette.cyan, gui = "bold" },
     }
+end
 
-    local tabs_section = {
+function Sections.tabs()
+    return {
         "tabs",
         mode = 1,
         tabs_color = {
@@ -51,10 +112,15 @@ function M.setup()
             inactive = { fg = color.incative_text, bg = color.bg },
         },
     }
+end
 
-    local mode_section = {
+function Sections.mode()
+    return {
         function()
+            local linemode = require("lualine.utils.mode")
+
             local m = linemode.get_mode()
+
             if m == "NORMAL" then
                 return "N"
             elseif m == "VISUAL" then
@@ -76,185 +142,53 @@ function M.setup()
             end
         end,
     }
+end
 
-    local filename_section = {
+function Sections.filename()
+    return {
         "filename",
-        path = 1,
-        color = { fg = color.active_text, bg = color.emphasized_bg },
-        fmt = function(v, _ctx)
-            if m.should_ignore_filetype() then
+        path = 0,
+        color = { fg = color.active_text, bg = color.bg },
+        fmt = function(v)
+            if fn.should_ignore_filetype() then
                 return nil
             else
                 return v
             end
         end,
     }
+end
 
-    local branch_section = {
+function Sections.branch()
+    return {
         "branch",
-        color = { fg = color.active_text, bg = color.bg },
+        color = { fg = color.active_text, bg = color.emphasized_bg },
     }
+end
 
-    local diagnostics_section = {
-        diagnostics,
-        sections = {
-            "error",
-            "warn",
-            "info",
-            "hint",
-        },
-        colors = {
-            error = "StatusBarDiagnosticError",
-            warn  = "StatusBarDiagnosticWarn",
-            info  = "StatusBarDiagnosticInfo",
-            hint  = "StatusBarDiagnosticHint",
-        },
-        symbols = {
-            error = lsp.signs.Error .. " ",
-            warn = lsp.signs.Warn .. " ",
-            info = lsp.signs.Info .. " ",
-            hint = lsp.signs.Hint .. " ",
-        },
-    }
+function Sections.symbol()
+    local trouble = require("trouble")
 
-    local searchcount_section = "searchcount"
+    local symbols = trouble.statusline({
+        mode = "lsp_document_symbols",
+        groups = {},
+        title = false,
+        filter = { range = true },
+        format = "{kind_icon}{symbol.name:StatusBarSegmentNormal}",
+        hl_group = "StatusBarSegmentNormal",
+    })
 
-    local encoding_section = {
-        "encoding",
-        color = { fg = color.incative_text },
-    }
-
-    local filetype_section = {
-        "filetype",
-        colored = false,
-        fmt = function(v, _ctx)
-            if m.should_ignore_filetype() then
-                return nil
-            else
-                if v == "markdown" then
-                    return "md"
-                else
-                    return v
-                end
-            end
+    return {
+        symbols and symbols.get,
+        cond = function()
+            return vim.b.trouble_lualine ~= false and symbols.has()
         end,
     }
-
-    local progress_section = {
-        "progress",
-        separator = { left = "" },
-        color = { fg = color.active_text, bg = color.emphasized_bg },
-    }
-
-    local location_seciton = {
-        "location",
-        padding = { left = 0, right = 1 },
-        color = { fg = color.active_text, bg = color.emphasized_bg },
-    }
-
-    plugin.setup {
-        options = {
-            icons_enabled = true,
-            theme = theme,
-            component_separators = "",
-            section_separators = {
-                left = "",
-                -- left = "",
-                right = "",
-            },
-            disabled_filetypes = {},
-            ignore_focus = {},
-            always_divide_middle = true,
-            globalstatus = true,
-        },
-        sections = {
-            lualine_a = {
-                mode_section,
-            },
-            lualine_b = {
-                filename_section,
-                branch_section,
-                diagnostics_section,
-            },
-            lualine_c = {},
-            lualine_x = {},
-            lualine_y = {
-                searchcount_section,
-                encoding_section,
-                filetype_section,
-                progress_section,
-            },
-            lualine_z = {
-                location_seciton,
-            },
-        },
-        tabline = {
-            lualine_a = { project_section },
-            lualine_b = {},
-            lualine_c = {},
-            lualine_x = {},
-            lualine_y = {},
-            lualine_z = { tabs_section },
-        },
-    }
-
-    m.ensure_tabline_visibility_mode()
 end
 
-function M.keymaps()
-    K.map { "<M-s>", "Toggle filename in statusline", m.toggle_filename, mode = { "n", "i", "v" } }
-end
+function Sections.diagnostics()
+    local icons = LazyVim.config.icons
 
-function M.show()
-    local plugin = require "lualine"
-
-    plugin.hide({ unhide = true })
-end
-
-function M.hide()
-    local plugin = require "lualine"
-
-    plugin.hide()
-    vim.o.laststatus = 0
-    vim.o.ruler = false
-end
-
-function M.rename_tab(name)
-    vim.cmd("LualineRenameTab " .. name)
-end
-
--- Private
-
-function m.toggle_filename()
-    local plugin = require "lualine"
-    local config = plugin.get_config()
-
-    for _, section in pairs(config.sections) do
-        for _, component in ipairs(section) do
-            if type(component) == "table" and component[1] == "filename" then
-                if component.path == 0 then
-                    component.path = 1
-                else
-                    component.path = 0
-                end
-            end
-        end
-    end
-
-    plugin.setup(config)
-    m.ensure_tabline_visibility_mode()
-end
-
-function m.ensure_tabline_visibility_mode()
-    -- Uncomment this if you want to show the tabline only when there are multiple tabs.
-    -- This line is required because lualine overrides this setting.
-    -- 0: never show tabline
-    -- 1: show tabline only when there are multiple tabs
-    -- 2: always show tabline
-    -- vim.cmd "set showtabline=1"
-end
-
-function m.diagnostics_component()
     local diagnostics = require("lualine.components.filename"):extend()
 
     function diagnostics:init(options)
@@ -296,35 +230,76 @@ function m.diagnostics_component()
             return vim.tbl_count(total)
         end
 
-        local function get_diagnostic_results()
+        local function get_diagnostic_results(opts)
+            opts = vim.tbl_extend("keep", opts or {}, {
+                error = true,
+                warn = true,
+                info = false,
+                hint = false,
+            })
+
             local severity = vim.diagnostic.severity
 
             local results = {}
 
-            local eb = count_diagnostics(context.BUFFER, severity.ERROR)
-            local ew = count_diagnostics(context.WORKSPACE, severity.ERROR)
-            if eb > 0 or ew > 0 then results.error = { eb, ew } else results.error = nil end
+            if opts.error then
+                local eb = count_diagnostics(context.BUFFER, severity.ERROR)
+                local ew = count_diagnostics(context.WORKSPACE, severity.ERROR)
+                if eb > 0 or ew > 0 then
+                    results.error = { eb, ew }
+                else
+                    results.error = nil
+                end
+            else
+                results.error = nil
+            end
 
-            local wb = count_diagnostics(context.BUFFER, severity.WARN)
-            local ww = count_diagnostics(context.WORKSPACE, severity.WARN)
-            if wb > 0 or ww > 0 then results.warn = { wb, ww } else results.warn = nil end
+            if opts.warn then
+                local wb = count_diagnostics(context.BUFFER, severity.WARN)
+                local ww = count_diagnostics(context.WORKSPACE, severity.WARN)
+                if wb > 0 or ww > 0 then
+                    results.warn = { wb, ww }
+                else
+                    results.warn = nil
+                end
+            else
+                results.warn = nil
+            end
 
-            local ib = count_diagnostics(context.BUFFER, severity.INFO)
-            local iw = count_diagnostics(context.WORKSPACE, severity.INFO)
-            if ib > 0 or iw > 0 then results.info = { ib, iw } else results.info = nil end
+            if opts.info then
+                local ib = count_diagnostics(context.BUFFER, severity.INFO)
+                local iw = count_diagnostics(context.WORKSPACE, severity.INFO)
+                if ib > 0 or iw > 0 then
+                    results.info = { ib, iw }
+                else
+                    results.info = nil
+                end
+            else
+                results.info = nil
+            end
 
-            local hb = count_diagnostics(context.BUFFER, severity.HINT)
-            local hw = count_diagnostics(context.WORKSPACE, severity.HINT)
-            if hb > 0 or hw > 0 then results.hint = { hb, hw } else results.hint = nil end
+            if opts.hint then
+                local hb = count_diagnostics(context.BUFFER, severity.HINT)
+                local hw = count_diagnostics(context.WORKSPACE, severity.HINT)
+                if hb > 0 or hw > 0 then
+                    results.hint = { hb, hw }
+                else
+                    results.hint = nil
+                end
+            else
+                results.hint = nil
+            end
 
             for _, v in pairs(results) do
-                if v ~= nil then return results end
+                if v ~= nil then
+                    return results
+                end
             end
 
             return nil
         end
 
-        local output = { " " }
+        local output = {}
 
         local bufnr = vim.api.nvim_get_current_buf()
 
@@ -336,9 +311,11 @@ function m.diagnostics_component()
             diagnostics_results = self.diagnostics.last_results[bufnr]
         end
 
-        if diagnostics_results == nil then return "" end
+        if diagnostics_results == nil then
+            return ""
+        end
 
-        local lualine_utils = require "lualine.utils.utils"
+        local lualine_utils = require("lualine.utils.utils")
 
         local colors, backgrounds = {}, {}
         for name, hl in pairs(self.diagnostics.highlight_groups) do
@@ -357,21 +334,126 @@ function m.diagnostics_component()
                 local buffer_total = diagnostics_results[section][1] ~= 0 and diagnostics_results[section][1] or "-"
                 local workspace_total = diagnostics_results[section][2]
 
-                table.insert(output, colors[section] .. padding .. icon .. buffer_total .. "/" .. workspace_total)
+                table.insert(output, colors[section] .. padding .. icon .. buffer_total .. "/" .. workspace_total .. " ")
             end
         end
 
         return table.concat(output, " ")
     end
 
-    return diagnostics
+    return {
+        diagnostics,
+        sections = {
+            "error",
+            "warn",
+            "info",
+            "hint",
+        },
+        colors = {
+            error = "StatusBarDiagnosticError",
+            warn = "StatusBarDiagnosticWarn",
+            info = "StatusBarDiagnosticInfo",
+            hint = "StatusBarDiagnosticHint",
+        },
+        symbols = {
+            error = icons.diagnostics.Error .. " ",
+            warn = icons.diagnostics.Warn .. " ",
+            info = icons.diagnostics.Info .. " ",
+            hint = icons.diagnostics.Hint .. " ",
+        },
+    }
 end
 
-function m.should_ignore_filetype()
+function Sections.updates()
+    local status = require("lazy.status")
+
+    return {
+        status.updates,
+        cond = status.has_updates,
+        color = { fg = color.active_text },
+    }
+end
+
+function Sections.searchcount()
+    return "searchcount"
+end
+
+function Sections.filetype()
+    return {
+        "filetype",
+        colored = false,
+        color = { fg = color.active_text, bg = color.emphasized_bg },
+        fmt = function(v, _ctx)
+            if fn.should_ignore_filetype() then
+                return nil
+            else
+                if v == "markdown" then
+                    return "md"
+                else
+                    return v
+                end
+            end
+        end,
+    }
+end
+
+function Sections.progress()
+    return {
+        "progress",
+        separator = " ",
+        padding = { left = 1, right = 0 },
+    }
+end
+
+function Sections.location()
+    return {
+        "location",
+        padding = { left = 0, right = 1 },
+    }
+end
+
+function Sections.time()
+    return {
+        function()
+            return " " .. os.date("%R")
+        end,
+        color = function()
+            local hour = tonumber(os.date("%H"))
+
+            local bg
+
+            if hour >= 9 and hour < 11 then
+                bg = palette.yellow
+            elseif hour >= 11 and hour < 18 then
+                bg = palette.cyan
+            elseif hour >= 18 and hour < 21 then
+                bg = palette.orange
+            else
+                bg = palette.red
+            end
+
+            return { fg = color.inverted_text, bg = bg, gui = "bold" }
+        end,
+    }
+end
+
+function NVLualine.show_tabline()
+    require("lualine").hide({ place = { "tabline" }, unhide = true })
+end
+
+function NVLualine.hide_tabline()
+    require("lualine").hide({ place = { "tabline" }, unhide = false })
+end
+
+function NVLualine.rename_tab(name)
+    vim.cmd("LualineRenameTab " .. name)
+end
+
+function fn.should_ignore_filetype()
     local ft = vim.bo.filetype
 
-    return
-        ft == "alpha"
+    return ft == "alpha"
+        or ft == "dashboard"
         or ft == "noice"
         or ft == "lazy"
         or ft == "mason"
@@ -385,4 +467,4 @@ function m.should_ignore_filetype()
         or ft == "saga_codeaction"
 end
 
-return M
+return { NVLualine }
