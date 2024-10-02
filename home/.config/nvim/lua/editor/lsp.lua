@@ -510,25 +510,18 @@ function DiagnosticPopup.format_diagnostics(diagnostics)
         local content
 
         if
-            diagnostic.user_data
+            vim.bo.filetype == "rust"
+            and diagnostic.user_data
             and diagnostic.user_data.lsp
             and diagnostic.user_data.lsp.data
             and diagnostic.user_data.lsp.data.rendered
         then
-            content = diagnostic.user_data.lsp.data.rendered
+            content = diagnostic.user_data.lsp.data.rendered:gsub("[\27\155][][()#;?%d]*[A-PRZcf-ntqry=><~]", "")
         else
             content = diagnostic.message
         end
 
-        local lines = vim.split(content, "\n")
-
-        while #lines > 0 and lines[1]:match("^%s*$") do
-            table.remove(lines, 1)
-        end
-
-        while #lines > 0 and lines[#lines]:match("^%s*$") do
-            table.remove(lines)
-        end
+        local lines = vim.split(content, "\n", { trimempty = true })
 
         result[i] = {
             label = {
