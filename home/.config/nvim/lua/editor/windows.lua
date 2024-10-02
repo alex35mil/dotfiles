@@ -1,6 +1,6 @@
 NVWindows = {
-    default_width = 120,
-    maximized_width = 1,
+    default_width = NVScreen.is_large() and 140 or 120,
+    maximized_width = 1, -- 100%
     window_picker_keys = "UHKMETJWNSABCDFGILOPQRVXYZ1234567890",
 }
 
