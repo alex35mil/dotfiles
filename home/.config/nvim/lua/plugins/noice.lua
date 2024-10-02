@@ -2,27 +2,39 @@ local fn = {}
 
 NVNoice = {
     "folke/noice.nvim",
-    opts = {
-        cmdline = {
-            format = {
-                search_down = { view = "cmdline" },
-                search_up = { view = "cmdline" },
-            },
-        },
-        views = {
-            cmdline = {
+    dependencies = {
+        "nvim-telescope/telescope.nvim",
+    },
+    keys = function()
+        return {
+            { "<D-l>", "<Cmd>NoiceHistory<CR>", mode = { "n", "i", "v" }, desc = "Open log" },
+        }
+    end,
+    opts = function()
+        local Layout = {
+            common = {
                 position = {
-                    row = 0,
-                    col = "50%",
+                    visually_centered = {
+                        row = "40%",
+                        col = "50%",
+                    },
                 },
-                size = {
-                    width = 60,
-                    height = 1,
+                border = {
+                    style = "none",
+                    padding = { top = 1, bottom = 1, left = 2, right = 2 },
+                },
+                win_options = {
+                    winhighlight = {
+                        Normal = "NormalFloat",
+                        FloatBorder = "FloatBorder",
+                    },
+                    winbar = "",
+                    foldenable = false,
                 },
             },
             cmdline_popup = {
                 position = {
-                    row = "30%",
+                    row = 10,
                     col = "50%",
                 },
                 size = {
@@ -30,11 +42,117 @@ NVNoice = {
                     height = "auto",
                 },
             },
-            cmdline_output = {
-                enter = true,
+        }
+
+        return {
+            cmdline = {
+                format = {
+                    search_down = { view = "cmdline" },
+                    search_up = { view = "cmdline" },
+                },
             },
-        },
-    },
+
+            commands = {
+                last = {
+                    view = "popup",
+                    opts = { enter = true, format = "details" },
+                    filter = {
+                        any = {
+                            { event = "notify" },
+                            { error = true },
+                            { warning = true },
+                            { event = "msg_show", kind = { "" } },
+                            { event = "lsp", kind = "message" },
+                        },
+                    },
+                    filter_opts = { count = 1 },
+                },
+                history = {
+                    view = "popup",
+                    opts = { enter = true, format = "details" },
+                    filter = {
+                        any = {
+                            { event = "notify" },
+                            { error = true },
+                            { warning = true },
+                            { event = "msg_show", kind = { "" } },
+                            { event = "lsp", kind = "message" },
+                        },
+                    },
+                },
+                errors = {
+                    view = "popup",
+                    opts = { enter = true, format = "details" },
+                    filter = { error = true },
+                    filter_opts = { reverse = true },
+                },
+                all = {
+                    view = "popup",
+                    opts = { enter = true, format = "details" },
+                    filter = {},
+                },
+            },
+
+            views = {
+                popup = {
+                    backend = "popup",
+                    relative = "editor",
+                    position = Layout.common.position.visually_centered,
+                    border = Layout.common.border,
+                    size = {
+                        width = NVWindows.default_width,
+                        height = NVScreen.is_large() and 30 or 15,
+                    },
+                    win_options = Layout.common.win_options,
+                    close = {
+                        events = { "BufLeave" },
+                        keys = { NVKeymaps.close },
+                    },
+                },
+                cmdline = {
+                    position = {
+                        row = 0,
+                        col = "50%",
+                    },
+                    size = {
+                        width = 60,
+                        height = 1,
+                    },
+                },
+                cmdline_popup = {
+                    position = Layout.cmdline_popup.position,
+                    size = Layout.cmdline_popup.size,
+                    border = Layout.common.border,
+                    win_options = Layout.common.win_options,
+                    filter_options = {},
+                    close = { keys = { NVKeymaps.close } },
+                },
+                cmdline_popupmenu = {
+                    position = {
+                        row = Layout.cmdline_popup.position.row + 4,
+                        col = Layout.cmdline_popup.position.col,
+                    },
+                    size = Layout.cmdline_popup.size,
+                    border = Layout.common.border,
+                    win_options = Layout.common.win_options,
+                    close = { keys = { NVKeymaps.close } },
+                },
+                cmdline_output = {
+                    enter = true,
+                    format = "details",
+                    view = "popup",
+                },
+                notify = {
+                    backend = "notify",
+                    render = "wrapped-compact",
+                },
+            },
+        }
+    end,
+    config = function(_, opts)
+        require("noice").setup(opts)
+        require("telescope").load_extension("noice")
+    end,
 }
 
 function NVNoice.ensure_hidden()

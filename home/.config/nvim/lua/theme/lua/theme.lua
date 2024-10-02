@@ -343,9 +343,7 @@ local function apply()
             StatusBarDiagnosticInfo({ DiagnosticInfo, bg = color.darker_gray }),
             StatusBarDiagnosticHint({ DiagnosticHint, bg = color.darker_gray }),
 
-            -- Float window border
             FloatTitle({ fg = color.bg, bg = color.cyan, bold = true }),
-            FloatBorder({ fg = color.thick_line, bg = color.float_bg }),
 
             IndentBlanklineChar({ fg = color.thin_line }),
             IndentBlanklineContextChar({ fg = IndentBlanklineChar.fg.lighten(25) }),
@@ -379,7 +377,7 @@ local function apply()
             TelescopeNormal({ bg = color.float_bg }),
             TelescopeMatching({ fg = color.charcoal }),
             TelescopeSelection({ bg = Normal.bg.lighten(9) }),
-            TelescopeBorder({ FloatBorder }),
+            TelescopeBorder({ fg = color.faded_text, bg = color.float_bg }), -- this is used for telescope titles
             TelescopeResultsDiffAdd({ GitAdded }),
             TelescopeResultsDiffChange({ GitChanged }),
             TelescopeResultsDiffDelete({ GitDeleted }),
@@ -397,13 +395,18 @@ local function apply()
             NeoTreeGitStaged({ fg = color.green }),
             NeoTreeGitIgnored({ fg = color.faded_text }),
 
-            SpectreHeader({ Comment }),
-            SpectreBorder({ Comment }),
-            SpectreDir({ fg = color.strong_text, bold = true }),
-            SpectreFile({ fg = color.cyan, bold = true }),
-            SpectreBody({ fg = color.charcoal, bold = true }),
-            SpectreSearch({ fg = color.bg, bg = color.green }),
-            SpectreReplace({ fg = color.bg, bg = color.orange }),
+            NotifyINFOIcon({ fg = color.blue }),
+            NotifyINFOTitle({ fg = color.blue }),
+            NotifyINFOBody({ fg = color.text, bg = color.float_bg }),
+            NotifyINFOBorder({ fg = color.float_bg, bg = color.float_bg }),
+            NotifyWARNIcon({ fg = color.yellow }),
+            NotifyWARNTitle({ fg = color.yellow }),
+            NotifyWARNBody({ fg = color.text, bg = color.float_bg }),
+            NotifyWARNBorder({ fg = color.float_bg, bg = color.float_bg }),
+            NotifyERRORIcon({ fg = color.red }),
+            NotifyERRORTitle({ fg = color.red }),
+            NotifyERRORBody({ fg = color.red, bg = color.float_bg }),
+            NotifyERRORBorder({ fg = color.float_bg, bg = color.float_bg }),
         }
     end)
 

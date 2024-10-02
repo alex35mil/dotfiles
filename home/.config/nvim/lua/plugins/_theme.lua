@@ -14,10 +14,10 @@ return {
             colorscheme = "theme",
             icons = {
                 diagnostics = {
-                    Error = " ",
-                    Warn = " ",
-                    Hint = " ",
-                    Info = " ",
+                    Error = NVIcons.error,
+                    Warn = NVIcons.warn,
+                    Hint = NVIcons.hint,
+                    Info = NVIcons.info,
                 },
             },
         },

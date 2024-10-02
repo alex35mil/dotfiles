@@ -12,6 +12,7 @@ NVTelescope = {
             { "<D-f>", Pickers.text_finder, mode = { "n", "i", "v" }, desc = "Open text finder" },
             { "<D-g>b", Pickers.git_branches, mode = { "n", "i", "v" }, desc = "Git: Branches" },
             { "<D-S-o>", Pickers.lsp_workspace_symbols, mode = { "n", "i", "v" }, desc = "LSP: Open workspace symbols" },
+            { "<D-S-l>", Pickers.logs, mode = { "n", "i", "v" }, desc = "LSP: Open logs" },
         }
     end,
     opts = function()
@@ -379,6 +380,24 @@ function Pickers.lsp_workspace_symbols()
         layout_config = {
             vertical = {
                 width = large_screen and 0.5 or 0.8,
+                height = 0.9,
+                preview_cutoff = 1,
+                prompt_position = "top",
+                preview_height = 0.6,
+                mirror = true,
+            },
+        },
+    })
+end
+
+function Pickers.logs()
+    local extensions = require("telescope").extensions
+
+    extensions.noice.noice({
+        layout_strategy = "vertical",
+        layout_config = {
+            vertical = {
+                width = NVScreen.is_large() and 0.5 or 0.8,
                 height = 0.9,
                 preview_cutoff = 1,
                 prompt_position = "top",
