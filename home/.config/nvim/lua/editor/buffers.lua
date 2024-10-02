@@ -23,40 +23,40 @@ function NVBuffers.keymaps()
 
     -- TODO: Revisit these keymaps
 
-    K.map({
-        "<C-S-w>",
-        "Delete current buffer, even if unsaved, but do not close current window if there are multiple",
-        function()
-            fn.delete_buf({ should_close_window = false, force = true })
-        end,
-        mode = "n",
-    })
+    -- K.map({
+    --     "<C-S-w>",
+    --     "Delete current buffer, even if unsaved, but do not close current window if there are multiple",
+    --     function()
+    --         fn.delete_buf({ should_close_window = false, force = true })
+    --     end,
+    --     mode = "n",
+    -- })
 
-    K.map({
-        "<C-S-M-w>",
-        "Delete current buffer, even if unsaved, and close current window if there are multiple",
-        function()
-            fn.delete_buf({ should_close_window = true, force = true })
-        end,
-        mode = "n",
-    })
+    -- K.map({
+    --     "<C-S-M-w>",
+    --     "Delete current buffer, even if unsaved, and close current window if there are multiple",
+    --     function()
+    --         fn.delete_buf({ should_close_window = true, force = true })
+    --     end,
+    --     mode = "n",
+    -- })
 
-    K.map({
-        "<Leader>bas",
-        "Delete all buffers except current & unsaved",
-        function()
-            fn.delete_all_bufs_except_current({ incl_unsaved = false })
-        end,
-        mode = "n",
-    })
-    K.map({
-        "<Leader>baf",
-        "Delete all buffers except current",
-        function()
-            fn.delete_all_bufs_except_current({ incl_unsaved = true })
-        end,
-        mode = "n",
-    })
+    -- K.map({
+    --     "<Leader>bas",
+    --     "Delete all buffers except current & unsaved",
+    --     function()
+    --         fn.delete_all_bufs_except_current({ incl_unsaved = false })
+    --     end,
+    --     mode = "n",
+    -- })
+    -- K.map({
+    --     "<Leader>baf",
+    --     "Delete all buffers except current",
+    --     function()
+    --         fn.delete_all_bufs_except_current({ incl_unsaved = true })
+    --     end,
+    --     mode = "n",
+    -- })
 end
 
 function NVBuffers.is_buf_listed(bufnr)

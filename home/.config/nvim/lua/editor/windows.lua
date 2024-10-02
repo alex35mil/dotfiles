@@ -10,91 +10,91 @@ local fn = {}
 
 function NVWindows.keymaps()
     K.map({ "<D-n>", "Create new buffer in the current window", "<Cmd>enew<CR>", mode = { "n", "v", "i" } })
-    K.map({ "<Leader>nh", "Create new buffer in a horizontal split", "<Cmd>new<CR>", mode = "n" })
-    K.map({ "<Leader>nn", "Create new buffer in a vertical split", "<Cmd>vnew<CR>", mode = "n" })
+    -- K.map({ "<Leader>nh", "Create new buffer in a horizontal split", "<Cmd>new<CR>", mode = "n" })
+    -- K.map({ "<Leader>nn", "Create new buffer in a vertical split", "<Cmd>vnew<CR>", mode = "n" })
 
     K.map({ "<S-Left>", "Move to window on the left", "<Cmd>wincmd h<CR>", mode = { "n", "v", "t" } })
     K.map({ "<S-Down>", "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n", "v", "t" } })
     K.map({ "<S-Up>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "t" } })
     K.map({ "<S-Right>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "v", "t" } })
 
-    K.map({
-        "<M-S-Left>",
-        "Move window to the left",
-        function()
-            fn.reposition_windows({ action = "move_left" })
-        end,
-        mode = "n",
-    })
-    K.map({
-        "<M-S-Right>",
-        "Move window to the right",
-        function()
-            fn.reposition_windows({ action = "move_right" })
-        end,
-        mode = "n",
-    })
-    K.map({
-        "<M-S-Up>",
-        "Move window up",
-        function()
-            fn.reposition_windows({ action = "move_up" })
-        end,
-        mode = "n",
-    })
-    K.map({
-        "<M-S-Down>",
-        "Move window down",
-        function()
-            fn.reposition_windows({ action = "move_down" })
-        end,
-        mode = "n",
-    })
+    -- K.map({
+    --     "<M-S-Left>",
+    --     "Move window to the left",
+    --     function()
+    --         fn.reposition_windows({ action = "move_left" })
+    --     end,
+    --     mode = "n",
+    -- })
+    -- K.map({
+    --     "<M-S-Right>",
+    --     "Move window to the right",
+    --     function()
+    --         fn.reposition_windows({ action = "move_right" })
+    --     end,
+    --     mode = "n",
+    -- })
+    -- K.map({
+    --     "<M-S-Up>",
+    --     "Move window up",
+    --     function()
+    --         fn.reposition_windows({ action = "move_up" })
+    --     end,
+    --     mode = "n",
+    -- })
+    -- K.map({
+    --     "<M-S-Down>",
+    --     "Move window down",
+    --     function()
+    --         fn.reposition_windows({ action = "move_down" })
+    --     end,
+    --     mode = "n",
+    -- })
+    --
+    -- K.map({
+    --     "<Leader>ws",
+    --     "Swap windows",
+    --     function()
+    --         fn.reposition_windows({ action = "swap" })
+    --     end,
+    --     mode = "n",
+    -- })
+    --
+    -- K.map({
+    --     "<C-S-Up>",
+    --     "Increase window width",
+    --     function()
+    --         fn.change_window_width("up")
+    --     end,
+    --     mode = "n",
+    -- })
+    -- K.map({
+    --     "<C-S-Down>",
+    --     "Decrease window width",
+    --     function()
+    --         fn.change_window_width("down")
+    --     end,
+    --     mode = "n",
+    -- })
+    -- K.map({
+    --     "<D-C-S-Up>",
+    --     "Increase window height",
+    --     function()
+    --         fn.change_window_height("up")
+    --     end,
+    --     mode = "n",
+    -- })
+    -- K.map({
+    --     "<D-C-S-Down>",
+    --     "Decrease window height",
+    --     function()
+    --         fn.change_window_height("down")
+    --     end,
+    --     mode = "n",
+    -- })
 
-    K.map({
-        "<Leader>ws",
-        "Swap windows",
-        function()
-            fn.reposition_windows({ action = "swap" })
-        end,
-        mode = "n",
-    })
-
-    K.map({
-        "<C-S-Up>",
-        "Increase window width",
-        function()
-            fn.change_window_width("up")
-        end,
-        mode = "n",
-    })
-    K.map({
-        "<C-S-Down>",
-        "Decrease window width",
-        function()
-            fn.change_window_width("down")
-        end,
-        mode = "n",
-    })
-    K.map({
-        "<D-C-S-Up>",
-        "Increase window height",
-        function()
-            fn.change_window_height("up")
-        end,
-        mode = "n",
-    })
-    K.map({
-        "<D-C-S-Down>",
-        "Decrease window height",
-        function()
-            fn.change_window_height("down")
-        end,
-        mode = "n",
-    })
-
-    K.map({ "<D-E>", "Equalize layout", fn.equalize_layout, mode = "n" })
-    K.map({ "<D-X>", "Reset layout", fn.reset_layout, mode = "n" })
+    -- K.map({ "<D-E>", "Equalize layout", fn.equalize_layout, mode = "n" })
+    -- K.map({ "<D-X>", "Reset layout", fn.reset_layout, mode = "n" })
 end
 
 function NVWindows.is_window_floating(winid)
