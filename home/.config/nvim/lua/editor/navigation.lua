@@ -55,7 +55,7 @@ function fn.scroll_horizontal(direction)
 end
 
 function fn.scroll_vertical(direction)
-    if NVNoice.scroll_lsp_doc(direction) then
+    if NVLsp.scroll_popup(direction) then
         return
     elseif NVWindows.is_window_floating(vim.api.nvim_get_current_win()) and not NVZenMode.is_active() then
         local keymap

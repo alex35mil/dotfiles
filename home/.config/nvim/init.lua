@@ -1,3 +1,4 @@
+require("utils")
 require("screen")
 require("keymaps")
 require("editor")

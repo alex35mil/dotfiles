@@ -292,7 +292,8 @@ local function apply()
             LspReferenceText({ bg = Visual.bg.darken(30) }), -- Used for highlighting "text" references
             LspReferenceRead({ LspReferenceText }), -- Used for highlighting "read" references
             LspReferenceWrite({ LspReferenceText }), -- Used for highlighting "write" references
-            -- LspCodeLens                 { } , -- Used to color the virtual text of the codelens. See |nvim_buf_set_extmark()|.
+            LspInlayHint({ Comment, bold = true }),
+            LspCodeLens({ LspInlayHint }), -- Used to color the virtual text of the codelens. See |nvim_buf_set_extmark()|.
             -- LspCodeLensSeparator        { } , -- Used to color the seperator between two or more code lens.
             -- LspSignatureActiveParameter { } , -- Used to highlight the active parameter in the signature help. See |vim.lsp.handlers.signature_help()|.
 
@@ -310,6 +311,10 @@ local function apply()
             DiagnosticUnderlineWarn({ DiagnosticWarn, undercurl = true }), -- Used to underline "Warn" diagnostics.
             DiagnosticUnderlineInfo({ DiagnosticInfo, undercurl = true }), -- Used to underline "Info" diagnostics.
             DiagnosticUnderlineHint({ DiagnosticHint, undercurl = true }), -- Used to underline "Hint" diagnostics.
+            DiagnosticFloatingErrorLabel({ fg = color.float_bg, bg = color.red }),
+            DiagnosticFloatingWarnLabel({ fg = color.float_bg, bg = color.yellow }),
+            DiagnosticFloatingInfoLabel({ fg = color.float_bg, bg = color.blue }),
+            DiagnosticFloatingHintLabel({ fg = color.float_bg, bg = color.text }),
             -- DiagnosticFloatingError    { } , -- Used to color "Error" diagnostic messages in diagnostics float. See |vim.diagnostic.open_float()|
             -- DiagnosticFloatingWarn     { } , -- Used to color "Warn" diagnostic messages in diagnostics float.
             -- DiagnosticFloatingInfo     { } , -- Used to color "Info" diagnostic messages in diagnostics float.

@@ -82,10 +82,6 @@ function fn.get_buf_info(bufnr)
 end
 
 function fn.delete_buf(options)
-    if NVNoice.ensure_hidden() then
-        return
-    end
-
     -- TODO: Handle mini.starter here
     -- if NVAlpha.is_active() then
     --     return
@@ -101,7 +97,14 @@ function fn.delete_buf(options)
     --     return
     -- end
 
-    if NVDiffview.ensure_current_hidden() then
+    if
+        NVNoice.ensure_hidden()
+        or NVLazy.ensure_hidden()
+        or NVTrouble.ensure_hidden()
+        or NVLsp.ensure_popup_hidden()
+        or NVGitsigns.ensure_preview_hidden()
+        or NVDiffview.ensure_current_hidden()
+    then
         return
     end
 
@@ -109,10 +112,6 @@ function fn.delete_buf(options)
     -- if spectre.ensure_active_closed() then
     --     return
     -- end
-
-    if NVLazy.ensure_hidden() then
-        return
-    end
 
     -- local mason = require("plugins.lsp.mason")
     -- if mason.ensure_hidden() then
