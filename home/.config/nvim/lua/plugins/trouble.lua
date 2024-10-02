@@ -4,7 +4,7 @@ NVTrouble = {
     "folke/trouble.nvim",
     keys = function()
         return {
-            { "<D-l>", fn.open_lsp, mode = { "n", "i", "v" }, desc = "Open lsp" },
+            { "<D-u>", fn.open_symbol_usage, mode = { "n", "i", "v" }, desc = "Open symbol usage" },
             { "<D-o>", fn.open_symbols, mode = { "n", "i", "v" }, desc = "Open symbols" },
             {
                 "<A-S-e>",
@@ -57,7 +57,17 @@ NVTrouble = {
             warn_no_results = true, -- show a warning when there are no results
             open_no_results = false, -- open the trouble window when there are no results
             keys = {
+                [NVKeymaps.close] = "close",
+                ["<CR>"] = "jump_close",
                 ["<cr>"] = "jump_close",
+                ["<Right>"] = "fold_open",
+                ["<D-Right>"] = "fold_open_recursive",
+                ["<Left>"] = "fold_close",
+                ["<D-Left>"] = "fold_close_recursive",
+                ["<Space>"] = "fold_toggle",
+                ["<D-Space>"] = "fold_toggle_recursive",
+                ["<D-S-CR>"] = "jump_split_close",
+                ["<D-CR>"] = "jump_vsplit_close",
             },
         }
     end,
@@ -103,7 +113,7 @@ function fn.open_diagnosics(filter)
     })
 end
 
-function fn.open_lsp()
+function fn.open_symbol_usage()
     local trouble = require("trouble")
 
     local large_screen = NVScreen.is_large()
