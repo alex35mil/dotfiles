@@ -219,15 +219,19 @@ local function apply()
             ColorColumn({ fg = color.thin_line }), -- Columns set with 'colorcolumn'
             Directory({ fg = color.text }), -- Directory names (and other special names in listings)
 
+            -- Git
+            GitAdded({ fg = color.green }),
+            GitChanged({ fg = color.blue }),
+            GitDeleted({ fg = color.red }),
+
+            diffAdded({ GitAdded }),
+            diffChanged({ GitChanged }),
+            diffDeleted({ GitDeleted }),
+
             DiffAdd({ bg = color.diff_add_bg.mix(Normal.bg, 80) }), -- Diff mode: Added line |diff.txt|
             DiffChange({ bg = color.blue.saturate(20).mix(Normal.bg, 85) }), -- Diff mode: Changed line |diff.txt|
             DiffDelete({ fg = color.faded_text, bg = color.bg }), -- Diff mode: Deleted line |diff.txt|
             DiffText({ bg = color.cyan.mix(Normal.bg, 70) }), -- Diff mode: Changed text within a changed line |diff.txt|
-
-            -- Gitsigns
-            diffAdded({ fg = color.green }),
-            diffChanged({ fg = color.blue }),
-            diffRemoved({ fg = color.red }),
 
             -- Diffview
             DiffviewDiffAdd({ bg = color.diff_add_bg }),
@@ -235,6 +239,15 @@ local function apply()
             DiffviewDiffDelete({ bg = color.diff_delete_bg }),
             DiffviewDiffDeleteText({ bg = color.diff_delete_bg.mix(color.red, 35) }),
             DiffviewDiffFill({ fg = color.faded_text, bg = color.bg }),
+
+            -- Gitsigns
+            GitSignsAdd({ GitAdded }),
+            GitSignsChange({ GitChanged }),
+            GitSignsDelete({ GitDeleted }),
+            GitSignsAddPreview({ fg = color.green, DiffviewDiffAdd }),
+            GitSignsDeletePreview({ fg = color.red, DiffviewDiffDelete }),
+            GitSignsAddInline({ DiffviewDiffAddText }),
+            GitSignsDeleteInline({ DiffviewDiffDeleteText }),
 
             -- EndOfBuffer  { }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
             -- TermCursor   { }, -- Cursor in a focused terminal
@@ -367,9 +380,9 @@ local function apply()
             TelescopeMatching({ fg = color.charcoal }),
             TelescopeSelection({ bg = Normal.bg.lighten(9) }),
             TelescopeBorder({ FloatBorder }),
-            TelescopeResultsDiffAdd({ diffAdded }),
-            TelescopeResultsDiffChange({ diffChanged }),
-            TelescopeResultsDiffDelete({ diffRemoved }),
+            TelescopeResultsDiffAdd({ GitAdded }),
+            TelescopeResultsDiffChange({ GitChanged }),
+            TelescopeResultsDiffDelete({ GitDeleted }),
             TelescopePromptCounter({ Comment }),
 
             SagaNormal({ bg = color.bg }),
