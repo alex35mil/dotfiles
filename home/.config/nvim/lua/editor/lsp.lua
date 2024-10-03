@@ -73,6 +73,15 @@ function NVLsp.keymaps()
     })
 end
 
+function NVLsp.autocmds()
+    vim.api.nvim_create_autocmd("LspProgress", {
+        pattern = "*",
+        callback = function()
+            vim.cmd("redrawstatus")
+        end,
+    })
+end
+
 --- Config ---
 
 ---@class Config
