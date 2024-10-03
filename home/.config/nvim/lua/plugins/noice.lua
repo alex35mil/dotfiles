@@ -153,6 +153,28 @@ NVNoice = {
                     backend = "notify",
                     render = "wrapped-compact",
                 },
+                confirm = {
+                    backend = "popup",
+                    relative = "editor",
+                    focusable = false,
+                    align = "center",
+                    enter = false,
+                    zindex = 210,
+                    format = { "{confirm}" },
+                    position = {
+                        row = 3,
+                        col = "50%",
+                    },
+                    size = "auto",
+                    border = {
+                        style = Layout.common.border.style,
+                        padding = Layout.common.border.padding,
+                        text = {
+                            top = " Confirm ",
+                        },
+                    },
+                    win_options = Layout.common.win_options,
+                },
             },
 
             routes = {
