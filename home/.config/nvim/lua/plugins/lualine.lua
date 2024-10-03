@@ -42,6 +42,7 @@ NVLualine = {
                 },
                 lualine_c = {
                     Sections.diagnostics(),
+                    Sections.lsp_progress(),
                 },
                 lualine_x = {
                     Sections.updates(),
@@ -182,6 +183,17 @@ function Sections.symbol()
         symbols and symbols.get,
         cond = function()
             return vim.b.trouble_lualine ~= false and symbols.has()
+        end,
+    }
+end
+
+function Sections.lsp_progress()
+    return {
+        function()
+            return require("noice").api.status.lsp_progress.get_hl()
+        end,
+        cond = function()
+            return package.loaded["noice"] and require("noice").api.status.lsp_progress.has()
         end,
     }
 end

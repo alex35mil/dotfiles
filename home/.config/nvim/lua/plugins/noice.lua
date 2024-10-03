@@ -52,6 +52,13 @@ NVNoice = {
                 },
             },
 
+            status = {
+                lsp_progress = {
+                    event = "lsp",
+                    kind = "progress",
+                },
+            },
+
             commands = {
                 last = {
                     view = "popup",
@@ -145,6 +152,13 @@ NVNoice = {
                 notify = {
                     backend = "notify",
                     render = "wrapped-compact",
+                },
+            },
+
+            routes = {
+                {
+                    filter = { event = "lsp", kind = "progress" },
+                    opts = { skip = true },
                 },
             },
         }
