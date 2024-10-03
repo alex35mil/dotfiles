@@ -27,6 +27,8 @@ M.palette = {
     float_bg = "#30353b",
     -- bars
     bar_bg = "#2c323c",
+    bar_text = "#b5bac8",
+    bar_faded_text = "#70757d",
     -- shades
     white = "#ffffff",
     darker_gray = "#2c323c",
@@ -281,9 +283,9 @@ local function apply()
             -- SpellCap     { }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
             -- SpellLocal   { }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
             -- SpellRare    { }, -- Word that is recognized by the spellchecker as one that is hardly ever used. |spell| Combined with the highlighting used otherwise.
-            -- StatusLine   { }, -- Status line of current window
-            -- StatusLineNC { }, -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-            TabLine({ bg = color.bg }), -- Tab pages line, not active tab page label
+            StatusLine({ bg = color.bar_bg }), -- Status line of current window
+            StatusLineNC({ StatusLine }), -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+            TabLine({ bg = color.bar_bg }), -- Tab pages line, not active tab page label
             TabLineFill({ bg = TabLine.bg }), -- Tab pages line, where there are no labels
             TabLineSel({ bg = TabLine.bg.lighten(5) }), -- Tab pages line, active tab page label
             Title({ fg = color.magenta, bold = true }), -- Titles for output from ":set all", ":autocmd" etc.
@@ -315,7 +317,7 @@ local function apply()
             DiagnosticError({ fg = color.red }), -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
             DiagnosticWarn({ fg = color.yellow }), -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
             DiagnosticInfo({ fg = color.blue }), -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-            DiagnosticHint({ fg = color.text }), -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+            DiagnosticHint({ fg = color.silver }), -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
             -- DiagnosticVirtualTextError { } , -- Used for "Error" diagnostic virtual text.
             -- DiagnosticVirtualTextWarn  { } , -- Used for "Warn" diagnostic virtual text.
             -- DiagnosticVirtualTextInfo  { } , -- Used for "Info" diagnostic virtual text.
@@ -324,10 +326,10 @@ local function apply()
             DiagnosticUnderlineWarn({ DiagnosticWarn, undercurl = true }), -- Used to underline "Warn" diagnostics.
             DiagnosticUnderlineInfo({ DiagnosticInfo, undercurl = true }), -- Used to underline "Info" diagnostics.
             DiagnosticUnderlineHint({ DiagnosticHint, undercurl = true }), -- Used to underline "Hint" diagnostics.
-            DiagnosticFloatingErrorLabel({ fg = color.float_bg, bg = color.red }),
-            DiagnosticFloatingWarnLabel({ fg = color.float_bg, bg = color.yellow }),
-            DiagnosticFloatingInfoLabel({ fg = color.float_bg, bg = color.blue }),
-            DiagnosticFloatingHintLabel({ fg = color.float_bg, bg = color.text }),
+            DiagnosticFloatingErrorLabel({ fg = color.float_bg, bg = DiagnosticError.fg }),
+            DiagnosticFloatingWarnLabel({ fg = color.float_bg, bg = DiagnosticWarn.fg }),
+            DiagnosticFloatingInfoLabel({ fg = color.float_bg, bg = DiagnosticInfo.fg }),
+            DiagnosticFloatingHintLabel({ fg = color.float_bg, bg = DiagnosticHint.fg }),
             -- DiagnosticFloatingError    { } , -- Used to color "Error" diagnostic messages in diagnostics float. See |vim.diagnostic.open_float()|
             -- DiagnosticFloatingWarn     { } , -- Used to color "Warn" diagnostic messages in diagnostics float.
             -- DiagnosticFloatingInfo     { } , -- Used to color "Info" diagnostic messages in diagnostics float.
@@ -337,11 +339,12 @@ local function apply()
             -- DiagnosticSignInfo         { } , -- Used for "Info" signs in sign column.
             -- DiagnosticSignHint         { } , -- Used for "Hint" signs in sign column.
 
-            StatusBarSegmentNormal({ fg = color.text, bg = color.bar_bg }),
-            StatusBarDiagnosticError({ DiagnosticError, bg = color.darker_gray }),
-            StatusBarDiagnosticWarn({ DiagnosticWarn, bg = color.darker_gray }),
-            StatusBarDiagnosticInfo({ DiagnosticInfo, bg = color.darker_gray }),
-            StatusBarDiagnosticHint({ DiagnosticHint, bg = color.darker_gray }),
+            StatusBarSegmentNormal({ fg = color.bar_text, bg = color.bar_bg }),
+            StatusBarSegmentFaded({ fg = color.bar_faded_text, bg = color.bar_bg }),
+            StatusBarDiagnosticError({ fg = DiagnosticError.fg, bg = color.bar_bg }),
+            StatusBarDiagnosticWarn({ fg = DiagnosticWarn.fg, bg = color.bar_bg }),
+            StatusBarDiagnosticInfo({ fg = DiagnosticInfo.fg, bg = color.bar_bg }),
+            StatusBarDiagnosticHint({ fg = DiagnosticHint.fg, bg = color.bar_bg }),
 
             FloatTitle({ fg = color.bg, bg = color.cyan, bold = true }),
 
@@ -356,12 +359,10 @@ local function apply()
             MiniStarterSection({ fg = color.text, bg = color.bg, bold = true }),
             MiniStarterFooter({ Comment }),
 
-            StatusLine({ bg = color.bar_bg }),
-
             NoiceCmdline({ bg = color.bar_bg }),
-            NoiceLspProgressTitle({ fg = color.text, bg = color.bar_bg }),
+            NoiceLspProgressTitle({ fg = color.bar_faded_text, bg = color.bar_bg }),
             NoiceLspProgressClient({ fg = color.charcoal, bg = color.bar_bg }),
-            NoiceLspProgressSpinner({ fg = color.yellow, bg = color.bar_bg }),
+            NoiceLspProgressSpinner({ fg = color.yellow.mix(color.bar_bg, 50), bg = color.bar_bg }),
 
             ZenBg({ fg = color.text, bg = color.bg }),
 

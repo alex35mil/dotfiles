@@ -3,6 +3,8 @@ local Sections = {}
 
 local fn = {}
 
+local __center__ = "%="
+
 NVLualine = {
     "nvim-lualine/lualine.nvim",
     opts = function()
@@ -26,7 +28,10 @@ NVLualine = {
             tabline = {
                 lualine_a = { Sections.project() },
                 lualine_b = {},
-                lualine_c = {},
+                lualine_c = {
+                    __center__,
+                    Sections.symbol(),
+                },
                 lualine_x = {},
                 lualine_y = {},
                 lualine_z = { Sections.tabs() },
@@ -38,13 +43,13 @@ NVLualine = {
                 lualine_b = {
                     Sections.branch(),
                     LazyVim.lualine.pretty_path(), -- FIXME: Respect ignored filytypes
-                    Sections.symbol(),
                 },
                 lualine_c = {
-                    Sections.diagnostics(),
-                    Sections.lsp_progress(),
+                    __center__,
+                    Sections.diagnostics({ icons = true, color = false }),
                 },
                 lualine_x = {
+                    Sections.lsp_progress(),
                     Sections.updates(),
                 },
                 lualine_y = {
@@ -64,8 +69,8 @@ NVLualine = {
 local palette = require("theme").palette
 
 local color = {
-    active_text = palette.text,
-    incative_text = palette.faded_text,
+    active_text = palette.bar_text,
+    incative_text = palette.bar_faded_text,
     inverted_text = palette.bar_bg,
     bg = palette.bar_bg,
     emphasized_bg = palette.lighter_gray,
@@ -175,8 +180,8 @@ function Sections.symbol()
         groups = {},
         title = false,
         filter = { range = true },
-        format = "{kind_icon}{symbol.name:StatusBarSegmentNormal}",
-        hl_group = "StatusBarSegmentNormal",
+        format = "{kind_icon:StatusBarSegmentFaded}{symbol.name:StatusBarSegmentFaded} ",
+        hl_group = "StatusBarSegmentFaded",
     })
 
     return {
@@ -190,31 +195,32 @@ end
 function Sections.lsp_progress()
     return {
         function()
-            return require("noice").api.status.lsp_progress.get_hl()
+            return require("noice").api.status.lsp_progress.get_hl() ---@diagnostic disable-line: undefined-field
         end,
         cond = function()
-            return package.loaded["noice"] and require("noice").api.status.lsp_progress.has()
+            return fn.is_lsp_progress()
         end,
     }
 end
 
-function Sections.diagnostics()
+---@param options {icons: boolean, color: boolean}
+function Sections.diagnostics(options)
     local icons = LazyVim.config.icons
 
     local diagnostics = require("lualine.components.filename"):extend()
 
-    function diagnostics:init(options)
-        diagnostics.super.init(self, options)
+    function diagnostics:init(opts)
+        diagnostics.super.init(self, opts)
 
         self.diagnostics = {
-            sections = options.sections,
-            symbols = options.symbols,
+            sections = opts.sections,
+            symbols = opts.symbols,
             last_results = {},
             highlight_groups = {
-                error = self:create_hl(options.colors.error, "error"),
-                warn = self:create_hl(options.colors.warn, "warn"),
-                info = self:create_hl(options.colors.info, "info"),
-                hint = self:create_hl(options.colors.hint, "hint"),
+                error = self:create_hl(opts.colors.error, "error"),
+                warn = self:create_hl(opts.colors.warn, "warn"),
+                info = self:create_hl(opts.colors.info, "info"),
+                hint = self:create_hl(opts.colors.hint, "hint"),
             },
         }
     end
@@ -311,8 +317,6 @@ function Sections.diagnostics()
             return nil
         end
 
-        local output = {}
-
         local bufnr = vim.api.nvim_get_current_buf()
 
         local diagnostics_results
@@ -335,6 +339,8 @@ function Sections.diagnostics()
             backgrounds[name] = lualine_utils.extract_highlight_colors(colors[name]:match("%%#(.-)#"), "bg")
         end
 
+        local output = {}
+
         local previous_section, padding
 
         for _, section in ipairs(self.diagnostics.sections) do
@@ -342,12 +348,30 @@ function Sections.diagnostics()
                 padding = previous_section and (backgrounds[previous_section] ~= backgrounds[section]) and " " or ""
                 previous_section = section
 
-                local icon = self.diagnostics.symbols[section]
                 local buffer_total = diagnostics_results[section][1] ~= 0 and diagnostics_results[section][1] or "-"
                 local workspace_total = diagnostics_results[section][2]
 
-                table.insert(output, colors[section] .. padding .. icon .. buffer_total .. "/" .. workspace_total .. " ")
+                local segment
+
+                if options.color then
+                    segment = colors[section] .. padding
+                else
+                    segment = padding
+                end
+
+                if options.icons then
+                    local icon = self.diagnostics.symbols[section]
+                    segment = segment .. icon
+                end
+
+                segment = segment .. buffer_total .. "/" .. workspace_total .. " "
+
+                table.insert(output, segment)
             end
+        end
+
+        if #output > 0 then
+            output[#output] = output[#output]:sub(1, -2)
         end
 
         return table.concat(output, " ")
@@ -361,6 +385,7 @@ function Sections.diagnostics()
             "info",
             "hint",
         },
+        color = { fg = color.incative_text },
         colors = {
             error = "StatusBarDiagnosticError",
             warn = "StatusBarDiagnosticWarn",
@@ -373,6 +398,9 @@ function Sections.diagnostics()
             info = icons.diagnostics.Info .. " ",
             hint = icons.diagnostics.Hint .. " ",
         },
+        cond = function()
+            return not fn.is_lsp_progress()
+        end,
     }
 end
 
@@ -459,6 +487,10 @@ end
 
 function NVLualine.rename_tab(name)
     vim.cmd("LualineRenameTab " .. name)
+end
+
+function fn.is_lsp_progress()
+    return package.loaded["noice"] and require("noice").api.status.lsp_progress.has() ---@diagnostic disable-line: undefined-field
 end
 
 function fn.should_ignore_filetype()
