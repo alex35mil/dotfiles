@@ -1,5 +1,14 @@
 local Pickers = {}
 
+local VerticalLayout = {}
+local HorizontalLayout = {}
+
+---@enum LayoutStrategy
+local LayoutStrategy = {
+    HORIZONTAL = "horizontal",
+    VERTICAL = "vertical",
+}
+
 local fn = {}
 
 NVTelescope = {
@@ -56,21 +65,10 @@ NVTelescope = {
                 initial_mode = "insert",
                 selection_strategy = "reset",
                 sorting_strategy = "ascending",
-                layout_strategy = "vertical",
+                layout_strategy = LayoutStrategy.VERTICAL,
                 layout_config = {
-                    horizontal = {
-                        prompt_position = "top",
-                        width = NVScreen.is_large() and 0.55 or 0.8,
-                        preview_width = 0.5,
-                    },
-                    vertical = {
-                        width = NVScreen.is_large() and 0.4 or 0.5,
-                        height = 0.7,
-                        preview_cutoff = 1,
-                        prompt_position = "top",
-                        preview_height = 0.4,
-                        mirror = true,
-                    },
+                    horizontal = HorizontalLayout.build(),
+                    vertical = VerticalLayout.build(),
                 },
                 file_sorter = require("telescope.sorters").get_fuzzy_file,
                 file_ignore_patterns = { "%.git/", "node_modules" },
@@ -309,6 +307,47 @@ function NVTelescopeFileBrowser.options()
     }
 end
 
+VerticalLayout = {
+    large_screen_width = 0.4,
+    small_screen_width = 0.5,
+}
+
+function VerticalLayout.build(config)
+    local default = {
+        width = NVScreen.is_large() and VerticalLayout.large_screen_width or VerticalLayout.small_screen_width,
+        height = 0.7,
+        preview_cutoff = 1,
+        prompt_position = "top",
+        preview_height = 0.4,
+        mirror = true,
+    }
+
+    if config then
+        return vim.tbl_extend("force", default, config)
+    else
+        return default
+    end
+end
+
+HorizontalLayout = {
+    large_screen_width = 0.6,
+    small_screen_width = 0.8,
+}
+
+function HorizontalLayout.build(config)
+    local default = {
+        prompt_position = "top",
+        width = NVScreen.is_large() and HorizontalLayout.large_screen_width or HorizontalLayout.small_screen_width,
+        preview_width = 0.5,
+    }
+
+    if config then
+        return vim.tbl_extend("force", default, config)
+    else
+        return default
+    end
+end
+
 function Pickers.file_browser()
     local extensions = require("telescope").extensions
 
@@ -321,7 +360,10 @@ function Pickers.file_browser()
         select_buffer = true,
         initial_mode = "insert",
         file_ignore_patterns = { "%.git/" },
-        layout_strategy = "horizontal",
+        layout_strategy = LayoutStrategy.HORIZONTAL,
+        layout_config = {
+            horizontal = HorizontalLayout.build(),
+        },
     })
 end
 
@@ -334,6 +376,10 @@ function Pickers.buffers()
         initial_mode = "insert",
         sort_mru = true,
         ignore_current_buffer = #listed_buffers > 1,
+        layout_strategy = LayoutStrategy.VERTICAL,
+        layout_config = {
+            vertical = VerticalLayout.build(),
+        },
     })
 end
 
@@ -344,7 +390,10 @@ function Pickers.file_finder()
         hidden = true,
         no_ignore = false,
         initial_mode = "insert",
-        layout_strategy = "vertical",
+        layout_strategy = LayoutStrategy.VERTICAL,
+        layout_config = {
+            vertical = VerticalLayout.build(),
+        },
     })
 end
 
@@ -355,7 +404,10 @@ function Pickers.text_finder()
         hidden = true,
         no_ignore = false,
         initial_mode = "insert",
-        layout_strategy = "horizontal",
+        layout_strategy = LayoutStrategy.HORIZONTAL,
+        layout_config = {
+            horizontal = HorizontalLayout.build(),
+        },
     })
 end
 
@@ -364,6 +416,10 @@ function Pickers.git_branches()
 
     telescope.git_branches({
         initial_mode = "insert",
+        layout_strategy = LayoutStrategy.VERTICAL,
+        layout_config = {
+            vertical = VerticalLayout.build(),
+        },
     })
 end
 
@@ -376,16 +432,13 @@ function Pickers.lsp_workspace_symbols()
         initial_mode = "insert",
         fname_width = large_screen and 40 or 30,
         symbol_width = large_screen and 40 or 30,
-        layout_strategy = "vertical",
+        layout_strategy = LayoutStrategy.VERTICAL,
         layout_config = {
-            vertical = {
+            vertical = VerticalLayout.build({
                 width = large_screen and 0.5 or 0.8,
                 height = 0.9,
-                preview_cutoff = 1,
-                prompt_position = "top",
                 preview_height = 0.6,
-                mirror = true,
-            },
+            }),
         },
     })
 end
@@ -394,16 +447,13 @@ function Pickers.logs()
     local extensions = require("telescope").extensions
 
     extensions.noice.noice({
-        layout_strategy = "vertical",
+        layout_strategy = LayoutStrategy.VERTICAL,
         layout_config = {
-            vertical = {
+            vertical = VerticalLayout.build({
                 width = NVScreen.is_large() and 0.5 or 0.8,
                 height = 0.9,
-                preview_cutoff = 1,
-                prompt_position = "top",
                 preview_height = 0.6,
-                mirror = true,
-            },
+            }),
         },
     })
 end
