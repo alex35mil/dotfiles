@@ -3,4 +3,5 @@
 -- Add any additional autocmds here
 
 NVLsp.autocmds()
+NVFormatting.autocmds()
 NVPersistence.autocmds()
