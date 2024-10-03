@@ -356,7 +356,12 @@ local function apply()
             MiniStarterSection({ fg = color.text, bg = color.bg, bold = true }),
             MiniStarterFooter({ Comment }),
 
+            StatusLine({ bg = color.bar_bg }),
+
             NoiceCmdline({ bg = color.bar_bg }),
+            NoiceLspProgressTitle({ fg = color.text, bg = color.bar_bg }),
+            NoiceLspProgressClient({ fg = color.charcoal, bg = color.bar_bg }),
+            NoiceLspProgressSpinner({ fg = color.yellow, bg = color.bar_bg }),
 
             ZenBg({ fg = color.text, bg = color.bg }),
 
