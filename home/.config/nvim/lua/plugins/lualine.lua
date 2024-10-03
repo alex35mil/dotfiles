@@ -38,7 +38,7 @@ NVLualine = {
                 lualine_b = {
                     Sections.branch(),
                     LazyVim.lualine.pretty_path(), -- FIXME: Respect ignored filytypes
-                    -- Sections.symbol(), -- NOTE: Broken https://github.com/folke/trouble.nvim/issues/569
+                    Sections.symbol(),
                 },
                 lualine_c = {
                     Sections.diagnostics(),
