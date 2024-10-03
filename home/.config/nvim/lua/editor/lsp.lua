@@ -532,6 +532,10 @@ function DiagnosticPopup.format_diagnostics(diagnostics)
 
         local lines = vim.split(content, "\n", { trimempty = true })
 
+        if i < #diagnostics then
+            lines[#lines + 1] = ""
+        end
+
         result[i] = {
             label = {
                 text = severity.label,
