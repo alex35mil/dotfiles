@@ -3,28 +3,7 @@ local fn = {}
 NVTinygit = {
     "chrisgrieser/nvim-tinygit",
     dependencies = {
-        {
-            "stevearc/dressing.nvim",
-            opts = {
-                input = {
-                    relative = "cursor",
-                    border = "solid",
-                    mappings = {
-                        n = {
-                            [NVKeymaps.close] = "Close",
-                            ["<Esc>"] = "Close",
-                            ["<CR>"] = "Confirm",
-                        },
-                        i = {
-                            [NVKeymaps.close] = "Close",
-                            ["<CR>"] = "Confirm",
-                            ["<Up>"] = "HistoryPrev",
-                            ["<Down>"] = "HistoryNext",
-                        },
-                    },
-                },
-            },
-        },
+        "stevearc/dressing.nvim",
         "nvim-telescope/telescope.nvim",
         "rcarriga/nvim-notify",
     },
