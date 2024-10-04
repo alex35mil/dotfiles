@@ -501,26 +501,46 @@ function DiagnosticPopup.jump(opts)
     return true
 end
 
+---@param cursor {line: integer, col: integer}
+---@param diagnostic vim.Diagnostic
+---@return boolean
+function DiagnosticPopup.is_cursor_within_diagnostic(cursor, diagnostic)
+    -- Check if the cursor line is within the range of lines
+    if cursor.line > diagnostic.lnum and cursor.line < diagnostic.end_lnum then
+        return true
+    end
+
+    -- Check if the cursor is on the starting line and within the start column
+    if cursor.line == diagnostic.lnum and cursor.col >= diagnostic.col then
+        -- If the start and end lines are the same, also check the end column
+        if cursor.line == diagnostic.end_lnum then
+            return cursor.col <= diagnostic.end_col
+        end
+        return true
+    end
+
+    -- Check if the cursor is on the ending line and within the end column
+    if cursor.line == diagnostic.end_lnum and cursor.col <= diagnostic.end_col then
+        return true
+    end
+
+    -- If none of the conditions are met, return false
+    return false
+end
+
 ---@return vim.Diagnostic[]
 function DiagnosticPopup.get_diagnoscics_under_cursor()
     local cursor = vim.api.nvim_win_get_cursor(0)
 
-    local line = cursor[1] - 1 -- Convert to 0-indexed
-    local col = cursor[2]
+    local cursor_line = cursor[1] - 1 -- Convert to 0-indexed
+    local cursor_col = cursor[2]
 
-    local line_diagnostics = vim.diagnostic.get(0, { lnum = line })
+    local line_diagnostics = vim.diagnostic.get(0, { lnum = cursor_line })
 
     local diagnostics = {}
 
     for _, diagnostic in ipairs(line_diagnostics) do
-        local end_col
-        if diagnostic.end_lnum ~= diagnostic.lnum then
-            end_col = vim.fn.col({ diagnostic.lnum, "$" }) - 1
-        else
-            end_col = diagnostic.end_col
-        end
-
-        if diagnostic.col <= col and col < end_col then
+        if DiagnosticPopup.is_cursor_within_diagnostic({ line = cursor_line, col = cursor_col }, diagnostic) then
             table.insert(diagnostics, diagnostic)
         end
     end
