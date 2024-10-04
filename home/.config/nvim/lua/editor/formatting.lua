@@ -2,7 +2,7 @@ NVFormatting = {}
 
 function NVFormatting.keymaps()
     K.map({
-        "<Leader>f",
+        "<C-f>",
         "Format",
         function()
             LazyVim.format({ force = true })
