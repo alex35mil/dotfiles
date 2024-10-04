@@ -74,7 +74,7 @@ function NVEditing.keymaps()
     K.map({
         "<Esc>",
         "Drop all the noise and Esc",
-        "<Cmd>NoiceDismiss<CR><Cmd>silent noh<CR><Esc>",
+        "<Cmd>lua NVEditing.esc()<CR><Esc>",
         mode = "n",
         silent = false,
     })
@@ -93,6 +93,12 @@ function NVEditing.keymaps()
 
     K.map({ "<D-s>", "Save files", "<Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = "n" })
     K.map({ "<D-s>", "Save files", "<Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = { "i", "v" } })
+end
+
+function NVEditing.esc()
+    NVLsp.ensure_popup_hidden()
+    vim.cmd("NoiceDismiss")
+    vim.cmd("silent noh")
 end
 
 function fn.paste()
