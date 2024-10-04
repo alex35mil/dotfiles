@@ -47,8 +47,8 @@ NVNoice = {
         return {
             cmdline = {
                 format = {
-                    search_down = { view = "cmdline" },
-                    search_up = { view = "cmdline" },
+                    search_down = { view = "cmdline", icon = "  " },
+                    search_up = { view = "cmdline", icon = "  " },
                 },
             },
 
@@ -147,7 +147,7 @@ NVNoice = {
                 },
                 cmdline = {
                     position = {
-                        row = 0,
+                        row = vim.o.lines,
                         col = "50%",
                     },
                     size = {

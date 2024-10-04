@@ -88,13 +88,13 @@ NVFlash = {
         },
         prompt = {
             enabled = true,
-            prefix = { { "󱅥  ", "FlashPromptIcon" } },
+            prefix = { { " 󱅥  ", "FlashPromptIcon" } },
             win_config = {
                 relative = "editor",
-                width = 20, -- when <=1 it's a percentage of the editor width
+                width = 50, -- when <=1 it's a percentage of the editor width
                 height = 1,
-                row = 0, -- when negative it's an offset from the bottom
-                col = math.floor(vim.go.columns / 2) - 14, -- when negative it's an offset from the right
+                row = -1, -- when negative it's an offset from the bottom
+                col = math.floor(vim.go.columns / 2) - 25, -- 25 = width / 2 -- when negative it's an offset from the right
                 zindex = 2000,
             },
         },
