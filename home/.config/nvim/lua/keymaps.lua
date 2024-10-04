@@ -5,6 +5,7 @@ NVKeymaps = {
         up = "<D-Up>",
         down = "<D-Down>",
     },
+    rename = "<D-r>",
     close = "<D-w>",
 }
 

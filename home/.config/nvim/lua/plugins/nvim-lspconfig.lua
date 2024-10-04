@@ -1,11 +1,9 @@
-NVLSPConfig = {
+NVLspConfig = {
     "neovim/nvim-lspconfig",
     opts = function()
-        local keys = require("lazyvim.plugins.lsp.keymaps").get()
-
-        keys[#keys + 1] = { "<D-r>", vim.lsp.buf.rename }
-        keys[#keys + 1] = { "<C-a>", vim.lsp.buf.code_action }
+        local lazy_keymaps = require("lazyvim.plugins.lsp.keymaps").get()
+        vim.list_extend(lazy_keymaps, NVLsp.keymaps())
     end,
 }
 
-return { NVLSPConfig }
+return { NVLspConfig }

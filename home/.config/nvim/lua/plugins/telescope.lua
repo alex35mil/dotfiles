@@ -210,7 +210,7 @@ function NVTelescopeFileBrowser.options()
     local mappings = {
         ["<D-n>"] = fb.create,
         ["<S-CR>"] = fb.create_from_prompt,
-        ["<D-r>"] = fb.rename,
+        [NVKeymaps.rename] = fb.rename,
         [NVKarabiner["<D-m>"]] = fb.move,
         ["<D-d>"] = fb.copy,
         ["<D-BS>"] = fb.remove,

@@ -27,50 +27,74 @@ local INFO = vim.diagnostic.severity.INFO
 local HINT = vim.diagnostic.severity.HINT
 
 function NVLsp.keymaps()
-    K.map({
-        "<D-i>",
-        "LSP: Show hover doc",
-        HoverPopup.show,
-        mode = { "n", "i" },
-    })
-    K.map({
-        "<D-S-i>",
-        "LSP: Show diagnostics under cursor",
-        DiagnosticPopup.show_current,
-        mode = { "n", "i" },
-    })
-    K.map({
-        "<D-S-h>",
-        "LSP: Jump to next error",
-        function()
-            DiagnosticPopup.show_next(ERROR)
-        end,
-        mode = { "n", "i" },
-    })
-    K.map({
-        "<D-S-t>",
-        "LSP: Jump to previous error",
-        function()
-            DiagnosticPopup.show_previous(ERROR)
-        end,
-        mode = { "n", "i" },
-    })
-    K.map({
-        "<C-S-h>",
-        "LSP: Jump to next warning",
-        function()
-            DiagnosticPopup.show_next(WARN)
-        end,
-        mode = { "n", "i" },
-    })
-    K.map({
-        "<C-S-t>",
-        "LSP: Jump to previous warning",
-        function()
-            DiagnosticPopup.show_previous(WARN)
-        end,
-        mode = { "n", "i" },
-    })
+    return {
+        { "gd", vim.lsp.buf.definition, desc = "LSP: Go to definition" },
+        { "gD", vim.lsp.buf.declaration, desc = "LSP: Go to declaration" },
+        { "gt", vim.lsp.buf.type_definition, desc = "LSP: Go to type definition" },
+        {
+            NVKeymaps.rename,
+            vim.lsp.buf.rename,
+            mode = { "n", "i" },
+            desc = "LSP: Rename symbol under cursor",
+        },
+        {
+            "<D-S-r>",
+            LazyVim.lsp.rename_file,
+            mode = { "n", "i" },
+            desc = "LSP: Rename current file",
+            has = { "workspace/didRenameFiles", "workspace/willRenameFiles" },
+        },
+        {
+            "<C-a>",
+            vim.lsp.buf.code_action,
+            mode = { "n", "i" },
+            desc = "LSP: Code actions",
+        },
+        {
+            "<D-i>",
+            HoverPopup.show,
+            mode = { "n", "i" },
+            desc = "LSP: Show hover doc",
+        },
+        {
+            "<D-S-i>",
+            DiagnosticPopup.show_current,
+            mode = { "n", "i" },
+            desc = "LSP: Show diagnostics under cursor",
+        },
+        {
+            "<D-S-h>",
+            function()
+                DiagnosticPopup.show_next(ERROR)
+            end,
+            mode = { "n", "i" },
+            desc = "LSP: Jump to next error",
+        },
+        {
+            "<D-S-t>",
+            function()
+                DiagnosticPopup.show_previous(ERROR)
+            end,
+            mode = { "n", "i" },
+            desc = "LSP: Jump to previous error",
+        },
+        {
+            "<C-S-h>",
+            function()
+                DiagnosticPopup.show_next(WARN)
+            end,
+            mode = { "n", "i" },
+            desc = "LSP: Jump to next warning",
+        },
+        {
+            "<C-S-t>",
+            function()
+                DiagnosticPopup.show_previous(WARN)
+            end,
+            mode = { "n", "i" },
+            desc = "LSP: Jump to previous warning",
+        },
+    }
 end
 
 function NVLsp.autocmds()
