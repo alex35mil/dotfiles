@@ -52,6 +52,16 @@ NVNoice = {
                 },
             },
 
+            lsp = {
+                hover = {
+                    enabled = false,
+                },
+                signature = {
+                    enabled = true,
+                    view = "hint",
+                },
+            },
+
             status = {
                 lsp_progress = {
                     event = "lsp",
@@ -113,6 +123,25 @@ NVNoice = {
                     win_options = Layout.common.win_options,
                     close = {
                         events = { "BufLeave" },
+                        keys = { NVKeymaps.close },
+                    },
+                },
+                hint = {
+                    backend = "popup",
+                    relative = "cursor",
+                    size = {
+                        width = "auto",
+                        height = "auto",
+                        max_height = 20,
+                        max_width = 120,
+                    },
+                    position = { row = Layout.common.border.padding.top + 1, col = 0 },
+                    border = Layout.common.border,
+                    win_options = {
+                        wrap = true,
+                        linebreak = true,
+                    },
+                    close = {
                         keys = { NVKeymaps.close },
                     },
                 },
@@ -191,9 +220,25 @@ NVNoice = {
     end,
 }
 
+---@param direction "up"|"down"
+function NVNoice.scroll_lsp_doc(direction)
+    local plugin = require("noice.lsp")
+
+    if direction == "up" then
+        return plugin.scroll(-4)
+    elseif direction == "down" then
+        return plugin.scroll(4)
+    else
+        return false
+    end
+end
+
 function NVNoice.ensure_hidden()
-    if fn.is_cmdline_active() then
-        fn.exit_cmdline()
+    if fn.ensure_command_line_hidden() then
+        return true
+    end
+
+    if fn.ensure_signature_hidden() then
         return true
     end
 
@@ -224,17 +269,36 @@ function fn.is_win_active()
     return vim.bo.filetype == "noice"
 end
 
-function fn.is_cmdline_active()
-    local mode = vim.fn.mode()
-    return mode == "c"
-end
-
 function fn.close_split()
     vim.cmd.close()
 end
 
-function fn.exit_cmdline()
-    NVKeys.send("<Esc>", { mode = "n" })
+---@return boolean
+function fn.ensure_command_line_hidden()
+    local mode = vim.fn.mode()
+
+    if mode == "c" then
+        NVKeys.send("<Esc>", { mode = "n" })
+        return true
+    end
+
+    return false
+end
+
+---@return boolean
+function fn.ensure_signature_hidden()
+    local lsp = require("noice.lsp")
+    local docs = require("noice.lsp.docs")
+
+    local signature = docs.get(lsp.kinds.signature)
+
+    if #signature:wins() == 0 then
+        return false
+    end
+
+    docs.hide(signature)
+
+    return true
 end
 
 return { NVNoice }
