@@ -35,5 +35,5 @@ function log.debug(payload)
         message = vim.inspect(payload)
     end
 
-    vim.notify(message, DEBUG)
+    vim.notify(message, DEBUG, { timeout = false })
 end

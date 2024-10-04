@@ -3,4 +3,5 @@ NVIcons = {
     warn = " ",
     hint = " ",
     info = " ",
+    debug = " ",
 }

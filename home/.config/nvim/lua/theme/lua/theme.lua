@@ -401,6 +401,10 @@ local function apply()
             NeoTreeGitStaged({ fg = color.green }),
             NeoTreeGitIgnored({ fg = color.faded_text }),
 
+            NotifyDEBUGIcon({ fg = color.silver }),
+            NotifyDEBUGTitle({ fg = color.silver }),
+            NotifyDEBUGBody({ fg = color.silver, bg = color.float_bg }),
+            NotifyDEBUGBorder({ fg = color.float_bg, bg = color.float_bg }),
             NotifyINFOIcon({ fg = color.blue }),
             NotifyINFOTitle({ fg = color.blue }),
             NotifyINFOBody({ fg = color.text, bg = color.float_bg }),
