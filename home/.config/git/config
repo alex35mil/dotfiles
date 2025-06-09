@@ -13,7 +13,7 @@
     postBuffer = 524288000
 
 [init]
-	defaultBranch = "main"
+    defaultBranch = "main"
 
 [branch]
     sort = "-committerdate"
@@ -21,9 +21,10 @@
 [push]
     default = "simple"
     followTags = true
+    autoSetupRemote = true
 
 [pull]
-	rebase = true
+    rebase = true
 
 [diff]
     algorithm = "histogram"
