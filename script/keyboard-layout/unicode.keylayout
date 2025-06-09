@@ -1,0 +1,921 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<!DOCTYPE keyboard SYSTEM "file://localhost/System/Library/DTDs/KeyboardLayout.dtd">
+<keyboard group="126" id="-12952" name="Unicode" maxout="1">
+    <layouts>
+        <layout first="0" last="0" mapSet="a0" modifiers="28"/>
+    </layouts>
+    <modifierMap id="28" defaultIndex="4">
+        <keyMapSelect mapIndex="0">
+            <modifier keys="command?"/>
+            <modifier keys="anyShift? caps? anyOption? command"/>
+        </keyMapSelect>
+        <keyMapSelect mapIndex="1">
+            <modifier keys="anyShift caps?"/>
+        </keyMapSelect>
+        <keyMapSelect mapIndex="2">
+            <modifier keys="caps"/>
+        </keyMapSelect>
+        <keyMapSelect mapIndex="3">
+            <modifier keys="anyShift? caps? anyOption"/>
+        </keyMapSelect>
+        <keyMapSelect mapIndex="4">
+            <modifier keys="anyShift caps? option? command? control"/>
+            <modifier keys="shift? caps? anyOption command? control"/>
+            <modifier keys="caps? anyOption? command? control"/>
+        </keyMapSelect>
+    </modifierMap>
+    <keyMapSet id="a0">
+        <keyMap index="0">
+            <key code="0" output="a"/>
+            <key code="1" output="s"/>
+            <key code="2" output="d"/>
+            <key code="3" output="f"/>
+            <key code="4" output="h"/>
+            <key code="5" output="g"/>
+            <key code="6" output="z"/>
+            <key code="7" output="x"/>
+            <key code="8" output="c"/>
+            <key code="9" output="v"/>
+            <key code="10" output="§"/>
+            <key code="11" output="b"/>
+            <key code="12" output="q"/>
+            <key code="13" output="w"/>
+            <key code="14" output="e"/>
+            <key code="15" output="r"/>
+            <key code="16" output="y"/>
+            <key code="17" output="t"/>
+            <key code="18" output="1"/>
+            <key code="19" output="2"/>
+            <key code="20" output="3"/>
+            <key code="21" output="4"/>
+            <key code="22" output="6"/>
+            <key code="23" output="5"/>
+            <key code="24" output="="/>
+            <key code="25" output="9"/>
+            <key code="26" output="7"/>
+            <key code="27" output="-"/>
+            <key code="28" output="8"/>
+            <key code="29" output="0"/>
+            <key code="30" output="]"/>
+            <key code="31" output="o"/>
+            <key code="32" output="u"/>
+            <key code="33" output="["/>
+            <key code="34" output="i"/>
+            <key code="35" output="p"/>
+            <key code="36" output="&#x000D;"/>
+            <key code="37" output="l"/>
+            <key code="38" output="j"/>
+            <key code="39" output="&#x0027;"/>
+            <key code="40" output="k"/>
+            <key code="41" output=";"/>
+            <key code="42" output="\"/>
+            <key code="43" output=","/>
+            <key code="44" output="/"/>
+            <key code="45" output="n"/>
+            <key code="46" output="m"/>
+            <key code="47" output="."/>
+            <key code="48" output="&#x0009;"/>
+            <key code="49" output=" "/>
+            <key code="50" output="`"/>
+            <key code="51" output="&#x0008;"/>
+            <key code="52" output="&#x0003;"/>
+            <key code="53" output="&#x001B;"/>
+            <key code="54" output=""/>
+            <key code="55" output=""/>
+            <key code="56" output=""/>
+            <key code="57" output=""/>
+            <key code="58" output=""/>
+            <key code="59" output=""/>
+            <key code="60" output=""/>
+            <key code="61" output=""/>
+            <key code="62" output=""/>
+            <key code="63" output=""/>
+            <key code="64" output=""/>
+            <key code="65" output="."/>
+            <key code="66" output="&#x001D;"/>
+            <key code="67" output="*"/>
+            <key code="68" output=""/>
+            <key code="69" output="+"/>
+            <key code="70" output="&#x001C;"/>
+            <key code="71" output="&#x001B;"/>
+            <key code="72" output="&#x001F;"/>
+            <key code="73" output=""/>
+            <key code="74" output=""/>
+            <key code="75" output="/"/>
+            <key code="76" output="&#x0003;"/>
+            <key code="77" output="&#x001E;"/>
+            <key code="78" output="-"/>
+            <key code="79" output=""/>
+            <key code="80" output=""/>
+            <key code="81" output="="/>
+            <key code="82" output="0"/>
+            <key code="83" output="1"/>
+            <key code="84" output="2"/>
+            <key code="85" output="3"/>
+            <key code="86" output="4"/>
+            <key code="87" output="5"/>
+            <key code="88" output="6"/>
+            <key code="89" output="7"/>
+            <key code="90" output=""/>
+            <key code="91" output="8"/>
+            <key code="92" output="9"/>
+            <key code="93" output=""/>
+            <key code="94" output=""/>
+            <key code="95" output=""/>
+            <key code="96" output="&#x0010;"/>
+            <key code="97" output="&#x0010;"/>
+            <key code="98" output="&#x0010;"/>
+            <key code="99" output="&#x0010;"/>
+            <key code="100" output="&#x0010;"/>
+            <key code="101" output="&#x0010;"/>
+            <key code="102" output="&#x0010;"/>
+            <key code="103" output="&#x0010;"/>
+            <key code="104" output="&#x0010;"/>
+            <key code="105" output="&#x0010;"/>
+            <key code="106" output="&#x0010;"/>
+            <key code="107" output="&#x0010;"/>
+            <key code="108" output="&#x0010;"/>
+            <key code="109" output="&#x0010;"/>
+            <key code="110" output="&#x0010;"/>
+            <key code="111" output="&#x0010;"/>
+            <key code="112" output="&#x0010;"/>
+            <key code="113" output="&#x0010;"/>
+            <key code="114" output="&#x0005;"/>
+            <key code="115" output="&#x0001;"/>
+            <key code="116" output="&#x000B;"/>
+            <key code="117" output="&#x007F;"/>
+            <key code="118" output="&#x0010;"/>
+            <key code="119" output="&#x0004;"/>
+            <key code="120" output="&#x0010;"/>
+            <key code="121" output="&#x000C;"/>
+            <key code="122" output="&#x0010;"/>
+            <key code="123" output="&#x001C;"/>
+            <key code="124" output="&#x001D;"/>
+            <key code="125" output="&#x001F;"/>
+            <key code="126" output="&#x001E;"/>
+            <key code="127" output=""/>
+        </keyMap>
+        <keyMap index="1">
+            <key code="0" output="A"/>
+            <key code="1" output="S"/>
+            <key code="2" output="D"/>
+            <key code="3" output="F"/>
+            <key code="4" output="H"/>
+            <key code="5" output="G"/>
+            <key code="6" output="Z"/>
+            <key code="7" output="X"/>
+            <key code="8" output="C"/>
+            <key code="9" output="V"/>
+            <key code="10" output="±"/>
+            <key code="11" output="B"/>
+            <key code="12" output="Q"/>
+            <key code="13" output="W"/>
+            <key code="14" output="E"/>
+            <key code="15" output="R"/>
+            <key code="16" output="Y"/>
+            <key code="17" output="T"/>
+            <key code="18" output="!"/>
+            <key code="19" output="@"/>
+            <key code="20" output="#"/>
+            <key code="21" output="$"/>
+            <key code="22" output="^"/>
+            <key code="23" output="%"/>
+            <key code="24" output="+"/>
+            <key code="25" output="("/>
+            <key code="26" output="&#x0026;"/>
+            <key code="27" output="_"/>
+            <key code="28" output="*"/>
+            <key code="29" output=")"/>
+            <key code="30" output="}"/>
+            <key code="31" output="O"/>
+            <key code="32" output="U"/>
+            <key code="33" output="{"/>
+            <key code="34" output="I"/>
+            <key code="35" output="P"/>
+            <key code="36" output="&#x000D;"/>
+            <key code="37" output="L"/>
+            <key code="38" output="J"/>
+            <key code="39" output="&#x0022;"/>
+            <key code="40" output="K"/>
+            <key code="41" output=":"/>
+            <key code="42" output="|"/>
+            <key code="43" output="&#x003C;"/>
+            <key code="44" output="?"/>
+            <key code="45" output="N"/>
+            <key code="46" output="M"/>
+            <key code="47" output="&#x003E;"/>
+            <key code="48" output="&#x0009;"/>
+            <key code="49" output=" "/>
+            <key code="50" output="~"/>
+            <key code="51" output="&#x0008;"/>
+            <key code="52" output="&#x0003;"/>
+            <key code="53" output="&#x001B;"/>
+            <key code="54" output=""/>
+            <key code="55" output=""/>
+            <key code="56" output=""/>
+            <key code="57" output=""/>
+            <key code="58" output=""/>
+            <key code="59" output=""/>
+            <key code="60" output=""/>
+            <key code="61" output=""/>
+            <key code="62" output=""/>
+            <key code="63" output=""/>
+            <key code="64" output=""/>
+            <key code="65" output="."/>
+            <key code="66" output="*"/>
+            <key code="67" output="*"/>
+            <key code="68" output=""/>
+            <key code="69" output="+"/>
+            <key code="70" output="+"/>
+            <key code="71" output="&#x001B;"/>
+            <key code="72" output="="/>
+            <key code="73" output=""/>
+            <key code="74" output=""/>
+            <key code="75" output="/"/>
+            <key code="76" output="&#x0003;"/>
+            <key code="77" output="/"/>
+            <key code="78" output="-"/>
+            <key code="79" output=""/>
+            <key code="80" output=""/>
+            <key code="81" output="="/>
+            <key code="82" output="0"/>
+            <key code="83" output="1"/>
+            <key code="84" output="2"/>
+            <key code="85" output="3"/>
+            <key code="86" output="4"/>
+            <key code="87" output="5"/>
+            <key code="88" output="6"/>
+            <key code="89" output="7"/>
+            <key code="90" output=""/>
+            <key code="91" output="8"/>
+            <key code="92" output="9"/>
+            <key code="93" output=""/>
+            <key code="94" output=""/>
+            <key code="95" output=""/>
+            <key code="96" output="&#x0010;"/>
+            <key code="97" output="&#x0010;"/>
+            <key code="98" output="&#x0010;"/>
+            <key code="99" output="&#x0010;"/>
+            <key code="100" output="&#x0010;"/>
+            <key code="101" output="&#x0010;"/>
+            <key code="102" output="&#x0010;"/>
+            <key code="103" output="&#x0010;"/>
+            <key code="104" output="&#x0010;"/>
+            <key code="105" output="&#x0010;"/>
+            <key code="106" output="&#x0010;"/>
+            <key code="107" output="&#x0010;"/>
+            <key code="108" output="&#x0010;"/>
+            <key code="109" output="&#x0010;"/>
+            <key code="110" output="&#x0010;"/>
+            <key code="111" output="&#x0010;"/>
+            <key code="112" output="&#x0010;"/>
+            <key code="113" output="&#x0010;"/>
+            <key code="114" output="&#x0005;"/>
+            <key code="115" output="&#x0001;"/>
+            <key code="116" output="&#x000B;"/>
+            <key code="117" output="&#x007F;"/>
+            <key code="118" output="&#x0010;"/>
+            <key code="119" output="&#x0004;"/>
+            <key code="120" output="&#x0010;"/>
+            <key code="121" output="&#x000C;"/>
+            <key code="122" output="&#x0010;"/>
+            <key code="123" output="&#x001C;"/>
+            <key code="124" output="&#x001D;"/>
+            <key code="125" output="&#x001F;"/>
+            <key code="126" output="&#x001E;"/>
+            <key code="127" output=""/>
+        </keyMap>
+        <keyMap index="2">
+            <key code="0" output="A"/>
+            <key code="1" output="S"/>
+            <key code="2" output="D"/>
+            <key code="3" output="F"/>
+            <key code="4" output="H"/>
+            <key code="5" output="G"/>
+            <key code="6" output="Z"/>
+            <key code="7" output="X"/>
+            <key code="8" output="C"/>
+            <key code="9" output="V"/>
+            <key code="10" output="§"/>
+            <key code="11" output="B"/>
+            <key code="12" output="Q"/>
+            <key code="13" output="W"/>
+            <key code="14" output="E"/>
+            <key code="15" output="R"/>
+            <key code="16" output="Y"/>
+            <key code="17" output="T"/>
+            <key code="18" output="1"/>
+            <key code="19" output="2"/>
+            <key code="20" output="3"/>
+            <key code="21" output="4"/>
+            <key code="22" output="6"/>
+            <key code="23" output="5"/>
+            <key code="24" output="="/>
+            <key code="25" output="9"/>
+            <key code="26" output="7"/>
+            <key code="27" output="-"/>
+            <key code="28" output="8"/>
+            <key code="29" output="0"/>
+            <key code="30" output="]"/>
+            <key code="31" output="O"/>
+            <key code="32" output="U"/>
+            <key code="33" output="["/>
+            <key code="34" output="I"/>
+            <key code="35" output="P"/>
+            <key code="36" output="&#x000D;"/>
+            <key code="37" output="L"/>
+            <key code="38" output="J"/>
+            <key code="39" output="&#x0027;"/>
+            <key code="40" output="K"/>
+            <key code="41" output=";"/>
+            <key code="42" output="\"/>
+            <key code="43" output=","/>
+            <key code="44" output="/"/>
+            <key code="45" output="N"/>
+            <key code="46" output="M"/>
+            <key code="47" output="."/>
+            <key code="48" output="&#x0009;"/>
+            <key code="49" output=" "/>
+            <key code="50" output="`"/>
+            <key code="51" output="&#x0008;"/>
+            <key code="52" output="&#x0003;"/>
+            <key code="53" output="&#x001B;"/>
+            <key code="54" output=""/>
+            <key code="55" output=""/>
+            <key code="56" output=""/>
+            <key code="57" output=""/>
+            <key code="58" output=""/>
+            <key code="59" output=""/>
+            <key code="60" output=""/>
+            <key code="61" output=""/>
+            <key code="62" output=""/>
+            <key code="63" output=""/>
+            <key code="64" output=""/>
+            <key code="65" output="."/>
+            <key code="66" output="&#x001D;"/>
+            <key code="67" output="*"/>
+            <key code="68" output=""/>
+            <key code="69" output="+"/>
+            <key code="70" output="&#x001C;"/>
+            <key code="71" output="&#x001B;"/>
+            <key code="72" output="&#x001F;"/>
+            <key code="73" output=""/>
+            <key code="74" output=""/>
+            <key code="75" output="/"/>
+            <key code="76" output="&#x0003;"/>
+            <key code="77" output="&#x001E;"/>
+            <key code="78" output="-"/>
+            <key code="79" output=""/>
+            <key code="80" output=""/>
+            <key code="81" output="="/>
+            <key code="82" output="0"/>
+            <key code="83" output="1"/>
+            <key code="84" output="2"/>
+            <key code="85" output="3"/>
+            <key code="86" output="4"/>
+            <key code="87" output="5"/>
+            <key code="88" output="6"/>
+            <key code="89" output="7"/>
+            <key code="90" output=""/>
+            <key code="91" output="8"/>
+            <key code="92" output="9"/>
+            <key code="93" output=""/>
+            <key code="94" output=""/>
+            <key code="95" output=""/>
+            <key code="96" output="&#x0010;"/>
+            <key code="97" output="&#x0010;"/>
+            <key code="98" output="&#x0010;"/>
+            <key code="99" output="&#x0010;"/>
+            <key code="100" output="&#x0010;"/>
+            <key code="101" output="&#x0010;"/>
+            <key code="102" output="&#x0010;"/>
+            <key code="103" output="&#x0010;"/>
+            <key code="104" output="&#x0010;"/>
+            <key code="105" output="&#x0010;"/>
+            <key code="106" output="&#x0010;"/>
+            <key code="107" output="&#x0010;"/>
+            <key code="108" output="&#x0010;"/>
+            <key code="109" output="&#x0010;"/>
+            <key code="110" output="&#x0010;"/>
+            <key code="111" output="&#x0010;"/>
+            <key code="112" output="&#x0010;"/>
+            <key code="113" output="&#x0010;"/>
+            <key code="114" output="&#x0005;"/>
+            <key code="115" output="&#x0001;"/>
+            <key code="116" output="&#x000B;"/>
+            <key code="117" output="&#x007F;"/>
+            <key code="118" output="&#x0010;"/>
+            <key code="119" output="&#x0004;"/>
+            <key code="120" output="&#x0010;"/>
+            <key code="121" output="&#x000C;"/>
+            <key code="122" output="&#x0010;"/>
+            <key code="123" output="&#x001C;"/>
+            <key code="124" output="&#x001D;"/>
+            <key code="125" output="&#x001F;"/>
+            <key code="126" output="&#x001E;"/>
+            <key code="127" output=""/>
+        </keyMap>
+        <keyMap index="3">
+            <key code="0" action="10"/>
+            <key code="2" action="13"/>
+            <key code="3" action="15"/>
+            <key code="8" action="12"/>
+            <key code="11" action="11"/>
+            <key code="14" action="14"/>
+            <key code="18" action="1"/>
+            <key code="19" action="2"/>
+            <key code="20" action="3"/>
+            <key code="21" action="4"/>
+            <key code="22" action="6"/>
+            <key code="23" action="5"/>
+            <key code="25" action="9"/>
+            <key code="26" action="7"/>
+            <key code="28" action="8"/>
+            <key code="29" action="0"/>
+            <key code="51" output="&#x0008;"/>
+            <key code="82" action="0"/>
+            <key code="83" action="1"/>
+            <key code="84" action="2"/>
+            <key code="85" action="3"/>
+            <key code="86" action="4"/>
+            <key code="87" action="5"/>
+            <key code="88" action="6"/>
+            <key code="89" action="7"/>
+            <key code="91" action="8"/>
+            <key code="92" action="9"/>
+            <key code="117" output="&#x007F;"/>
+            <key code="123" output="&#x001C;"/>
+            <key code="124" output="&#x001D;"/>
+            <key code="125" output="&#x001F;"/>
+            <key code="126" output="&#x001E;"/>
+        </keyMap>
+        <keyMap index="4">
+            <key code="0" output="&#x0001;"/>
+            <key code="1" output="&#x0013;"/>
+            <key code="2" output="&#x0004;"/>
+            <key code="3" output="&#x0006;"/>
+            <key code="4" output="&#x0008;"/>
+            <key code="5" output="&#x0007;"/>
+            <key code="6" output="&#x001A;"/>
+            <key code="7" output="&#x0018;"/>
+            <key code="8" output="&#x0003;"/>
+            <key code="9" output="&#x0016;"/>
+            <key code="10" output="0"/>
+            <key code="11" output="&#x0002;"/>
+            <key code="12" output="&#x0011;"/>
+            <key code="13" output="&#x0017;"/>
+            <key code="14" output="&#x0005;"/>
+            <key code="15" output="&#x0012;"/>
+            <key code="16" output="&#x0019;"/>
+            <key code="17" output="&#x0014;"/>
+            <key code="18" output="1"/>
+            <key code="19" output="2"/>
+            <key code="20" output="3"/>
+            <key code="21" output="4"/>
+            <key code="22" output="6"/>
+            <key code="23" output="5"/>
+            <key code="24" output="="/>
+            <key code="25" output="9"/>
+            <key code="26" output="7"/>
+            <key code="27" output="&#x001F;"/>
+            <key code="28" output="8"/>
+            <key code="29" output="0"/>
+            <key code="30" output="&#x001D;"/>
+            <key code="31" output="&#x000F;"/>
+            <key code="32" output="&#x0015;"/>
+            <key code="33" output="&#x001B;"/>
+            <key code="34" output="&#x0009;"/>
+            <key code="35" output="&#x0010;"/>
+            <key code="36" output="&#x000D;"/>
+            <key code="37" output="&#x000C;"/>
+            <key code="38" output="&#x000A;"/>
+            <key code="39" output="&#x0027;"/>
+            <key code="40" output="&#x000B;"/>
+            <key code="41" output=";"/>
+            <key code="42" output="&#x001C;"/>
+            <key code="43" output=","/>
+            <key code="44" output="/"/>
+            <key code="45" output="&#x000E;"/>
+            <key code="46" output="&#x000D;"/>
+            <key code="47" output="."/>
+            <key code="48" output="&#x0009;"/>
+            <key code="49" output=" "/>
+            <key code="50" output="`"/>
+            <key code="51" output="&#x0008;"/>
+            <key code="52" output="&#x0003;"/>
+            <key code="53" output="&#x001B;"/>
+            <key code="54" output=""/>
+            <key code="55" output=""/>
+            <key code="56" output=""/>
+            <key code="57" output=""/>
+            <key code="58" output=""/>
+            <key code="59" output=""/>
+            <key code="60" output=""/>
+            <key code="61" output=""/>
+            <key code="62" output=""/>
+            <key code="63" output=""/>
+            <key code="64" output=""/>
+            <key code="65" output="."/>
+            <key code="66" output="&#x001D;"/>
+            <key code="67" output="*"/>
+            <key code="68" output=""/>
+            <key code="69" output="+"/>
+            <key code="70" output="&#x001C;"/>
+            <key code="71" output="&#x001B;"/>
+            <key code="72" output="&#x001F;"/>
+            <key code="73" output=""/>
+            <key code="74" output=""/>
+            <key code="75" output="/"/>
+            <key code="76" output="&#x0003;"/>
+            <key code="77" output="&#x001E;"/>
+            <key code="78" output="-"/>
+            <key code="79" output=""/>
+            <key code="80" output=""/>
+            <key code="81" output="="/>
+            <key code="82" output="0"/>
+            <key code="83" output="1"/>
+            <key code="84" output="2"/>
+            <key code="85" output="3"/>
+            <key code="86" output="4"/>
+            <key code="87" output="5"/>
+            <key code="88" output="6"/>
+            <key code="89" output="7"/>
+            <key code="90" output=""/>
+            <key code="91" output="8"/>
+            <key code="92" output="9"/>
+            <key code="93" output=""/>
+            <key code="94" output=""/>
+            <key code="95" output=""/>
+            <key code="96" output="&#x0010;"/>
+            <key code="97" output="&#x0010;"/>
+            <key code="98" output="&#x0010;"/>
+            <key code="99" output="&#x0010;"/>
+            <key code="100" output="&#x0010;"/>
+            <key code="101" output="&#x0010;"/>
+            <key code="102" output="&#x0010;"/>
+            <key code="103" output="&#x0010;"/>
+            <key code="104" output="&#x0010;"/>
+            <key code="105" output="&#x0010;"/>
+            <key code="106" output="&#x0010;"/>
+            <key code="107" output="&#x0010;"/>
+            <key code="108" output="&#x0010;"/>
+            <key code="109" output="&#x0010;"/>
+            <key code="110" output="&#x0010;"/>
+            <key code="111" output="&#x0010;"/>
+            <key code="112" output="&#x0010;"/>
+            <key code="113" output="&#x0010;"/>
+            <key code="114" output="&#x0005;"/>
+            <key code="115" output="&#x0001;"/>
+            <key code="116" output="&#x000B;"/>
+            <key code="117" output="&#x007F;"/>
+            <key code="118" output="&#x0010;"/>
+            <key code="119" output="&#x0004;"/>
+            <key code="120" output="&#x0010;"/>
+            <key code="121" output="&#x000C;"/>
+            <key code="122" output="&#x0010;"/>
+            <key code="123" output="&#x001C;"/>
+            <key code="124" output="&#x001D;"/>
+            <key code="125" output="&#x001F;"/>
+            <key code="126" output="&#x001E;"/>
+            <key code="127" output=""/>
+        </keyMap>
+    </keyMapSet>
+    <actions>
+        <action id="0">
+            <when state="none" next="4353"/>
+            <when state="1" through="256" output="&#x0000;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀀" multiplier="16"/>
+            <when state="1281" through="1536" output="倀" multiplier="16"/>
+            <when state="1537" through="1792" output="怀" multiplier="16"/>
+            <when state="1793" through="2048" output="瀀" multiplier="16"/>
+            <when state="2049" through="2304" output="耀" multiplier="16"/>
+            <when state="2305" through="2560" output="退" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀀ" multiplier="16"/>
+            <when state="257" through="512" output="က" multiplier="16"/>
+            <when state="2817" through="3072" output="뀀" multiplier="16"/>
+            <when state="3073" through="3328" output="쀀" multiplier="16"/>
+            <when state="3329" through="3584" output="퀀" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="1" multiplier="16"/>
+            <when state="4353" through="4368" next="4097" multiplier="16"/>
+            <when state="513" through="768" output=" " multiplier="16"/>
+            <when state="769" through="1024" output="　" multiplier="16"/>
+        </action>
+        <action id="1">
+            <when state="none" next="4354"/>
+            <when state="1" through="256" output="&#x0001;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀁" multiplier="16"/>
+            <when state="1281" through="1536" output="倁" multiplier="16"/>
+            <when state="1537" through="1792" output="态" multiplier="16"/>
+            <when state="1793" through="2048" output="瀁" multiplier="16"/>
+            <when state="2049" through="2304" output="老" multiplier="16"/>
+            <when state="2305" through="2560" output="送" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀁ" multiplier="16"/>
+            <when state="257" through="512" output="ခ" multiplier="16"/>
+            <when state="2817" through="3072" output="뀁" multiplier="16"/>
+            <when state="3073" through="3328" output="쀁" multiplier="16"/>
+            <when state="3329" through="3584" output="퀁" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="2" multiplier="16"/>
+            <when state="4353" through="4368" next="4098" multiplier="16"/>
+            <when state="513" through="768" output=" " multiplier="16"/>
+            <when state="769" through="1024" output="、" multiplier="16"/>
+        </action>
+        <action id="10">
+            <when state="none" next="4363"/>
+            <when state="1" through="256" output="&#x000A;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀊" multiplier="16"/>
+            <when state="1281" through="1536" output="倊" multiplier="16"/>
+            <when state="1537" through="1792" output="怊" multiplier="16"/>
+            <when state="1793" through="2048" output="瀊" multiplier="16"/>
+            <when state="2049" through="2304" output="耊" multiplier="16"/>
+            <when state="2305" through="2560" output="逊" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀊ" multiplier="16"/>
+            <when state="257" through="512" output="ည" multiplier="16"/>
+            <when state="2817" through="3072" output="뀊" multiplier="16"/>
+            <when state="3073" through="3328" output="쀊" multiplier="16"/>
+            <when state="3329" through="3584" output="퀊" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="11" multiplier="16"/>
+            <when state="4353" through="4368" next="4107" multiplier="16"/>
+            <when state="513" through="768" output=" " multiplier="16"/>
+            <when state="769" through="1024" output="《" multiplier="16"/>
+        </action>
+        <action id="11">
+            <when state="none" next="4364"/>
+            <when state="1" through="256" output="&#x000B;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀋" multiplier="16"/>
+            <when state="1281" through="1536" output="個" multiplier="16"/>
+            <when state="1537" through="1792" output="怋" multiplier="16"/>
+            <when state="1793" through="2048" output="瀋" multiplier="16"/>
+            <when state="2049" through="2304" output="耋" multiplier="16"/>
+            <when state="2305" through="2560" output="逋" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀋ" multiplier="16"/>
+            <when state="257" through="512" output="ဋ" multiplier="16"/>
+            <when state="2817" through="3072" output="뀋" multiplier="16"/>
+            <when state="3073" through="3328" output="쀋" multiplier="16"/>
+            <when state="3329" through="3584" output="퀋" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="12" multiplier="16"/>
+            <when state="4353" through="4368" next="4108" multiplier="16"/>
+            <when state="513" through="768" output="​" multiplier="16"/>
+            <when state="769" through="1024" output="》" multiplier="16"/>
+        </action>
+        <action id="12">
+            <when state="none" next="4365"/>
+            <when state="1" through="256" output="&#x000C;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀌" multiplier="16"/>
+            <when state="1281" through="1536" output="倌" multiplier="16"/>
+            <when state="1537" through="1792" output="怌" multiplier="16"/>
+            <when state="1793" through="2048" output="瀌" multiplier="16"/>
+            <when state="2049" through="2304" output="而" multiplier="16"/>
+            <when state="2305" through="2560" output="逌" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀌ" multiplier="16"/>
+            <when state="257" through="512" output="ဌ" multiplier="16"/>
+            <when state="2817" through="3072" output="뀌" multiplier="16"/>
+            <when state="3073" through="3328" output="쀌" multiplier="16"/>
+            <when state="3329" through="3584" output="퀌" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="13" multiplier="16"/>
+            <when state="4353" through="4368" next="4109" multiplier="16"/>
+            <when state="513" through="768" output="‌" multiplier="16"/>
+            <when state="769" through="1024" output="「" multiplier="16"/>
+        </action>
+        <action id="13">
+            <when state="none" next="4366"/>
+            <when state="1" through="256" output="&#x000D;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀍" multiplier="16"/>
+            <when state="1281" through="1536" output="倍" multiplier="16"/>
+            <when state="1537" through="1792" output="怍" multiplier="16"/>
+            <when state="1793" through="2048" output="瀍" multiplier="16"/>
+            <when state="2049" through="2304" output="耍" multiplier="16"/>
+            <when state="2305" through="2560" output="逍" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀍ" multiplier="16"/>
+            <when state="257" through="512" output="ဍ" multiplier="16"/>
+            <when state="2817" through="3072" output="뀍" multiplier="16"/>
+            <when state="3073" through="3328" output="쀍" multiplier="16"/>
+            <when state="3329" through="3584" output="퀍" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="14" multiplier="16"/>
+            <when state="4353" through="4368" next="4110" multiplier="16"/>
+            <when state="513" through="768" output="‍" multiplier="16"/>
+            <when state="769" through="1024" output="」" multiplier="16"/>
+        </action>
+        <action id="14">
+            <when state="none" next="4367"/>
+            <when state="1" through="256" output="&#x000E;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀎" multiplier="16"/>
+            <when state="1281" through="1536" output="倎" multiplier="16"/>
+            <when state="1537" through="1792" output="怎" multiplier="16"/>
+            <when state="1793" through="2048" output="瀎" multiplier="16"/>
+            <when state="2049" through="2304" output="耎" multiplier="16"/>
+            <when state="2305" through="2560" output="逎" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀎ" multiplier="16"/>
+            <when state="257" through="512" output="ဎ" multiplier="16"/>
+            <when state="2817" through="3072" output="뀎" multiplier="16"/>
+            <when state="3073" through="3328" output="쀎" multiplier="16"/>
+            <when state="3329" through="3584" output="퀎" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="15" multiplier="16"/>
+            <when state="4353" through="4368" next="4111" multiplier="16"/>
+            <when state="513" through="768" output="‎" multiplier="16"/>
+            <when state="769" through="1024" output="『" multiplier="16"/>
+        </action>
+        <action id="15">
+            <when state="none" next="4368"/>
+            <when state="1" through="256" output="&#x000F;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀏" multiplier="16"/>
+            <when state="1281" through="1536" output="倏" multiplier="16"/>
+            <when state="1537" through="1792" output="怏" multiplier="16"/>
+            <when state="1793" through="2048" output="瀏" multiplier="16"/>
+            <when state="2049" through="2304" output="耏" multiplier="16"/>
+            <when state="2305" through="2560" output="透" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀏ" multiplier="16"/>
+            <when state="257" through="512" output="ဏ" multiplier="16"/>
+            <when state="2817" through="3072" output="뀏" multiplier="16"/>
+            <when state="3073" through="3328" output="쀏" multiplier="16"/>
+            <when state="3329" through="3584" output="퀏" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="16" multiplier="16"/>
+            <when state="4353" through="4368" next="4112" multiplier="16"/>
+            <when state="513" through="768" output="‏" multiplier="16"/>
+            <when state="769" through="1024" output="』" multiplier="16"/>
+        </action>
+        <action id="2">
+            <when state="none" next="4355"/>
+            <when state="1" through="256" output="&#x0002;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀂" multiplier="16"/>
+            <when state="1281" through="1536" output="倂" multiplier="16"/>
+            <when state="1537" through="1792" output="怂" multiplier="16"/>
+            <when state="1793" through="2048" output="瀂" multiplier="16"/>
+            <when state="2049" through="2304" output="耂" multiplier="16"/>
+            <when state="2305" through="2560" output="适" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀂ" multiplier="16"/>
+            <when state="257" through="512" output="ဂ" multiplier="16"/>
+            <when state="2817" through="3072" output="뀂" multiplier="16"/>
+            <when state="3073" through="3328" output="쀂" multiplier="16"/>
+            <when state="3329" through="3584" output="퀂" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="3" multiplier="16"/>
+            <when state="4353" through="4368" next="4099" multiplier="16"/>
+            <when state="513" through="768" output=" " multiplier="16"/>
+            <when state="769" through="1024" output="。" multiplier="16"/>
+        </action>
+        <action id="3">
+            <when state="none" next="4356"/>
+            <when state="1" through="256" output="&#x0003;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀃" multiplier="16"/>
+            <when state="1281" through="1536" output="倃" multiplier="16"/>
+            <when state="1537" through="1792" output="怃" multiplier="16"/>
+            <when state="1793" through="2048" output="瀃" multiplier="16"/>
+            <when state="2049" through="2304" output="考" multiplier="16"/>
+            <when state="2305" through="2560" output="逃" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀃ" multiplier="16"/>
+            <when state="257" through="512" output="ဃ" multiplier="16"/>
+            <when state="2817" through="3072" output="뀃" multiplier="16"/>
+            <when state="3073" through="3328" output="쀃" multiplier="16"/>
+            <when state="3329" through="3584" output="퀃" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="4" multiplier="16"/>
+            <when state="4353" through="4368" next="4100" multiplier="16"/>
+            <when state="513" through="768" output=" " multiplier="16"/>
+            <when state="769" through="1024" output="〃" multiplier="16"/>
+        </action>
+        <action id="4">
+            <when state="none" next="4357"/>
+            <when state="1" through="256" output="&#x0004;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀄" multiplier="16"/>
+            <when state="1281" through="1536" output="倄" multiplier="16"/>
+            <when state="1537" through="1792" output="怄" multiplier="16"/>
+            <when state="1793" through="2048" output="瀄" multiplier="16"/>
+            <when state="2049" through="2304" output="耄" multiplier="16"/>
+            <when state="2305" through="2560" output="逄" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀄ" multiplier="16"/>
+            <when state="257" through="512" output="င" multiplier="16"/>
+            <when state="2817" through="3072" output="뀄" multiplier="16"/>
+            <when state="3073" through="3328" output="쀄" multiplier="16"/>
+            <when state="3329" through="3584" output="퀄" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="5" multiplier="16"/>
+            <when state="4353" through="4368" next="4101" multiplier="16"/>
+            <when state="513" through="768" output=" " multiplier="16"/>
+            <when state="769" through="1024" output="〄" multiplier="16"/>
+        </action>
+        <action id="5">
+            <when state="none" next="4358"/>
+            <when state="1" through="256" output="&#x0005;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀅" multiplier="16"/>
+            <when state="1281" through="1536" output="倅" multiplier="16"/>
+            <when state="1537" through="1792" output="怅" multiplier="16"/>
+            <when state="1793" through="2048" output="瀅" multiplier="16"/>
+            <when state="2049" through="2304" output="者" multiplier="16"/>
+            <when state="2305" through="2560" output="逅" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀅ" multiplier="16"/>
+            <when state="257" through="512" output="စ" multiplier="16"/>
+            <when state="2817" through="3072" output="뀅" multiplier="16"/>
+            <when state="3073" through="3328" output="쀅" multiplier="16"/>
+            <when state="3329" through="3584" output="퀅" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="6" multiplier="16"/>
+            <when state="4353" through="4368" next="4102" multiplier="16"/>
+            <when state="513" through="768" output=" " multiplier="16"/>
+            <when state="769" through="1024" output="々" multiplier="16"/>
+        </action>
+        <action id="6">
+            <when state="none" next="4359"/>
+            <when state="1" through="256" output="&#x0006;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀆" multiplier="16"/>
+            <when state="1281" through="1536" output="倆" multiplier="16"/>
+            <when state="1537" through="1792" output="怆" multiplier="16"/>
+            <when state="1793" through="2048" output="瀆" multiplier="16"/>
+            <when state="2049" through="2304" output="耆" multiplier="16"/>
+            <when state="2305" through="2560" output="逆" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀆ" multiplier="16"/>
+            <when state="257" through="512" output="ဆ" multiplier="16"/>
+            <when state="2817" through="3072" output="뀆" multiplier="16"/>
+            <when state="3073" through="3328" output="쀆" multiplier="16"/>
+            <when state="3329" through="3584" output="퀆" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="7" multiplier="16"/>
+            <when state="4353" through="4368" next="4103" multiplier="16"/>
+            <when state="513" through="768" output=" " multiplier="16"/>
+            <when state="769" through="1024" output="〆" multiplier="16"/>
+        </action>
+        <action id="7">
+            <when state="none" next="4360"/>
+            <when state="1" through="256" output="&#x0007;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀇" multiplier="16"/>
+            <when state="1281" through="1536" output="倇" multiplier="16"/>
+            <when state="1537" through="1792" output="怇" multiplier="16"/>
+            <when state="1793" through="2048" output="瀇" multiplier="16"/>
+            <when state="2049" through="2304" output="耇" multiplier="16"/>
+            <when state="2305" through="2560" output="逇" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀇ" multiplier="16"/>
+            <when state="257" through="512" output="ဇ" multiplier="16"/>
+            <when state="2817" through="3072" output="뀇" multiplier="16"/>
+            <when state="3073" through="3328" output="쀇" multiplier="16"/>
+            <when state="3329" through="3584" output="퀇" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="8" multiplier="16"/>
+            <when state="4353" through="4368" next="4104" multiplier="16"/>
+            <when state="513" through="768" output=" " multiplier="16"/>
+            <when state="769" through="1024" output="〇" multiplier="16"/>
+        </action>
+        <action id="8">
+            <when state="none" next="4361"/>
+            <when state="1" through="256" output="&#x0008;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀈" multiplier="16"/>
+            <when state="1281" through="1536" output="倈" multiplier="16"/>
+            <when state="1537" through="1792" output="怈" multiplier="16"/>
+            <when state="1793" through="2048" output="瀈" multiplier="16"/>
+            <when state="2049" through="2304" output="耈" multiplier="16"/>
+            <when state="2305" through="2560" output="逈" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀈ" multiplier="16"/>
+            <when state="257" through="512" output="ဈ" multiplier="16"/>
+            <when state="2817" through="3072" output="뀈" multiplier="16"/>
+            <when state="3073" through="3328" output="쀈" multiplier="16"/>
+            <when state="3329" through="3584" output="퀈" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="9" multiplier="16"/>
+            <when state="4353" through="4368" next="4105" multiplier="16"/>
+            <when state="513" through="768" output=" " multiplier="16"/>
+            <when state="769" through="1024" output="〈" multiplier="16"/>
+        </action>
+        <action id="9">
+            <when state="none" next="4362"/>
+            <when state="1" through="256" output="&#x0009;" multiplier="16"/>
+            <when state="1025" through="1280" output="䀉" multiplier="16"/>
+            <when state="1281" through="1536" output="倉" multiplier="16"/>
+            <when state="1537" through="1792" output="怉" multiplier="16"/>
+            <when state="1793" through="2048" output="瀉" multiplier="16"/>
+            <when state="2049" through="2304" output="耉" multiplier="16"/>
+            <when state="2305" through="2560" output="选" multiplier="16"/>
+            <when state="2561" through="2816" output="ꀉ" multiplier="16"/>
+            <when state="257" through="512" output="ဉ" multiplier="16"/>
+            <when state="2817" through="3072" output="뀉" multiplier="16"/>
+            <when state="3073" through="3328" output="쀉" multiplier="16"/>
+            <when state="3329" through="3584" output="퀉" multiplier="16"/>
+            <when state="3585" through="3840" output="" multiplier="16"/>
+            <when state="3841" through="4096" output="" multiplier="16"/>
+            <when state="4097" through="4352" next="10" multiplier="16"/>
+            <when state="4353" through="4368" next="4106" multiplier="16"/>
+            <when state="513" through="768" output=" " multiplier="16"/>
+            <when state="769" through="1024" output="〉" multiplier="16"/>
+        </action>
+    </actions>
+</keyboard>

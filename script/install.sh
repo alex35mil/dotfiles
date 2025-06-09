@@ -165,6 +165,22 @@ cd $DOTFILES
 
 echo "🛠   Building Zellij runner... done."
 
+# Copying fixed Unicode Hex Input keyboard layout
+echo
+echo "⌨️  Copying Unicode Hex Input keyboard layout..."
+
+KEYBOARD_LAYOUT_SOURCE="$DOTFILES/script/keyboard-layout/unicode.keylayout"
+KEYBOARD_LAYOUT_TARGET="$HOME/Library/Keyboard Layouts/unicode.keylayout"
+
+if [[ ! -f "$KEYBOARD_LAYOUT_TARGET" ]] || ! cmp -s "$KEYBOARD_LAYOUT_SOURCE" "$KEYBOARD_LAYOUT_TARGET"; then
+    cp "$KEYBOARD_LAYOUT_SOURCE" "$KEYBOARD_LAYOUT_TARGET"
+    echo "Keyboard layout is copied to $KEYBOARD_LAYOUT_TARGET."
+else
+    echo "Keyboard layout already exists and is identical. Not copying."
+fi
+echo
+echo "⌨️  Copying Unicode Hex Input keyboard layout... done."
+
 # Finally, ensuring .hushlogin exists to get rid of "Last login..." message
 echo
 echo "📋  Ensuring .hushlogin: $HOME/.hushlogin..."
