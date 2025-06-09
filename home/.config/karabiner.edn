@@ -1,19 +1,9 @@
 {
-    :applications {
-        :alacritty ["^org.alacritty$"]
-        :neovide [:paths "^.*\\.cargo/bin/neovide$"]
-        :zed ["^dev.zed.Zed$"]
-        :xcode ["^com.apple.dt.Xcode$"]
-        :things ["^com.culturedcode.ThingsMac$"]
-        :notion ["^notion.id$"]
-    }
-
-    :input-sources {
-        :ru { :language "ru" }
+    :devices {
+        :macbook [{:vendor_id 1452 :product_id 835}]
     }
 
     :main [
-
         ;; !  | mandatory
         ;; #  | optional
         ;; C  | left_command
@@ -39,149 +29,19 @@
         ;; https://github.com/yqrashawn/GokuRakuJoudo/blob/master/src/karabiner_configurator/keys_info.clj
 
         {
-            :des "Global configuration"
+            :des "Macbook keyboard configuration"
             :rules [
-                ; F21 -> Ctrl+Fn+F8: toggle menubar no macOS
-                [:f21 :!TFf8]
-            ]
-        }
+                :macbook
 
-        {
-            :des "Dvorak configuration"
-            :rules [
-                ; Homerow mods safety belt for Dvorak layout
-                [:!Qh [:t :h]]
-                [:!Qn [:t :n]]
-                [:!Eh [:s :h]]
-                [:!Et [:s :t]]
-                [:!Wt [:n :t]]
-                [:!Wd [:n :d]]
-                [:!Wh [:n :h]]
-                [:!Wg [:n :g]]
-                [:!Cu [:e :u]]
-                [:!Co [:e :o]]
-                [:!Ca [:e :a]]
-                [:!Ci [:e :i]]
-                [:!Se [:u :e]]
-                [:!So [:u :o]]
-                [:!Sa [:u :a]]
-                [:!Tu [:o :u]]
-                [:!Te [:o :e]]
-                [:!Ti [:o :i]]
-                [:!Rt [:h :t]]
-                [:!Rn [:h :n]]
-                [:!Rs [:h :s]]
-                [:!Ou [:a :u]]
-
-                ; RU
-                ; Specific to my keyboard
-                [:!Squote :!S7 [:ru]] ; period
-                ; General mappings
-                [:#SOERPquote :q [:ru]]
-                [:#SOERPcomma :w [:ru]]
-                [:#SOERPperiod :e [:ru]]
-                [:#SOERPp :r [:ru]]
-                [:#SOERPy :t [:ru]]
-                [:#SOERPf :y [:ru]]
-                [:#SOERPg :u [:ru]]
-                [:#SOERPc :i [:ru]]
-                [:#SOERPr :o [:ru]]
-                [:#SOERPl :p [:ru]]
-                [:#SOERPo :s [:ru]]
-                [:#SOERPe :d [:ru]]
-                [:#SOERPu :f [:ru]]
-                [:#SOERPi :g [:ru]]
-                [:#SOERPd :h [:ru]]
-                [:#SOERPh :j [:ru]]
-                [:#SOERPt :k [:ru]]
-                [:#SOERPn :l [:ru]]
-                [:#SOERPs :semicolon [:ru]]
-                [:#SOERPsemicolon :z [:ru]]
-                [:#SOERPq :x [:ru]]
-                [:#SOERPj :c [:ru]]
-                [:#SOERPk :v [:ru]]
-                [:#SOERPx :b [:ru]]
-                [:#SOERPb :n [:ru]]
-                [:#SOERPw :comma [:ru]]
-                [:#SOERPv :period [:ru]]
-                [:#SOERPz :quote [:ru]]
-            ]
-        }
-
-        {
-            :des "Scrolla configuration"
-            :rules [
-                ; Enabling/disabling is done via CLI from Hammerspoon
-                [:down_arrow :j ["scrolla" 1]]
-                [:up_arrow :k ["scrolla" 1]]
-                [:left_arrow :h ["scrolla" 1]]
-                [:right_arrow :l ["scrolla" 1]]
-                [:!Odown_arrow :d ["scrolla" 1]]
-                [:!Oup_arrow :u ["scrolla" 1]]
-                [:!Sright_arrow :tab ["scrolla" 1]]
-                [:!Sleft_arrow :!Stab ["scrolla" 1]]
-            ]
-        }
-
-        {
-            :des "Alacritty configuration"
-            :rules [
-                ; Cmd+C -> Ctrl+C
-                [:!Cc :!Tc [:alacritty]]
-
-                ; Cmd+N <-> Ctrl+N
-                [:!Cn :!Tn [:alacritty]]
-                [:!Tn :!Cn [:alacritty]]
-
-                ; Cmd+W <-> Ctrl+W
-                [:!Cw :!Tw [:alacritty]]
-                [:!Tw :!Cw [:alacritty]]
-
-                ; Cmd+Q <-> Ctrl+Q
-                [:!Qq :!Wq [:alacritty]]
-                [:!Wq :!Qq [:alacritty]]
-            ]
-        }
-
-        {
-            :des "Neovide configuration"
-            :rules [
-                [:!Th :!TOSh [:neovide]] ; Ctrl+H -> Ctrl+Opt+Shift+H
-                [:!Cm :!TOSm [:neovide]] ; Cmd+M -> Ctrl+Opt+Shift+M
-            ]
-        }
-
-        {
-            :des "Zed configuration"
-            :rules [
-                [:!Cs [:escape :!Cs] [:zed]] ; Cmd+S -> Esc Cmd+S
-                [:!CTOh :slash [:zed]] ; Whooshy -> /
-            ]
-        }
-
-        {
-            :des "Xcode configuration"
-            :rules [
-                [:!Ct :!CSo [:xcode]]
-                ; [:!Ch :page_down [:xcode]]
-            ]
-        }
-
-        {
-            :des "Things configuration"
-            :rules [
-                [:!Cg :!Ck [:things]] ; Complete
-                [:!CSg :!COk [:things]] ; Cancel
-                [:!Cp :!Cl [:things]] ; Show in Project
-                [:!Cw :escape [:things]] ; Close
-            ]
-        }
-
-        {
-            :des "Notion configuration"
-            :rules [
-                [:!Ct :!Cp [:notion]]
-                [:!Cw :escape [:notion]]
+                [{:key :f1} {:ckey :display_brightness_decrement}]
+                [{:key :f2} {:ckey :display_brightness_increment}]
+                ; ... apple_vendor_keyboard_key_code is not supported?
+                [{:key :f7} {:ckey :rewind}]
+                [{:key :f8} {:ckey :play_or_pause}]
+                [{:key :f9} {:ckey :fastforward}]
+                [{:key :f10} {:ckey :mute}]
+                [{:key :f11} {:ckey :volume_decrement}]
+                [{:key :f12} {:ckey :volume_increment}]
             ]
         }
     ]
