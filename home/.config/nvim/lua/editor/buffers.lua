@@ -94,6 +94,7 @@ function fn.delete_buf(options)
 
     if
         NVNoice.ensure_hidden()
+        or NVTinygit.ensure_hidden()
         or NVLazy.ensure_hidden()
         or NVMason.ensure_hidden()
         or NVTrouble.ensure_hidden()
@@ -103,7 +104,6 @@ function fn.delete_buf(options)
         or NVSLazygit.ensure_hidden()
         or NVGitsigns.ensure_preview_hidden()
         or NVDiffview.ensure_current_hidden()
-        or NVTinygit.ensure_hidden()
         or NVGrugFar.ensure_current_hidden()
     then
         return
