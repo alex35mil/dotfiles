@@ -170,7 +170,7 @@ pub(crate) fn create(
     let mut args = vec!["--session", session];
 
     if let Some(layout) = layout {
-        args.extend_from_slice(&["--layout", layout]);
+        args.extend_from_slice(&["--new-session-with-layout", layout]);
     }
 
     let mut cmd = Command::new(BIN);
