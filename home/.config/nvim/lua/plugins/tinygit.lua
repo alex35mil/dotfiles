@@ -28,7 +28,7 @@ NVTinygit = {
             spellcheck = true,
             keepAbortedMsgSecs = 1200,
             keymaps = {
-                normal = { abort = "<Esc>", confirm = "<D-CR>" },
+                normal = { abort = "<Esc>", confirm = "<CR>" },
                 insert = { confirm = "<CR>" },
             },
         },
