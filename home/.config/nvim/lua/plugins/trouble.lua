@@ -1,11 +1,10 @@
 local fn = {}
+local win = {}
 
 NVTrouble = {
     "folke/trouble.nvim",
     keys = function()
         return {
-            { "<D-u>", fn.open_symbol_usage, mode = { "n", "i", "v" }, desc = "Open symbol usage" },
-            { "<D-o>", fn.open_symbols, mode = { "n", "i", "v" }, desc = "Open symbols" },
             {
                 "<A-S-e>",
                 function()
@@ -73,7 +72,7 @@ NVTrouble = {
     end,
 }
 
-function fn.win(opts)
+function win.float(opts)
     local base = {
         type = "float",
         relative = "editor",
@@ -99,12 +98,12 @@ function fn.open_diagnosics(filter)
         mode = "diagnostics",
         focus = true,
         filter = filter,
-        win = fn.win({
+        win = win.float({
             title = " Diagnostics ",
             size = size,
             position = { 0.5 - shift, 0.5 },
         }),
-        preview = fn.win({
+        preview = win.float({
             title = " Preview ",
             size = size,
             position = { 0.5 + shift - 0.05, 0.5 },
@@ -128,12 +127,12 @@ function fn.open_symbol_usage()
     trouble.open({
         mode = "lsp",
         focus = true,
-        win = fn.win({
+        win = win.float({
             title = " LSP ",
             size = size,
             position = { 0.5, 0.5 - shift },
         }),
-        preview = fn.win({
+        preview = win.float({
             title = " Preview ",
             size = size,
             position = { 0.5, 0.5 + shift },
@@ -150,7 +149,7 @@ function fn.open_symbols()
     trouble.open({
         mode = "symbols",
         focus = true,
-        win = fn.win({
+        win = win.float({
             title = " Document Symbols ",
             size = {
                 width = 100,

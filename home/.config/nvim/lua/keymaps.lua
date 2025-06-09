@@ -5,12 +5,16 @@ NVKeymaps = {
         up = "<D-Up>",
         down = "<D-Down>",
     },
+    scroll_alt = {
+        up = "<D-S-Up>",
+        down = "<D-S-Down>",
+    },
     rename = "<D-r>",
     close = "<D-w>",
 }
 
 NVKarabiner = {
-    ["<D-h>"] = "<C-A-h>",
+    ["<D-j>"] = "<C-A-j>",
     ["<D-m>"] = "<C-A-m>",
 }
 

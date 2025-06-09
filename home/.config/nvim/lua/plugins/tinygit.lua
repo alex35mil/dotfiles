@@ -3,23 +3,17 @@ local fn = {}
 NVTinygit = {
     "chrisgrieser/nvim-tinygit",
     dependencies = {
-        "stevearc/dressing.nvim",
-        "nvim-telescope/telescope.nvim",
         "rcarriga/nvim-notify",
     },
     keys = function()
         return {
-            { "<D-g>s", fn.stage, mode = { "n", "i", "v" }, desc = "Git: Stage" },
             { "<D-g>c", fn.commit, mode = { "n", "i", "v" }, desc = "Git: Commit" },
             { "<D-g>a", fn.amend, mode = { "n", "i", "v" }, desc = "Git: Amend and push" },
             { "<D-g>r", fn.rename_last_commit, mode = { "n", "i", "v" }, desc = "Git: Rename last commit anrd push" },
         }
     end,
     opts = {
-        backdrop = {
-            enabled = false,
-        },
-        staging = {
+        stage = {
             contextSize = 1,
             stagedIndicator = " ",
             keymaps = {
@@ -29,27 +23,35 @@ NVTinygit = {
             },
             moveToNextHunkOnStagingToggle = true,
         },
-        commitMsg = {
-            commitPreview = false,
+        commit = {
+            border = { " ", " ", " ", " ", " ", " ", " ", " " },
             spellcheck = true,
-            keepAbortedMsgSecs = 300,
-            inputFieldWidth = 72,
-            conventionalCommits = {
-                enforce = false,
-            },
-            insertIssuesOnHash = {
-                enabled = false,
-                next = "<Tab>",
-                prev = "<S-Tab>",
-                issuesToFetch = 20,
+            keepAbortedMsgSecs = 1200,
+            keymaps = {
+                normal = { abort = "<Esc>", confirm = "<D-CR>" },
+                insert = { confirm = "<CR>" },
             },
         },
         push = {
-            preventPushingFixupOrSquashCommits = true,
+            preventPushingFixupCommits = true,
             confirmationSound = false,
+            openReferencedIssues = false,
+        },
+        appearance = {
+            backdrop = {
+                enabled = false,
+            },
         },
     },
 }
+
+function NVTinygit.ensure_hidden()
+    if vim.bo.filetype == "gitcommit" then
+        vim.cmd.close()
+        return true
+    end
+    return false
+end
 
 function fn.stage()
     local tinygit = require("tinygit")
@@ -63,7 +65,10 @@ end
 
 function fn.amend()
     local tinygit = require("tinygit")
-    tinygit.amendNoEdit({ stageAllIfNothingStaged = false, forcePushIfDiverged = true })
+    tinygit.amendNoEdit({
+        stageAllIfNothingStaged = false,
+        forcePushIfDiverged = true,
+    })
 end
 
 function fn.rename_last_commit()

@@ -44,22 +44,24 @@ function NVNavigation.keymaps()
     K.map({ "<C-Right>", "History: forward", "<C-i>", mode = "n" })
 end
 
+---@param direction "left" | "right"
 function fn.scroll_horizontal(direction)
     if direction == "left" then
         vim.cmd("normal! 7zh")
     elseif direction == "right" then
         vim.cmd("normal! 7zl")
     else
-        vim.api.nvim_err_writeln("Unexpected scroll direction")
+        log.error("Unexpected scroll direction")
     end
 end
 
+---@param direction "up" | "down"
 function fn.scroll_vertical(direction)
     if NVLsp.scroll_popup(direction) then
         return
     elseif NVNoice.scroll_lsp_doc(direction) then
         return
-    elseif NVWindows.is_window_floating(vim.api.nvim_get_current_win()) and not NVZenMode.is_active() then
+    elseif NVWindows.is_window_floating(vim.api.nvim_get_current_win()) then
         local keymap
 
         if direction == "up" then
@@ -67,7 +69,7 @@ function fn.scroll_vertical(direction)
         elseif direction == "down" then
             keymap = "<C-d>"
         else
-            vim.api.nvim_err_writeln("Unexpected scroll direction")
+            log.error("Unexpected scroll direction")
             return
         end
 
@@ -96,7 +98,7 @@ function fn.scroll_vertical(direction)
         elseif direction == "down" then
             keymap = "<C-e>"
         else
-            vim.api.nvim_err_writeln("Unexpected scroll direction")
+            log.error("Unexpected scroll direction")
             return
         end
 

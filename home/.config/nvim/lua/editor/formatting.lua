@@ -13,7 +13,7 @@ end
 
 function NVFormatting.autocmds()
     vim.api.nvim_create_autocmd({ "FileType" }, {
-        pattern = { "json", "toml", "yaml", "clojure" },
+        pattern = { "sh", "json", "jsonc", "toml", "yaml", "clojure", "markdown" },
         callback = function()
             vim.b.autoformat = false
         end,

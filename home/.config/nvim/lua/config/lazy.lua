@@ -20,11 +20,9 @@ require("lazy").setup({
         { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 
         -- import/override with your plugins
-        { import = "lazyvim.plugins.extras.coding.mini-surround" },
-        -- { import = "lazyvim.plugins.extras.coding.copilot" },
-        -- { import = "lazyvim.plugins.extras.coding.codeium" },
-        { import = "lazyvim.plugins.extras.editor.telescope" },
         { import = "lazyvim.plugins.extras.ui.mini-starter" },
+        { import = "lazyvim.plugins.extras.coding.mini-surround" },
+        { import = "lazyvim.plugins.extras.ai.supermaven" },
         { import = "lazyvim.plugins.extras.lang.docker" },
         { import = "lazyvim.plugins.extras.lang.git" },
         { import = "lazyvim.plugins.extras.lang.json" },
@@ -33,11 +31,12 @@ require("lazy").setup({
         -- { import = "lazyvim.plugins.extras.lang.ocaml" }, -- NOTE: Ocaml LSP is broken
         { import = "lazyvim.plugins.extras.lang.rust" },
         { import = "lazyvim.plugins.extras.lang.sql" },
-        { import = "lazyvim.plugins.extras.lang.tailwind" },
         { import = "lazyvim.plugins.extras.lang.terraform" },
         { import = "lazyvim.plugins.extras.lang.toml" },
+        { import = "lazyvim.plugins.extras.lang.typescript" },
         { import = "lazyvim.plugins.extras.lang.yaml" },
         { import = "plugins" },
+        { import = "plugins/languages" },
     },
     defaults = {
         -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.

@@ -54,8 +54,11 @@ opt.whichwrap:append({
 })
 
 g.lazyvim_picker = "telescope"
+-- g.lazyvim_picker = "snacks" -- FIXME: Dashboard gets broken: https://github.com/LazyVim/LazyVim/pull/5607
 
 if g.neovide then
+    g.snacks_animate = false
+
     o.guifont = "BerkeleyMono Nerd Font:h17"
     opt.linespace = 24
 

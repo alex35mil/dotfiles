@@ -3,5 +3,8 @@
 -- Add any additional autocmds here
 
 NVLsp.autocmds()
+NVTabs.autocmds()
 NVFormatting.autocmds()
+NVGrugFar.autocmds()
 NVPersistence.autocmds()
+NVReScript.autocmds()

@@ -91,12 +91,21 @@ function NVEditing.keymaps()
     K.map({ "<D-?>", "Start comment on the next line", "gco", mode = "n", remap = true })
     K.map({ "<D-?>", "Start comment on the next line", "<Cmd>normal gco<CR>", mode = "i", remap = true })
 
-    K.map({ "<D-s>", "Save files", "<Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = "n" })
-    K.map({ "<D-s>", "Save files", "<Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = { "i", "v" } })
+    K.map({ "<D-s>", "Save files", "<Cmd>lua NVEditing.esc()<CR><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = "n" })
+    K.map({ "<D-s>", "Save files", "<Cmd>lua NVEditing.esc()<CR><Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = { "i", "v" } })
+    K.map({ "<D-S-s>", "Save files", "<Cmd>lua NVEditing.esc()<CR><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = "n" })
+    K.map({ "<D-S-s>", "Save files", "<Cmd>lua NVEditing.esc()<CR><Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = { "i", "v" } })
 end
 
 function NVEditing.esc()
-    NVLsp.ensure_popup_hidden()
+    if NVLsp.ensure_popup_hidden() then
+        return
+    end
+
+    if NVMulticursor.esc() then
+        return
+    end
+
     vim.cmd("NoiceDismiss")
     vim.cmd("silent noh")
 end
@@ -118,7 +127,7 @@ function fn.paste()
             vim.o.formatoptions = fopts
         end, 10)
     else
-        vim.api.nvim_err_writeln("Unexpected mode")
+        log.error("Unexpected mode")
     end
 end
 

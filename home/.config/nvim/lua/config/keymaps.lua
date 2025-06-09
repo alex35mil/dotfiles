@@ -3,7 +3,9 @@
 -- Add any additional keymaps here
 
 NVEditing.keymaps()
+NVFormatting.keymaps()
 NVBuffers.keymaps()
 NVWindows.keymaps()
+NVTabs.keymaps()
 NVNavigation.keymaps()
 NVDebug.keymaps()

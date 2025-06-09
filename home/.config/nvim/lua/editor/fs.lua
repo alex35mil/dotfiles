@@ -2,6 +2,8 @@ NVFS = {}
 
 local format = vim.fn.fnamemodify
 
+---@param options {capitalize: boolean}
+---@return string
 function NVFS.root(options)
     local opts = options or { capitalize = false }
 
@@ -15,18 +17,27 @@ function NVFS.root(options)
     end
 end
 
+---@param loc string
+---@return string
 function NVFS.relative_path(loc)
     return format(loc, ":.")
 end
 
+---@param loc string
+---@return string
 function NVFS.filename(loc)
     return format(loc, ":t")
 end
 
+---@param loc string
+---@return string
 function NVFS.filestem(loc)
     return format(loc, ":t:r")
 end
 
+---@param loc string
+---@param fmt "absolute" | "relative" | "filename" | "filestem"
+---@return string | nil
 function NVFS.format(loc, fmt)
     if fmt == "absolute" then
         return loc
@@ -37,7 +48,7 @@ function NVFS.format(loc, fmt)
     elseif fmt == "filestem" then
         return NVFS.filestem(loc)
     else
-        vim.api.nvim_err_writeln("Invalid path format: " .. fmt)
+        log.error("Invalid path format: " .. fmt)
         return nil
     end
 end

@@ -16,12 +16,6 @@ NVTelescope = {
     keys = function()
         return {
             { "<D-e>", Pickers.file_browser, mode = { "n", "i", "v" }, desc = "Open file browser" },
-            { "<D-t>", Pickers.file_finder, mode = { "n", "i", "v" }, desc = "Open file finder" },
-            { "<D-b>", Pickers.buffers, mode = { "n", "i", "v" }, desc = "Open buffer picker" },
-            { "<D-f>", Pickers.text_finder, mode = { "n", "i", "v" }, desc = "Open text finder" },
-            { "<D-g>b", Pickers.git_branches, mode = { "n", "i", "v" }, desc = "Git: Branches" },
-            { "<D-S-o>", Pickers.lsp_workspace_symbols, mode = { "n", "i", "v" }, desc = "LSP: Open workspace symbols" },
-            { "<D-S-l>", Pickers.logs, mode = { "n", "i", "v" }, desc = "LSP: Open logs" },
         }
     end,
     opts = function()
@@ -111,84 +105,6 @@ NVTelescope = {
                 file_browser = NVTelescopeFileBrowser.options(),
             },
         }
-
-        -- TODO: Review default LazyVim configuration
-
-        -- local actions = require("telescope.actions")
-        --
-        -- local open_with_trouble = function(...)
-        --     return require("trouble.sources.telescope").open(...)
-        -- end
-        -- local find_files_no_ignore = function()
-        --     local action_state = require("telescope.actions.state")
-        --     local line = action_state.get_current_line()
-        --     LazyVim.pick("find_files", { no_ignore = true, default_text = line })()
-        -- end
-        -- local find_files_with_hidden = function()
-        --     local action_state = require("telescope.actions.state")
-        --     local line = action_state.get_current_line()
-        --     LazyVim.pick("find_files", { hidden = true, default_text = line })()
-        -- end
-        --
-        -- local function find_command()
-        --     if 1 == vim.fn.executable("rg") then
-        --         return { "rg", "--files", "--color", "never", "-g", "!.git" }
-        --     elseif 1 == vim.fn.executable("fd") then
-        --         return { "fd", "--type", "f", "--color", "never", "-E", ".git" }
-        --     elseif 1 == vim.fn.executable("fdfind") then
-        --         return { "fdfind", "--type", "f", "--color", "never", "-E", ".git" }
-        --     elseif 1 == vim.fn.executable("find") and vim.fn.has("win32") == 0 then
-        --         return { "find", ".", "-type", "f" }
-        --     elseif 1 == vim.fn.executable("where") then
-        --         return { "where", "/r", ".", "*" }
-        --     end
-        -- end
-        --
-        -- return {
-        --     defaults = {
-        --         borderchars = {
-        --             prompt = { "", "", "", "", "", "", "", "" },
-        --             results = { "", "", "", "", "", "", "", "" },
-        --             preview = { "", "", "", "", "", "", "", "" },
-        --         },
-        --         prompt_prefix = "   ",
-        --         selection_caret = " ",
-        --         -- open files in the first window that is an actual file.
-        --         -- use the current window if no other window is available.
-        --         get_selection_window = function()
-        --             local wins = vim.api.nvim_list_wins()
-        --             table.insert(wins, 1, vim.api.nvim_get_current_win())
-        --             for _, win in ipairs(wins) do
-        --                 local buf = vim.api.nvim_win_get_buf(win)
-        --                 if vim.bo[buf].buftype == "" then
-        --                     return win
-        --                 end
-        --             end
-        --             return 0
-        --         end,
-        --         mappings = {
-        --             i = {
-        --                 ["<c-t>"] = open_with_trouble,
-        --                 ["<a-t>"] = open_with_trouble,
-        --                 ["<a-i>"] = find_files_no_ignore,
-        --                 ["<a-h>"] = find_files_with_hidden,
-        --                 ["<C-Down>"] = actions.cycle_history_next,
-        --                 ["<C-Up>"] = actions.cycle_history_prev,
-        --                 ["<C-f>"] = actions.preview_scrolling_down,
-        --                 ["<C-b>"] = actions.preview_scrolling_up,
-        --             },
-        --             n = {
-        --                 ["q"] = actions.close,
-        --             },
-        --         },
-        --     },
-        --     pickers = {
-        --         find_files = {
-        --             find_command = find_command,
-        --             hidden = true,
-        --         },
-        --     },
-        -- }
     end,
 }
 
@@ -212,7 +128,8 @@ function NVTelescopeFileBrowser.options()
         ["<S-CR>"] = fb.create_from_prompt,
         [NVKeymaps.rename] = fb.rename,
         [NVKarabiner["<D-m>"]] = fb.move,
-        ["<D-d>"] = fb.copy,
+        ["<D-d>"] = fb.copy, -- duplicate current file
+        ["<D-v>"] = fb.copy, -- (copy)/paste selected file(s)
         ["<D-BS>"] = fb.remove,
         ["<D-o>"] = fb.open,
         ["<D-u>"] = fb.goto_parent_dir,
@@ -367,97 +284,6 @@ function Pickers.file_browser()
     })
 end
 
-function Pickers.buffers()
-    local telescope = require("telescope.builtin")
-
-    local listed_buffers = NVBuffers.get_listed_bufs()
-
-    telescope.buffers({
-        initial_mode = "insert",
-        sort_mru = true,
-        ignore_current_buffer = #listed_buffers > 1,
-        layout_strategy = LayoutStrategy.VERTICAL,
-        layout_config = {
-            vertical = VerticalLayout.build(),
-        },
-    })
-end
-
-function Pickers.file_finder()
-    local telescope = require("telescope.builtin")
-
-    telescope.find_files({
-        hidden = true,
-        no_ignore = false,
-        initial_mode = "insert",
-        layout_strategy = LayoutStrategy.VERTICAL,
-        layout_config = {
-            vertical = VerticalLayout.build(),
-        },
-    })
-end
-
-function Pickers.text_finder()
-    local telescope = require("telescope.builtin")
-
-    telescope.live_grep({
-        hidden = true,
-        no_ignore = false,
-        initial_mode = "insert",
-        layout_strategy = LayoutStrategy.HORIZONTAL,
-        layout_config = {
-            horizontal = HorizontalLayout.build(),
-        },
-    })
-end
-
-function Pickers.git_branches()
-    local telescope = require("telescope.builtin")
-
-    telescope.git_branches({
-        initial_mode = "insert",
-        layout_strategy = LayoutStrategy.VERTICAL,
-        layout_config = {
-            vertical = VerticalLayout.build(),
-        },
-    })
-end
-
-function Pickers.lsp_workspace_symbols()
-    local telescope = require("telescope.builtin")
-
-    local large_screen = NVScreen.is_large()
-
-    telescope.lsp_dynamic_workspace_symbols({
-        initial_mode = "insert",
-        fname_width = large_screen and 40 or 30,
-        symbol_width = large_screen and 40 or 30,
-        layout_strategy = LayoutStrategy.VERTICAL,
-        layout_config = {
-            vertical = VerticalLayout.build({
-                width = large_screen and 0.5 or 0.8,
-                height = 0.9,
-                preview_height = 0.6,
-            }),
-        },
-    })
-end
-
-function Pickers.logs()
-    local extensions = require("telescope").extensions
-
-    extensions.noice.noice({
-        layout_strategy = LayoutStrategy.VERTICAL,
-        layout_config = {
-            vertical = VerticalLayout.build({
-                width = NVScreen.is_large() and 0.5 or 0.8,
-                height = 0.9,
-                preview_height = 0.6,
-            }),
-        },
-    })
-end
-
 function NVTelescope.open_file_browser()
     Pickers.file_browser()
 end
@@ -473,10 +299,10 @@ function fn.copy_path(bufnr, fmt)
 
         if result ~= nil then
             NVClipboard.yank(result)
-            print("Copied: " .. result)
+            log.info("Copied: " .. result)
         end
     else
-        vim.api.nvim_err_writeln("No file selected")
+        log.error("No file selected")
     end
 end
 

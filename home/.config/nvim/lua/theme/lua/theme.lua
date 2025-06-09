@@ -258,7 +258,7 @@ local function apply()
             -- VertSplit    { }, -- Column separating vertically split windows
             Folded({ fg = color.bg, bg = color.charcoal }), -- Line used for closed folds
             FoldColumn({ fg = color.charcoal, bg = color.bg }), -- 'foldcolumn'
-            SignColumn({ fg = color.text, bg = color.bg }), -- Column where |signs| are displayed
+            SignColumn({ fg = color.text }), -- Column where |signs| are displayed
             -- IncSearch    { }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
             -- Substitute   { }, -- |:substitute| replacement text highlighting
             LineNr({ fg = color.strong_faded_text }), -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
@@ -272,7 +272,7 @@ local function apply()
             NormalFloat({ fg = color.text, bg = color.float_bg }), -- Normal text in floating windows.
             -- NormalNC     { }, -- normal text in non-current windows
             Pmenu({ fg = color.text, bg = color.float_bg }), -- Popup menu: Normal item.
-            PmenuSel({ Pmenu, bg = Pmenu.bg.lighten(10) }), -- Popup menu: Selected item.
+            PmenuSel({ Pmenu, bg = Pmenu.bg.lighten(6) }), -- Popup menu: Selected item.
             PmenuSbar({ bg = Pmenu.bg.lighten(5) }), -- Popup menu: Scrollbar.d
             PmenuThumb({ bg = Pmenu.bg.lighten(15) }), -- Popup menu: Thumb of the scrollbar.
             -- Question     { }, -- |hit-enter| prompt and yes/no questions
@@ -347,6 +347,7 @@ local function apply()
             StatusBarDiagnosticHint({ fg = DiagnosticHint.fg, bg = color.bar_bg }),
 
             FloatTitle({ fg = color.bg, bg = color.cyan, bold = true }),
+            FloatBorder({ fg = color.faded_text, bg = color.float_bg }),
 
             IndentBlanklineChar({ fg = color.thin_line }),
             IndentBlanklineContextChar({ fg = IndentBlanklineChar.fg.lighten(25) }),
@@ -364,6 +365,13 @@ local function apply()
             NoiceLspProgressClient({ fg = color.charcoal, bg = color.bar_bg }),
             NoiceLspProgressSpinner({ fg = color.yellow.mix(color.bar_bg, 50), bg = color.bar_bg }),
 
+            MultiCursorCursor({ fg = color.silver.mix(color.bg, 50), reverse = true }),
+            MultiCursorVisual({ bg = color.faded_text }),
+            MultiCursorSign({ fg = color.silver.mix(color.bg, 50) }),
+            MultiCursorDisabledCursor({ bg = color.red }),
+            MultiCursorDisabledVisual({ bg = color.faded_text }),
+            MultiCursorDisabledSign({ bg = color.red }),
+
             ZenBg({ fg = color.text, bg = color.bg }),
 
             WinShiftMove({ bg = Normal.bg.lighten(7) }),
@@ -380,6 +388,23 @@ local function apply()
 
             NvimSurroundHighlight({ fg = Normal.bg, bg = color.cyan }),
 
+            SnacksIndent({ fg = color.faded_text.mix(color.bg, 80) }),
+            SnacksIndentScope({ fg = color.faded_text }),
+
+            SnacksInputNormal({ bg = color.float_bg }),
+            SnacksInputBorder({ fg = color.float_bg, bg = color.float_bg }),
+            SnacksInputTitle({ fg = color.faded_text, bg = color.float_bg }),
+
+            SnacksPickerTitle({ fg = color.faded_text, bg = color.float_bg }),
+            SnacksPickerBorder({ fg = color.float_bg, bg = color.float_bg }),
+            SnacksPickerTotals({ fg = color.faded_text }),
+            SnacksPickerBufNr({ fg = color.faded_text }),
+            SnacksPickerDir({ fg = color.faded_text }),
+            SnacksPickerRow({ fg = color.faded_text }),
+            SnacksPickerCol({ fg = color.faded_text }),
+            SnacksPickerListCursorLine({ bg = color.float_bg.lighten(6) }),
+            SnacksPickerPreviewCursorLine({ bg = color.float_bg.lighten(6) }),
+
             TelescopeNormal({ bg = color.float_bg }),
             TelescopeMatching({ fg = color.charcoal }),
             TelescopeSelection({ bg = Normal.bg.lighten(9) }),
@@ -389,17 +414,8 @@ local function apply()
             TelescopeResultsDiffDelete({ GitDeleted }),
             TelescopePromptCounter({ Comment }),
 
-            SagaNormal({ bg = color.bg }),
-
-            NeoTreeRootName({ fg = color.strong_text, bold = true }),
-            NeoTreeDirectoryIcon({ fg = color.faded_text }),
-            NeoTreeFileIcon({ fg = color.faded_text }),
-            NeoTreeIndentMarker({ IndentBlanklineChar }),
-            NeoTreeGitAdded({ fg = color.green }),
-            NeoTreeGitUntracked({ fg = color.green }),
-            NeoTreeGitModified({ fg = color.blue }),
-            NeoTreeGitStaged({ fg = color.green }),
-            NeoTreeGitIgnored({ fg = color.faded_text }),
+            TroubleDirectory({ fg = color.charcoal }),
+            TroubleFilename({ fg = color.charcoal, bold = true }),
 
             NotifyDEBUGIcon({ fg = color.silver }),
             NotifyDEBUGTitle({ fg = color.silver }),
@@ -417,6 +433,8 @@ local function apply()
             NotifyERRORTitle({ fg = color.red }),
             NotifyERRORBody({ fg = color.red, bg = color.float_bg }),
             NotifyERRORBorder({ fg = color.float_bg, bg = color.float_bg }),
+
+            RenderMarkdownCode({ Normal }),
         }
     end)
 

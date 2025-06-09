@@ -12,9 +12,13 @@ function NVPersistence.autocmds()
 
             -- TODO: Complete this list
             NVLazy.ensure_hidden()
+            NVMason.ensure_hidden()
             NVNoice.ensure_hidden()
-            NVZenMode.ensure_deacitvated()
+            NVTabs.ensure_focus_deacitvated()
+            NVSZoom.ensure_deactivated()
+            NVSLazygit.ensure_hidden()
             NVDiffview.ensure_all_hidden()
+            NVTinygit.ensure_hidden()
             NVNoNeckPain.disable()
         end,
     })

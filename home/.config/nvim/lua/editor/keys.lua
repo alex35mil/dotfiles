@@ -1,10 +1,12 @@
 NVKeys = {}
 
+---@param keys string
+---@param options {mode: "n" | "x" | "t", from_part: boolean, do_lt: boolean, special: boolean}
 function NVKeys.send(keys, options)
     local mode = options.mode
 
     if mode == nil then
-        vim.api.nvim_err_writeln("Sending keys requires mode")
+        log.error("Sending keys requires mode")
         return
     end
 
@@ -33,6 +35,6 @@ function NVKeys.send(keys, options)
     elseif mode == "t" then
         vim.api.nvim_feedkeys(keys, mode, false)
     else
-        vim.api.nvim_err_writeln("Unexpected mode")
+        log.error("Unexpected mode")
     end
 end

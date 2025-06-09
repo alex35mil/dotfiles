@@ -47,6 +47,7 @@ NVNoice = {
         return {
             cmdline = {
                 format = {
+                    cmdline = { pattern = "^:", icon = "❯", lang = "vim" },
                     search_down = { view = "cmdline", icon = "  " },
                     search_up = { view = "cmdline", icon = "  " },
                 },
@@ -216,7 +217,6 @@ NVNoice = {
     end,
     config = function(_, opts)
         require("noice").setup(opts)
-        require("telescope").load_extension("noice")
     end,
 }
 

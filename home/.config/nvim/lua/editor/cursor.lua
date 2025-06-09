@@ -1,16 +1,19 @@
 NVCursor = {}
 
+---@alias Cursor {win: WinID, pos: [Row, Col]}
+
+---@return Cursor
 function NVCursor.get()
     local win = vim.api.nvim_get_current_win()
-    local pos = vim.api.nvim_win_get_cursor(win)
+    local pos = vim.api.nvim_win_get_cursor(0)
 
-    return { win, pos }
+    return { win = win, pos = pos }
 end
 
+---@param cursor Cursor
 function NVCursor.set(cursor)
-    local row, col = cursor.pos[1], cursor.pos[2]
-
-    vim.api.nvim_win_set_cursor(cursor.win, { row, col })
+    vim.api.nvim_set_current_win(cursor.win)
+    vim.api.nvim_win_set_cursor(cursor.win, cursor.pos)
 end
 
 function NVCursor.shake()

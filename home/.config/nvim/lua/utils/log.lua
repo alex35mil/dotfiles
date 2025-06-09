@@ -5,6 +5,7 @@ local ERROR = vim.log.levels.ERROR
 local WARN = vim.log.levels.WARN
 local INFO = vim.log.levels.INFO
 local DEBUG = vim.log.levels.DEBUG
+local TRACE = vim.log.levels.TRACE
 
 ---@param message string
 function log.info(message)
@@ -16,9 +17,14 @@ function log.warn(message)
     vim.notify(message, WARN)
 end
 
----@param message string
+---@param message string|table
 function log.error(message)
-    vim.notify(message, ERROR)
+    if type(message) == string then
+        ---@cast message string
+        vim.notify(message, ERROR)
+    else
+        vim.notify(vim.inspect(message), ERROR)
+    end
 end
 
 ---@param payload string | number | any
@@ -36,4 +42,9 @@ function log.debug(payload)
     end
 
     vim.notify(message, DEBUG, { timeout = false })
+end
+
+---@param payload table
+function log.trace(payload)
+    vim.notify(vim.inspect(payload), TRACE)
 end

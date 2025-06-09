@@ -2,7 +2,7 @@ NVMiniSurround = {
     "echasnovski/mini.surround",
     opts = {
         mappings = {
-            add = "<A-s>",
+            add = "s",
             replace = "cs",
             delete = "ds",
         },

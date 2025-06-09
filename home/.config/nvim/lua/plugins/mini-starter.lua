@@ -17,13 +17,11 @@ NVMiniStarter = {
             end
         end)
 
-        table.insert(items, function()
-            if NVPersistence.has_session() then
-                return item("Restore session", NVPersistence.restore, project)
-            else
-                return item("Browse", NVTelescope.open_file_browser, project)
-            end
-        end)
+        if NVPersistence.has_session() then
+            table.insert(items, item("Restore session", NVPersistence.restore, project))
+        end
+
+        table.insert(items, item("Browse project", NVTelescope.open_file_browser, project))
 
         table.insert(items, item("Quit", "qa", project))
 

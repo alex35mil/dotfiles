@@ -2,10 +2,13 @@ NVFlash = {
     "folke/flash.nvim",
     event = "VeryLazy",
     vscode = false,
-    keys = {
-        { NVKarabiner["<D-h>"], mode = { "n", "x", "o" }, require("flash").jump, desc = "Search" },
-    },
+    keys = function()
+        return {
+            { NVKarabiner["<D-j>"], mode = { "n", "i", "x", "o" }, require("flash").jump, desc = "Search" },
+        }
+    end,
     opts = {
+        labels = "htnueosaldibxgpkmfycwjrqvz",
         search = {
             multi_window = true,
             forward = true,

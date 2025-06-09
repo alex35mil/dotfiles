@@ -117,8 +117,6 @@ function fn.toggle_diff()
     if current_diff ~= nil then
         fn.hide_current_diff()
     else
-        NVZenMode.ensure_deacitvated()
-
         local inactive_diff_tab = fn.inactive_diff()
 
         if inactive_diff_tab ~= nil then

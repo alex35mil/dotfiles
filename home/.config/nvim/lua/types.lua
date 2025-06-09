@@ -1,0 +1,6 @@
+---@alias BufID integer
+---@alias WinID integer
+---@alias TabID integer
+---
+---@alias Row integer
+---@alias Col integer

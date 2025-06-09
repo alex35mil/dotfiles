@@ -28,9 +28,9 @@ local HINT = vim.diagnostic.severity.HINT
 
 function NVLsp.keymaps()
     return {
-        { "gd", vim.lsp.buf.definition, desc = "LSP: Go to definition" },
-        { "gD", vim.lsp.buf.declaration, desc = "LSP: Go to declaration" },
-        { "gt", vim.lsp.buf.type_definition, desc = "LSP: Go to type definition" },
+        { "gd", NVSPickers.lsp_definitions, desc = "LSP: Go to definition" },
+        { "gt", NVSPickers.lsp_type_definitions, desc = "LSP: Go to type definition" },
+        { "gD", NVSPickers.lsp_declarations, desc = "LSP: Go to declaration" },
         {
             NVKeymaps.rename,
             vim.lsp.buf.rename,
@@ -39,7 +39,7 @@ function NVLsp.keymaps()
         },
         {
             "<D-S-r>",
-            LazyVim.lsp.rename_file,
+            Snacks.rename.rename_file,
             mode = { "n", "i" },
             desc = "LSP: Rename current file",
             has = { "workspace/didRenameFiles", "workspace/willRenameFiles" },
@@ -148,9 +148,6 @@ local config = {
 }
 
 --- Types ---
-
----@alias BufID integer
----@alias WinID integer
 
 ---@enum PopupType
 local POPUP_TYPE = {
@@ -478,9 +475,9 @@ function DiagnosticPopup.jump(opts)
     }
 
     if opts.target == "next" then
-        pos = vim.diagnostic.get_next_pos(get_pos_opts)
+        pos = vim.diagnostic.get_next(get_pos_opts)
     elseif opts.target == "previous" then
-        pos = vim.diagnostic.get_prev_pos(get_pos_opts)
+        pos = vim.diagnostic.get_prev(get_pos_opts)
     else
         log.error("Unexpected diagnostics target: " .. vim.inspect(opts.target))
         return false
@@ -496,7 +493,7 @@ function DiagnosticPopup.jump(opts)
         return false
     end
 
-    vim.api.nvim_win_set_cursor(0, { pos[1] + 1, pos[2] })
+    vim.api.nvim_win_set_cursor(0, { pos.lnum + 1, pos.col })
 
     return true
 end
