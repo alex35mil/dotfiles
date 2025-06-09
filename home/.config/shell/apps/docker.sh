@@ -20,9 +20,9 @@ alias dnetrm="docker network rm "
 alias dnetpr="docker network prune "
 alias dspr="docker system prune "
 alias dspra="docker system prune -a"
-alias dc="docker-compose "
-alias dcup="docker-compose up"
-alias dcupb="docker-compose up --build"
+alias dc="docker compose "
+alias dcup="docker compose up"
+alias dcupb="docker compose up --build"
 
 # Prints Docker stats
 function dls() {

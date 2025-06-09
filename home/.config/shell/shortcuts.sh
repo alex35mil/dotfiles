@@ -2,12 +2,12 @@
 alias dup="PSHELL=zsh $HOME/Dev/dotfiles/script/install.sh"
 
 case "$SHELL" in
-    */zsh)
-        alias reload="exec zsh -l"
-        ;;
-    */bash)
-        alias reload="exec bash --login"
-        ;;
+*/zsh)
+    alias reload="exec zsh -l"
+    ;;
+*/bash)
+    alias reload="exec bash --login"
+    ;;
 esac
 
 alias c="clear"
@@ -25,7 +25,7 @@ alias icd="cd ~/Library/Mobile\\ Documents/com~apple~CloudDocs"
 alias ico="cd ~/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents"
 
 # === System
-alias mymac="system_profiler SPHardwareDataType | rg -i \"Model Identifier|Chip|Memory\" | awk '{\$1=\$1; print}'"
+alias mymac="system_profiler SPHardwareDataType | rg -i \"Model Identifier|Chip|Memory\" | awk '{\$1=\$1; print}' && echo -n 'OS: ' && sw_vers -productName | tr -d '\n' && echo -n ' ' && sw_vers -productVersion"
 
 function l() {
     if [[ -z $1 ]]; then
@@ -107,18 +107,17 @@ function o() {
 # With no arguments it cleans up the current folder,
 # otherwise at the provided path.
 function cleanup() {
-      # If an argument is provided, use it as the target directory
-      # otherwise, use the current directory.
-      local target_dir="${1:-.}"
+    # If an argument is provided, use it as the target directory. Otherwise, use the current directory.
+    local target_dir="${1:-.}"
 
-      # Remove .DS_Store files
-      find "$target_dir" -type f -name '*.DS_Store' -exec echo "Removing: {}" 1>&2 \; -delete
+    # Remove .DS_Store files
+    find "$target_dir" -type f -name '*.DS_Store' -exec echo "Removing: {}" \; -delete 1>&2
 
-      # Remove default.profraw files
-      find "$target_dir" -type f -name 'default.profraw' -exec echo "Removing: {}" 1>&2 \; -delete
+    # Remove default.profraw files
+    find "$target_dir" -type f -name 'default.profraw' -exec echo "Removing: {}" \; -delete 1>&2
 
-      # Remove broken symlinks
-      find "$target_dir" -type l ! -exec test -e {} \; -exec echo "Removing broken symlink: {}" 1>&2 \; -delete
+    # Remove broken symlinks
+    find "$target_dir" -type l ! -exec test -e {} \; -exec echo "Removing broken symlink: {}" \; -delete 1>&2
 }
 
 # Adds fingerprint to the filename
@@ -139,7 +138,7 @@ function fingerprint() {
 
 # === Network
 alias hosts="sudo $EDITOR /etc/hosts"
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias publicip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
 
 # Prints listners on a specific port. E.g. `p 3000`
@@ -175,14 +174,92 @@ function p() {
 
 # Generates a new ssh entity
 function gen-ssh() {
-    ssh-keygen -f ~/.ssh/$@ -C "$@"
-    echo "Host $@" >> ~/.ssh/config
-    echo " HostName __IP__" >> ~/.ssh/config
-    echo " ForwardAgent yes" >> ~/.ssh/config
-    echo " PreferredAuthentications publickey" >> ~/.ssh/config
-    echo " IdentityFile ~/.ssh/$@" >> ~/.ssh/config
-    echo "" >> ~/.ssh/config
-    vim ~/.ssh/config
+    local usage="Usage: gen-ssh <id> --alias <alias> --ip <ip> --user <user>"
+
+    if [[ $# -eq 0 || $1 == "-h" || $1 == "--help" ]]; then
+        echo "$usage"
+        return 0
+    fi
+
+    local id=$1
+    shift
+
+    local alias=""
+    local ip=""
+    local user=""
+
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            --alias)
+                alias="$2"
+                shift 2
+                ;;
+            --ip)
+                ip="$2"
+                shift 2
+                ;;
+            --user)
+                user="$2"
+                shift 2
+                ;;
+            *)
+                echo "Unknown parameter: $1"
+                echo "$usage"
+                return 1
+                ;;
+        esac
+    done
+
+    # Validate that all required parameters are provided
+    if [[ -z "$id" || -z "$alias" || -z "$ip" || -z "$user" ]]; then
+        echo "Error: All parameters are required"
+        echo "$usage"
+        return 1
+    fi
+
+    ssh-keygen -t ed25519 -f ~/.ssh/$id -C "$id"
+    echo >>~/.ssh/config
+    echo "Host $alias" >>~/.ssh/config
+    echo " HostName $ip" >>~/.ssh/config
+    echo " User $user" >>~/.ssh/config
+    echo " ForwardAgent yes" >>~/.ssh/config
+    echo " PreferredAuthentications publickey" >>~/.ssh/config
+    echo " IdentityFile ~/.ssh/$id" >>~/.ssh/config
+    echo " ServerAliveInterval 60" >>~/.ssh/config
+    echo " ServerAliveCountMax 2" >>~/.ssh/config
+
+    cat ~/.ssh/config
+}
+
+
+# === Git
+function git-branch-stat() {
+    base_branch=${1:-main}
+
+    # Get stats for tracked files
+    tracked_stats=$(git diff --shortstat $base_branch)
+    files_changed=$(echo "$tracked_stats" | grep -o '[0-9]\+ file' | grep -o '[0-9]\+' || echo "0")
+    insertions=$(echo "$tracked_stats" | grep -o '[0-9]\+ insertion' | grep -o '[0-9]\+' || echo "0")
+    deletions=$(echo "$tracked_stats" | grep -o '[0-9]\+ deletion' | grep -o '[0-9]\+' || echo "0")
+
+    # Count untracked files
+    untracked_count=$(git ls-files --others --exclude-standard | wc -l | tr -d ' ')
+
+    # Count deleted files
+    deleted_count=$(git diff --diff-filter=D --summary $base_branch | wc -l | tr -d ' ')
+
+    # Total files affected
+    total_files=$((files_changed + untracked_count))
+
+    # ANSI color codes
+    GREEN='\033[0;32m'
+    RED='\033[0;31m'
+    BLUE='\033[0;34m'
+    NC='\033[0m' # No Color
+
+    echo "∑ Cumulative changes vs $base_branch branch:"
+    echo -e "Files: $total_files (${BLUE}$((files_changed - deleted_count)) changed${NC}, ${GREEN}$untracked_count untracked${NC}, ${RED}$deleted_count deleted${NC})"
+    echo -e "Lines: ${GREEN}+$insertions${NC} / ${RED}-$deletions${NC}"
 }
 
 # === Misc
@@ -211,20 +288,20 @@ function w() {
 
 # Prints nice color chart
 function colortest() {
-    T='ﮊ ﮊ ﮊ'
+    T='󰚌 󰚌 󰚌'
 
     echo -e "\n                    40m       41m       42m       43m\
-       44m       45m       46m       47m";
+       44m       45m       46m       47m"
 
     for FGs in '    m' '   1m' '  30m' '1;30m' '  31m' '1;31m' '  32m' \
-               '1;32m' '  33m' '1;33m' '  34m' '1;34m' '  35m' '1;35m' \
-               '  36m' '1;36m' '  37m' '1;37m';
-    do FG=${FGs// /}
+        '1;32m' '  33m' '1;33m' '  34m' '1;34m' '  35m' '1;35m' \
+        '  36m' '1;36m' '  37m' '1;37m'; do
+        FG=${FGs// /}
         echo -en " $FGs \033[$FG  $T  "
-        for BG in 40m 41m 42m 43m 44m 45m 46m 47m;
-        do echo -en "$EINS \033[$FG\033[$BG  $T  \033[0m";
+        for BG in 40m 41m 42m 43m 44m 45m 46m 47m; do
+            echo -en "$EINS \033[$FG\033[$BG  $T  \033[0m"
         done
-        echo;
+        echo
     done
     echo
 }

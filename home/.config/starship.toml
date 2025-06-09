@@ -6,3 +6,6 @@ symbol = " "
 
 [nix_shell]
 disabled = true
+
+[docker_context]
+only_with_files = false

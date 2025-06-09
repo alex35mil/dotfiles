@@ -6,8 +6,8 @@ cargo install --locked \
     cargo-outdated \
     cargo-sync-readme \
     cargo-update \
+    cargo-release \
     cargo-wasi \
     cargo-watch \
     sea-orm-cli \
-    sqlx-cli \
-    typos-cli
+    sqlx-cli
