@@ -16,23 +16,23 @@ App = {
 }
 
 Capslock = {
-    label = "󰃸"
+    label = "󰃸",
 }
 
 InputSource = {
     EN = {
-        id = "ABC",
+        id = "Unicode",
         label = "EN",
     },
     RU = {
         id = "Russian",
         label = "RU",
-    }
+    },
 }
 
 HUD = {
-    entries   = {},
-    delimiter = ""
+    entries = {},
+    delimiter = "",
 }
 
 --- Loggers
@@ -41,40 +41,6 @@ AppEventLogger = hs.logger.new("App Event", "info")
 CapslockLogger = hs.logger.new("Capslock", "info")
 InputSourceLogger = hs.logger.new("Input Source", "info")
 HUDLogger = hs.logger.new("HUD", "info")
-
---- App Watcher
-
-function HandleAppEvent(app, event)
-    AppEventLogger.f("%s - New Event: %s", app, event)
-
-    if
-        app == App.ALACRITTY
-        or app == App.ZED
-        or app == App.NEOVIDE
-        or app == App.XCODE
-        or app == App.ARC
-        or app == App.THINGS
-        or app == App.ONEPASSWORD
-        or app == App.NOTION
-        or app == App.BEAR
-        or app == App.OBSIDIAN
-    then
-        if event == hs.application.watcher.activated then
-            AppEventLogger.f("%s - activated", app)
-            InputSource:activateEN()
-        end
-    elseif app == App.TELEGRAM then
-        if event == hs.application.watcher.activated then
-            AppEventLogger.f("%s - activated", app)
-            InputSource:activateRU()
-        elseif event == hs.application.watcher.deactivated then
-            AppEventLogger.f("%s - deactivated", app)
-            InputSource:activateEN()
-        end
-    end
-end
-
-AppWatcher = hs.application.watcher.new(HandleAppEvent)
 
 --- Capslock
 
@@ -164,18 +130,41 @@ end
 --    * fadeOutDuration - a number in seconds specifying the fade out duration of the alert, defaults to 0.15
 
 HUDStyle = {
-    strokeWidth     = 30,
-    strokeColor     = { white = 0.5, alpha = 0 },
-    fillColor       = { white = 0, alpha = 0.3 },
-    textColor       = { white = 1, alpha = 1 },
-    textFont        = "BerkeleyMono Nerd Font",
-    textSize        = 60,
-    radius          = 10,
-    atScreenEdge    = 2,
-    fadeInDuration  = 0,
+    strokeWidth = 30,
+    strokeColor = { white = 0.5, alpha = 0 },
+    fillColor = { white = 0, alpha = 0.3 },
+    textColor = { white = 1, alpha = 1 },
+    textFont = "BerkeleyMono Nerd Font",
+    textSize = 60,
+    radius = 10,
+    atScreenEdge = 2,
+    fadeInDuration = 0,
     fadeOutDuration = 0,
-    padding         = 60,
+    padding = 60,
 }
+
+function HUD:style(frame)
+    -- Base style
+    local style = {
+        strokeWidth = 30,
+        strokeColor = { white = 0.5, alpha = 0 },
+        fillColor = { white = 0, alpha = 0.3 },
+        textColor = { white = 1, alpha = 1 },
+        textFont = "BerkeleyMono Nerd Font",
+        fadeInDuration = 0,
+        fadeOutDuration = 0,
+    }
+
+    local breakpoint = 1500
+    local isSmallScreen = frame.w < breakpoint
+
+    style.textSize = isSmallScreen and 20 or 60
+    style.padding = isSmallScreen and 10 or 60
+    style.radius = isSmallScreen and 5 or 10
+    style.atScreenEdge = isSmallScreen and 1 or 2
+
+    return style
+end
 
 function HUD:show(label)
     local entries = {}
@@ -183,7 +172,9 @@ function HUD:show(label)
     local screens = hs.screen.allScreens()
 
     for i, screen in ipairs(screens) do
-        entries[i] = hs.alert(label, HUDStyle, screen, "forever")
+        local frame = screen:fullFrame()
+        local style = HUD:style(frame)
+        entries[i] = hs.alert(label, style, screen, "forever")
     end
 
     self.entries = entries
@@ -228,64 +219,16 @@ end
 function HUD:update()
     HUD:setState({
         ["input_source"] = InputSource:current(),
-        ["capslock"] = Capslock:isOn()
+        ["capslock"] = Capslock:isOn(),
     })
 end
-
---- Mouse
-
-function MovePointer(direction)
-    local pos = hs.mouse.getAbsolutePosition()
-    local screen = hs.screen.mainScreen():fullFrame()
-    local step_factor = 4
-
-    if direction == "left" then
-        pos.x = pos.x - (screen.w / step_factor)
-    elseif direction == "right" then
-        pos.x = pos.x + (screen.w / step_factor)
-    elseif direction == "up" then
-        pos.y = pos.y - (screen.h / step_factor)
-    elseif direction == "down" then
-        pos.y = pos.y + (screen.h / step_factor)
-    else
-    end
-
-    hs.mouse.setAbsolutePosition(pos)
-end
-
---- Scrolla
-
-function ToggleScrolla(status)
-    local karabiner = "/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"
-    local enabled
-
-    if status == "on" then
-        enabled = 1
-    elseif status == "off" then
-        enabled = 0
-    end
-
-    local cmd = string.format("'%s' --set-variables '{\"scrolla\":%d}'", karabiner, enabled)
-
-    hs.execute(cmd)
-end
-
-ScrollaOnWatcher = hs.distributednotifications.new(function() ToggleScrolla("on") end, "ScrollaDidEngage")
-ScrollaOffWatcher = hs.distributednotifications.new(function() ToggleScrolla("off") end, "ScrollaDidDisengage")
 
 --- Let's go
 
 HUD:update()
 
-AppWatcher:start()
+-- AppWatcher:start()
 
-ScrollaOnWatcher:start()
-ScrollaOffWatcher:start()
-
-hs.hotkey.bind({ "cmd", "ctrl", "alt" }, "C", function() Capslock:toggle() end)
-hs.hotkey.bind({ "cmd", "ctrl", "alt" }, "Space", function() InputSource:toggle() end)
-
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "Left", function() MovePointer("left") end)
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "Right", function() MovePointer("right") end)
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "Up", function() MovePointer("up") end)
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "Down", function() MovePointer("down") end)
+hs.hotkey.bind({ "cmd", "ctrl", "alt" }, "Space", function()
+    InputSource:toggle()
+end)
