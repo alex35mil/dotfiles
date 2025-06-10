@@ -1,6 +1,5 @@
 .envrc
 .direnv
-.devbox
 .idea
 .DS_Store
 default.profraw

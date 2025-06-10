@@ -16,9 +16,9 @@ typeset -U path cdpath fpath manpath
 
 fpath+=(
     $XDG_CONFIG_HOME/shell/zsh/completions
-    $DEVBOX_PROFILE/share/zsh/site-functions
-    $DEVBOX_PROFILE/share/zsh/$ZSH_VERSION/functions
-    $DEVBOX_PROFILE/share/zsh/vendor-completions
+    $HOMEBREW_PREFIX/share/zsh/site-functions
+    $HOMEBREW_PREFIX/share/zsh/$ZSH_VERSION/functions
+    $HOMEBREW_PREFIX/share/zsh/vendor-completions
 )
 # ------------------------------------------
 # `fpath` is a special array in zsh that specifies directories to search
@@ -28,7 +28,7 @@ fpath+=(
 
 unalias run-help
 autoload run-help
-HELPDIR="$DEVBOX_PROFILE/share/zsh/$ZSH_VERSION/help"
+HELPDIR="$HOMEBREW_PREFIX/share/zsh/$ZSH_VERSION/help"
 alias help=run-help
 # ------------------------------------------
 # Loads help modules provided by zsh and aliases `run-help` to `help`.
@@ -182,7 +182,7 @@ zstyle ':completion:*' verbose yes
 # selection of the appropriate completion.
 # ------------------------------------------
 
-source "$DEVBOX_PROFILE/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # ------------------------------------------
 # Activates zsh-autosuggestions plugin. This plugin provides
 # real-time command autosuggestions as you type in the terminal, based on your

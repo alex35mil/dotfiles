@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-    Packages are managed via <b>Nix</b> + <b>Devbox</b>.
+    Packages are managed via <b>Brew</b> + <b>Mise</b>.
 </p>
 
 <p />

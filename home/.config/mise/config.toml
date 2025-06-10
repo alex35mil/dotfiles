@@ -1,0 +1,24 @@
+[settings]
+experimental = true
+lockfile = true
+
+[tools]
+1password = "latest"
+bat = "latest"
+direnv = "latest"
+fd = "latest"
+fzf = "latest"
+go = "latest"
+hostctl = "latest"
+jq = "latest"
+lazygit = "latest"
+mkcert = "latest"
+neovim = "latest"
+ripgrep = "latest"
+starship = "latest"
+terraform = "latest"
+tree-sitter = "latest"
+typos = "latest"
+watchexec = "latest"
+yamlfmt = "latest"
+zellij = "latest"
