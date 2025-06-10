@@ -114,12 +114,12 @@ impl ZellijPlugin for State {
 
         let session_name = &self.mode_info.session_name;
         let mode = self.mode_info.mode;
-        let palette = self.mode_info.style.colors;
+        let palette = Palette::from(self.mode_info.style.colors);
 
         let mut session = Session::render(session_name.as_deref(), mode, palette);
         let tabs = Tabs::render(&self.tabs, mode, palette);
         let mut datetime = self.now.render(mode, palette);
-        let pad = Bg::render(2, self.mode_info.style.colors);
+        let pad = Bg::render(2, palette);
 
         let mut blocks = Vec::with_capacity(cols);
 

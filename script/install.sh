@@ -148,7 +148,7 @@ mkdir -p "$ZELLIJ_STATUSBAR_DEST"
 rm "$ZELLIJ_STATUSBAR_DEST/$ZELLIJ_STATUSBAR_BIN" || true
 cd $ZELLIJ_STATUSBAR_SRC
 cargo build --release
-cp "target/wasm32-wasi/release/$ZELLIJ_STATUSBAR_BIN" "$ZELLIJ_STATUSBAR_DEST/"
+cp "target/wasm32-wasip1/release/$ZELLIJ_STATUSBAR_BIN" "$ZELLIJ_STATUSBAR_DEST/"
 
 echo "🛠   Building Zellij statusbar... done."
 
