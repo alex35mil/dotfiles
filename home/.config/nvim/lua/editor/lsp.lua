@@ -229,9 +229,9 @@ function Popup:init(opts)
 
     local total_width = vim.o.columns
     local cursor_screen_pos = vim.fn.screenpos(0, cursor[1], cursor[2] + 1)
-    local h_space = total_width - cursor_screen_pos.col - config.win.border.padding.left - config.win.border.padding.right
+    local h_space = total_width - config.win.border.padding.left - config.win.border.padding.right
 
-    local width = math.min(h_space, opts.bounding_box.w)
+    local width = math.min(h_space - config.win.border.padding.left - config.win.border.padding.right, opts.bounding_box.w)
     if config.win.max_width ~= nil then
         width = math.min(width, config.win.max_width)
     end
@@ -248,8 +248,20 @@ function Popup:init(opts)
         row = 2
     end
 
+    local col = 0
+    local total_popup_width = width + config.win.border.padding.left + config.win.border.padding.right
+
+    if total_popup_width > total_width then
+        col = config.win.border.padding.left - cursor_screen_pos.col
+    else
+        local popup_right_edge = cursor_screen_pos.col + total_popup_width
+        if popup_right_edge > total_width then
+            col = total_width - popup_right_edge
+        end
+    end
+
     local relative = "cursor"
-    local position = { row = row, col = 0 }
+    local position = { row = row, col = col }
     local size = { width = width, height = height }
     local border = {
         style = config.win.border.style,
