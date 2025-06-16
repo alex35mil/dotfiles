@@ -111,11 +111,11 @@ end
 
 function fn.deactivate_active_focus()
     local current_cursor = vim.api.nvim_win_get_cursor(0)
+    local current_buf = vim.api.nvim_get_current_buf()
     local tab_number = vim.api.nvim_tabpage_get_number(NVTabs.focus.tab)
     vim.cmd("tabclose " .. tab_number)
 
     local current_win = vim.api.nvim_get_current_win()
-    local current_buf = vim.api.nvim_get_current_buf()
     vim.api.nvim_win_set_buf(current_win, current_buf)
     vim.api.nvim_win_set_cursor(current_win, current_cursor)
 end
