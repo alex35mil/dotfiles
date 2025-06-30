@@ -37,14 +37,14 @@ function SnacksVerticalLayout.build(opts)
             {
                 win = "preview",
                 title = "{preview}",
-                border = { " ", " ", " ", " ", " ", " ", " ", " " },
+                border = { " ", "─", " ", " ", " ", " ", " ", " " },
             },
         },
     }
 end
 
 SnacksHorizontalLayout = {
-    large_screen_width = 0.6,
+    large_screen_width = 0.75,
     small_screen_width = 0.95,
 }
 
@@ -84,7 +84,7 @@ function SnacksHorizontalLayout.build(opts)
 end
 
 NVSPickers.keys = {
-    [NVKarabiner["<D-m>"]] = { "toggle_maximize", mode = { "n", "i", "v" } },
+    [NVKeyRemaps["<D-m>"]] = { "toggle_maximize", mode = { "n", "i", "v" } },
     ["<D-CR>"] = { "edit_vsplit", mode = { "n", "i", "v" } },
     ["<D-S-CR>"] = { "edit_split", mode = { "n", "i", "v" } },
     ["<C-Tab>"] = { "cycle_win", mode = { "n", "i", "v" } },
@@ -146,8 +146,8 @@ NVSnacks = {
             enabled = true,
             indent = {
                 enabled = true,
-                only_scope = true,
-                only_current = true,
+                only_scope = false,
+                only_current = false,
                 hl = "SnacksIndent",
             },
             scope = {
@@ -237,7 +237,7 @@ end
 function NVSPickers.text_search()
     Snacks.picker.grep({
         hidden = true,
-        ignored = true,
+        ignored = false,
         layout = SnacksHorizontalLayout.build(),
     })
 end
@@ -323,7 +323,7 @@ end
 function NVSZoom.ensure_deactivated()
     local win = Snacks.zen.win
     if win then
-        win:close()
+        Snacks.zen.zoom()
         return true
     end
     return false

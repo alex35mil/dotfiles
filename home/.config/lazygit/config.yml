@@ -1,8 +1,8 @@
 keybinding:
   universal:
     quit: "w"
-    scrollUpMain: "<C-t>"
-    scrollDownMain: "<C-h>"
+    scrollUpMain: "<C-u>"
+    scrollDownMain: "<C-d>"
   files:
     commitChangesWithoutHook: "<C-C>"
   commits:

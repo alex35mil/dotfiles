@@ -24,7 +24,7 @@ M.palette = {
     thin_line = "#2f3337",
     thick_line = "#73787d",
     -- floats
-    float_bg = "#30353b",
+    float_bg = "#2b2f34",
     -- bars
     bar_bg = "#2c323c",
     bar_text = "#b5bac8",
@@ -255,7 +255,6 @@ local function apply()
             -- TermCursor   { }, -- Cursor in a focused terminal
             -- TermCursorNC { }, -- Cursor in an unfocused terminal
             -- ErrorMsg     { }, -- Error messages on the command line
-            -- VertSplit    { }, -- Column separating vertically split windows
             Folded({ fg = color.bg, bg = color.charcoal }), -- Line used for closed folds
             FoldColumn({ fg = color.charcoal, bg = color.bg }), -- 'foldcolumn'
             SignColumn({ fg = color.text }), -- Column where |signs| are displayed
@@ -268,7 +267,7 @@ local function apply()
             ModeMsg({ MsgArea }), -- 'showmode' message (e.g., "-- INSERT -- ")
             -- MsgSeparator { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
             -- MoreMsg      { }, -- |more-prompt|
-            NonText({ fg = color.cyan }), -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
+            NonText({ fg = color.faded_text }), -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
             NormalFloat({ fg = color.text, bg = color.float_bg }), -- Normal text in floating windows.
             -- NormalNC     { }, -- normal text in non-current windows
             Pmenu({ fg = color.text, bg = color.float_bg }), -- Popup menu: Normal item.
@@ -290,7 +289,7 @@ local function apply()
             TabLineSel({ bg = TabLine.bg.lighten(5) }), -- Tab pages line, active tab page label
             Title({ fg = color.magenta, bold = true }), -- Titles for output from ":set all", ":autocmd" etc.
             -- NB!: VertSplit is dynamic. See functions below.
-            VertSplit({ fg = color.bg }), -- Vertical split line
+            VertSplit({ fg = color.thin_line }), -- Vertical split line
             Visual({ bg = Normal.bg.lighten(18) }), -- Visual mode selection
             -- VisualNOS    { }, -- Visual mode selection when vim is "Not Owning the Selection".
             -- WarningMsg   { }, -- Warning messages
@@ -346,7 +345,7 @@ local function apply()
             StatusBarDiagnosticInfo({ fg = DiagnosticInfo.fg, bg = color.bar_bg }),
             StatusBarDiagnosticHint({ fg = DiagnosticHint.fg, bg = color.bar_bg }),
 
-            FloatTitle({ fg = color.bg, bg = color.cyan, bold = true }),
+            FloatTitle({ fg = color.faded_text, bg = color.float_bg, bold = true }),
             FloatBorder({ fg = color.faded_text, bg = color.float_bg }),
 
             IndentBlanklineChar({ fg = color.thin_line }),
@@ -396,7 +395,7 @@ local function apply()
             SnacksInputTitle({ fg = color.faded_text, bg = color.float_bg }),
 
             SnacksPickerTitle({ fg = color.faded_text, bg = color.float_bg }),
-            SnacksPickerBorder({ fg = color.float_bg, bg = color.float_bg }),
+            SnacksPickerBorder({ fg = color.thin_line.lighten(5), bg = color.float_bg }),
             SnacksPickerTotals({ fg = color.faded_text }),
             SnacksPickerBufNr({ fg = color.faded_text }),
             SnacksPickerDir({ fg = color.faded_text }),
@@ -404,6 +403,7 @@ local function apply()
             SnacksPickerCol({ fg = color.faded_text }),
             SnacksPickerListCursorLine({ bg = color.float_bg.lighten(6) }),
             SnacksPickerPreviewCursorLine({ bg = color.float_bg.lighten(6) }),
+            SnacksPickerMatch({ fg = Normal.bg, bg = color.cyan }),
 
             TelescopeNormal({ bg = color.float_bg }),
             TelescopeMatching({ fg = color.charcoal }),
@@ -434,7 +434,7 @@ local function apply()
             NotifyERRORBody({ fg = color.red, bg = color.float_bg }),
             NotifyERRORBorder({ fg = color.float_bg, bg = color.float_bg }),
 
-            RenderMarkdownCode({ Normal }),
+            -- RenderMarkdownCode({ Normal }),
         }
     end)
 

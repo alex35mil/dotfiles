@@ -4,7 +4,7 @@ NVFlash = {
     vscode = false,
     keys = function()
         return {
-            { NVKarabiner["<D-j>"], mode = { "n", "i", "x", "o" }, require("flash").jump, desc = "Search" },
+            { "<D-j>", mode = { "n", "i", "x", "o" }, require("flash").jump, desc = "Search" },
         }
     end,
     opts = {

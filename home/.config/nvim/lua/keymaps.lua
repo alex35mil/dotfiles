@@ -13,8 +13,7 @@ NVKeymaps = {
     close = "<D-w>",
 }
 
-NVKarabiner = {
-    ["<D-j>"] = "<C-A-j>",
+NVKeyRemaps = {
     ["<D-m>"] = "<C-A-m>",
 }
 

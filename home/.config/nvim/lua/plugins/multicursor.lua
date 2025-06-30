@@ -17,14 +17,14 @@ NVMulticursor = {
             mode = { "n", "v" },
         },
         {
-            "<C-S-Up>",
+            "<C-D-Up>",
             function()
                 require("multicursor-nvim").lineSkipCursor(-1)
             end,
             mode = { "n", "v" },
         },
         {
-            "<C-S-Down>",
+            "<C-D-Down>",
             function()
                 require("multicursor-nvim").lineSkipCursor(1)
             end,

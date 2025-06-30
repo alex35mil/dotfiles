@@ -1,10 +1,13 @@
 NVWindows = {
-    default_width = NVScreen.is_large() and 140 or 120,
     maximized_width = 1, -- 100%
     window_picker_keys = "UHKMETJWNSABCDFGILOPQRVXYZ1234567890",
 }
 
 local fn = {}
+
+function NVWindows.default_width()
+    return NVScreen.is_large() and 140 or 120
+end
 
 function NVWindows.keymaps()
     K.map({ "<D-n>", "Create new buffer in the current window", "<Cmd>enew<CR>", mode = { "n", "v", "i" } })
@@ -15,42 +18,6 @@ function NVWindows.keymaps()
     K.map({ "<S-Down>", "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n", "v", "t" } })
     K.map({ "<S-Up>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "t" } })
     K.map({ "<S-Right>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "v", "t" } })
-
-    K.map({
-        "<C-S-Up>",
-        "Increase window width",
-        function()
-            fn.change_window_width("up")
-        end,
-        mode = { "n", "i", "v" },
-    })
-    K.map({
-        "<C-S-Down>",
-        "Decrease window width",
-        function()
-            fn.change_window_width("down")
-        end,
-        mode = { "n", "i", "v" },
-    })
-    K.map({
-        "<C-D-S-Up>",
-        "Increase window height",
-        function()
-            fn.change_window_height("up")
-        end,
-        mode = { "n", "i", "v" },
-    })
-    K.map({
-        "<C-D-S-Down>",
-        "Decrease window height",
-        function()
-            fn.change_window_height("down")
-        end,
-        mode = { "n", "i", "v" },
-    })
-
-    K.map({ "<A-e>", "Equalize layout", fn.equalize_layout, mode = { "n", "i", "v" } })
-    K.map({ "<A-x>", "Reset layout", fn.reset_layout, mode = { "n", "i", "v" } })
 
     K.map({
         "<M-S-Left>",
@@ -93,6 +60,42 @@ function NVWindows.keymaps()
         end,
         mode = { "n", "i", "v" },
     })
+
+    K.map({
+        "<C-S-Up>",
+        "Increase window width",
+        function()
+            fn.change_window_width("up")
+        end,
+        mode = { "n", "i", "v" },
+    })
+    K.map({
+        "<C-S-Down>",
+        "Decrease window width",
+        function()
+            fn.change_window_width("down")
+        end,
+        mode = { "n", "i", "v" },
+    })
+    K.map({
+        "<C-D-S-Up>",
+        "Increase window height",
+        function()
+            fn.change_window_height("up")
+        end,
+        mode = { "n", "i", "v" },
+    })
+    K.map({
+        "<C-D-S-Down>",
+        "Decrease window height",
+        function()
+            fn.change_window_height("down")
+        end,
+        mode = { "n", "i", "v" },
+    })
+
+    K.map({ "<A-e>", "Equalize layout", fn.equalize_layout, mode = { "n", "i", "v" } })
+    K.map({ "<A-x>", "Reset layout", fn.reset_layout, mode = { "n", "i", "v" } })
 end
 
 ---@param winid WinID

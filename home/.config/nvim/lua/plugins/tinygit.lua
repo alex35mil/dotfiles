@@ -24,7 +24,6 @@ NVTinygit = {
             moveToNextHunkOnStagingToggle = true,
         },
         commit = {
-            border = { " ", " ", " ", " ", " ", " ", " ", " " },
             spellcheck = true,
             keepAbortedMsgSecs = 1200,
             keymaps = {

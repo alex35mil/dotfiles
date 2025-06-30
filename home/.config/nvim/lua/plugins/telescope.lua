@@ -127,7 +127,7 @@ function NVTelescopeFileBrowser.options()
         ["<D-n>"] = fb.create,
         ["<S-CR>"] = fb.create_from_prompt,
         [NVKeymaps.rename] = fb.rename,
-        [NVKarabiner["<D-m>"]] = fb.move,
+        [NVKeyRemaps["<D-m>"]] = fb.move,
         ["<D-d>"] = fb.copy, -- duplicate current file
         ["<D-v>"] = fb.copy, -- (copy)/paste selected file(s)
         ["<D-BS>"] = fb.remove,
@@ -247,7 +247,7 @@ function VerticalLayout.build(config)
 end
 
 HorizontalLayout = {
-    large_screen_width = 0.6,
+    large_screen_width = 0.75,
     small_screen_width = 0.8,
 }
 

@@ -3,7 +3,7 @@ local fn = {}
 NVNoNeckPain = {
     "shortcuts/no-neck-pain.nvim",
     opts = {
-        width = NVWindows.default_width,
+        width = NVWindows.default_width(),
         autocmds = {
             enableOnVimEnter = false,
             skipEnteringNoNeckPainBuffer = true,
@@ -20,7 +20,7 @@ function NVNoNeckPain.decrease_window_width()
 end
 
 function NVNoNeckPain.set_default_window_width()
-    vim.cmd("NoNeckPainResize " .. NVWindows.default_width)
+    vim.cmd("NoNeckPainResize " .. NVWindows.default_width())
 end
 
 ---@return {left: WinID, right: WinID}?

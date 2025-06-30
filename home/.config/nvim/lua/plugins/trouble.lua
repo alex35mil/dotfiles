@@ -88,7 +88,7 @@ function fn.open_diagnosics(filter)
     local trouble = require("trouble")
 
     local size = {
-        width = NVScreen.is_large() and NVWindows.default_width or 0.8,
+        width = NVScreen.is_large() and NVWindows.default_width() or 0.8,
         height = 0.4,
     }
 

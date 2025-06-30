@@ -99,12 +99,13 @@ function fn.delete_buf(options)
         or NVMason.ensure_hidden()
         or NVTrouble.ensure_hidden()
         or NVLsp.ensure_popup_hidden()
-        or NVTabs.ensure_focus_deactivated_if_active()
-        or NVSZoom.ensure_deactivated()
         or NVSLazygit.ensure_hidden()
         or NVGitsigns.ensure_preview_hidden()
         or NVDiffview.ensure_current_hidden()
         or NVGrugFar.ensure_current_hidden()
+        -- should go last
+        or NVSZoom.ensure_deactivated()
+        or NVTabs.ensure_focus_deactivated_if_active()
     then
         return
     end
