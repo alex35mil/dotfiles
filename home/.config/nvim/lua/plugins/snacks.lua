@@ -223,13 +223,26 @@ function NVSPickers.buffers()
         current = false,
         sort_lastused = true,
         layout = SnacksVerticalLayout.build(),
+        filter = {
+            filter = function(item, filter)
+                if item.file == "diffview://null" then
+                    return false
+                else
+                    return true
+                end
+            end,
+        },
         win = {
             input = {
                 keys = {
                     ["<D-x>"] = { "bufdelete", mode = { "n", "i" } },
                 },
             },
-            list = { keys = { ["dd"] = "bufdelete" } },
+            list = {
+                keys = {
+                    ["dd"] = "bufdelete",
+                },
+            },
         },
     })
 end
