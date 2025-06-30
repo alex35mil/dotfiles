@@ -174,26 +174,21 @@ function p() {
 
 # Generates a new ssh entity
 function gen-ssh() {
-    local usage="Usage: gen-ssh <id> --alias <alias> --ip <ip> --user <user>"
+    local usage="Usage: gen-ssh <entry> --ip <ip> --user <user>"
 
     if [[ $# -eq 0 || $1 == "-h" || $1 == "--help" ]]; then
         echo "$usage"
         return 0
     fi
 
-    local id=$1
+    local entry=$1
     shift
 
-    local alias=""
     local ip=""
     local user=""
 
     while [[ $# -gt 0 ]]; do
         case $1 in
-            --alias)
-                alias="$2"
-                shift 2
-                ;;
             --ip)
                 ip="$2"
                 shift 2
@@ -211,20 +206,20 @@ function gen-ssh() {
     done
 
     # Validate that all required parameters are provided
-    if [[ -z "$id" || -z "$alias" || -z "$ip" || -z "$user" ]]; then
+    if [[ -z "$entry" || -z "$ip" || -z "$user" ]]; then
         echo "Error: All parameters are required"
         echo "$usage"
         return 1
     fi
 
-    ssh-keygen -t ed25519 -f ~/.ssh/$id -C "$id"
+    ssh-keygen -t ed25519 -f ~/.ssh/$entry -C "$entry"
     echo >>~/.ssh/config
-    echo "Host $alias" >>~/.ssh/config
+    echo "Host $entry" >>~/.ssh/config
     echo " HostName $ip" >>~/.ssh/config
     echo " User $user" >>~/.ssh/config
     echo " ForwardAgent yes" >>~/.ssh/config
     echo " PreferredAuthentications publickey" >>~/.ssh/config
-    echo " IdentityFile ~/.ssh/$id" >>~/.ssh/config
+    echo " IdentityFile ~/.ssh/$entry" >>~/.ssh/config
     echo " ServerAliveInterval 60" >>~/.ssh/config
     echo " ServerAliveCountMax 2" >>~/.ssh/config
 

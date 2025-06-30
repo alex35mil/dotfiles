@@ -18,10 +18,10 @@ bi() {
     fi
 }
 
-bu() {
+brm() {
     if [ $# -eq 0 ]; then
         echo "Error: No package specified"
-        echo "Usage: bu <package-name> [additional-packages...]"
+        echo "Usage: brm <package-name> [additional-packages...]"
         return 1
     fi
 
