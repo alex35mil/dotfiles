@@ -35,35 +35,35 @@ keybinds clear-defaults=true {
         bind "ﰵ" { MoveFocus "Up"; }         // Shift ↑
         bind "ﰬ" { MoveFocus "Down"; }       // Shift ↓
 
-        bind "" { Resize "Left"; }  // Ctrl Shift ←
-        bind "" { Resize "Right"; } // Ctrl Shift →
-        bind "" { Resize "Up"; }    // Ctrl Shift ↑
-        bind "" { Resize "Down"; }  // Ctrl Shift ↓
-
         bind "" { MovePane "Left"; }  // Opt Shift ←
         bind "" { MovePane "Right"; } // Opt Shift →
         bind "" { MovePane "Up"; }    // Opt Shift ↑
         bind "" { MovePane "Down"; }  // Opt Shift ↓
 
+        bind "" { Resize "Left"; }  // Ctrl Shift ←
+        bind "" { Resize "Right"; } // Ctrl Shift →
+        bind "" { Resize "Up"; }    // Ctrl Shift ↑
+        bind "" { Resize "Down"; }  // Ctrl Shift ↓
+
         bind "" {
             NewTab { layout "terminal"; }
             SwitchToMode "Normal";
-        }                                                      // Opt ↑
+        }                                                      // Opt N
         bind "" { SwitchToMode "RenameTab"; TabNameInput 0; } // Opt R
         bind "" { CloseTab; SwitchToMode "Normal"; }          // Opt W
         bind "" { GoToPreviousTab; }                          // Opt ←
         bind "" { GoToNextTab; }                              // Opt →
-        bind "" { MoveTab "Left"; }                           // Opt Shift ←
-        bind "" { MoveTab "Right"; }                          // Opt Shift →
+        bind "" { MoveTab "Left"; }                           // Opt Cmd ←
+        bind "" { MoveTab "Right"; }                          // Opt Cmd →
     }
 
     shared_except "locked" {
-        bind "" { ScrollUp; }           // Cmd ↑
-        bind "" { ScrollDown; }         // Cmd ↓
-        bind "" { HalfPageScrollUp; }   // Cmd Shift ↑
-        bind "" { HalfPageScrollDown; } // Cmd Shift ↓
-        bind "" { PageScrollUp; }       // Cmd Shift →
-        bind "" { PageScrollDown; }     // Cmd Shift ←
+        bind "" { ScrollUp; }           // Cmd Shift ↑
+        bind "" { ScrollDown; }         // Cmd Shift ↓
+        bind "" { HalfPageScrollUp; }   // Cmd ↑
+        bind "" { HalfPageScrollDown; } // Cmd ↓
+        bind "" { PageScrollUp; }       // Cmd Opt Shift ↑
+        bind "" { PageScrollDown; }     // Cmd Opt Shift ↓
     }
 
     search {

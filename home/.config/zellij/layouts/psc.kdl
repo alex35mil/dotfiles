@@ -1,0 +1,61 @@
+layout {
+    tab name="terminal" focus=true {
+        pane focus=true
+        pane size="30%"
+        pane size=1 borderless=true {
+            plugin location="file:/Users/Alex/.config/zellij/plugins/statusbar.wasm"
+        }
+    }
+    tab name="app" {
+        pane split_direction="vertical" {
+            pane name="web/lib/rescript" command="zsh" start_suspended=true {
+                args "-c" "cargo run --bin cli -- web lib rescript watch"
+            }
+            pane name="web/platform/rescript" command="zsh" start_suspended=true {
+                args "-c" "cargo run --bin cli --  web platform rescript watch"
+            }
+            pane name="web/sites/rescript" command="zsh" start_suspended=true {
+                args "-c" "cargo run --bin cli -- web sites rescript watch"
+            }
+        }
+        pane split_direction="vertical" {
+            pane name="web/platform/next" command="zsh" start_suspended=true {
+                args "-c" "cargo run --bin cli -- web platform next develop"
+            }
+            pane name="web/sites/next" command="zsh" start_suspended=true {
+                args "-c" "cargo run --bin cli -- web sites next develop"
+            }
+        }
+        pane split_direction="vertical" {
+            pane name="plugin/obsidian" command="zsh" start_suspended=true {
+                args "-c" "cargo run --bin cli -- plugins obsidian develop"
+            }
+        }
+        pane split_direction="vertical" {
+            pane name="core/server" command="zsh" start_suspended=true {
+                args "-c" "cargo run --bin cli -- core develop core-server"
+            }
+            pane name="lambda/image-uploader" command="zsh" start_suspended=true {
+                args "-c" "cargo run --bin cli -- lambda watch"
+            }
+        }
+        pane size=1 borderless=true {
+            plugin location="file:/Users/Alex/.config/zellij/plugins/statusbar.wasm"
+        }
+    }
+    tab name="sidecars" {
+        pane split_direction="vertical" {
+            pane name="service-proxy" command="zsh" start_suspended=true {
+                args "-c" "cargo run --bin cli -- service-proxy run"
+            }
+        }
+        pane split_direction="vertical" {
+            pane name="docker" command="zsh" start_suspended=true {
+                args "-c" "cargo run --bin cli -- compose up"
+            }
+        }
+        pane size=1 borderless=true {
+            plugin location="file:/Users/Alex/.config/zellij/plugins/statusbar.wasm"
+        }
+    }
+}

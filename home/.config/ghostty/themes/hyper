@@ -1,0 +1,23 @@
+# Primary colors
+background = #272b30
+foreground = #afb4c3
+
+# Normal colors
+palette = 0=#272b30
+palette = 1=#cc6666
+palette = 2=#bdb968
+palette = 3=#f0c674
+palette = 4=#81a2be
+palette = 5=#b08cba
+palette = 6=#7fb2c8
+palette = 7=#afb4c3
+
+# Bright colors
+palette = 8=#555a5f
+palette = 9=#de7777
+palette = 10=#d1cc7c
+palette = 11=#f4d088
+palette = 12=#94b5d1
+palette = 13=#c49fce
+palette = 14=#92c5d1
+palette = 15=#c9cdd6

@@ -22,7 +22,7 @@ impl DateTime {
         // FIXME: UTC offset is always +00:00. Hardcoding TZ, for now.
         // let now = Local::now();
         let utc = Utc::now();
-        let offset = FixedOffset::east_opt(4 * 3600 /* hours */).unwrap();
+        let offset = FixedOffset::east_opt(3 * 3600 /* hours */).unwrap();
         let now = utc.with_timezone(&offset);
 
         let datetime = now.format("%d/%m/%Y %H:%M").to_string();
