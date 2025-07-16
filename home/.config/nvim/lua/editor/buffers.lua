@@ -9,7 +9,7 @@ function NVBuffers.keymaps()
         function()
             fn.delete_buf({ should_close_window = false, force = false })
         end,
-        mode = { "n", "v", "i", "c" },
+        mode = { "n", "v", "i", "t", "c" },
     })
 
     K.map({
@@ -106,6 +106,7 @@ function fn.delete_buf(options)
         -- should go last
         or NVSZoom.ensure_deactivated()
         or NVTabs.ensure_focus_deactivated_if_active()
+        or NVClaudeCode.ensure_hidden()
     then
         return
     end

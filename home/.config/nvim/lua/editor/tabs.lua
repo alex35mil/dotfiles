@@ -9,7 +9,7 @@ NVTabs = { focus = nil }
 local fn = {}
 
 function NVTabs.keymaps()
-    K.map({ NVKeyRemaps["<D-m>"], "Toggle focus mode", fn.toggle_focus, mode = { "n", "i", "v" } })
+    K.map({ NVKeyRemaps["<D-m>"], "Toggle focus mode", fn.toggle_focus, mode = { "n", "i", "v", "t" } })
 end
 
 function NVTabs.autocmds()

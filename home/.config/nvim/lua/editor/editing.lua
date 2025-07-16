@@ -24,7 +24,7 @@ function NVEditing.keymaps()
 
     K.map({ "<CR>", "Change inner word", [["xciw]], mode = "n" })
     K.map({ "<CR>", "Change seletion", [["xc]], mode = "v" })
-    K.map({ "<C-CR>", "Change inner word", [[<Esc>"xciw]], mode = "i" })
+    K.map({ "<M-CR>", "Change inner word", [[<Esc>"xciw]], mode = "i" })
     K.map({ "<M-w>", "Select inner word", "viw", mode = "n" })
     K.map({ "<M-y>", "Yank inner word", "yiw", mode = "n" })
 
@@ -93,8 +93,6 @@ function NVEditing.keymaps()
 
     K.map({ "<D-s>", "Save files", "<Cmd>lua NVEditing.esc()<CR><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = "n" })
     K.map({ "<D-s>", "Save files", "<Cmd>lua NVEditing.esc()<CR><Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = { "i", "v" } })
-    K.map({ "<D-S-s>", "Save files", "<Cmd>lua NVEditing.esc()<CR><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = "n" })
-    K.map({ "<D-S-s>", "Save files", "<Cmd>lua NVEditing.esc()<CR><Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = { "i", "v" } })
 end
 
 function NVEditing.esc()

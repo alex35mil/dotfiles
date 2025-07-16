@@ -1,6 +1,7 @@
 NVSPickers = {}
 NVSZoom = {}
 NVSLazygit = {}
+NVSTerminal = {}
 
 local SnacksVerticalLayout = {}
 local SnacksHorizontalLayout = {}
@@ -180,6 +181,11 @@ NVSnacks = {
             zoom_indicator = {
                 text = "▍   zoom    󰊓  ",
             },
+            terminal = {
+                wo = {
+                    winhighlight = "Normal:SnacksTerminal,WinBar:SnacksTerminalHeader,WinBarNC:SnacksTerminalHeaderNC",
+                },
+            },
         },
     },
 }
@@ -225,7 +231,9 @@ function NVSPickers.buffers()
         layout = SnacksVerticalLayout.build(),
         filter = {
             filter = function(item, filter)
-                if item.file == "diffview://null" then
+                if string.find(item.file, "^diffview://") then
+                    return false
+                elseif string.find(item.file, "^term://") then
                     return false
                 else
                     return true
@@ -343,14 +351,37 @@ function NVSZoom.ensure_deactivated()
     return false
 end
 
+---@param app string
+---@param bufid BufID | nil
+---@return boolean
+function NVSTerminal.is_app(app, bufid)
+    bufid = bufid or vim.api.nvim_get_current_buf()
+
+    local buf_info = vim.fn.getbufinfo(bufid)[1]
+
+    if buf_info and buf_info.variables.snacks_terminal and buf_info.variables.snacks_terminal.cmd then
+        local cmd = buf_info.variables.snacks_terminal.cmd
+
+        if type(cmd) == "string" then
+            return string.find(cmd, app) ~= nil
+        elseif type(cmd) == "table" and cmd[1] then
+            return string.find(cmd[1], app) ~= nil
+        else
+            return false
+        end
+    else
+        return false
+    end
+end
+
 function NVSLazygit.show()
     Snacks.lazygit()
 end
 
 ---@return boolean
 function NVSLazygit.ensure_hidden()
-    if vim.bo.filetype == "snacks_terminal" then
-        vim.cmd.close()
+    if NVSTerminal.is_app("lazygit") then
+        Snacks.lazygit()
         return true
     end
     return false

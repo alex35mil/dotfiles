@@ -405,6 +405,10 @@ local function apply()
             SnacksPickerPreviewCursorLine({ bg = color.float_bg.lighten(6) }),
             SnacksPickerMatch({ fg = Normal.bg, bg = color.cyan }),
 
+            SnacksTerminal({ Normal }),
+            SnacksTerminalHeader({ bg = color.orange, fg = color.strong_faded_text, bold = true }),
+            SnacksTerminalHeaderNC({ bg = color.bg, fg = color.strong_text, bold = true }),
+
             TelescopeNormal({ bg = color.float_bg }),
             TelescopeMatching({ fg = color.charcoal }),
             TelescopeSelection({ bg = Normal.bg.lighten(9) }),

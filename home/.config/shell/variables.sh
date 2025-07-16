@@ -23,6 +23,7 @@ export PATH="$SWIFT_BIN_PATH:$GO_BIN_PATH:$NPM_BIN_PATH:$PATH"
 # if interactive shell
 if [[ $- == *i* ]]; then
     export EDITOR="nvim"
+    export TERMINAL="ghostty"
     export VISUAL="$EDITOR"
 
     export CLICOLOR="1"
