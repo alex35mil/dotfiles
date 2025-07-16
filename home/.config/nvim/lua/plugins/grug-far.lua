@@ -12,7 +12,7 @@ NVGrugFar = {
             },
         },
         prefills = {
-            flags = "--hidden",
+            flags = "--hidden --fixed-strings",
             filesFilter = "!.git/",
         },
         keymaps = {
@@ -93,6 +93,9 @@ function NVGrugFar.autocmds()
             end)
             keymap("<A-c>", function()
                 fn.toggle_flag("--ignore-case")
+            end)
+            keymap("<A-r>", function()
+                fn.toggle_flag("--fixed-strings")
             end)
         end,
     })

@@ -251,6 +251,7 @@ function NVSPickers.text_search()
     Snacks.picker.grep({
         hidden = true,
         ignored = false,
+        regex = false,
         layout = SnacksHorizontalLayout.build(),
     })
 end
