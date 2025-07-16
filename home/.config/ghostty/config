@@ -28,7 +28,12 @@ mouse-hide-while-typing = true
 copy-on-select = clipboard
 clipboard-paste-protection = true
 
-# Keybindings
+# --- Keybindings
+
+# Claude
+keybind = shift+enter=text:\n
+
+# Zellij
 keybind = cmd+t=text:
 keybind = cmd+n=text:
 keybind = ctrl+n=new_window
@@ -53,22 +58,22 @@ keybind = opt+shift+right=text:
 keybind = opt+shift+up=text:
 keybind = opt+shift+down=text:
 
-keybind = ctrl+shift+left=text:
-keybind = ctrl+shift+right=text:
-keybind = ctrl+shift+up=text:
-keybind = ctrl+shift+down=text:
+keybind = opt+cmd+shift+left=text:
+keybind = opt+cmd+shift+right=text:
+keybind = opt+cmd+shift+up=text:
+keybind = opt+cmd+shift+down=text:
 
-keybind = opt+n=text:
-keybind = opt+r=text:
-keybind = opt+w=text:
-keybind = opt+left=text:
-keybind = opt+right=text:
-keybind = opt+cmd+left=text:
-keybind = opt+cmd+right=text:
+keybind = ctrl+shift+n=text:
+keybind = ctrl+shift+r=text:
+keybind = ctrl+shift+w=text:
+keybind = ctrl+left=text:
+keybind = ctrl+right=text:
+keybind = ctrl+cmd+left=text:
+keybind = ctrl+cmd+right=text:
 
 keybind = cmd+up=text:
 keybind = cmd+down=text:
 keybind = cmd+shift+up=text:
 keybind = cmd+shift+down=text:
-keybind = cmd+alt+shift+up=text:
-keybind = cmd+alt+shift+down=text:
+keybind = ctrl+shift+up=text:
+keybind = ctrl+shift+down=text:

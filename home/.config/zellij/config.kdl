@@ -1,8 +1,8 @@
 // Zellij's keybinding system is pretty limited.
 // In order to expand its capabilities, binding each action to a unicode symbol
-// and setting keymap in Alacritty config. This way, it's possible to use ⌘,
+// and setting keymap in terminal config. This way, it's possible to use ⌘,
 // as well as combinations of modifiers, such as ⌘ ⇧, etc.
-// See Alacritty config for details.
+// See Ghostty config for details.
 keybinds clear-defaults=true {
     shared_except "normal" "locked" "search" "scroll" "renametab" "renamepane" {
         bind "Enter" "Esc" { SwitchToMode "Normal"; }
@@ -40,30 +40,30 @@ keybinds clear-defaults=true {
         bind "" { MovePane "Up"; }    // Opt Shift ↑
         bind "" { MovePane "Down"; }  // Opt Shift ↓
 
-        bind "" { Resize "Left"; }  // Ctrl Shift ←
-        bind "" { Resize "Right"; } // Ctrl Shift →
-        bind "" { Resize "Up"; }    // Ctrl Shift ↑
-        bind "" { Resize "Down"; }  // Ctrl Shift ↓
+        bind "" { Resize "Left"; }  // Opt Cmd Shift ←
+        bind "" { Resize "Right"; } // Opt Cmd Shift →
+        bind "" { Resize "Up"; }    // Opt Cmd Shift ↑
+        bind "" { Resize "Down"; }  // Opt Cmd Shift ↓
 
         bind "" {
             NewTab { layout "terminal"; }
             SwitchToMode "Normal";
-        }                                                      // Opt N
-        bind "" { SwitchToMode "RenameTab"; TabNameInput 0; } // Opt R
-        bind "" { CloseTab; SwitchToMode "Normal"; }          // Opt W
-        bind "" { GoToPreviousTab; }                          // Opt ←
-        bind "" { GoToNextTab; }                              // Opt →
-        bind "" { MoveTab "Left"; }                           // Opt Cmd ←
-        bind "" { MoveTab "Right"; }                          // Opt Cmd →
+        }                                                      // Ctrl Shift N
+        bind "" { SwitchToMode "RenameTab"; TabNameInput 0; } // Ctrl Shift R
+        bind "" { CloseTab; SwitchToMode "Normal"; }          // Ctrl Shift W
+        bind "" { GoToNextTab; }                              // Ctrl →
+        bind "" { GoToPreviousTab; }                          // Ctrl ←
+        bind "" { MoveTab "Left"; }                           // Ctrl Cmd ←
+        bind "" { MoveTab "Right"; }                          // Ctrl Cmd →
     }
 
     shared_except "locked" {
-        bind "" { ScrollUp; }           // Cmd Shift ↑
-        bind "" { ScrollDown; }         // Cmd Shift ↓
         bind "" { HalfPageScrollUp; }   // Cmd ↑
         bind "" { HalfPageScrollDown; } // Cmd ↓
-        bind "" { PageScrollUp; }       // Cmd Opt Shift ↑
-        bind "" { PageScrollDown; }     // Cmd Opt Shift ↓
+        bind "" { ScrollUp; }           // Cmd Shift ↑
+        bind "" { ScrollDown; }         // Cmd Shift ↓
+        bind "" { PageScrollUp; }       // Ctrl Shift ↑
+        bind "" { PageScrollDown; }     // Ctrl Shift ↓
     }
 
     search {
