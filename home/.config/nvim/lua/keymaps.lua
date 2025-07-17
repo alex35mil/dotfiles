@@ -14,7 +14,7 @@ NVKeymaps = {
 }
 
 NVKeyRemaps = {
-    ["<D-m>"] = "<C-A-m>",
+    ["<D-m>"] = "<C-S-A-m>",
 }
 
 local default_keymap_options = { noremap = true, silent = true }
