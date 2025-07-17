@@ -650,7 +650,7 @@ function HoverPopup.show()
     -- Unmounting whatever is mounted
     Popups:ensure_unmounted(current_winid)
 
-    local params = vim.lsp.util.make_position_params()
+    local params = vim.lsp.util.make_position_params(current_winid, "utf-16")
 
     vim.lsp.buf_request(0, "textDocument/hover", params, function(_, result, ctx, _)
         if not result or not result.contents then
