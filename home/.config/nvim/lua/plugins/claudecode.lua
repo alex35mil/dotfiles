@@ -117,7 +117,7 @@ function fn.send_and_focus()
 
         local function wait_for_claude_connection(callback)
             local start_time = vim.loop.hrtime()
-            local timeout_ns = 5 * 1000 * 1000 * 1000 -- 5 seconds in nanoseconds
+            local timeout_ns = 10 * 1000 * 1000 * 1000 -- 5 seconds in nanoseconds
             local check_interval = 100 -- milliseconds
 
             local function check_connection()
