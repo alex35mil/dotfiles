@@ -212,6 +212,10 @@ NVNoice = {
                     filter = { event = "lsp", kind = "progress" },
                     opts = { skip = true },
                 },
+                {
+                    filter = { event = "msg_show" },
+                    view = "notify",
+                },
             },
         }
     end,
