@@ -46,7 +46,7 @@ NVTinygit = {
 
 function NVTinygit.ensure_hidden()
     if vim.bo.filetype == "gitcommit" then
-        vim.cmd.close()
+        NVKeys.send("<Esc>", { mode = "x" }) -- not vim.cmd.close() because tinygit persists message on <Esc>
         return true
     end
     return false
