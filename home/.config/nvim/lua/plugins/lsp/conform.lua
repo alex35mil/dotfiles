@@ -14,8 +14,9 @@ NVConform = {
     },
 }
 
----@param bufid BufID
+---@param bufid BufID | nil
 function NVConform.format(bufid)
+    bufid = bufid or vim.api.nvim_get_current_buf()
     require("conform").format({ bufnr = bufid })
 end
 

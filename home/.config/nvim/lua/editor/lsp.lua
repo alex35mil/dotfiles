@@ -140,7 +140,7 @@ function NVLsp.keymaps()
         {
             "<C-f>",
             "Format",
-            vim.lsp.buf.format,
+            NVConform.format,
             mode = { "n", "v" },
         },
     }
