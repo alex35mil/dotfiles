@@ -1,5 +1,15 @@
 {
-  "permissions": {
-    "allow": ["WebFetch", "Glob", "Grep", "LS", "Read", "NotebookRead", "Task", "TodoWrite"]
-  }
+    "permissions": {
+        "allow": [
+            "WebFetch",
+            "Glob",
+            "Grep",
+            "LS",
+            "Read",
+            "NotebookRead",
+            "Task",
+            "TodoWrite"
+        ]
+    },
+    "includeCoAuthoredBy": false
 }

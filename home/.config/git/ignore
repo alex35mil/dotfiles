@@ -5,3 +5,4 @@
 default.profraw
 neovide_backtraces.log
 SIDENOTES-*.md
+**/.claude/settings.local.json
