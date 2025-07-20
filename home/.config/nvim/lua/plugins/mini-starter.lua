@@ -33,7 +33,7 @@ NVMiniStarter = {
 
         return config
     end,
-    config = function(_, config)
+    config = function(_, opts)
         -- close Lazy and re-open when starter is ready
         if vim.o.filetype == "lazy" then
             vim.cmd.close()
@@ -47,14 +47,16 @@ NVMiniStarter = {
 
         local starter = require("mini.starter")
 
-        starter.setup(config)
+        starter.setup(opts)
+
+        local starter_bufid
 
         vim.api.nvim_create_autocmd("User", {
             pattern = "MiniStarterOpened",
             callback = function()
-                NVLualine.hide_tabline()
+                NVLualine.hide_everything()
 
-                local starter_bufid = vim.api.nvim_get_current_buf()
+                starter_bufid = vim.api.nvim_get_current_buf()
 
                 vim.api.nvim_create_autocmd("BufWipeout", {
                     callback = function(args)
@@ -62,18 +64,13 @@ NVMiniStarter = {
 
                         if bufid == starter_bufid then
                             NVLualine.rename_tab("editor")
-                            NVLualine.show_tabline()
+                            NVLualine.show_everything()
                             NVNoNeckPain.enable()
+                            starter_bufid = nil
                         end
                     end,
                 })
             end,
-        })
-
-        vim.api.nvim_create_autocmd("User", {
-            once = true,
-            pattern = "MiniStarterOpened",
-            callback = NVLualine.hide_tabline,
         })
 
         vim.api.nvim_create_autocmd("User", {
@@ -85,6 +82,24 @@ NVMiniStarter = {
                 starter.config.footer = "  in " .. ms .. "ms"
                 if vim.bo[ev.buf].filetype == "ministarter" then
                     pcall(starter.refresh)
+                end
+            end,
+        })
+
+        vim.api.nvim_create_autocmd("User", {
+            once = true,
+            pattern = "LazyInstall",
+            callback = function(ev)
+                local ft = vim.bo[ev.buf].filetype
+                if ft == "ministarter" then
+                    pcall(starter.refresh)
+                elseif ft == "lazy" then
+                    local ok, is_loaded = pcall(vim.api.nvim_buf_is_loaded, starter_bufid)
+                    if ok and is_loaded then
+                        pcall(function()
+                            starter.refresh(starter_bufid)
+                        end)
+                    end
                 end
             end,
         })

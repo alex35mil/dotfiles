@@ -2,6 +2,9 @@ NVTypeScript = {
     {
         "neovim/nvim-lspconfig",
         opts = {
+            ensure_installed = {
+                "vtsls",
+            },
             servers = {
                 vtsls = {
                     settings = {
@@ -16,6 +19,15 @@ NVTypeScript = {
                         },
                     },
                 },
+            },
+        },
+    },
+
+    {
+        "nvim-treesitter/nvim-treesitter",
+        opts = {
+            ensure_installed = {
+                "typescript",
             },
         },
     },

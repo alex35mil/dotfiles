@@ -124,7 +124,6 @@ function fn.toggle_diff()
         else
             fn.open_diff()
             NVLualine.rename_tab("diff")
-            NVLualine.show_tabline()
         end
     end
 end

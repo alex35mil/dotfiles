@@ -1,56 +1,66 @@
-local M = {}
+-- TODO: We probably should compile it to be able to load the theme before the plugins
 
-M.palette = {
-    -- palette
-    red = "#cc6666",
-    green = "#bdb968",
-    yellow = "#f0c674",
-    blue = "#81a2be",
-    magenta = "#b193ba",
-    cyan = "#7fb2c8",
-    silver = "#acbcc3",
-    charcoal = "#708499",
-    teal = "#749689",
-    beige = "#ebd2a7",
-    orange = "#de935f",
-    purple = "#b08cba",
-    -- base
-    bg = "#272b30",
-    text = "#afb4c3",
-    strong_text = "#80838f",
-    faded_text = "#686d75",
-    strong_faded_text = "#464b50",
-    -- lines
-    thin_line = "#2f3337",
-    thick_line = "#73787d",
-    -- floats
-    float_bg = "#2b2f34",
-    -- bars
-    bar_bg = "#2c323c",
-    bar_text = "#b5bac8",
-    bar_faded_text = "#70757d",
-    -- shades
-    white = "#ffffff",
-    darker_gray = "#2c323c",
-    lighter_gray = "#3e4452",
-    -- git
-    diff_add_bg = "#3a413b",
-    diff_delete_bg = "#443c3f",
-    -- terminal
-    brightBlack = "#636363",
-    brightRed = "#a04041",
-    brightGreen = "#8b9440",
-    brightYellow = "#ec9c62",
-    brightBlue = "#5d7f9a",
-    brightMagenta = "#82658c",
-    brightCyan = "#5e8d87",
-    brightWhite = "#6d757d",
+NVTheme = {
+    palette = {
+        -- palette
+        red = "#cc6666",
+        green = "#bdb968",
+        yellow = "#f0c674",
+        blue = "#81a2be",
+        magenta = "#b193ba",
+        cyan = "#7fb2c8",
+        silver = "#acbcc3",
+        charcoal = "#708499",
+        teal = "#749689",
+        beige = "#ebd2a7",
+        orange = "#de935f",
+        purple = "#b08cba",
+        -- base
+        bg = "#272b30",
+        text = "#afb4c3",
+        strong_text = "#80838f",
+        faded_text = "#686d75",
+        strong_faded_text = "#464b50",
+        -- lines
+        thin_line = "#2f3337",
+        thick_line = "#73787d",
+        -- floats
+        float_bg = "#2b2f34",
+        -- bars
+        bar_bg = "#2c323c",
+        bar_text = "#b5bac8",
+        bar_faded_text = "#70757d",
+        -- shades
+        white = "#ffffff",
+        darker_gray = "#2c323c",
+        lighter_gray = "#3e4452",
+        -- git
+        diff_add_bg = "#3a413b",
+        diff_delete_bg = "#443c3f",
+        -- terminal
+        brightBlack = "#636363",
+        brightRed = "#a04041",
+        brightGreen = "#8b9440",
+        brightYellow = "#ec9c62",
+        brightBlue = "#5d7f9a",
+        brightMagenta = "#82658c",
+        brightCyan = "#5e8d87",
+        brightWhite = "#6d757d",
+    },
 }
 
-local function apply()
-    local lush = require("lush")
+function NVTheme.apply()
+    vim.opt.termguicolors = true
 
-    local palette = M.palette
+    if vim.g.colors_name then
+        vim.cmd("hi clear")
+        vim.cmd("syntax reset")
+    end
+
+    vim.g.colors_name = "hyper"
+
+    local lush = require("lush")
+    local palette = NVTheme.palette
 
     vim.o.background = "dark"
 
@@ -421,20 +431,21 @@ local function apply()
             TroubleDirectory({ fg = color.charcoal }),
             TroubleFilename({ fg = color.charcoal, bold = true }),
 
-            NotifyDEBUGIcon({ fg = color.silver }),
-            NotifyDEBUGTitle({ fg = color.silver }),
+            NotifyBackground({ fg = color.float_bg, bg = color.float_bg }),
+            NotifyDEBUGIcon({ fg = color.silver, bg = color.float_bg }),
+            NotifyDEBUGTitle({ fg = color.silver, bg = color.float_bg }),
             NotifyDEBUGBody({ fg = color.silver, bg = color.float_bg }),
             NotifyDEBUGBorder({ fg = color.float_bg, bg = color.float_bg }),
-            NotifyINFOIcon({ fg = color.blue }),
-            NotifyINFOTitle({ fg = color.blue }),
+            NotifyINFOIcon({ fg = color.blue, bg = color.float_bg }),
+            NotifyINFOTitle({ fg = color.blue, bg = color.float_bg }),
             NotifyINFOBody({ fg = color.text, bg = color.float_bg }),
             NotifyINFOBorder({ fg = color.float_bg, bg = color.float_bg }),
-            NotifyWARNIcon({ fg = color.yellow }),
-            NotifyWARNTitle({ fg = color.yellow }),
+            NotifyWARNIcon({ fg = color.yellow, bg = color.float_bg }),
+            NotifyWARNTitle({ fg = color.yellow, bg = color.float_bg }),
             NotifyWARNBody({ fg = color.text, bg = color.float_bg }),
             NotifyWARNBorder({ fg = color.float_bg, bg = color.float_bg }),
-            NotifyERRORIcon({ fg = color.red }),
-            NotifyERRORTitle({ fg = color.red }),
+            NotifyERRORIcon({ fg = color.red, bg = color.float_bg }),
+            NotifyERRORTitle({ fg = color.red, bg = color.float_bg }),
             NotifyERRORBody({ fg = color.red, bg = color.float_bg }),
             NotifyERRORBorder({ fg = color.float_bg, bg = color.float_bg }),
 
@@ -446,18 +457,3 @@ local function apply()
 
     vim.api.nvim_exec_autocmds("User", { pattern = "ThemeApplied" })
 end
-
-function M.apply()
-    vim.opt.termguicolors = true
-
-    if vim.g.colors_name then
-        vim.cmd("hi clear")
-        vim.cmd("syntax reset")
-    end
-
-    vim.g.colors_name = "theme"
-
-    apply()
-end
-
-return M

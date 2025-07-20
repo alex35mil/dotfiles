@@ -2,6 +2,7 @@ local fn = {}
 
 NVMason = {
     "mason-org/mason.nvim",
+    build = ":MasonUpdate",
     keys = function()
         return {
             { "<Leader>m", fn.show, mode = "n", desc = "Show mason" },

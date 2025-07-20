@@ -3,7 +3,7 @@ local CONFIG = os.getenv("XDG_CONFIG_HOME")
 NVMarkdown = {
     {
         "MeanderingProgrammer/render-markdown.nvim",
-        ft = { "markdown", "codecompanion" },
+        ft = { "markdown" },
         opts = {
             code = {
                 enabled = false,

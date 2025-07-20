@@ -8,8 +8,18 @@ NVClaudeCode = {
     keys = function()
         return {
             { "<D-S-c>", "<Esc><Cmd>ClaudeCode<CR>", mode = { "n", "i", "t", "v" }, desc = "Toggle Claude" },
-            { "<C-S-c>", "<Cmd>ClaudeCode --continue<CR>", mode = { "n", "i", "t", "v" }, desc = "Continue with last Claude session" },
-            { "<M-S-c>", "<Cmd>ClaudeCode --resume<CR>", mode = { "n", "i", "t", "v" }, desc = "Resume specific Claude session" },
+            {
+                "<C-S-c>",
+                "<Cmd>ClaudeCode --continue<CR>",
+                mode = { "n", "i", "t", "v" },
+                desc = "Continue with last Claude session",
+            },
+            {
+                "<M-S-c>",
+                "<Cmd>ClaudeCode --resume<CR>",
+                mode = { "n", "i", "t", "v" },
+                desc = "Resume specific Claude session",
+            },
             { "<D-S-s>", fn.send_and_focus, mode = { "n", "i", "v" }, desc = "Send to Claude and focus" },
             { "<C-CR>", fn.accept_diff, mode = { "n", "i", "v" }, desc = "Accept Claude diff" },
             { "<D-x>", fn.deny_diff, mode = { "n", "i", "v" }, desc = "Deny Claude diff" },

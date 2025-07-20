@@ -3,17 +3,19 @@ NVSZoom = {}
 NVSLazygit = {}
 NVSTerminal = {}
 
-local SnacksVerticalLayout = {}
-local SnacksHorizontalLayout = {}
-
-SnacksVerticalLayout = {
+NVSPickerVerticalLayout = {
     large_screen_width = 0.4,
     small_screen_width = 0.5,
 }
+NVSPickerHorizontalLayout = {
+    large_screen_width = 0.75,
+    small_screen_width = 0.95,
+}
 
-function SnacksVerticalLayout.build(opts)
+function NVSPickerVerticalLayout.build(opts)
     local config = vim.tbl_extend("keep", opts or {}, {
-        width = NVScreen.is_large() and SnacksVerticalLayout.large_screen_width or SnacksVerticalLayout.small_screen_width,
+        width = NVScreen.is_large() and NVSPickerVerticalLayout.large_screen_width
+            or NVSPickerVerticalLayout.small_screen_width,
         height = 0.7,
     })
 
@@ -44,14 +46,10 @@ function SnacksVerticalLayout.build(opts)
     }
 end
 
-SnacksHorizontalLayout = {
-    large_screen_width = 0.75,
-    small_screen_width = 0.95,
-}
-
-function SnacksHorizontalLayout.build(opts)
+function NVSPickerHorizontalLayout.build(opts)
     local config = vim.tbl_extend("keep", opts or {}, {
-        width = NVScreen.is_large() and SnacksHorizontalLayout.large_screen_width or SnacksHorizontalLayout.small_screen_width,
+        width = NVScreen.is_large() and NVSPickerHorizontalLayout.large_screen_width
+            or NVSPickerHorizontalLayout.small_screen_width,
         height = 0.9,
     })
 
@@ -98,16 +96,13 @@ NVSPickers.keys = {
 
 NVSnacks = {
     "folke/snacks.nvim",
+    event = "VeryLazy",
     keys = function()
         return {
             { "<D-S-e>", NVSPickers.explorer, mode = { "n", "i", "v" }, desc = "Open file tree" },
             { "<D-t>", NVSPickers.files, mode = { "n", "i", "v" }, desc = "Open file finder" },
             { "<D-b>", NVSPickers.buffers, mode = { "n", "i", "v" }, desc = "Open buffers list" },
             { "<M-f>", NVSPickers.text_search, mode = { "n", "i", "v" }, desc = "Open text search" },
-            { "<D-o>", NVSPickers.lsp_document_symbols, mode = { "n", "i", "v" }, desc = "LSP: Open document symbols" },
-            { "<D-S-o>", NVSPickers.lsp_workspace_symbols, mode = { "n", "i", "v" }, desc = "LSP: Open workspace symbols" },
-            { "<D-u>", NVSPickers.lsp_references, mode = { "n", "i", "v" }, desc = "Open symbol usage" },
-            { "<D-S-i>", NVSPickers.lsp_implementations, mode = { "n", "i", "v" }, desc = "Open symbol usage" },
             { "<D-g>b", NVSPickers.git_branches, mode = { "n", "i", "v" }, desc = "Git: Branches" },
             { "<Leader>h", NVSPickers.highlights, mode = "n", desc = "Show highlights" },
             { "<D-g>g", NVSLazygit.show, mode = { "n", "i", "v" }, desc = "Git: Lazygit" },
@@ -123,6 +118,9 @@ NVSnacks = {
                 [NVKeymaps.close] = "cancel",
             },
         },
+        statuscolumn = {
+            enabled = true,
+        },
         explorer = {
             tree = false,
             replace_netrw = true,
@@ -131,7 +129,7 @@ NVSnacks = {
             enabled = true,
             prompt = "❯ ",
             ui_select = true,
-            layout = SnacksVerticalLayout.build(),
+            layout = NVSPickerVerticalLayout.build(),
             win = {
                 input = { keys = NVSPickers.keys },
                 list = { keys = NVSPickers.keys },
@@ -191,7 +189,7 @@ NVSnacks = {
 }
 
 function NVSPickers.explorer()
-    local layout = SnacksHorizontalLayout.build()
+    local layout = NVSPickerHorizontalLayout.build()
 
     Snacks.picker.explorer({
         hidden = true,
@@ -218,7 +216,7 @@ function NVSPickers.files()
         ignored = false,
         follow = false,
         supports_live = true,
-        layout = SnacksVerticalLayout.build(),
+        layout = NVSPickerVerticalLayout.build(),
     })
 end
 
@@ -228,7 +226,7 @@ function NVSPickers.buffers()
         unloaded = true,
         current = false,
         sort_lastused = true,
-        layout = SnacksVerticalLayout.build(),
+        layout = NVSPickerVerticalLayout.build(),
         filter = {
             filter = function(item, filter)
                 if string.find(item.file, "^diffview://") then
@@ -260,13 +258,13 @@ function NVSPickers.text_search()
         hidden = true,
         ignored = false,
         regex = false,
-        layout = SnacksHorizontalLayout.build(),
+        layout = NVSPickerHorizontalLayout.build(),
     })
 end
 
 function NVSPickers.git_branches()
     Snacks.picker.git_branches({
-        layout = SnacksVerticalLayout.build(),
+        layout = NVSPickerVerticalLayout.build(),
         win = {
             input = {
                 keys = {
@@ -280,7 +278,7 @@ end
 
 function NVSPickers.lsp_document_symbols()
     Snacks.picker.lsp_symbols({
-        layout = SnacksVerticalLayout.build({
+        layout = NVSPickerVerticalLayout.build({
             width = NVScreen.is_large() and 0.5 or 0.8,
             height = 0.9,
         }),
@@ -289,7 +287,7 @@ end
 
 function NVSPickers.lsp_workspace_symbols()
     Snacks.picker.lsp_workspace_symbols({
-        layout = SnacksVerticalLayout.build({
+        layout = NVSPickerVerticalLayout.build({
             width = NVScreen.is_large() and 0.5 or 0.8,
             height = 0.9,
         }),
@@ -299,41 +297,41 @@ end
 function NVSPickers.lsp_references()
     Snacks.picker.lsp_references({
         auto_confirm = false,
-        layout = SnacksHorizontalLayout.build(),
+        layout = NVSPickerHorizontalLayout.build(),
     })
 end
 
 function NVSPickers.lsp_implementations()
     Snacks.picker.lsp_implementations({
         auto_confirm = false,
-        layout = SnacksHorizontalLayout.build(),
+        layout = NVSPickerHorizontalLayout.build(),
     })
 end
 
 function NVSPickers.lsp_definitions()
     Snacks.picker.lsp_definitions({
         auto_confirm = true,
-        layout = SnacksVerticalLayout.build(),
+        layout = NVSPickerVerticalLayout.build(),
     })
 end
 
 function NVSPickers.lsp_type_definitions()
     Snacks.picker.lsp_type_definitions({
         auto_confirm = true,
-        layout = SnacksVerticalLayout.build(),
+        layout = NVSPickerVerticalLayout.build(),
     })
 end
 
 function NVSPickers.lsp_declarations()
     Snacks.picker.lsp_declarations({
         auto_confirm = true,
-        layout = SnacksVerticalLayout.build(),
+        layout = NVSPickerVerticalLayout.build(),
     })
 end
 
 function NVSPickers.highlights()
     Snacks.picker.highlights({
-        layout = SnacksHorizontalLayout.build(),
+        layout = NVSPickerHorizontalLayout.build(),
     })
 end
 

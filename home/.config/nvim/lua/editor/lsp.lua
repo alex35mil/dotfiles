@@ -28,71 +28,120 @@ local HINT = vim.diagnostic.severity.HINT
 
 function NVLsp.keymaps()
     return {
-        { "gd", NVSPickers.lsp_definitions, desc = "LSP: Go to definition" },
-        { "gt", NVSPickers.lsp_type_definitions, desc = "LSP: Go to type definition" },
-        { "gD", NVSPickers.lsp_declarations, desc = "LSP: Go to declaration" },
+        { "gd", "LSP: Go to definition", NVSPickers.lsp_definitions, mode = "n" },
+        { "gt", "LSP: Go to type definition", NVSPickers.lsp_type_definitions, mode = "n" },
+        { "gD", "LSP: Go to declaration", NVSPickers.lsp_declarations, mode = "n" },
         {
             NVKeymaps.rename,
+            "LSP: Rename symbol under cursor",
             vim.lsp.buf.rename,
             mode = { "n", "i" },
-            desc = "LSP: Rename symbol under cursor",
         },
         {
             "<D-S-r>",
-            Snacks.rename.rename_file,
+            "LSP: Rename current file",
+            function()
+                Snacks.rename.rename_file()
+            end,
             mode = { "n", "i" },
-            desc = "LSP: Rename current file",
-            has = { "workspace/didRenameFiles", "workspace/willRenameFiles" },
+            has = {
+                vim.lsp.protocol.Methods.workspace_didRenameFiles,
+                vim.lsp.protocol.Methods.workspace_willRenameFiles,
+            },
         },
         {
             "<C-a>",
-            vim.lsp.buf.code_action,
+            "LSP: Code actions",
+            function()
+                NVTinyCodeAction.show()
+            end,
             mode = { "n", "i" },
-            desc = "LSP: Code actions",
         },
         {
-            "<D-i>",
-            HoverPopup.show,
-            mode = { "n", "i" },
-            desc = "LSP: Show hover doc",
+            "<D-o>",
+            "LSP: Open document symbols",
+            function()
+                NVSPickers.lsp_document_symbols()
+            end,
+            mode = { "n", "i", "v" },
+        },
+        {
+            "<D-S-o>",
+            "LSP: Open workspace symbols",
+            function()
+                NVSPickers.lsp_workspace_symbols()
+            end,
+            mode = { "n", "i", "v" },
+        },
+        {
+            "<D-u>",
+            "LSP: Open symbol usage",
+            function()
+                NVSPickers.lsp_references()
+            end,
+            mode = { "n", "i", "v" },
         },
         {
             "<D-S-i>",
-            DiagnosticPopup.show_current,
+            "LSP: Open symbol usage",
+            function()
+                NVSPickers.lsp_implementations()
+            end,
+            mode = { "n", "i", "v" },
+        },
+        {
+            "<D-i>",
+            "LSP: Show hover doc",
+            function()
+                HoverPopup.show()
+            end,
             mode = { "n", "i" },
-            desc = "LSP: Show diagnostics under cursor",
+        },
+        {
+            "<D-S-i>",
+            "LSP: Show diagnostics under cursor",
+            function()
+                DiagnosticPopup.show_current()
+            end,
+            mode = { "n", "i" },
         },
         {
             "<D-S-h>",
+            "LSP: Jump to next error",
             function()
                 DiagnosticPopup.show_next(ERROR)
             end,
             mode = { "n", "i" },
-            desc = "LSP: Jump to next error",
         },
         {
             "<D-S-t>",
+            "LSP: Jump to previous error",
             function()
                 DiagnosticPopup.show_previous(ERROR)
             end,
             mode = { "n", "i" },
-            desc = "LSP: Jump to previous error",
         },
         {
             "<C-S-h>",
+            "LSP: Jump to next warning",
             function()
                 DiagnosticPopup.show_next(WARN)
             end,
             mode = { "n", "i" },
-            desc = "LSP: Jump to next warning",
         },
         {
             "<C-S-t>",
+            "LSP: Jump to previous warning",
             function()
                 DiagnosticPopup.show_previous(WARN)
             end,
             mode = { "n", "i" },
-            desc = "LSP: Jump to previous warning",
+        },
+        {
+            "<C-f>",
+            "Format",
+            vim.lsp.buf.format,
+            mode = { "n", "v" },
         },
     }
 end
@@ -225,13 +274,16 @@ function Popup:init(opts)
     local cursor_screen_row = vim.fn.screenpos(win, cursor[1], 1).row
     local space_above = cursor_screen_row - 1
     local space_below = editor_height - cursor_screen_row
-    local v_space = math.max(space_above, space_below) - config.win.border.padding.top - config.win.border.padding.bottom
+    local v_space = math.max(space_above, space_below)
+        - config.win.border.padding.top
+        - config.win.border.padding.bottom
 
     local total_width = vim.o.columns
     local cursor_screen_pos = vim.fn.screenpos(0, cursor[1], cursor[2] + 1)
     local h_space = total_width - config.win.border.padding.left - config.win.border.padding.right
 
-    local width = math.min(h_space - config.win.border.padding.left - config.win.border.padding.right, opts.bounding_box.w)
+    local width =
+        math.min(h_space - config.win.border.padding.left - config.win.border.padding.right, opts.bounding_box.w)
     if config.win.max_width ~= nil then
         width = math.min(width, config.win.max_width)
     end

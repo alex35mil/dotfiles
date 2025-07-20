@@ -92,7 +92,12 @@ function NVEditing.keymaps()
     K.map({ "<D-?>", "Start comment on the next line", "<Cmd>normal gco<CR>", mode = "i", remap = true })
 
     K.map({ "<D-s>", "Save files", "<Cmd>lua NVEditing.esc()<CR><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = "n" })
-    K.map({ "<D-s>", "Save files", "<Cmd>lua NVEditing.esc()<CR><Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>", mode = { "i", "v" } })
+    K.map({
+        "<D-s>",
+        "Save files",
+        "<Cmd>lua NVEditing.esc()<CR><Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>",
+        mode = { "i", "v" },
+    })
 end
 
 function NVEditing.esc()

@@ -5,8 +5,23 @@ local fn = {}
 
 local __center__ = "%="
 
+local palette = NVTheme.palette
+
+local color = {
+    active_text = palette.bar_text,
+    incative_text = palette.bar_faded_text,
+    inverted_text = palette.bar_bg,
+    bg = palette.bar_bg,
+    emphasized_bg = palette.lighter_gray,
+}
+
 NVLualine = {
     "nvim-lualine/lualine.nvim",
+    dependencies = {
+        "folke/noice.nvim",
+        "folke/trouble.nvim",
+        "nvim-tree/nvim-web-devicons",
+    },
     opts = function()
         -- PERF: we don't need this lualine require madness 🤷
         local lualine_require = require("lualine_require")
@@ -42,7 +57,7 @@ NVLualine = {
                 },
                 lualine_b = {
                     Sections.branch(),
-                    LazyVim.lualine.pretty_path(), -- FIXME: Respect ignored filytypes
+                    Sections.filename(),
                 },
                 lualine_c = {
                     __center__,
@@ -64,16 +79,6 @@ NVLualine = {
             },
         }
     end,
-}
-
-local palette = require("theme").palette
-
-local color = {
-    active_text = palette.bar_text,
-    incative_text = palette.bar_faded_text,
-    inverted_text = palette.bar_bg,
-    bg = palette.bar_bg,
-    emphasized_bg = palette.lighter_gray,
 }
 
 function Theme.build()
@@ -105,7 +110,9 @@ function Sections.project()
         function()
             return NVFS.root({ capitalize = true })
         end,
-        color = { fg = color.inverted_text, bg = palette.cyan, gui = "bold" },
+        color = function()
+            return { fg = color.inverted_text, bg = palette.cyan, gui = "bold" }
+        end,
     }
 end
 
@@ -114,38 +121,42 @@ function Sections.tabs()
         "tabs",
         mode = 1,
         tabs_color = {
-            active = { fg = color.active_text, bg = color.emphasized_bg },
-            inactive = { fg = color.incative_text, bg = color.bg },
+            active = function()
+                return { fg = color.active_text, bg = color.emphasized_bg }
+            end,
+            inactive = function()
+                return { fg = color.incative_text, bg = color.bg }
+            end,
         },
     }
 end
 
 function Sections.mode()
+    local function get_mode_info()
+        local linemode = require("lualine.utils.mode")
+        local m = linemode.get_mode()
+
+        local mode_config = {
+            ["NORMAL"] = { text = "N", bg = palette.cyan },
+            ["VISUAL"] = { text = "V", bg = palette.purple },
+            ["SELECT"] = { text = "S", bg = palette.purple },
+            ["INSERT"] = { text = "I", bg = palette.green },
+            ["REPLACE"] = { text = "R", bg = palette.red },
+            ["COMMAND"] = { text = "C", bg = palette.yellow },
+            ["EX"] = { text = "X", bg = palette.yellow },
+            ["TERMINAL"] = { text = "T", bg = palette.cyan },
+        }
+
+        return mode_config[m] or { text = m, bg = palette.cyan }
+    end
+
     return {
         function()
-            local linemode = require("lualine.utils.mode")
-
-            local m = linemode.get_mode()
-
-            if m == "NORMAL" then
-                return "N"
-            elseif m == "VISUAL" then
-                return "V"
-            elseif m == "SELECT" then
-                return "S"
-            elseif m == "INSERT" then
-                return "I"
-            elseif m == "REPLACE" then
-                return "R"
-            elseif m == "COMMAND" then
-                return "C"
-            elseif m == "EX" then
-                return "X"
-            elseif m == "TERMINAL" then
-                return "T"
-            else
-                return m
-            end
+            return get_mode_info().text
+        end,
+        color = function()
+            local mode_info = get_mode_info()
+            return { fg = color.inverted_text, bg = mode_info.bg, gui = "bold" }
         end,
     }
 end
@@ -153,8 +164,10 @@ end
 function Sections.filename()
     return {
         "filename",
-        path = 0,
-        color = { fg = color.active_text, bg = color.bg },
+        path = 1,
+        color = function()
+            return { fg = color.active_text, bg = color.bg }
+        end,
         fmt = function(v)
             if fn.should_ignore_filetype() then
                 return nil
@@ -168,7 +181,9 @@ end
 function Sections.branch()
     return {
         "branch",
-        color = { fg = color.active_text, bg = color.emphasized_bg },
+        color = function()
+            return { fg = color.active_text, bg = color.emphasized_bg }
+        end,
     }
 end
 
@@ -205,8 +220,6 @@ end
 
 ---@param options {icons: boolean, color: boolean}
 function Sections.diagnostics(options)
-    local icons = LazyVim.config.icons
-
     local diagnostics = require("lualine.components.filename"):extend()
 
     function diagnostics:init(opts)
@@ -385,7 +398,9 @@ function Sections.diagnostics(options)
             "info",
             "hint",
         },
-        color = { fg = color.incative_text },
+        color = function()
+            return { fg = color.incative_text, bg = color.bg }
+        end,
         colors = {
             error = "StatusBarDiagnosticError",
             warn = "StatusBarDiagnosticWarn",
@@ -393,10 +408,10 @@ function Sections.diagnostics(options)
             hint = "StatusBarDiagnosticHint",
         },
         symbols = {
-            error = icons.diagnostics.Error .. " ",
-            warn = icons.diagnostics.Warn .. " ",
-            info = icons.diagnostics.Info .. " ",
-            hint = icons.diagnostics.Hint .. " ",
+            error = NVIcons.error .. " ",
+            warn = NVIcons.warn .. " ",
+            info = NVIcons.info .. " ",
+            hint = NVIcons.hint .. " ",
         },
         cond = function()
             return not fn.is_lsp_progress()
@@ -410,7 +425,9 @@ function Sections.updates()
     return {
         status.updates,
         cond = status.has_updates,
-        color = { fg = color.active_text },
+        color = function()
+            return { fg = color.active_text }
+        end,
     }
 end
 
@@ -422,13 +439,17 @@ function Sections.filetype()
     return {
         "filetype",
         colored = false,
-        color = { fg = color.active_text, bg = color.emphasized_bg },
+        color = function()
+            return { fg = color.active_text, bg = color.emphasized_bg }
+        end,
         fmt = function(v, _ctx)
             if fn.should_ignore_filetype() then
                 return nil
             else
                 if v == "markdown" then
                     return "md"
+                elseif v == "snacks_terminal" then
+                    return "term"
                 else
                     return v
                 end
@@ -477,6 +498,16 @@ function Sections.time()
     }
 end
 
+function NVLualine.show_everything()
+    vim.o.laststatus = 3
+    vim.o.showtabline = 2
+end
+
+function NVLualine.hide_everything()
+    vim.o.laststatus = 0
+    vim.o.showtabline = 0
+end
+
 function NVLualine.show_tabline()
     require("lualine").hide({ place = { "tabline" }, unhide = true })
 end
@@ -496,19 +527,12 @@ end
 function fn.should_ignore_filetype()
     local ft = vim.bo.filetype
 
-    return ft == "alpha"
-        or ft == "dashboard"
-        or ft == "noice"
+    return ft == "noice"
         or ft == "lazy"
         or ft == "mason"
-        or ft == "neo-tree"
         or ft == "TelescopePrompt"
         or ft == "lazygit"
         or ft == "DiffviewFiles"
-        or ft == "spectre_panel"
-        or ft == "sagarename"
-        or ft == "sagafinder"
-        or ft == "saga_codeaction"
 end
 
 return { NVLualine }

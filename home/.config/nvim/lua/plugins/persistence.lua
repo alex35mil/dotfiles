@@ -1,4 +1,8 @@
-NVPersistence = {}
+NVPersistence = {
+    "folke/persistence.nvim",
+    event = "BufReadPre",
+    opts = {},
+}
 
 function NVPersistence.autocmds()
     vim.api.nvim_create_autocmd("User", {
@@ -50,4 +54,4 @@ function NVPersistence.restore()
     require("persistence").load()
 end
 
-return {}
+return { NVPersistence }

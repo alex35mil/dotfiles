@@ -1,5 +1,6 @@
 NVScrollbar = {
     "petertriho/nvim-scrollbar",
+    event = "BufEnter",
     opts = {
         show = true,
         handlers = {

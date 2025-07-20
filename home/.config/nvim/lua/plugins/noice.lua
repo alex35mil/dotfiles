@@ -3,8 +3,10 @@ local fn = {}
 NVNoice = {
     "folke/noice.nvim",
     dependencies = {
-        "nvim-telescope/telescope.nvim",
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify",
     },
+    event = "VeryLazy",
     keys = function()
         return {
             { "<D-l>", "<Cmd>NoiceHistory<CR>", mode = { "n", "i", "v" }, desc = "Open log" },
@@ -88,12 +90,13 @@ NVNoice = {
                 history = {
                     view = "popup",
                     opts = { enter = true, format = "details" },
+                    filter_opts = { reverse = true },
                     filter = {
                         any = {
                             { event = "notify" },
                             { error = true },
                             { warning = true },
-                            { event = "msg_show", kind = { "" } },
+                            { event = "msg_show" },
                             { event = "lsp", kind = "message" },
                         },
                     },
@@ -210,6 +213,16 @@ NVNoice = {
             routes = {
                 {
                     filter = { event = "lsp", kind = "progress" },
+                    opts = { skip = true },
+                },
+                {
+                    filter = {
+                        event = "msg_show",
+                        any = {
+                            { kind = "undo" },
+                            { find = "^%[supermaven%-nvim%] nvim%-cmp is not available" },
+                        },
+                    },
                     opts = { skip = true },
                 },
                 {

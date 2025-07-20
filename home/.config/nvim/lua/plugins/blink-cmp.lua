@@ -1,6 +1,16 @@
-NVBlink = {
+NVBlinkCmp = {
     "saghen/blink.cmp",
+    build = "cargo build --release",
     opts = {
+        sources = {
+            default = {
+                "supermaven",
+                "lsp",
+                "path",
+                "snippets",
+                "buffer",
+            },
+        },
         completion = {
             list = {
                 selection = {
@@ -8,13 +18,12 @@ NVBlink = {
                     auto_insert = false,
                 },
             },
-            ghost_text = {
-                enabled = false,
-            },
+            documentation = { auto_show = true },
+            ghost_text = { enabled = false },
         },
-
         keymap = {
             ["<CR>"] = { "accept", "fallback" },
+            ["<M-Esc>"] = { "show_documentation", "hide_documentation", "fallback" },
             ["<D-c>"] = {
                 function(cmp)
                     cmp.show({ providers = { "supermaven" } })
@@ -27,4 +36,4 @@ NVBlink = {
     },
 }
 
-return { NVBlink }
+return { NVBlinkCmp }
