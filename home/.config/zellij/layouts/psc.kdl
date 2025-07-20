@@ -12,7 +12,7 @@ layout {
                 args "-c" "cargo run --bin cli -- web lib rescript watch"
             }
             pane name="web/platform/rescript" command="zsh" start_suspended=true {
-                args "-c" "cargo run --bin cli --  web platform rescript watch"
+                args "-c" "cargo run --bin cli -- web platform rescript watch"
             }
             pane name="web/sites/rescript" command="zsh" start_suspended=true {
                 args "-c" "cargo run --bin cli -- web sites rescript watch"
