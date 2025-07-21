@@ -1,15 +1,15 @@
 <h1 align="center">dotfiles</h1>
 
 <p align="center">
-    <img width="1728" alt="$EDITOR" src="https://user-images.githubusercontent.com/4244251/266051792-1c524e39-bf8f-4c27-a895-74b02db712b5.png">
+    <img width="1728" alt="$TERM" src="https://github.com/user-attachments/assets/14415dbe-61bd-4c5a-9329-0569f650a2e6" />
     <sub>
-        <code>$EDITOR</code>
+        <code>$TERM</code>
     </sub>
 </p>
 
 <h2 align="center">Notes</h2>
 <p align="center">
-    Primary tools: <b>Zsh</b>, <b>Alacritty</b> (with <b>Zellij</b>), <b>Neovim</b> (with <b>Neovide</b>).
+    Primary tools: <b>Zsh</b>, <b>Ghostty</b> + <b>Zellij</b>, <b>Neovim</b> + <b>Neovide</b>.
 </p>
 
 <p align="center">
@@ -27,42 +27,45 @@
     <a href="https://github.com/alex35mil/dotfiles/tree/master/bin/zellij/statusbar">Zellij statusbar</a><br />
 </p>
 
-<h2 align="center">Screenshots</h2>
-<h3 align="center">Terminal</h3>
-
+<h2 align="center">Editor</h2>
 <p align="center">
-    <img width="1329" alt="Session switcher" src="https://user-images.githubusercontent.com/4244251/266051696-938608c5-d2ee-4ba2-9324-bc2118020d5f.png">
-    <sub>Session selector</sub>
+    <img width="1728" alt="Start Screen" src="https://github.com/user-attachments/assets/4e355ea6-a816-4b4b-9baf-21d7ccb35585">
+    <sub>Start Screen</sub>
 </p>
 
 <p>&nbsp;</p>
 
 <p align="center">
-    <img width="1728" alt="Terminal multiplexer" src="https://user-images.githubusercontent.com/4244251/266051735-8daff1af-6530-481a-802a-be39c09e100e.png">
-    <sub>Session panes</sub>
-</p>
-
-<p>&nbsp;</p>
-
-<h3 align="center">Editor</h3>
-
-<p align="center">
-    <img width="1728" alt="Single buffer" src="https://user-images.githubusercontent.com/4244251/266051812-5adc68e7-e2ac-4f1e-9093-f995cbd0f561.png">
-    <sub>Single buffer</sub>
+    <img width="1728" alt="Buffer" src="https://github.com/user-attachments/assets/cad833db-032f-402c-b87c-c58aa898e463">
+    <sub>Buffer</sub>
 </p>
 
 <p>&nbsp;</p>
 
 <p align="center">
-    <img width="1728" alt="Buffer selector" src="https://user-images.githubusercontent.com/4244251/266051843-3e7a18de-e8c8-4a8e-96aa-c268648d913d.png">
-    <sub>Buffer selector</sub>
+    <img width="1728" alt="Splits" src="https://github.com/user-attachments/assets/e74c943f-a997-4719-8dab-311d3e73eabf">
+    <sub>Splits</sub>
 </p>
 
 <p>&nbsp;</p>
 
 <p align="center">
-    <img width="1728" alt="Multiple splits" src="https://user-images.githubusercontent.com/4244251/266051893-215de829-7a94-4b04-9be5-5cf9f8417c96.png">
-    <sub>Multiple splits</sub>
+    <img width="1728" alt="LSP Diagnostics" src="https://github.com/user-attachments/assets/f358877b-776c-47ac-be7e-c4671d8b0221">
+    <sub>LSP Diagnostics</sub>
+</p>
+
+<p>&nbsp;</p>
+
+<p align="center">
+    <img width="1728" alt="File Explorer" src="https://github.com/user-attachments/assets/f471eec6-958a-462c-a892-79e72466aab4">
+    <sub>File Explorer</sub>
+</p>
+
+<p>&nbsp;</p>
+
+<p align="center">
+    <img width="1728" alt="Buffer Picker" src="https://github.com/user-attachments/assets/d75417cb-e5ed-49b1-adac-cd2973fdffcd">
+    <sub>Buffer Picker</sub>
 </p>
 
 <p align="center"> <sub> — </sub> </p>
