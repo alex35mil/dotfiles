@@ -171,6 +171,8 @@ function Sections.filename()
         fmt = function(v)
             if fn.should_ignore_filetype() then
                 return nil
+            elseif string.find(v, "%[No Name%]") then
+                return nil
             else
                 return v
             end
@@ -450,6 +452,16 @@ function Sections.filetype()
                     return "md"
                 elseif v == "snacks_terminal" then
                     return "term"
+                elseif v == "snacks_picker_input" then
+                    return "picker"
+                elseif v == "TelescopePrompt" then
+                    return "finder"
+                elseif v == "lazy" then
+                    return "plugins"
+                elseif v == "mason" then
+                    return "tools"
+                elseif v == "DiffviewFiles" then
+                    return "diff"
                 else
                     return v
                 end
@@ -526,13 +538,7 @@ end
 
 function fn.should_ignore_filetype()
     local ft = vim.bo.filetype
-
     return ft == "noice"
-        or ft == "lazy"
-        or ft == "mason"
-        or ft == "TelescopePrompt"
-        or ft == "lazygit"
-        or ft == "DiffviewFiles"
 end
 
 return { NVLualine }
