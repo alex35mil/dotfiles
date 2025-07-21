@@ -20,9 +20,9 @@ NVClaudeCode = {
                 mode = { "n", "i", "t", "v" },
                 desc = "Resume specific Claude session",
             },
-            { "<D-S-s>", fn.send_and_focus, mode = { "n", "i", "v" }, desc = "Send to Claude and focus" },
+            { "<D-p>", fn.post_and_focus, mode = { "n", "i", "v" }, desc = "Post to Claude and focus" },
             { "<C-CR>", fn.accept_diff, mode = { "n", "i", "v" }, desc = "Accept Claude diff" },
-            { "<D-x>", fn.deny_diff, mode = { "n", "i", "v" }, desc = "Deny Claude diff" },
+            { "<D-S-n>", fn.deny_diff, mode = { "n", "i", "v" }, desc = "Deny Claude diff (NOPE!)" },
         }
     end,
 }
@@ -57,7 +57,7 @@ function fn.deny_diff()
     end
 end
 
-function fn.send_and_focus()
+function fn.post_and_focus()
     local is_visible = fn.is_claude_visible()
 
     if is_visible then
