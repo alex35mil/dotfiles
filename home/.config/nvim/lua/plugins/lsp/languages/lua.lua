@@ -2,26 +2,25 @@ NVLua = {
     {
         "neovim/nvim-lspconfig",
         opts = {
-            ensure_installed = {
-                "lua-language-server",
-                "stylua",
-            },
-            servers = {
+            tools = {
                 lua_ls = {
-                    settings = {
-                        Lua = {
-                            workspace = {
-                                checkThirdParty = false,
-                            },
-                            codeLens = {
-                                enable = true,
-                            },
-                            completion = {
-                                callSnippet = "Replace",
+                    lsp = {
+                        settings = {
+                            Lua = {
+                                workspace = {
+                                    checkThirdParty = false,
+                                },
+                                codeLens = {
+                                    enable = true,
+                                },
+                                completion = {
+                                    callSnippet = "Replace",
+                                },
                             },
                         },
                     },
                 },
+                stylua = { lsp = false },
             },
         },
     },
@@ -31,6 +30,15 @@ NVLua = {
         opts = {
             ensure_installed = {
                 "lua",
+            },
+        },
+    },
+
+    {
+        "stevearc/conform.nvim",
+        opts = {
+            formatters_by_ft = {
+                lua = { "stylua" },
             },
         },
     },

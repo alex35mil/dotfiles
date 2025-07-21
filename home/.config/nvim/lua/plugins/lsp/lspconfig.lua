@@ -1,9 +1,13 @@
+-- LSP registry: https://github.com/neovim/nvim-lspconfig/tree/master/lsp
+-- Mason registry: https://github.com/mason-org/mason-registry/tree/main/packages
+
 NVLspConfig = {
     "neovim/nvim-lspconfig",
     dependencies = {
         { "mason-org/mason.nvim", opts = {} },
         "mason-org/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
+        "b0o/SchemaStore.nvim",
     },
     opts_extend = { "ensure_installed" },
     config = function(_, opts)
@@ -109,7 +113,11 @@ NVLspConfig = {
             severity_sort = true,
             update_in_insert = true,
             float = { border = "rounded", source = "if_many" },
-            underline = { severity = vim.diagnostic.severity.WARN },
+            underline = {
+                severity = {
+                    min = vim.diagnostic.severity.WARN,
+                },
+            },
             signs = {
                 text = {
                     [vim.diagnostic.severity.ERROR] = NVIcons.error,
@@ -133,21 +141,22 @@ NVLspConfig = {
             },
         })
 
-        require("mason-tool-installer").setup({ ensure_installed = opts.ensure_installed })
+        local cmp_capabilities = require("blink.cmp").get_lsp_capabilities()
 
-        require("mason-lspconfig").setup({
-            ensure_installed = {}, -- explicitly set to an empty table as it is handled by mason-tool-installer
-            automatic_installation = false,
-        })
-
-        -- Setup servers with custom configurations
-        local servers = opts.servers or {}
-        local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-        for server_name, server_config in pairs(servers) do
-            local config = vim.tbl_deep_extend("force", { capabilities = capabilities }, server_config or {})
-            require("lspconfig")[server_name].setup(config)
+        for tool, spec in pairs(opts.tools) do
+            if spec.lsp then
+                if type(spec.lsp) == "table" then
+                    local config = vim.tbl_deep_extend("force", { capabilities = cmp_capabilities }, spec.lsp)
+                    vim.lsp.config(tool, config)
+                else
+                    local config = { capabilities = cmp_capabilities }
+                    vim.lsp.config(tool, config)
+                end
+                vim.lsp.enable(tool)
+            end
         end
+
+        require("mason-tool-installer").setup({ ensure_installed = vim.tbl_keys(opts.tools) })
     end,
 }
 

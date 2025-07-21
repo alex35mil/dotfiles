@@ -2,17 +2,16 @@ NVJSON = {
     {
         "neovim/nvim-lspconfig",
         opts = {
-            ensure_installed = {
-                "json-lsp",
-            },
-            servers = {
+            tools = {
                 jsonls = {
-                    settings = {
-                        json = {
-                            format = {
-                                enable = true,
+                    lsp = {
+                        settings = {
+                            json = {
+                                format = { enable = true },
+                                validate = { enable = true },
+                                schemas = require("schemastore").json.schemas(),
+                                schemaDownload = { enable = true },
                             },
-                            validate = { enable = true },
                         },
                     },
                 },
@@ -25,6 +24,7 @@ NVJSON = {
         opts = {
             ensure_installed = {
                 "json",
+                "json5",
                 "jsonc",
             },
         },

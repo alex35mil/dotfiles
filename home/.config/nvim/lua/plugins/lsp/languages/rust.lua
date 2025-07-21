@@ -1,13 +1,4 @@
 NVRust = {
-    recommended = {
-        ft = "rust",
-        root = {
-            "Cargo.toml",
-            "Cargo.lock",
-            "rust-project.json",
-        },
-    },
-
     {
         "nvim-treesitter/nvim-treesitter",
         opts = {
@@ -78,6 +69,19 @@ NVRust = {
                 actions = true,
                 completion = true,
                 hover = true,
+            },
+        },
+    },
+
+    {
+        "nvim-tree/nvim-web-devicons",
+        opts = {
+            override = {
+                rs = {
+                    icon = "",
+                    color = "#a52b00",
+                    name = "Rust",
+                },
             },
         },
     },

@@ -2,11 +2,6 @@ NVWebDevicons = {
     "nvim-tree/nvim-web-devicons",
     opts = {
         override = {
-            rs = {
-                icon = "",
-                color = "#a52b00",
-                name = "Rust",
-            },
             term = {
                 icon = "",
                 color = "#00ff00",

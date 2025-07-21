@@ -2,14 +2,9 @@ NVCss = {
     {
         "neovim/nvim-lspconfig",
         opts = {
-            ensure_installed = {
-                "stylelint-lsp",
-                "css-variables-language-server",
-            },
-            setup = {
-                stylelint_lsp = function(_, opts)
-                    opts.filetypes = { "css" }
-                end,
+            tools = {
+                stylelint_lsp = { lsp = true },
+                css_variables = { lsp = true },
             },
         },
     },
@@ -19,6 +14,19 @@ NVCss = {
         opts = {
             ensure_installed = {
                 "css",
+            },
+        },
+    },
+
+    {
+        "nvim-tree/nvim-web-devicons",
+        opts = {
+            override = {
+                css = {
+                    icon = "",
+                    color = "#1572b6",
+                    name = "CSS",
+                },
             },
         },
     },

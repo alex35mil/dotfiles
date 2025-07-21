@@ -1,20 +1,9 @@
 NVReScript = {
-    recommended = {
-        ft = { "rescript" },
-        root = {
-            "rescript.json",
-            "bsconfig.json",
-        },
-    },
-
     {
         "neovim/nvim-lspconfig",
         opts = {
-            ensure_installed = {
-                "rescript-language-server",
-            },
-            servers = {
-                rescriptls = {},
+            tools = {
+                rescriptls = { lsp = true },
             },
         },
     },

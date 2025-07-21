@@ -2,6 +2,15 @@ local CONFIG = os.getenv("XDG_CONFIG_HOME")
 
 NVMarkdown = {
     {
+        "neovim/nvim-lspconfig",
+        opts = {
+            tools = {
+                ["markdownlint-cli2"] = { lsp = false },
+            },
+        },
+    },
+
+    {
         "MeanderingProgrammer/render-markdown.nvim",
         ft = { "markdown" },
         opts = {
@@ -16,6 +25,7 @@ NVMarkdown = {
             },
         },
     },
+
     {
         "mfussenegger/nvim-lint",
         opts = {

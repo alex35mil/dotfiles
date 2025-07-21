@@ -1,24 +1,29 @@
+local lsp_settings = {
+    preferences = {
+        quoteStyle = "double",
+    },
+    format = {
+        enable = true,
+        semicolons = "remove",
+    },
+}
+
+local prettier = { "prettierd", "prettier", stop_after_first = true }
+
 NVTypeScript = {
     {
         "neovim/nvim-lspconfig",
         opts = {
-            ensure_installed = {
-                "vtsls",
-            },
-            servers = {
+            tools = {
                 vtsls = {
-                    settings = {
-                        typescript = {
-                            preferences = {
-                                quoteStyle = "double",
-                            },
-                            format = {
-                                enable = true,
-                                semicolons = "remove",
-                            },
+                    lsp = {
+                        settings = {
+                            typescript = lsp_settings,
+                            javascript = lsp_settings,
                         },
                     },
                 },
+                prettierd = { lsp = false },
             },
         },
     },
@@ -27,7 +32,21 @@ NVTypeScript = {
         "nvim-treesitter/nvim-treesitter",
         opts = {
             ensure_installed = {
+                "javascript",
                 "typescript",
+                "tsx",
+            },
+        },
+    },
+
+    {
+        "stevearc/conform.nvim",
+        opts = {
+            formatters_by_ft = {
+                javascript = prettier,
+                javascriptreact = prettier,
+                typescript = prettier,
+                typescriptreact = prettier,
             },
         },
     },
