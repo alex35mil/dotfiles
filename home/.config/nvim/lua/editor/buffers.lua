@@ -59,6 +59,18 @@ function NVBuffers.keymaps()
     -- })
 end
 
+function NVBuffers.autocmds()
+    -- Auto-reload files when they change externally
+    vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "CursorHold", "CursorHoldI" }, {
+        pattern = "*",
+        callback = function()
+            if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "" then
+                vim.cmd("checktime")
+            end
+        end,
+    })
+end
+
 ---@param bufid BufID
 ---@return boolean
 function NVBuffers.is_buf_listed(bufid)

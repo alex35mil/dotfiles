@@ -21,6 +21,7 @@ vim.opt.scrolloff = 4
 vim.opt.sidescrolloff = 8
 
 vim.opt.autowrite = true
+vim.opt.autoread = true
 
 vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
 

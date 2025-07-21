@@ -23,6 +23,7 @@ NVDebug.keymaps()
 -- Autocmds
 
 NVLsp.autocmds()
+NVBuffers.autocmds()
 NVTabs.autocmds()
 NVGrugFar.autocmds()
 NVPersistence.autocmds()
