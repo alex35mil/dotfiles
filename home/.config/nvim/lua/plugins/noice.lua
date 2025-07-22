@@ -221,6 +221,11 @@ NVNoice = {
                         any = {
                             { kind = "undo" },
                             { find = "^%[supermaven%-nvim%] nvim%-cmp is not available" },
+                            { find = "%d+ lines yanked" },
+                            { find = "%d+ lines changed" },
+                            { find = "%d+ more lines" },
+                            { find = "%d+ fewer lines" },
+                            { find = "%d+ lines indented" },
                         },
                     },
                     opts = { skip = true },
