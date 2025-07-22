@@ -3,7 +3,7 @@ local lsp_settings = {
         quoteStyle = "double",
     },
     format = {
-        enable = true,
+        enable = false,
         semicolons = "remove",
     },
 }
