@@ -231,6 +231,15 @@ NVNoice = {
                     opts = { skip = true },
                 },
                 {
+                    filter = {
+                        event = "notify",
+                        any = {
+                            { find = "%[file_browser%.to_absolute_path%] Given path .* doesn't exist" },
+                        },
+                    },
+                    opts = { skip = true },
+                },
+                {
                     filter = { event = "msg_show" },
                     view = "notify",
                 },
