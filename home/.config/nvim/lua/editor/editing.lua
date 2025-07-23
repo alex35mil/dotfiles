@@ -85,11 +85,17 @@ function NVEditing.keymaps()
     K.map({ "<D-S-z>", "Redo", "<C-r>", mode = { "n", "v" } })
     K.map({ "<D-S-z>", "Redo", "<Esc><C-r>i", mode = "i" })
 
-    K.map({ "<D-/>", "Comment", "gcc", mode = "n", remap = true })
-    K.map({ "<D-/>", "Comment", "gc", mode = "v", remap = true })
-    K.map({ "<D-/>", "Comment", "<Cmd>normal gcc<CR>", mode = "i", remap = true })
-    K.map({ "<D-?>", "Start comment on the next line", "gco", mode = "n", remap = true })
-    K.map({ "<D-?>", "Start comment on the next line", "<Cmd>normal gco<CR>", mode = "i", remap = true })
+    K.map({ "<D-}>", "Comment", "gcc", mode = "n", remap = true })
+    K.map({ "<D-}>", "Comment", "gc", mode = "v", remap = true })
+    K.map({ "<D-}>", "Comment", "<Cmd>normal gcc<CR>", mode = "i", remap = true })
+    K.map({ "<D-{>", "Start comment on the next line", "oo<Esc><Cmd>normal gcc<CR>A<BS>", mode = "n", remap = true })
+    K.map({
+        "<D-{>",
+        "Start comment on the next line",
+        "<Esc>oo<Esc><Cmd>normal gcc<CR>A<BS>",
+        mode = "i",
+        remap = true,
+    })
 
     -- "done here" (<D-h> is just easier to hit in Dvorak compared to <D-s>)
     K.map({
