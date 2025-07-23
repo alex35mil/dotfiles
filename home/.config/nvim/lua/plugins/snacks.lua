@@ -99,13 +99,13 @@ NVSnacks = {
     event = "VeryLazy",
     keys = function()
         return {
-            { "<D-S-e>", NVSPickers.explorer, mode = { "n", "i", "v" }, desc = "Open file tree" },
-            { "<D-t>", NVSPickers.files, mode = { "n", "i", "v" }, desc = "Open file finder" },
-            { "<D-b>", NVSPickers.buffers, mode = { "n", "i", "v" }, desc = "Open buffers list" },
-            { "<M-f>", NVSPickers.text_search, mode = { "n", "i", "v" }, desc = "Open text search" },
-            { "<D-g>b", NVSPickers.git_branches, mode = { "n", "i", "v" }, desc = "Git: Branches" },
-            { "<Leader>h", NVSPickers.highlights, mode = "n", desc = "Show highlights" },
-            { "<D-g>g", NVSLazygit.show, mode = { "n", "i", "v" }, desc = "Git: Lazygit" },
+            { "<D-S-e>", NVSPickers.explorer, mode = { "n", "i", "v", "t" }, desc = "Open file tree" },
+            { "<D-t>", NVSPickers.files, mode = { "n", "i", "v", "t" }, desc = "Open file finder" },
+            { "<D-b>", NVSPickers.buffers, mode = { "n", "i", "v", "t" }, desc = "Open buffers list" },
+            { "<D-g>b", NVSPickers.git_branches, mode = { "n", "i", "v", "t" }, desc = "Git: Branches" },
+            { "<M-f>", NVSPickers.text_search, mode = { "n", "i", "v", "t" }, desc = "Open text search" },
+            { "<M-h>", NVSPickers.highlights, mode = "n", desc = "Show highlights" },
+            { "<D-g>g", NVSLazygit.show, mode = { "n", "i", "v", "t" }, desc = "Git: Lazygit" },
             { "<D-S-m>", NVSZoom.activate, mode = { "n", "i", "v" }, desc = "Maximize" },
         }
     end,

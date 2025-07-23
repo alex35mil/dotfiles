@@ -67,7 +67,7 @@ function NVWindows.keymaps()
         function()
             fn.change_window_width("up")
         end,
-        mode = { "n", "i", "v" },
+        mode = { "n", "i", "v", "t" },
     })
     K.map({
         "<C-S-Down>",
@@ -75,7 +75,7 @@ function NVWindows.keymaps()
         function()
             fn.change_window_width("down")
         end,
-        mode = { "n", "i", "v" },
+        mode = { "n", "i", "v", "t" },
     })
     K.map({
         "<C-D-S-Up>",

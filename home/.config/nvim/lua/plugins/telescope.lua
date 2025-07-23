@@ -15,7 +15,7 @@ NVTelescope = {
     "nvim-telescope/telescope.nvim",
     keys = function()
         return {
-            { "<D-e>", Pickers.file_browser, mode = { "n", "i", "v" }, desc = "Open file browser" },
+            { "<D-e>", Pickers.file_browser, mode = { "n", "i", "v", "t" }, desc = "Open file browser" },
         }
     end,
     opts = function()

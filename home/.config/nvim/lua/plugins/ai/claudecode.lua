@@ -25,6 +25,17 @@ NVClaudeCode = {
             { "<D-S-n>", fn.deny_diff, mode = { "n", "i", "v" }, desc = "Deny Claude diff (NOPE!)" },
         }
     end,
+    opts = {
+        terminal = {
+            split_side = "right",
+            split_width_percentage = 0.35,
+        },
+        diff_opts = {
+            auto_close_on_accept = true,
+            vertical_split = true,
+            open_in_current_tab = false,
+        },
+    },
 }
 
 ---@return boolean

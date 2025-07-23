@@ -1,10 +1,12 @@
+local fn = {}
+
 NVFlash = {
     "folke/flash.nvim",
     event = "VeryLazy",
     vscode = false,
     keys = function()
         return {
-            { "<D-j>", mode = { "n", "i", "x", "o" }, require("flash").jump, desc = "Search" },
+            { "<D-j>", mode = { "n", "i", "x", "o", "t" }, fn.search, desc = "Search" },
         }
     end,
     opts = {
@@ -107,5 +109,42 @@ NVFlash = {
         },
     },
 }
+
+function fn.search()
+    if vim.fn.mode() ~= "t" then
+        require("flash").jump()
+    else
+        NVKeys.send("<C-\\><C-n>", { mode = "n" })
+
+        local timeout = 1000 -- 1 second
+        local interval = 10 -- check every 10ms
+        local elapsed = 0
+
+        local timer = vim.uv.new_timer()
+
+        if not timer then
+            log.error("Failed to create timer")
+            return
+        end
+
+        timer:start(
+            0,
+            interval,
+            vim.schedule_wrap(function()
+                if vim.fn.mode() == "n" then
+                    timer:stop()
+                    timer:close()
+                    require("flash").jump()
+                elseif elapsed >= timeout then
+                    timer:stop()
+                    timer:close()
+                    log.error("Timeout entering normal mode")
+                else
+                    elapsed = elapsed + interval
+                end
+            end)
+        )
+    end
+end
 
 return { NVFlash }
