@@ -1,5 +1,7 @@
 brew "btop"
+brew "cmake"
 brew "curl"
+brew "dtc"
 brew "git"
 brew "tree"
 brew "wget"
