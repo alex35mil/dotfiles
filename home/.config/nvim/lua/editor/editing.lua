@@ -63,14 +63,6 @@ function NVEditing.keymaps()
     K.map({ "<D-a>", "Select all", "ggVG", mode = "n" })
     K.map({ "<D-a>", "Select all", "<Esc>ggVG", mode = { "i", "v" } })
 
-    K.map({ "*", "Don't jump on *", "<Cmd>keepjumps normal! mi*`i<CR>", mode = "n" })
-    K.map({
-        "*",
-        "Highlight selected text",
-        [["*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>]],
-        mode = "v",
-    })
-
     K.map({
         "<Esc>",
         "Drop all the noise and Esc",

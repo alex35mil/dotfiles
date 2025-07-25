@@ -286,7 +286,6 @@ function NVTheme.apply()
             PmenuThumb({ bg = Pmenu.bg.lighten(15) }), -- Popup menu: Thumb of the scrollbar.
             -- Question     { }, -- |hit-enter| prompt and yes/no questions
             -- QuickFixLine { }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
-            Search({ fg = color.bg, bg = color.cyan }), -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
             SpecialKey({ fg = color.faded_text }), -- Unprintable characters: text displayed differently from what it really is. But not 'listchars' whitespace. |hl-Whitespace|
             -- SpellBad     { }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
             -- SpellCap     { }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
@@ -306,6 +305,10 @@ function NVTheme.apply()
             Whitespace({ fg = color.faded_text }), -- "nbsp", "space", "tab" and "trail" in 'listchars'
             Winseparator({ VertSplit }), -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
             -- WildMenu     { }, -- Current match in 'wildmenu' completion
+
+            Search({ bg = Normal.bg.lighten(15) }), -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
+            CurSearch({ fg = color.bg, bg = color.cyan }),
+            HlSearchLens({ fg = color.faded_text, bg = Normal.bg.lighten(6) }),
 
             -- These groups are for the native LSP client and diagnostic system. Some
             -- other LSP clients may use these groups, or use their own. Consult your
