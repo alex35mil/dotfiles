@@ -74,7 +74,7 @@ function NVLsp.keymaps()
             mode = { "n", "i", "v" },
         },
         {
-            "<D-u>",
+            "<C-u>",
             "LSP: Open symbol usage",
             function()
                 NVSPickers.lsp_references()
