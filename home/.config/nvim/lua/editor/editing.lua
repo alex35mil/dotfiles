@@ -55,7 +55,37 @@ function NVEditing.keymaps()
     K.map({ "<M-Right>", "Jump one word to the right", fn.jump_to_end_of_word, mode = "i" })
     K.map({ "<D-Left>", "Jump to the beginning of the line", "<C-o>I", mode = "i" })
     K.map({ "<D-Right>", "Jump to the end of the line", "<C-o>A", mode = "i" })
-    K.map({ "<M-BS>", "Delete word to the left", "<C-w>", mode = "i" })
+    vim.api.nvim_create_autocmd("BufEnter", {
+        pattern = "*",
+        callback = function()
+            if vim.bo.filetype ~= "snacks_input" and vim.bo.filetype ~= "snacks_picker_input" then
+                K.map({ "<M-BS>", "Delete word to the left", "<C-w>", mode = "i", buffer = true })
+            end
+        end,
+    })
+    vim.api.nvim_create_autocmd({ "FileType" }, {
+        pattern = { "snacks_input", "snacks_picker_input" },
+        callback = function()
+            K.map({ "<M-BS>", "Delete word to the left", "<C-S-w>", mode = "i", buffer = true })
+        end,
+    })
+    vim.api.nvim_create_autocmd("CmdlineEnter", {
+        pattern = "*",
+        callback = function()
+            K.map({
+                "<M-BS>",
+                "Delete word to the left",
+                function()
+                    NVKeys.send("<C-w>", { mode = "n" })
+                    vim.schedule(function()
+                        vim.cmd("redraw")
+                    end)
+                end,
+                mode = "c",
+                buffer = true,
+            })
+        end,
+    })
     K.map({ "<M-Del>", "Delete word to the right", [[<C-o>"_de]], mode = "i" })
     K.map({ "<D-BS>", "Delete everything to the left", "<C-u>", mode = "i" })
     K.map({ "<D-Del>", "Delete everything to the right", [[<C-o>"_D]], mode = "i" })
