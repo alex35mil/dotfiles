@@ -89,15 +89,14 @@ function NVEditing.keymaps()
         remap = true,
     })
 
-    -- "done here" (<D-h> is just easier to hit in Dvorak compared to <D-s>)
     K.map({
-        NVKeyRemaps["<D-h>"],
+        "<D-s>",
         "Save files",
         "<Cmd>lua NVEditing.esc()<CR><Cmd>silent w<CR><Cmd>silent! wa<CR>",
         mode = "n",
     })
     K.map({
-        NVKeyRemaps["<D-h>"],
+        "<D-s>",
         "Save files",
         "<Cmd>lua NVEditing.esc()<CR><Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>",
         mode = { "i", "v" },
