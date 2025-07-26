@@ -10,6 +10,7 @@ NVNoice = {
     keys = function()
         return {
             { "<D-l>", "<Cmd>NoiceHistory<CR>", mode = { "n", "i", "v" }, desc = "Open log" },
+            { "<D-S-l>", "<Cmd>NoiceAll<CR>", mode = { "n", "i", "v" }, desc = "Open log" },
         }
     end,
     opts = function()
@@ -110,6 +111,7 @@ NVNoice = {
                 all = {
                     view = "popup",
                     opts = { enter = true, format = "details" },
+                    filter_opts = { reverse = true },
                     filter = {},
                 },
             },
@@ -184,7 +186,7 @@ NVNoice = {
                 },
                 notify = {
                     backend = "notify",
-                    render = "wrapped-compact",
+                    render = "compact",
                 },
                 confirm = {
                     backend = "popup",
@@ -242,8 +244,39 @@ NVNoice = {
                     opts = { skip = true },
                 },
                 {
+                    filter = { error = true },
+                    view = "notify",
+                    opts = { title = "" },
+                },
+                {
+                    filter = { warning = true },
+                    view = "notify",
+                    opts = { title = "" },
+                },
+                {
+                    filter = { event = "notify", kind = "info" },
+                    view = "notify",
+                    opts = { title = "" },
+                },
+                {
+                    filter = { event = "notify", kind = "debug" },
+                    view = "notify",
+                    opts = { title = "" },
+                },
+                {
+                    filter = { event = "notify" },
+                    view = "notify",
+                    opts = { title = "Notification" },
+                },
+                {
+                    filter = { event = "msg_show", kind = "emsg" },
+                    view = "notify",
+                    opts = { title = "Error" },
+                },
+                {
                     filter = { event = "msg_show" },
                     view = "notify",
+                    opts = { title = "Message" },
                 },
             },
         }
