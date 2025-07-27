@@ -26,6 +26,8 @@ NVTheme = {
         thick_line = "#73787d",
         -- floats
         float_bg = "#2b2f34",
+        float_thin_line = "#333740",
+        float_thick_line = "#777c85",
         -- bars
         bar_bg = "#2c323c",
         bar_text = "#b5bac8",
@@ -423,6 +425,7 @@ function NVTheme.apply()
             SnacksPickerDir({ fg = color.faded_text }),
             SnacksPickerRow({ fg = color.faded_text }),
             SnacksPickerCol({ fg = color.faded_text }),
+            SnacksPickerTree({ fg = color.float_thin_line }),
             SnacksPickerSelected({ fg = color.cyan }),
             SnacksPickerListCursorLine({ bg = color.float_bg.lighten(6) }),
             SnacksPickerPreviewCursorLine({ bg = color.float_bg.lighten(6) }),

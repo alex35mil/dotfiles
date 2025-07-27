@@ -198,6 +198,11 @@ NVSnacks = {
                     Hint = NVIcons.hint,
                     Info = NVIcons.info,
                 },
+                tree = {
+                    vertical = "│   ",
+                    middle = "│   ",
+                    last = "└── ",
+                },
             },
             actions = NVSPickers.actions,
         },
