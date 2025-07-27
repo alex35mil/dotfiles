@@ -14,6 +14,10 @@ NVWebDevicons = {
                 icon = "󰀶",
                 name = "Finder",
             },
+            preview = {
+                icon = "",
+                name = "Preview",
+            },
             plugins = {
                 icon = "",
                 name = "Plugins",
@@ -30,7 +34,8 @@ NVWebDevicons = {
         devicons.set_icon_by_filetype({
             snacks_terminal = "term",
             snacks_picker_input = "picker",
-            TelescopePrompt = "finder",
+            snacks_picker_list = "finder",
+            snacks_picker_preview = "preview",
             lazy = "plugins",
             mason = "tools",
             DiffviewFiles = "diff",

@@ -5,8 +5,8 @@ NVWhichKey = {
         preset = "helix",
         -- NOTE: It doesn't work as it interferes with general scroll keymaps
         -- keys = {
-        --     scroll_up = NVKeymaps.scroll.up,
-        --     scroll_down = NVKeymaps.scroll.down,
+        --     scroll_up = NVKeymaps.scroll_ctx.up,
+        --     scroll_down = NVKeymaps.scroll_ctx.down,
         -- },
     },
     keys = {

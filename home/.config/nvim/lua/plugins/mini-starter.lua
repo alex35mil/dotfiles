@@ -21,7 +21,7 @@ NVMiniStarter = {
             table.insert(items, item("Restore session", NVPersistence.restore, project))
         end
 
-        table.insert(items, item("Browse project", NVTelescope.open_file_browser, project))
+        table.insert(items, item("Browse project", NVSPickers.explorer, project))
 
         table.insert(items, item("Quit", "qa", project))
 

@@ -11,6 +11,9 @@ NVScrollbar = {
             search = false, -- Requires hlslens
             ale = false,
         },
+        excluded_filetypes = {
+            "snacks_picker_list",
+        },
     },
 }
 

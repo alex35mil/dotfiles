@@ -9,6 +9,10 @@ NVKeymaps = {
         up = "<D-S-Up>",
         down = "<D-S-Down>",
     },
+    scroll_ctx = {
+        up = "<C-Up>",
+        down = "<C-Down>",
+    },
     rename = "<D-r>",
     close = "<D-w>",
 }

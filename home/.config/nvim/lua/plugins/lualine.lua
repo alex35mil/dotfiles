@@ -454,8 +454,10 @@ function Sections.filetype()
                     return "term"
                 elseif v == "snacks_picker_input" then
                     return "picker"
-                elseif v == "TelescopePrompt" then
+                elseif v == "snacks_picker_list" then
                     return "finder"
+                elseif v == "snacks_picker_preview" then
+                    return "preview"
                 elseif v == "lazy" then
                     return "plugins"
                 elseif v == "mason" then

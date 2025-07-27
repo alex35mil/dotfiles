@@ -36,8 +36,8 @@ NVBlinkCmp = {
                     cmp.show()
                 end,
             },
-            [NVKeymaps.scroll.up] = { "scroll_documentation_up", "fallback" },
-            [NVKeymaps.scroll.down] = { "scroll_documentation_down", "fallback" },
+            [NVKeymaps.scroll_ctx.up] = { "scroll_documentation_up", "fallback" },
+            [NVKeymaps.scroll_ctx.down] = { "scroll_documentation_down", "fallback" },
             [NVKeymaps.close] = { "hide", "fallback" },
         },
     },

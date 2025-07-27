@@ -83,30 +83,79 @@ function NVSPickerHorizontalLayout.build(opts)
 end
 
 NVSPickers.keys = {
-    [NVKeyRemaps["<D-m>"]] = { "toggle_maximize", mode = { "n", "i", "v" } },
+    ["<D-S-m>"] = { "toggle_maximize", mode = { "n", "i", "v" } },
     ["<D-CR>"] = { "edit_vsplit", mode = { "n", "i", "v" } },
     ["<D-S-CR>"] = { "edit_split", mode = { "n", "i", "v" } },
     ["<C-Tab>"] = { "cycle_win", mode = { "n", "i", "v" } },
-    [NVKeymaps.scroll.up] = { "preview_scroll_up", mode = { "n", "i", "v" } },
-    [NVKeymaps.scroll.down] = { "preview_scroll_down", mode = { "n", "i", "v" } },
-    [NVKeymaps.scroll_alt.up] = { "list_scroll_up", mode = { "n", "i", "v" } },
-    [NVKeymaps.scroll_alt.down] = { "list_scroll_down", mode = { "n", "i", "v" } },
+    [NVKeymaps.scroll.up] = { "list_scroll_up", mode = { "n", "i", "v" } },
+    [NVKeymaps.scroll.down] = { "list_scroll_down", mode = { "n", "i", "v" } },
+    [NVKeymaps.scroll_alt.up] = { "x_list_scroll_up_bit", mode = { "n", "i", "v" } },
+    [NVKeymaps.scroll_alt.down] = { "x_list_scroll_down_bit", mode = { "n", "i", "v" } },
+    [NVKeymaps.scroll_ctx.up] = { "preview_scroll_up", mode = { "n", "i", "v" } },
+    [NVKeymaps.scroll_ctx.down] = { "preview_scroll_down", mode = { "n", "i", "v" } },
+    ["<C-l>"] = { "focus_list", mode = { "n", "i", "v" } },
+    ["<C-i>"] = { "focus_input", mode = { "n", "i", "v" } },
+    ["<C-p>"] = { "focus_preview", mode = { "n", "i", "v" } },
+    ["<D-S-p>"] = { "toggle_preview", mode = { "n", "i", "v" } },
+    ["<D-S-a>"] = { "x_copy_absolute_path", mode = { "n", "i", "v" } },
+    ["<D-S-r>"] = { "x_copy_relative_path", mode = { "n", "i", "v" } },
+    ["<D-S-n>"] = { "x_copy_filename", mode = { "n", "i", "v" } },
+    ["<D-S-s>"] = { "x_copy_filestem", mode = { "n", "i", "v" } },
     [NVKeymaps.close] = { "close", mode = { "n", "i", "v" } },
 }
+
+NVSPickers.actions = {
+    x_list_scroll_up_bit = function(picker)
+        picker.list:scroll(-2)
+    end,
+    x_list_scroll_down_bit = function(picker)
+        picker.list:scroll(2)
+    end,
+    x_copy_absolute_path = function(_, item)
+        NVSPickers.copy_path(item, "absolute")
+    end,
+    x_copy_relative_path = function(_, item)
+        NVSPickers.copy_path(item, "relative")
+    end,
+    x_copy_filename = function(_, item)
+        NVSPickers.copy_path(item, "filename")
+    end,
+    x_copy_filestem = function(_, item)
+        NVSPickers.copy_path(item, "filestem")
+    end,
+}
+
+---@param item snacks.picker.explorer.Item
+---@param fmt "absolute" | "relative" | "filename" | "filestem"
+function NVSPickers.copy_path(item, fmt)
+    if item == nil then
+        log.info("No item selected")
+        return
+    end
+
+    local result = NVFS.format(item.file, fmt)
+
+    if result ~= nil then
+        NVClipboard.yank(result)
+        log.info("Copied: " .. result)
+    else
+        log.error("Failed to copy")
+    end
+end
 
 NVSnacks = {
     "folke/snacks.nvim",
     event = "VeryLazy",
     keys = function()
         return {
-            { "<D-S-e>", NVSPickers.explorer, mode = { "n", "i", "v", "t" }, desc = "Open file tree" },
+            { "<D-e>", NVSPickers.explorer, mode = { "n", "i", "v", "t" }, desc = "Open file tree" },
             { "<D-t>", NVSPickers.files, mode = { "n", "i", "v", "t" }, desc = "Open file finder" },
             { "<D-b>", NVSPickers.buffers, mode = { "n", "i", "v", "t" }, desc = "Open buffers list" },
             { "<D-g>b", NVSPickers.git_branches, mode = { "n", "i", "v", "t" }, desc = "Git: Branches" },
             { "<M-f>", NVSPickers.text_search, mode = { "n", "i", "v", "t" }, desc = "Open text search" },
             { "<M-h>", NVSPickers.highlights, mode = "n", desc = "Show highlights" },
             { "<D-g>g", NVSLazygit.show, mode = { "n", "i", "v", "t" }, desc = "Git: Lazygit" },
-            { "<D-S-m>", NVSZoom.activate, mode = { "n", "i", "v" }, desc = "Maximize" },
+            { NVKeyRemaps["<D-m>"], NVSZoom.activate, mode = { "n", "i", "v" }, desc = "Maximize" },
         }
     end,
     opts = {
@@ -140,6 +189,15 @@ NVSnacks = {
                     filename_first = true,
                 },
             },
+            icons = {
+                diagnostics = {
+                    Error = NVIcons.error,
+                    Warn = NVIcons.warn,
+                    Hint = NVIcons.hint,
+                    Info = NVIcons.info,
+                },
+            },
+            actions = NVSPickers.actions,
         },
         indent = {
             enabled = true,
@@ -191,6 +249,29 @@ NVSnacks = {
 function NVSPickers.explorer()
     local layout = NVSPickerHorizontalLayout.build()
 
+    local keys = {
+        ["<D-n>"] = { "explorer_add", mode = { "n", "i", "v" } },
+        ["<D-u>"] = { "explorer_close", mode = { "n", "i", "v" } },
+        ["<D-S-u>"] = { "x_go_to_root", mode = { "n", "i", "v" } },
+        ["<Left>"] = { "x_collapse_dir", mode = { "n", "i", "v" } },
+        ["<Right>"] = { "x_expand_dir", mode = { "n", "i", "v" } },
+        ["<D-f>"] = { "explorer_focus", mode = { "n", "i", "v" } },
+        ["<C-u>"] = { "x_go_up", mode = { "n", "i", "v" } },
+        ["<Space>"] = { "select_and_next", mode = { "n", "i", "v" } },
+        ["<D-Space>"] = { "select_and_prev", mode = { "n", "i", "v" } },
+        ["<D-a>"] = { "select_all", mode = { "n", "i", "v" } },
+        ["<BS>"] = { "list_up", mode = { "n", "i", "v" } },
+        ["<D-d>"] = { "x_duplicate", mode = { "n", "i", "v" } },
+        ["<D-c>"] = { "select_and_next", mode = { "n", "i", "v" } },
+        ["<D-x>"] = { "select_and_next", mode = { "n", "i", "v" } },
+        ["<D-v>"] = { "x_copy_paste", mode = { "n", "i", "v" } },
+        [NVKeyRemaps["<D-m>"]] = { "explorer_move", mode = { "n", "i", "v" } },
+        ["<D-BS>"] = { "explorer_del", mode = { "n", "i", "v" } },
+        ["<D-o>"] = { "explorer_open", mode = { "n", "i", "v" } },
+        [NVKeymaps.rename] = { "explorer_rename", mode = { "n", "i", "v" } },
+        [NVKeymaps.close] = { "close", mode = { "n", "i", "v" } },
+    }
+
     Snacks.picker.explorer({
         hidden = true,
         ignored = true,
@@ -200,11 +281,68 @@ function NVSPickers.explorer()
             layout = layout.layout,
         },
         win = {
-            list = {
-                keys = {
-                    [NVKeymaps.close] = { "close", mode = { "n", "i", "v" } },
-                },
-            },
+            input = { keys = keys },
+            list = { keys = keys },
+        },
+        actions = {
+            x_duplicate = function(picker, _)
+                local selected = picker:selected()
+
+                if #selected == 0 then
+                    picker:action("explorer_copy")
+                end
+            end,
+            x_copy_paste = function(picker, _)
+                local selected = picker:selected()
+
+                if #selected > 0 then
+                    picker:action("explorer_copy")
+                end
+            end,
+            x_expand_dir = function(picker, item)
+                if not item.dir or item.open then
+                    return
+                end
+                picker:action("confirm")
+            end,
+            x_collapse_dir = function(picker, item)
+                if not item.dir or not item.open then
+                    return
+                end
+                picker:action("confirm")
+            end,
+            x_go_up = function(picker, _)
+                local project_root = vim.fn.getcwd()
+                local explorer_root = picker:cwd()
+
+                if project_root ~= explorer_root then
+                    picker:action("explorer_up")
+                end
+            end,
+            x_go_to_root = function(picker, item)
+                ---@param item snacks.picker.Item
+                ---@diagnostic disable-next-line: redefined-local
+                local function get_root(item)
+                    if item.parent then
+                        return get_root(item.parent)
+                    else
+                        return item
+                    end
+                end
+
+                local explorer_root = get_root(item)
+
+                if item.file ~= explorer_root.file then
+                    picker.list:move(1, true, true) -- needs to go first as action is async
+                    picker:action("explorer_close_all")
+                else
+                    local project_root = vim.fn.getcwd()
+                    if explorer_root.file ~= project_root then
+                        picker:set_cwd(project_root)
+                        picker:find()
+                    end
+                end
+            end,
         },
     })
 end
@@ -332,6 +470,21 @@ end
 function NVSPickers.highlights()
     Snacks.picker.highlights({
         layout = NVSPickerHorizontalLayout.build(),
+        win = {
+            input = {
+                keys = {
+                    ["<CR>"] = { "x_copy_highlight", mode = { "n", "i" } },
+                },
+            },
+        },
+        actions = {
+            x_copy_highlight = function(_, item)
+                if item.hl_group then
+                    NVClipboard.yank(item.hl_group)
+                    log.info("Copied: " .. item.hl_group)
+                end
+            end,
+        },
     })
 end
 

@@ -235,6 +235,8 @@ function NVTheme.apply()
             GitAdded({ fg = color.green }),
             GitChanged({ fg = color.blue }),
             GitDeleted({ fg = color.red }),
+            GitUntracked({ fg = color.teal }),
+            GitStaged({ fg = color.purple }),
 
             diffAdded({ GitAdded }),
             diffChanged({ GitChanged }),
@@ -256,6 +258,13 @@ function NVTheme.apply()
             GitSignsAdd({ GitAdded }),
             GitSignsChange({ GitChanged }),
             GitSignsDelete({ GitDeleted }),
+            GitSignsUntracked({ GitUntracked }),
+
+            GitSignsStagedAdd({ fg = GitSignsAdd.fg.mix(Normal.bg, 70) }),
+            GitSignsStagedChange({ fg = GitSignsChange.fg.mix(Normal.bg, 70) }),
+            GitSignsStagedDelete({ fg = GitSignsDelete.fg.mix(Normal.bg, 70) }),
+            GitSignsStagedUntracked({ fg = GitSignsUntracked.fg.mix(Normal.bg, 70) }),
+
             GitSignsAddPreview({ fg = color.green, DiffviewDiffAdd }),
             GitSignsDeletePreview({ fg = color.red, DiffviewDiffDelete }),
             GitSignsAddInline({ DiffviewDiffAddText }),
@@ -417,6 +426,12 @@ function NVTheme.apply()
             SnacksPickerListCursorLine({ bg = color.float_bg.lighten(6) }),
             SnacksPickerPreviewCursorLine({ bg = color.float_bg.lighten(6) }),
             SnacksPickerMatch({ fg = Normal.bg, bg = color.cyan }),
+            SnacksPickerPathHidden({ fg = color.text }),
+
+            SnacksPickerGitStatusAdded({ GitAdded }),
+            SnacksPickerGitStatusModified({ GitChanged }),
+            SnacksPickerGitStatusStaged({ GitStaged }),
+            SnacksPickerGitStatusUntracked({ GitUntracked }),
 
             SnacksTerminal({ Normal }),
             SnacksTerminalHeader({ bg = color.orange, fg = color.strong_faded_text, bold = true }),
