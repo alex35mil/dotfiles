@@ -41,5 +41,5 @@ end
 function fn.print_all_buffers_info()
     local bufs = vim.fn.getbufinfo()
 
-    fn.print("bufs: " .. vim.inspect(bufs))
+    log.debug("bufs: " .. vim.inspect(bufs))
 end
