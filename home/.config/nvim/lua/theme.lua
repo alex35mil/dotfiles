@@ -437,6 +437,9 @@ function NVTheme.apply()
             SnacksTerminalHeader({ bg = color.orange, fg = color.strong_faded_text, bold = true }),
             SnacksTerminalHeaderNC({ bg = color.bg, fg = color.strong_text, bold = true }),
 
+            SnacksNotifierHistory({ bg = color.float_bg }),
+            SnacksNotifierHistoryDateTime({ fg = color.cyan }),
+
             TelescopeNormal({ bg = color.float_bg }),
             TelescopeMatching({ fg = color.charcoal }),
             TelescopeSelection({ bg = Normal.bg.lighten(9) }),

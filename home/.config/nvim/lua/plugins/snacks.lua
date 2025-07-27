@@ -2,6 +2,7 @@ NVSPickers = {}
 NVSZoom = {}
 NVSLazygit = {}
 NVSTerminal = {}
+NVSNotifier = {}
 
 NVSPickerVerticalLayout = {
     large_screen_width = 0.4,
@@ -156,6 +157,7 @@ NVSnacks = {
             { "<M-h>", NVSPickers.highlights, mode = "n", desc = "Show highlights" },
             { "<D-g>g", NVSLazygit.show, mode = { "n", "i", "v", "t" }, desc = "Git: Lazygit" },
             { NVKeyRemaps["<D-m>"], NVSZoom.activate, mode = { "n", "i", "v" }, desc = "Maximize" },
+            { "<D-l>", NVSNotifier.log, mode = { "n", "i", "v" }, desc = "Open log" },
         }
     end,
     opts = {
@@ -199,6 +201,17 @@ NVSnacks = {
             },
             actions = NVSPickers.actions,
         },
+        notifier = {
+            enabled = true,
+            timeout = 3000,
+            level = vim.log.levels.DEBUG,
+            icons = {
+                error = NVIcons.error,
+                warn = NVIcons.warn,
+                info = NVIcons.info,
+                debug = NVIcons.debug,
+            },
+        },
         indent = {
             enabled = true,
             indent = {
@@ -240,6 +253,14 @@ NVSnacks = {
             terminal = {
                 wo = {
                     winhighlight = "Normal:SnacksTerminal,WinBar:SnacksTerminalHeader,WinBarNC:SnacksTerminalHeaderNC",
+                },
+            },
+            notification_history = {
+                backdrop = false,
+                border = { " ", " ", " ", " ", " ", " ", " ", " " },
+                keys = {
+                    q = "close",
+                    [NVKeymaps.close] = "close",
                 },
             },
         },
@@ -478,10 +499,11 @@ function NVSPickers.highlights()
             },
         },
         actions = {
-            x_copy_highlight = function(_, item)
+            x_copy_highlight = function(picker, item)
                 if item.hl_group then
                     NVClipboard.yank(item.hl_group)
                     log.info("Copied: " .. item.hl_group)
+                    picker:close()
                 end
             end,
         },
@@ -523,6 +545,14 @@ function NVSTerminal.is_app(app, bufid)
     else
         return false
     end
+end
+
+function NVSNotifier.log()
+    Snacks.notifier.show_history()
+end
+
+function NVSNotifier.hide()
+    Snacks.notifier.hide()
 end
 
 function NVSLazygit.show()

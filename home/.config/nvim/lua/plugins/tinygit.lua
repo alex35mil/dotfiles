@@ -2,9 +2,6 @@ local fn = {}
 
 NVTinygit = {
     "chrisgrieser/nvim-tinygit",
-    dependencies = {
-        "rcarriga/nvim-notify",
-    },
     keys = function()
         return {
             { "<D-g>c", fn.commit, mode = { "n", "i", "v" }, desc = "Git: Commit" },

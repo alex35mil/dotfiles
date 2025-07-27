@@ -142,7 +142,7 @@ function NVEditing.esc()
         return
     end
 
-    vim.cmd("NoiceDismiss")
+    NVSNotifier.hide()
     vim.cmd("silent noh")
 end
 

@@ -4,13 +4,11 @@ NVNoice = {
     "folke/noice.nvim",
     dependencies = {
         "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify",
     },
     event = "VeryLazy",
     keys = function()
         return {
-            { "<D-l>", "<Cmd>NoiceHistory<CR>", mode = { "n", "i", "v" }, desc = "Open log" },
-            { "<D-S-l>", "<Cmd>NoiceAll<CR>", mode = { "n", "i", "v" }, desc = "Open log" },
+            { "<D-S-l>", "<Cmd>NoiceAll<CR>", mode = { "n", "i", "v" }, desc = "Open messages log" },
         }
     end,
     opts = function()
@@ -56,6 +54,10 @@ NVNoice = {
                 },
             },
 
+            notify = {
+                enabled = false,
+            },
+
             lsp = {
                 hover = {
                     enabled = false,
@@ -74,40 +76,6 @@ NVNoice = {
             },
 
             commands = {
-                last = {
-                    view = "popup",
-                    opts = { enter = true, format = "details" },
-                    filter = {
-                        any = {
-                            { event = "notify" },
-                            { error = true },
-                            { warning = true },
-                            { event = "msg_show", kind = { "" } },
-                            { event = "lsp", kind = "message" },
-                        },
-                    },
-                    filter_opts = { count = 1 },
-                },
-                history = {
-                    view = "popup",
-                    opts = { enter = true, format = "details" },
-                    filter_opts = { reverse = true },
-                    filter = {
-                        any = {
-                            { event = "notify" },
-                            { error = true },
-                            { warning = true },
-                            { event = "msg_show" },
-                            { event = "lsp", kind = "message" },
-                        },
-                    },
-                },
-                errors = {
-                    view = "popup",
-                    opts = { enter = true, format = "details" },
-                    filter = { error = true },
-                    filter_opts = { reverse = true },
-                },
                 all = {
                     view = "popup",
                     opts = { enter = true, format = "details" },
@@ -184,10 +152,6 @@ NVNoice = {
                     format = "details",
                     view = "popup",
                 },
-                notify = {
-                    backend = "notify",
-                    render = "compact",
-                },
                 confirm = {
                     backend = "popup",
                     relative = "editor",
@@ -216,67 +180,6 @@ NVNoice = {
                 {
                     filter = { event = "lsp", kind = "progress" },
                     opts = { skip = true },
-                },
-                {
-                    filter = {
-                        event = "msg_show",
-                        any = {
-                            { kind = "undo" },
-                            { kind = "search_cmd" },
-                            { kind = "search_count" },
-                            { find = "^%[supermaven%-nvim%] nvim%-cmp is not available" },
-                            { find = "%d+ lines yanked" },
-                            { find = "%d+ lines changed" },
-                            { find = "%d+ more lines" },
-                            { find = "%d+ fewer lines" },
-                            { find = "%d+ lines indented" },
-                        },
-                    },
-                    opts = { skip = true },
-                },
-                {
-                    filter = {
-                        event = "notify",
-                        any = {
-                            { find = "%[file_browser%.to_absolute_path%] Given path .* doesn't exist" },
-                        },
-                    },
-                    opts = { skip = true },
-                },
-                {
-                    filter = { error = true },
-                    view = "notify",
-                    opts = { title = "" },
-                },
-                {
-                    filter = { warning = true },
-                    view = "notify",
-                    opts = { title = "" },
-                },
-                {
-                    filter = { event = "notify", kind = "info" },
-                    view = "notify",
-                    opts = { title = "" },
-                },
-                {
-                    filter = { event = "notify", kind = "debug" },
-                    view = "notify",
-                    opts = { title = "" },
-                },
-                {
-                    filter = { event = "notify" },
-                    view = "notify",
-                    opts = { title = "Notification" },
-                },
-                {
-                    filter = { event = "msg_show", kind = "emsg" },
-                    view = "notify",
-                    opts = { title = "Error" },
-                },
-                {
-                    filter = { event = "msg_show" },
-                    view = "notify",
-                    opts = { title = "Message" },
                 },
             },
         }
