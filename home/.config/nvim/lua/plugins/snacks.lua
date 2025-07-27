@@ -365,8 +365,8 @@ function NVSPickers.explorer()
                     local project_root = vim.fn.getcwd()
                     if explorer_root.file ~= project_root then
                         picker:set_cwd(project_root)
-                        picker:find()
                     end
+                    picker:action("explorer_close_all")
                 end
             end,
         },
