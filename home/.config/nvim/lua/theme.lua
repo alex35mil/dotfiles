@@ -423,6 +423,7 @@ function NVTheme.apply()
             SnacksPickerDir({ fg = color.faded_text }),
             SnacksPickerRow({ fg = color.faded_text }),
             SnacksPickerCol({ fg = color.faded_text }),
+            SnacksPickerSelected({ fg = color.cyan }),
             SnacksPickerListCursorLine({ bg = color.float_bg.lighten(6) }),
             SnacksPickerPreviewCursorLine({ bg = color.float_bg.lighten(6) }),
             SnacksPickerMatch({ fg = Normal.bg, bg = color.cyan }),
