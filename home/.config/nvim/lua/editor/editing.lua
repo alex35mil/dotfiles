@@ -120,13 +120,13 @@ function NVEditing.keymaps()
     })
 
     K.map({
-        "<D-s>",
+        "<D-k>",
         "Save files",
         "<Cmd>lua NVEditing.esc()<CR><Cmd>silent w<CR><Cmd>silent! wa<CR>",
         mode = "n",
     })
     K.map({
-        "<D-s>",
+        "<D-k>",
         "Save files",
         "<Cmd>lua NVEditing.esc()<CR><Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>",
         mode = { "i", "v" },
