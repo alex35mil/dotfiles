@@ -210,6 +210,7 @@ NVSnacks = {
             enabled = true,
             timeout = 3000,
             level = vim.log.levels.DEBUG,
+            margin = { top = 1, right = 1, bottom = 0 },
             icons = {
                 error = NVIcons.error,
                 warn = NVIcons.warn,
@@ -259,6 +260,9 @@ NVSnacks = {
                 wo = {
                     winhighlight = "Normal:SnacksTerminal,WinBar:SnacksTerminalHeader,WinBarNC:SnacksTerminalHeaderNC",
                 },
+            },
+            notification = {
+                border = { " ", " ", " ", " ", " ", " ", " ", " " },
             },
             notification_history = {
                 backdrop = false,

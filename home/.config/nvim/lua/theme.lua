@@ -441,40 +441,29 @@ function NVTheme.apply()
             SnacksTerminalHeader({ bg = color.orange, fg = color.strong_faded_text, bold = true }),
             SnacksTerminalHeaderNC({ bg = color.bg, fg = color.strong_text, bold = true }),
 
+            NVNotification({ bg = color.float_bg }),
+            NVNotificationMeta({ fg = color.faded_text }),
+            SnacksNotifierTrace({ NVNotification }),
+            SnacksNotifierTitleTrace({ NVNotification, fg = NVNotificationMeta.fg }),
+            SnacksNotifierBorderTrace({ NVNotification, fg = NVNotificationMeta.fg }),
+            SnacksNotifierDebug({ NVNotification }),
+            SnacksNotifierTitleDebug({ NVNotification, fg = NVNotificationMeta.fg }),
+            SnacksNotifierBorderDebug({ NVNotification, fg = NVNotificationMeta.fg }),
+            SnacksNotifierInfo({ NVNotification }),
+            SnacksNotifierTitleInfo({ NVNotification, fg = DiagnosticInfo.fg }),
+            SnacksNotifierBorderInfo({ NVNotification, fg = DiagnosticInfo.fg }),
+            SnacksNotifierWarn({ NVNotification }),
+            SnacksNotifierTitleWarn({ NVNotification, fg = DiagnosticWarn.fg }),
+            SnacksNotifierBorderWarn({ NVNotification, fg = DiagnosticWarn.fg }),
+            SnacksNotifierError({ NVNotification }),
+            SnacksNotifierTitleError({ NVNotification, fg = DiagnosticError.fg }),
+            SnacksNotifierBorderError({ NVNotification, fg = DiagnosticError.fg }),
+
             SnacksNotifierHistory({ bg = color.float_bg }),
             SnacksNotifierHistoryDateTime({ fg = color.cyan }),
 
-            TelescopeNormal({ bg = color.float_bg }),
-            TelescopeMatching({ fg = color.charcoal }),
-            TelescopeSelection({ bg = Normal.bg.lighten(9) }),
-            TelescopeBorder({ fg = color.faded_text, bg = color.float_bg }), -- this is used for telescope titles
-            TelescopeResultsDiffAdd({ GitAdded }),
-            TelescopeResultsDiffChange({ GitChanged }),
-            TelescopeResultsDiffDelete({ GitDeleted }),
-            TelescopePromptCounter({ Comment }),
-
             TroubleDirectory({ fg = color.charcoal }),
             TroubleFilename({ fg = color.charcoal, bold = true }),
-
-            NotifyBackground({ fg = color.float_bg, bg = color.float_bg }),
-            NotifyDEBUGIcon({ fg = color.silver, bg = color.float_bg }),
-            NotifyDEBUGTitle({ fg = color.silver, bg = color.float_bg, bold = true }),
-            NotifyDEBUGBody({ fg = color.silver, bg = color.float_bg }),
-            NotifyDEBUGBorder({ fg = color.float_bg, bg = color.float_bg }),
-            NotifyINFOIcon({ fg = color.blue, bg = color.float_bg }),
-            NotifyINFOTitle({ fg = color.blue, bg = color.float_bg, bold = true }),
-            NotifyINFOBody({ fg = color.text, bg = color.float_bg }),
-            NotifyINFOBorder({ fg = color.float_bg, bg = color.float_bg }),
-            NotifyWARNIcon({ fg = color.yellow, bg = color.float_bg }),
-            NotifyWARNTitle({ fg = color.yellow, bg = color.float_bg, bold = true }),
-            NotifyWARNBody({ fg = color.yellow, bg = color.float_bg }),
-            NotifyWARNBorder({ fg = color.float_bg, bg = color.float_bg }),
-            NotifyERRORIcon({ fg = color.red, bg = color.float_bg, bold = true }),
-            NotifyERRORTitle({ fg = color.red, bg = color.float_bg }),
-            NotifyERRORBody({ fg = color.red, bg = color.float_bg }),
-            NotifyERRORBorder({ fg = color.float_bg, bg = color.float_bg }),
-
-            -- RenderMarkdownCode({ Normal }),
         }
     end)
 
