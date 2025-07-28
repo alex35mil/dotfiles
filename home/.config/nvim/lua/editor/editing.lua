@@ -90,6 +90,9 @@ function NVEditing.keymaps()
     K.map({ "<D-BS>", "Delete everything to the left", "<C-u>", mode = "i" })
     K.map({ "<D-Del>", "Delete everything to the right", [[<C-o>"_D]], mode = "i" })
 
+    K.map({ "<D-S-CR>", "Split line in three", "i<CR><Esc>O", mode = "n" })
+    K.map({ "<D-S-CR>", "Split line in three", "<CR><Esc>O", mode = "i" })
+
     K.map({ "<D-a>", "Select all", "ggVG", mode = "n" })
     K.map({ "<D-a>", "Select all", "<Esc>ggVG", mode = { "i", "v" } })
 
