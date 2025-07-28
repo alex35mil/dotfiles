@@ -103,6 +103,8 @@ vim.opt.shortmess:append({
     I = true,
     c = true,
     C = true,
+    S = true,
+    s = true,
 })
 
 vim.opt.updatetime = 200
