@@ -110,9 +110,13 @@ NVFlash = {
     },
 }
 
+function fn.jump()
+    require("flash").jump({ search = { mode = "search" } })
+end
+
 function fn.search()
     if vim.fn.mode() ~= "t" then
-        require("flash").jump()
+        fn.jump()
     else
         NVKeys.send("<C-\\><C-n>", { mode = "n" })
 
@@ -134,7 +138,7 @@ function fn.search()
                 if vim.fn.mode() == "n" then
                     timer:stop()
                     timer:close()
-                    require("flash").jump()
+                    fn.jump()
                 elseif elapsed >= timeout then
                     timer:stop()
                     timer:close()

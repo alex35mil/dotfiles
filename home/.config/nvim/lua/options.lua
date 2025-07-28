@@ -55,7 +55,7 @@ vim.opt.fillchars:append({
 
 vim.opt.conceallevel = 2
 
-vim.opt.ignorecase = false
+vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.mouse = "a"
