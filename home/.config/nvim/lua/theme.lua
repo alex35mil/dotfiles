@@ -452,10 +452,10 @@ function NVTheme.apply()
             SnacksNotifierInfo({ NVNotification }),
             SnacksNotifierTitleInfo({ NVNotification, fg = DiagnosticInfo.fg }),
             SnacksNotifierBorderInfo({ NVNotification, fg = DiagnosticInfo.fg }),
-            SnacksNotifierWarn({ NVNotification }),
+            SnacksNotifierWarn({ NVNotification, fg = DiagnosticWarn.fg }),
             SnacksNotifierTitleWarn({ NVNotification, fg = DiagnosticWarn.fg }),
             SnacksNotifierBorderWarn({ NVNotification, fg = DiagnosticWarn.fg }),
-            SnacksNotifierError({ NVNotification }),
+            SnacksNotifierError({ NVNotification, fg = DiagnosticError.fg }),
             SnacksNotifierTitleError({ NVNotification, fg = DiagnosticError.fg }),
             SnacksNotifierBorderError({ NVNotification, fg = DiagnosticError.fg }),
 
