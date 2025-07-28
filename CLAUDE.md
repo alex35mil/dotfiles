@@ -28,11 +28,13 @@ This is a personal dotfiles repository containing configuration files for a deve
 - `zsh/` - Zsh-specific options and completions
 
 #### Neovim Configuration (`home/.config/nvim/`)
-- `init.lua` - Entry point loading utils, screen, keymaps, editor, and lazy
+- `init.lua` - Entry point loading utils, theme, screen, keymaps, editor, options, and plugins
 - `lua/editor/` - Core editor functionality modules
 - `lua/plugins/` - Plugin configurations
-- `lua/config/` - Neovim configuration (options, keymaps, autocmds)
 - `lua/theme/` - Custom theme implementation
+- `lua/keymaps.lua` - Keymaps helpers
+- `lua/options.lua` - Neovim and Neovide options
+- `lua/plugins.lua` - Lazy plugin manager config
 
 #### Zellij Configuration (`home/.config/zellij/`)
 - `config.kdl` - Main Zellij configuration with custom keybindings
