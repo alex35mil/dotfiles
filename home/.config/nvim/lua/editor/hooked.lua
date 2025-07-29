@@ -208,6 +208,15 @@ function NVHooked.show()
             local has_duplicates = filename_counts[display_filename] > 1
             local is_directory = vim.fn.isdirectory(filepath) == 1
 
+            local bufnr = vim.fn.bufnr(filepath)
+            local last_used
+            if bufnr ~= -1 then
+                local buf_info = vim.fn.getbufinfo(bufnr)[1]
+                if buf_info and buf_info.lastused then
+                    last_used = buf_info.lastused
+                end
+            end
+
             table.insert(items, {
                 text = display_filename,
                 file = filepath,
@@ -215,11 +224,24 @@ function NVHooked.show()
                 has_duplicates = has_duplicates,
                 is_directory = is_directory,
                 show_full_paths = STATE.show_full_paths,
+                last_used = last_used,
             })
         end
 
-        -- Sort alphabetically by full absolute path
+        -- Sort by last_used (most recent first), then alphabetically
         table.sort(items, function(a, b)
+            -- If both have last_used, sort by most recent first
+            if a.last_used and b.last_used then
+                return a.last_used > b.last_used
+            end
+            -- If only one has last_used, it comes first
+            if a.last_used and not b.last_used then
+                return true
+            end
+            if not a.last_used and b.last_used then
+                return false
+            end
+            -- If neither has last_used, sort alphabetically
             return a.file < b.file
         end)
 
