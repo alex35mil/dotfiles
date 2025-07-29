@@ -299,6 +299,7 @@ function NVSPickers.explorer()
         ["<D-BS>"] = { "explorer_del", mode = "n" },
         ["<D-o>"] = { "explorer_open", mode = { "n", "i", "v" } },
         [NVKeymaps.rename] = { "explorer_rename", mode = { "n", "i", "v" } },
+        [NVKeyRemaps["<D-h>"]] = { "x_hook", mode = { "n", "i", "v" } },
         [NVKeymaps.close] = { "close", mode = { "n", "i", "v" } },
     }
 
@@ -372,6 +373,28 @@ function NVSPickers.explorer()
                     end
                     picker:action("explorer_close_all")
                 end
+            end,
+            x_hook = function(picker, item)
+                local selected = picker:selected()
+                local files_to_hook = {}
+
+                if #selected > 0 then
+                    for _, sel_item in ipairs(selected) do
+                        if sel_item.file then
+                            table.insert(files_to_hook, sel_item.file)
+                        end
+                    end
+                else
+                    if item and item.file then
+                        table.insert(files_to_hook, item.file)
+                    end
+                end
+
+                if #files_to_hook > 0 then
+                    NVHooked.hook(files_to_hook)
+                end
+
+                picker.list:set_selected({})
             end,
         },
         on_show = function(picker)

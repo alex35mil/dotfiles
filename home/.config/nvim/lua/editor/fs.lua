@@ -25,6 +25,12 @@ end
 
 ---@param loc string
 ---@return string
+function NVFS.dirname(loc)
+    return format(loc, ":h")
+end
+
+---@param loc string
+---@return string
 function NVFS.filename(loc)
     return format(loc, ":t")
 end
