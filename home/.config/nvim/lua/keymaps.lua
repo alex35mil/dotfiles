@@ -13,6 +13,8 @@ NVKeymaps = {
         up = "<C-Up>",
         down = "<C-Down>",
     },
+    open_vsplit = "<D-CR>",
+    open_hsplit = "<D-S-CR>",
     rename = "<D-r>",
     close = "<D-w>",
 }

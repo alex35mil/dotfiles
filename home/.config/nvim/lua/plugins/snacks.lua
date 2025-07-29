@@ -85,8 +85,8 @@ end
 
 NVSPickers.keys = {
     ["<D-S-m>"] = { "toggle_maximize", mode = { "n", "i", "v" } },
-    ["<D-CR>"] = { "edit_vsplit", mode = { "n", "i", "v" } },
-    ["<D-S-CR>"] = { "edit_split", mode = { "n", "i", "v" } },
+    [NVKeymaps.open_vsplit] = { "edit_vsplit", mode = { "n", "i", "v" } },
+    [NVKeymaps.open_hsplit] = { "edit_split", mode = { "n", "i", "v" } },
     ["<C-Tab>"] = { "cycle_win", mode = { "n", "i", "v" } },
     [NVKeymaps.scroll.up] = { "list_scroll_up", mode = { "n", "i", "v" } },
     [NVKeymaps.scroll.down] = { "list_scroll_down", mode = { "n", "i", "v" } },
@@ -156,7 +156,7 @@ NVSnacks = {
             { "<M-f>", NVSPickers.text_search, mode = { "n", "i", "v", "t" }, desc = "Open text search" },
             { "<M-h>", NVSPickers.highlights, mode = "n", desc = "Show highlights" },
             { "<D-g>g", NVSLazygit.show, mode = { "n", "i", "v", "t" }, desc = "Git: Lazygit" },
-            { NVKeyRemaps["<D-m>"], NVSZoom.activate, mode = { "n", "i", "v" }, desc = "Maximize" },
+            { "<D-S-m>", NVSZoom.activate, mode = { "n", "i", "v" }, desc = "Maximize" },
             { "<D-l>", NVSNotifier.log, mode = { "n", "i", "v" }, desc = "Open log" },
         }
     end,
@@ -283,20 +283,20 @@ function NVSPickers.explorer()
         ["<D-n>"] = { "explorer_add", mode = { "n", "i", "v" } },
         ["<D-u>"] = { "explorer_close", mode = { "n", "i", "v" } },
         ["<D-S-u>"] = { "x_go_to_root", mode = { "n", "i", "v" } },
-        ["<Left>"] = { "x_collapse_dir", mode = { "n", "i", "v" } },
-        ["<Right>"] = { "x_expand_dir", mode = { "n", "i", "v" } },
+        ["<Left>"] = { "x_collapse_dir", mode = "n" },
+        ["<Right>"] = { "x_expand_dir", mode = "n" },
         ["<D-f>"] = { "explorer_focus", mode = { "n", "i", "v" } },
         ["<C-u>"] = { "x_go_up", mode = { "n", "i", "v" } },
-        ["<Space>"] = { "select_and_next", mode = { "n", "i", "v" } },
-        ["<D-Space>"] = { "select_and_prev", mode = { "n", "i", "v" } },
+        ["<Space>"] = { "select_and_next", mode = { "n", "v" } },
+        ["<D-Space>"] = { "select_and_prev", mode = { "n", "v" } },
         ["<D-a>"] = { "select_all", mode = { "n", "i", "v" } },
-        ["<BS>"] = { "list_up", mode = { "n", "i", "v" } },
+        ["<BS>"] = { "list_up", mode = "n" },
         ["<D-d>"] = { "x_duplicate", mode = { "n", "i", "v" } },
         ["<D-c>"] = { "select_and_next", mode = { "n", "i", "v" } },
         ["<D-x>"] = { "select_and_next", mode = { "n", "i", "v" } },
         ["<D-v>"] = { "x_copy_paste", mode = { "n", "i", "v" } },
         [NVKeyRemaps["<D-m>"]] = { "explorer_move", mode = { "n", "i", "v" } },
-        ["<D-BS>"] = { "explorer_del", mode = { "n", "i", "v" } },
+        ["<D-BS>"] = { "explorer_del", mode = "n" },
         ["<D-o>"] = { "explorer_open", mode = { "n", "i", "v" } },
         [NVKeymaps.rename] = { "explorer_rename", mode = { "n", "i", "v" } },
         [NVKeymaps.close] = { "close", mode = { "n", "i", "v" } },
@@ -374,6 +374,11 @@ function NVSPickers.explorer()
                 end
             end,
         },
+        on_show = function(picker)
+            vim.defer_fn(function()
+                picker:action("list_scroll_center")
+            end, 50)
+        end,
     })
 end
 
@@ -409,7 +414,7 @@ function NVSPickers.buffers()
         win = {
             input = {
                 keys = {
-                    ["<D-x>"] = { "bufdelete", mode = { "n", "i" } },
+                    ["<D-BS>"] = { "bufdelete", mode = { "n", "i" } },
                 },
             },
             list = {
