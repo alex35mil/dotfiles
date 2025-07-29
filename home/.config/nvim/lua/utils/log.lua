@@ -8,27 +8,31 @@ local DEBUG = vim.log.levels.DEBUG
 local TRACE = vim.log.levels.TRACE
 
 ---@param message string
-function log.info(message)
-    vim.notify(message, INFO)
+---@param opts? table
+function log.info(message, opts)
+    vim.notify(message, INFO, opts)
 end
 
 ---@param message string
-function log.warn(message)
-    vim.notify(message, WARN)
+---@param opts? table
+function log.warn(message, opts)
+    vim.notify(message, WARN, opts)
 end
 
 ---@param message string|table
-function log.error(message)
+---@param opts? table
+function log.error(message, opts)
     if type(message) == string then
         ---@cast message string
-        vim.notify(message, ERROR)
+        vim.notify(message, ERROR, opts)
     else
-        vim.notify(vim.inspect(message), ERROR)
+        vim.notify(vim.inspect(message), ERROR, opts)
     end
 end
 
 ---@param payload string | number | any
-function log.debug(payload)
+---@param opts? table
+function log.debug(payload, opts)
     local message
 
     local type = type(payload)
@@ -41,10 +45,11 @@ function log.debug(payload)
         message = vim.inspect(payload)
     end
 
-    vim.notify(message, DEBUG, { timeout = false })
+    vim.notify(message, DEBUG, vim.tbl_extend("force", { timeout = false }, opts or {}))
 end
 
 ---@param payload table
-function log.trace(payload)
-    vim.notify(vim.inspect(payload), TRACE)
+---@param opts? table
+function log.trace(payload, opts)
+    vim.notify(vim.inspect(payload), TRACE, opts)
 end
