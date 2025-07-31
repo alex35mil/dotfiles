@@ -305,7 +305,7 @@ function NVSPickers.explorer()
 
     Snacks.picker.explorer({
         hidden = true,
-        ignored = true,
+        ignored = false,
         jump = { close = true },
         layout = {
             preview = true,
