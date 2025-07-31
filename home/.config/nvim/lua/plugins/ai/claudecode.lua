@@ -29,6 +29,20 @@ NVClaudeCode = {
         terminal = {
             split_side = "right",
             split_width_percentage = 0.35,
+            ---@module "snacks"
+            ---@type snacks.win.Config|{}
+            snacks_win_opts = {
+                keys = {
+                    claude_new_line = {
+                        "<S-CR>",
+                        function()
+                            fn.new_line()
+                        end,
+                        mode = "t",
+                        desc = "New line",
+                    },
+                },
+            },
         },
         diff_opts = {
             auto_close_on_accept = true,
@@ -66,6 +80,13 @@ function fn.deny_diff()
         vim.cmd("ClaudeCodeDiffDeny")
         vim.cmd("ClaudeCodeFocus")
     end
+end
+
+function fn.new_line()
+    vim.api.nvim_feedkeys("\\", "t", true)
+    vim.defer_fn(function()
+        vim.api.nvim_feedkeys("\r", "t", true)
+    end, 10)
 end
 
 function fn.post_and_focus()
