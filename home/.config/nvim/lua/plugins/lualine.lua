@@ -144,7 +144,7 @@ function Sections.mode()
             ["REPLACE"] = { text = "R", bg = palette.red },
             ["COMMAND"] = { text = "C", bg = palette.yellow },
             ["EX"] = { text = "X", bg = palette.yellow },
-            ["TERMINAL"] = { text = "T", bg = palette.cyan },
+            ["TERMINAL"] = { text = "T", bg = palette.orange },
         }
 
         return mode_config[m] or { text = m, bg = palette.cyan }
