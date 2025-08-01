@@ -57,11 +57,9 @@ end
 
 ---@param direction "up" | "down"
 function fn.scroll_vertical(direction)
-    if NVLsp.scroll_popup(direction) then
-        return
-    elseif NVNoice.scroll_lsp_doc(direction) then
-        return
-    elseif NVWindows.is_window_floating(vim.api.nvim_get_current_win()) then
+    NVLsp.hide_popup_unless_active()
+
+    if NVWindows.is_window_floating(vim.api.nvim_get_current_win()) then
         local keymap
 
         if direction == "up" then

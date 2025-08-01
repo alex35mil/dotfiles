@@ -1,5 +1,7 @@
 NVLsp = {}
 
+local fn = {}
+
 ---@class Popup
 ---@field type PopupType
 ---@field popup NuiPopup
@@ -142,6 +144,22 @@ function NVLsp.keymaps()
             "Format",
             NVConform.format,
             mode = { "n", "v" },
+        },
+        {
+            NVKeymaps.scroll_ctx.up,
+            "LSP: Scroll popup up",
+            function()
+                fn.scroll("up")
+            end,
+            mode = { "n", "i" },
+        },
+        {
+            NVKeymaps.scroll_ctx.down,
+            "LSP: Scroll popup down",
+            function()
+                fn.scroll("down")
+            end,
+            mode = { "n", "i" },
         },
     }
 end
@@ -755,10 +773,17 @@ function HoverPopup:render()
     self:attach_listeners()
 end
 
---- Exports ---
+---@param direction "up"|"down"
+function fn.scroll(direction)
+    if fn.scroll_popup(direction) then
+        return
+    elseif NVNoice.scroll_lsp_doc(direction) then
+        return
+    end
+end
 
 ---@param direction "up"|"down"
-function NVLsp.scroll_popup(direction)
+function fn.scroll_popup(direction)
     local popup = Popups:get_popup(vim.api.nvim_get_current_win())
 
     if not popup then
@@ -781,6 +806,8 @@ function NVLsp.scroll_popup(direction)
     end
 end
 
+--- Exports ---
+
 function NVLsp.ensure_popup_hidden()
     -- Let's check first if we're inside a diagnostic popup
     local parent_winid = Popup.get_lsp_popup_parent_winid()
@@ -795,6 +822,27 @@ function NVLsp.ensure_popup_hidden()
         end
 
         return true
+    else
+        local current_winid = vim.api.nvim_get_current_win()
+
+        local popup = Popups:get_popup(current_winid)
+
+        if not popup then
+            return false
+        end
+
+        popup:unmount()
+
+        return true
+    end
+end
+
+function NVLsp.hide_popup_unless_active()
+    -- Checking if we're inside a diagnostic popup
+    local parent_winid = Popup.get_lsp_popup_parent_winid()
+
+    if parent_winid then
+        return false
     else
         local current_winid = vim.api.nvim_get_current_win()
 
