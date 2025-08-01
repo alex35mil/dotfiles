@@ -32,7 +32,7 @@ function NVHooked.autocmds()
         group = group,
         once = true,
         callback = function()
-            fn.load()
+            vim.schedule(fn.load)
         end,
     })
 
