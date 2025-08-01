@@ -299,7 +299,7 @@ function NVSPickers.explorer()
         ["<D-BS>"] = { "explorer_del", mode = "n" },
         ["<D-o>"] = { "explorer_open", mode = { "n", "i", "v" } },
         [NVKeymaps.rename] = { "explorer_rename", mode = { "n", "i", "v" } },
-        [NVKeyRemaps["<D-h>"]] = { "x_hook", mode = { "n", "i", "v" } },
+        ["<C-h>"] = { "x_hook", mode = { "n", "i", "v" } },
         [NVKeymaps.close] = { "close", mode = { "n", "i", "v" } },
     }
 

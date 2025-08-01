@@ -1,6 +1,12 @@
 local title = "Hooked"
 
-NVHooked = { data = nil }
+---@class NVHooked
+---@field data table<Filepath, table> | nil
+---@field watcher Watcher | nil
+NVHooked = {
+    data = nil,
+    watcher = nil,
+}
 
 local fn = {}
 
@@ -17,6 +23,26 @@ function NVHooked.keymaps()
         "Hook/unhook a buffer",
         NVHooked.toggle,
         mode = { "n", "i", "v" },
+    })
+end
+
+function NVHooked.autocmds()
+    local group = vim.api.nvim_create_augroup("NVHooked", { clear = true })
+    vim.api.nvim_create_autocmd("VimEnter", {
+        group = group,
+        once = true,
+        callback = function()
+            fn.load()
+        end,
+    })
+
+    vim.api.nvim_create_autocmd("VimLeavePre", {
+        group = group,
+        callback = function()
+            if NVHooked.watcher then
+                NVHooked.watcher:cleanup()
+            end
+        end,
     })
 end
 
@@ -52,6 +78,7 @@ end
 ---@return boolean, table
 function fn.load()
     local cache_path = fn.get_cache_path()
+
     if vim.fn.filereadable(cache_path) == 0 then
         return true, {}
     end
@@ -60,11 +87,46 @@ function fn.load()
 
     if ok then
         NVHooked.data = data
+
+        if not NVHooked.watcher then
+            fn.watch(data)
+        end
     else
         fn.log("error", "Failed to load hooked buffers")
     end
 
     return ok, data
+end
+
+function fn.watch(data)
+    local Watcher = require("utils.watcher")
+
+    local ok, watcher = Watcher:new({
+        on_move = function(old_path, new_path, _)
+            local loaded, hooked = fn.load()
+            if loaded and hooked[old_path] then
+                hooked[new_path] = hooked[old_path]
+                hooked[old_path] = nil
+
+                fn.save(hooked)
+            end
+        end,
+        on_delete = function(path, _)
+            local loaded, hooked = fn.load()
+            if loaded and hooked[path] then
+                hooked[path] = nil
+                fn.save(hooked)
+            end
+        end,
+    })
+
+    if ok and watcher then
+        for filepath, _ in pairs(data) do
+            watcher:track(filepath)
+        end
+
+        NVHooked.watcher = watcher
+    end
 end
 
 function fn.save(data)
@@ -107,6 +169,10 @@ function NVHooked.hook(files)
             return
         end
 
+        for _, filepath in ipairs(added) do
+            NVHooked.watcher:track(filepath)
+        end
+
         if #added == 1 then
             fn.log("info", "󰓎  Hooked " .. NVFS.filename(added[1]))
         else
@@ -144,6 +210,8 @@ function NVHooked.toggle(bufid)
             return
         end
 
+        NVHooked.watcher:untrack(filepath)
+
         fn.log("info", "󱕩  Unhooked " .. NVFS.filename(filepath))
         return false -- Removed
     else
@@ -154,6 +222,8 @@ function NVHooked.toggle(bufid)
         if not saved then
             return
         end
+
+        NVHooked.watcher:track(filepath)
 
         fn.log("info", "󰓎  Hooked " .. NVFS.filename(filepath))
         return true -- Added
@@ -207,6 +277,8 @@ function NVHooked.show()
             local display_filename = display_filenames[filepath]
             local has_duplicates = filename_counts[display_filename] > 1
             local is_directory = vim.fn.isdirectory(filepath) == 1
+            local is_file = vim.fn.filereadable(filepath) == 1
+            local is_valid = is_directory or is_file
 
             local bufnr = vim.fn.bufnr(filepath)
             local last_used
@@ -222,6 +294,7 @@ function NVHooked.show()
                 file = filepath,
                 display_filename = display_filename,
                 has_duplicates = has_duplicates,
+                is_valid = is_valid,
                 is_directory = is_directory,
                 show_full_paths = STATE.show_full_paths,
                 last_used = last_used,
@@ -252,7 +325,10 @@ function NVHooked.show()
         local icon = nil
         local icon_hl = "SnacksPickerFile"
 
-        if item.is_directory then
+        if not item.is_valid then
+            icon = " "
+            icon_hl = "SnacksPickerLinkBroken"
+        elseif item.is_directory then
             icon = "󰉋 "
             icon_hl = "SnacksPickerDirectory"
         else
@@ -272,11 +348,11 @@ function NVHooked.show()
             table.insert(parts, { icon, icon_hl })
         end
 
-        table.insert(parts, { " " .. item.text, "SnacksPickerFile" })
+        table.insert(parts, { " " .. item.text, item.is_valid and "SnacksPickerFile" or "SnacksPickerLinkBroken" })
 
         if item.show_full_paths or item.has_duplicates then
             local full_path = vim.fn.fnamemodify(item.file, ":~:.")
-            table.insert(parts, { "  " .. full_path, "SnacksPickerDir" })
+            table.insert(parts, { "  " .. full_path, item.is_valid and "SnacksPickerDir" or "SnacksPickerLinkBroken" })
         end
 
         return parts
@@ -341,7 +417,9 @@ function NVHooked.show()
         actions = {
             hooked_open = function(picker, item)
                 if item then
-                    if not item.is_directory then
+                    if not item.is_valid then
+                        fn.log("error", "Item at " .. item.file .. " doesn't exist")
+                    elseif not item.is_directory then
                         picker:action("confirm")
                     else
                         Snacks.explorer({
