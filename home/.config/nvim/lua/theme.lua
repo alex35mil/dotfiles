@@ -277,8 +277,8 @@ function NVTheme.apply()
             -- TermCursor   { }, -- Cursor in a focused terminal
             -- TermCursorNC { }, -- Cursor in an unfocused terminal
             -- ErrorMsg     { }, -- Error messages on the command line
-            Folded { fg = color.bg, bg = color.charcoal }, -- Line used for closed folds
-            FoldColumn { fg = color.charcoal, bg = color.bg }, -- 'foldcolumn'
+            Folded { fg = color.bg, bg = color.purple.mix(Normal.bg, 70) }, -- Line used for closed folds
+            FoldColumn { fg = color.text, bg = color.bg }, -- 'foldcolumn'
             SignColumn { fg = color.text }, -- Column where |signs| are displayed
             -- IncSearch    { }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
             -- Substitute   { }, -- |:substitute| replacement text highlighting
