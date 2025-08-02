@@ -45,6 +45,7 @@ NVClaudeCode = {
             },
         },
         diff_opts = {
+            keep_terminal_focus = false,
             auto_close_on_accept = true,
             vertical_split = true,
             open_in_current_tab = false,
@@ -158,12 +159,12 @@ function fn.post_and_focus()
         vim.cmd("ClaudeCode")
 
         local function wait_for_claude_connection(callback)
-            local start_time = vim.loop.hrtime()
+            local start_time = vim.uv.hrtime()
             local timeout_ns = 10 * 1000 * 1000 * 1000 -- 5 seconds in nanoseconds
             local check_interval = 100 -- milliseconds
 
             local function check_connection()
-                local elapsed = vim.loop.hrtime() - start_time
+                local elapsed = vim.uv.hrtime() - start_time
 
                 if fn.is_claude_connected() then
                     if was_claude_initially_connected then

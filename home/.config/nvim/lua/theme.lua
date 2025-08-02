@@ -245,7 +245,7 @@ function NVTheme.apply()
             diffChanged { GitChanged },
             diffDeleted { GitDeleted },
 
-            DiffAdd { bg = color.diff_add_bg.mix(Normal.bg, 80) }, -- Diff mode: Added line |diff.txt|
+            DiffAdd { bg = color.diff_add_bg.mix(Normal.bg, 50) }, -- Diff mode: Added line |diff.txt|
             DiffChange { bg = color.blue.saturate(20).mix(Normal.bg, 85) }, -- Diff mode: Changed line |diff.txt|
             DiffDelete { fg = color.faded_text, bg = color.bg }, -- Diff mode: Deleted line |diff.txt|
             DiffText { bg = color.cyan.mix(Normal.bg, 70) }, -- Diff mode: Changed text within a changed line |diff.txt|

@@ -1,15 +1,19 @@
 {
-    "permissions": {
-        "allow": [
-            "WebFetch",
-            "Glob",
-            "Grep",
-            "LS",
-            "Read",
-            "NotebookRead",
-            "Task",
-            "TodoWrite"
-        ]
-    },
-    "includeCoAuthoredBy": false
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "WebFetch",
+      "Glob",
+      "Grep",
+      "LS",
+      "Read",
+      "NotebookRead",
+      "Task",
+      "TodoWrite"
+    ]
+  },
+  "feedbackSurveyState": {
+    "lastShownTime": 1754138018991
+  }
 }
