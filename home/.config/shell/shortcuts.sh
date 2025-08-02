@@ -226,37 +226,6 @@ function gen-ssh() {
     cat ~/.ssh/config
 }
 
-
-# === Git
-function git-branch-stat() {
-    base_branch=${1:-main}
-
-    # Get stats for tracked files
-    tracked_stats=$(git diff --shortstat $base_branch)
-    files_changed=$(echo "$tracked_stats" | grep -o '[0-9]\+ file' | grep -o '[0-9]\+' || echo "0")
-    insertions=$(echo "$tracked_stats" | grep -o '[0-9]\+ insertion' | grep -o '[0-9]\+' || echo "0")
-    deletions=$(echo "$tracked_stats" | grep -o '[0-9]\+ deletion' | grep -o '[0-9]\+' || echo "0")
-
-    # Count untracked files
-    untracked_count=$(git ls-files --others --exclude-standard | wc -l | tr -d ' ')
-
-    # Count deleted files
-    deleted_count=$(git diff --diff-filter=D --summary $base_branch | wc -l | tr -d ' ')
-
-    # Total files affected
-    total_files=$((files_changed + untracked_count))
-
-    # ANSI color codes
-    GREEN='\033[0;32m'
-    RED='\033[0;31m'
-    BLUE='\033[0;34m'
-    NC='\033[0m' # No Color
-
-    echo "∑ Cumulative changes vs $base_branch branch:"
-    echo -e "Files: $total_files (${BLUE}$((files_changed - deleted_count)) changed${NC}, ${GREEN}$untracked_count untracked${NC}, ${RED}$deleted_count deleted${NC})"
-    echo -e "Lines: ${GREEN}+$insertions${NC} / ${RED}-$deletions${NC}"
-}
-
 # === Misc
 # `w` with no arguments lists all shell aliases,
 # otherwise lists aliases, that start with the given chars.

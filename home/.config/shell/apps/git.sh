@@ -63,3 +63,45 @@ function gcl() {
 function ginit() {
     git init && git commit -m "Initial commit" --allow-empty
 }
+
+# Prints stats for tracked files
+function git-branch-stat() {
+    # If base branch is provided - use it, otherwise auto-detect
+    if [ -n "$1" ]; then
+        base_branch="$1"
+    else
+        if git show-ref --verify --quiet refs/heads/main; then
+            base_branch="main"
+        elif git show-ref --verify --quiet refs/heads/master; then
+            base_branch="master"
+        else
+            echo "Error: No base branch provided and neither 'main' nor 'master' branches exist" >&2
+            return 1
+        fi
+    fi
+
+    # Get stats for tracked files
+    tracked_stats=$(git diff --shortstat $base_branch)
+    files_changed=$(echo "$tracked_stats" | grep -o '[0-9]\+ file' | grep -o '[0-9]\+' || echo "0")
+    insertions=$(echo "$tracked_stats" | grep -o '[0-9]\+ insertion' | grep -o '[0-9]\+' || echo "0")
+    deletions=$(echo "$tracked_stats" | grep -o '[0-9]\+ deletion' | grep -o '[0-9]\+' || echo "0")
+
+    # Count untracked files
+    untracked_count=$(git ls-files --others --exclude-standard | wc -l | tr -d ' ')
+
+    # Count deleted files
+    deleted_count=$(git diff --diff-filter=D --summary $base_branch | wc -l | tr -d ' ')
+
+    # Total files affected
+    total_files=$((files_changed + untracked_count))
+
+    # ANSI color codes
+    GREEN='\033[0;32m'
+    RED='\033[0;31m'
+    BLUE='\033[0;34m'
+    NC='\033[0m' # No Color
+
+    echo "∑ Cumulative changes vs $base_branch branch:"
+    echo -e "Files: $total_files (${BLUE}$((files_changed - deleted_count)) changed${NC}, ${GREEN}$untracked_count untracked${NC}, ${RED}$deleted_count deleted${NC})"
+    echo -e "Lines: ${GREEN}+$insertions${NC} / ${RED}-$deletions${NC}"
+}
