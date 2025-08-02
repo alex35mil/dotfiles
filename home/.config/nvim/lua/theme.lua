@@ -278,7 +278,7 @@ function NVTheme.apply()
             -- TermCursorNC { }, -- Cursor in an unfocused terminal
             -- ErrorMsg     { }, -- Error messages on the command line
             Folded { fg = color.bg, bg = color.purple.mix(Normal.bg, 70) }, -- Line used for closed folds
-            FoldColumn { fg = color.text, bg = color.bg }, -- 'foldcolumn'
+            FoldColumn { fg = color.text }, -- 'foldcolumn'
             SignColumn { fg = color.text }, -- Column where |signs| are displayed
             -- IncSearch    { }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
             -- Substitute   { }, -- |:substitute| replacement text highlighting
@@ -365,6 +365,8 @@ function NVTheme.apply()
 
             StatusBarSegmentNormal { fg = color.bar_text, bg = color.bar_bg },
             StatusBarSegmentFaded { fg = color.bar_faded_text, bg = color.bar_bg },
+            StatusBarFilename { fg = color.bar_faded_text, bg = color.bar_bg, bold = true },
+            StatusBarFilenameLoc { fg = color.bar_faded_text, bg = color.bar_bg },
             StatusBarDiagnosticError { fg = DiagnosticError.fg, bg = color.bar_bg },
             StatusBarDiagnosticWarn { fg = DiagnosticWarn.fg, bg = color.bar_bg },
             StatusBarDiagnosticInfo { fg = DiagnosticInfo.fg, bg = color.bar_bg },

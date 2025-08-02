@@ -1,6 +1,14 @@
 local Theme = {}
 local Sections = {}
 
+---@class State
+---@field tabline "lsp_symbol" | "filepath"
+---@field statusline "workspace_lsps" | "buffer_lsps"
+local State = {
+    tabline = "filepath",
+    statusline = "buffer_lsps",
+}
+
 local fn = {}
 
 local __center__ = "%="
@@ -21,6 +29,25 @@ NVLualine = {
         "folke/noice.nvim",
         "folke/trouble.nvim",
         "nvim-tree/nvim-web-devicons",
+    },
+    lazy = false,
+    keys = {
+        {
+            "<C-BS>",
+            function()
+                fn.toggle_statusline()
+            end,
+            mode = { "n", "i", "v" },
+            desc = "Toggle statusline: Diagnostics from all LSPs or from LSPs attached to the current buffer",
+        },
+        {
+            "<C-Del>",
+            function()
+                fn.toggle_tabline()
+            end,
+            mode = { "n", "i", "v" },
+            desc = "Toggle tabline: LSP symbol or file path",
+        },
     },
     opts = function()
         -- PERF: we don't need this lualine require madness 🤷
@@ -45,7 +72,7 @@ NVLualine = {
                 lualine_b = {},
                 lualine_c = {
                     __center__,
-                    Sections.symbol(),
+                    Sections.file_or_lsp_symbol(),
                 },
                 lualine_x = {},
                 lualine_y = {},
@@ -57,7 +84,7 @@ NVLualine = {
                 },
                 lualine_b = {
                     Sections.branch(),
-                    Sections.filename(),
+                    Sections.window_and_buffer(),
                 },
                 lualine_c = {
                     __center__,
@@ -161,21 +188,19 @@ function Sections.mode()
     }
 end
 
-function Sections.filename()
+function Sections.window_and_buffer()
     return {
-        "filename",
-        path = 1,
-        color = function()
-            return { fg = color.active_text, bg = color.bg }
+        function()
+            local win_icon = "󰬞"
+            local buf_icon = "󰬉"
+
+            local winnr = vim.api.nvim_get_current_win()
+            local bufnr = vim.api.nvim_get_current_buf()
+
+            return " " .. win_icon .. " " .. winnr .. " " .. buf_icon .. " " .. bufnr
         end,
-        fmt = function(v)
-            if fn.should_ignore_filetype() then
-                return nil
-            elseif string.find(v, "%[No Name%]") then
-                return nil
-            else
-                return v
-            end
+        color = function()
+            return { fg = color.incative_text, bg = color.bg }
         end,
     }
 end
@@ -189,22 +214,60 @@ function Sections.branch()
     }
 end
 
-function Sections.symbol()
-    local trouble = require("trouble")
-
-    local symbols = trouble.statusline({
-        mode = "lsp_document_symbols",
-        groups = {},
-        title = false,
-        filter = { range = true },
-        format = "{kind_icon:StatusBarSegmentFaded}{symbol.name:StatusBarSegmentFaded} ",
-        hl_group = "StatusBarSegmentFaded",
-    })
+function Sections.file_or_lsp_symbol()
+    -- PERF: Lazy initialization
+    local __symbols
+    local function symbols()
+        if not __symbols then
+            local trouble = require("trouble")
+            __symbols = trouble.statusline({
+                mode = "lsp_document_symbols",
+                groups = {},
+                title = false,
+                filter = { range = true },
+                format = "{kind_icon:StatusBarSegmentFaded}{symbol.name:StatusBarSegmentFaded} ",
+                hl_group = "StatusBarSegmentFaded",
+            })
+        end
+        return __symbols
+    end
 
     return {
-        symbols and symbols.get,
+        function()
+            if State.tabline == "lsp_symbol" then
+                return symbols().get()
+            else
+                local bufname = vim.api.nvim_buf_get_name(0)
+
+                if bufname == "" then
+                    return ""
+                end
+
+                local relative = NVFS.relative_path(bufname)
+                local filename = NVFS.filename(relative)
+                local directory = NVFS.dirname(relative)
+
+                if directory == "." then
+                    return "%#StatusBarFilename#" .. filename .. "%*"
+                else
+                    return "%#StatusBarFilename#"
+                        .. filename
+                        .. "%*%#StatusBarFilenameLoc#"
+                        .. " · "
+                        .. directory
+                        .. "%*"
+                end
+            end
+        end,
         cond = function()
-            return vim.b.trouble_lualine ~= false and symbols.has()
+            if State.tabline == "lsp_symbol" then
+                return vim.b.trouble_lualine ~= false and symbols().has()
+            else
+                return true
+            end
+        end,
+        color = function()
+            return { fg = color.incative_text, bg = color.bg }
         end,
     }
 end
@@ -248,19 +311,47 @@ function Sections.diagnostics(options)
 
         local function count_diagnostics(ctx, severity)
             local bufnr
+            local namespaces
 
             if ctx == context.BUFFER then
                 bufnr = 0
+                namespaces = nil
             elseif ctx == context.WORKSPACE then
                 bufnr = nil
+                if State.statusline == "workspace_lsps" then
+                    namespaces = nil
+                else
+                    -- collect namespaces from LSPs attached to current buffer
+                    namespaces = {}
+                    local current_buf = vim.api.nvim_get_current_buf()
+                    local attached_clients = vim.lsp.get_clients({ bufnr = current_buf })
+
+                    for _, client in ipairs(attached_clients) do
+                        local ns = vim.lsp.diagnostic.get_namespace(client.id)
+                        table.insert(namespaces, ns)
+                    end
+                end
             else
-                vim.print("Unexpected diagnostics context: " .. ctx)
+                log.error("Unexpected diagnostics context: " .. ctx)
                 return nil
             end
 
-            local total = vim.diagnostic.get(bufnr, { severity = severity })
+            local total_count = 0
 
-            return vim.tbl_count(total)
+            if namespaces then
+                for _, ns in ipairs(namespaces) do
+                    local reported = vim.diagnostic.get(bufnr, {
+                        severity = severity,
+                        namespace = ns,
+                    })
+                    total_count = total_count + vim.tbl_count(reported)
+                end
+            else
+                local reported = vim.diagnostic.get(bufnr, { severity = severity })
+                total_count = vim.tbl_count(reported)
+            end
+
+            return total_count
         end
 
         local function get_diagnostic_results(opts)
@@ -332,6 +423,22 @@ function Sections.diagnostics(options)
             return nil
         end
 
+        local lsp_scope_icon
+        local all_clear_icon = "󰓏"
+
+        if State.statusline == "buffer_lsps" then
+            local devicons = require("nvim-web-devicons")
+
+            local icon, _ = devicons.get_icon(vim.fn.expand("%:t"))
+            if icon == nil then
+                icon, _ = devicons.get_icon_by_filetype(vim.bo.filetype)
+            end
+
+            if icon then
+                lsp_scope_icon = icon .. "    "
+            end
+        end
+
         local bufnr = vim.api.nvim_get_current_buf()
 
         local diagnostics_results
@@ -343,7 +450,7 @@ function Sections.diagnostics(options)
         end
 
         if diagnostics_results == nil then
-            return ""
+            return lsp_scope_icon and lsp_scope_icon .. all_clear_icon or all_clear_icon
         end
 
         local lualine_utils = require("lualine.utils.utils")
@@ -389,7 +496,9 @@ function Sections.diagnostics(options)
             output[#output] = output[#output]:sub(1, -2)
         end
 
-        return table.concat(output, " ")
+        local result = table.concat(output, " ")
+
+        return lsp_scope_icon and lsp_scope_icon .. result or result
     end
 
     return {
@@ -416,7 +525,7 @@ function Sections.diagnostics(options)
             hint = NVIcons.hint .. " ",
         },
         cond = function()
-            return not fn.is_lsp_progress()
+            return fn.has_lsp_attached() and not fn.is_lsp_progress()
         end,
     }
 end
@@ -428,13 +537,18 @@ function Sections.updates()
         status.updates,
         cond = status.has_updates,
         color = function()
-            return { fg = color.active_text }
+            return { fg = color.incative_text, bg = color.bg }
         end,
     }
 end
 
 function Sections.searchcount()
-    return "searchcount"
+    return {
+        "searchcount",
+        color = function()
+            return { fg = color.incative_text, bg = color.bg }
+        end,
+    }
 end
 
 function Sections.filetype()
@@ -462,6 +576,8 @@ function Sections.filetype()
                     return "plugins"
                 elseif v == "mason" then
                     return "tools"
+                elseif v == "grug-far" then
+                    return "search"
                 elseif v == "DiffviewFiles" then
                     return "diff"
                 else
@@ -476,7 +592,10 @@ function Sections.progress()
     return {
         "progress",
         separator = " ",
-        padding = { left = 1, right = 0 },
+        padding = { left = 1, right = 1 },
+        color = function()
+            return { fg = color.incative_text, bg = color.bg }
+        end,
     }
 end
 
@@ -484,6 +603,9 @@ function Sections.location()
     return {
         "location",
         padding = { left = 0, right = 1 },
+        color = function()
+            return { fg = color.incative_text, bg = color.bg }
+        end,
     }
 end
 
@@ -532,6 +654,28 @@ end
 
 function NVLualine.rename_tab(name)
     vim.cmd("LualineRenameTab " .. name)
+end
+
+function fn.toggle_tabline()
+    if State.tabline == "lsp_symbol" then
+        State.tabline = "filepath"
+    else
+        State.tabline = "lsp_symbol"
+    end
+    require("lualine").refresh({ place = { "tabline" } })
+end
+
+function fn.toggle_statusline()
+    if State.statusline == "workspace_lsps" then
+        State.statusline = "buffer_lsps"
+    else
+        State.statusline = "workspace_lsps"
+    end
+    require("lualine").refresh({ place = { "statusline" } })
+end
+
+function fn.has_lsp_attached()
+    return #vim.lsp.get_clients({ bufnr = 0 }) > 0
 end
 
 function fn.is_lsp_progress()

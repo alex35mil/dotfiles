@@ -18,6 +18,10 @@ NVWebDevicons = {
                 icon = "",
                 name = "Preview",
             },
+            search = {
+                icon = "󰦄",
+                name = "Search",
+            },
             plugins = {
                 icon = "",
                 name = "Plugins",
@@ -39,6 +43,7 @@ NVWebDevicons = {
             lazy = "plugins",
             mason = "tools",
             DiffviewFiles = "diff",
+            ["grug-far"] = "search",
         })
     end,
 }
