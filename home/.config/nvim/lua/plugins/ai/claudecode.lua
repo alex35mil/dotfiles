@@ -41,14 +41,21 @@ NVClaudeCode = {
                         mode = "t",
                         desc = "New line",
                     },
+                    claude_hide = {
+                        NVKeymaps.close,
+                        function(self)
+                            self:hide()
+                        end,
+                        mode = "t",
+                        desc = "Hide",
+                    },
                 },
             },
         },
         diff_opts = {
+            layout = "vertical",
+            open_in_new_tab = true,
             keep_terminal_focus = false,
-            auto_close_on_accept = true,
-            vertical_split = true,
-            open_in_current_tab = false,
         },
     },
 }
