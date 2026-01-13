@@ -145,22 +145,6 @@ function NVLsp.keymaps()
             NVConform.format,
             mode = { "n", "v" },
         },
-        {
-            NVKeymaps.scroll_ctx.up,
-            "LSP: Scroll popup up",
-            function()
-                fn.scroll("up")
-            end,
-            mode = { "n", "i" },
-        },
-        {
-            NVKeymaps.scroll_ctx.down,
-            "LSP: Scroll popup down",
-            function()
-                fn.scroll("down")
-            end,
-            mode = { "n", "i" },
-        },
     }
 end
 
@@ -379,6 +363,29 @@ end
 function Popup:attach_listeners()
     local popup = self.popup
 
+    -- Set up buffer-local scroll keymaps for the parent window
+    local parent_bufnr = vim.api.nvim_win_get_buf(self.parent)
+
+    K.map({
+        NVKeymaps.scroll_ctx.up,
+        "LSP: Scroll popup up",
+        function()
+            fn.scroll("up")
+        end,
+        mode = { "n", "i" },
+        buffer = parent_bufnr,
+    })
+
+    K.map({
+        NVKeymaps.scroll_ctx.down,
+        "LSP: Scroll popup down",
+        function()
+            fn.scroll("down")
+        end,
+        mode = { "n", "i" },
+        buffer = parent_bufnr,
+    })
+
     local augroup_id = vim.api.nvim_create_augroup("LSPPopupGroup", { clear = true })
 
     local function unmount()
@@ -427,6 +434,11 @@ function Popup:focus()
 end
 
 function Popup:unmount()
+    -- Clean up buffer-local scroll keymaps
+    local parent_bufnr = vim.api.nvim_win_get_buf(self.parent)
+    pcall(vim.keymap.del, { "n", "i" }, NVKeymaps.scroll_ctx.up, { buffer = parent_bufnr })
+    pcall(vim.keymap.del, { "n", "i" }, NVKeymaps.scroll_ctx.down, { buffer = parent_bufnr })
+
     self.popup:unmount()
     Popups[self.parent] = nil
 end
