@@ -1,0 +1,14 @@
+layout {
+    tab name="terminal" {
+        pane split_direction="vertical" {
+            pane {
+                pane name="editor"
+                pane name="shell"
+            }
+            pane name="monitor" command="btop"
+        }
+        pane size=1 borderless=true {
+            plugin location="file:/Users/Alex/.config/zellij/plugins/statusbar.wasm"
+        }
+    }
+}

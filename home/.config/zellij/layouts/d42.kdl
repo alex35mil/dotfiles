@@ -1,0 +1,61 @@
+layout {
+    tab name="terminal" focus=true {
+        pane focus=true
+        pane size="30%"
+        pane size=1 borderless=true {
+            plugin location="file:/Users/Alex/.config/zellij/plugins/statusbar.wasm"
+        }
+    }
+    tab name="app" {
+        pane split_direction="vertical" {
+            pane name="web/rescript" command="zsh" start_suspended=true {
+                args "-c" "cli rescript watch"
+            }
+            pane split_direction="horizontal" {
+                pane name="web/platform/next" command="zsh" start_suspended=true {
+                    args "-c" "cli web platform next develop"
+                }
+                pane name="web/sites/next" command="zsh" start_suspended=true {
+                    args "-c" "cli web sites next develop"
+                }
+            }
+        }
+        pane split_direction="vertical" {
+            pane name="core/server" command="zsh" start_suspended=true {
+                args "-c" "cli core develop core-server"
+            }
+            pane name="core/dns-verifier" command="zsh" start_suspended=true {
+                args "-c" "cli core develop dns-verifier"
+            }
+            pane name="lambda/image-uploader" command="zsh" start_suspended=true {
+                args "-c" "cli lambda watch"
+            }
+        }
+        pane size="15%" split_direction="vertical" {
+            pane name="integrations/obsidian" command="zsh" start_suspended=true {
+                args "-c" "cli integrations obsidian develop"
+            }
+        }
+        pane size=1 borderless=true {
+            plugin location="file:/Users/Alex/.config/zellij/plugins/statusbar.wasm"
+        }
+    }
+    tab name="sidecars" {
+        pane split_direction="horizontal" {
+            pane split_direction="vertical" {
+                pane name="docker/proxy" command="zsh" start_suspended=true {
+                    args "-c" "cli docker-compose proxy up"
+                }
+                pane name="docker/dev-services" command="zsh" start_suspended=true {
+                    args "-c" "cli docker-compose dev up"
+                }
+            }
+            pane name="service-proxy" size="20%" command="zsh" start_suspended=true {
+                args "-c" "cli service-proxy run"
+            }
+        }
+        pane size=1 borderless=true {
+            plugin location="file:/Users/Alex/.config/zellij/plugins/statusbar.wasm"
+        }
+    }
+}
