@@ -39,7 +39,8 @@ NVGrugFar = {
     },
     keys = function()
         return {
-            { "<D-S-f>", fn.open, mode = { "n", "i", "v" }, desc = "Search and Replace" },
+            { "<D-S-f>", fn.open, mode = { "n", "i", "v" }, desc = "Search and Replace in the project" },
+            { "<C-S-f>", fn.open_current, mode = { "n", "i", "v" }, desc = "Search and Replace in the current buffer" },
         }
     end,
 }
@@ -53,6 +54,18 @@ function fn.open()
         instance:open()
     else
         plugin.open({ transient = true })
+    end
+end
+
+function fn.open_current()
+    local plugin = require("grug-far")
+
+    local success, instance = pcall(plugin.get_instance)
+
+    if success and instance then
+        instance:open()
+    else
+        plugin.open({ transient = true, prefills = { paths = vim.fn.expand("%") } })
     end
 end
 
