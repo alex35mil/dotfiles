@@ -126,6 +126,8 @@ function fn.toggle_diff()
             fn.open_diff()
             NVLualine.rename_tab("diff")
         end
+
+        vim.defer_fn(NVIncline.refresh, 100)
     end
 end
 
