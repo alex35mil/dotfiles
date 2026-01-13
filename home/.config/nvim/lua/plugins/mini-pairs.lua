@@ -1,7 +1,17 @@
 NVMiniPairs = {
     "echasnovski/mini.pairs",
     opts = {
-        skip_ts = {},
+        mappings = {
+            ['"'] = { action = "open", pair = '""', neigh_pattern = "[^\\][%s%)%]%}%,%.]" },
+            ["'"] = { action = "open", pair = "''", neigh_pattern = "[^%a\\][%s%)%]%}%,%.]" },
+            ["`"] = { action = "open", pair = "``", neigh_pattern = "[^\\][%s%)%]%}%,%.]" },
+            ["("] = { action = "open", pair = "()", neigh_pattern = "[^\\][%s%)%]%}%,%.]" },
+            ["["] = { action = "open", pair = "[]", neigh_pattern = "[^\\][%s%)%]%}%,%.]" },
+            ["{"] = { action = "open", pair = "{}", neigh_pattern = "[^\\][%s%)%]%}%,%.]" },
+            [")"] = false,
+            ["]"] = false,
+            ["}"] = false,
+        },
     },
 }
 
