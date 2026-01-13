@@ -14,10 +14,10 @@ function NVWindows.keymaps()
     K.map({ "<Leader>nh", "Create new buffer in a horizontal split", "<Cmd>new<CR>", mode = "n" })
     K.map({ "<Leader>nn", "Create new buffer in a vertical split", "<Cmd>vnew<CR>", mode = "n" })
 
-    K.map({ "<S-Left>", "Move to window on the left", "<Cmd>wincmd h<CR>", mode = { "n", "v", "t" } })
-    K.map({ "<S-Down>", "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n", "v", "t" } })
-    K.map({ "<S-Up>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "t" } })
-    K.map({ "<S-Right>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "v", "t" } })
+    K.map({ "<S-Left>", "Move to window on the left", "<Cmd>wincmd h<CR>", mode = { "n", "v", "i", "t" } })
+    K.map({ "<S-Down>", "Move to window below", "<Cmd>wincmd j<CR>", mode = { "n", "v", "i", "t" } })
+    K.map({ "<S-Up>", "Move to window above", "<Cmd>wincmd k<CR>", mode = { "n", "v", "i", "t" } })
+    K.map({ "<S-Right>", "Move to window on the right", "<Cmd>wincmd l<CR>", mode = { "n", "v", "i", "t" } })
 
     K.map({
         "<M-S-Left>",
