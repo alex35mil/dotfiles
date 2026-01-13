@@ -1,6 +1,8 @@
 local fn = {}
 local win = {}
 
+local DIAGNOSTICS_SOURCE = "diagnostics_per_ft"
+
 NVTrouble = {
     "folke/trouble.nvim",
     keys = function()
@@ -70,45 +72,62 @@ NVTrouble = {
             },
         }
     end,
+    config = function(_, opts)
+        require("trouble").setup(opts)
+        require("trouble.sources").register(DIAGNOSTICS_SOURCE, {
+            get = function(cb)
+                local Item = require("trouble.item")
+
+                local items = {}
+                local clients = vim.lsp.get_clients({ bufnr = 0 })
+
+                for _, client in ipairs(clients) do
+                    local ns = vim.lsp.diagnostic.get_namespace(client.id)
+                    local diags = vim.diagnostic.get(nil, { namespace = ns })
+
+                    for _, d in ipairs(diags) do
+                        table.insert(
+                            items,
+                            Item.new({
+                                source = "diagnostics",
+                                buf = d.bufnr,
+                                pos = { d.lnum + 1, d.col },
+                                end_pos = { d.end_lnum and (d.end_lnum + 1) or nil, d.end_col },
+                                item = d,
+                            })
+                        )
+                    end
+                end
+
+                cb(items)
+            end,
+            config = {
+                format = "{severity_icon} {message:md} {item.source} {code} {pos}",
+                groups = {
+                    { "directory" },
+                    { "filename", format = "{file_icon} {basename} {count}" },
+                },
+                modes = {
+                    [DIAGNOSTICS_SOURCE] = {
+                        source = DIAGNOSTICS_SOURCE,
+                    },
+                },
+            },
+        })
+    end,
 }
-
-function win.float(opts)
-    local base = {
-        type = "float",
-        relative = "editor",
-        title_pos = "center",
-        border = "solid",
-        zindex = 1000,
-    }
-
-    return vim.tbl_extend("error", base, opts)
-end
 
 function fn.open_diagnosics(filter)
     local trouble = require("trouble")
 
-    local size = {
-        width = NVScreen.is_large() and NVWindows.default_width() or 0.8,
-        height = 0.4,
-    }
-
-    local shift = 0.4
-
     trouble.open({
-        mode = "diagnostics",
+        mode = DIAGNOSTICS_SOURCE,
         focus = true,
         filter = filter,
-        win = win.float({
-            title = " Diagnostics ",
-            size = size,
-            position = { 0.5 - shift, 0.5 },
-        }),
-        preview = win.float({
-            title = " Preview ",
-            size = size,
-            position = { 0.5 + shift - 0.05, 0.5 },
-            scratch = true,
-        }),
+        win = {
+            size = 0.4,
+            position = "bottom",
+        },
     })
 end
 

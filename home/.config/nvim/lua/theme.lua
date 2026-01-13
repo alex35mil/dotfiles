@@ -465,6 +465,8 @@ function NVTheme.apply()
             SnacksNotifierHistory { bg = color.float_bg },
             SnacksNotifierHistoryDateTime { fg = color.cyan },
 
+            TroubleNormal { Normal },
+            TroubleNormalNC { Normal },
             TroubleDirectory { fg = color.charcoal },
             TroubleFilename { fg = color.charcoal, bold = true },
         }
