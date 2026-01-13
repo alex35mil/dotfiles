@@ -130,7 +130,7 @@ function NVEditing.keymaps()
     K.map({
         "<D-k>",
         "Save files",
-        "<Cmd>lua NVEditing.esc()<CR><Cmd>silent w<CR><Cmd>silent! wa<CR>",
+        fn.save,
         mode = "n",
     })
     K.map({
@@ -152,6 +152,12 @@ function NVEditing.esc()
 
     NVSNotifier.hide()
     vim.cmd("silent noh")
+end
+
+function fn.save()
+    NVEditing.esc()
+    vim.cmd("silent w")
+    vim.cmd("silent! wa")
 end
 
 function fn.paste()
