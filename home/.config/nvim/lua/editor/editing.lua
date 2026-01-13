@@ -49,9 +49,14 @@ function NVEditing.keymaps()
     K.map({ "<Tab>", "Indent", ">gv", mode = "v" })
     K.map({ "<S-Tab>", "Unindent", "<gv", mode = "v" })
 
-    K.map({ "<M-Left>", "Jump one word to the left", "b", mode = { "n", "v" } })
-    K.map({ "<M-Right>", "Jump one word to the right", "w", mode = { "n", "v" } })
-    K.map({ "<M-Left>", "Jump one word to the left", "<C-o>b", mode = "i" })
+    K.map({ "<M-Left>", "Jump one word to the left", "<Cmd>lua require('spider').motion('b')<CR>", mode = { "n", "v" } })
+    K.map({
+        "<M-Right>",
+        "Jump one word to the right",
+        "<Cmd>lua require('spider').motion('w')<CR>",
+        mode = { "n", "v" },
+    })
+    K.map({ "<M-Left>", "Jump one word to the left", "<C-o><Cmd>lua require('spider').motion('b')<CR>", mode = "i" })
     K.map({ "<M-Right>", "Jump one word to the right", fn.jump_to_end_of_word, mode = "i" })
     K.map({ "<D-Left>", "Jump to the beginning of the line", "<C-o>I", mode = "i" })
     K.map({ "<D-Right>", "Jump to the end of the line", "<C-o>A", mode = "i" })
@@ -171,7 +176,7 @@ function fn.paste()
 end
 
 function fn.jump_to_end_of_word()
-    vim.cmd("normal! e")
+    require("spider").motion("e")
 
     local current_col = vim.fn.col(".")
     local end_col = vim.fn.col("$")
