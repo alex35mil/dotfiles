@@ -20,7 +20,7 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 alias dev="cd ~/Dev"
-alias devn="cd ~/Dev/null"
+alias devnull="cd ~/Dev/null"
 alias icd="cd ~/Library/Mobile\\ Documents/com~apple~CloudDocs"
 alias ico="cd ~/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents"
 
@@ -138,11 +138,11 @@ function fingerprint() {
 
 # === Network
 alias hosts="sudo $EDITOR /etc/hosts"
-alias publicip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
 
 # Prints listners on a specific port. E.g. `p 3000`
-function p() {
+function port() {
     if [ -z "$1" ]; then
         echo "Usage: p [port]"
         return 1
