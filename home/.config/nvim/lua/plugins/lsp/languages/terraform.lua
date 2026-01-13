@@ -25,6 +25,11 @@ NVTerraform = {
             linters_by_ft = {
                 terraform = { "tflint" },
             },
+            linters = {
+                tflint = {
+                    prepend_args = { "--fast" },
+                },
+            },
         },
     },
 
@@ -34,6 +39,9 @@ NVTerraform = {
             local null_ls = require("null-ls")
             opts.sources = vim.list_extend(opts.sources or {}, {
                 null_ls.builtins.diagnostics.terraform_validate,
+                null_ls.builtins.formatting.terraform_fmt.with({
+                    extra_filetypes = { "hcl" },
+                }),
             })
         end,
     },
