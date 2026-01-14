@@ -36,6 +36,7 @@ NVWebDevicons = {
         local devicons = require("nvim-web-devicons")
         devicons.setup(opts)
         devicons.set_icon_by_filetype({
+            oil = "finder",
             snacks_terminal = "term",
             snacks_picker_input = "picker",
             snacks_picker_list = "finder",

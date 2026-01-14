@@ -566,6 +566,8 @@ function Sections.filetype()
             else
                 if v == "markdown" then
                     return "md"
+                elseif v == "oil" then
+                    return "finder"
                 elseif v == "snacks_terminal" then
                     return "term"
                 elseif v == "snacks_picker_input" then
