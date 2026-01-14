@@ -83,8 +83,17 @@ function NVNoNeckPain.disable()
     fn.ensure_cursor_position(NoNeckPain.disable)
 end
 
-function NVNoNeckPain.enable()
-    fn.ensure_cursor_position(NoNeckPain.enable)
+---@param opts {ensure_cursor_position: boolean}?
+function NVNoNeckPain.enable(opts)
+    local opts = vim.tbl_extend("keep", opts or {}, {
+        ensure_cursor_position = true,
+    })
+
+    if opts.ensure_cursor_position then
+        fn.ensure_cursor_position(NoNeckPain.enable)
+    else
+        NoNeckPain.enable()
+    end
 end
 
 ---@param f function

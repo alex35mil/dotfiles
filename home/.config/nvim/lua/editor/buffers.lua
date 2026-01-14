@@ -117,7 +117,7 @@ function fn.delete_buf(options)
         or NVGrugFar.ensure_current_hidden()
         -- should go last
         or NVSZoom.ensure_deactivated()
-        or NVTabs.ensure_focus_deactivated_if_active()
+        or NVFocus.ensure_deactivated_if_active()
         or NVClaudeCode.ensure_hidden()
     then
         return

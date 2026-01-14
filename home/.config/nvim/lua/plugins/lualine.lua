@@ -33,7 +33,7 @@ NVLualine = {
     lazy = false,
     keys = {
         {
-            "<C-BS>",
+            "<C-Del>",
             function()
                 fn.toggle_statusline()
             end,
@@ -41,7 +41,7 @@ NVLualine = {
             desc = "Toggle statusline: Diagnostics from all LSPs or from LSPs attached to the current buffer",
         },
         {
-            "<C-Del>",
+            "<C-BS>",
             function()
                 fn.toggle_tabline()
             end,
@@ -191,13 +191,15 @@ end
 function Sections.window_and_buffer()
     return {
         function()
+            local tab_icon = "󰬛"
             local win_icon = "󰬞"
             local buf_icon = "󰬉"
 
+            local tabnr = vim.api.nvim_get_current_tabpage()
             local winnr = vim.api.nvim_get_current_win()
             local bufnr = vim.api.nvim_get_current_buf()
 
-            return " " .. win_icon .. " " .. winnr .. " " .. buf_icon .. " " .. bufnr
+            return " " .. tab_icon .. " " .. tabnr .. " " .. win_icon .. " " .. winnr .. " " .. buf_icon .. " " .. bufnr
         end,
         color = function()
             return { fg = color.incative_text, bg = color.bg }
@@ -652,8 +654,8 @@ function NVLualine.hide_tabline()
     require("lualine").hide({ place = { "tabline" }, unhide = false })
 end
 
-function NVLualine.rename_tab(name)
-    vim.cmd("LualineRenameTab " .. name)
+function NVLualine.rename_tab(icon, name)
+    vim.cmd("LualineRenameTab " .. icon .. " " .. name)
 end
 
 function fn.toggle_tabline()

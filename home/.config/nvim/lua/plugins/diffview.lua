@@ -87,6 +87,11 @@ NVDiffview = {
     end,
 }
 
+NVDiffview.tab = {
+    icon = "",
+    name = "diff",
+}
+
 function NVDiffview.ensure_current_hidden()
     local current_diff = fn.current_diff()
 
@@ -108,7 +113,8 @@ function NVDiffview.ensure_all_hidden()
     local inactive_diff_tab = fn.inactive_diff()
 
     if inactive_diff_tab ~= nil then
-        vim.api.nvim_command("tabclose " .. inactive_diff_tab)
+        local tab_nr = vim.api.nvim_tabpage_get_number(inactive_diff_tab)
+        vim.cmd.tabclose(tab_nr)
     end
 end
 
@@ -124,7 +130,7 @@ function fn.toggle_diff()
             vim.api.nvim_set_current_tabpage(inactive_diff_tab)
         else
             fn.open_diff()
-            NVLualine.rename_tab("diff")
+            NVTabs.set_label(NVDiffview.tab)
         end
 
         vim.defer_fn(NVIncline.refresh, 100)

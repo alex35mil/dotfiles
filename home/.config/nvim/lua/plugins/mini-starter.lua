@@ -63,7 +63,7 @@ NVMiniStarter = {
                         local bufid = args.buf
 
                         if bufid == starter_bufid then
-                            NVLualine.rename_tab("editor")
+                            NVTabs.set_label_if_empty({ icon = NVTabs.editor_icon, name = "main" })
                             NVLualine.show_everything()
                             NVNoNeckPain.enable()
                             starter_bufid = nil

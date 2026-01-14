@@ -18,18 +18,21 @@ function NVPersistence.autocmds()
             NVLazy.ensure_hidden()
             NVMason.ensure_hidden()
             NVNoice.ensure_hidden()
-            NVTabs.ensure_focus_deacitvated()
+            NVFocus.ensure_deacitvated()
             NVSZoom.ensure_deactivated()
             NVSLazygit.ensure_hidden()
             NVDiffview.ensure_all_hidden()
             NVTinygit.ensure_hidden()
             NVNoNeckPain.disable()
+
+            NVTabs.save_labels()
         end,
     })
 
     vim.api.nvim_create_autocmd("User", {
         pattern = "PersistenceLoadPost",
         callback = function()
+            NVTabs.restore_labels()
             NVNoNeckPain.reload()
         end,
     })
