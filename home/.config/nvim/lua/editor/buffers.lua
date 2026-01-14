@@ -118,7 +118,7 @@ function fn.delete_buf(options)
         -- should go last
         or NVSZoom.ensure_deactivated()
         or NVFocus.ensure_deactivated_if_active()
-        or NVClaudeCode.ensure_hidden()
+        or NVClaudeCode.hide_active()
     then
         return
     end

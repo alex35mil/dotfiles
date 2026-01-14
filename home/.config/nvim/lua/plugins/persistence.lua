@@ -26,6 +26,10 @@ function NVPersistence.autocmds()
             NVNoNeckPain.disable()
 
             NVTabs.save_labels()
+
+            -- Switch to first tab so persistence saves under
+            -- main repo's cwd in case we're on a worktree tab
+            vim.cmd("tabfirst")
         end,
     })
 

@@ -1,13 +1,29 @@
 local fn = {}
 
+local CC = require("editor.claudecode").init({
+    on_close = function(tab_id)
+        vim.schedule(function()
+            if vim.api.nvim_tabpage_is_valid(tab_id) then
+                pcall(NVNoNeckPain.enable)
+            end
+        end)
+    end,
+})
+
 NVClaudeCode = {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
-    config = true,
     event = "VeryLazy",
     keys = function()
         return {
-            { "<D-S-c>", "<Esc><Cmd>ClaudeCode<CR>", mode = { "n", "i", "t", "v" }, desc = "Toggle Claude" },
+            {
+                "<D-S-c>",
+                function()
+                    CC.toggle()
+                end,
+                mode = { "n", "i", "t", "v" },
+                desc = "Toggle Claude",
+            },
             {
                 "<C-S-c>",
                 "<Cmd>ClaudeCode --continue<CR>",
@@ -22,11 +38,12 @@ NVClaudeCode = {
             },
             { "<D-p>", fn.post_and_focus, mode = { "n", "i", "v" }, desc = "Post to Claude and focus" },
             { "<C-CR>", fn.accept_diff, mode = { "n", "i", "v" }, desc = "Accept Claude diff" },
-            { "<D-S-n>", fn.deny_diff, mode = { "n", "i", "v" }, desc = "Deny Claude diff (NOPE!)" },
+            { "<C-r>", fn.reject_diff, mode = { "n", "i", "v" }, desc = "Reject Claude diff" },
         }
     end,
     opts = {
         terminal = {
+            provider = CC,
             split_side = "right",
             split_width_percentage = 0.35,
             ---@module "snacks"
@@ -61,9 +78,9 @@ NVClaudeCode = {
 }
 
 ---@return boolean
-function NVClaudeCode.ensure_hidden()
+function NVClaudeCode.hide_active()
     if fn.is_claude_active() then
-        vim.cmd("ClaudeCode")
+        CC.close()
         return true
     end
     return false
@@ -83,7 +100,7 @@ function fn.accept_diff()
     end
 end
 
-function fn.deny_diff()
+function fn.reject_diff()
     if NVClaudeCode.is_diff_active() then
         vim.cmd("ClaudeCodeDiffDeny")
         vim.cmd("ClaudeCodeFocus")
@@ -163,11 +180,11 @@ function fn.post_and_focus()
             NVKeys.send("<Esc>", { mode = "x" })
         end
 
-        vim.cmd("ClaudeCode")
+        CC.toggle()
 
         local function wait_for_claude_connection(callback)
             local start_time = vim.uv.hrtime()
-            local timeout_ns = 10 * 1000 * 1000 * 1000 -- 5 seconds in nanoseconds
+            local timeout_ns = 10 * 1000 * 1000 * 1000 -- 10 seconds in nanoseconds
             local check_interval = 100 -- milliseconds
 
             local function check_connection()
@@ -223,16 +240,12 @@ end
 
 ---@return boolean
 function fn.is_claude_visible()
-    local current_tab = vim.api.nvim_get_current_tabpage()
-    local windows = vim.api.nvim_tabpage_list_wins(current_tab)
-
-    for _, win in ipairs(windows) do
-        local buf = vim.api.nvim_win_get_buf(win)
-        if fn.is_claude_buf(buf) then
-            return true
-        end
+    local tab_id = vim.api.nvim_get_current_tabpage()
+    local tab_term = CC.terminals[tab_id]
+    if tab_term and tab_term.terminal then
+        local win = tab_term.terminal.win
+        return win ~= nil and vim.api.nvim_win_is_valid(win)
     end
-
     return false
 end
 
@@ -244,7 +257,28 @@ end
 
 ---@return boolean
 function fn.is_claude_connected()
-    return require("claudecode").is_claude_connected()
+    local tab_id = vim.api.nvim_get_current_tabpage()
+    return CC.clients[tab_id] ~= nil
+end
+
+---@param path string
+function NVClaudeCode.add_file(path)
+    local ok, claudecode = pcall(require, "claudecode")
+    if ok and claudecode.send_at_mention then
+        claudecode.send_at_mention(path)
+    end
+end
+
+function NVClaudeCode.focus()
+    local tab_id = vim.api.nvim_get_current_tabpage()
+    local tab_term = CC.terminals[tab_id]
+    if tab_term and tab_term.terminal then
+        local win = tab_term.terminal.win
+        if win and vim.api.nvim_win_is_valid(win) then
+            vim.api.nvim_set_current_win(win)
+            vim.cmd("startinsert")
+        end
+    end
 end
 
 return { NVClaudeCode }

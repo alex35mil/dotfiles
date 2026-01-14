@@ -15,7 +15,7 @@ NVKeymaps = {
     },
     open_vsplit = "<D-CR>",
     open_hsplit = "<D-S-CR>",
-    open_tab = "<C-n>",
+    open_tab = "<C-S-CR>",
     rename = "<D-r>",
     close = "<D-w>",
 }
