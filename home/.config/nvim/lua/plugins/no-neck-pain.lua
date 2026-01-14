@@ -6,6 +6,7 @@ NVNoNeckPain = {
         width = NVWindows.default_width(),
         autocmds = {
             enableOnVimEnter = false,
+            enableOnTabEnter = false, -- handling it at own tabs module
             skipEnteringNoNeckPainBuffer = true,
         },
     },
@@ -90,36 +91,42 @@ function NVNoNeckPain.enable(opts)
     })
 
     if opts.ensure_cursor_position then
-        fn.ensure_cursor_position(NoNeckPain.enable)
+        fn.ensure_cursor_position(function()
+            pcall(NoNeckPain.enable)
+        end)
     else
-        NoNeckPain.enable()
+        pcall(NoNeckPain.enable)
     end
 end
 
 ---@param f function
 ---@param opts {check_sidepads_visibility: boolean}?
 function NVNoNeckPain.update_layout_with(f, opts)
-    local config = vim.tbl_extend("keep", opts or {}, {
-        check_sidepads_visibility = true,
-    })
+    -- NOTE: Let's disable all of this and see if it's even needed at this point
 
-    local sidepads_visible
+    -- local config = vim.tbl_extend("keep", opts or {}, {
+    --     check_sidepads_visibility = true,
+    -- })
+    --
+    -- local sidepads_visible
+    --
+    -- if config.check_sidepads_visibility then
+    --     sidepads_visible = NVNoNeckPain.are_sidepads_visible()
+    -- else
+    --     sidepads_visible = true
+    -- end
 
-    if config.check_sidepads_visibility then
-        sidepads_visible = NVNoNeckPain.are_sidepads_visible()
-    else
-        sidepads_visible = true
-    end
-
-    if sidepads_visible then
-        NVNoNeckPain.disable()
-    end
+    -- if sidepads_visible then
+    --     NVNoNeckPain.disable()
+    -- end
 
     f()
 
-    if sidepads_visible then
-        NVNoNeckPain.enable()
-    end
+    -- if sidepads_visible then
+    --     vim.defer_fn(function()
+    --         pcall(NVNoNeckPain.enable)
+    --     end, 50)
+    -- end
 end
 
 function NVNoNeckPain.reload()
@@ -131,16 +138,18 @@ end
 
 ---@param f function
 function fn.ensure_cursor_position(f)
-    local current_cursor = NVCursor.get()
+    -- NOTE: Let's disable all of this and see if it's even needed at this point
+
+    -- local current_cursor = NVCursor.get()
 
     f()
 
     -- NoNeckPain moves cursor on activation
     -- and it debounces execution by 10ms
     -- Can be removed if addressed: https://github.com/shortcuts/no-neck-pain.nvim/issues/480
-    vim.defer_fn(function()
-        pcall(NVCursor.set, current_cursor)
-    end, 15)
+    -- vim.defer_fn(function()
+    --     pcall(NVCursor.set, current_cursor)
+    -- end, 50)
 end
 
 return { NVNoNeckPain }
