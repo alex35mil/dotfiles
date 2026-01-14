@@ -1,4 +1,4 @@
-NVGit = {
+NVLGit = {
     {
         "nvim-treesitter/nvim-treesitter",
         opts = {
@@ -13,4 +13,4 @@ NVGit = {
     },
 }
 
-return NVGit
+return NVLGit

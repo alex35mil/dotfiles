@@ -1,4 +1,4 @@
-NVJSON = {
+NVLJSON = {
     {
         "neovim/nvim-lspconfig",
         opts = {
@@ -31,4 +31,4 @@ NVJSON = {
     },
 }
 
-return NVJSON
+return NVLJSON

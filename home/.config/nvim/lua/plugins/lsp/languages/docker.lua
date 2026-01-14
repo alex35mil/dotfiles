@@ -1,4 +1,4 @@
-NVDocker = {
+NVLDocker = {
     {
         "neovim/nvim-lspconfig",
         opts = {
@@ -32,4 +32,4 @@ NVDocker = {
     },
 }
 
-return NVDocker
+return NVLDocker

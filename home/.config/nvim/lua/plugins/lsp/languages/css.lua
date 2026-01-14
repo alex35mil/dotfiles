@@ -1,4 +1,4 @@
-NVCss = {
+NVLCss = {
     {
         "neovim/nvim-lspconfig",
         opts = {
@@ -41,4 +41,4 @@ NVCss = {
     },
 }
 
-return NVCss
+return NVLCss

@@ -1,4 +1,4 @@
-NVYAML = {
+NVLYAML = {
     {
         "neovim/nvim-lspconfig",
         opts = {
@@ -28,4 +28,4 @@ NVYAML = {
     },
 }
 
-return NVYAML
+return NVLYAML

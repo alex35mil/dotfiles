@@ -1,4 +1,4 @@
-NVRust = {
+NVLRust = {
     {
         "nvim-treesitter/nvim-treesitter",
         opts = {
@@ -87,4 +87,4 @@ NVRust = {
     },
 }
 
-return NVRust
+return NVLRust

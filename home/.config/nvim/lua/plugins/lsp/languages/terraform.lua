@@ -1,4 +1,4 @@
-NVTerraform = {
+NVLTerraform = {
     {
         "neovim/nvim-lspconfig",
         opts = {
@@ -47,4 +47,4 @@ NVTerraform = {
     },
 }
 
-return NVTerraform
+return NVLTerraform

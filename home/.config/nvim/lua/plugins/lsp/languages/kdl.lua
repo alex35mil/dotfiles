@@ -1,4 +1,4 @@
-NVKdl = {
+NVLKdl = {
     {
         "nvim-treesitter/nvim-treesitter",
         opts = {
@@ -9,4 +9,4 @@ NVKdl = {
     },
 }
 
-return NVKdl
+return NVLKdl

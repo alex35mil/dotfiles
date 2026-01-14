@@ -1,4 +1,4 @@
-NVTOML = {
+NVLTOML = {
     {
         "neovim/nvim-lspconfig",
         opts = {
@@ -18,4 +18,4 @@ NVTOML = {
     },
 }
 
-return NVTOML
+return NVLTOML

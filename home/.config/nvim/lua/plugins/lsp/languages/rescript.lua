@@ -1,4 +1,4 @@
-NVReScript = {
+NVLReScript = {
     {
         "neovim/nvim-lspconfig",
         opts = {
@@ -18,7 +18,7 @@ NVReScript = {
     },
 }
 
-function NVReScript.autocmds()
+function NVLReScript.autocmds()
     local CREATE_INTERFACE_FILE_COMMAND = "RescriptCreateInterfaceFile"
 
     vim.api.nvim_create_user_command(CREATE_INTERFACE_FILE_COMMAND, function(opts)
@@ -55,4 +55,4 @@ function NVReScript.autocmds()
     end, { bang = true })
 end
 
-return NVReScript
+return NVLReScript

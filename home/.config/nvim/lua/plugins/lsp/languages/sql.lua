@@ -1,4 +1,4 @@
-NVSQL = {
+NVLSQL = {
     {
         "neovim/nvim-lspconfig",
         opts = {
@@ -32,4 +32,4 @@ NVSQL = {
     },
 }
 
-return NVSQL
+return NVLSQL

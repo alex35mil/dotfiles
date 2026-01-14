@@ -1,4 +1,4 @@
-NVLua = {
+NVLLua = {
     {
         "neovim/nvim-lspconfig",
         opts = {
@@ -57,4 +57,4 @@ NVLua = {
     },
 }
 
-return NVLua
+return NVLLua

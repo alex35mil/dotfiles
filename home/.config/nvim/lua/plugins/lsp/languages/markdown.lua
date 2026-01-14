@@ -1,6 +1,6 @@
 local CONFIG = os.getenv("XDG_CONFIG_HOME")
 
-NVMarkdown = {
+NVLMarkdown = {
     {
         "neovim/nvim-lspconfig",
         opts = {
@@ -38,7 +38,7 @@ NVMarkdown = {
     },
 }
 
-function NVMarkdown.autocmds()
+function NVLMarkdown.autocmds()
     vim.api.nvim_create_autocmd("FileType", {
         pattern = "markdown",
         callback = function()
@@ -48,4 +48,4 @@ function NVMarkdown.autocmds()
     })
 end
 
-return NVMarkdown
+return NVLMarkdown

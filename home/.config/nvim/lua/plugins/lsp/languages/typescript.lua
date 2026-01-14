@@ -10,7 +10,7 @@ local lsp_settings = {
 
 local prettier = { "prettierd", "prettier", stop_after_first = true }
 
-NVTypeScript = {
+NVLTypeScript = {
     {
         "neovim/nvim-lspconfig",
         opts = {
@@ -52,4 +52,4 @@ NVTypeScript = {
     },
 }
 
-return NVTypeScript
+return NVLTypeScript
