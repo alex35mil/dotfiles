@@ -86,7 +86,7 @@ end
 ---@param opts {ensure_cursor_position: boolean}?
 function NVNoNeckPain.enable(opts)
     local opts = vim.tbl_extend("keep", opts or {}, {
-        ensure_cursor_position = true,
+        ensure_cursor_position = false,
     })
 
     if opts.ensure_cursor_position then
