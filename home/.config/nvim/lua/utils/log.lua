@@ -1,38 +1,28 @@
 ---@diagnostic disable-next-line: lowercase-global
 log = {}
 
+-- Can be changed from cmdline to enable/disable logging
+LOG = "info" --- @type "trace" | "debug" | "info" | "warn" | "error"
+
 local ERROR = vim.log.levels.ERROR
 local WARN = vim.log.levels.WARN
 local INFO = vim.log.levels.INFO
 local DEBUG = vim.log.levels.DEBUG
 local TRACE = vim.log.levels.TRACE
 
----@param message string
----@param opts? table
-function log.info(message, opts)
-    vim.notify(message, INFO, opts)
-end
+local level_map = {
+    trace = TRACE,
+    debug = DEBUG,
+    info = INFO,
+    warn = WARN,
+    error = ERROR,
+}
 
----@param message string
----@param opts? table
-function log.warn(message, opts)
-    vim.notify(message, WARN, opts)
-end
+---@alias payload string | number | any
 
----@param message string|table
----@param opts? table
-function log.error(message, opts)
-    if type(message) == string then
-        ---@cast message string
-        vim.notify(message, ERROR, opts)
-    else
-        vim.notify(vim.inspect(message), ERROR, opts)
-    end
-end
-
----@param payload string | number | any
----@param opts? table
-function log.debug(payload, opts)
+---@param payload payload
+---@return string
+local function message(payload)
     local message
 
     local type = type(payload)
@@ -45,11 +35,54 @@ function log.debug(payload, opts)
         message = vim.inspect(payload)
     end
 
-    vim.notify(message, DEBUG, vim.tbl_extend("force", { timeout = false }, opts or {}))
+    return message
 end
 
----@param payload table
+local function dispatch(payload, level, opts)
+    local threshold = level_map[LOG]
+
+    if not threshold then
+        print("[ERROR] Unexpected LOG value. Using INFO.")
+        threshold = INFO
+    end
+
+    if level < threshold then
+        return
+    end
+
+    if level == TRACE or level == DEBUG then
+        opts = vim.tbl_extend("force", { timeout = false }, opts or {})
+    end
+
+    vim.notify(message(payload), level, opts)
+end
+
+---@param payload payload
+---@param opts? table
+function log.info(payload, opts)
+    dispatch(payload, INFO, opts)
+end
+
+---@param payload payload
+---@param opts? table
+function log.warn(payload, opts)
+    dispatch(payload, WARN, opts)
+end
+
+---@param payload payload
+---@param opts? table
+function log.error(payload, opts)
+    dispatch(payload, ERROR, opts)
+end
+
+---@param payload payload
+---@param opts? table
+function log.debug(payload, opts)
+    dispatch(payload, DEBUG, opts)
+end
+
+---@param payload payload
 ---@param opts? table
 function log.trace(payload, opts)
-    vim.notify(vim.inspect(payload), TRACE, opts)
+    dispatch(payload, TRACE, opts)
 end
