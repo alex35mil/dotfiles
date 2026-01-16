@@ -309,10 +309,12 @@ function NVSPickers.buffers()
         sort_lastused = true,
         layout = NVSPickerVerticalLayout.build(),
         filter = {
-            filter = function(item, filter)
+            filter = function(item, _)
                 if string.find(item.file, "^diffview://") then
                     return false
                 elseif string.find(item.file, "^term://") then
+                    return false
+                elseif string.find(item.file, "^oil://") then
                     return false
                 else
                     return true

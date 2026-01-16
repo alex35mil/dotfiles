@@ -45,7 +45,7 @@ NVBlinkCmp = {
 
 function NVBlinkCmp.autocmds()
     vim.api.nvim_create_autocmd("FileType", {
-        pattern = "gitcommit",
+        pattern = { "oil", "gitcommit" },
         callback = function()
             vim.b.completion = false
         end,

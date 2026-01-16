@@ -1,9 +1,20 @@
 local fn = {}
+local cache = {}
 
 NVOil = {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     lazy = false,
+    config = function(_, opts)
+        -- Clear gitignore cache on refresh
+        local refresh = require("oil.actions").refresh
+        local original_refresh = refresh.callback
+        refresh.callback = function(...)
+            cache.gitignore = cache.new_gitignore_cache()
+            original_refresh(...)
+        end
+        require("oil").setup(opts)
+    end,
     keys = function()
         return {
             { "<D-e>", NVOil.open, mode = { "n", "i", "v", "t" }, desc = "Open file explorer" },
@@ -79,6 +90,21 @@ NVOil = {
         },
         view_options = {
             show_hidden = true,
+            -- Don't treat dot files as hidden
+            is_hidden_file = function()
+                return false
+            end,
+            -- Gray out gitignored files
+            highlight_filename = function(entry)
+                local dir = require("oil").get_current_dir()
+                if not dir then
+                    return nil
+                end
+                if cache.gitignore[dir][entry.name] then
+                    return "Comment"
+                end
+                return nil
+            end,
         },
         float = {
             -- Padding around the floating window
@@ -110,6 +136,34 @@ function NVOil.open()
     require("oil").open_float()
     -- require("oil").open_float(nil, { preview = {} }) -- preview causing issues with MOVE aciton: https://github.com/stevearc/oil.nvim/issues/632
 end
+
+function fn.parse_gitignore_output(proc)
+    local result = proc:wait()
+    local ret = {}
+    if result.code == 0 then
+        for line in vim.gsplit(result.stdout, "\n", { plain = true, trimempty = true }) do
+            line = line:gsub("/$", "")
+            ret[line] = true
+        end
+    end
+    return ret
+end
+
+function cache.new_gitignore_cache()
+    return setmetatable({}, {
+        __index = function(self, key)
+            local proc = vim.system(
+                { "git", "ls-files", "--ignored", "--exclude-standard", "--others", "--directory" },
+                { cwd = key, text = true }
+            )
+            local ret = fn.parse_gitignore_output(proc)
+            rawset(self, key, ret)
+            return ret
+        end,
+    })
+end
+
+cache.gitignore = cache.new_gitignore_cache()
 
 ---@param close boolean
 function fn.add_to_claude(close)
