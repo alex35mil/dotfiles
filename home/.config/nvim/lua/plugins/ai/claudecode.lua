@@ -1,13 +1,17 @@
 local fn = {}
 
-local CC = require("editor.claudecode").init({
-    on_close = function(tab_id)
-        vim.schedule(function()
-            if vim.api.nvim_tabpage_is_valid(tab_id) then
-                pcall(NVNoNeckPain.enable)
-            end
-        end)
-    end,
+function fn.reload_layout(tab_id)
+    vim.schedule(function()
+        local current_tab = vim.api.nvim_get_current_tabpage()
+        if current_tab == tab_id and vim.api.nvim_tabpage_is_valid(tab_id) then
+            pcall(NVNoNeckPain.reload)
+        end
+    end)
+end
+
+local CCProvider = require("editor.claudecode").init({
+    on_hide = fn.reload_layout,
+    on_exit = fn.reload_layout,
 })
 
 NVClaudeCode = {
@@ -18,9 +22,7 @@ NVClaudeCode = {
         return {
             {
                 "<D-S-c>",
-                function()
-                    CC.toggle()
-                end,
+                "<Esc><Cmd>ClaudeCode<CR>",
                 mode = { "n", "i", "t", "v" },
                 desc = "Toggle Claude",
             },
@@ -43,7 +45,7 @@ NVClaudeCode = {
     end,
     opts = {
         terminal = {
-            provider = CC,
+            provider = CCProvider,
             split_side = "right",
             split_width_percentage = 0.35,
             ---@module "snacks"
@@ -73,6 +75,8 @@ NVClaudeCode = {
             layout = "vertical",
             open_in_new_tab = true,
             keep_terminal_focus = false,
+            hide_terminal_in_new_tab = true,
+            on_new_file_reject = "close_window",
         },
     },
 }
@@ -80,7 +84,7 @@ NVClaudeCode = {
 ---@return boolean
 function NVClaudeCode.hide_active()
     if fn.is_claude_active() then
-        CC.close()
+        CCProvider.close()
         return true
     end
     return false
@@ -96,14 +100,14 @@ end
 function fn.accept_diff()
     if NVClaudeCode.is_diff_active() then
         vim.cmd("ClaudeCodeDiffAccept")
-        vim.cmd("ClaudeCodeFocus")
+        vim.defer_fn(CCProvider.focus, 50)
     end
 end
 
 function fn.reject_diff()
     if NVClaudeCode.is_diff_active() then
         vim.cmd("ClaudeCodeDiffDeny")
-        vim.cmd("ClaudeCodeFocus")
+        vim.defer_fn(CCProvider.focus, 50)
     end
 end
 
@@ -163,11 +167,6 @@ function fn.post_and_focus()
                 if state.selection then
                     vim.fn.setpos("'<", state.selection.start_pos)
                     vim.fn.setpos("'>", state.selection.end_pos)
-                    if state.selection.mode == "v" then
-                        vim.api.nvim_feedkeys("gv", "n", false)
-                    elseif state.selection.mode == "V" then
-                        vim.api.nvim_feedkeys("gV", "n", false)
-                    end
                 end
             end
         end
@@ -180,7 +179,7 @@ function fn.post_and_focus()
             NVKeys.send("<Esc>", { mode = "x" })
         end
 
-        CC.toggle()
+        vim.cmd("ClaudeCode")
 
         local function wait_for_claude_connection(callback)
             local start_time = vim.uv.hrtime()
@@ -240,13 +239,7 @@ end
 
 ---@return boolean
 function fn.is_claude_visible()
-    local tab_id = vim.api.nvim_get_current_tabpage()
-    local tab_term = CC.terminals[tab_id]
-    if tab_term and tab_term.terminal then
-        local win = tab_term.terminal.win
-        return win ~= nil and vim.api.nvim_win_is_valid(win)
-    end
-    return false
+    return CCProvider.is_active()
 end
 
 ---@return boolean
@@ -258,7 +251,7 @@ end
 ---@return boolean
 function fn.is_claude_connected()
     local tab_id = vim.api.nvim_get_current_tabpage()
-    return CC.clients[tab_id] ~= nil
+    return CCProvider.is_connected(tab_id)
 end
 
 ---@param path string
@@ -266,18 +259,6 @@ function NVClaudeCode.add_file(path)
     local ok, claudecode = pcall(require, "claudecode")
     if ok and claudecode.send_at_mention then
         claudecode.send_at_mention(path)
-    end
-end
-
-function NVClaudeCode.focus()
-    local tab_id = vim.api.nvim_get_current_tabpage()
-    local tab_term = CC.terminals[tab_id]
-    if tab_term and tab_term.terminal then
-        local win = tab_term.terminal.win
-        if win and vim.api.nvim_win_is_valid(win) then
-            vim.api.nvim_set_current_win(win)
-            vim.cmd("startinsert")
-        end
     end
 end
 
