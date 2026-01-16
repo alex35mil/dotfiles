@@ -139,6 +139,19 @@ function NVEditing.keymaps()
         "<Cmd>lua NVEditing.esc()<CR><Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>",
         mode = { "i", "v" },
     })
+    -- Duplicates of the above so saving works with CAPS_WORD
+    K.map({
+        "<D-S-k>",
+        "Save files",
+        fn.save,
+        mode = "n",
+    })
+    K.map({
+        "<D-S-k>",
+        "Save files",
+        "<Cmd>lua NVEditing.esc()<CR><Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>",
+        mode = { "i", "v" },
+    })
 end
 
 function NVEditing.esc()
