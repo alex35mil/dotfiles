@@ -1,17 +1,43 @@
 local fn = {}
 
-function fn.reload_layout(tab_id)
-    vim.schedule(function()
-        local current_tab = vim.api.nvim_get_current_tabpage()
-        if current_tab == tab_id and vim.api.nvim_tabpage_is_valid(tab_id) then
-            pcall(NVNoNeckPain.reload)
-        end
-    end)
-end
-
 local CCProvider = require("editor.claudecode").init({
-    on_hide = fn.reload_layout,
-    on_exit = fn.reload_layout,
+    layout = {
+        default = "side",
+        side = {
+            position = "right",
+            width = 0.3,
+        },
+        float = {
+            width = 0.6,
+            height = 0.8,
+            backdrop = false,
+            border = "rounded",
+        },
+        common = {
+            wo = {
+                winbar = "",
+                winhighlight = "Normal:SnacksTerminal,FloatBorder:SnacksTerminalFloatBorder,WinBar:SnacksTerminalHeader,WinBarNC:SnacksTerminalHeaderNC",
+            },
+            keys = {
+                claude_new_line = {
+                    "<S-CR>",
+                    function()
+                        fn.new_line()
+                    end,
+                    mode = "t",
+                    desc = "New line",
+                },
+                claude_hide = {
+                    NVKeymaps.close,
+                    function(self)
+                        self:hide()
+                    end,
+                    mode = "t",
+                    desc = "Hide",
+                },
+            },
+        },
+    },
 })
 
 NVClaudeCode = {
@@ -22,54 +48,66 @@ NVClaudeCode = {
         return {
             {
                 "<D-S-c>",
-                "<Esc><Cmd>ClaudeCode<CR>",
+                function()
+                    CCProvider.open_on_side()
+                end,
                 mode = { "n", "i", "t", "v" },
-                desc = "Toggle Claude",
+                desc = "Toggle Claude in a side panel",
+            },
+            {
+                "<D-S-g>",
+                function()
+                    CCProvider.open_float()
+                end,
+                mode = { "n", "i", "t", "v" },
+                desc = "Toggle Claude in float window",
             },
             {
                 "<C-S-c>",
-                "<Cmd>ClaudeCode --continue<CR>",
+                function()
+                    CCProvider.open_on_side("continue")
+                end,
                 mode = { "n", "i", "t", "v" },
-                desc = "Continue with last Claude session",
+                desc = "Continue last session in side panel",
+            },
+            {
+                "<C-S-g>",
+                function()
+                    CCProvider.open_float("continue")
+                end,
+                mode = { "n", "i", "t", "v" },
+                desc = "Continue last session in float window",
             },
             {
                 "<M-S-c>",
-                "<Cmd>ClaudeCode --resume<CR>",
+                function()
+                    CCProvider.open_on_side("resume")
+                end,
                 mode = { "n", "i", "t", "v" },
-                desc = "Resume specific Claude session",
+                desc = "Resume session in side panel",
+            },
+            {
+                "<M-S-g>",
+                function()
+                    CCProvider.open_float("resume")
+                end,
+                mode = { "n", "i", "t", "v" },
+                desc = "Resume session in float window",
             },
             { "<D-p>", fn.post_and_focus, mode = { "n", "i", "v" }, desc = "Post to Claude and focus" },
             { "<C-CR>", fn.accept_diff, mode = { "n", "i", "v" }, desc = "Accept Claude diff" },
             { "<C-r>", fn.reject_diff, mode = { "n", "i", "v" }, desc = "Reject Claude diff" },
+            {
+                "<M-c>",
+                CCProvider.toggle_layout,
+                mode = { "n", "i", "t", "v" },
+                desc = "Toggle Claude layout (side/float)",
+            },
         }
     end,
     opts = {
         terminal = {
             provider = CCProvider,
-            split_side = "right",
-            split_width_percentage = 0.35,
-            ---@module "snacks"
-            ---@type snacks.win.Config|{}
-            snacks_win_opts = {
-                keys = {
-                    claude_new_line = {
-                        "<S-CR>",
-                        function()
-                            fn.new_line()
-                        end,
-                        mode = "t",
-                        desc = "New line",
-                    },
-                    claude_hide = {
-                        NVKeymaps.close,
-                        function(self)
-                            self:hide()
-                        end,
-                        mode = "t",
-                        desc = "Hide",
-                    },
-                },
-            },
         },
         diff_opts = {
             layout = "vertical",

@@ -1,23 +1,34 @@
 -- Multi-session terminal provider for claudecode.nvim
--- Enables independent Claude sessions per tab with proper broadcasting
+-- Enables independent Claude sessions per tab with proper broadcasting and side/float layouts switching
 
 local Provider = {
     config = nil,
     initialized = false,
 }
 
+---@alias SessionMode "continue" | "resume" | nil
+
+---@alias LayoutMode "side" | "float"
+
+---@class LayoutOpts
+---@field default LayoutMode?
+---@field side table?
+---@field float table?
+
 local State = {
     terminals = {}, ---@type table<TabID, {instance: snacks.win, bufnr: number, client_id: string | nil}>
     clients = {}, ---@type table<TabID, string>
     ghosts = {}, ---@type table<string>
+    layouts = {}, ---@type table<TabID, LayoutMode>
     connecting = nil, ---@type TabID | nil
+    layout_switching = false,
     on_connect_patched = false,
     on_disconnect_patched = false,
     broadcast_patched = false,
 }
 
 local Terminal = {}
-
+local Layout = {}
 local CCInternal = {}
 
 ---
@@ -29,8 +40,10 @@ function Provider.init(opts)
         return Provider
     end
     opts = opts or {}
+    Provider.layout = vim.tbl_deep_extend("force", { default = "side" }, opts.layout or {})
     Provider.on_hide = opts.on_hide
     Provider.on_exit = opts.on_exit
+    Provider.on_layout_switch = opts.on_layout_switch
     Provider.initialized = true
     return Provider
 end
@@ -169,6 +182,87 @@ end
 function Provider.is_available()
     local ok, snacks = pcall(require, "snacks")
     return ok and snacks.terminal ~= nil
+end
+
+---
+--- Layout
+---
+
+---@return LayoutMode
+function Layout.current()
+    local tab_id = vim.api.nvim_get_current_tabpage()
+    return State.layouts[tab_id] or Provider.layout.default
+end
+
+---@param mode LayoutMode
+function Layout.set(mode)
+    local tab_id = vim.api.nvim_get_current_tabpage()
+    State.layouts[tab_id] = mode
+end
+
+---@param mode SessionMode
+function Provider.open_on_side(mode)
+    Layout.set("side")
+    vim.cmd(Provider.cmd(mode))
+end
+
+---@param mode SessionMode
+function Provider.open_float(mode)
+    Layout.set("float")
+    vim.cmd(Provider.cmd(mode))
+end
+
+---@param mode SessionMode
+---@return string
+function Provider.cmd(mode)
+    if mode == "continue" then
+        return "ClaudeCode --continue"
+    elseif mode == "resume" then
+        return "ClaudeCode --resume"
+    end
+    return "ClaudeCode"
+end
+
+function Provider.toggle_layout()
+    local tab_id = vim.api.nvim_get_current_tabpage()
+    local tab_term = State.terminals[tab_id]
+
+    if not tab_term or not Terminal.is_valid(tab_term) then
+        return
+    end
+
+    local current_mode = Layout.current()
+    local new_mode = current_mode == "side" and "float" or "side"
+    local instance = tab_term.instance
+    local new_opts = Terminal.build_layout_opts(new_mode)
+
+    instance.opts = vim.tbl_deep_extend("force", instance.opts, new_opts)
+
+    State.layout_switching = true
+    instance:hide()
+    State.layout_switching = false
+    instance:show()
+
+    Layout.set(new_mode)
+
+    local new_win = instance.win
+    if new_win and vim.api.nvim_win_is_valid(new_win) then
+        -- Signal terminal to reflow content for new window size
+        local bufnr = tab_term.bufnr
+        local chan = vim.bo[bufnr].channel
+        if chan and chan > 0 then
+            local win_width = vim.api.nvim_win_get_width(new_win)
+            local win_height = vim.api.nvim_win_get_height(new_win)
+            pcall(vim.fn.jobresize, chan, win_width, win_height)
+        end
+    end
+
+    vim.defer_fn(function()
+        Terminal.focus(tab_term)
+        if Provider.on_layout_switch then
+            Provider.on_layout_switch(tab_id, new_mode)
+        end
+    end, 100)
 end
 
 ---
@@ -378,31 +472,18 @@ end
 
 ---@return string[]
 function CCInternal.get_root_client_ids()
-    local ok, claudecode = pcall(require, "claudecode")
-    if
-        ok
-        and claudecode.state
-        and claudecode.state.server
-        and claudecode.state.server.state
-        and claudecode.state.server.state.clients
-    then
-        return vim.tbl_keys(claudecode.state.server.state.clients)
+    local server = CCInternal.get_root_server()
+    if server and server.state and server.state.clients then
+        return vim.tbl_keys(server.state.clients)
     end
     return {}
 end
 
 ---@return string[]
 function CCInternal.get_tcp_client_ids()
-    local ok, claudecode = pcall(require, "claudecode")
-    if
-        ok
-        and claudecode.state
-        and claudecode.state.server
-        and claudecode.state.server.state
-        and claudecode.state.server.state.server
-        and claudecode.state.server.state.server.clients
-    then
-        return vim.tbl_keys(claudecode.state.server.state.server.clients)
+    local server = CCInternal.get_tcp_server()
+    if server and server.clients then
+        return vim.tbl_keys(server.clients)
     end
     return {}
 end
@@ -425,16 +506,19 @@ function Terminal.new(cmd, env, config, focus)
 end
 
 function Terminal.build_opts(config, env, focus, tab_id)
-    local user_snacks_opts = config.snacks_win_opts or {}
-    local user_on_close = user_snacks_opts.on_close
-    user_snacks_opts = vim.tbl_extend("force", user_snacks_opts, { on_close = nil })
-
+    local mode = State.layouts[tab_id] or Provider.layout.default
+    local layout_opts = Terminal.build_layout_opts(mode)
     local should_focus = focus ~= false
 
-    local win_opts = vim.tbl_deep_extend("force", {
-        position = config.split_side or "right",
-        width = config.split_width_percentage or 0.35,
+    -- Capture user's on_close if provided via layout config
+    local user_on_close = layout_opts.on_close
+
+    local win_opts = vim.tbl_deep_extend("force", layout_opts, {
         on_close = function(terminal)
+            if State.layout_switching then
+                return
+            end
+
             log.trace({ "Terminal is closed", tab_id = tab_id, terminal_id = terminal.id })
 
             local tab_client_id = State.clients[tab_id]
@@ -455,6 +539,7 @@ function Terminal.build_opts(config, env, focus, tab_id)
                     is_valid = vim.api.nvim_buf_is_valid(terminal.buf),
                 })
                 State.terminals[tab_id] = nil
+                State.layouts[tab_id] = nil
 
                 if Provider.on_exit then
                     Provider.on_exit(tab_id)
@@ -465,7 +550,7 @@ function Terminal.build_opts(config, env, focus, tab_id)
                 user_on_close(terminal)
             end
         end,
-    }, user_snacks_opts)
+    })
 
     local opts = {
         count = tab_id,
@@ -481,6 +566,29 @@ function Terminal.build_opts(config, env, focus, tab_id)
     end
 
     return opts
+end
+
+---@param mode LayoutMode
+---@return table
+function Terminal.build_layout_opts(mode)
+    local defaults = {
+        side = {
+            position = "right",
+            width = 0.3,
+            wo = {
+                winfixwidth = true,
+            },
+        },
+        float = {
+            position = "float",
+            width = 0.6,
+            height = 0.8,
+            backdrop = false,
+            border = "rounded",
+        },
+    }
+
+    return vim.tbl_deep_extend("force", defaults[mode] or {}, Provider.layout.common or {}, Provider.layout[mode] or {})
 end
 
 function Terminal.get_instance(tab_id)

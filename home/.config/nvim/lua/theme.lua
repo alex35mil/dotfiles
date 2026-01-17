@@ -443,6 +443,7 @@ function NVTheme.apply()
             SnacksTerminal { Normal },
             SnacksTerminalHeader { bg = color.orange, fg = color.strong_faded_text, bold = true },
             SnacksTerminalHeaderNC { bg = color.bg, fg = color.strong_text, bold = true },
+            SnacksTerminalFloatBorder { fg = color.float_thick_line, bg = color.bg },
 
             NVNotification { bg = color.float_bg },
             NVNotificationMeta { fg = color.faded_text },
