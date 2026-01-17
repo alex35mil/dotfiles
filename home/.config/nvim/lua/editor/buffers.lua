@@ -7,7 +7,7 @@ function NVBuffers.keymaps()
         NVKeymaps.close,
         "Delete current buffer, but do not close current window if there are multiple",
         function()
-            fn.delete_buf({ should_close_window = false, force = false })
+            fn.delete_buf({ should_close_window = false })
         end,
         mode = { "n", "v", "i", "t", "c" },
     })
@@ -98,7 +98,7 @@ function fn.get_buf_info(bufid)
     return vim.fn.getbufinfo(bufid)[1]
 end
 
----@param options {force: boolean, should_close_window: boolean}
+---@param options {should_close_window: boolean}
 function fn.delete_buf(options)
     if NVMiniStarter.is_active() then
         return
@@ -123,8 +123,6 @@ function fn.delete_buf(options)
         return
     end
 
-    -- TODO: When closing unsaved buffer, show confirmation dialog
-
     if vim.bo.readonly then
         vim.cmd.close()
         return
@@ -132,7 +130,7 @@ function fn.delete_buf(options)
 
     local current_win = vim.api.nvim_get_current_win()
 
-    local opts = vim.tbl_extend("keep", options, { force = false, should_close_window = false })
+    local opts = vim.tbl_extend("keep", options, { should_close_window = false })
 
     local current_buf = vim.api.nvim_get_current_buf()
     local current_buf_info = fn.get_buf_info(current_buf)
@@ -142,9 +140,13 @@ function fn.delete_buf(options)
         return
     end
 
-    if current_buf_info.name == "" and current_buf_info.changed == 1 and not opts.force then
-        log.error("The buffer needs to be saved first")
-        return
+    -- Don't write if file was deleted from disk or if it's an unnamed modified buffer
+    local file_exists = current_buf_info.name ~= "" and vim.fn.filereadable(current_buf_info.name) == 1
+
+    if current_buf_info.name == "" and current_buf_info.changed == 1 then
+        if vim.fn.confirm("Buffer has unsaved changes. Discard?", "&Yes\n&No", 2) ~= 1 then
+            return
+        end
     end
 
     local mode = vim.fn.mode()
@@ -170,13 +172,14 @@ function fn.delete_buf(options)
     end
 
     if #tab_windows > 1 and opts.should_close_window then
-        vim.cmd("silent! write")
+        if file_exists then
+            vim.cmd("silent! write")
+        end
         vim.cmd.close()
-        NVNoNeckPain.reload()
 
         -- We don't want to destroy the buffer that is shown in another window
         if not is_opened_elsewhere then
-            vim.api.nvim_buf_delete(current_buf, { force = opts.force })
+            vim.api.nvim_buf_delete(current_buf, { force = not file_exists })
         end
     else
         local bufs = NVBuffers.get_listed_bufs({ sort_lastused = true })
@@ -208,30 +211,38 @@ function fn.delete_buf(options)
         end
 
         if next_buf ~= nil then
-            vim.cmd("silent! write")
+            if file_exists then
+                vim.cmd("silent! write")
+            end
             vim.api.nvim_set_current_buf(next_buf)
             if not is_opened_elsewhere then
-                vim.api.nvim_buf_delete(current_buf, { force = opts.force })
+                vim.api.nvim_buf_delete(current_buf, { force = not file_exists })
             end
         else
             if #tab_windows > 1 then
-                vim.cmd("silent! write")
+                if file_exists then
+                    vim.cmd("silent! write")
+                end
                 vim.cmd.close()
                 if not is_opened_elsewhere then
-                    vim.api.nvim_buf_delete(current_buf, { force = opts.force })
+                    vim.api.nvim_buf_delete(current_buf, { force = not file_exists })
                 end
             else
                 local empty_buf = vim.api.nvim_create_buf(true, false)
 
                 if empty_buf == 0 then
                     log.error("Failed to create empty buffer")
-                    vim.cmd("silent! write")
+                    if file_exists then
+                        vim.cmd("silent! write")
+                    end
                 else
-                    vim.cmd("silent! write")
+                    if file_exists then
+                        vim.cmd("silent! write")
+                    end
                     vim.api.nvim_set_current_buf(empty_buf)
                 end
 
-                vim.api.nvim_buf_delete(current_buf, { force = opts.force })
+                vim.api.nvim_buf_delete(current_buf, { force = not file_exists })
             end
         end
     end
