@@ -177,20 +177,10 @@ end
 
 ---@param direction "up"|"down"
 function fn.change_window_width(direction)
-    local layout_managed = NVLayout.is_managed()
-
     if direction == "up" then
-        if layout_managed then
-            NVLayout.increase_width(5)
-        else
-            vim.cmd("vertical resize +5")
-        end
+        NVLayout.increase_width()
     elseif direction == "down" then
-        if layout_managed then
-            NVLayout.decrease_width(5)
-        else
-            vim.cmd("vertical resize -5")
-        end
+        NVLayout.decrease_width()
     else
         log.error("Window Width Change: Unexpected direction")
     end
