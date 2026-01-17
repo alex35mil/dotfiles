@@ -125,7 +125,6 @@ function NVGrugFar.ensure_current_hidden()
     end
 
     instance:close()
-    vim.schedule(NVNoNeckPain.reload)
 
     return true
 end

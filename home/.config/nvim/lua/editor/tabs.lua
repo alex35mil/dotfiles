@@ -17,17 +17,6 @@ function NVTabs.keymaps()
     K.map({ "<C-S-d>", "Previous tab", "<Cmd>tabprev<CR>", mode = { "n", "i", "v", "t" } })
 end
 
-function NVTabs.autocmds()
-    vim.api.nvim_create_autocmd("TabEnter", {
-        callback = function()
-            if not NVTabs.restoring then
-                NVNoNeckPain.enable({ ensure_cursor_position = false })
-            end
-        end,
-        desc = "Enable NoNeckPain on tab switch",
-    })
-end
-
 function fn.create_tab()
     Snacks.input({ prompt = "Tab name: " }, function(name)
         if name and name ~= "" then

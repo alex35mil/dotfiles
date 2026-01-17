@@ -23,7 +23,6 @@ function NVPersistence.autocmds()
             NVSLazygit.ensure_hidden()
             NVDiffview.ensure_all_hidden()
             NVTinygit.ensure_hidden()
-            NVNoNeckPain.disable()
 
             NVTabs.save_labels()
 
@@ -37,7 +36,6 @@ function NVPersistence.autocmds()
         pattern = "PersistenceLoadPost",
         callback = function()
             NVTabs.restore_labels()
-            NVNoNeckPain.reload()
         end,
     })
 end

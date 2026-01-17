@@ -25,7 +25,7 @@ NVDebug.keymaps()
 
 NVLsp.autocmds()
 NVBuffers.autocmds()
-NVTabs.autocmds()
+NVLayout.autocmds()
 NVFocus.autocmds()
 NVGrugFar.autocmds()
 NVPersistence.autocmds()

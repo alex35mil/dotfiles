@@ -316,6 +316,8 @@ function NVSPickers.buffers()
                     return false
                 elseif string.find(item.file, "^oil://") then
                     return false
+                elseif NVLayout.is_sidepad_buf(item.buf) then
+                    return false
                 else
                     return true
                 end

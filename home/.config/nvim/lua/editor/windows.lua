@@ -95,7 +95,6 @@ function NVWindows.keymaps()
     })
 
     K.map({ "<A-e>", "Equalize layout", fn.equalize_layout, mode = { "n", "i", "v" } })
-    K.map({ "<A-x>", "Reset layout", fn.reset_layout, mode = { "n", "i", "v" } })
 end
 
 ---@param winid WinID
@@ -155,20 +154,18 @@ function fn.reposition_windows(opts)
     local windows = fn.get_normal_tab_windows()
 
     if #windows == 2 and action == "swap" then
-        NVNoNeckPain.update_layout_with(function()
-            vim.cmd("wincmd r")
-        end)
+        vim.cmd("wincmd r")
     elseif #windows > 1 then
         if action == "swap" then
             NVWinshift.swap()
         elseif action == "move_left" then
-            NVNoNeckPain.update_layout_with(NVWinshift.move_left)
+            NVWinshift.move_left()
         elseif action == "move_right" then
-            NVNoNeckPain.update_layout_with(NVWinshift.move_right)
+            NVWinshift.move_right()
         elseif action == "move_up" then
-            NVNoNeckPain.update_layout_with(NVWinshift.move_up)
+            NVWinshift.move_up()
         elseif action == "move_down" then
-            NVNoNeckPain.update_layout_with(NVWinshift.move_down)
+            NVWinshift.move_down()
         else
             log.error("Unexpected windows action")
         end
@@ -180,17 +177,17 @@ end
 
 ---@param direction "up"|"down"
 function fn.change_window_width(direction)
-    local sidepads_visible = NVNoNeckPain.are_sidepads_visible()
+    local layout_managed = NVLayout.is_managed()
 
     if direction == "up" then
-        if sidepads_visible then
-            NVNoNeckPain.increase_window_width()
+        if layout_managed then
+            NVLayout.increase_width(5)
         else
             vim.cmd("vertical resize +5")
         end
     elseif direction == "down" then
-        if sidepads_visible then
-            NVNoNeckPain.decrease_window_width()
+        if layout_managed then
+            NVLayout.decrease_width(5)
         else
             vim.cmd("vertical resize -5")
         end
@@ -211,19 +208,8 @@ function fn.change_window_height(direction)
 end
 
 function fn.equalize_layout()
-    local sidepads_visible = NVNoNeckPain.are_sidepads_visible()
-
-    if sidepads_visible then
-        NVNoNeckPain.set_default_window_width()
-        vim.cmd("vert wincmd =")
-    else
-        vim.cmd("wincmd =")
-    end
-end
-
-function fn.reset_layout()
-    fn.equalize_layout()
-    NVNoNeckPain.reload()
+    NVLayout.reset_width()
+    vim.cmd("wincmd =")
 end
 
 ---@return WinID[]?
@@ -253,15 +239,9 @@ function fn.get_normal_tab_windows()
 
     local result = {}
 
-    local sidepads = NVNoNeckPain.get_sidepads()
-
     for _, winid in ipairs(windows) do
         if not NVWindows.is_window_floating(winid) then
-            if sidepads ~= nil then
-                if winid ~= sidepads.left and winid ~= sidepads.right then
-                    table.insert(result, winid)
-                end
-            else
+            if not NVLayout.is_sidepad_win(winid) then
                 table.insert(result, winid)
             end
         end

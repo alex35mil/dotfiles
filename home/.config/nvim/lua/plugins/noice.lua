@@ -218,15 +218,8 @@ function NVNoice.ensure_hidden()
             fn.close_split()
             return true
         else
-            if NVNoNeckPain.are_sidepads_visible() then
-                NVNoNeckPain.update_layout_with(function()
-                    vim.api.nvim_set_current_win(current_win)
-                    fn.close_split()
-                end, { check_sidepads_visibility = false })
-            else
-                fn.close_split()
-            end
-
+            -- Probably, needs specal handling of general window depending on the layout
+            fn.close_split()
             return true
         end
     else

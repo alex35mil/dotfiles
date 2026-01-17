@@ -65,7 +65,7 @@ NVMiniStarter = {
                         if bufid == starter_bufid then
                             NVTabs.set_label_if_empty({ icon = NVTabs.editor_icon, name = "main" })
                             NVLualine.show_everything()
-                            NVNoNeckPain.enable()
+                            NVLayout.enable()
                             starter_bufid = nil
                         end
                     end,
