@@ -5,10 +5,6 @@ NVWindows = {
 
 local fn = {}
 
-function NVWindows.default_width()
-    return NVScreen.is_large() and 140 or 120
-end
-
 function NVWindows.keymaps()
     K.map({ "<D-n>", "Create new buffer in the current window", "<Cmd>enew<CR>", mode = { "n", "v", "i" } })
     K.map({ "<Leader>nh", "Create new buffer in a horizontal split", "<Cmd>new<CR>", mode = "n" })

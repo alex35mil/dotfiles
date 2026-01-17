@@ -20,6 +20,10 @@ local State = {
     tabs = {}, ---@type table<TabID, TabState>
 }
 
+function NVLayout.default_width()
+    return NVScreen.is_large() and 140 or 120
+end
+
 local WIDTH_CHANGE_STEP = 5
 local MIN_WIDTH = 40
 
@@ -39,7 +43,7 @@ end
 
 local function get_content_width()
     local tab = get_tab_state()
-    return tab.content_width or NVWindows.default_width()
+    return tab.content_width or NVLayout.default_width()
 end
 
 local function is_sidepad_buf(buf)
