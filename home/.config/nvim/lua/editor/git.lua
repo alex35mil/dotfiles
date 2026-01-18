@@ -183,6 +183,14 @@ function NVGit.has_unstaged_changes()
     return vim.v.shell_error ~= 0
 end
 
+function NVGit.get_staged_files_count()
+    local output = vim.fn.systemlist("git diff --cached --name-only 2>/dev/null")
+    if vim.v.shell_error ~= 0 then
+        return 0
+    end
+    return #output
+end
+
 ---
 --- Commit & Push
 ---

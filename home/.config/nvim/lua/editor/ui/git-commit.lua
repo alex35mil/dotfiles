@@ -21,8 +21,7 @@ local highlights = {
     footer_action = "NonText",
     footer_separator = "FloatBorder",
     char_count = "FloatBorder",
-    char_count_over = "ErrorMsg",
-    subject_over = "ErrorMsg",
+    error = "DiagnosticError",
 }
 
 local function setup_highlights()
@@ -278,7 +277,7 @@ local function setup_char_counter(winid, bufnr)
 
         local text = vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)[1] or ""
         local count = #text
-        local count_hl = count <= MAX_SUBJECT_LEN and highlights.char_count or highlights.char_count_over
+        local count_hl = count <= MAX_SUBJECT_LEN and highlights.char_count or highlights.error
 
         local conf = vim.api.nvim_win_get_config(winid)
         local action_labels = { commit = "commit", rename = "rename", amend = "amend" }
@@ -395,7 +394,7 @@ local function create_subject_window(title, initial_text)
 
     -- Highlight over-length text
     vim.api.nvim_win_call(winid, function()
-        vim.fn.matchadd(highlights.subject_over, [[\%>]] .. MAX_SUBJECT_LEN .. [[v.]])
+        vim.fn.matchadd(highlights.error, [[\%>]] .. MAX_SUBJECT_LEN .. [[v.]])
     end)
 
     return winid, bufnr
@@ -409,6 +408,18 @@ local function create_body_window(initial_text)
     local lines = initial_text and vim.split(initial_text, "\n") or { "" }
     vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 
+    local staged_count = NVGit.get_staged_files_count()
+    local footer
+    if staged_count > 0 then
+        footer = {
+            { " " .. staged_count .. " file" .. (staged_count > 1 and "s" or "") .. " staged ", highlights.char_count },
+        }
+    elseif state.mode == "commit" then
+        footer = {
+            { " nothing staged ", highlights.error },
+        }
+    end
+
     local winid = vim.api.nvim_open_win(bufnr, false, {
         relative = "win",
         win = state.subject.win,
@@ -419,6 +430,8 @@ local function create_body_window(initial_text)
         border = "rounded",
         title = " Description (optional) ",
         title_pos = "left",
+        footer = footer,
+        footer_pos = "right",
         style = "minimal",
     })
 
