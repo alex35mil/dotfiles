@@ -22,7 +22,7 @@ function NVPersistence.autocmds()
             NVSZoom.ensure_deactivated()
             NVSLazygit.ensure_hidden()
             NVDiffview.ensure_all_hidden()
-            NVTinygit.ensure_hidden()
+            NVGitCommit.ensure_hidden()
 
             NVTabs.save_labels()
 

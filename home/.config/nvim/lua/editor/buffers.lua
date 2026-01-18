@@ -84,7 +84,7 @@ function fn.delete_buf()
     if
         NVNoice.ensure_hidden()
         or NVSInput.ensure_hidden()
-        or NVTinygit.ensure_hidden()
+        or NVGitCommit.ensure_hidden()
         or NVLazy.ensure_hidden()
         or NVMason.ensure_hidden()
         or NVTrouble.ensure_hidden()
