@@ -2,7 +2,7 @@
 log = {}
 
 -- Can be changed from cmdline to enable/disable logging
-LOG = "info" --- @type "trace" | "debug" | "info" | "warn" | "error"
+LOG = "debug" --- @type "trace" | "debug" | "info" | "warn" | "error"
 
 local ERROR = vim.log.levels.ERROR
 local WARN = vim.log.levels.WARN
