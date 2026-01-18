@@ -6,40 +6,18 @@ function NVBuffers.keymaps()
     K.map({
         NVKeymaps.close,
         "Delete current buffer, but do not close current window if there are multiple",
-        function()
-            fn.delete_buf({ should_close_window = false })
-        end,
+        fn.delete_buf,
         mode = { "n", "v", "i", "t", "c" },
     })
 
     K.map({
         "<D-S-w>",
         "Delete current buffer and close current window if there are multiple",
-        function()
-            vim.cmd("q")
-        end,
+        fn.delete_buf_and_close_win,
         mode = { "n", "i", "v", "t", "c" },
     })
 
     -- TODO: Revisit these keymaps
-
-    -- K.map({
-    --     "<C-S-w>",
-    --     "Delete current buffer, even if unsaved, but do not close current window if there are multiple",
-    --     function()
-    --         fn.delete_buf({ should_close_window = false, force = true })
-    --     end,
-    --     mode = "n",
-    -- })
-
-    -- K.map({
-    --     "<C-S-M-w>",
-    --     "Delete current buffer, even if unsaved, and close current window if there are multiple",
-    --     function()
-    --         fn.delete_buf({ should_close_window = true, force = true })
-    --     end,
-    --     mode = "n",
-    -- })
 
     -- K.map({
     --     "<Leader>bas",
@@ -98,14 +76,14 @@ function fn.get_buf_info(bufid)
     return vim.fn.getbufinfo(bufid)[1]
 end
 
----@param options {should_close_window: boolean}
-function fn.delete_buf(options)
+function fn.delete_buf()
     if NVMiniStarter.is_active() then
         return
     end
 
     if
         NVNoice.ensure_hidden()
+        or NVSInput.ensure_hidden()
         or NVTinygit.ensure_hidden()
         or NVLazy.ensure_hidden()
         or NVMason.ensure_hidden()
@@ -129,9 +107,6 @@ function fn.delete_buf(options)
     end
 
     local current_win = vim.api.nvim_get_current_win()
-
-    local opts = vim.tbl_extend("keep", options, { should_close_window = false })
-
     local current_buf = vim.api.nvim_get_current_buf()
     local current_buf_info = fn.get_buf_info(current_buf)
 
@@ -171,80 +146,99 @@ function fn.delete_buf(options)
         is_opened_elsewhere = fn.is_opened_elsewhere(tabs, current_tab, current_win, current_buf)
     end
 
-    if #tab_windows > 1 and opts.should_close_window then
+    local bufs = NVBuffers.get_listed_bufs({ sort_lastused = true })
+
+    -- Searching for the next buffer to show in the current window
+    local next_buf = nil
+
+    for _, buf in ipairs(bufs) do
+        if buf.bufnr ~= current_buf then
+            -- If there are multiple windows opened, we don't want to show the buffer
+            -- that is already opened in another window. So if it's the case,
+            -- we skip it and continue searching for the next buffer.
+            local is_opened_elsewhere_in_current_tab = false
+
+            for _, win in ipairs(tab_windows) do
+                local win_buf = vim.api.nvim_win_get_buf(win)
+                if win_buf == buf.bufnr then
+                    is_opened_elsewhere_in_current_tab = true
+                    break
+                end
+            end
+
+            if not is_opened_elsewhere_in_current_tab then
+                -- that's the one 🖤
+                next_buf = buf.bufnr
+                break
+            end
+        end
+    end
+
+    if next_buf ~= nil then
         if file_exists then
             vim.cmd("silent! write")
         end
-        vim.cmd.close()
-
-        -- We don't want to destroy the buffer that is shown in another window
+        vim.api.nvim_set_current_buf(next_buf)
         if not is_opened_elsewhere then
             vim.api.nvim_buf_delete(current_buf, { force = not file_exists })
         end
     else
-        local bufs = NVBuffers.get_listed_bufs({ sort_lastused = true })
-
-        -- Searching for the next buffer to show in the current window
-        local next_buf = nil
-
-        for _, buf in ipairs(bufs) do
-            if buf.bufnr ~= current_buf then
-                -- If there are multiple windows opened, we don't want to show the buffer
-                -- that is already opened in another window. So if it's the case,
-                -- we skip it and continue searching for the next buffer.
-                local is_opened_elsewhere_in_current_tab = false
-
-                for _, win in ipairs(tab_windows) do
-                    local win_buf = vim.api.nvim_win_get_buf(win)
-                    if win_buf == buf.bufnr then
-                        is_opened_elsewhere_in_current_tab = true
-                        break
-                    end
-                end
-
-                if not is_opened_elsewhere_in_current_tab then
-                    -- that's the one 🖤
-                    next_buf = buf.bufnr
-                    break
-                end
-            end
-        end
-
-        if next_buf ~= nil then
+        if #tab_windows > 1 then
             if file_exists then
                 vim.cmd("silent! write")
             end
-            vim.api.nvim_set_current_buf(next_buf)
+            vim.cmd.close()
             if not is_opened_elsewhere then
                 vim.api.nvim_buf_delete(current_buf, { force = not file_exists })
             end
         else
-            if #tab_windows > 1 then
+            local empty_buf = vim.api.nvim_create_buf(true, false)
+
+            if empty_buf == 0 then
+                log.error("Failed to create empty buffer")
                 if file_exists then
                     vim.cmd("silent! write")
                 end
-                vim.cmd.close()
-                if not is_opened_elsewhere then
-                    vim.api.nvim_buf_delete(current_buf, { force = not file_exists })
-                end
             else
-                local empty_buf = vim.api.nvim_create_buf(true, false)
-
-                if empty_buf == 0 then
-                    log.error("Failed to create empty buffer")
-                    if file_exists then
-                        vim.cmd("silent! write")
-                    end
-                else
-                    if file_exists then
-                        vim.cmd("silent! write")
-                    end
-                    vim.api.nvim_set_current_buf(empty_buf)
+                if file_exists then
+                    vim.cmd("silent! write")
                 end
+                vim.api.nvim_set_current_buf(empty_buf)
+            end
 
-                vim.api.nvim_buf_delete(current_buf, { force = not file_exists })
+            vim.api.nvim_buf_delete(current_buf, { force = not file_exists })
+        end
+    end
+end
+
+function fn.delete_buf_and_close_win()
+    local tab_windows = NVWindows.get_tab_windows_with_listed_buffers({ incl_help = true })
+
+    if tab_windows == nil then
+        vim.cmd("q")
+        return
+    end
+
+    local is_last_window_in_tab = #tab_windows <= 1
+    local non_temporary_tabs = NVTabs.get_non_temporary()
+
+    if is_last_window_in_tab then
+        if #non_temporary_tabs > 1 then
+            if vim.fn.confirm("Close tab?", "&Yes\n&No", 2) == 1 then
+                vim.cmd("tabclose")
+            end
+        else
+            -- Last non-temporary tab: create empty buffer instead of closing
+            local current_buf = vim.api.nvim_get_current_buf()
+            local empty_buf = vim.api.nvim_create_buf(true, false)
+
+            if empty_buf ~= 0 then
+                vim.api.nvim_set_current_buf(empty_buf)
+                vim.api.nvim_buf_delete(current_buf, { force = true })
             end
         end
+    else
+        vim.cmd("q")
     end
 end
 

@@ -140,7 +140,7 @@ function NVLsp.keymaps()
             mode = { "n", "i" },
         },
         {
-            "<C-f>",
+            "<M-S-f>",
             "Format",
             NVConform.format,
             mode = { "n", "v" },

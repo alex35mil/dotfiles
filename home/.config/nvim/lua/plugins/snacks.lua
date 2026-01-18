@@ -3,6 +3,7 @@ NVSZoom = {}
 NVSLazygit = {}
 NVSTerminal = {}
 NVSNotifier = {}
+NVSInput = {}
 
 NVSPickerVerticalLayout = {
     large_screen_width = 0.4,
@@ -84,7 +85,7 @@ function NVSPickerHorizontalLayout.build(opts)
 end
 
 NVSPickers.keys = {
-    ["<D-S-m>"] = { "toggle_maximize", mode = { "n", "i", "v" } },
+    ["<M-f>"] = { "toggle_maximize", mode = { "n", "i", "v" } },
     [NVKeymaps.open_vsplit] = { "edit_vsplit", mode = { "n", "i", "v" } },
     [NVKeymaps.open_hsplit] = { "edit_split", mode = { "n", "i", "v" } },
     ["<C-Tab>"] = { "cycle_win", mode = { "n", "i", "v" } },
@@ -152,10 +153,10 @@ NVSnacks = {
             { "<D-t>", NVSPickers.files, mode = { "n", "i", "v", "t" }, desc = "Open file finder" },
             { "<D-b>", NVSPickers.buffers, mode = { "n", "i", "v", "t" }, desc = "Open buffers list" },
             { "<D-g>b", NVSPickers.git_branches, mode = { "n", "i", "v", "t" }, desc = "Git: Branches" },
-            { "<M-f>", NVSPickers.text_search, mode = { "n", "i", "v", "t" }, desc = "Open text search" },
-            { "<M-h>", NVSPickers.highlights, mode = "n", desc = "Show highlights" },
-            { "<D-g>g", NVSLazygit.show, mode = { "n", "i", "v", "t" }, desc = "Git: Lazygit" },
-            { "<D-S-m>", NVSZoom.activate, mode = { "n", "i", "v" }, desc = "Maximize" },
+            { "<C-f>", NVSPickers.text_search, mode = { "n", "i", "v", "t" }, desc = "Open text search" },
+            { "<C-h>", NVSPickers.highlights, mode = "n", desc = "Show highlights" },
+            { "<D-g>l", NVSLazygit.show, mode = { "n", "i", "v", "t" }, desc = "Git: Lazygit" },
+            { "<M-f>", NVSZoom.activate, mode = { "n", "i", "v" }, desc = "Maximize" },
             { "<D-l>", NVSNotifier.log, mode = { "n", "i", "v" }, desc = "Open log" },
         }
     end,
@@ -489,6 +490,22 @@ end
 function NVSLazygit.ensure_hidden()
     if NVSTerminal.is_app("lazygit") then
         Snacks.lazygit()
+        return true
+    end
+    return false
+end
+
+---@param bufid BufID | nil
+---@return boolean
+function NVSInput.is_input(bufid)
+    bufid = bufid or vim.api.nvim_get_current_buf()
+    local ft = vim.bo[bufid].filetype
+    return ft == "snacks_input"
+end
+
+function NVSInput.ensure_hidden()
+    if NVSInput.is_input() then
+        vim.cmd.close()
         return true
     end
     return false

@@ -9,8 +9,8 @@ NVTabs = {
 local fn = {}
 
 function NVTabs.keymaps()
-    K.map({ "<C-n>", "New tab", fn.create_tab, mode = { "n", "i", "v", "t" } })
-    K.map({ "<D-S-n>", "New tab with git worktree", fn.create_tab_with_worktree, mode = { "n", "i", "v", "t" } })
+    K.map({ "<D-S-m>", "Make new tab", fn.create_tab, mode = { "n", "i", "v", "t" } })
+    K.map({ "<C-S-m>", "Make new tab with git worktree", fn.create_tab_with_worktree, mode = { "n", "i", "v", "t" } })
     K.map({ NVKeyRemaps["<D-h>"], "Switch worktree", fn.pick_worktree, mode = { "n", "i", "v", "t" } })
     K.map({ "<C-w>", "Close tab", fn.close_tab, mode = { "n", "i", "v", "t" }, nowait = true })
     K.map({ "<C-S-n>", "Next tab", "<Cmd>tabnext<CR>", mode = { "n", "i", "v", "t" } })
@@ -278,4 +278,24 @@ function NVTabs.restore_labels()
     vim.api.nvim_set_current_tabpage(current_tab)
 
     NVTabs.restoring = false
+end
+
+---@param tabid TabID
+---@return boolean
+function NVTabs.is_temporary(tabid)
+    return NVFocus.is_focus_tab(tabid) or NVDiffview.is_diffview_tab(tabid) or NVClaudeCode.is_diff_tab(tabid)
+end
+
+---@return TabID[]
+function NVTabs.get_non_temporary()
+    local tabs = vim.api.nvim_list_tabpages()
+    local result = {}
+
+    for _, tabid in ipairs(tabs) do
+        if not NVTabs.is_temporary(tabid) then
+            table.insert(result, tabid)
+        end
+    end
+
+    return result
 end

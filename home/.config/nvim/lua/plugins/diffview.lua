@@ -92,6 +92,23 @@ NVDiffview.tab = {
     name = "diff",
 }
 
+---@param tabid TabID
+---@return boolean
+function NVDiffview.is_diffview_tab(tabid)
+    local ok, dv = pcall(require, "diffview.lib")
+    if not ok or not dv.views then
+        return false
+    end
+
+    for _, view in ipairs(dv.views) do
+        if view.tabpage == tabid then
+            return true
+        end
+    end
+
+    return false
+end
+
 function NVDiffview.ensure_current_hidden()
     local current_diff = fn.current_diff()
 

@@ -135,6 +135,19 @@ function NVClaudeCode.is_diff_active(bufid)
     return vim.b[bufid].claudecode_diff_tab_name ~= nil
 end
 
+---@param tabid TabID
+---@return boolean
+function NVClaudeCode.is_diff_tab(tabid)
+    local tab_wins = vim.api.nvim_tabpage_list_wins(tabid)
+    for _, win in ipairs(tab_wins) do
+        local bufid = vim.api.nvim_win_get_buf(win)
+        if vim.b[bufid].claudecode_diff_tab_name ~= nil then
+            return true
+        end
+    end
+    return false
+end
+
 function fn.accept_diff()
     if NVClaudeCode.is_diff_active() then
         -- Sometimes, when I accept/reject a diff while there's a diffview tab open elsewhere,

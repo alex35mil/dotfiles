@@ -113,6 +113,12 @@ function NVFocus.ensure_deactivated_if_active()
     return true
 end
 
+---@param tabid TabID
+---@return boolean
+function NVFocus.is_focus_tab(tabid)
+    return NVFocus.tab ~= nil and NVFocus.tab.id == tabid
+end
+
 function NVFocus.deactivate_active()
     local current_cursor = vim.api.nvim_win_get_cursor(0)
     local current_buf = vim.api.nvim_get_current_buf()
