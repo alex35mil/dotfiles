@@ -255,7 +255,7 @@ function NVTheme.apply()
             DiffviewDiffAddText { bg = color.diff_add_bg.mix(color.green, 25).lighten(3) },
             DiffviewDiffDelete { bg = color.diff_delete_bg },
             DiffviewDiffDeleteText { bg = color.diff_delete_bg.mix(color.red, 35) },
-            DiffviewDiffFill { fg = color.faded_text, bg = color.bg },
+            DiffviewDiffFill { fg = color.faded_text.mix(color.bg, 50), bg = color.bg },
 
             -- Gitsigns
             GitSignsAdd { GitAdded },
