@@ -20,9 +20,11 @@ NVKeymaps = {
     close = "<D-w>",
 }
 
+-- Remapped via Keyboard Maestro
 NVKeyRemaps = {
     ["<D-m>"] = "<C-S-A-m>",
     ["<D-h>"] = "<C-S-A-h>",
+    ["<C-c>"] = "<C-S-A-c>",
 }
 
 local default_keymap_options = { noremap = true, silent = true }

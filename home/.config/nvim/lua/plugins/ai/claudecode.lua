@@ -96,7 +96,7 @@ NVClaudeCode = {
             },
             { "<D-p>", fn.post_and_focus, mode = { "n", "i", "v" }, desc = "Post to Claude and focus" },
             { "<C-CR>", fn.accept_diff, mode = { "n", "i", "v" }, desc = "Accept Claude diff" },
-            { "<C-r>", fn.reject_diff, mode = { "n", "i", "v" }, desc = "Reject Claude diff" },
+            { NVKeyRemaps["<C-c>"], fn.reject_diff, mode = { "n", "i", "v" }, desc = "Reject Claude diff" },
             {
                 "<M-c>",
                 CCProvider.toggle_layout,
@@ -137,6 +137,11 @@ end
 
 function fn.accept_diff()
     if NVClaudeCode.is_diff_active() then
+        -- Sometimes, when I accept/reject a diff while there's a diffview tab open elsewhere,
+        -- the diffview tab gets closed and its windows get merged into the tab where the Claude Code terminal is.
+        -- I couldn't find the culprit, so I just preemptively close all diff tabs since it's harmless.
+        NVDiffview.ensure_all_hidden()
+
         vim.cmd("ClaudeCodeDiffAccept")
         vim.defer_fn(CCProvider.focus, 50)
     end
@@ -144,6 +149,11 @@ end
 
 function fn.reject_diff()
     if NVClaudeCode.is_diff_active() then
+        -- Sometimes, when I accept/reject a diff while there's a diffview tab open elsewhere,
+        -- the diffview tab gets closed and its windows get merged into the tab where the Claude Code terminal is.
+        -- I couldn't find the culprit, so I just preemptively close all diff tabs since it's harmless.
+        NVDiffview.ensure_all_hidden()
+
         vim.cmd("ClaudeCodeDiffDeny")
         vim.defer_fn(CCProvider.focus, 50)
     end
