@@ -1,6 +1,6 @@
 local fn = {}
 
-local CCProvider = require("editor.claudecode").init({
+local CCProvider = require("editor.features.claudecode-provider").init({
     layout = {
         default = "side",
         side = {
@@ -118,6 +118,10 @@ NVClaudeCode = {
         },
     },
 }
+
+function NVClaudeCode.focus()
+    CCProvider.focus()
+end
 
 ---@return boolean
 function NVClaudeCode.hide_active()

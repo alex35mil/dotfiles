@@ -91,7 +91,7 @@ NVNoice = {
                     position = Layout.common.position.visually_centered,
                     border = Layout.common.border,
                     size = {
-                        width = NVLayout.default_width(),
+                        width = NVLayoutManager.default_width(),
                         height = NVScreen.is_large() and 30 or 15,
                     },
                     win_options = Layout.common.win_options,

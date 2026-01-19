@@ -88,14 +88,14 @@ function fn.delete_buf()
         or NVLazy.ensure_hidden()
         or NVMason.ensure_hidden()
         or NVTrouble.ensure_hidden()
-        or NVLsp.ensure_popup_hidden()
+        or NVLspPopup.ensure_hidden()
         or NVSLazygit.ensure_hidden()
         or NVGitsigns.ensure_preview_hidden()
         or NVDiffview.ensure_current_hidden()
         or NVGrugFar.ensure_current_hidden()
         -- should go last
         or NVSZoom.ensure_deactivated()
-        or NVFocus.ensure_deactivated_if_active()
+        or NVFocusMode.ensure_deactivated_if_active()
         or NVClaudeCode.hide_active()
     then
         return

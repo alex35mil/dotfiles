@@ -4,6 +4,10 @@ NVGit = {}
 --- Worktrees
 ---
 
+---@alias GitWorktreeInfo {path: string, branch: string}
+
+---@param name string
+---@return string
 function NVGit.normalize_worktree_name(name)
     local result = name:lower()
     result = result:gsub("[%s_]+", "-")
@@ -13,6 +17,8 @@ function NVGit.normalize_worktree_name(name)
     return result
 end
 
+---@param path? string
+---@return GitWorktreeInfo?
 function NVGit.get_worktree_info(path)
     path = path or vim.fn.getcwd(-1, 0)
 

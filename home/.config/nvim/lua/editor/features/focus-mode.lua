@@ -6,28 +6,28 @@
 
 ---@class NVFocus
 ---@field tab FocusTab?
-NVFocus = { tab = nil }
+NVFocusMode = { tab = nil }
 
-function NVFocus.keymaps()
-    K.map({ "<D-f>", "Toggle focus mode", NVFocus.toggle, mode = { "n", "i", "v", "t" } })
+function NVFocusMode.keymaps()
+    K.map({ "<D-f>", "Toggle focus mode", NVFocusMode.toggle, mode = { "n", "i", "v", "t" } })
 end
 
-function NVFocus.autocmds()
+function NVFocusMode.autocmds()
     vim.api.nvim_create_autocmd("TabClosed", {
         desc = "Clear focus tab if closed",
         callback = function()
-            if NVFocus.tab then
+            if NVFocusMode.tab then
                 local tabs = vim.api.nvim_list_tabpages()
                 local focus_tab_exists = false
                 for _, tab in ipairs(tabs) do
-                    if tab == NVFocus.tab.id then
+                    if tab == NVFocusMode.tab.id then
                         focus_tab_exists = true
                         break
                     end
                 end
 
                 if not focus_tab_exists then
-                    NVFocus.tab = nil
+                    NVFocusMode.tab = nil
                     log.trace({ "Focus tab was closed, cleared focus state" })
                 end
             end
@@ -35,24 +35,24 @@ function NVFocus.autocmds()
     })
 end
 
-function NVFocus.toggle()
+function NVFocusMode.toggle()
     local current_buf = vim.api.nvim_get_current_buf()
     local current_cursor = vim.api.nvim_win_get_cursor(0)
 
-    log.trace({ "Toggling focus", state = NVFocus.tab })
+    log.trace({ "Toggling focus", state = NVFocusMode.tab })
 
-    if NVFocus.tab then
+    if NVFocusMode.tab then
         local current_tab = vim.api.nvim_get_current_tabpage()
 
-        if NVFocus.tab.id ~= current_tab then
+        if NVFocusMode.tab.id ~= current_tab then
             log.trace({ "Focus tab exists but is not active. Activating it." })
-            vim.api.nvim_set_current_tabpage(NVFocus.tab.id)
+            vim.api.nvim_set_current_tabpage(NVFocusMode.tab.id)
             local current_win = vim.api.nvim_get_current_win()
             vim.api.nvim_win_set_buf(current_win, current_buf)
             vim.api.nvim_win_set_cursor(current_win, current_cursor)
         else
             log.trace({ "Focus tab is active. Deactivating it." })
-            NVFocus.deactivate_active()
+            NVFocusMode.deactivate_active()
         end
         return
     end
@@ -73,7 +73,7 @@ function NVFocus.toggle()
     vim.api.nvim_win_set_cursor(focus_win, current_cursor)
     vim.api.nvim_buf_delete(empty_buf, { force = true })
 
-    NVFocus.tab = {
+    NVFocusMode.tab = {
         id = focus_tab,
         original_tab = current_tab,
         original_win = current_win,
@@ -81,51 +81,51 @@ function NVFocus.toggle()
     }
 end
 
-function NVFocus.ensure_deacitvated()
-    if NVFocus.tab then
+function NVFocusMode.ensure_deacitvated()
+    if NVFocusMode.tab then
         local current_tab = vim.api.nvim_get_current_tabpage()
 
-        if NVFocus.tab.id ~= current_tab then
+        if NVFocusMode.tab.id ~= current_tab then
             log.trace({ "Focus tab exists but is not active. Closing it." })
-            local tab_number = vim.api.nvim_tabpage_get_number(NVFocus.tab.id)
+            local tab_number = vim.api.nvim_tabpage_get_number(NVFocusMode.tab.id)
             vim.cmd("tabclose " .. tab_number)
         else
             log.trace({ "Focus tab is active. Deactivating it." })
-            NVFocus.deactivate_active()
+            NVFocusMode.deactivate_active()
         end
     end
 end
 
-function NVFocus.ensure_deactivated_if_active()
-    if not NVFocus.tab then
+function NVFocusMode.ensure_deactivated_if_active()
+    if not NVFocusMode.tab then
         return false
     end
 
     local current_tab = vim.api.nvim_get_current_tabpage()
 
-    if NVFocus.tab.id ~= current_tab then
+    if NVFocusMode.tab.id ~= current_tab then
         return false
     end
 
     log.trace({ "Focus tab is active. Deactivating it." })
-    NVFocus.deactivate_active()
+    NVFocusMode.deactivate_active()
 
     return true
 end
 
 ---@param tabid TabID
 ---@return boolean
-function NVFocus.is_focus_tab(tabid)
-    return NVFocus.tab ~= nil and NVFocus.tab.id == tabid
+function NVFocusMode.is_focus_tab(tabid)
+    return NVFocusMode.tab ~= nil and NVFocusMode.tab.id == tabid
 end
 
-function NVFocus.deactivate_active()
+function NVFocusMode.deactivate_active()
     local current_cursor = vim.api.nvim_win_get_cursor(0)
     local current_buf = vim.api.nvim_get_current_buf()
 
-    local original_tab = NVFocus.tab.original_tab
-    local original_win = NVFocus.tab.original_win
-    local focus_tab_id = NVFocus.tab.id
+    local original_tab = NVFocusMode.tab.original_tab
+    local original_win = NVFocusMode.tab.original_win
+    local focus_tab_id = NVFocusMode.tab.id
 
     -- Check if original tab still exists
     local original_tab_valid = false

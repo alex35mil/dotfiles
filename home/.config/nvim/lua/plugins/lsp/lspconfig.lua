@@ -17,7 +17,7 @@ NVLspConfig = {
                 local client = vim.lsp.get_client_by_id(event.data.client_id)
 
                 -- Let's set keymaps first
-                local keymaps = NVLsp.keymaps()
+                local keymaps = NVLspPopup.keymaps()
 
                 for _, keymap in ipairs(keymaps) do
                     if keymap.mode == nil then

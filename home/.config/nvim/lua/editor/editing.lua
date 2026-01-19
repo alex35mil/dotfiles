@@ -155,7 +155,7 @@ function NVEditing.keymaps()
 end
 
 function NVEditing.esc()
-    if NVLsp.ensure_popup_hidden() then
+    if NVLspPopup.ensure_hidden() then
         return
     end
 

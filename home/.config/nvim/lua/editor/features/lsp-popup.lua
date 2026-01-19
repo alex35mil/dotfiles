@@ -1,4 +1,4 @@
-NVLsp = {}
+NVLspPopup = {}
 
 local fn = {}
 
@@ -28,7 +28,7 @@ local WARN = vim.diagnostic.severity.WARN
 local INFO = vim.diagnostic.severity.INFO
 local HINT = vim.diagnostic.severity.HINT
 
-function NVLsp.keymaps()
+function NVLspPopup.keymaps()
     return {
         { "gd", "LSP: Go to definition", NVSPickers.lsp_definitions, mode = "n" },
         { "gt", "LSP: Go to type definition", NVSPickers.lsp_type_definitions, mode = "n" },
@@ -148,7 +148,7 @@ function NVLsp.keymaps()
     }
 end
 
-function NVLsp.autocmds()
+function NVLspPopup.autocmds()
     vim.api.nvim_create_autocmd("LspProgress", {
         pattern = "*",
         callback = function()
@@ -820,7 +820,7 @@ end
 
 --- Exports ---
 
-function NVLsp.ensure_popup_hidden()
+function NVLspPopup.ensure_hidden()
     -- Let's check first if we're inside a diagnostic popup
     local parent_winid = Popup.get_lsp_popup_parent_winid()
 
@@ -849,7 +849,7 @@ function NVLsp.ensure_popup_hidden()
     end
 end
 
-function NVLsp.hide_popup_unless_active()
+function NVLspPopup.hide_unless_active()
     -- Checking if we're inside a diagnostic popup
     local parent_winid = Popup.get_lsp_popup_parent_winid()
 

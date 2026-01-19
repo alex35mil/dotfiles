@@ -7,7 +7,7 @@
 --   2. Companion: left sidepad only, with one main buffer centered and a fixed-width panel (e.g., AI chat) on the right.
 --      Applies when: exactly one main content column + one fixed-width companion column.
 
-NVLayout = {}
+NVLayoutManager = {}
 
 ---@class TabState
 ---@field on boolean
@@ -20,7 +20,7 @@ local State = {
     tabs = {}, ---@type table<TabID, TabState>
 }
 
-function NVLayout.default_width()
+function NVLayoutManager.default_width()
     return NVScreen.is_large() and 140 or 120
 end
 
@@ -43,7 +43,7 @@ end
 
 local function get_content_width()
     local tab = get_tab_state()
-    return tab.content_width or NVLayout.default_width()
+    return tab.content_width or NVLayoutManager.default_width()
 end
 
 local function is_sidepad_buf(buf)
@@ -402,7 +402,7 @@ local function update_layout()
     end
 end
 
-function NVLayout.autocmds()
+function NVLayoutManager.autocmds()
     local group = vim.api.nvim_create_augroup("NVLayout", { clear = true })
 
     vim.api.nvim_create_autocmd("WinResized", {
@@ -460,14 +460,14 @@ function NVLayout.autocmds()
     })
 end
 
-function NVLayout.enable()
+function NVLayoutManager.enable()
     State.on = true
     local tab = get_tab_state()
     tab.on = true
     vim.schedule(update_layout)
 end
 
-function NVLayout.disable()
+function NVLayoutManager.disable()
     local tab = get_tab_state()
     tab.on = false
     vim.schedule(delete_sidepads)
@@ -475,18 +475,18 @@ end
 
 ---@param buf BufID
 ---@return boolean
-function NVLayout.is_sidepad_buf(buf)
+function NVLayoutManager.is_sidepad_buf(buf)
     return is_sidepad_buf(buf)
 end
 
 ---@param win WinID
 ---@return boolean
-function NVLayout.is_sidepad_win(win)
+function NVLayoutManager.is_sidepad_win(win)
     return is_sidepad_win(win)
 end
 
 ---@param amount number | nil
-function NVLayout.increase_width(amount)
+function NVLayoutManager.increase_width(amount)
     amount = amount or WIDTH_CHANGE_STEP
 
     -- Companion panel or unmanaged layout: resize directly
@@ -503,7 +503,7 @@ function NVLayout.increase_width(amount)
 end
 
 ---@param amount number | nil
-function NVLayout.decrease_width(amount)
+function NVLayoutManager.decrease_width(amount)
     amount = amount or WIDTH_CHANGE_STEP
 
     -- Companion panel or unmanaged layout: resize directly
@@ -518,7 +518,7 @@ function NVLayout.decrease_width(amount)
     vim.schedule(update_layout)
 end
 
-function NVLayout.reset_width()
+function NVLayoutManager.reset_width()
     local tab = get_tab_state()
     tab.content_width = nil
     vim.schedule(update_layout)
