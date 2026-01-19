@@ -94,14 +94,18 @@ NVOil = {
             is_hidden_file = function()
                 return false
             end,
-            -- Gray out gitignored files
+            -- Gray out gitignored files and .git directory
             highlight_filename = function(entry)
+                local faded = "Comment"
+                if entry.name == ".git" then
+                    return faded
+                end
                 local dir = require("oil").get_current_dir()
                 if not dir then
                     return nil
                 end
                 if cache.gitignore[dir][entry.name] then
-                    return "Comment"
+                    return faded
                 end
                 return nil
             end,
