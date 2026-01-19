@@ -451,10 +451,13 @@ function NVLayoutManager.autocmds()
 
     vim.api.nvim_create_autocmd("TabClosed", {
         group = group,
-        callback = function(args)
-            local tab_id = tonumber(args.file)
-            if tab_id and State.tabs[tab_id] then
-                State.tabs[tab_id] = nil
+        callback = function()
+            -- Clean up state for any tabpages that no longer exist
+            -- Note: args.file is tab NUMBER (position), not tabpage HANDLE
+            for tab_id, _ in pairs(State.tabs) do
+                if not vim.api.nvim_tabpage_is_valid(tab_id) then
+                    State.tabs[tab_id] = nil
+                end
             end
         end,
     })
