@@ -52,15 +52,15 @@ function Capslock:update()
     HUD:updateCapslock(Capslock:isOn())
 end
 
-function Capslock:toggle()
-    CapslockLogger.f("Toggling Capslock")
+CapslockWatcher = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, function(event)
+    local capslock = hs.hid.capslock.get()
 
-    local is_on = hs.hid.capslock.toggle()
+    CapslockLogger.f("Capslock state: %s", capslock)
 
-    CapslockLogger.f("Is it on prior to toggle: %s", is_on)
+    HUD:updateCapslock(capslock)
 
-    HUD:updateCapslock(is_on)
-end
+    return false
+end)
 
 --- Input Source
 
@@ -228,6 +228,7 @@ end
 HUD:update()
 
 -- AppWatcher:start()
+CapslockWatcher:start()
 
 hs.hotkey.bind({ "cmd", "ctrl", "alt" }, "Space", function()
     InputSource:toggle()
