@@ -9,10 +9,10 @@ NVTabs = {
 local fn = {}
 
 function NVTabs.keymaps()
-    K.map({ "<D-S-m>", "Make new tab", fn.create_tab, mode = { "n", "i", "v", "t" } })
+    K.map({ "<D-S-n>", "Create new tab", fn.create_tab, mode = { "n", "i", "v", "t" } })
     K.map({ "<C-w>", "Close tab", fn.close_tab, mode = { "n", "i", "v", "t" }, nowait = true })
-    K.map({ "<C-S-n>", "Next tab", "<Cmd>tabnext<CR>", mode = { "n", "i", "v", "t" } })
-    K.map({ "<C-S-d>", "Previous tab", "<Cmd>tabprev<CR>", mode = { "n", "i", "v", "t" } })
+    K.map({ "<D-Right>", "Next tab", "<Cmd>tabnext<CR>", mode = { "n", "i", "v", "t" } })
+    K.map({ "<D-Left>", "Previous tab", "<Cmd>tabprev<CR>", mode = { "n", "i", "v", "t" } })
 end
 
 function fn.create_tab()

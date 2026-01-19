@@ -63,11 +63,11 @@ keybind = opt+cmd+shift+right=text:
 keybind = opt+cmd+shift+up=text:
 keybind = opt+cmd+shift+down=text:
 
-keybind = ctrl+shift+m=text:
+keybind = ctrl+shift+n=text:
 keybind = ctrl+shift+r=text:
 keybind = ctrl+shift+w=text:
-keybind = ctrl+shift+d=text:
-keybind = ctrl+shift+n=text:
+keybind = cmd+left=text:
+keybind = cmd+right=text:
 keybind = ctrl+cmd+left=text:
 keybind = ctrl+cmd+right=text:
 

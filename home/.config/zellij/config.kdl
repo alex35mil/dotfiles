@@ -48,11 +48,11 @@ keybinds clear-defaults=true {
         bind "" {
             NewTab { layout "terminal"; }
             SwitchToMode "Normal";
-        }                                                      // Ctrl Shift M
+        }                                                      // Ctrl Shift N
         bind "" { SwitchToMode "RenameTab"; TabNameInput 0; } // Ctrl Shift R
         bind "" { CloseTab; SwitchToMode "Normal"; }          // Ctrl Shift W
-        bind "" { GoToNextTab; }                              // Ctrl Shift N
-        bind "" { GoToPreviousTab; }                          // Ctrl Shift D
+        bind "" { GoToNextTab; }                              // Cmd →
+        bind "" { GoToPreviousTab; }                          // Cmd ←
         bind "" { MoveTab "Left"; }                           // Ctrl Cmd ←
         bind "" { MoveTab "Right"; }                          // Ctrl Cmd →
     }
