@@ -12,6 +12,8 @@ NVTheme.apply()
 
 -- Keymaps
 
+log.keymaps()
+
 NVEditing.keymaps()
 NVBuffers.keymaps()
 NVWindows.keymaps()

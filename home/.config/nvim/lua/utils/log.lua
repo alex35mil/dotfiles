@@ -1,8 +1,43 @@
 ---@diagnostic disable-next-line: lowercase-global
 log = {}
 
--- Can be changed from cmdline to enable/disable logging
-LOG = "debug" --- @type "trace" | "debug" | "info" | "warn" | "error"
+--- @alias LogLevel "trace" | "debug" | "info" | "warn" | "error"
+--- "trace" - for extensive debugging of specific issues - should be commited and disabled by default
+--- "debug" - for temporary debug logging "right here, right now" - shouldn't be commited, but enabled by default
+--- "info"+ - general user-level alerts
+
+local default = "debug" ---@type LogLevel
+
+local LEVEL = default ---@type LogLevel
+
+function log.keymaps()
+    K.map({
+        "<M-l>t",
+        "LOG: Set log level to `trace`",
+        function()
+            LEVEL = "trace"
+        end,
+        mode = "n",
+    })
+
+    K.map({
+        "<M-l>i",
+        "LOG: Set log level to `info`",
+        function()
+            LEVEL = "info"
+        end,
+        mode = "n",
+    })
+
+    K.map({
+        "<M-l>r",
+        "LOG: Reset log level",
+        function()
+            LEVEL = default
+        end,
+        mode = "n",
+    })
+end
 
 local ERROR = vim.log.levels.ERROR
 local WARN = vim.log.levels.WARN
@@ -39,7 +74,7 @@ local function message(payload)
 end
 
 local function dispatch(payload, level, opts)
-    local threshold = level_map[LOG]
+    local threshold = level_map[LEVEL]
 
     if not threshold then
         print("[ERROR] Unexpected LOG value. Using INFO.")
