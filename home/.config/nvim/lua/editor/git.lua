@@ -81,7 +81,7 @@ end
 
 function NVGit.worktree_has_changes(path)
     local output = vim.fn.system("git -C " .. vim.fn.shellescape(path) .. " status --porcelain 2>&1")
-    return vim.v.shell_error == 0 and output ~= ""
+    return vim.v.shell_error == 0 and vim.trim(output) ~= ""
 end
 
 function NVGit.create_worktree(branch, path)
