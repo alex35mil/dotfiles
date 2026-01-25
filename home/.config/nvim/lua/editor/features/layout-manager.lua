@@ -218,11 +218,25 @@ end
 ---@return {content_wins: WinID[], companion_wins: WinID[], companion_width: number, has_companion_window: boolean} | nil
 local function get_companion_layout_info()
     local layout = vim.fn.winlayout()
-    if layout[1] ~= "row" then
+
+    -- Find the row that could be the companion layout
+    -- Direct row at top level, or row inside a column (e.g., when Trouble is open at bottom)
+    local row_node
+    if layout[1] == "row" then
+        row_node = layout
+    elseif layout[1] == "col" and #layout[2] == 2 then
+        local first, second = layout[2][1], layout[2][2]
+        -- First child must be a row, second must be a single leaf (bottom panel)
+        if first[1] == "row" and second[1] == "leaf" then
+            row_node = first
+        end
+    end
+
+    if not row_node then
         return nil
     end
 
-    local children = layout[2]
+    local children = row_node[2]
     -- Filter out sidepads, collect content columns
     local columns = {}
     ---@diagnostic disable-next-line: param-type-mismatch
@@ -245,7 +259,7 @@ local function get_companion_layout_info()
         if node[1] == "leaf" then
             return { node[2] }
         end
-        if node[1] == "col" then
+        if node[1] == "col" or node[1] == "row" then
             local wins = {}
             ---@diagnostic disable-next-line: param-type-mismatch
             for _, c in ipairs(node[2]) do
