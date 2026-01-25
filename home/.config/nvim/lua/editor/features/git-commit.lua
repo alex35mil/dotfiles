@@ -2,10 +2,11 @@ NVGitCommit = {}
 
 -- If changing those, don't forget to update footer labels
 local keymaps = {
-    commit = "<D-CR>",
-    commit_and_push = "<D-S-CR>",
+    commit_from_subject = "<CR>",
+    commit_from_body = "<C-CR>",
+    commit_and_push = "<D-CR>",
     cancel = { NVKeymaps.close, "<Esc>" },
-    next_field = "<Tab>",
+    next_field = { "<Tab>", "<S-CR>" },
     prev_field = "<S-Tab>",
 }
 
@@ -223,19 +224,8 @@ local function setup_form_keymaps(bufnr)
         vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, nowait = true, silent = true })
     end
 
-    -- Commit/rename without push
-    map("n", keymaps.commit, function()
-        do_commit(false)
-    end)
-    map("i", keymaps.commit, function()
-        do_commit(false)
-    end)
-
-    -- Commit/rename and push
-    map("n", keymaps.commit_and_push, function()
-        do_commit(true)
-    end)
-    map("i", keymaps.commit_and_push, function()
+    -- Commit and push
+    map({ "n", "i" }, keymaps.commit_and_push, function()
         do_commit(true)
     end)
 
@@ -265,7 +255,9 @@ local function setup_form_keymaps(bufnr)
             vim.cmd.startinsert({ bang = true })
         end)
     end
-    map({ "n", "i" }, keymaps.next_field, go_next_field)
+    for _, key in ipairs(keymaps.next_field) do
+        map({ "n", "i" }, key, go_next_field)
+    end
     map({ "n", "i" }, keymaps.prev_field, go_prev_field)
 end
 
@@ -282,10 +274,10 @@ local function setup_char_counter(winid, bufnr)
         local conf = vim.api.nvim_win_get_config(winid)
         local action_labels = { commit = "commit", rename = "rename", amend = "amend" }
         conf.footer = {
-            { " ⌘ ↵  ", highlights.footer_key },
+            { " ↵  ", highlights.footer_key },
             { action_labels[state.mode], highlights.footer_action },
             { " · ", highlights.footer_separator },
-            { "⌘ ⇧ ↵  ", highlights.footer_key },
+            { "⌘ ↵  ", highlights.footer_key },
             { "+push", highlights.footer_action },
             { " · ", highlights.footer_separator },
             { "⌘ W ", highlights.footer_key },
@@ -383,14 +375,10 @@ local function create_subject_window(title, initial_text)
     setup_char_counter(winid, bufnr)
     setup_form_unmount(bufnr)
 
-    -- <CR> in subject moves to body
-    local function subject_to_body()
-        vim.api.nvim_set_current_win(state.body.win)
-        vim.schedule(function()
-            vim.cmd.startinsert({ bang = true })
-        end)
-    end
-    vim.keymap.set({ "n", "i" }, "<CR>", subject_to_body, { buffer = bufnr, nowait = true, silent = true })
+    -- <CR> in subject commits
+    vim.keymap.set({ "n", "i" }, keymaps.commit_from_subject, function()
+        do_commit(false)
+    end, { buffer = bufnr, nowait = true, silent = true })
 
     -- Highlight over-length text
     vim.api.nvim_win_call(winid, function()
@@ -446,6 +434,11 @@ local function create_body_window(initial_text)
     vim.wo[winid].winhighlight = get_winhighlight()
 
     setup_form_keymaps(bufnr)
+
+    -- <C-CR> in body commits
+    vim.keymap.set({ "n", "i" }, keymaps.commit_from_body, function()
+        do_commit(false)
+    end, { buffer = bufnr, nowait = true, silent = true })
 
     return winid, bufnr
 end
