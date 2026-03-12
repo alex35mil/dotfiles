@@ -25,8 +25,6 @@ function NVEditing.keymaps()
     K.map({ "<CR>", "Change inner word", [["xciw]], mode = "n" })
     K.map({ "<CR>", "Change seletion", [["xc]], mode = "v" })
     K.map({ "<M-CR>", "Change inner word", [[<Esc>"xciw]], mode = "i" })
-    K.map({ "<M-w>", "Select inner word", "viw", mode = "n" })
-    K.map({ "<M-y>", "Yank inner word", "yiw", mode = "n" })
 
     K.map({ "<D-CR>", "Insert new line above", "O<Esc>", mode = "n" })
     K.map({ "<S-CR>", "Insert new line below", "o<Esc>", mode = "n" })

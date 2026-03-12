@@ -58,7 +58,7 @@ function NVWindows.keymaps()
     })
 
     K.map({
-        "<C-S-Up>",
+        "<D-C-Up>",
         "Increase window width",
         function()
             fn.change_window_width("up")
@@ -66,7 +66,7 @@ function NVWindows.keymaps()
         mode = { "n", "i", "v", "t" },
     })
     K.map({
-        "<C-S-Down>",
+        "<D-C-Down>",
         "Decrease window width",
         function()
             fn.change_window_width("down")
@@ -74,7 +74,7 @@ function NVWindows.keymaps()
         mode = { "n", "i", "v", "t" },
     })
     K.map({
-        "<C-D-S-Up>",
+        "<D-C-S-Up>",
         "Increase window height",
         function()
             fn.change_window_height("up")
@@ -82,7 +82,7 @@ function NVWindows.keymaps()
         mode = { "n", "i", "v" },
     })
     K.map({
-        "<C-D-S-Down>",
+        "<D-C-S-Down>",
         "Decrease window height",
         function()
             fn.change_window_height("down")

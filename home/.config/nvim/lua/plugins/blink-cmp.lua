@@ -31,7 +31,7 @@ NVBlinkCmp = {
                     cmp.show({ providers = { "supermaven" } })
                 end,
             },
-            ["<M-c>"] = {
+            ["<C-c>"] = {
                 function(cmp)
                     cmp.show()
                 end,
