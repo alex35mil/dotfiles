@@ -568,6 +568,8 @@ function Sections.filetype()
                     return "md"
                 elseif v == "oil" then
                     return "finder"
+                elseif v == "pi-chat-history" or v == "pi-chat-prompt" or v == "pi-chat-attachments" then
+                    return "agent"
                 elseif v == "snacks_terminal" then
                     return "term"
                 elseif v == "snacks_picker_input" then

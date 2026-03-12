@@ -220,15 +220,17 @@ local function get_companion_layout_info()
     local layout = vim.fn.winlayout()
 
     -- Find the row that could be the companion layout
-    -- Direct row at top level, or row inside a column (e.g., when Trouble is open at bottom)
+    -- Direct row at top level, or row inside a column (e.g., when Trouble is open at top/bottom)
     local row_node
     if layout[1] == "row" then
         row_node = layout
     elseif layout[1] == "col" and #layout[2] == 2 then
         local first, second = layout[2][1], layout[2][2]
-        -- First child must be a row, second must be a single leaf (bottom panel)
+        -- One child must be a row, the other must be a single leaf (top/bottom panel)
         if first[1] == "row" and second[1] == "leaf" then
             row_node = first
+        elseif first[1] == "leaf" and second[1] == "row" then
+            row_node = second
         end
     end
 

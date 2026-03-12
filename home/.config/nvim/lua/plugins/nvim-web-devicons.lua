@@ -14,6 +14,10 @@ NVWebDevicons = {
                 icon = "󰀶",
                 name = "Finder",
             },
+            agent = {
+                icon = "π",
+                name = "Agent",
+            },
             preview = {
                 icon = "",
                 name = "Preview",
@@ -45,6 +49,9 @@ NVWebDevicons = {
             mason = "tools",
             DiffviewFiles = "diff",
             ["grug-far"] = "search",
+            ["pi-chat-history"] = "agent",
+            ["pi-chat-prompt"] = "agent",
+            ["pi-chat-attachments"] = "agent",
         })
     end,
 }

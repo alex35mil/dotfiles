@@ -1,0 +1,11 @@
+{
+  "lastChangelogVersion": "0.57.1",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.4",
+  "defaultThinkingLevel": "medium",
+  "theme": "dark",
+  "packages": [
+    "/Users/Alex/Dev/agentic-af"
+  ],
+  "hideThinkingBlock": true
+}

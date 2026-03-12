@@ -10,6 +10,7 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 
 export SDKROOT=$(xcrun --show-sdk-path)
 
+export PI_CODING_AGENT_DIR="$XDG_CONFIG_HOME/pi/agent"
 export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
 
 export PRETTIERD_DEFAULT_CONFIG="$XDG_CONFIG_HOME/prettier.yml"

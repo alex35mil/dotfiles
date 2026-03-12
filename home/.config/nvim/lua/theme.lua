@@ -15,6 +15,7 @@ NVTheme = {
         beige = "#ebd2a7",
         orange = "#de935f",
         purple = "#b08cba",
+        slate = "#5a6e80",
         -- base
         bg = "#272b30",
         text = "#afb4c3",
@@ -212,6 +213,7 @@ function NVTheme.apply()
             -- sym"@preproc"           { }, -- PreProc
             -- sym"@debug"             { }, -- Debug
             -- sym"@tag"               { }, -- Tag
+            sym"@lsp.typemod.comment.documentation" { fg = color.slate },
 
             -- The following are the Neovim (as of 0.8.0-dev+100-g371dfb174) highlight
             -- groups, mostly used for styling UI elements.
@@ -249,6 +251,10 @@ function NVTheme.apply()
             DiffChange { bg = color.blue.saturate(20).mix(Normal.bg, 85) }, -- Diff mode: Changed line |diff.txt|
             DiffDelete { fg = color.faded_text, bg = color.bg }, -- Diff mode: Deleted line |diff.txt|
             DiffText { bg = color.cyan.mix(Normal.bg, 70) }, -- Diff mode: Changed text within a changed line |diff.txt|
+
+            -- π
+            PiDiffAdd { bg = color.diff_add_bg.mix(Normal.bg, 50) },
+            PiDiffDelete { bg = color.diff_delete_bg.mix(Normal.bg, 50) },
 
             -- Diffview
             DiffviewDiffAdd { bg = color.diff_add_bg },
@@ -392,6 +398,13 @@ function NVTheme.apply()
             NoiceLspProgressTitle { fg = color.bar_faded_text, bg = color.bar_bg },
             NoiceLspProgressClient { fg = color.charcoal, bg = color.bar_bg },
             NoiceLspProgressSpinner { fg = color.yellow.mix(color.bar_bg, 50), bg = color.bar_bg },
+
+            PiChatHistoryWinbarTitle { fg = Normal.bg, bg = color.cyan },
+            PiChatHistoryFloatTitle { PiChatHistoryWinbarTitle },
+            PiUserMessageLabel { fg = Normal.bg, bg = color.silver },
+            PiAgentResponseLabel { fg = Normal.bg, bg = color.cyan },
+            PiBusy { fg = color.charcoal },
+            PiStatusLineOn { fg = color.green },
 
             MultiCursorCursor { fg = color.silver.mix(color.bg, 50), reverse = true },
             MultiCursorVisual { bg = color.faded_text },

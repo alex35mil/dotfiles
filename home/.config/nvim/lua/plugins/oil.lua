@@ -75,17 +75,17 @@ NVOil = {
             },
             ["<C-p>"] = {
                 function()
-                    fn.add_to_claude(false)
+                    fn.send_to_pi(false)
                 end,
                 mode = { "n", "v" },
-                desc = "Add to Claude",
+                desc = "Add to π",
             },
             ["<D-p>"] = {
                 function()
-                    fn.add_to_claude(true)
+                    fn.send_to_pi(true)
                 end,
                 mode = { "n", "v" },
-                desc = "Add to Claude and close",
+                desc = "Add to π and close",
             },
         },
         view_options = {
@@ -113,9 +113,22 @@ NVOil = {
         float = {
             padding = 2,
             -- max_width and max_height can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-            max_width = 0.6,
+            max_width = 0.65,
             max_height = 0,
             border = { " ", " ", " ", " ", " ", " ", " ", " " },
+            win_options = {
+                number = true,
+                relativenumber = false,
+                signcolumn = "no",
+                foldcolumn = "0",
+                cursorline = true,
+                cursorcolumn = false,
+                spell = false,
+                list = false,
+                conceallevel = 3,
+                concealcursor = "nvic",
+                winhighlight = "",
+            },
         },
         preview_win = {
             update_on_cursor_moved = true,
@@ -170,6 +183,49 @@ function cache.new_gitignore_cache()
 end
 
 cache.gitignore = cache.new_gitignore_cache()
+
+---@param close boolean
+function fn.send_to_pi(close)
+    local oil = require("oil")
+    local dir = oil.get_current_dir()
+    if not dir then
+        return
+    end
+
+    local mode = vim.fn.mode()
+    local paths = {}
+
+    if mode == "V" or mode == "v" then
+        local start_line = vim.fn.line("v")
+        local end_line = vim.fn.line(".")
+        if start_line > end_line then
+            start_line, end_line = end_line, start_line
+        end
+        for lnum = start_line, end_line do
+            local entry = oil.get_entry_on_line(0, lnum)
+            if entry then
+                table.insert(paths, dir .. entry.name)
+            end
+        end
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+    else
+        local entry = oil.get_cursor_entry()
+        if entry then
+            table.insert(paths, dir .. entry.name)
+        end
+    end
+
+    local pi = require("pi")
+
+    for _, path in ipairs(paths) do
+        pi.send_mention({ path = path }, { focus = false })
+    end
+
+    if close then
+        oil.close()
+        pi.focus_chat_prompt()
+    end
+end
 
 ---@param close boolean
 function fn.add_to_claude(close)

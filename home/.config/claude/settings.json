@@ -22,6 +22,7 @@
     "playwright@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true
   },
+  "autoMemoryEnabled": false,
   "feedbackSurveyState": {
     "lastShownTime": 1754138018991
   }

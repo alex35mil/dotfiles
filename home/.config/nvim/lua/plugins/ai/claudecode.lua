@@ -44,67 +44,6 @@ NVClaudeCode = {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
     event = "VeryLazy",
-    keys = function()
-        return {
-            {
-                "<D-S-c>",
-                function()
-                    CCProvider.open_on_side()
-                end,
-                mode = { "n", "i", "t", "v" },
-                desc = "Toggle Claude in a side panel",
-            },
-            {
-                "<D-S-g>",
-                function()
-                    CCProvider.open_float()
-                end,
-                mode = { "n", "i", "t", "v" },
-                desc = "Toggle Claude in float window",
-            },
-            {
-                "<C-S-c>",
-                function()
-                    CCProvider.open_on_side("continue")
-                end,
-                mode = { "n", "i", "t", "v" },
-                desc = "Continue last session in side panel",
-            },
-            {
-                "<C-S-g>",
-                function()
-                    CCProvider.open_float("continue")
-                end,
-                mode = { "n", "i", "t", "v" },
-                desc = "Continue last session in float window",
-            },
-            {
-                "<M-S-c>",
-                function()
-                    CCProvider.open_on_side("resume")
-                end,
-                mode = { "n", "i", "t", "v" },
-                desc = "Resume session in side panel",
-            },
-            {
-                "<M-S-g>",
-                function()
-                    CCProvider.open_float("resume")
-                end,
-                mode = { "n", "i", "t", "v" },
-                desc = "Resume session in float window",
-            },
-            { "<D-p>", fn.post_and_focus, mode = { "n", "i", "v" }, desc = "Post to Claude and focus" },
-            { "<C-CR>", fn.accept_diff, mode = { "n", "i", "v" }, desc = "Accept Claude diff" },
-            { NVKeyRemaps["<C-c>"], fn.reject_diff, mode = { "n", "i", "v" }, desc = "Reject Claude diff" },
-            {
-                "<M-c>",
-                CCProvider.toggle_layout,
-                mode = { "n", "i", "t", "v" },
-                desc = "Toggle Claude layout (side/float)",
-            },
-        }
-    end,
     opts = {
         terminal = {
             provider = CCProvider,
