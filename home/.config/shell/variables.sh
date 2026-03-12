@@ -17,8 +17,9 @@ export PRETTIERD_DEFAULT_CONFIG="$XDG_CONFIG_HOME/prettier.yml"
 SWIFT_BIN_PATH="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"
 GO_BIN_PATH="$(go env GOPATH)/bin"
 NPM_BIN_PATH="$HOME/.npm-global/bin"
+OBSIDIAN_PATH="/Applications/Obsidian.app/Contents/MacOS"
 
-export PATH="$SWIFT_BIN_PATH:$GO_BIN_PATH:$NPM_BIN_PATH:$PATH"
+export PATH="$SWIFT_BIN_PATH:$GO_BIN_PATH:$NPM_BIN_PATH:$OBSIDIAN_PATH:$PATH"
 
 # if interactive shell
 if [[ $- == *i* ]]; then
