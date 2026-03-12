@@ -4,7 +4,7 @@ NVMiniPairs = {
         mappings = {
             ['"'] = { action = "open", pair = '""', neigh_pattern = "[^\\][%s%)%]%}%,%.]" },
             ["'"] = { action = "open", pair = "''", neigh_pattern = "[^%a\\][%s%)%]%}%,%.]" },
-            ["`"] = { action = "open", pair = "``", neigh_pattern = "[^\\][%s%)%]%}%,%.]" },
+            ["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^\\`][%s%)%]%}%,%.]" },
             ["("] = { action = "open", pair = "()", neigh_pattern = "[^\\][%s%)%]%}%,%.]" },
             ["["] = { action = "open", pair = "[]", neigh_pattern = "[^\\][%s%)%]%}%,%.]" },
             ["{"] = { action = "open", pair = "{}", neigh_pattern = "[^\\][%s%)%]%}%,%.]" },
