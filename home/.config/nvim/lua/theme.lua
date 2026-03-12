@@ -378,10 +378,12 @@ function NVTheme.apply()
             IndentBlanklineChar { fg = color.thin_line },
             IndentBlanklineContextChar { fg = IndentBlanklineChar.fg.lighten(25) },
 
-            TodoComment { fg = color.purple },
-            FixmeComment { fg = color.purple },
-            HackComment { fg = color.yellow },
-            PriorityComment { fg = color.orange },
+            TODONow { DiagnosticInfo },
+            TODONormal { fg = DiagnosticInfo.fg.mix(Normal.bg, 55) },
+            FIXMENow { DiagnosticError },
+            FIXMENormal { fg = DiagnosticError.fg.mix(Normal.bg, 55) },
+            NOTENormal { fg = DiagnosticHint.fg.mix(Normal.bg, 25) },
+            WARNNormal { fg = DiagnosticWarn.fg.mix(Normal.bg, 55) },
 
             MiniStarterSection { fg = color.text, bg = color.bg, bold = true },
             MiniStarterFooter { Comment },
