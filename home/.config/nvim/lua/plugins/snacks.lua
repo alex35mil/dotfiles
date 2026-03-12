@@ -193,10 +193,10 @@ NVSnacks = {
             },
             icons = {
                 diagnostics = {
-                    Error = NVIcons.error,
-                    Warn = NVIcons.warn,
-                    Hint = NVIcons.hint,
-                    Info = NVIcons.info,
+                    Error = NVIcons.lsp.full.error,
+                    Warn = NVIcons.lsp.full.warn,
+                    Hint = NVIcons.lsp.full.hint,
+                    Info = NVIcons.lsp.full.info,
                 },
                 tree = {
                     vertical = "│   ",
@@ -212,10 +212,10 @@ NVSnacks = {
             level = vim.log.levels.DEBUG,
             margin = { top = 1, right = 1, bottom = 0 },
             icons = {
-                error = NVIcons.error,
-                warn = NVIcons.warn,
-                info = NVIcons.info,
-                debug = NVIcons.debug,
+                error = NVIcons.lsp.full.error,
+                warn = NVIcons.lsp.full.warn,
+                info = NVIcons.lsp.full.info,
+                debug = NVIcons.lsp.full.debug,
             },
             filter = function(n)
                 local tab_name = vim.fn.gettabvar(vim.fn.tabpagenr(), "tabname")

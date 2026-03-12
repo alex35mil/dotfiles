@@ -120,10 +120,10 @@ NVLspConfig = {
             },
             signs = {
                 text = {
-                    [vim.diagnostic.severity.ERROR] = NVIcons.error,
-                    [vim.diagnostic.severity.WARN] = NVIcons.warn,
-                    [vim.diagnostic.severity.INFO] = NVIcons.info,
-                    [vim.diagnostic.severity.HINT] = NVIcons.hint,
+                    [vim.diagnostic.severity.ERROR] = NVIcons.lsp.mini.error,
+                    [vim.diagnostic.severity.WARN] = NVIcons.lsp.mini.warn,
+                    [vim.diagnostic.severity.INFO] = NVIcons.lsp.mini.info,
+                    [vim.diagnostic.severity.HINT] = NVIcons.lsp.mini.hint,
                 },
             },
             virtual_text = {

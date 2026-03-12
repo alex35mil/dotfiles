@@ -1,7 +1,18 @@
 NVIcons = {
-    error = " ",
-    warn = " ",
-    hint = " ",
-    info = " ",
-    debug = " ",
+    lsp = {
+        mini = {
+            error = "󰫲",
+            warn = "󰬄",
+            hint = "󰫵",
+            info = "󰫶",
+            debug = "󰫱",
+        },
+        full = {
+            error = "󰬌 ",
+            warn = "󰬞 ",
+            hint = "󰬏 ",
+            info = "󰬐 ",
+            debug = "󰬋 ",
+        },
+    },
 }

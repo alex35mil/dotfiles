@@ -521,10 +521,10 @@ function Sections.diagnostics(options)
             hint = "StatusBarDiagnosticHint",
         },
         symbols = {
-            error = NVIcons.error .. " ",
-            warn = NVIcons.warn .. " ",
-            info = NVIcons.info .. " ",
-            hint = NVIcons.hint .. " ",
+            error = NVIcons.lsp.full.error .. " ",
+            warn = NVIcons.lsp.full.warn .. " ",
+            info = NVIcons.lsp.full.info .. " ",
+            hint = NVIcons.lsp.full.hint .. " ",
         },
         cond = function()
             return fn.has_lsp_attached() and not fn.is_lsp_progress()
