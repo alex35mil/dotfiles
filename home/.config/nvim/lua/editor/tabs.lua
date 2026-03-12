@@ -37,9 +37,13 @@ function fn.close_tab()
     NVGitWorktrees.close_tab(info)
 end
 
+function NVTabs.render_label(label)
+    return label.icon .. " " .. label.name
+end
+
 function NVTabs.set_label(label)
     vim.t.tab_label = label
-    NVLualine.rename_tab(label.icon, label.name)
+    NVLualine.rename_tab(NVTabs.render_label(label))
 end
 
 function NVTabs.set_label_if_empty(label)

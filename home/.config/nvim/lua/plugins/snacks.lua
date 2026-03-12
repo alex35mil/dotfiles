@@ -219,7 +219,7 @@ NVSnacks = {
             },
             filter = function(n)
                 local tab_name = vim.fn.gettabvar(vim.fn.tabpagenr(), "tabname")
-                if tab_name == NVDiffview.tab_name then
+                if tab_name == NVTabs.render_label(NVDiffview.tab) then
                     if
                         string.find(n.msg, "^Client %S+ quit with exit code %d+ and signal %d+%.")
                         or string.find(n.msg, "^%[null%-ls%] failed to run generator")

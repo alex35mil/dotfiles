@@ -656,8 +656,8 @@ function NVLualine.hide_tabline()
     require("lualine").hide({ place = { "tabline" }, unhide = false })
 end
 
-function NVLualine.rename_tab(icon, name)
-    vim.cmd("LualineRenameTab " .. icon .. " " .. name)
+function NVLualine.rename_tab(label)
+    vim.cmd("LualineRenameTab " .. label)
 end
 
 function fn.toggle_tabline()
