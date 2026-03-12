@@ -61,7 +61,7 @@ function gcl() {
 
 # Initializes git repository and creates initial commit
 function ginit() {
-    git init && git commit -m "Initial commit" --allow-empty
+    git init && git commit -m "init" --allow-empty
 }
 
 # Prints stats for tracked files
