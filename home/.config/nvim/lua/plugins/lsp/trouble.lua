@@ -1,5 +1,4 @@
 local fn = {}
-local win = {}
 
 local DIAGNOSTICS_SOURCE = "diagnostics_per_ft"
 
@@ -61,14 +60,15 @@ NVTrouble = {
                 [NVKeymaps.close] = "close",
                 ["<CR>"] = "jump_close",
                 ["<cr>"] = "jump_close",
+                ["<S-CR>"] = "jump",
+                ["<D-S-CR>"] = "jump_split_close",
+                ["<D-CR>"] = "jump_vsplit_close",
                 ["<Right>"] = "fold_open",
                 ["<D-Right>"] = "fold_open_recursive",
                 ["<Left>"] = "fold_close",
                 ["<D-Left>"] = "fold_close_recursive",
                 ["<Space>"] = "fold_toggle",
                 ["<D-Space>"] = "fold_toggle_recursive",
-                ["<D-S-CR>"] = "jump_split_close",
-                ["<D-CR>"] = "jump_vsplit_close",
             },
         }
     end,
@@ -117,6 +117,11 @@ NVTrouble = {
     end,
 }
 
+local win = {
+    size = 0.4,
+    position = "bottom",
+}
+
 function fn.open_diagnosics(filter)
     local trouble = require("trouble")
 
@@ -124,58 +129,7 @@ function fn.open_diagnosics(filter)
         mode = DIAGNOSTICS_SOURCE,
         focus = true,
         filter = filter,
-        win = {
-            size = 0.4,
-            position = "bottom",
-        },
-    })
-end
-
-function fn.open_symbol_usage()
-    local trouble = require("trouble")
-
-    local large_screen = NVScreen.is_large()
-
-    local size = {
-        width = large_screen and 100 or 0.45,
-        height = 0.8,
-    }
-
-    local shift = large_screen and 0.35 or 0.42
-
-    trouble.open({
-        mode = "lsp",
-        focus = true,
-        win = win.float({
-            title = " LSP ",
-            size = size,
-            position = { 0.5, 0.5 - shift },
-        }),
-        preview = win.float({
-            title = " Preview ",
-            size = size,
-            position = { 0.5, 0.5 + shift },
-            scratch = true,
-        }),
-    })
-end
-
-function fn.open_symbols()
-    local trouble = require("trouble")
-
-    local large_screen = NVScreen.is_large()
-
-    trouble.open({
-        mode = "symbols",
-        focus = true,
-        win = win.float({
-            title = " Document Symbols ",
-            size = {
-                width = 100,
-                height = 0.45,
-            },
-            position = { large_screen and 0.3 or 0.4, 0.5 },
-        }),
+        win = win,
     })
 end
 
