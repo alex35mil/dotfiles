@@ -33,7 +33,7 @@ layout {
         }
         pane size="15%" split_direction="vertical" {
             pane name="integrations/obsidian" command="zsh" start_suspended=true {
-                args "-c" "cli integrations obsidian develop"
+                args "-c" "cli obsidian develop"
             }
         }
         pane size=1 borderless=true {
