@@ -3,21 +3,22 @@ macos-icon = blueprint
 
 font-family = "BerkeleyMono Nerd Font"
 font-family-bold = "BerkeleyMono Nerd Font Bold"
-font-family-italic = "BerkeleyMono Nerd Font Italic"
-font-family-bold-italic = "BerkeleyMono Nerd Font Bold Italic"
+font-family-italic = "BerkeleyMono Nerd Font Oblique"
+font-family-bold-italic = "BerkeleyMono Nerd Font Bold Oblique"
 
 font-size = 16
 font-thicken = false
 adjust-cell-height = 40%
 adjust-box-thickness = -3
 
-window-decoration = none
+window-decoration = auto
 window-padding-x = 20
 window-padding-y = 20
 window-width = 226
 window-height = 64
 window-position-x = 128
 window-position-y = 73
+macos-titlebar-style = hidden
 
 minimum-contrast = 1.1
 
@@ -36,17 +37,17 @@ keybind = shift+enter=text:\n
 # Zellij
 keybind = cmd+t=text:
 keybind = cmd+n=text:
-keybind = ctrl+n=new_window
+keybind = ctrl+opt+n=new_window
 keybind = cmd+shift+n=text:
 keybind = cmd+r=text:
 keybind = cmd+b=text:
-keybind = cmd+m=text:
+keybind = cmd+f=text:
 keybind = cmd+o=text:
-keybind = cmd+f=text:
+keybind = ctrl+f=text:
 keybind = cmd+w=text:
-keybind = ctrl+w=close_surface
+keybind = ctrl+opt+w=close_surface
 keybind = cmd+q=text:
-keybind = ctrl+q=quit
+keybind = ctrl+opt+q=quit
 
 keybind = shift+left=text:ﰯ
 keybind = shift+right=text:ﰲ
@@ -58,18 +59,18 @@ keybind = opt+shift+right=text:
 keybind = opt+shift+up=text:
 keybind = opt+shift+down=text:
 
-keybind = opt+cmd+shift+left=text:
-keybind = opt+cmd+shift+right=text:
-keybind = opt+cmd+shift+up=text:
-keybind = opt+cmd+shift+down=text:
+keybind = cmd+ctrl+left=text:
+keybind = cmd+ctrl+right=text:
+keybind = cmd+ctrl+up=text:
+keybind = cmd+ctrl+down=text:
 
-keybind = ctrl+shift+n=text:
-keybind = ctrl+shift+r=text:
-keybind = ctrl+shift+w=text:
-keybind = cmd+left=text:
-keybind = cmd+right=text:
-keybind = ctrl+cmd+left=text:
-keybind = ctrl+cmd+right=text:
+keybind = ctrl+n=text:
+keybind = ctrl+r=text:
+keybind = ctrl+w=text:
+keybind = ctrl+left=text:
+keybind = ctrl+right=text:
+keybind = ctrl+cmd+shift+left=text:
+keybind = ctrl+cmd+shift+right=text:
 
 keybind = cmd+up=text:
 keybind = cmd+down=text:

@@ -18,7 +18,7 @@ keybinds clear-defaults=true {
     }
 
     shared_except "entersearch" "locked" {
-        bind "" { SwitchToMode "EnterSearch"; SearchInput 0; } // Cmd F
+        bind "" { SwitchToMode "EnterSearch"; SearchInput 0; } // Ctrl F
     }
 
     shared_except "locked" "search" {
@@ -26,7 +26,7 @@ keybinds clear-defaults=true {
         bind "" { NewPane "Down"; }                               // Cmd Shift N
         bind "" { SwitchToMode "RenamePane"; PaneNameInput 0; }   // Cmd R
         bind "" { TogglePaneFrames; SwitchToMode "Normal"; }      // Cmd B
-        bind "" { ToggleFocusFullscreen; SwitchToMode "Normal"; } // Cmd M
+        bind "" { ToggleFocusFullscreen; SwitchToMode "Normal"; } // Cmd F
         bind "" { ToggleFloatingPanes; }                          // Cmd O
         bind "" { CloseFocus; SwitchToMode "Normal"; }            // Cmd W
 
@@ -40,21 +40,21 @@ keybinds clear-defaults=true {
         bind "" { MovePane "Up"; }    // Opt Shift ↑
         bind "" { MovePane "Down"; }  // Opt Shift ↓
 
-        bind "" { Resize "Left"; }  // Opt Cmd Shift ←
-        bind "" { Resize "Right"; } // Opt Cmd Shift →
-        bind "" { Resize "Up"; }    // Opt Cmd Shift ↑
-        bind "" { Resize "Down"; }  // Opt Cmd Shift ↓
+        bind "" { Resize "Left"; }  // Cmd Ctrl ←
+        bind "" { Resize "Right"; } // Cmd Ctrl →
+        bind "" { Resize "Up"; }    // Cmd Ctrl ↑
+        bind "" { Resize "Down"; }  // Cmd Ctrl ↓
 
         bind "" {
             NewTab { layout "terminal"; }
             SwitchToMode "Normal";
-        }                                                      // Ctrl Shift N
-        bind "" { SwitchToMode "RenameTab"; TabNameInput 0; } // Ctrl Shift R
-        bind "" { CloseTab; SwitchToMode "Normal"; }          // Ctrl Shift W
-        bind "" { GoToNextTab; }                              // Cmd →
-        bind "" { GoToPreviousTab; }                          // Cmd ←
-        bind "" { MoveTab "Left"; }                           // Ctrl Cmd ←
-        bind "" { MoveTab "Right"; }                          // Ctrl Cmd →
+        }                                                      // Ctrl N
+        bind "" { SwitchToMode "RenameTab"; TabNameInput 0; } // Ctrl R
+        bind "" { CloseTab; SwitchToMode "Normal"; }          // Ctrl W
+        bind "" { GoToNextTab; }                              // Ctrl →
+        bind "" { GoToPreviousTab; }                          // Ctrl ←
+        bind "" { MoveTab "Left"; }                           // Ctrl Cmd Shift ←
+        bind "" { MoveTab "Right"; }                          // Ctrl Cmd Shift →
     }
 
     shared_except "locked" {
