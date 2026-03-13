@@ -226,6 +226,9 @@ function NVPi.autocmds()
             keymap("<D-n>", event, function()
                 pi.new_session()
             end)
+            keymap("<D-S-x>", event, function()
+                pi.compact()
+            end)
         end,
     })
 
