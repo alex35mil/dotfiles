@@ -5,9 +5,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Repository Overview
 
 This is a personal dotfiles repository containing configuration files for a development environment centered around:
-- **Terminal**: Ghostty (previously Alacritty) with Zellij multiplexer
+- **Terminal**: Ghostty with Zellij multiplexer
 - **Shell**: Zsh with custom configuration
 - **Editor**: Neovim with extensive Lua configuration
+- **Coding agent**: Pi configuration and agent setup under `home/.config/pi/`
 - **Package Management**: Homebrew + Mise for runtime management
 
 ## Architecture
@@ -30,23 +31,27 @@ This is a personal dotfiles repository containing configuration files for a deve
 #### Neovim Configuration (`home/.config/nvim/`)
 - `init.lua` - Entry point loading utils, theme, screen, keymaps, editor, options, and plugins
 - `lua/editor/` - Core editor functionality modules
+- `lua/editor/features/` - Larger editor feature modules grouped under the editor namespace
 - `lua/plugins/` - Plugin configurations
-- `lua/theme/` - Custom theme implementation
+- `lua/theme.lua` - Custom theme implementation
 - `lua/keymaps.lua` - Keymaps helpers
 - `lua/options.lua` - Neovim and Neovide options
 - `lua/plugins.lua` - Lazy plugin manager config
+- `lua/utils/` - Shared utilities used across the configuration
 
 #### Zellij Configuration (`home/.config/zellij/`)
 - `config.kdl` - Main Zellij configuration with custom keybindings
-- `layouts/` - Session layouts (terminal, psc)
+- `layouts/` - Session layouts such as `terminal.kdl`, `showcase.kdl`, and `d42.kdl`
 - `themes/` - Custom themes
+- `plugins/` - Built plugin artifacts such as `statusbar.wasm`
 - Custom keybindings use Unicode symbols mapped in terminal config
 
 ## Development Commands
 
 ### Installation
 ```bash
-# Install dotfiles and build binaries
+# Install dotfiles, create symlinks, build binaries, copy the keyboard layout,
+# ensure .hushlogin exists, and optionally restart the shell
 script/install.sh
 
 # Build only Zellij statusbar
@@ -91,9 +96,9 @@ script/font/patch.sh
 
 ### Neovim Development
 - Plugin management via Lazy.nvim
-- Custom theme in `lua/theme/`
-- Editor functionality split into modules in `lua/editor/`
-- Language-specific configurations in `lua/plugins/languages/`
+- Custom theme in `lua/theme.lua`
+- Editor functionality split into modules in `lua/editor/` and `lua/editor/features/`
+- Plugin modules organized under `lua/plugins/`, including `lua/plugins/lsp/` and `lua/plugins/lsp/languages/`
 
 ## Important Notes
 
@@ -110,6 +115,8 @@ script/font/patch.sh
 
 ### Neovim Architecture
 - Modular structure with clear separation of concerns
+- Core editor modules live in `lua/editor/`, with larger workflows in `lua/editor/features/`
+- Plugin configuration lives in `lua/plugins/`, including LSP-related code in `lua/plugins/lsp/`
 - Custom utilities in `lua/utils/`
 - Screen-specific configurations in `lua/screen.lua`
 - Type definitions in `lua/types.lua`
