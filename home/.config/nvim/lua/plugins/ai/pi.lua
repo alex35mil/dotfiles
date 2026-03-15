@@ -11,7 +11,6 @@ NVPi = {
             { match = "gpt", latest = true },
         },
         ui = {
-            show_debug = true,
             panels = {
                 history = {
                     name = function(tab_id)
