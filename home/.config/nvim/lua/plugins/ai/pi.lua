@@ -47,8 +47,8 @@ NVPi = {
             },
             dialog = {
                 keys = {
-                    confirm = { "<C-CR>" },
-                    cancel = { NVKeymaps.close },
+                    confirm = { { "<C-CR>", modes = { "n", "i" } } },
+                    cancel = { { NVKeymaps.close, modes = { "n", "i" } } },
                 },
             },
         },
@@ -56,6 +56,22 @@ NVPi = {
             diff_accept = { "<C-CR>", modes = { "n", "i", "v" } },
             diff_reject = { NVKeyRemaps["<C-c>"], modes = { "n", "i", "v" } },
         },
+        on_widget = function(key, lines)
+            if key == "rules:load" then
+                local content = {}
+                for _, line in ipairs(lines) do
+                    content[#content + 1] = {
+                        { "   ╰  rule: " .. line, "Comment" },
+                    }
+                end
+                return {
+                    target = "history",
+                    block = "custom",
+                    content = content,
+                }
+            end
+            return nil
+        end,
     },
     keys = function()
         return {
@@ -196,7 +212,7 @@ function NVPi.autocmds()
             keymap("<C-S-Down>", event, function()
                 pi.scroll_chat_history("down", 2)
             end)
-            keymap("<C-{>", event, function()
+            keymap("<C-}>", event, function()
                 pi.scroll_chat_history_to_last_agent_response()
             end)
             keymap("<C-(>", event, function()
@@ -225,6 +241,9 @@ function NVPi.autocmds()
             end)
             keymap("<D-n>", event, function()
                 pi.new_session()
+            end)
+            keymap("<D-r>", event, function()
+                pi.set_session_name()
             end)
             keymap("<D-S-x>", event, function()
                 pi.compact()
