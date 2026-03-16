@@ -11,9 +11,20 @@ NVPi = {
             { match = "gpt", latest = true },
         },
         layout = {
-            default = "side",
-            side = { position = "right", width = 0.35 },
-            float = { width = 0.6, height = 0.85, border = "rounded" },
+            side = function()
+                return {
+                    position = "right",
+                    width = NVScreen.is_large() and 0.35 or 0.45,
+                }
+            end,
+            float = function()
+                local size = NVScreen.is_large() and { width = 0.6, height = 0.85 } or { width = 0.8, height = 0.85 }
+                return {
+                    width = size.width,
+                    height = size.height,
+                    border = "rounded",
+                }
+            end,
         },
         panels = {
             history = {
