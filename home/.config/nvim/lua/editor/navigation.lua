@@ -59,19 +59,17 @@ end
 function fn.scroll_vertical(direction)
     NVLspPopup.hide_unless_active()
 
-    if NVWindows.is_window_floating(vim.api.nvim_get_current_win()) then
-        local keymap
+    local command
 
+    if NVWindows.is_window_floating(vim.api.nvim_get_current_win()) then
         if direction == "up" then
-            keymap = "<C-u>"
+            command = "<C-u>"
         elseif direction == "down" then
-            keymap = "<C-d>"
+            command = "<C-d>"
         else
             log.error("Unexpected scroll direction")
             return
         end
-
-        NVKeys.send(keymap, { mode = "n" })
     else
         -- if we already at the top, place cursor on the first line
         if direction == "up" and vim.fn.line("w0") == 1 then
@@ -89,29 +87,27 @@ function fn.scroll_vertical(direction)
         -- otherwise, scroll
         local lines = 15
 
-        local keymap
-
         if direction == "up" then
-            keymap = "<C-y>"
+            command = "<C-y>"
         elseif direction == "down" then
-            keymap = "<C-e>"
+            command = "<C-e>"
         else
             log.error("Unexpected scroll direction")
             return
         end
 
-        local mode = vim.fn.mode()
+        command = tostring(lines) .. command
+    end
 
-        local is_i_mode = mode == "i"
+    local is_i_mode = vim.fn.mode() == "i"
 
-        if is_i_mode then
-            NVKeys.send("<Esc>", { mode = "n" })
-        end
+    if is_i_mode then
+        NVKeys.send("<Esc>", { mode = "n" })
+    end
 
-        NVKeys.send(tostring(lines) .. keymap, { mode = "n" })
+    NVKeys.send(command, { mode = "n" })
 
-        if is_i_mode then
-            NVKeys.send("a", { mode = "n" })
-        end
+    if is_i_mode then
+        NVKeys.send("a", { mode = "n" })
     end
 end
