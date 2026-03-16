@@ -319,6 +319,8 @@ function NVSPickers.buffers()
                     return false
                 elseif NVLayoutManager.is_sidepad_buf(item.buf) then
                     return false
+                elseif item.file == "[Scratch]" or item.file == "" then
+                    return false
                 else
                     return true
                 end
