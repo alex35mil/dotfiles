@@ -10,50 +10,56 @@ NVPi = {
             { match = "opus", latest = true },
             { match = "gpt", latest = true },
         },
-        ui = {
-            panels = {
-                history = {
-                    name = function(tab_id)
-                        return "π  󰫰󰫵󰫮󰬁  " .. tab_id
-                    end,
-                },
-                prompt = {
-                    name = function(tab_id)
-                        return "π  󰫽󰫿󰫼󰫺󰫽󰬁  " .. tab_id
-                    end,
-                },
+        layout = {
+            default = "side",
+            side = { position = "right", width = 0.35 },
+            float = { width = 0.6, height = 0.85, border = "rounded" },
+        },
+        panels = {
+            history = {
+                name = function(tab_id)
+                    return "π  󰫰󰫵󰫮󰬁  " .. tab_id
+                end,
             },
-            layout = {
-                default = "side",
-                side = { position = "right", width = 0.35 },
-                float = { width = 0.6, height = 0.85, border = "rounded" },
-            },
-            statusline = {
-                layout = {
-                    left = {
-                        "context",
-                        "  ",
-                        function(state)
-                            if state.extensions["permission"] then
-                                return "󰐌", "PiStatusLineOn"
-                            end
-                        end,
-                        "  ",
-                        "attention",
-                    },
-                    right = { "model", "   ", "thinking" },
-                },
-            },
-            dialog = {
-                keys = {
-                    confirm = { { "<C-CR>", modes = { "n", "i" } } },
-                    cancel = { { NVKeymaps.close, modes = { "n", "i" } } },
-                },
+            prompt = {
+                name = function(tab_id)
+                    return "π  󰫽󰫿󰫼󰫺󰫽󰬁  " .. tab_id
+                end,
             },
         },
-        keymaps = {
-            diff_accept = { "<C-CR>", modes = { "n", "i", "v" } },
-            diff_reject = { NVKeyRemaps["<C-c>"], modes = { "n", "i", "v" } },
+        diff = {
+            keys = {
+                accept = { "<C-CR>", modes = { "n", "i", "v" } },
+                reject = { NVKeyRemaps["<C-c>"], modes = { "n", "i", "v" } },
+            },
+        },
+        statusline = {
+            layout = {
+                left = {
+                    "context",
+                    "  ",
+                    function(state)
+                        if state.extensions["permission"] then
+                            return "󰐌", "PiStatusLineOn"
+                        end
+                    end,
+                    "  ",
+                    "attention",
+                },
+                right = { "model", "   ", "thinking" },
+            },
+        },
+        dialog = {
+            keys = {
+                confirm = { { "<C-CR>", modes = { "n", "i" } } },
+                cancel = { { NVKeymaps.close, modes = { "n", "i" } } },
+            },
+        },
+        zen = {
+            keys = {
+                toggle = { "<D-f>", modes = { "n", "i", "v" } },
+                exit = { NVKeymaps.close, modes = { "n", "i", "i" } },
+            },
         },
         on_widget = function(key, lines)
             if key == "rules:load" then
