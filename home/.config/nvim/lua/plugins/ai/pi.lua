@@ -8,7 +8,7 @@ NVPi = {
         debug = true,
         models = {
             { match = "opus", latest = true },
-            { match = "gpt", latest = true },
+            { match = "gpt-5.3-codex", exact = true },
         },
         layout = {
             side = function()
@@ -42,6 +42,8 @@ NVPi = {
             keys = {
                 accept = { "<C-CR>", modes = { "n", "i", "v" } },
                 reject = { NVKeyRemaps["<C-c>"], modes = { "n", "i", "v" } },
+                expand_context = { "+", modes = { "n" } },
+                shrink_context = { "-", modes = { "n" } },
             },
         },
         statusline = {
@@ -100,7 +102,7 @@ NVPi = {
                 desc = "Toggle π in a float layout",
             },
             {
-                "<D-S-a>",
+                "<D-S-s>",
                 function()
                     vim.cmd("Pi layout=side")
                 end,
@@ -116,7 +118,7 @@ NVPi = {
                 desc = "Continue last π session in a float layout",
             },
             {
-                "<C-S-a>",
+                "<C-S-s>",
                 function()
                     vim.cmd("PiContinue layout=side")
                 end,
@@ -132,7 +134,7 @@ NVPi = {
                 desc = "Select past π session and load it in a float layout",
             },
             {
-                "<M-S-a>",
+                "<M-S-s>",
                 function()
                     vim.cmd("PiResume layout=side")
                 end,
@@ -156,7 +158,7 @@ NVPi = {
                 desc = "Send @-mention to π and focus the chat",
             },
             {
-                "<M-w>",
+                "<M-w>", -- what?!
                 function()
                     vim.cmd("PiAttention")
                 end,
@@ -217,16 +219,19 @@ function NVPi.autocmds()
                 pi.focus_chat_attachments()
             end)
             keymap(NVKeymaps.scroll_ctx.up, event, function()
-                pi.scroll_chat_history("up")
-            end)
-            keymap(NVKeymaps.scroll_ctx.down, event, function()
-                pi.scroll_chat_history("down")
-            end)
-            keymap("<C-S-Up>", event, function()
                 pi.scroll_chat_history("up", 2)
             end)
-            keymap("<C-S-Down>", event, function()
+            keymap(NVKeymaps.scroll_ctx.down, event, function()
                 pi.scroll_chat_history("down", 2)
+            end)
+            keymap("<C-S-Up>", event, function()
+                pi.scroll_chat_history("up")
+            end)
+            keymap("<C-S-Down>", event, function()
+                pi.scroll_chat_history("down")
+            end)
+            keymap("<C-{>", event, function()
+                pi.scroll_chat_history_to_last_agent_response()
             end)
             keymap("<C-}>", event, function()
                 pi.scroll_chat_history_to_last_agent_response()
