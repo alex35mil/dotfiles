@@ -42,7 +42,7 @@ NVOil = {
             ["gs"] = { "actions.change_sort", mode = "n" },
             ["gx"] = { "actions.open_external", mode = "n" },
             ["<D-k>"] = { "<Cmd>w<CR>", mode = { "n", "v", "i" } },
-            ["<D-n>"] = { "o", mode = "n" },
+            [NVKeyRemaps["<D-n>"]] = { "o", mode = "n" },
             ["<M-h>"] = { "actions.toggle_hidden", mode = "n" },
             [NVKeymaps.close] = { "actions.close", mode = "n" },
             ["<D-S-a>"] = {

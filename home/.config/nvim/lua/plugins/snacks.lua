@@ -356,7 +356,7 @@ function NVSPickers.git_branches()
         win = {
             input = {
                 keys = {
-                    ["<D-n>"] = { "git_branch_add", mode = { "n", "i" } },
+                    [NVKeyRemaps["<D-n>"]] = { "git_branch_add", mode = { "n", "i" } },
                     ["<D-x>"] = { "git_branch_del", mode = { "n", "i" } },
                 },
             },

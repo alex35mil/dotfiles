@@ -22,6 +22,7 @@ NVKeymaps = {
 
 -- Remapped via Keyboard Maestro
 NVKeyRemaps = {
+    ["<D-n>"] = "<C-S-A-n>",
     ["<D-m>"] = "<C-S-A-m>",
     ["<D-h>"] = "<C-S-A-h>",
     ["<C-c>"] = "<C-S-A-c>",

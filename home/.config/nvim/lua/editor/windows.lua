@@ -6,7 +6,7 @@ NVWindows = {
 local fn = {}
 
 function NVWindows.keymaps()
-    K.map({ "<D-n>", "Create new buffer in the current window", "<Cmd>enew<CR>", mode = { "n", "v", "i" } })
+    K.map({ NVKeyRemaps["<D-n>"], "Create new buffer in the current window", "<Cmd>enew<CR>", mode = { "n", "v", "i" } })
     K.map({ "<Leader>nh", "Create new buffer in a horizontal split", "<Cmd>new<CR>", mode = "n" })
     K.map({ "<Leader>nn", "Create new buffer in a vertical split", "<Cmd>vnew<CR>", mode = "n" })
 
