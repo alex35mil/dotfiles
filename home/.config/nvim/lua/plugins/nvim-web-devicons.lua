@@ -1,6 +1,7 @@
 NVWebDevicons = {
     "nvim-tree/nvim-web-devicons",
     opts = {
+        color_icons = false,
         override = {
             term = {
                 icon = "",

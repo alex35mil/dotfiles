@@ -33,6 +33,7 @@ NVTheme = {
         bar_bg = "#2c323c",
         bar_text = "#b5bac8",
         bar_faded_text = "#70757d",
+        winbar_bg = "#292e36",
         -- shades
         white = "#ffffff",
         darker_gray = "#2c323c",
@@ -249,7 +250,7 @@ function NVTheme.apply()
 
             DiffAdd { bg = color.diff_add_bg.mix(Normal.bg, 50) }, -- Diff mode: Added line |diff.txt|
             DiffChange { bg = color.blue.saturate(20).mix(Normal.bg, 85) }, -- Diff mode: Changed line |diff.txt|
-            DiffDelete { fg = color.faded_text, bg = color.bg }, -- Diff mode: Deleted line |diff.txt|
+            DiffDelete { bg = color.diff_delete_bg.mix(Normal.bg, 50) }, -- Diff mode: Deleted line |diff.txt|
             DiffText { bg = color.cyan.mix(Normal.bg, 70) }, -- Diff mode: Changed text within a changed line |diff.txt|
 
             -- π
@@ -405,6 +406,35 @@ function NVTheme.apply()
             PiAgentResponseLabel { fg = Normal.bg, bg = color.cyan },
             PiBusy { fg = color.charcoal },
             PiStatusLineOn { fg = color.green },
+            PiDiffWinbar { bg = color.bar_bg },
+            PiDiffWinbarCurrent { fg = color.bar_text, bold = true },
+            PiDiffWinbarProposed { fg = color.bar_text, bold = true },
+            PiDiffWinbarHint { fg = color.bar_faded_text },
+
+            DeltaStatusAdded { GitAdded },
+            DeltaStatusModified { GitChanged },
+            DeltaStatusDeleted { GitDeleted },
+            DeltaStatusRenamed { fg = color.slate },
+            DeltaStatusUntracked { GitUntracked },
+            DeltaStatusUnmerged { fg = color.yellow },
+            DeltaSectionHeader { fg = color.charcoal, bold = true },
+            DeltaPickerCursorLine { bg = color.float_bg.lighten(6) },
+            DeltaSpotlightWinbar { bg = color.winbar_bg },
+            DeltaSpotlightWinbarTitle { fg = color.bar_text },
+            DeltaSpotlightWinbarLabel { fg = color.bar_faded_text },
+            DeltaSpotlightWinbarNumericValue { fg = color.cyan },
+            DeltaSpotlightStatusStaged { fg = color.green },
+            DeltaSpotlightStatusUnstaged { fg = color.cyan },
+            DeltaSpotlightStatusMixed { fg = color.yellow },
+            DeltaSpotlightStatusUntracked { fg = color.teal },
+            DeltaSpotlightStatusClean { fg = color.faded_text },
+            DeltaSpotlightPopup { bg = color.bg },
+            DeltaSpotlightPopupBorder { fg = color.faded_text, bg = color.bg },
+            DeltaSpotlightPopupTitle { fg = color.faded_text, bg = color.bg, bold = true },
+            DeltaSpotlightPopupAdded { bg = color.diff_add_bg },
+            DeltaSpotlightPopupRemoved { bg = color.diff_delete_bg },
+            DeltaSpotlightPopupAddedText { bg = color.diff_add_bg.mix(color.green, 25).lighten(3) },
+            DeltaSpotlightPopupRemovedText { bg = color.diff_delete_bg.mix(color.red, 35) },
 
             MultiCursorCursor { fg = color.silver.mix(color.bg, 50), reverse = true },
             MultiCursorVisual { bg = color.faded_text },
@@ -468,15 +498,15 @@ function NVTheme.apply()
             SnacksNotifierDebug { NVNotification },
             SnacksNotifierTitleDebug { NVNotification, fg = NVNotificationMeta.fg },
             SnacksNotifierBorderDebug { NVNotification, fg = NVNotificationMeta.fg },
-            SnacksNotifierInfo { NVNotification },
-            SnacksNotifierTitleInfo { NVNotification, fg = DiagnosticInfo.fg },
-            SnacksNotifierBorderInfo { NVNotification, fg = DiagnosticInfo.fg },
-            SnacksNotifierWarn { NVNotification, fg = DiagnosticWarn.fg },
-            SnacksNotifierTitleWarn { NVNotification, fg = DiagnosticWarn.fg },
-            SnacksNotifierBorderWarn { NVNotification, fg = DiagnosticWarn.fg },
-            SnacksNotifierError { NVNotification, fg = DiagnosticError.fg },
-            SnacksNotifierTitleError { NVNotification, fg = DiagnosticError.fg },
-            SnacksNotifierBorderError { NVNotification, fg = DiagnosticError.fg },
+            SnacksNotifierInfo { fg = color.bg, bg = DiagnosticInfo.fg },
+            SnacksNotifierTitleInfo { SnacksNotifierInfo },
+            SnacksNotifierBorderInfo { SnacksNotifierInfo },
+            SnacksNotifierWarn { fg = color.bg, bg = DiagnosticWarn.fg },
+            SnacksNotifierTitleWarn { SnacksNotifierWarn },
+            SnacksNotifierBorderWarn { SnacksNotifierWarn },
+            SnacksNotifierError { fg = color.bg, bg = DiagnosticError.fg },
+            SnacksNotifierTitleError { SnacksNotifierError },
+            SnacksNotifierBorderError { SnacksNotifierError },
 
             SnacksNotifierHistory { bg = color.float_bg },
             SnacksNotifierHistoryDateTime { fg = color.cyan },
@@ -491,5 +521,5 @@ function NVTheme.apply()
 
     lush(theme)
 
-    vim.api.nvim_exec_autocmds("User", { pattern = "ThemeApplied" })
+    vim.api.nvim_exec_autocmds("ColorScheme", { pattern = vim.g.colors_name })
 end
