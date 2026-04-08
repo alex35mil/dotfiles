@@ -1,6 +1,8 @@
 NVSupermaven = {
     "supermaven-inc/supermaven-nvim",
+    event = "InsertEnter",
     opts = {
+        log_level = "off",
         disable_keymaps = true,
         disable_inline_completion = true,
     },
