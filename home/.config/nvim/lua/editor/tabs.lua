@@ -30,7 +30,7 @@ function fn.close_tab()
     local info = NVGit.get_worktree_info()
 
     if not info then
-        if vim.fn.confirm("Close tab?", "&Yes\n&No", 2) == 1 then
+        if NVDialogs.confirm("Close tab?", "&Yes\n&No", 2) == 1 then
             vim.cmd("tabclose")
         end
         return

@@ -173,7 +173,7 @@ function NVGitWorktrees.close_tab(info)
             -- Confirm before removing worktree with uncommitted changes
             local has_changes = NVGit.worktree_has_changes(info.path)
             if has_changes then
-                if vim.fn.confirm("Worktree has uncommitted changes. Force remove?", "&Yes\n&No", 2) ~= 1 then
+                if NVDialogs.confirm("Worktree has uncommitted changes. Force remove?", "&Yes\n&No", 2) ~= 1 then
                     return
                 end
             end

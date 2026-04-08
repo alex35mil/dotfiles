@@ -119,7 +119,7 @@ function fn.delete_buf()
     local file_exists = current_buf_info.name ~= "" and vim.fn.filereadable(current_buf_info.name) == 1
 
     if current_buf_info.name == "" and current_buf_info.changed == 1 then
-        if vim.fn.confirm("Buffer has unsaved changes. Discard?", "&Yes\n&No", 2) ~= 1 then
+        if NVDialogs.confirm("Buffer has unsaved changes. Discard?", "&Yes\n&No", 2) ~= 1 then
             return
         end
     end
@@ -224,7 +224,7 @@ function fn.delete_buf_and_close_win()
 
     if is_last_window_in_tab then
         if #non_temporary_tabs > 1 then
-            if vim.fn.confirm("Close tab?", "&Yes\n&No", 2) == 1 then
+            if NVDialogs.confirm("Close tab?", "&Yes\n&No", 2) == 1 then
                 vim.cmd("tabclose")
             end
         else
