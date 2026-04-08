@@ -252,12 +252,7 @@ function Sections.file_or_lsp_symbol()
                 if directory == "." then
                     return "%#StatusBarFilename#" .. filename .. "%*"
                 else
-                    return "%#StatusBarFilenameLoc#"
-                        .. directory
-                        .. "%*%#StatusBarFilename#"
-                        .. "  "
-                        .. filename
-                        .. "%*"
+                    return "%#StatusBarFilenameLoc#" .. directory .. "/" .. "%*%#StatusBarFilename#" .. filename .. "%*"
                 end
             end
         end,
