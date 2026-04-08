@@ -23,6 +23,7 @@ function NVPersistence.autocmds()
             NVSLazygit.ensure_hidden()
             NVDiffview.ensure_all_hidden()
             NVGitCommit.ensure_hidden()
+            NVDelta.ensure_spotlight_deactivated()
 
             NVTabs.save_labels()
 

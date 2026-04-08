@@ -8,41 +8,6 @@ NVGitsigns = {
             row = 0,
             col = 1,
         },
-        on_attach = function(buffer)
-            local gs = package.loaded.gitsigns
-
-            local function keymap(mapping)
-                mapping = vim.tbl_extend("error", mapping, { buffer = buffer })
-                K.map(mapping)
-            end
-
-            keymap({ "<D-Space>", "Git: Preview hunk", gs.preview_hunk, mode = "n" })
-            keymap({ "<D-S-Space>", "Git: Stage/unstage hunk", gs.stage_hunk, mode = "n" })
-            keymap({
-                "<D-S-Space>",
-                "Git: Stage/unstage hunk",
-                function()
-                    gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-                end,
-                mode = "v",
-            })
-            keymap({
-                "<M-S-h>",
-                "Git: Jump to next hunk",
-                function()
-                    gs.nav_hunk("next", { navigation_message = false })
-                end,
-                mode = { "n", "i" },
-            })
-            keymap({
-                "<M-S-t>",
-                "Git: Jump to previous hunk",
-                function()
-                    gs.nav_hunk("prev", { navigation_message = false })
-                end,
-                mode = { "n", "i" },
-            })
-        end,
     },
 }
 
