@@ -205,12 +205,18 @@ NVSnacks = {
                 },
             },
             actions = NVSPickers.actions,
+            sources = {
+                select = {
+                    layout = { preview = false },
+                },
+            },
         },
         notifier = {
             enabled = true,
             timeout = 3000,
             level = vim.log.levels.DEBUG,
             margin = { top = 1, right = 1, bottom = 0 },
+            date_format = "%T",
             icons = {
                 error = NVIcons.lsp.full.error,
                 warn = NVIcons.lsp.full.warn,
