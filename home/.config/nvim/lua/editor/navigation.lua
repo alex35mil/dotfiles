@@ -61,43 +61,32 @@ function fn.scroll_vertical(direction)
 
     local command
 
-    if NVWindows.is_window_floating(vim.api.nvim_get_current_win()) then
-        if direction == "up" then
-            command = "<C-u>"
-        elseif direction == "down" then
-            command = "<C-d>"
-        else
-            log.error("Unexpected scroll direction")
-            return
-        end
-    else
-        -- if we already at the top, place cursor on the first line
-        if direction == "up" and vim.fn.line("w0") == 1 then
-            vim.api.nvim_win_set_cursor(0, { 1, 0 })
-            return
-        end
-
-        -- if we already at the bottom, place cursor on the last line
-        if direction == "down" and vim.fn.line("w$") == vim.fn.line("$") then
-            local line_count = vim.api.nvim_buf_line_count(0)
-            vim.api.nvim_win_set_cursor(0, { line_count, 0 })
-            return
-        end
-
-        -- otherwise, scroll
-        local lines = 15
-
-        if direction == "up" then
-            command = "<C-y>"
-        elseif direction == "down" then
-            command = "<C-e>"
-        else
-            log.error("Unexpected scroll direction")
-            return
-        end
-
-        command = tostring(lines) .. command
+    -- if we already at the top, place cursor on the first line
+    if direction == "up" and vim.fn.line("w0") == 1 then
+        vim.api.nvim_win_set_cursor(0, { 1, 0 })
+        return
     end
+
+    -- if we already at the bottom, place cursor on the last line
+    if direction == "down" and vim.fn.line("w$") == vim.fn.line("$") then
+        local line_count = vim.api.nvim_buf_line_count(0)
+        vim.api.nvim_win_set_cursor(0, { line_count, 0 })
+        return
+    end
+
+    -- otherwise, scroll
+    local lines = 15
+
+    if direction == "up" then
+        command = "<C-y>"
+    elseif direction == "down" then
+        command = "<C-e>"
+    else
+        log.error("Unexpected scroll direction")
+        return
+    end
+
+    command = tostring(lines) .. command
 
     local is_i_mode = vim.fn.mode() == "i"
 
