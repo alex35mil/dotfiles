@@ -4,8 +4,12 @@ NVSupermaven = {
     opts = {
         log_level = "off",
         disable_keymaps = true,
-        disable_inline_completion = true,
+        disable_inline_completion = false,
     },
+    config = function(_, opts)
+        require("supermaven-nvim").setup(opts)
+        require("supermaven-nvim.completion_preview").disable_inline_completion = true
+    end,
 }
 
 NVBlinkCmpSupermaven = {
