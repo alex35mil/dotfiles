@@ -20,12 +20,11 @@ NVLJSON = {
     },
 
     {
-        "nvim-treesitter/nvim-treesitter",
+        "romus204/tree-sitter-manager.nvim",
         opts = {
             ensure_installed = {
                 "json",
                 "json5",
-                "jsonc",
             },
         },
     },

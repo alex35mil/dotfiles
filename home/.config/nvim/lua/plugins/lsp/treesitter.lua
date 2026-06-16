@@ -1,15 +1,11 @@
 NVTreeSitter = {
-    "nvim-treesitter/nvim-treesitter",
-    branch = "main",
-    build = ":TSUpdate",
+    "romus204/tree-sitter-manager.nvim",
     event = "VeryLazy",
     lazy = vim.fn.argc(-1) == 0,
     opts = {},
     opts_extend = { "ensure_installed" },
     config = function(_, opts)
-        if opts.ensure_installed then
-            require("nvim-treesitter").install(opts.ensure_installed)
-        end
+        require("tree-sitter-manager").setup(opts)
 
         -- Auto-start treesitter highlight/indent for non-bundled parsers
         vim.api.nvim_create_autocmd("FileType", {

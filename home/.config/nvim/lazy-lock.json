@@ -31,7 +31,6 @@
   "nvim-lspconfig": { "branch": "master", "commit": "bedca8b426b2fee0ccac596d167d71bbe971253f" },
   "nvim-scrollbar": { "branch": "main", "commit": "f8e87b96cd6362ef8579be456afee3b38fd7e2a8" },
   "nvim-spider": { "branch": "main", "commit": "af2f73ffd62e61a091b3503845b7704d76d81d95" },
-  "nvim-treesitter": { "branch": "main", "commit": "4916d6592ede8c07973490d9322f187e07dfefac" },
   "nvim-treesitter-textobjects": { "branch": "main", "commit": "851e865342e5a4cb1ae23d31caf6e991e1c99f1e" },
   "nvim-ufo": { "branch": "main", "commit": "ab3eb124062422d276fae49e0dd63b3ad1062cfc" },
   "nvim-web-devicons": { "branch": "master", "commit": "95b7a002d5dba1a42eb58f5fac5c565a485eefd0" },
@@ -45,6 +44,7 @@
   "supermaven-nvim": { "branch": "main", "commit": "07d20fce48a5629686aefb0a7cd4b25e33947d50" },
   "tiny-code-action.nvim": { "branch": "main", "commit": "47ec77edf11db531b01d415688b87b1c63bc0aca" },
   "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },
+  "tree-sitter-manager.nvim": { "branch": "main", "commit": "f448f54ece0cdba82a31e41186720f902c91c090" },
   "trouble.nvim": { "branch": "main", "commit": "bd67efe408d4816e25e8491cc5ad4088e708a69a" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
   "winshift.nvim": { "branch": "main", "commit": "37468ed6f385dfb50402368669766504c0e15583" }
