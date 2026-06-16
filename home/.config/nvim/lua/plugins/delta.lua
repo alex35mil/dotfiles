@@ -6,6 +6,7 @@ NVDelta = {
     opts = function()
         local pi = require("pi")
         local delta = require("delta")
+        local diff = delta.diff
         local picker = delta.picker
         local spotlight = delta.spotlight
 
@@ -27,6 +28,7 @@ NVDelta = {
                         end,
                     },
                     preview = {
+                        enabled = true,
                         title = " 󰫽󰫿󰫲󰬃󰫶󰫲󰬄 ",
                         width = 0.5,
                     },
@@ -46,6 +48,8 @@ NVDelta = {
                     jump_down = { NVKeymaps.scroll.down, picker.actions.move(5) },
                     jump_top = { { "<M-Up>", { "gg", modes = "n" } }, picker.actions.move_to_top },
                     jump_bottom = { { "<M-Down>", { "G", modes = "n" } }, picker.actions.move_to_bottom },
+                    scroll_left = { "<D-S-Left>", picker.actions.scroll_horizontal(-8) },
+                    scroll_right = { "<D-S-Right>", picker.actions.scroll_horizontal(8) },
                     close = { { NVKeymaps.close, { "<Esc>", modes = "n" } }, picker.actions.close },
                     toggle_stage = { "<C-CR>", picker.actions.toggle_stage },
                     reset = { "<D-x>", picker.actions.reset },
@@ -73,7 +77,6 @@ NVDelta = {
                 actions = {
                     next_hunk = { "<M-S-h>", spotlight.actions.next_hunk, global = true },
                     prev_hunk = { "<M-S-t>", spotlight.actions.prev_hunk, global = true },
-                    open_diff = { "<D-Space>", spotlight.actions.open_diff, global = true },
                     toggle_stage_file = { "<C-CR>", spotlight.actions.toggle_stage_file },
                     toggle_stage_hunk = {
                         { "<D-S-Space>", modes = { "n", "v" } },
@@ -83,7 +86,16 @@ NVDelta = {
                     reset_file = { "<C-S-x>", spotlight.actions.reset_file, global = true },
                     reset_hunk = { { "<D-S-x>", modes = { "n", "v" } }, spotlight.actions.reset_hunk, global = true },
                 },
-                diff = {
+            },
+            diff = {
+                file = {
+                    keys = {
+                        toggle_stage_file_and_close = "<C-CR>",
+                        reset_file_and_close = "<C-S-x>",
+                        close = NVKeymaps.close,
+                    },
+                },
+                hunk = {
                     mode = "auto",
                     keys = {
                         scroll_up = NVKeymaps.scroll_ctx.up,
@@ -92,6 +104,10 @@ NVDelta = {
                         focus_right = { "<Tab>", "<S-Right>" },
                         close = { NVKeymaps.close, "<Esc>" },
                     },
+                },
+                actions = {
+                    open_file_diff = { "<D-g>d", diff.actions.open_file_diff },
+                    open_hunk_diff = { "<D-Space>", diff.actions.open_hunk_diff },
                 },
             },
         }
@@ -130,8 +146,10 @@ NVDelta = {
     end,
 }
 
-function NVDelta.ensure_spotlight_deactivated()
-    require("delta.spotlight").disable_all()
+function NVDelta.cleanup()
+    local delta = require("delta")
+    delta.spotlight.disable_all()
+    delta.diff.close_all()
 end
 
 --- Opening a file from a Delta picker starts a review flow. If Pi is in the

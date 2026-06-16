@@ -4,7 +4,7 @@ NVDiffview = {
     "sindrets/diffview.nvim",
     keys = function()
         return {
-            { "<D-g>d", fn.toggle_diff, mode = { "n", "v", "i" }, desc = "Git: Toggle diff" },
+            { "<D-g>D", fn.toggle_diff, mode = { "n", "v", "i" }, desc = "Git: Toggle diff" },
         }
     end,
     opts = function()

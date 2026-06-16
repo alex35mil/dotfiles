@@ -435,6 +435,10 @@ function NVTheme.apply()
             DeltaSpotlightPopupRemoved { bg = color.diff_delete_bg },
             DeltaSpotlightPopupAddedText { bg = color.diff_add_bg.mix(color.green, 25).lighten(3) },
             DeltaSpotlightPopupRemovedText { bg = color.diff_delete_bg.mix(color.red, 35) },
+            DeltaDiffFileWinbar { bg = color.bar_bg },
+            DeltaDiffFileWinbarCurrent { fg = color.bar_text, bold = true },
+            DeltaDiffFileWinbarBase { fg = color.bar_text, bold = true },
+            DeltaDiffFileWinbarHint { fg = color.bar_faded_text },
 
             MultiCursorCursor { fg = color.silver.mix(color.bg, 50), reverse = true },
             MultiCursorVisual { bg = color.faded_text },
