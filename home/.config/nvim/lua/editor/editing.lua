@@ -131,26 +131,50 @@ function NVEditing.keymaps()
 
     K.map({
         "<D-k>",
-        "Save files",
+        "Save file",
         fn.save,
         mode = "n",
     })
     K.map({
         "<D-k>",
-        "Save files",
+        "Save file",
+        "<Cmd>lua NVEditing.esc()<CR><Esc><Cmd>silent w<CR>",
+        mode = { "i", "v" },
+    })
+    K.map({
+        "<M-k>",
+        "Save all files",
+        fn.save_all,
+        mode = "n",
+    })
+    K.map({
+        "<M-k>",
+        "Save all files",
         "<Cmd>lua NVEditing.esc()<CR><Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>",
         mode = { "i", "v" },
     })
     -- Duplicates of the above so saving works with CAPS_WORD
     K.map({
         "<D-S-k>",
-        "Save files",
+        "Save file",
         fn.save,
         mode = "n",
     })
     K.map({
         "<D-S-k>",
-        "Save files",
+        "Save file",
+        "<Cmd>lua NVEditing.esc()<CR><Esc><Cmd>silent w<CR>",
+        mode = { "i", "v" },
+    })
+    K.map({
+        "<M-S-k>",
+        "Save all files",
+        fn.save_all,
+        mode = "n",
+    })
+    K.map({
+        "<M-S-k>",
+        "Save all files",
         "<Cmd>lua NVEditing.esc()<CR><Esc><Cmd>silent w<CR><Cmd>silent! wa<CR>",
         mode = { "i", "v" },
     })
@@ -172,6 +196,10 @@ end
 function fn.save()
     NVEditing.esc()
     vim.cmd("silent w")
+end
+
+function fn.save_all()
+    fn.save()
     vim.cmd("silent! wa")
 end
 
