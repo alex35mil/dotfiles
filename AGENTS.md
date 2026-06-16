@@ -1,15 +1,15 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to coding agents working in this repository.
 
-## Repository Overview
+## Repository overview
 
 This is a personal dotfiles repository containing configuration files for a development environment centered around:
 - **Terminal**: Ghostty with Zellij multiplexer
 - **Shell**: Zsh with custom configuration
-- **Editor**: Neovim with extensive Lua configuration
-- **Coding agent**: Pi configuration and agent setup under `home/.config/pi/`
-- **Package Management**: Homebrew + Mise for runtime management
+- **Editor**: Neovim + Neovide with extensive Lua configuration
+- **Coding agent**: Pi configuration under `home/.config/pi/`
+- **Package management**: Brew + Mise for runtime management
 
 ## Architecture
 
