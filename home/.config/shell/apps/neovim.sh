@@ -1,6 +1,7 @@
 export NEOVIDE_FRAME="buttonless"
 export NEOVIDE_MAXIMIZED="true"
 export NEOVIDE_TITLE_HIDDEN="true"
+export NEOVIDE_STARTUP_MESSAGE_CAPTURE="false"
 
 alias n="neohub "
 alias ncc="rm -rf ~/.cache/nvim/luac/"
