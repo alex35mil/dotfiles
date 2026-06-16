@@ -41,7 +41,7 @@ This is a personal dotfiles repository containing configuration files for a deve
 
 #### Zellij Configuration (`home/.config/zellij/`)
 - `config.kdl` - Main Zellij configuration with custom keybindings
-- `layouts/` - Session layouts such as `terminal.kdl`, `showcase.kdl`, and `d42.kdl`
+- `layouts/` - Session layouts such as `terminal.kdl`, `showcase.kdl`, etc.
 - `themes/` - Custom themes
 - `plugins/` - Built plugin artifacts such as `statusbar.wasm`
 - Custom keybindings use Unicode symbols mapped in terminal config
