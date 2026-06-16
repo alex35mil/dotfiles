@@ -40,8 +40,8 @@ function NVNavigation.keymaps()
         mode = { "n", "v", "i" },
     })
 
-    K.map({ "<C-S-Left>", "History: back", "<C-o>", mode = "n" })
-    K.map({ "<C-S-Right>", "History: forward", "<C-i>", mode = "n" })
+    K.map({ "<D-[>", "History: back", "<C-o>", mode = "n" })
+    K.map({ "<D-]>", "History: forward", "<C-i>", mode = "n" })
 end
 
 ---@param direction "left" | "right"
