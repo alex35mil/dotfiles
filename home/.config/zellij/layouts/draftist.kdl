@@ -12,11 +12,11 @@ layout {
                 args "-c" "cli rescript watch"
             }
             pane split_direction="horizontal" {
-                pane name="web/platform/next" command="zsh" start_suspended=true {
-                    args "-c" "cli web platform next develop"
+                pane name="web/platform/tss" command="zsh" start_suspended=true {
+                    args "-c" "cli web platform tanstack develop"
                 }
-                pane name="web/sites/next" command="zsh" start_suspended=true {
-                    args "-c" "cli web sites next develop"
+                pane name="web/sites/tss" command="zsh" start_suspended=true {
+                    args "-c" "cli web sites tanstack develop"
                 }
             }
         }
