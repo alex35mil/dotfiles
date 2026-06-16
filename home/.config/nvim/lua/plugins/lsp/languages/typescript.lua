@@ -8,7 +8,7 @@ local lsp_settings = {
     },
 }
 
-local prettier = { "prettierd", "prettier", stop_after_first = true }
+local oxfmt = { "oxfmt" }
 
 NVLTypeScript = {
     {
@@ -23,7 +23,6 @@ NVLTypeScript = {
                         },
                     },
                 },
-                prettierd = { lsp = false },
             },
         },
     },
@@ -43,10 +42,10 @@ NVLTypeScript = {
         "stevearc/conform.nvim",
         opts = {
             formatters_by_ft = {
-                javascript = prettier,
-                javascriptreact = prettier,
-                typescript = prettier,
-                typescriptreact = prettier,
+                javascript = oxfmt,
+                javascriptreact = oxfmt,
+                typescript = oxfmt,
+                typescriptreact = oxfmt,
             },
         },
     },
