@@ -6,9 +6,10 @@ NVPi = {
     },
     opts = {
         debug = true,
+        expand_startup_details = false,
         models = {
             { match = "opus", latest = true },
-            { match = "gpt-5.3-codex", exact = true },
+            { match = "gpt-5.5", exact = true },
         },
         layout = {
             side = function()
@@ -190,6 +191,9 @@ function NVPi.autocmds()
             end)
             keymap("<D-S-w>", event, function()
                 vim.cmd("PiStop")
+            end)
+            keymap("<C-o>", event, function()
+                pi.toggle_history_blocks()
             end)
         end,
     })
