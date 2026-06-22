@@ -40,11 +40,17 @@ NVPi = {
             },
         },
         diff = {
+            icons = {
+                note = "󰣒",
+            },
             keys = {
                 accept = { "<C-CR>", modes = { "n", "i", "v" } },
                 reject = { NVKeyRemaps["<C-c>"], modes = { "n", "i", "v" } },
                 expand_context = { "+", modes = { "n" } },
                 shrink_context = { "-", modes = { "n" } },
+                edit_note = { "<D-S-n>", modes = { "n", "v" } },
+                delete_note = { "<D-S-x>", modes = { "n", "v" } },
+                list_notes = "<D-S-l>",
             },
         },
         statusline = {
@@ -238,7 +244,7 @@ function NVPi.autocmds()
                 pi.scroll_chat_history_to_last_agent_response()
             end)
             keymap("<C-}>", event, function()
-                pi.scroll_chat_history_to_last_agent_response()
+                pi.scroll_chat_history_to_first_agent_response()
             end)
             keymap("<C-(>", event, function()
                 pi.scroll_chat_history_to_bottom()
