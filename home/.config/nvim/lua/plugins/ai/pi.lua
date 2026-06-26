@@ -296,4 +296,8 @@ function NVPi.autocmds()
     })
 end
 
+function NVPi.open_float()
+    vim.cmd("Pi layout=float")
+end
+
 return { NVPi }

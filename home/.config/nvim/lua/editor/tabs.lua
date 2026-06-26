@@ -22,6 +22,7 @@ function fn.create_tab()
         if name and name ~= "" then
             vim.cmd("tabnew")
             NVTabs.set_label({ icon = NVTabs.editor_icon, name = name })
+            NVPi.open_float()
         end
     end)
 end
