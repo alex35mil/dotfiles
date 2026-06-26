@@ -266,6 +266,13 @@ bindkey "^[[Z" reverse-menu-complete
 # through all the options again.
 # ------------------------------------------
 
+bindkey "^[^?" backward-kill-word
+# ------------------------------------------
+# - `"^[^?"`: This is the key sequence for Opt+Backspace.
+#
+# - `backward-kill-word`: Deletes the word before the cursor.
+# ------------------------------------------
+
 # ------------------------------------------
 # OPTIONS
 #
