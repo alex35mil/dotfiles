@@ -1,5 +1,9 @@
 {
     "defaultMode": "ask",
+    "ask": [
+        "write(.agents/gigs/*/plan.md)",
+        "edit(.agents/gigs/*/plan.md)"
+    ],
     "allow": [
         "read",
         "fetch",
@@ -46,7 +50,6 @@
         "bash(git diff *)"
     ],
     "deny": [],
-    "ask": [],
     "keybindings": {
         "autoAcceptEdits": "shift+tab"
     }
