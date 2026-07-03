@@ -56,6 +56,8 @@ NVDelta = {
                     toggle_preview = { "<D-S-p>", picker.actions.toggle_preview },
                     scroll_preview_up = { NVKeymaps.scroll_ctx.up, picker.actions.scroll_preview(-5) },
                     scroll_preview_down = { NVKeymaps.scroll_ctx.down, picker.actions.scroll_preview(5) },
+                    send_to_pi = { "<C-p>", fn.send_to_pi({ close = false }) },
+                    send_to_pi_and_close = { "<D-p>", fn.send_to_pi({ close = true }) },
                 },
             },
             spotlight = {
@@ -168,6 +170,27 @@ function fn.open(action)
             end)
         else
             action(ctx)
+        end
+    end
+end
+
+---@param opts { close: boolean }
+---@return delta.picker.ActionHandler
+function fn.send_to_pi(opts)
+    local pi = require("pi")
+
+    ---@param ctx delta.picker.ActionContext
+    return function(ctx)
+        local node = ctx.node
+        if not node or not node.path or node.path == "" then
+            return
+        end
+
+        pi.send_mention({ path = node.path }, { focus = false })
+
+        if opts.close then
+            ctx.close()
+            pi.focus_chat_prompt()
         end
     end
 end
