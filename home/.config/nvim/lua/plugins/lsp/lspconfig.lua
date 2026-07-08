@@ -156,7 +156,11 @@ NVLspConfig = {
             end
         end
 
-        require("mason-tool-installer").setup({ ensure_installed = vim.tbl_keys(opts.tools) })
+        local ensure_installed = vim.tbl_filter(function(tool)
+            return opts.tools[tool].mason ~= false
+        end, vim.tbl_keys(opts.tools))
+
+        require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
     end,
 }
 
