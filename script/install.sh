@@ -64,6 +64,7 @@ HOME_CONFIG="$HOME/.config"
 
 # I want to symlink these directories instead of each individual file in them.
 UMBRELLA_DIRECTORIES=(
+    ".config/karabiner"
     ".config/nvim"
     ".config/shell"
     ".config/zellij"

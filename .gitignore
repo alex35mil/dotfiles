@@ -3,6 +3,7 @@ target/
 /.clj-kondo/
 /home/.config/zellij/plugins/**
 /home/.config/shell/secrets.sh
+home/.config/karabiner/automatic_backups/
 /script/font/original/**/*
 /script/font/patched/**/*
 !/script/font/original/**/.gitkeep

@@ -3,179 +3,203 @@
 
 const KB: Keyboards = {
     MacBook: {
-        vendor_id: 1452,
-        product_id: 835,
+        id: {
+            product_id: 835,
+            vendor_id: 1452,
+        },
+        ignore: false,
     },
-}
+    Chocofi: {
+        id: {
+            product_id: 24926,
+            vendor_id: 7504,
+        },
+        ignore: true,
+    },
+};
 
 const DEVICE: DeviceConditions = {
     MacBookKB: {
+        identifiers: [KB.MacBook.id],
         type: "device_if",
-        identifiers: [KB.MacBook],
     },
-}
+};
 
 const MacBookRule: Rule = {
     description: "Macbook keyboard configuration",
     manipulators: [
         {
-            type: "basic",
+            conditions: [DEVICE.MacBookKB],
             from: { key_code: "f1" },
             to: [{ consumer_key_code: "display_brightness_decrement" }],
-            conditions: [DEVICE.MacBookKB],
+            type: "basic",
         },
         {
-            type: "basic",
+            conditions: [DEVICE.MacBookKB],
             from: { key_code: "f2" },
             to: [{ consumer_key_code: "display_brightness_increment" }],
-            conditions: [DEVICE.MacBookKB],
+            type: "basic",
         },
         {
-            type: "basic",
+            conditions: [DEVICE.MacBookKB],
             from: { key_code: "f7" },
             to: [{ consumer_key_code: "rewind" }],
-            conditions: [DEVICE.MacBookKB],
+            type: "basic",
         },
         {
-            type: "basic",
+            conditions: [DEVICE.MacBookKB],
             from: { key_code: "f8" },
             to: [{ consumer_key_code: "play_or_pause" }],
-            conditions: [DEVICE.MacBookKB],
+            type: "basic",
         },
         {
-            type: "basic",
+            conditions: [DEVICE.MacBookKB],
             from: { key_code: "f9" },
             to: [{ consumer_key_code: "fastforward" }],
-            conditions: [DEVICE.MacBookKB],
+            type: "basic",
         },
         {
-            type: "basic",
+            conditions: [DEVICE.MacBookKB],
             from: { key_code: "f10" },
             to: [{ consumer_key_code: "mute" }],
-            conditions: [DEVICE.MacBookKB],
+            type: "basic",
         },
         {
-            type: "basic",
+            conditions: [DEVICE.MacBookKB],
             from: { key_code: "f11" },
             to: [{ consumer_key_code: "volume_decrement" }],
-            conditions: [DEVICE.MacBookKB],
+            type: "basic",
         },
         {
-            type: "basic",
+            conditions: [DEVICE.MacBookKB],
             from: { key_code: "f12" },
             to: [{ consumer_key_code: "volume_increment" }],
-            conditions: [DEVICE.MacBookKB],
+            type: "basic",
         },
     ],
-}
+};
 
-const ComplexModifications: ComplexModifications = { rules: [MacBookRule] }
+const ComplexModifications: ComplexModifications = { rules: [MacBookRule] };
 
 // --- Update
 
-import * as fs from "fs"
-import * as path from "path"
-import { fileURLToPath } from "url"
+import * as fs from "fs";
+import * as path from "path";
+import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const configPath = path.join(__dirname, "karabiner.json")
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const configPath = path.join(__dirname, "karabiner.json");
 
 try {
-    const configData = fs.readFileSync(configPath, "utf8")
-    const config: KarabinerConfig = JSON.parse(configData)
+    const configData = fs.readFileSync(configPath, "utf8");
+    const config: KarabinerConfig = JSON.parse(configData);
 
     config.profiles.forEach((profile) => {
-        profile.complex_modifications = ComplexModifications
-    })
+        profile.complex_modifications = ComplexModifications;
+        profile.devices = profile.devices?.map((device) => {
+            const keyboard = Object.values(KB).find(
+                (keyboard) =>
+                    device.identifiers.vendor_id === keyboard.id.vendor_id &&
+                    device.identifiers.product_id === keyboard.id.product_id,
+            );
+            return keyboard && "ignore" in device ? { ...device, ignore: keyboard.ignore } : device;
+        });
+    });
 
-    fs.writeFileSync(configPath, JSON.stringify(config, null, 4))
-    console.log("🟢 Karabiner configuration updated successfully")
-    process.exit(0)
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 4));
+    console.log("🟢 Karabiner configuration updated successfully");
+    process.exit(0);
 } catch (error) {
-    console.error("🔴 Error updating Karabiner configuration:", error)
-    process.exit(1)
+    console.error("🔴 Error updating Karabiner configuration:", error);
+    process.exit(1);
 }
 
 // --- Types
 
-type Keyboards = { [key: string]: DeviceIdentifier }
-type DeviceConditions = { [key: string]: DeviceCondition }
+type Keyboards = {
+    [key: string]: {
+        id: DeviceIdentifier;
+        ignore: boolean;
+    };
+};
+
+type DeviceConditions = { [key: string]: DeviceCondition };
 
 interface Modifier {
-    mandatory?: string[]
-    optional?: string[]
+    mandatory?: string[];
+    optional?: string[];
 }
 
 interface KeyCode {
-    key_code: string
-    modifiers?: Modifier | string[]
+    key_code: string;
+    modifiers?: Modifier | string[];
 }
 
 interface ConsumerKey {
-    consumer_key_code: string
+    consumer_key_code: string;
 }
 
 interface ToEvent extends Partial<KeyCode>, Partial<ConsumerKey> {
-    modifiers?: string[]
+    modifiers?: string[];
 }
 
 interface FrontmostApplicationCondition {
-    type: "frontmost_application_if" | "frontmost_application_unless"
-    file_paths?: string[]
-    bundle_identifiers?: string[]
+    type: "frontmost_application_if" | "frontmost_application_unless";
+    file_paths?: string[];
+    bundle_identifiers?: string[];
 }
 
 interface DeviceIdentifier {
-    vendor_id: number
-    product_id: number
+    vendor_id: number;
+    product_id: number;
 }
 
 interface DeviceCondition {
-    type: "device_if" | "device_unless"
-    identifiers: DeviceIdentifier[]
+    type: "device_if" | "device_unless";
+    identifiers: DeviceIdentifier[];
 }
 
-type Condition = FrontmostApplicationCondition | DeviceCondition
+type Condition = FrontmostApplicationCondition | DeviceCondition;
 
 interface Manipulator {
-    type: "basic"
-    from: KeyCode
-    to: ToEvent[]
-    conditions?: Condition[]
+    type: "basic";
+    from: KeyCode;
+    to: ToEvent[];
+    conditions?: Condition[];
 }
 
 interface Rule {
-    description: string
-    manipulators: Manipulator[]
+    description: string;
+    manipulators: Manipulator[];
 }
 
 interface ComplexModifications {
-    rules: Rule[]
+    rules: Rule[];
 }
 
 interface Device {
     identifiers: {
-        vendor_id: number
-        product_id: number
-        is_keyboard?: boolean
-        is_pointing_device?: boolean
-    }
-    ignore?: boolean
-    ignore_vendor_events?: boolean
-    manipulate_caps_lock_led?: boolean
+        vendor_id: number;
+        product_id: number;
+        is_keyboard?: boolean;
+        is_pointing_device?: boolean;
+    };
+    ignore?: boolean;
+    ignore_vendor_events?: boolean;
+    manipulate_caps_lock_led?: boolean;
 }
 
 interface Profile {
-    name: string
-    complex_modifications: ComplexModifications
-    devices?: Device[]
-    selected?: boolean
+    name: string;
+    complex_modifications: ComplexModifications;
+    devices?: Device[];
+    selected?: boolean;
     virtual_hid_keyboard?: {
-        keyboard_type_v2: string
-    }
+        keyboard_type_v2: string;
+    };
 }
 
 interface KarabinerConfig {
-    profiles: Profile[]
+    profiles: Profile[];
 }
