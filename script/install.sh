@@ -37,6 +37,10 @@ fi
 
 # Let's store the required paths in variables.
 #
+# START_DIR is where the script was launched from, so we can return there
+# before restarting the shell.
+START_DIR="$PWD"
+
 # DOTFILES will contain the root directory of this repo.
 #
 # Breaking it down:
@@ -70,7 +74,7 @@ UMBRELLA_DIRECTORIES=(
 declare -A PATHS
 
 # `cd` to the $DOTFILES_HOME directory to get relative paths with `find`
-cd $DOTFILES_HOME
+cd "$DOTFILES_HOME"
 
 # Here, I `find` all the files in the $DOTFILES_HOME directory,
 # and if a file is inside one of the $UMBRELLA_DIRECTORIES,
@@ -146,7 +150,7 @@ ZELLIJ_STATUSBAR_BIN="statusbar.wasm"
 
 mkdir -p "$ZELLIJ_STATUSBAR_DEST"
 rm "$ZELLIJ_STATUSBAR_DEST/$ZELLIJ_STATUSBAR_BIN" || true
-cd $ZELLIJ_STATUSBAR_SRC
+cd "$ZELLIJ_STATUSBAR_SRC"
 cargo build --release
 cp "target/wasm32-wasip1/release/$ZELLIJ_STATUSBAR_BIN" "$ZELLIJ_STATUSBAR_DEST/"
 
@@ -158,10 +162,8 @@ echo "🛠   Building Zellij runner..."
 
 ZELLIJ_RUNNER_SRC="$DOTFILES_BIN/zellij/runner"
 
-cd $ZELLIJ_RUNNER_SRC
+cd "$ZELLIJ_RUNNER_SRC"
 cargo install --locked --path .
-
-cd $DOTFILES
 
 echo "🛠   Building Zellij runner... done."
 
@@ -181,11 +183,14 @@ fi
 echo
 echo "⌨️  Copying Unicode Hex Input keyboard layout... done."
 
-# Finally, ensuring .hushlogin exists to get rid of "Last login..." message
+# Ensuring .hushlogin exists to get rid of "Last login..." message
 echo
 echo "📋  Ensuring .hushlogin: $HOME/.hushlogin..."
 touch "$HOME/.hushlogin"
 echo "📋  Ensuring .hushlogin: $HOME/.hushlogin... done."
+
+# Finally, navigating back to where we started
+cd "$START_DIR"
 
 # Before exiting, let's restart the shell to get all the new goodies.
 # Since I can run the install script from either bash/zsh or nu shell,
