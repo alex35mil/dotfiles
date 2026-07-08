@@ -73,7 +73,7 @@ impl Sessions {
         Self(sessions)
     }
 
-    pub fn iter(&self) -> slice::Iter<Session> {
+    pub fn iter(&self) -> slice::Iter<'_, Session> {
         self.0.iter()
     }
 
@@ -114,19 +114,16 @@ pub(crate) fn list_sessions() -> io::Result<Sessions> {
                 if err.contains("No") && err.contains("sessions found") {
                     Ok(Sessions::empty())
                 } else {
-                    Err(io::Error::new(
-                        io::ErrorKind::Other,
-                        format!(
-                            "Failed to get Zellij sessions. Exit code: {}. {}",
-                            exit_code, err
-                        ),
-                    ))
+                    Err(io::Error::other(format!(
+                        "Failed to get Zellij sessions. Exit code: {}. {}",
+                        exit_code, err
+                    )))
                 }
             }
-            Err(_) => Err(io::Error::new(
-                io::ErrorKind::Other,
-                format!("Failed to get Zellij sessions. Exit code: {}", exit_code),
-            )),
+            Err(_) => Err(io::Error::other(format!(
+                "Failed to get Zellij sessions. Exit code: {}",
+                exit_code
+            ))),
         }
     }
 }

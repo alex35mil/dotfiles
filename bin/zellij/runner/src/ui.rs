@@ -210,7 +210,7 @@ impl Banners {
         Ok(banners)
     }
 
-    fn random(&self) -> Option<Banner> {
+    fn random(&self) -> Option<Banner<'_>> {
         match &self.0 {
             None => None,
             Some(banners) => {
@@ -391,7 +391,7 @@ where
                 EventResult::Continue => (),
                 EventResult::Return => {
                     match self.selector.flush() {
-                        Err(error) => break Err(io::Error::new(io::ErrorKind::Other, error)),
+                        Err(error) => break Err(io::Error::other(error)),
                         Ok(Some(selection)) => break Ok((self.on_select)(selection)),
                         Ok(None) => continue,
                     };
@@ -724,7 +724,7 @@ impl<'a> Screen for ActionSelectorScreen<'a> {
                             };
                             return Ok(result);
                         }
-                        Err(error) => return Err(io::Error::new(io::ErrorKind::Other, error)),
+                        Err(error) => return Err(io::Error::other(error)),
                     };
                 }
                 EventResult::Cancel | EventResult::Exit => {
@@ -907,7 +907,7 @@ impl<'a> Screen for DirSelectorScreen<'a> {
                             ));
                             return Ok(result);
                         }
-                        Err(error) => return Err(io::Error::new(io::ErrorKind::Other, error)),
+                        Err(error) => return Err(io::Error::other(error)),
                     };
                 }
                 EventResult::Cancel => {
@@ -1220,7 +1220,7 @@ impl<'a> Screen for LayoutSelectorScreen<'a> {
                             });
                             return Ok(result);
                         }
-                        Err(error) => return Err(io::Error::new(io::ErrorKind::Other, error)),
+                        Err(error) => return Err(io::Error::other(error)),
                     };
                 }
                 EventResult::Cancel => {
