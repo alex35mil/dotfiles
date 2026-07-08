@@ -9,31 +9,31 @@ layout {
     tab name="app" {
         pane split_direction="vertical" {
             pane name="web/rescript" command="zsh" start_suspended=true {
-                args "-c" "cli rescript watch"
+                args "-c" "cli local rescript watch"
             }
             pane split_direction="horizontal" {
-                pane name="web/platform/tss" command="zsh" start_suspended=true {
-                    args "-c" "cli web platform tanstack develop"
+                pane name="web/platform" command="zsh" start_suspended=true {
+                    args "-c" "cli local web platform tanstack develop"
                 }
-                pane name="web/sites/tss" command="zsh" start_suspended=true {
-                    args "-c" "cli web sites tanstack develop"
+                pane name="web/sites" command="zsh" start_suspended=true {
+                    args "-c" "cli local web sites tanstack develop"
                 }
             }
         }
         pane split_direction="vertical" {
             pane name="core/server" command="zsh" start_suspended=true {
-                args "-c" "cli core develop core-server"
+                args "-c" "cli local core develop core-server"
             }
             pane name="core/dns-verifier" command="zsh" start_suspended=true {
-                args "-c" "cli core develop dns-verifier"
+                args "-c" "cli local core develop dns-verifier"
             }
             pane name="lambda/image-uploader" command="zsh" start_suspended=true {
-                args "-c" "cli lambda watch"
+                args "-c" "cli local lambda watch"
             }
         }
         pane size="15%" split_direction="vertical" {
             pane name="integrations/obsidian" command="zsh" start_suspended=true {
-                args "-c" "cli obsidian develop"
+                args "-c" "cli local obsidian develop"
             }
         }
         pane size=1 borderless=true {
@@ -44,14 +44,14 @@ layout {
         pane split_direction="horizontal" {
             pane split_direction="vertical" {
                 pane name="docker/proxy" command="zsh" start_suspended=true {
-                    args "-c" "cli docker-compose proxy up"
+                    args "-c" "cli local docker-compose proxy up"
                 }
                 pane name="docker/dev-services" command="zsh" start_suspended=true {
-                    args "-c" "cli docker-compose dev up"
+                    args "-c" "cli local docker-compose dev up"
                 }
             }
             pane name="service-proxy" size="20%" command="zsh" start_suspended=true {
-                args "-c" "cli service-proxy run"
+                args "-c" "cli local service-proxy run"
             }
         }
         pane size=1 borderless=true {
