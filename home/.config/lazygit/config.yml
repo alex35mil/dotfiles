@@ -1,10 +1,10 @@
 keybinding:
   universal:
     quit: "w"
-    scrollUpMain: "<C-u>"
-    scrollDownMain: "<C-d>"
+    scrollUpMain: "<ctrl-u>"
+    scrollDownMain: "<ctrl-d>"
   files:
-    commitChangesWithoutHook: "<C-C>"
+    commitChangesWithoutHook: "<ctrl-shift-c>"
   commits:
     moveUpCommit: "<pgup>"
     moveDownCommit: "<pgdown>"

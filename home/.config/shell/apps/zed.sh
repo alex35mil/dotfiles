@@ -1,1 +1,0 @@
-alias e="zed ."

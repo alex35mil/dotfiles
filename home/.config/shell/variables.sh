@@ -16,7 +16,7 @@ export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
 export PRETTIERD_DEFAULT_CONFIG="$XDG_CONFIG_HOME/prettier.yml"
 
 SWIFT_BIN_PATH="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"
-GO_BIN_PATH="$(go env GOPATH)/bin"
+GO_BIN_PATH="$HOME/go/bin"
 MOONBIT_BIN_PATH="$HOME/.moon/bin"
 NPM_BIN_PATH="$HOME/.npm-global/bin"
 OBSIDIAN_PATH="/Applications/Obsidian.app/Contents/MacOS"

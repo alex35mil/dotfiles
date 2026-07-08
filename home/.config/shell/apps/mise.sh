@@ -1,1 +1,1 @@
-alias ms="mise registry " # aka mise search
+export MISE_PIN="1"
