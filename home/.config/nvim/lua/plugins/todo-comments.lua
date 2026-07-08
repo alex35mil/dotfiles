@@ -33,15 +33,14 @@ NVTodoComments = {
     end,
     opts = {
         keywords = {
-            TODO = { icon = " ", color = "todo_normal" },
-            TODO_NOW = { icon = " ", color = "todo_now", alt = { "TODO!" } },
-            FIXME = { icon = " ", color = "fixme_normal", alt = { "FIX", "BUG" } },
-            FIXME_NOW = { icon = " ", color = "fixme_now", alt = { "FIXME!" } },
-            HACK = { icon = " ", color = "warning_normal" },
-            WARN = { icon = " ", color = "warning_normal", alt = { "WARNING", "XXX" } },
-            PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-            NOTE = { icon = " ", color = "note_normal", alt = { "INFO" } },
-            TEST = { icon = "⏲ ", color = "note_normal", alt = { "TESTING", "PASSED", "FAILED" } },
+            TODO = { icon = "󰬁 ", color = "todo_normal" },
+            TODO_NOW = { icon = "󰬁 ", color = "todo_now", alt = { "TODO!" } },
+            FIXME = { icon = "󰫳 ", color = "fixme_normal", alt = { "FIX", "BUG" } },
+            FIXME_NOW = { icon = "󰫳 ", color = "fixme_now", alt = { "FIXME!" } },
+            HACK = { icon = "󰫵 ", color = "warning_normal" },
+            WARN = { icon = "󰬄 ", color = "warning_normal", alt = { "WARNING", "XXX" } },
+            PERF = { icon = "󰫽 ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+            NOTE = { icon = "󰫻 ", color = "note_normal", alt = { "INFO" } },
         },
         colors = {
             todo_now = { "TODONow" },
