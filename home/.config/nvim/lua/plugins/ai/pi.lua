@@ -8,8 +8,9 @@ NVPi = {
         debug = true,
         expand_startup_details = false,
         models = {
-            { match = "opus", latest = true },
-            { match = "gpt-5.5", exact = true },
+            { match = "gpt-5.6-luna", exact = true },
+            { match = "gpt-5.6-terra", exact = true },
+            { match = "gpt-5.6-sol", exact = true },
         },
         layout = {
             side = function()

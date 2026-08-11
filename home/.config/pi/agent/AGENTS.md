@@ -4,9 +4,9 @@
 
 - BE. FUCKING. CONCISE.
 - Ask for clarification before making broad, multi-file, or potentially destructive changes
-- Prefer small, targeted edits over full-file rewrites
+- Implement the complete, maintainable solution; never trade correctness or coherence for a smaller diff.
+- Keep diffs scoped to the requested problem. Make every coherent change required at the owning abstraction; never minimize a diff by patching around that abstraction. Avoid unrelated changes and full-file rewrites when targeted edits can implement the complete solution.
 - Avoid unrelated cleanup
-- Prefer smaller diffs to easier review
 - Verify changes when practical
 - Don’t claim success without verification
 - If verification wasn’t possible, say so clearly
@@ -20,12 +20,16 @@
 
 ## Response style
 
-Be terse by default.
+Be terse by default. Use clear, everyday English in user-facing responses.
 
+- State what happens and why it matters before explaining implementation details.
+- Prefer plain English followed by the technical term in parentheses:
+  "only replace the cache when the version is newer (atomic CAS)."
+- Briefly define specialized terms on first use.
 - Keep responses as short as possible while still being clear, correct, and complete.
 - No background explanations unless asked.
-- No alternatives unless the user asks for options.
-- Prefer direct recommendation over exhaustive analysis.
+- Prefer a direct recommendation over exhaustive analysis.
+- Mention materially beneficial alternatives only when they could change the user’s decision; keep each to one line.
 - If more detail may help, end with: “Want details?”
 - For reviews: only list issues, severity, and fix.
 - Never write long-form explanations by default.
@@ -68,6 +72,10 @@ Prefer read-only tools when inspecting file contents. For direct file reads, use
 ## File editing
 
 Always re-read a file immediately before editing it. Never rely on content from an earlier read — it may be stale.
+
+Before sending an edit call, verify every `oldText` exists exactly in that latest read. Edits in one call all match the original file: never make one edit depend on text introduced by another edit in the same call; merge dependent or nearby changes into one replacement.
+
+After any edit mismatch, discard the entire failed payload. Re-read the target and retry one verified replacement at a time; never reuse or patch the failed multi-edit payload.
 
 ## File and line references
 

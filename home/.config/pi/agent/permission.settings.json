@@ -1,6 +1,8 @@
 {
     "defaultMode": "ask",
     "ask": [
+        "write(.agents/epics/*/epic.md)",
+        "edit(.agents/epics/*/epic.md)",
         "write(.agents/gigs/*/plan.md)",
         "edit(.agents/gigs/*/plan.md)"
     ],
