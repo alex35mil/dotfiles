@@ -1,11 +1,7 @@
 {
     "defaultMode": "ask",
-    "ask": [
-        "write(.agents/epics/*/epic.md)",
-        "edit(.agents/epics/*/epic.md)",
-        "write(.agents/gigs/*/plan.md)",
-        "edit(.agents/gigs/*/plan.md)"
-    ],
+    "ask": [],
+    "deny": [],
     "allow": [
         "read",
         "fetch",
@@ -29,6 +25,7 @@
         "bash(realpath *)",
         "bash(basename *)",
         "bash(dirname *)",
+        "bash(date *)",
         "bash(du *)",
         "bash(pwd)",
         "bash(echo *)",
@@ -51,7 +48,6 @@
         "bash(git branch *)",
         "bash(git diff *)"
     ],
-    "deny": [],
     "keybindings": {
         "autoAcceptEdits": "shift+tab"
     }
