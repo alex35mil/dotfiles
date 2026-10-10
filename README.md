@@ -9,11 +9,11 @@
 
 <h2 align="center">Notes</h2>
 <p align="center">
-    Primary tools: <b>Zsh</b>, <b>Ghostty</b> + <b>Zellij</b>, <b>Neovim</b> + <b>Neovide</b>.
+    Primary tools: <b>Zsh</b>, <b>Ghostty</b> + <b>Zellij</b>, <b>Neovim</b> + <b>Neovide</b>, <b>Pi</b>.
 </p>
 
 <p align="center">
-    Packages are managed via <b>Brew</b> + <b>Mise</b>.
+    Packages are managed via <b>Mise</b>.
 </p>
 
 <p />

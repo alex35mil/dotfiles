@@ -5,10 +5,8 @@ export TERM="xterm-256color"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 
-export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/brew/Brewfile"
-export HOMEBREW_NO_AUTO_UPDATE=1
-
-export SDKROOT=$(xcrun --show-sdk-path)
+export HOMEBREW_PREFIX="/opt/homebrew"
+export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 
 export PI_CODING_AGENT_DIR="$XDG_CONFIG_HOME/pi/agent"
 export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
@@ -18,10 +16,13 @@ export PRETTIERD_DEFAULT_CONFIG="$XDG_CONFIG_HOME/prettier.yml"
 SWIFT_BIN_PATH="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"
 GO_BIN_PATH="$HOME/go/bin"
 MOONBIT_BIN_PATH="$HOME/.moon/bin"
-NPM_BIN_PATH="$HOME/.npm-global/bin"
 OBSIDIAN_PATH="/Applications/Obsidian.app/Contents/MacOS"
 
-export PATH="$SWIFT_BIN_PATH:$GO_BIN_PATH:$MOONBIT_BIN_PATH:$NPM_BIN_PATH:$OBSIDIAN_PATH:$PATH"
+if [[ -n "${ZSH_VERSION:-}" ]]; then
+    typeset -U path
+fi
+
+export PATH="$HOME/.local/bin:$SWIFT_BIN_PATH:$GO_BIN_PATH:$MOONBIT_BIN_PATH:$OBSIDIAN_PATH:$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
 
 # if interactive shell
 if [[ $- == *i* ]]; then
@@ -36,3 +37,4 @@ if [[ $- == *i* ]]; then
 fi
 
 source "$XDG_CONFIG_HOME/shell/secrets.sh"
+source "$XDG_CONFIG_HOME/shell/apps/_.sh"

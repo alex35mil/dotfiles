@@ -1,7 +1,6 @@
 alias d="docker "
 alias dps="docker ps "
 alias dpsa="docker ps -a "
-alias dsa="docker container stop $(docker ps -a -q)"
 alias dimg="docker image "
 alias dimgls="docker image ls "
 alias dimgrm="docker image rm "
@@ -23,6 +22,11 @@ alias dspra="docker system prune -a"
 alias dc="docker compose "
 alias dcup="docker compose up"
 alias dcupb="docker compose up --build"
+
+# Stops all containers
+function dsa() {
+    docker container stop $(docker ps -a -q) "$@"
+}
 
 # Prints Docker stats
 function dls() {

@@ -1,5 +1,8 @@
-source ~/.config/shell/init.pre.sh
-source ~/.config/shell/variables.sh
-source ~/.config/shell/init.mise.sh
+# Login shells load their environment after macOS's PATH setup in .zprofile.
+if [[ ! -o login ]]; then
+    source ~/.config/shell/variables.sh
 
-export SHELL_INITIALIZED=1
+    if [[ ! -o interactive ]]; then
+        source ~/.config/shell/init.mise.sh
+    fi
+fi

@@ -21,7 +21,7 @@ function nsc() {
         find $SWAPROOT -type f -name "*.sw[klmnop]" -delete
         echo "All swap files deleted"
     else
-        SEARCHTERM=$(echo "%Users%Alex%Dev%$1" | tr '/' '%')
+        SEARCHTERM=$(echo "%Users%Alex%Projects%$1" | tr '/' '%')
         find $SWAPROOT -type f -name "$SEARCHTERM*.sw[klmnop]" -delete
         echo "Swap files for $1 deleted"
     fi

@@ -19,6 +19,7 @@ fpath+=(
     $HOMEBREW_PREFIX/share/zsh/site-functions
     $HOMEBREW_PREFIX/share/zsh/$ZSH_VERSION/functions
     $HOMEBREW_PREFIX/share/zsh/vendor-completions
+    $HOMEBREW_PREFIX/opt/zsh-completions/share/zsh-completions
 )
 # ------------------------------------------
 # `fpath` is a special array in zsh that specifies directories to search

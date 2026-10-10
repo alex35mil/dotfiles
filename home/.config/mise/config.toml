@@ -1,27 +1,267 @@
 [settings]
 experimental = true
 lockfile = true
+lockfile_mode = "generate"
+lockfile_platforms = ["macos-arm64"]
 disable_backends = ["asdf", "vfox"]
+idiomatic_version_file_enable_tools = ["rust"]
+
+[settings.node]
+corepack = true
 
 [tools]
 1password = "2.34.1"
 bat = "0.26.1"
+"cargo:cargo-machete" = "0.9.2"
+"conda:btop" = "1.4.7"
+"conda:curl" = "8.22.0"
+"conda:pstree" = "2.39"
+"conda:tree" = "2.3.2"
+"conda:wget" = "1.25.0"
 direnv = "2.37.1"
 fd = "10.4.2"
 fzf = "0.73.1"
 gh = "2.96.0"
-go = "1.26.4"
 hostctl = "1.1.4"
 jq = "1.8.2"
 lazygit = "0.63.0"
 mkcert = "1.4.4"
 neovim = "latest"
-node = "24.9.0"
+"npm:@agentclientprotocol/codex-acp" = "2.1.1"
+"npm:@earendil-works/pi-coding-agent" = "0.80.10"
+"npm:@playwright/mcp" = "0.0.83"
+"npm:@upstash/context7-mcp" = "4.1.1"
+"npm:chrome-devtools-mcp" = "1.10.1"
+oxfmt = "0.71.0"
 ripgrep = "15.1.0"
 starship = "1.26.0"
 terraform = "1.15.7"
 tree-sitter = "0.26.10"
 typos = "1.48.0"
-watchexec = "2.5.1"
 yamlfmt = "0.21.0"
 zellij = "0.44.3"
+
+[tools.go]
+version = "1.26.4"
+
+[tools.node]
+version = "24.21.0"
+
+[tools.python]
+version = "3.14.7"
+
+[tools.rust]
+version = "1.99.0"
+profile = "minimal"
+components = ["clippy", "rustfmt", "rust-analyzer", "rust-src"]
+targets = ["wasm32-wasip1"]
+
+## System Settings
+
+[bootstrap.macos.keyboard]
+automatic_capitalization = false
+automatic_spelling_correction = false
+fn_state = true
+
+[bootstrap.macos.finder]
+show_pathbar = true
+show_status_bar = true
+preferred_view_style = "list"
+
+[bootstrap.macos.dock]
+autohide = true
+tilesize = 28
+
+[bootstrap.macos.defaults.NSGlobalDomain]
+AppleLanguages = ["en-RU", "en", "ru-RU"]
+AppleLocale = "en_RU"
+AppleMeasurementUnits = "Centimeters"
+AppleMetricUnits = true
+AppleTemperatureUnit = "Celsius"
+AppleICUForce24HourTime = true
+AppleShowAllExtensions = true
+AppleKeyboardUIMode = 2
+NSAutomaticPeriodSubstitutionEnabled = true
+NSAutomaticQuoteSubstitutionEnabled = true
+NSAutomaticDashSubstitutionEnabled = true
+"com.apple.swipescrolldirection" = false
+
+[bootstrap.macos.defaults."com.apple.AppleMultitouchTrackpad"]
+Clicking = true
+TrackpadThreeFingerDrag = false
+
+# [bootstrap.macos.defaults."com.apple.universalaccess"]
+# reduceMotion = true
+
+[bootstrap.macos.defaults."org.hammerspoon.Hammerspoon"]
+MJConfigFile = "~/.config/hammerspoon/init.lua"
+
+### Keybinds
+
+# Menu focus: ⌃ F2 (ZMK MENU_FOCUS)
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["7"]
+value = { enabled = true, value = { parameters = [65535, 120, 8650752], type = "standard" } }
+
+# Status menu focus: F20 (ZMK TRAY_FOCUS)
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["57"]
+value = { enabled = true, value = { parameters = [65535, 90, 8388608], type = "standard" } }
+
+# Next window focus: ⌘ `
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["27"]
+value = { enabled = true, value = { parameters = [96, 50, 1048576], type = "standard" } }
+
+# Mission Control: ⌘ ⌃ ⌥ M
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["32"]
+value = { enabled = true, value = { parameters = [109, 46, 1835008], type = "standard" } }
+
+# Hammerspoon owns language switching; disable both native input-source shortcuts.
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["60", "enabled"]
+value = false
+
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["61", "enabled"]
+value = false
+
+# Reserve ⌘ ␣ for better stuff
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["64", "enabled"]
+value = false
+
+# Widgets / Notification Center: ⌘ ⌃ ⌥ N
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["163"]
+value = { enabled = true, value = { parameters = [110, 45, 1835008], type = "standard" } }
+
+# Stage Manager toggle: ⌘ ⌃ ⌥ F
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["222"]
+value = { enabled = true, value = { parameters = [102, 3, 1835008], type = "standard" } }
+
+## Repos
+
+[bootstrap.repos]
+"~/Projects/personal/apps/Draftist" = { url = "git@github.com:DraftistHQ/Draftist.git" }
+"~/Projects/personal/libs/steward" = { url = "git@github.com:alex35mil/steward.git" }
+"~/Projects/personal/tooling/delta.nvim" = { url = "git@github.com:alex35mil/delta.nvim.git" }
+"~/Projects/personal/tooling/pi.nvim" = { url = "git@github.com:alex35mil/pi.nvim.git" }
+"~/Projects/personal/configs/dotfiles" = { url = "git@github.com:alex35mil/dotfiles.git" }
+"~/Projects/personal/configs/pi-af" = { url = "git@github.com:alex35mil/pi-af.git" }
+"~/Projects/personal/configs/zmk-config" = { url = "git@github.com:alex35mil/zmk-config.git" }
+"~/Projects/personal/infra/vpn" = { url = "git@github.com:alex35mil/vpn.git" }
+"~/Projects/upstream/neovide" = { url = "git@github.com:neovide/neovide.git" }
+
+## Apps
+
+[bootstrap.packages]
+"brew:git" = "latest"
+"brew:mas" = "latest"
+"brew:pngpaste" = "latest"
+"brew:zsh" = "latest"
+"brew:zsh-autosuggestions" = "latest"
+"brew:zsh-completions" = "latest"
+
+# App Store
+"mas:937984704" = "latest" # Amphetamine
+"mas:1091189122" = "latest" # Bear
+"mas:904280696" = "latest" # Things 3
+"mas:932747118" = "latest" # Shadowrocket
+"mas:1611378436" = "latest" # Pure Paste
+"mas:361304891" = "latest" # Numbers
+"mas:361309726" = "latest" # Pages
+
+# Direct
+"brew-cask:1password" = "latest"
+"brew-cask:adobe-creative-cloud" = "latest"
+"brew-cask:appcleaner" = "latest"
+"brew-cask:arc" = "latest"
+# "brew-cask:arq" = "latest"
+"brew-cask:beekeeper-studio" = "latest"
+"brew-cask:chatgpt" = "latest"
+"brew-cask:cleanshot" = "latest"
+"brew-cask:daisydisk" = "latest"
+"brew-cask:discord" = "latest"
+"brew-cask:docker-desktop" = "latest"
+"brew-cask:figma" = "latest"
+"brew-cask:focusrite-control-2" = "latest"
+"brew-cask:ghostty" = "latest"
+"brew-cask:google-chrome" = "latest"
+"brew-cask:google-drive" = "latest"
+"brew-cask:hammerspoon" = "latest"
+"brew-cask:homerow" = "latest"
+"brew-cask:jump-desktop-connect" = "latest"
+"brew-cask:karabiner-elements" = "latest"
+"brew-cask:keyboard-maestro" = "latest"
+"brew-cask:ledger-wallet" = "latest"
+"brew-cask:linear" = "latest"
+"brew-cask:logi-options+" = "latest"
+"brew-cask:notion" = "latest"
+"brew-cask:obs" = "latest"
+"brew-cask:obsidian" = "latest"
+"brew-cask:raycast" = "latest"
+"brew-cask:readdle-spark" = "latest"
+"brew-cask:rectangle-pro" = "latest"
+"brew-cask:redis-insight" = "latest"
+"brew-cask:slack" = "latest"
+"brew-cask:tailscale-app" = "latest"
+"brew-cask:telegram" = "latest"
+"brew-cask:tourbox-console" = "latest"
+"brew-cask:whatsapp" = "latest"
+"brew-cask:zoom" = "latest"
+
+[bootstrap.packages."macos-app:neohub"]
+version = "0.2.1"
+url = "https://github.com/alex35mil/NeoHub/releases/download/v{{version}}/NeoHub.zip"
+sha256 = "d4dac0473a86ea9af7e055c524ea36c1a35483be52befdd24d2d67908972f6c3"
+artifact = "NeoHub.app"
+os = "macos/arm64"
+
+[bootstrap.packages."macos-app:toggl"]
+version = "1.6.1"
+url = "https://toggl.com/toggl/desktop/downloads/Toggl-{{version}}-arm64.dmg"
+sha256 = "4fe3b1f0e483da03d8ec75684c16cf0a5cf5637075ee998dbe5ec1e658285aac"
+artifact = "Toggl 2.0.app"
+os = "macos/arm64"
+
+# Neovide: building from main
+[tasks."apps:neovide"]
+description = "Build and install Neovide from the existing local source checkout"
+dir = "{{env.HOME}}/Projects/upstream/neovide"
+run = '''
+cargo build --locked --release --target aarch64-apple-darwin
+GENERATE_BUNDLE_APP=true GENERATE_DMG=false ./macos-builder/run aarch64-apple-darwin
+cargo install --locked --path . --target aarch64-apple-darwin
+ditto target/aarch64-apple-darwin/release/bundle/osx/Neovide.app /Applications/Neovide.app
+'''
+
+## Power modes
+
+[tasks."power:normal"]
+description = "Restore macOS power-management defaults"
+run = "sudo /usr/bin/pmset restoredefaults"
+
+[tasks."power:away"]
+description = "Prevent idle system sleep on AC power"
+run = "sudo /usr/bin/pmset -c sleep 0"

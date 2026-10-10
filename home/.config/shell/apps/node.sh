@@ -1,5 +1,3 @@
-export NPM_CONFIG_PREFIX="$HOME/.npm-global"
-
 alias j="npm "
 alias js="npm start"
 alias jt="npm test"
@@ -9,8 +7,6 @@ alias jid="npm install --save-dev --save-exact "
 alias jrm="npm remove --save "
 alias jrmd="npm remove --save-dev "
 alias jo="npm outdated"
-alias jup="ncu --upgrade --interactive --format group"
-alias jupw="ncu --workspaces --upgrade --interactive --format group"
 alias jlg="npm ls -g --depth=0"
 alias jfuck="rm -rf node_modules && npm cache clean && npm install"
 

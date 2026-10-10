@@ -1,0 +1,7 @@
+{
+  "name": "mise-npm-install",
+  "private": true,
+  "dependencies": {
+    "@upstash/context7-mcp": "4.1.1"
+  }
+}

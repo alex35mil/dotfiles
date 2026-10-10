@@ -9,7 +9,7 @@ This is a personal dotfiles repository containing configuration files for a deve
 - **Shell**: Zsh with custom configuration
 - **Editor**: Neovim + Neovide with extensive Lua configuration
 - **Coding agent**: Pi configuration under `home/.config/pi/`
-- **Package management**: Brew + Mise for runtime management
+- **Package management**: Mise for runtime and bootstrap package management
 
 ## Architecture
 
@@ -47,19 +47,6 @@ This is a personal dotfiles repository containing configuration files for a deve
 - Custom keybindings use Unicode symbols mapped in terminal config
 
 ## Development Commands
-
-### Installation
-```bash
-# Install dotfiles, create symlinks, build binaries, copy the keyboard layout,
-# ensure .hushlogin exists, and optionally restart the shell
-script/install.sh
-
-# Build only Zellij statusbar
-cd bin/zellij/statusbar && cargo build --release
-
-# Build only Zellij runner
-cd bin/zellij/runner && cargo install --locked --path .
-```
 
 ### Rust Binaries
 ```bash
@@ -103,8 +90,7 @@ script/font/patch.sh
 ## Important Notes
 
 ### Shell Environment
-- Uses Mise for language runtime management
-- Homebrew for package management
+- Uses Mise for language runtimes and bootstrap packages
 - Custom shortcuts and aliases in `shortcuts.sh`
 - Environment variables in `variables.sh`
 

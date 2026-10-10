@@ -1,5 +1,5 @@
 # === General
-alias dup="PSHELL=zsh $HOME/Dev/dotfiles/script/install.sh"
+alias dup="$HOME/Projects/personal/configs/dotfiles/script/config/setup.sh"
 
 case "$SHELL" in
 */zsh)
@@ -19,8 +19,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-alias dev="cd ~/Dev"
-alias devnull="cd ~/Dev/null"
+alias pj="cd ~/Projects"
 alias icd="cd ~/Library/Mobile\\ Documents/com~apple~CloudDocs"
 alias ico="cd ~/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents"
 

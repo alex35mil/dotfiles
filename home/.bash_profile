@@ -1,5 +1,7 @@
-source ~/.config/shell/init.pre.sh
 source ~/.config/shell/variables.sh
-source ~/.config/shell/init.mise.sh
 
-[[ -f ~/.bashrc ]] && source ~/.bashrc
+if [[ $- == *i* ]]; then
+    [[ -f ~/.bashrc ]] && source ~/.bashrc
+else
+    source ~/.config/shell/init.mise.sh
+fi

@@ -1,0 +1,19 @@
+# Most files are linked individually; frequently changing configuration
+# directories are linked whole so adding/removing files needs no reinstall.
+[dotfiles."~"]
+source = "home"
+mode = "symlink-each"
+exclude = [
+    ".config/karabiner",
+    ".config/nvim",
+    ".config/shell",
+    ".config/zellij",
+    ".config/pi/agent/rules",
+]
+
+[dotfiles]
+"~/.config/karabiner" = { source = "home/.config/karabiner", mode = "symlink" }
+"~/.config/nvim" = { source = "home/.config/nvim", mode = "symlink" }
+"~/.config/shell" = { source = "home/.config/shell", mode = "symlink" }
+"~/.config/zellij" = { source = "home/.config/zellij", mode = "symlink" }
+"~/.config/pi/agent/rules" = { source = "home/.config/pi/agent/rules", mode = "symlink" }

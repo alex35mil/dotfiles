@@ -1,0 +1,7 @@
+{
+  "name": "mise-npm-install",
+  "private": true,
+  "dependencies": {
+    "@agentclientprotocol/codex-acp": "2.1.1"
+  }
+}
