@@ -2,7 +2,7 @@ local fn = {}
 
 NVDelta = {
     main = "delta",
-    dir = "/Users/Alex/Dev/delta.nvim",
+    dir = "/Users/Alex/Projects/personal/tooling/delta.nvim",
     opts = function()
         local pi = require("pi")
         local delta = require("delta")

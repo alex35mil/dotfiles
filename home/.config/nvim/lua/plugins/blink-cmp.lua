@@ -1,6 +1,9 @@
 NVBlinkCmp = {
     "saghen/blink.cmp",
-    build = "cargo build --release",
+    dependencies = { "saghen/blink.lib" },
+    build = function()
+        require("blink.cmp").build():pwait()
+    end,
     event = "InsertEnter",
     opts = {
         sources = {

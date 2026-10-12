@@ -1,6 +1,6 @@
 NVPi = {
     main = "pi",
-    dir = "/Users/Alex/Dev/pi.nvim",
+    dir = "/Users/Alex/Projects/personal/tooling/pi.nvim",
     dependencies = {
         "HakonHarnes/img-clip.nvim",
     },
