@@ -300,7 +300,7 @@ url_api = "https://api.github.com/repos/FiloSottile/mkcert/releases/assets/63709
 [[tools.neovim]]
 version = "0.12.0"
 backend = "aqua:neovim/neovim"
-specifiers = ["latest"]
+specifiers = ["0.12.0"]
 
 [tools.neovim."platforms.macos-arm64"]
 checksum = "sha256:cf0137d6961785c34926f879b7a5b5fa0371ab0d6e2959e390e2f00b46165ce9"
