@@ -1,20 +1,6 @@
 -- To set the XDG location of the config:
 -- defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
 
-App = {
-    ALACRITTY = "Alacritty",
-    ZED = "Zed",
-    NEOVIDE = "Neovide",
-    XCODE = "Xcode",
-    ARC = "Arc",
-    THINGS = "Things",
-    ONEPASSWORD = "1Password",
-    NOTION = "Notion",
-    BEAR = "Bear",
-    OBSIDIAN = "Obsidian",
-    TELEGRAM = "Telegram",
-}
-
 Capslock = {
     label = "󰃸",
 }
@@ -155,7 +141,7 @@ function HUD:style(frame)
         fadeOutDuration = 0,
     }
 
-    local breakpoint = 1500
+    local breakpoint = 1600
     local isSmallScreen = frame.w < breakpoint
 
     style.textSize = isSmallScreen and 20 or 60
