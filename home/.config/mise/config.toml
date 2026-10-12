@@ -79,12 +79,29 @@ AppleMeasurementUnits = "Centimeters"
 AppleMetricUnits = true
 AppleTemperatureUnit = "Celsius"
 AppleICUForce24HourTime = true
+AppleIconAppearanceTheme = "RegularDark"
 AppleShowAllExtensions = true
 AppleKeyboardUIMode = 2
+_HIHideMenuBar = true
+AppleMenuBarVisibleInFullscreen = false
 NSAutomaticPeriodSubstitutionEnabled = true
 NSAutomaticQuoteSubstitutionEnabled = true
 NSAutomaticDashSubstitutionEnabled = true
 "com.apple.swipescrolldirection" = false
+
+[bootstrap.macos.defaults."com.apple.controlcenter"]
+AutoHideMenuBarOption = 0
+
+[bootstrap.macos.defaults."com.apple.WindowManager"]
+GloballyEnabled = true
+AutoHide = true
+AppWindowGroupingBehavior = 1
+HideDesktop = true
+StageManagerHideWidgets = false
+StageFrameMinimumHorizontalInset = 0
+
+[bootstrap.macos.defaults."com.apple.widgets"]
+widgetAppearance = 0 # Always dim desktop widgets
 
 [bootstrap.macos.defaults."com.apple.AppleMultitouchTrackpad"]
 Clicking = true
@@ -96,6 +113,13 @@ TrackpadThreeFingerDrag = false
 [bootstrap.macos.defaults."org.hammerspoon.Hammerspoon"]
 MJConfigFile = "~/.config/hammerspoon/init.lua"
 
+# Disable font smoothing
+[[bootstrap.macos.defaults_entries]]
+domain = "NSGlobalDomain"
+key = "AppleFontSmoothing"
+host = "current"
+value = 0
+
 ### Keybinds
 
 # Menu focus: ⌃ F2 (ZMK MENU_FOCUS)
@@ -105,12 +129,12 @@ key = "AppleSymbolicHotKeys"
 path = ["7"]
 value = { enabled = true, value = { parameters = [65535, 120, 8650752], type = "standard" } }
 
-# Status menu focus: F20 (ZMK TRAY_FOCUS)
+# Status menu focus: ⌃ Fn F8 (Keyboard Maestro maps ZMK TRAY_FOCUS/F20 to this shortcut)
 [[bootstrap.macos.defaults_entries]]
 domain = "com.apple.symbolichotkeys"
 key = "AppleSymbolicHotKeys"
 path = ["57"]
-value = { enabled = true, value = { parameters = [65535, 90, 8388608], type = "standard" } }
+value = { enabled = true, value = { parameters = [65535, 100, 8650752], type = "standard" } }
 
 # Next window focus: ⌘ `
 [[bootstrap.macos.defaults_entries]]
@@ -125,6 +149,13 @@ domain = "com.apple.symbolichotkeys"
 key = "AppleSymbolicHotKeys"
 path = ["32"]
 value = { enabled = true, value = { parameters = [109, 46, 1835008], type = "standard" } }
+
+# Reserve ⌃ ↓ for Neovim; disable App Exposé (Application windows).
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["33", "enabled"]
+value = false
 
 # Hammerspoon owns language switching; disable both native input-source shortcuts.
 [[bootstrap.macos.defaults_entries]]
