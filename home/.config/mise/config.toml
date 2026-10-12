@@ -157,6 +157,34 @@ key = "AppleSymbolicHotKeys"
 path = ["33", "enabled"]
 value = false
 
+# Move left a Space: ⌃ ← (reserved for apps)
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["79", "enabled"]
+value = false
+
+# Move right a Space: ⌃ → (reserved for apps)
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["81", "enabled"]
+value = false
+
+# Move left a Space, slow: ⌃ ⇧ ←
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["80", "enabled"]
+value = false
+
+# Move right a Space, slow: ⌃ ⇧ →
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["82", "enabled"]
+value = false
+
 # Hammerspoon owns language switching; disable both native input-source shortcuts.
 [[bootstrap.macos.defaults_entries]]
 domain = "com.apple.symbolichotkeys"
