@@ -250,6 +250,7 @@ value = { enabled = true, value = { parameters = [102, 3, 1835008], type = "stan
 "mas:1611378436" = "latest" # Pure Paste
 "mas:361304891" = "latest" # Numbers
 "mas:361309726" = "latest" # Pages
+"mas:1291898086" = "latest" # Toggl Track
 
 # Direct
 "brew-cask:1password" = "latest"
@@ -295,13 +296,6 @@ version = "0.2.1"
 url = "https://github.com/alex35mil/NeoHub/releases/download/v{{version}}/NeoHub.zip"
 sha256 = "d4dac0473a86ea9af7e055c524ea36c1a35483be52befdd24d2d67908972f6c3"
 artifact = "NeoHub.app"
-os = "macos/arm64"
-
-[bootstrap.packages."macos-app:toggl"]
-version = "1.6.1"
-url = "https://toggl.com/toggl/desktop/downloads/Toggl-{{version}}-arm64.dmg"
-sha256 = "4fe3b1f0e483da03d8ec75684c16cf0a5cf5637075ee998dbe5ec1e658285aac"
-artifact = "Toggl 2.0.app"
 os = "macos/arm64"
 
 # Neovide: building from main
