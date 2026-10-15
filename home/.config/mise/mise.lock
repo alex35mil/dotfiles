@@ -156,6 +156,111 @@ conda_deps = [
     "libev-4.33-h1a92334_3",
 ]
 
+[[tools."conda:ffmpeg"]]
+version = "9.0.2"
+backend = "conda:ffmpeg"
+specifiers = ["9.0.2"]
+
+[tools."conda:ffmpeg".options]
+channel = "conda-forge"
+
+[tools."conda:ffmpeg"."platforms.macos-arm64"]
+checksum = "sha256:ddce48dce54dd27512ac1071d4bbb64cbed4ba1aa687f78405d6d519ce5832df"
+url = "https://conda.anaconda.org/conda-forge/osx-arm64/ffmpeg-9.0.2-gpl_h70d8be8_104.conda"
+conda_deps = [
+    "libvpx-1.17.0-h484c67d_0",
+    "librsvg-2.62.4-hc8ac265_0",
+    "libopenvino-tensorflow-lite-frontend-2026.4.0-h2ffa9d5_0",
+    "libopenvino-tensorflow-frontend-2026.4.0-h6bbf1e4_0",
+    "libopenvino-pytorch-frontend-2026.4.0-h2ffa9d5_0",
+    "libopenvino-paddle-frontend-2026.4.0-hfd01559_0",
+    "libopenvino-onnx-frontend-2026.4.0-hfd01559_0",
+    "libopenvino-ir-frontend-2026.4.0-he33a331_0",
+    "libopenvino-hetero-plugin-2026.4.0-he33a331_0",
+    "libopenvino-gguf-frontend-2026.4.0-hb2ea1c4_0",
+    "libopenvino-auto-plugin-2026.4.0-hb2ea1c4_0",
+    "libopenvino-auto-batch-plugin-2026.4.0-hb2ea1c4_0",
+    "libopenvino-arm-cpu-plugin-2026.4.0-h3654348_0",
+    "libopenvino-2026.4.0-h3654348_0",
+    "libexpat-2.8.5-h6111c0a_0",
+    "fonts-conda-ecosystem-1-0",
+    "cairo-1.18.6-h580cee5_0",
+    "pugixml-1.15-hd3d436d_0",
+    "aom-3.14.1-pl5321hf79ea98_2",
+    "fontconfig-2.18.3-h81aa574_1",
+    "lame-4.0-hef9b5c2_1",
+    "libass-0.17.5-h0a551c8_1",
+    "libfreetype-2.14.3-hce30654_2",
+    "libfreetype6-2.14.3-h2ed5691_2",
+    "libharfbuzz-14.6.0-hcda0f7c_2",
+    "libpng-1.6.59-hf5e6511_0",
+    "liblzma-5.8.3-h8088a28_1",
+    "libopus-1.6.1-h74c22ad_1",
+    "libplacebo-7.360.1-h8466173_2",
+    "libvorbis-1.3.7-h81086ad_2",
+    "libvulkan-loader-1.4.357.0-hfbe1efa_2",
+    "libwebp-base-1.6.0-h202fb40_1",
+    "libzlib-1.3.2-h8088a28_3",
+    "openh264-2.6.0-hf8510ef_2",
+    "sdl2-2.32.56-h784d473_0",
+    "svt-av1-4.2.0-h484c67d_1",
+    "libabseil-20260526.0-cxx17_h4c27e2a_3",
+    "bzip2-1.0.8-h4e30115_10",
+    "gmp-6.3.0-hf5e55b1_3",
+    "libcxx-23.1.3-h55c6f16_0",
+    "libdav1d7-1.5.4-h74c22ad_4",
+    "libiconv-1.18-he4c29f2_3",
+    "libjxl-0.12.0-hb71b141_4",
+    "libxml2-2.15.4-h550178d_1",
+    "libxml2-16-2.15.4-heb56d2d_1",
+    "openssl-3.6.5-h55eecbc_0",
+    "x264-1!164.3095-pl5321h4df14c8_3",
+    "x265-3.5-h55d2f36_4",
+    "libintl-0.25.1-hae62183_2",
+    "libglib-2.90.0-hccd281b_0",
+    "fonts-conda-forge-1-hc364b38_1",
+    "font-ttf-dejavu-sans-mono-2.37-hab24e00_0",
+    "mpg123-1.33.7-h0e3f465_1",
+    "fribidi-1.0.17-hb001647_0",
+    "graphite2-1.3.15-h784d473_1",
+    "icu-78.3-py310h579977c_2",
+    "libbrotlienc-1.2.0-h2ddc9cb_4",
+    "libbrotlicommon-1.2.0-h1dcdb26_4",
+    "libbrotlidec-1.2.0-h5295a6a_4",
+    "libhwy-1.4.0-hd2bdd19_2",
+    "tbb-2023.1.0-h81c76ee_2",
+    "libprotobuf-7.35.1-h391e224_3",
+    "snappy-1.2.2-h3951085_2",
+    "shaderc-2026.4-hfd4ff19_1",
+    "libdovi-3.4.0-hc336dc4_1",
+    "lcms2-2.19.1-hce41798_3",
+    "gdk-pixbuf-2.44.8-h5867e2c_2",
+    "pango-1.58.2-hc6efcc1_3",
+    "libpango-devel-1.58.2-haa2d88b_3",
+    "libpango-1.58.2-hc2ac4f2_3",
+    "libharfbuzz-devel-14.6.0-hcda0f7c_2",
+    "freetype-2.14.3-hce30654_2",
+    "libogg-1.3.5-h48c0fde_1",
+    "ca-certificates-2026.7.22-hbd8a1cb_0",
+    "sdl3-3.4.18-h4bb5895_0",
+    "libusb-1.0.30-h74c22ad_0",
+    "font-ttf-ubuntu-0.83-h77eed37_3",
+    "font-ttf-inconsolata-3.000-h77eed37_0",
+    "font-ttf-source-code-pro-2.038-h77eed37_0",
+    "pixman-0.46.4-h784d473_3",
+    "libffi-3.7.0-h47dc5ef_1",
+    "pcre2-10.47-he63d830_1",
+    "libhwloc-2.15.0-default_h98d0dc1_1001",
+    "glslang-16.6.0-h1a33c25_0",
+    "spirv-tools-2026.4-hc0b298b_0",
+    "libjpeg-turbo-3.2.0-h84a0fba_1",
+    "libtiff-4.7.2-hf67920b_1",
+    "lerc-4.2.0-h1eee2c3_0",
+    "dbus-1.16.2-hf049998_2",
+    "libdeflate-1.25-he7e0567_1",
+    "zstd-1.5.7-hf451053_7",
+]
+
 [[tools."conda:pstree"]]
 version = "2.39"
 backend = "conda:pstree"
@@ -431,6 +536,17 @@ specifiers = ["0.21.0"]
 checksum = "sha256:4b417ecb94339d57e4c122ecc948c1a00fe328b5853266de9806e652a92858fa"
 url = "https://github.com/google/yamlfmt/releases/download/v0.21.0/yamlfmt_0.21.0_Darwin_arm64.tar.gz"
 url_api = "https://api.github.com/repos/google/yamlfmt/releases/assets/336650209"
+
+[[tools.yt-dlp]]
+version = "2026.08.19"
+backend = "github:yt-dlp/yt-dlp"
+specifiers = ["2026.08.19"]
+
+[tools.yt-dlp."platforms.macos-arm64"]
+checksum = "sha256:07e54b0865303c864006925913bce2604f8ee8cc6f18699bac9c309f9328a6d8"
+url = "https://github.com/yt-dlp/yt-dlp/releases/download/2026.08.19/yt-dlp_macos.zip"
+url_api = "https://api.github.com/repos/yt-dlp/yt-dlp/releases/assets/521488891"
+provenance = "github-attestations"
 
 [[tools.zellij]]
 version = "0.44.3"
