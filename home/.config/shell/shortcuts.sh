@@ -211,14 +211,16 @@ function gen-ssh() {
         return 1
     fi
 
-    ssh-keygen -t ed25519 -f ~/.ssh/$entry -C "$entry"
+    install -d -m 700 "$HOME/.ssh/keys" || return
+    ssh-keygen -t ed25519 -f "$HOME/.ssh/keys/$entry" -C "$entry" || return
     echo >>~/.ssh/config
     echo "Host $entry" >>~/.ssh/config
     echo " HostName $ip" >>~/.ssh/config
     echo " User $user" >>~/.ssh/config
     echo " ForwardAgent yes" >>~/.ssh/config
     echo " PreferredAuthentications publickey" >>~/.ssh/config
-    echo " IdentityFile ~/.ssh/$entry" >>~/.ssh/config
+    echo " Tag dedicated-key" >>~/.ssh/config
+    echo " IdentityFile ~/.ssh/keys/$entry" >>~/.ssh/config
     echo " ServerAliveInterval 60" >>~/.ssh/config
     echo " ServerAliveCountMax 2" >>~/.ssh/config
 
