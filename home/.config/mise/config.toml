@@ -225,6 +225,16 @@ value = { enabled = true, value = { parameters = [102, 3, 1835008], type = "stan
 
 [bootstrap.repos]
 "~/Projects/personal/apps/Draftist" = { url = "git@github.com:DraftistHQ/Draftist.git" }
+"~/Projects/personal/libs/conform" = { url = "git@github.com:shakacode/conform.git" }
+"~/Projects/personal/libs/derive-from-one" = { url = "git@github.com:shakacode/derive-from-one.git" }
+"~/Projects/personal/libs/justerror" = { url = "git@github.com:shakacode/justerror.git" }
+"~/Projects/personal/libs/re-formality" = { url = "git@github.com:shakacode/re-formality.git" }
+"~/Projects/personal/libs/rescript-classnames" = { url = "git@github.com:shakacode/rescript-classnames.git" }
+"~/Projects/personal/libs/rescript-debounce" = { url = "git@github.com:shakacode/rescript-debounce.git" }
+"~/Projects/personal/libs/rescript-dnd" = { url = "git@github.com:shakacode/rescript-dnd.git" }
+"~/Projects/personal/libs/rescript-logger" = { url = "git@github.com:shakacode/rescript-logger.git" }
+"~/Projects/personal/libs/rescript-throttle" = { url = "git@github.com:shakacode/rescript-throttle.git" }
+"~/Projects/personal/libs/serde_derive_rescript" = { url = "git@github.com:alex35mil/serde_derive_rescript.git" }
 "~/Projects/personal/libs/steward" = { url = "git@github.com:alex35mil/steward.git" }
 "~/Projects/personal/tooling/delta.nvim" = { url = "git@github.com:alex35mil/delta.nvim.git" }
 "~/Projects/personal/tooling/pi.nvim" = { url = "git@github.com:alex35mil/pi.nvim.git" }
