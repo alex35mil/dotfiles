@@ -5,6 +5,8 @@
 default.profraw
 neovide_backtraces.log
 SIDENOTES-*.md
+mise.local.toml
+mise.local.lock
 **/.agents/epics/**/*
 **/.agents/gigs/**/*
 **/.agents/*.settings.local.json
