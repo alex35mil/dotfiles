@@ -94,8 +94,32 @@ local function setup_sidepad_win(win)
     vim.wo[win].cursorcolumn = false
 end
 
-local function create_sidepads_for_centered_layout()
+---@param sides ("left"|"right")[]
+---@param width number
+local function create_sidepads(sides, width)
     local tab = get_tab_state()
+    State.creating = true
+
+    local ok, err = xpcall(function()
+        for _, side in ipairs(sides) do
+            -- Split at the tab's edge without leaving the current buffer.
+            local win = vim.api.nvim_open_win(create_sidepad_buf(), false, {
+                split = side,
+                win = -1,
+                width = width,
+            })
+            tab.sidepads[side] = win
+            setup_sidepad_win(win)
+        end
+    end, debug.traceback)
+
+    State.creating = false
+    if not ok then
+        error(err, 0)
+    end
+end
+
+local function create_sidepads_for_centered_layout()
     local content_width = get_content_width()
     local total = vim.o.columns
 
@@ -103,37 +127,12 @@ local function create_sidepads_for_centered_layout()
         return
     end
 
-    State.creating = true
-
     local padding = math.floor((total - content_width) / 2)
-    local original_win = vim.api.nvim_get_current_win()
-
-    -- Create left sidepad at absolute left edge
-    vim.cmd("topleft vnew")
-    local temp_buf = vim.api.nvim_get_current_buf()
-    tab.sidepads.left = vim.api.nvim_get_current_win()
-    vim.api.nvim_win_set_buf(tab.sidepads.left, create_sidepad_buf())
-    vim.api.nvim_buf_delete(temp_buf, { force = true })
-    vim.api.nvim_win_set_width(tab.sidepads.left, padding)
-    setup_sidepad_win(tab.sidepads.left)
-
-    -- Create right sidepad at absolute right edge
-    vim.cmd("botright vnew")
-    temp_buf = vim.api.nvim_get_current_buf()
-    tab.sidepads.right = vim.api.nvim_get_current_win()
-    vim.api.nvim_win_set_buf(tab.sidepads.right, create_sidepad_buf())
-    vim.api.nvim_buf_delete(temp_buf, { force = true })
-    vim.api.nvim_win_set_width(tab.sidepads.right, padding)
-    setup_sidepad_win(tab.sidepads.right)
-
-    vim.api.nvim_set_current_win(original_win)
-
-    State.creating = false
+    create_sidepads({ "left", "right" }, padding)
 end
 
 ---@param companion_width number
 local function create_sidepad_for_companion_layout(companion_width)
-    local tab = get_tab_state()
     local content_width = get_content_width()
     local total = vim.o.columns
 
@@ -142,19 +141,7 @@ local function create_sidepad_for_companion_layout(companion_width)
         return
     end
 
-    State.creating = true
-    local original_win = vim.api.nvim_get_current_win()
-
-    vim.cmd("topleft vnew")
-    local temp_buf = vim.api.nvim_get_current_buf()
-    tab.sidepads.left = vim.api.nvim_get_current_win()
-    vim.api.nvim_win_set_buf(tab.sidepads.left, create_sidepad_buf())
-    vim.api.nvim_buf_delete(temp_buf, { force = true })
-    vim.api.nvim_win_set_width(tab.sidepads.left, padding)
-    setup_sidepad_win(tab.sidepads.left)
-
-    vim.api.nvim_set_current_win(original_win)
-    State.creating = false
+    create_sidepads({ "left" }, padding)
 end
 
 ---@param companion_width number
