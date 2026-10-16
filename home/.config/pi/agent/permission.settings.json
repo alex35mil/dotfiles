@@ -4,6 +4,9 @@
     "deny": [],
     "allow": [
         "read",
+        "grep",
+        "find",
+        "ls",
         "fetch",
         "web_search",
         "bash(ls *)",
@@ -46,7 +49,8 @@
         "bash(git grep *)",
         "bash(git ls-files *)",
         "bash(git branch *)",
-        "bash(git diff *)"
+        "bash(git diff *)",
+        "bash(git rev-parse *)"
     ],
     "keybindings": {
         "autoAcceptEdits": "shift+tab"
