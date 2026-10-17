@@ -225,8 +225,8 @@ value = { enabled = true, value = { parameters = [102, 3, 1835008], type = "stan
 [[bootstrap.macos.defaults_entries]]
 domain = "com.apple.symbolichotkeys"
 key = "AppleSymbolicHotKeys"
-path = ["263", "enabled"]
-value = false
+path = ["263"]
+value = { enabled = false, value = { parameters = [32, 49, 1179648], type = "standard" } }
 
 ## Repos
 

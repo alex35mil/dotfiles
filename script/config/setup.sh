@@ -88,6 +88,9 @@ esac
 echo
 echo "🛠   Applying Mise setup..."
 "$MISE" --cd "$DOTFILES" bootstrap --yes --skip-dirty --only packages,repos,macos-defaults,tools
+# Activate saved input preferences in the running session.
+# Private, undocumented Apple utility; recheck compatibility after macOS upgrades.
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
 echo "🛠   Applying Mise setup... done."
 
 # Copying fixed Unicode Hex Input keyboard layout
