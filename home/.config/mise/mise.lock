@@ -156,6 +156,19 @@ conda_deps = [
     "libev-4.33-h1a92334_3",
 ]
 
+[[tools."conda:exiftool"]]
+version = "13.59"
+backend = "conda:exiftool"
+specifiers = ["13.59"]
+
+[tools."conda:exiftool".options]
+channel = "conda-forge"
+
+[tools."conda:exiftool"."platforms.macos-arm64"]
+checksum = "sha256:123c1cbbd700a963a7b5e38f703b7c9cdbeb1511c5122a3b69b588be6e82997d"
+url = "https://conda.anaconda.org/conda-forge/osx-arm64/exiftool-13.59-pl5321hce30654_0.conda"
+conda_deps = ["perl-5.32.1-10_hb001647_perl5"]
+
 [[tools."conda:ffmpeg"]]
 version = "9.0.2"
 backend = "conda:ffmpeg"
