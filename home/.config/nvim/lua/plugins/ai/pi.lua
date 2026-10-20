@@ -55,6 +55,7 @@ NVPi = {
             },
         },
         statusline = {
+            icons = "monochrome",
             layout = {
                 left = {
                     "context",
