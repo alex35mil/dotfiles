@@ -3,6 +3,7 @@
     "ask": [],
     "deny": [],
     "allow": [
+        "codemode",
         "read",
         "grep",
         "find",

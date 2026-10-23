@@ -4,10 +4,6 @@
 .DS_Store
 default.profraw
 neovide_backtraces.log
-SIDENOTES-*.md
 mise.local.toml
 mise.local.lock
-**/.agents/epics/**/*
-**/.agents/gigs/**/*
-**/.agents/*.settings.local.json
-**/.claude/settings.local.json
+**/.agents/*.local.json

@@ -441,10 +441,10 @@ backend = "npm:@agentclientprotocol/codex-acp"
 specifiers = ["2.1.1"]
 
 [[tools."npm:@earendil-works/pi-coding-agent"]]
-version = "0.80.10"
-aube = { path = "locks/npm-earendil-works-pi-coding-agent/0.80.10", digest = "sha256:e4aac8eea75b69022c57c2e7d2edf90840205b611c5ac6b4741a955fbcd476b9" }
+version = "1.3.0"
+aube = { path = "locks/npm-earendil-works-pi-coding-agent/1.3.0", digest = "sha256:4d3287366f1eeb0dc32f8ab5efd88e9f01051ea3cf002f3ea7a701848307d800" }
 backend = "npm:@earendil-works/pi-coding-agent"
-specifiers = ["0.80.10"]
+specifiers = ["1.3.0"]
 
 [[tools."npm:@playwright/mcp"]]
 version = "0.0.83"

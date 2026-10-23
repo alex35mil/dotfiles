@@ -8,9 +8,7 @@ NVPi = {
         debug = true,
         expand_startup_details = false,
         models = {
-            { match = "gpt-5.6-luna", exact = true },
-            { match = "gpt-5.6-terra", exact = true },
-            { match = "gpt-5.6-sol", exact = true },
+            { match = "gpt-6.1-sol", exact = true },
         },
         layout = {
             side = function()
@@ -61,7 +59,7 @@ NVPi = {
                     "context",
                     "  ",
                     function(state)
-                        if state.extensions["permission"] then
+                        if state.extensions["permissions"] then
                             return "󰐌", "PiStatusLineOn"
                         end
                     end,
@@ -252,7 +250,7 @@ function NVPi.autocmds()
                 pi.scroll_chat_history_to_bottom()
             end)
             keymap("<S-Tab>", event, function()
-                pi.invoke("/permission-toggle-auto-accept")
+                pi.invoke("/permissions-toggle-auto-accept")
             end)
             keymap("<D-S-m>", event, function()
                 pi.select_model()
