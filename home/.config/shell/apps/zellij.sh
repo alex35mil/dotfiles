@@ -1,6 +1,6 @@
 export ZELLIJ_RUNNER_ROOT_DIR="Projects"
 export ZELLIJ_RUNNER_IGNORE_DIRS="node_modules,target"
-export ZELLIJ_RUNNER_MAX_DIRS_DEPTH="3"
+export ZELLIJ_RUNNER_MAX_DIRS_DEPTH="5"
 export ZELLIJ_RUNNER_LAYOUTS_DIR=".config/zellij/layouts"
 export ZELLIJ_RUNNER_BANNERS_DIR=".config/zellij/banners"
 
