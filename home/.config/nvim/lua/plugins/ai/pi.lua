@@ -8,6 +8,7 @@ NVPi = {
         debug = true,
         expand_startup_details = false,
         models = {
+            { match = "claude-opus-5-5", exact = true },
             { match = "gpt-6.1-sol", exact = true },
         },
         layout = {

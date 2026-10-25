@@ -114,6 +114,16 @@ version = "0.9.2"
 backend = "cargo:cargo-machete"
 specifiers = ["0.9.2"]
 
+[[tools.claude-code]]
+version = "2.1.309"
+backend = "aqua:anthropics/claude-code"
+specifiers = ["2.1.309"]
+
+[tools.claude-code."platforms.macos-arm64"]
+checksum = "sha256:09a74f9e0493ebea7e8867565ae04c8989575e6ef1d0a84e3b392c8065284395"
+url = "https://github.com/anthropics/claude-code/releases/download/v2.1.309/claude-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/anthropics/claude-code/releases/assets/667004521"
+
 [[tools."conda:btop"]]
 version = "1.4.7"
 backend = "conda:btop"

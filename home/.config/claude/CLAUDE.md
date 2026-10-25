@@ -1,1 +1,0 @@
-../pi/agent/AGENTS.md
