@@ -13,7 +13,6 @@ export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
 
 export PRETTIERD_DEFAULT_CONFIG="$XDG_CONFIG_HOME/prettier.yml"
 
-DOCKER_BIN_PATH="$HOME/.docker/bin"
 GO_BIN_PATH="$HOME/go/bin"
 MOONBIT_BIN_PATH="$HOME/.moon/bin"
 OBSIDIAN_PATH="/Applications/Obsidian.app/Contents/MacOS"
@@ -22,7 +21,7 @@ if [[ -n "${ZSH_VERSION:-}" ]]; then
     typeset -U path
 fi
 
-export PATH="$HOME/.local/bin:$DOCKER_BIN_PATH:$GO_BIN_PATH:$MOONBIT_BIN_PATH:$OBSIDIAN_PATH:$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
+export PATH="$HOME/.local/bin:$GO_BIN_PATH:$MOONBIT_BIN_PATH:$OBSIDIAN_PATH:$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
 
 # if interactive shell
 if [[ $- == *i* ]]; then
