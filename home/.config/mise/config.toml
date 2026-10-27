@@ -306,6 +306,7 @@ value = { enabled = false, value = { parameters = [32, 49, 1179648], type = "sta
 "brew-cask:readdle-spark" = "latest"
 "brew-cask:rectangle-pro" = "latest"
 "brew-cask:redis-insight" = "latest"
+"brew-cask:sf-symbols" = "latest"
 "brew-cask:slack" = "latest"
 "brew-cask:tailscale-app" = "latest"
 "brew-cask:telegram" = "latest"
