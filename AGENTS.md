@@ -90,7 +90,7 @@ script/font/patch.sh
 ## Important Notes
 
 ### Shell Environment
-- Uses Mise for language runtimes and bootstrap packages
+- Uses Mise for language runtimes and bootstrap packages. All software installation is declared in `home/.config/mise/config.toml`: CLI tools and runtimes in `[tools]`; macOS apps, Homebrew formulae/casks (`brew:`, `brew-cask:`), and App Store apps (`mas:`) in `[bootstrap.packages]`. Homebrew is managed by mise and is not on `PATH`, so add the entry there and install it with `mise bootstrap packages apply <manager:package>` rather than calling `brew` directly. Read the whole config before saying whether something can be installed through mise.
 - Custom shortcuts and aliases in `shortcuts.sh`
 - Environment variables in `variables.sh`
 
