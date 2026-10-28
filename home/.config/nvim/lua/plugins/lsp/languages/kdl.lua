@@ -1,6 +1,6 @@
 NVLKdl = {
     {
-        "romus204/tree-sitter-manager.nvim",
+        "nvim-treesitter/nvim-treesitter",
         opts = {
             ensure_installed = {
                 "kdl",

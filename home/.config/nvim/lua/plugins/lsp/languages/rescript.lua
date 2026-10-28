@@ -9,19 +9,10 @@ NVLReScript = {
     },
 
     {
-        "romus204/tree-sitter-manager.nvim",
+        "nvim-treesitter/nvim-treesitter",
         opts = {
             ensure_installed = {
                 "rescript",
-            },
-            languages = {
-                rescript = {
-                    install_info = {
-                        revision = "990214a83f25801dfe0226bd7e92bb71bba1970f",
-                        url = "https://github.com/rescript-lang/tree-sitter-rescript",
-                        use_repo_queries = true,
-                    },
-                },
             },
         },
     },
