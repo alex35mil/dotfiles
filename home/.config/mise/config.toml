@@ -256,6 +256,7 @@ value = { enabled = false, value = { parameters = [32, 49, 1179648], type = "sta
 ## Apps
 
 [bootstrap.packages]
+"brew:container" = "latest"
 "brew:git" = "latest"
 "brew:mas" = "latest"
 "brew:pngpaste" = "latest"
@@ -320,6 +321,15 @@ url = "https://github.com/alex35mil/NeoHub/releases/download/v{{version}}/NeoHub
 sha256 = "d4dac0473a86ea9af7e055c524ea36c1a35483be52befdd24d2d67908972f6c3"
 artifact = "NeoHub.app"
 os = "macos/arm64"
+
+# Apple container: `container system start` registers its services only for the current login session,
+# so re-run it at each login. It is idempotent and exits once the services are up.
+[bootstrap.macos.launchd.agents.container]
+program = "/opt/homebrew/opt/container/bin/container"
+args = ["system", "start", "--enable-kernel-install"]
+run_at_load = true
+stdout_path = "~/Library/Logs/container-start.log"
+stderr_path = "~/Library/Logs/container-start.log"
 
 # Neovide: building from main
 [tasks."apps:neovide"]
