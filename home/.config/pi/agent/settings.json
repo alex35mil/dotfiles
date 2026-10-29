@@ -1,5 +1,4 @@
 {
-  "lastChangelogVersion": "1.3.0",
   "defaultProvider": "claude-code",
   "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "high",
