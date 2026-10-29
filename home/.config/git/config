@@ -35,6 +35,13 @@
 [rerere]
     enabled = true
 
+# pi writes machine-local state into its settings.json; strip it so the dotfiles copy stays shareable.
+# Applied via the dotfiles repo's .gitattributes. https://github.com/earendil-works/pi/issues/10187
+[filter "pi-settings"]
+    clean = "jq 'del(.deviceId, .lastChangelogVersion)'"
+    # Fail instead of committing unfiltered content if jq is missing
+    required = true
+
 [alias]
     # Delete all merged branches except for the currently checked out one.
     dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
