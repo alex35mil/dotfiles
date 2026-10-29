@@ -17,24 +17,22 @@ function NVBuffers.keymaps()
         mode = { "n", "i", "v", "t", "c" },
     })
 
-    -- TODO: Revisit these keymaps
-
-    -- K.map({
-    --     "<Leader>bas",
-    --     "Delete all buffers except current & unsaved",
-    --     function()
-    --         fn.delete_all_bufs_except_current({ incl_unsaved = false })
-    --     end,
-    --     mode = "n",
-    -- })
-    -- K.map({
-    --     "<Leader>baf",
-    --     "Delete all buffers except current",
-    --     function()
-    --         fn.delete_all_bufs_except_current({ incl_unsaved = true })
-    --     end,
-    --     mode = "n",
-    -- })
+    K.map({
+        "<M-x>",
+        "Delete other buffers, keeping unsaved ones",
+        function()
+            fn.delete_other_bufs("keep")
+        end,
+        mode = "n",
+    })
+    K.map({
+        "<S-M-x>",
+        "Delete other buffers, discarding unsaved changes",
+        function()
+            fn.delete_other_bufs("discard")
+        end,
+        mode = "n",
+    })
 end
 
 function NVBuffers.autocmds()
@@ -176,7 +174,7 @@ function fn.delete_buf()
 
     if next_buf ~= nil then
         if file_exists then
-            vim.cmd("silent! write")
+            vim.cmd("silent! update")
         end
         vim.api.nvim_set_current_buf(next_buf)
         if not is_opened_elsewhere then
@@ -185,7 +183,7 @@ function fn.delete_buf()
     else
         if #tab_windows > 1 then
             if file_exists then
-                vim.cmd("silent! write")
+                vim.cmd("silent! update")
             end
             vim.cmd.close()
             if not is_opened_elsewhere then
@@ -197,11 +195,11 @@ function fn.delete_buf()
             if empty_buf == 0 then
                 log.error("Failed to create empty buffer")
                 if file_exists then
-                    vim.cmd("silent! write")
+                    vim.cmd("silent! update")
                 end
             else
                 if file_exists then
-                    vim.cmd("silent! write")
+                    vim.cmd("silent! update")
                 end
                 vim.api.nvim_set_current_buf(empty_buf)
             end
@@ -242,48 +240,58 @@ function fn.delete_buf_and_close_win()
     end
 end
 
-function fn.delete_all_bufs_except_current(opts)
-    local incl_unsaved = opts.incl_unsaved
+---@alias UnsavedBufs "keep" | "discard"
 
-    local current_buf = vim.api.nvim_get_current_buf()
-    local bufs = vim.fn.getbufinfo({ buflisted = 1 })
+--- Deletes every listed buffer that isn't visible in any window, in any tab.
+--- Never changes the layout: visible buffers (including the current one) are left alone.
+--- Terminal buffers are kept too, since deleting one kills its running job.
+---@param unsaved UnsavedBufs
+function fn.delete_other_bufs(unsaved)
+    vim.cmd("silent! wall")
 
-    vim.cmd("silent! wa")
+    local visible = {}
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        visible[vim.api.nvim_win_get_buf(win)] = true
+    end
 
-    for _, buf in ipairs(bufs) do
-        if buf.bufnr ~= current_buf then
-            local unnamed_modified = buf.name == "" and buf.changed == 1
+    local deleted = 0
+    local kept_unsaved = {}
 
-            if not unnamed_modified then
-                vim.cmd.bdelete(buf.bufnr)
-            elseif unnamed_modified and incl_unsaved then
-                vim.cmd("bdelete! " .. buf.bufnr)
+    for _, buf in ipairs(NVBuffers.get_listed_bufs()) do
+        local bufid = buf.bufnr
+        if not visible[bufid] and vim.bo[bufid].buftype ~= "terminal" then
+            -- Still modified after :wall means unnamed, or its write failed
+            if not vim.bo[bufid].modified then
+                deleted = deleted + fn.wipe_buf(bufid, { force = false })
+            elseif unsaved == "discard" then
+                deleted = deleted + fn.wipe_buf(bufid, { force = true })
+            elseif unsaved == "keep" then
+                kept_unsaved[bufid] = true
+            else
+                error("Unexpected unsaved buffers mode: " .. tostring(unsaved))
             end
         end
     end
 
-    local current_win = vim.api.nvim_get_current_win()
-    local windows_with_listed_buffers = NVWindows.get_tab_windows_with_listed_buffers()
-
-    if windows_with_listed_buffers == nil then
-        print("No windows with listed buffers")
-        return
+    local kept = vim.tbl_count(kept_unsaved)
+    local msg = "Deleted " .. deleted .. " buffer(s)"
+    if kept > 0 then
+        msg = msg .. ", kept " .. kept .. " unsaved"
     end
+    vim.notify(msg, vim.log.levels.INFO)
+end
 
-    for _, win in ipairs(windows_with_listed_buffers) do
-        local buf = vim.api.nvim_win_get_buf(win)
-        local buf_name = vim.api.nvim_buf_get_name(buf)
-
-        if win ~= current_win and buf_name ~= "" then
-            vim.api.nvim_win_close(win, false)
-        end
+--- Wipes the buffer like `<D-w>` does, so it disappears from pickers instead of lingering unlisted.
+---@param bufid BufID
+---@param opts {force: boolean}
+---@return 0 | 1 Number of deleted buffers
+function fn.wipe_buf(bufid, opts)
+    local ok, err = pcall(vim.api.nvim_buf_delete, bufid, { force = opts.force })
+    if not ok then
+        log.error("Failed to delete buffer " .. bufid .. ": " .. tostring(err))
+        return 0
     end
-
-    if incl_unsaved then
-        print("Closed all buffers except current")
-    else
-        print("Closed all buffers except current and unsaved")
-    end
+    return 1
 end
 
 ---@param tabs TabID[]
