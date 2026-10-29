@@ -3,11 +3,12 @@
     "ask": [],
     "deny": [
         "read(*mise.local.toml)",
+        "read(.env)",
+        "read(.env.*)",
         "read(*/.env)",
         "read(*/.env.*)",
         "read(*/auth.json)",
         "bash(* *mise.local.toml*)",
-        "bash(* *.env*)",
         "bash(* *auth.json*)",
         "bash(grep *)",
         "bash(egrep *)",
