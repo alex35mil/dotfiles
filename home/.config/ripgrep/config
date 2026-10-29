@@ -1,0 +1,4 @@
+--glob=!mise.local.toml
+--glob=!.env
+--glob=!.env.*
+--glob=!auth.json

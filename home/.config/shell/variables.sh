@@ -11,6 +11,7 @@ export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 export PI_CODING_AGENT_DIR="$XDG_CONFIG_HOME/pi/agent"
 export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
 
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
 export PRETTIERD_DEFAULT_CONFIG="$XDG_CONFIG_HOME/prettier.yml"
 
 GO_BIN_PATH="$HOME/go/bin"
