@@ -299,6 +299,7 @@ value = { enabled = false, value = { parameters = [32, 49, 1179648], type = "sta
 "brew-cask:keyboard-maestro" = "latest"
 "brew-cask:ledger-wallet" = "latest"
 "brew-cask:linear" = "latest"
+"brew-cask:little-snitch" = "latest"
 "brew-cask:logi-options+" = "latest"
 "brew-cask:notion" = "latest"
 "brew-cask:obs" = "latest"
