@@ -8,7 +8,6 @@ NVBlinkCmp = {
     opts = {
         sources = {
             default = {
-                "supermaven",
                 "lsp",
                 "path",
                 "snippets",
@@ -35,11 +34,6 @@ NVBlinkCmp = {
         keymap = {
             ["<CR>"] = { "accept", "fallback" },
             ["<M-Esc>"] = { "show_documentation", "hide_documentation", "fallback" },
-            ["<D-c>"] = {
-                function(cmp)
-                    cmp.show({ providers = { "supermaven" } })
-                end,
-            },
             ["<C-c>"] = {
                 function(cmp)
                     cmp.show()

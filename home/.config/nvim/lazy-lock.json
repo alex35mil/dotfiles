@@ -1,6 +1,5 @@
 {
   "SchemaStore.nvim": { "branch": "main", "commit": "b463a5e79f84fd9ca22dd47f41754387d8fe7af4" },
-  "blink-cmp-supermaven": { "branch": "main", "commit": "e96f634e350b7218f121b709d9fd8db5496ff9ca" },
   "blink.cmp": { "branch": "main", "commit": "8219b58f1c11a2fb1644d3c7116c509fa8348ec0" },
   "blink.lib": { "branch": "main", "commit": "fd9a48ebbe6ec30d5dfcc5b42c243941ccdca1aa" },
   "claudecode.nvim": { "branch": "main", "commit": "2390c6e45c4789072c293ac69de051d169668b29" },
@@ -43,7 +42,6 @@
   "render-markdown.nvim": { "branch": "main", "commit": "245956d67572c137df375dbf256e96bdb07e0937" },
   "rustaceanvim": { "branch": "main", "commit": "88575b98bb9937fb9983ddec5e532b67e75ce677" },
   "snacks.nvim": { "branch": "main", "commit": "882c996cf28183f4d63640de0b4c02ec886d01f2" },
-  "supermaven-nvim": { "branch": "main", "commit": "07d20fce48a5629686aefb0a7cd4b25e33947d50" },
   "tiny-code-action.nvim": { "branch": "main", "commit": "91a9c32228e9a7761d241023d9ebb9d11d8fb10d" },
   "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },
   "trouble.nvim": { "branch": "main", "commit": "bd67efe408d4816e25e8491cc5ad4088e708a69a" },
