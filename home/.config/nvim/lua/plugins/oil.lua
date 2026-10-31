@@ -227,47 +227,6 @@ function fn.send_to_pi(close)
     end
 end
 
----@param close boolean
-function fn.add_to_claude(close)
-    local oil = require("oil")
-    local dir = oil.get_current_dir()
-    if not dir then
-        return
-    end
-
-    local mode = vim.fn.mode()
-    local paths = {}
-
-    if mode == "V" or mode == "v" then
-        local start_line = vim.fn.line("v")
-        local end_line = vim.fn.line(".")
-        if start_line > end_line then
-            start_line, end_line = end_line, start_line
-        end
-        for lnum = start_line, end_line do
-            local entry = oil.get_entry_on_line(0, lnum)
-            if entry then
-                table.insert(paths, dir .. entry.name)
-            end
-        end
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
-    else
-        local entry = oil.get_cursor_entry()
-        if entry then
-            table.insert(paths, dir .. entry.name)
-        end
-    end
-
-    for _, path in ipairs(paths) do
-        NVClaudeCode.add_file(path)
-    end
-
-    if close then
-        oil.close()
-        NVClaudeCode.focus()
-    end
-end
-
 ---@param fmt "absolute" | "relative" | "filename" | "filestem"
 function fn.copy_path(fmt)
     local oil = require("oil")

@@ -16,7 +16,6 @@ require("editor.terminal")
 require("editor.windows")
 
 require("editor.features.agents")
-require("editor.features.claudecode-provider")
 require("editor.features.focus-mode")
 require("editor.features.git-commit")
 require("editor.features.layout-manager")

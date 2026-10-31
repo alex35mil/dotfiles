@@ -118,7 +118,7 @@ end
 ---@param tabid TabID
 ---@return boolean
 function NVTabs.is_temporary(tabid)
-    return NVFocusMode.is_focus_tab(tabid) or NVDiffview.is_diffview_tab(tabid) or NVClaudeCode.is_diff_tab(tabid)
+    return NVFocusMode.is_focus_tab(tabid) or NVDiffview.is_diffview_tab(tabid)
 end
 
 ---@return TabID[]

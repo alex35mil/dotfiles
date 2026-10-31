@@ -94,7 +94,6 @@ function fn.delete_buf()
         -- should go last
         or NVSZoom.ensure_deactivated()
         or NVFocusMode.ensure_deactivated_if_active()
-        or NVClaudeCode.hide_active()
     then
         return
     end
