@@ -444,6 +444,17 @@ specifiers = ["24.21.0"]
 checksum = "sha256:bed7eea5325e1108f32ce5228ddd6a5f0f08a499ee42aa7442aea583702f6057"
 url = "https://nodejs.org/dist/v24.21.0/node-v24.21.0-darwin-arm64.tar.gz"
 
+[[tools.nono]]
+version = "0.80.0"
+backend = "github:nolabs-ai/nono"
+specifiers = ["0.80.0"]
+
+[tools.nono."platforms.macos-arm64"]
+checksum = "sha256:ae824167b3d90531b830429ba92b7781379b1c2d79f9b11fdd88b0fd267e4e32"
+url = "https://github.com/nolabs-ai/nono/releases/download/v0.80.0/nono-v0.80.0-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/nolabs-ai/nono/releases/assets/636393745"
+provenance = "github-attestations"
+
 [[tools."npm:@agentclientprotocol/codex-acp"]]
 version = "2.1.1"
 aube = { path = "locks/npm-agentclientprotocol-codex-acp/2.1.1", digest = "sha256:d58066fa8a141f879694c4d6a50e193bdc32fc08a7d34baeb15f5d42c6d27a16" }

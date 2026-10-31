@@ -5,6 +5,7 @@ source = "home"
 mode = "symlink-each"
 exclude = [
     ".config/karabiner",
+    ".config/nono/profiles",
     ".config/nvim",
     ".config/shell",
     ".config/zellij",
@@ -13,6 +14,7 @@ exclude = [
 
 [dotfiles]
 "~/.config/karabiner" = { source = "home/.config/karabiner", mode = "symlink" }
+"~/.config/nono/profiles" = { source = "home/.config/nono/profiles", mode = "symlink" }
 "~/.config/nvim" = { source = "home/.config/nvim", mode = "symlink" }
 "~/.config/shell" = { source = "home/.config/shell", mode = "symlink" }
 "~/.config/zellij" = { source = "home/.config/zellij", mode = "symlink" }

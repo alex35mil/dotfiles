@@ -28,16 +28,16 @@ function fn.create_tab()
 end
 
 function fn.close_tab()
-    local info = NVGit.get_worktree_info()
+    local agent = NVAgents.get(vim.fn.getcwd(-1, 0))
 
-    if not info then
+    if not agent then
         if NVDialogs.confirm("Close tab?", "&Yes\n&No", 2) == 1 then
             vim.cmd("tabclose")
         end
         return
     end
 
-    NVGitWorktrees.close_tab(info)
+    NVAgents.close_tab(agent)
 end
 
 function NVTabs.render_label(label)
@@ -55,8 +55,16 @@ function NVTabs.set_label_if_empty(label)
     end
 end
 
+--- Labels file for the session of the first tab's cwd. One file per session,
+--- so Neovim instances in different repos never overwrite each other's labels.
+---@return string
+function fn.labels_file()
+    local cwd = vim.fn.getcwd(-1, 1)
+    local dir = vim.fs.joinpath(vim.fn.stdpath("state"), "tab-labels")
+    return vim.fs.joinpath(dir, (cwd:gsub("[\\/:]+", "%%")) .. ".json")
+end
+
 function NVTabs.save_labels()
-    local cwd = vim.fn.getcwd(-1, 0) -- first tab cwd
     local tab_labels = {}
 
     for i, tab in ipairs(vim.api.nvim_list_tabpages()) do
@@ -66,17 +74,26 @@ function NVTabs.save_labels()
         end
     end
 
-    local all = vim.g.NVTABS or {}
-    all[cwd] = not vim.tbl_isempty(tab_labels) and tab_labels or nil
-    vim.g.NVTABS = all
+    local file = fn.labels_file()
+    if vim.tbl_isempty(tab_labels) then
+        vim.fn.delete(file)
+        return
+    end
+    vim.fn.mkdir(vim.fs.dirname(file), "p")
+    if vim.fn.writefile({ vim.json.encode(tab_labels) }, file) ~= 0 then
+        log.error("Couldn't save tab labels to " .. file)
+    end
 end
 
 function NVTabs.restore_labels()
-    local cwd = vim.fn.getcwd(-1, 0) -- first tab cwd
-    local all = vim.g.NVTABS or {}
-    local tab_labels = all[cwd]
+    local file = fn.labels_file()
+    if vim.fn.filereadable(file) == 0 then
+        return
+    end
 
-    if not tab_labels then
+    local ok, tab_labels = pcall(vim.json.decode, table.concat(vim.fn.readfile(file), "\n"))
+    if not ok or type(tab_labels) ~= "table" then
+        log.warn("Couldn't read tab labels from " .. file)
         return
     end
 

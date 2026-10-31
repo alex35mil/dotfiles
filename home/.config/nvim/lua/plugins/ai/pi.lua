@@ -11,6 +11,21 @@ NVPi = {
             { match = "claude-opus-5-5", exact = true },
             { match = "gpt-6.1-sol", exact = true },
         },
+        process = {
+            descriptor = {
+                path = ".agents/pi.nvim.json",
+                trusted_paths = { "~/Projects/personal/" },
+            },
+            stop = {
+                on_failure = function(report)
+                    vim.system({
+                        "osascript",
+                        "-e",
+                        ('display notification %q with title "pi cleanup failed"'):format(report.workspace),
+                    }):wait()
+                end,
+            },
+        },
         layout = {
             side = function()
                 return {
@@ -60,8 +75,16 @@ NVPi = {
                     "context",
                     "  ",
                     function(state)
-                        if state.extensions["permissions"] then
+                        local status = state.extensions["permissions"]
+                        if not status then
+                            return
+                        end
+                        if status:find("Auto%-accept") then
                             return "󰐌", "PiStatusLineOn"
+                        elseif status:find("Review") then
+                            return "󰓔", "PiStatusLineWarn"
+                        else
+                            log.warn("Unexpected π permissions status")
                         end
                     end,
                     "  ",

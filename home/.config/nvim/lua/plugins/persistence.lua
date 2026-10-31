@@ -28,7 +28,7 @@ function NVPersistence.autocmds()
             NVTabs.save_labels()
 
             -- Switch to first tab so persistence saves under
-            -- main repo's cwd in case we're on a worktree tab
+            -- main repo's cwd in case we're on an agent tab
             vim.cmd("tabfirst")
         end,
     })
