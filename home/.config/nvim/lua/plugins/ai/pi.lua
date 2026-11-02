@@ -1,3 +1,35 @@
+local fn = {}
+
+---@alias LimitThresholds { warning: number, error: number }
+
+--- How a rate-limit window's usage is planned. The window is split into equal periods, and
+--- usage is colored by how far it runs ahead of the plan through the current period.
+---@class LimitPlan
+---@field window_seconds integer Window length; it starts `window_seconds` before the reset.
+---@field budgets number[] Planned share, in percent, for each period; adds up to 100.
+---@field error_margin number Percentage points above the plan where warning turns into error.
+---@field final LimitThresholds The last period's plan is 100%, so it colors by what's left instead.
+---@field reset_format string `os.date` format of the reset time, shown while colored.
+
+---@type LimitPlan
+local FIVE_HOUR_PLAN = {
+    window_seconds = 5 * 60 * 60,
+    budgets = { 20, 20, 20, 20, 20 },
+    error_margin = 10,
+    final = { warning = 95, error = 98 },
+    reset_format = "%H:%M",
+}
+
+--- The week resets on Monday, so periods run Monday to Sunday: less work planned on the weekend.
+---@type LimitPlan
+local WEEKLY_PLAN = {
+    window_seconds = 7 * 24 * 60 * 60,
+    budgets = { 16, 16, 16, 16, 16, 10, 10 },
+    error_margin = 5,
+    final = { warning = 95, error = 98 },
+    reset_format = "%a %H:%M",
+}
+
 NVPi = {
     main = "pi",
     dir = "/Users/Alex/Projects/personal/tooling/pi.nvim",
@@ -72,8 +104,33 @@ NVPi = {
             icons = "monochrome",
             layout = {
                 left = {
+                    function(state)
+                        local runtime = state.extensions["status:runtime"]
+                        if runtime == "sandbox" then
+                            return "󰷛", "PiStatusLineIcon"
+                        elseif runtime == "host" then
+                            return "󰍹", "PiStatusLineWarning"
+                        end
+                    end,
+                    "   ",
                     "context",
-                    "  ",
+                    "   ",
+                    function(state)
+                        local limit = fn.limit(state, "h5")
+                        if limit then
+                            local hl = fn.limit_hl(limit, FIVE_HOUR_PLAN)
+                            return fn.limit_text("", limit, FIVE_HOUR_PLAN, hl), hl
+                        end
+                    end,
+                    "   ",
+                    function(state)
+                        local limit = fn.limit(state, "wk")
+                        if limit then
+                            local hl = fn.limit_hl(limit, WEEKLY_PLAN)
+                            return fn.limit_text("󱨴", limit, WEEKLY_PLAN, hl), hl
+                        end
+                    end,
+                    "   ",
                     function(state)
                         local status = state.extensions["permissions"]
                         if not status then
@@ -82,12 +139,12 @@ NVPi = {
                         if status:find("Auto%-accept") then
                             return "󰐌", "PiStatusLineOn"
                         elseif status:find("Review") then
-                            return "󰓔", "PiStatusLineWarn"
+                            return "󰓔", "PiStatusLineWarning"
                         else
                             log.warn("Unexpected π permissions status")
                         end
                     end,
-                    "  ",
+                    "   ",
                     "attention",
                 },
                 right = { "model", "   ", "thinking" },
@@ -323,6 +380,77 @@ end
 ---@param opts? { draft: string? } `draft` pre-fills the prompt; it's never sent.
 function NVPi.open_float(opts)
     require("pi").show({ layout = "float", draft = opts and opts.draft })
+end
+
+---@class Limit
+---@field used number Usage in percent.
+---@field resets_at integer? Unix seconds; absent when the provider didn't report it.
+
+--- One window from the `status:limits` extension entry. Absent until the provider reports it,
+--- and once its reset has passed, since the usage then belongs to the previous window.
+---@param state pi.StatusLineState
+---@param window "h5"|"wk"
+---@return Limit?
+function fn.limit(state, window)
+    local raw = state.extensions["status:limits"]
+    if not raw then
+        return nil
+    end
+    local limits = vim.json.decode(raw)
+    local used, resets_at = limits[window], limits[window .. "Reset"]
+    if not used or (resets_at and resets_at <= os.time()) then
+        return nil
+    end
+    return { used = used, resets_at = resets_at }
+end
+
+--- Highlight for a window's usage against its plan. Without a reset time the current period
+--- is unknown, so it stays uncolored.
+---@param limit Limit
+---@param plan LimitPlan
+---@return string?
+function fn.limit_hl(limit, plan)
+    if not limit.resets_at then
+        return nil
+    end
+    local elapsed = os.time() - (limit.resets_at - plan.window_seconds)
+    local period_seconds = plan.window_seconds / #plan.budgets
+    local period = math.max(1, math.min(#plan.budgets, math.floor(elapsed / period_seconds) + 1))
+    if period == #plan.budgets then
+        return fn.threshold_hl(limit.used, plan.final)
+    end
+    local planned = 0
+    for i = 1, period do
+        planned = planned + plan.budgets[i]
+    end
+    return fn.threshold_hl(limit.used - planned, { warning = 0, error = plan.error_margin }, true)
+end
+
+--- `warning` is inclusive unless `strict` (above the plan means strictly over it); `error` is inclusive.
+---@param value number
+---@param thresholds LimitThresholds
+---@param strict boolean?
+---@return string?
+function fn.threshold_hl(value, thresholds, strict)
+    if value >= thresholds.error then
+        return "PiStatusLineError"
+    elseif value > thresholds.warning or (not strict and value == thresholds.warning) then
+        return "PiStatusLineWarning"
+    end
+end
+
+--- Usage text, with the reset time while the usage is colored.
+---@param icon string
+---@param limit Limit
+---@param plan LimitPlan
+---@param hl string?
+---@return string
+function fn.limit_text(icon, limit, plan, hl)
+    local text = ("%s %d%%"):format(icon, limit.used)
+    if hl and limit.resets_at then
+        text = text .. " 󱄋 " .. os.date(plan.reset_format, limit.resets_at)
+    end
+    return text
 end
 
 return { NVPi }

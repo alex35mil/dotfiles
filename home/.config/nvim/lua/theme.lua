@@ -413,7 +413,6 @@ function NVTheme.apply()
             PiToolStatusSuccess { fg = color.faded_text },
             PiToolStatusSuccessIcon { fg = color.green },
             PiStatusLineOn { fg = color.green },
-            PiStatusLineWarn { fg = color.yellow },
             PiDiffWinbar { bg = color.bar_bg },
             PiDiffWinbarCurrent { fg = color.bar_text, bold = true },
             PiDiffWinbarProposed { fg = color.bar_text, bold = true },
