@@ -320,8 +320,9 @@ function NVPi.autocmds()
     })
 end
 
-function NVPi.open_float()
-    vim.cmd("Pi layout=float")
+---@param opts? { draft: string? } `draft` pre-fills the prompt; it's never sent.
+function NVPi.open_float(opts)
+    require("pi").show({ layout = "float", draft = opts and opts.draft })
 end
 
 return { NVPi }

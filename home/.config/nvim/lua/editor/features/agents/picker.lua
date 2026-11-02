@@ -68,7 +68,7 @@ function M.pick()
                 local filter = picker.input:get()
                 if filter and filter ~= "" then
                     picker:close()
-                    create.create(filter)
+                    create.create({ kind = "named", name = filter })
                 end
             end
         end,

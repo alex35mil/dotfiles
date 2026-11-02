@@ -3,14 +3,14 @@
 -- through a workspace descriptor.
 
 local lookup = require("editor.features.agents.lookup")
-local create = require("editor.features.agents.create")
+local new = require("editor.features.agents.new")
 local picker = require("editor.features.agents.picker")
 local close = require("editor.features.agents.close")
 
 NVAgents = {}
 
 function NVAgents.keymaps()
-    K.map({ "<C-S-n>", "Create agent", create.prompt, mode = { "n", "i", "v", "t" } })
+    K.map({ "<C-S-n>", "New agent (from Todo or by name)", new.pick, mode = { "n", "i", "v", "t" } })
     K.map({ "<D-g>w", "Show agent picker", picker.pick, mode = { "n", "i", "v", "t" } })
 end
 

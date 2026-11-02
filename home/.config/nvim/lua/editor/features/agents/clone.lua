@@ -69,7 +69,7 @@ function M.clonefile(src, dst)
     end
 end
 
----@param agent {source: string, path: string, label: string}
+---@param agent {source: string, path: string, label: string, issue: string?}
 function M.setup(agent)
     local shared = M.link_shared(agent.source, agent.path)
 
@@ -79,6 +79,9 @@ function M.setup(agent)
 
     util.git_ok(agent.path, { "config", "--local", "agent.source", agent.source }, "git config failed")
     util.git_ok(agent.path, { "config", "--local", "agent.label", agent.label }, "git config failed")
+    if agent.issue then
+        util.git_ok(agent.path, { "config", "--local", "agent.issue", agent.issue }, "git config failed")
+    end
 end
 
 --- Link the clone's `SHARED_PATH` to the source's, when the source has it.

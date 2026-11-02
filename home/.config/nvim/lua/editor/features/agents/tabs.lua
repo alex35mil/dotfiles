@@ -5,6 +5,20 @@ local M = {}
 M.ICON = "󰙅"
 M.SOURCE_ICON = NVTabs.editor_icon
 
+-- Longest agent label shown in a tab; the picker shows it in full.
+local TAB_LABEL_MAX = 40
+
+--- `label` cut at a word to fit a tab.
+---@param label string
+---@return string
+function M.tab_label(label)
+    if vim.fn.strchars(label) <= TAB_LABEL_MAX then
+        return label
+    end
+    local cut = vim.fn.strcharpart(label, 0, TAB_LABEL_MAX):gsub("%s+%S*$", "")
+    return cut .. "…"
+end
+
 --- The current buffer's path relative to `root`, when it's inside it.
 ---@param root string
 ---@return string?
@@ -18,10 +32,11 @@ end
 
 ---@param agent {path: string, label: string}
 ---@param relative_file string?
-function M.open(agent, relative_file)
+---@param draft string? Text to pre-fill in the Pi prompt.
+function M.open(agent, relative_file, draft)
     vim.cmd("tabnew")
     vim.cmd("tcd " .. vim.fn.fnameescape(agent.path))
-    NVTabs.set_label({ icon = M.ICON, name = agent.label })
+    NVTabs.set_label({ icon = M.ICON, name = M.tab_label(agent.label) })
 
     if relative_file then
         local file = vim.fs.joinpath(agent.path, relative_file)
@@ -31,7 +46,7 @@ function M.open(agent, relative_file)
     end
 
     log.info("Agent: " .. agent.path)
-    NVPi.open_float()
+    NVPi.open_float({ draft = draft })
 end
 
 ---@param path string
