@@ -8,6 +8,7 @@
         "ls",
         "fetch",
         "web_search",
+        "git_read",
         "bash(ls *)",
         "bash(find * -name *)",
         "bash(find * -type *)",
