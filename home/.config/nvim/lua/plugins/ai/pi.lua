@@ -162,22 +162,17 @@ NVPi = {
                 exit = { NVKeymaps.close, modes = { "n", "i", "i" } },
             },
         },
-        on_widget = function(key, lines)
-            if key == "rules:load" then
-                local content = {}
-                for _, line in ipairs(lines) do
-                    content[#content + 1] = {
+        entry_renderers = {
+            ["rules:load"] = function(entry)
+                local lines = {}
+                for _, line in ipairs(entry.data.paths) do
+                    lines[#lines + 1] = {
                         { "   ╰  rule: " .. line, "Comment" },
                     }
                 end
-                return {
-                    target = "history",
-                    block = "custom",
-                    content = content,
-                }
-            end
-            return nil
-        end,
+                return lines
+            end,
+        },
     },
     keys = function()
         return {
