@@ -4,16 +4,51 @@
         "description": "Pi on the host, confined to one agent checkout, sharing the host Pi and Claude Code setup"
     },
     "extends": "mise-dev",
-    "groups": { "include": ["git_config"] },
+    "groups": {
+        "include": [
+            "git_config"
+        ]
+    },
     "workdir": { "access": "readwrite" },
     "filesystem": {
-        "allow": ["$HOME/.config/pi/agent", "$HOME/.config/claude", "$HOME/Library/Keychains"],
-        "read": ["$HOME/.config", "$HOME/Projects/personal/configs/dotfiles/home", "$HOME/Projects/personal/configs/pi-af"],
-        "deny": ["$HOME/Projects/personal/configs/dotfiles/home/.config/shell/secrets.sh"],
-        "read_file": ["$HOME/.ssh/config", "$HOME/.ssh/known_hosts"],
-        "unix_socket": ["$SSH_AUTH_SOCK"],
-        "bypass_protection": ["$HOME/Library/Keychains", "$HOME/.ssh/config", "$HOME/.ssh/known_hosts"]
+        "allow": [
+            "$HOME/.config/pi/agent",
+            "$HOME/.config/claude",
+            "$HOME/Library/Keychains"
+        ],
+        "read": [
+            "$HOME/Projects/personal/configs/dotfiles/home",
+            "$HOME/Projects/personal/configs/pi-af",
+            "$HOME/.config",
+            "$HOME/.local/state/mise/trusted-configs",
+            "$HOME/.cargo/bin",
+            "$HOME/.rustup/toolchains"
+        ],
+        "deny": [
+            "$HOME/Projects/personal/configs/dotfiles/home/.config/shell/secrets.sh"
+        ],
+        "read_file": [
+            "$HOME/.ssh/config",
+            "$HOME/.ssh/known_hosts"
+        ],
+        "unix_socket": [
+            "$SSH_AUTH_SOCK"
+        ],
+        "bypass_protection": [
+            "$HOME/Library/Keychains",
+            "$HOME/.ssh/config",
+            "$HOME/.ssh/known_hosts"
+        ]
     },
-    "network": { "network_profile": null, "open_port": [0] },
-    "environment": { "set_vars": { "PI_AF_RUNTIME": "sandbox" } }
+    "network": {
+        "network_profile": null,
+        "open_port": [
+            0
+        ]
+    },
+    "environment": {
+        "set_vars": {
+            "PI_AF_RUNTIME": "sandbox"
+        }
+    }
 }
