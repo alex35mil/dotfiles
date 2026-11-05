@@ -47,7 +47,7 @@ function M.load(tracker)
     local project = config.project
     local status = config.fields.status
     local repository = config.repository.owner .. "/" .. config.repository.repo
-    local epic_label = vim.tbl_get(config, "labels", "kind", "epic")
+    local epic_label = vim.tbl_get(config, "labels", "groups", "kind", "values", "epic", "name")
 
     local nodes = queue.paginate(function(cursor)
         local response = queue.post(tracker, URL, "Bearer {{VAR}}", items_query(project.ownerType), {

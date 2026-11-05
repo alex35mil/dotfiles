@@ -80,6 +80,13 @@ function M.create(request)
             error(err, 0)
         end
 
+        if request.kind == "queued" and request.item.kind.kind == "unclassified" then
+            log.warn(
+                ("Couldn't classify %s as an Epic, Task, or Gig: the tracker has no Epic Kind label configured. Opening Pi without a prompt."):format(
+                    queue.agent_label(request.item)
+                )
+            )
+        end
         tabs.open({ path = path, label = plan.label }, relative_file, plan.draft)
     end)
 end

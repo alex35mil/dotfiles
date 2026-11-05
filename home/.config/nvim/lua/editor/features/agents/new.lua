@@ -47,7 +47,7 @@ local function kind_text(item)
     elseif kind.kind == "pr" then
         return "Pull request"
     elseif kind.kind == "unclassified" then
-        return "Unclassified (no Kind labels configured)"
+        return "Unclassified (no Epic Kind label configured)"
     end
     error("unknown queue kind: " .. vim.inspect(kind))
 end

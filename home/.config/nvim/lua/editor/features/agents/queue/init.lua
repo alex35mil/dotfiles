@@ -12,7 +12,7 @@
 ---| { kind: "task", epic: QueueParent }
 ---| { kind: "gig" }
 ---| { kind: "pr" } An incoming pull request.
----| { kind: "unclassified" } Top-level work with no Kind labels configured to tell an Epic from a Gig.
+---| { kind: "unclassified" } Top-level work in a tracker with no Epic Kind label configured to tell an Epic from a Gig.
 
 ---@class QueueItem
 ---@field id string Stable identity, stored as the agent's `agent.issue`.
