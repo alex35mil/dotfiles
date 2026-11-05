@@ -3,6 +3,7 @@
 .idea
 .DS_Store
 default.profraw
+.nvim.lua
 neovide_backtraces.log
 mise.local.toml
 mise.local.lock

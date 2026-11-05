@@ -115,6 +115,8 @@ vim.opt.undolevels = 10000
 
 vim.opt.confirm = true
 
+vim.o.exrc = true
+
 vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 
 vim.g.markdown_recommended_style = 0
