@@ -128,7 +128,10 @@ function M.post(tracker, url, authorization, query, variables)
         "--write-out",
         "\n%{http_code}",
         url,
-    }, { stdin = vim.json.encode({ query = query, variables = variables }) })
+    }, {
+        -- An empty Lua table encodes as a JSON array; GraphQL needs an object.
+        stdin = vim.json.encode({ query = query, variables = next(variables) and variables or vim.empty_dict() }),
+    })
 
     if result.code ~= 0 then
         local stderr = vim.trim(result.stderr or "")
@@ -157,14 +160,24 @@ function M.data(url, response)
     local body = response.body
     local errors = type(body) == "table" and body.errors or nil
     if response.status ~= 200 or type(errors) == "table" or type(body) ~= "table" or type(body.data) ~= "table" then
-        local messages = {}
-        for _, err in ipairs(type(errors) == "table" and errors or {}) do
-            table.insert(messages, type(err) == "table" and tostring(err.message) or tostring(err))
-        end
-        local detail = #messages > 0 and table.concat(messages, "\n") or vim.inspect(body):sub(1, 300)
-        util.refuse(("Tracker request to %s failed (HTTP %d):\n%s"):format(url, response.status, detail))
+        util.refuse(
+            ("Tracker request to %s failed (HTTP %d):\n%s"):format(url, response.status, M.error_detail(response))
+        )
     end
     return body.data
+end
+
+--- The error messages of a failed GraphQL response, or its raw body.
+---@param response QueueResponse
+---@return string
+function M.error_detail(response)
+    local body = response.body
+    local errors = type(body) == "table" and body.errors or nil
+    local messages = {}
+    for _, err in ipairs(type(errors) == "table" and errors or {}) do
+        table.insert(messages, type(err) == "table" and tostring(err.message) or tostring(err))
+    end
+    return #messages > 0 and table.concat(messages, "\n") or vim.inspect(body):sub(1, 300)
 end
 
 --- Fetch every page of a connection. `page` receives the cursor and returns

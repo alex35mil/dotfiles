@@ -88,14 +88,17 @@ end
 ---@param tracker QueueTracker
 ---@return string
 function M.authorization(tracker)
+    local failures = {}
     for _, authorization in ipairs({ "{{VAR}}", "Bearer {{VAR}}" }) do
         local response = queue.post(tracker, URL, authorization, "query { viewer { id } }", {})
         if response.status ~= 401 and response.status ~= 400 then
             queue.data(URL, response)
             return authorization
         end
+        local form = authorization:gsub("{{VAR}}", tracker.credential)
+        table.insert(failures, ("%s (HTTP %d): %s"):format(form, response.status, queue.error_detail(response)))
     end
-    util.refuse("Linear rejected " .. tracker.credential)
+    util.refuse("Linear rejected " .. tracker.credential .. ":\n" .. table.concat(failures, "\n"))
     error("unreachable")
 end
 
