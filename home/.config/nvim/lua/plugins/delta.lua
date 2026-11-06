@@ -155,8 +155,10 @@ function NVDelta.cleanup()
 end
 
 --- Opening a file from a Delta picker starts a review flow. If Pi is in the
---- floating layout, switch to the side layout first so the reviewed
---- code is on the left in a spotlight window and the agent chat is on the right.
+--- floating layout, move it to the side layout so the reviewed code is on
+--- the left in a spotlight window and the agent chat is on the right.
+--- The file opens first: the picker closes as soon as it loses focus, so the
+--- layout switch comes after and keeps focus on the opened file.
 ---@param action delta.picker.ActionHandler
 ---@return delta.picker.ActionHandler
 function fn.open(action)
@@ -164,12 +166,11 @@ function fn.open(action)
 
     ---@param ctx delta.picker.ActionContext
     return function(ctx)
-        if pi.is_visible() and pi.layout() == "float" then
-            pi.toggle_layout(function(_)
-                action(ctx)
-            end)
-        else
-            action(ctx)
+        local opens_file = ctx.node ~= nil and not ctx.node.is_dir
+        local float = pi.is_visible() and pi.layout() == "float"
+        action(ctx)
+        if opens_file and float then
+            pi.set_layout("side", { focus = false })
         end
     end
 end
