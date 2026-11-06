@@ -61,6 +61,10 @@ NVDelta = {
                     scroll_preview_down = { NVKeymaps.scroll_ctx.down, picker.actions.scroll_preview(5) },
                     send_to_pi = { "<C-p>", fn.send_to_pi({ close = false }) },
                     send_to_pi_and_close = { "<D-p>", fn.send_to_pi({ close = true }) },
+                    copy_absolute_path = { { "<D-S-a>", modes = "n" }, fn.copy_path("absolute") },
+                    copy_relative_path = { { "<D-S-r>", modes = "n" }, fn.copy_path("relative") },
+                    copy_filename = { { "<D-S-n>", modes = "n" }, fn.copy_path("filename") },
+                    copy_filestem = { { "<D-S-s>", modes = "n" }, fn.copy_path("filestem") },
                 },
             },
             spotlight = {
@@ -195,6 +199,47 @@ function fn.send_to_pi(opts)
         if opts.close then
             ctx.close()
             pi.focus_chat_prompt()
+        end
+    end
+end
+
+--- Absolute path of a picker node. Directory nodes carry only a
+--- repository-relative path, so their root comes from a file inside them.
+---@param node delta.Node
+---@return string?
+function fn.absolute_path(node)
+    if node.file then
+        return node.file.absolute_path
+    end
+    for _, child in ipairs(node.children or {}) do
+        local child_path = fn.absolute_path(child)
+        if child_path then
+            local root = child_path:sub(1, #child_path - #child.path - 1)
+            return root .. "/" .. node.path
+        end
+    end
+    return nil
+end
+
+---@param fmt "absolute" | "relative" | "filename" | "filestem"
+---@return delta.picker.ActionHandler
+function fn.copy_path(fmt)
+    ---@param ctx delta.picker.ActionContext
+    return function(ctx)
+        local node = ctx.node
+        if not node then
+            log.warn("Nothing to copy: no file or directory under the cursor")
+            return
+        end
+        local path = fn.absolute_path(node)
+        if not path then
+            log.error("Can't resolve the absolute path of " .. node.path)
+            return
+        end
+        local result = NVFS.format(path, fmt)
+        if result then
+            NVClipboard.yank(result)
+            vim.notify("Copied: " .. result)
         end
     end
 end
