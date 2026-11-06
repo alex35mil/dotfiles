@@ -13,6 +13,7 @@ NVDelta = {
         return {
             picker = {
                 initial_mode = "n",
+                remember_collapsed = true,
                 layout = {
                     height = { 0.5, 0.9 },
                     main = {
@@ -50,6 +51,8 @@ NVDelta = {
                     jump_bottom = { { "<M-Down>", { "G", modes = "n" } }, picker.actions.move_to_bottom },
                     scroll_left = { "<D-S-Left>", picker.actions.scroll_horizontal(-8) },
                     scroll_right = { "<D-S-Right>", picker.actions.scroll_horizontal(8) },
+                    collapse_all = { { "<D-Left>", modes = "n" }, picker.actions.collapse_all },
+                    expand_all = { { "<D-Right>", modes = "n" }, picker.actions.expand_all },
                     close = { { NVKeymaps.close, { "<Esc>", modes = "n" } }, picker.actions.close },
                     toggle_stage = { "<C-CR>", picker.actions.toggle_stage },
                     reset = { "<D-x>", picker.actions.reset },
@@ -108,7 +111,7 @@ NVDelta = {
                     },
                 },
                 actions = {
-                    open_file_diff = { "<D-g>d", diff.actions.open_file_diff },
+                    open_file_diff = { "<D-d>", diff.actions.open_file_diff },
                     open_hunk_diff = { "<D-Space>", diff.actions.open_hunk_diff },
                 },
             },
