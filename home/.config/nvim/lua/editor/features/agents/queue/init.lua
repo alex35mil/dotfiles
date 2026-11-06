@@ -198,6 +198,32 @@ function M.paginate(page)
     error("unreachable")
 end
 
+---@class QueueOrder
+---@field rank integer? Priority rank, 1 the highest; nil when unset.
+---@field position number The tracker's manual order.
+
+--- Sort `items` the way tracker views order by priority: by rank, unset
+--- last, then by manual position.
+---@generic T
+---@param items T[]
+---@param order fun(item: T): QueueOrder
+function M.sort_by_priority(items, order)
+    local keys = {}
+    for _, item in ipairs(items) do
+        keys[item] = order(item)
+    end
+    table.sort(items, function(a, b)
+        local ka, kb = keys[a], keys[b]
+        if ka.rank ~= kb.rank then
+            if ka.rank == nil or kb.rank == nil then
+                return kb.rank == nil
+            end
+            return ka.rank < kb.rank
+        end
+        return ka.position < kb.position
+    end)
+end
+
 --- The workflow command that starts `item`, naming it by reference and
 --- title, with a trailing space so comments can follow; nil when its kind
 --- is unknown.

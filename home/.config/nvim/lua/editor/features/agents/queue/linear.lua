@@ -1,5 +1,6 @@
 -- Todo work of a Linear team: Projects (Epics) first, then issues (Tasks in
--- a Project, Gigs without one), each in Linear's manual order.
+-- a Project, Gigs without one), each ordered by priority, then by Linear's
+-- manual order within a priority.
 
 local util = require("editor.features.agents.util")
 local queue = require("editor.features.agents.queue")
@@ -15,7 +16,7 @@ query($team: String!, $status: String!, $cursor: String) {
     accessibleTeams: { some: { name: { eq: $team } } }
   }) {
     pageInfo { hasNextPage endCursor }
-    nodes { id name url sortOrder }
+    nodes { id name url priority prioritySortOrder }
   }
 }]]
 
@@ -26,7 +27,7 @@ query($team: String!, $state: String!, $cursor: String) {
     state: { name: { eq: $state } }
   }) {
     pageInfo { hasNextPage endCursor }
-    nodes { id identifier title url sortOrder project { id name url } }
+    nodes { id identifier title url priority prioritySortOrder project { id name url } }
   }
 }]]
 
@@ -45,8 +46,9 @@ function M.load(tracker)
                 queue.post(tracker, URL, authorization, query, vim.tbl_extend("force", variables, { cursor = cursor }))
             return queue.data(URL, response)[field]
         end)
-        table.sort(nodes, function(a, b)
-            return a.sortOrder < b.sortOrder
+        queue.sort_by_priority(nodes, function(node)
+            -- 0 is "No priority"; 1 (Urgent) to 4 (Low) are ranks already.
+            return { rank = node.priority ~= 0 and node.priority or nil, position = node.prioritySortOrder }
         end)
         return nodes
     end

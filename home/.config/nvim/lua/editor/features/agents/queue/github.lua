@@ -1,4 +1,5 @@
--- Todo items of a GitHub Project, in the Project's order.
+-- Todo items of a GitHub Project, ordered by the configured Priority, then
+-- by the Project's manual order.
 
 local util = require("editor.features.agents.util")
 local queue = require("editor.features.agents.queue")
@@ -11,7 +12,7 @@ local URL = "https://api.github.com/graphql"
 ---@return string
 local function items_query(owner_type)
     return ([[
-query($owner: String!, $number: Int!, $status: String!, $cursor: String) {
+query($owner: String!, $number: Int!, $status: String!, $priority: String!, $cursor: String) {
   owner: %s(login: $owner) {
     projectV2(number: $number) {
       items(first: 100, after: $cursor, orderBy: {field: POSITION, direction: ASC}) {
@@ -19,6 +20,12 @@ query($owner: String!, $number: Int!, $status: String!, $cursor: String) {
         nodes {
           status: fieldValueByName(name: $status) {
             ... on ProjectV2ItemFieldSingleSelectValue { name }
+          }
+          priority: fieldValueByName(name: $priority) {
+            ... on ProjectV2ItemFieldSingleSelectValue { name }
+            ... on ProjectV2ItemIssueFieldValue {
+              issueFieldValue { ... on IssueFieldSingleSelectValue { name } }
+            }
           }
           content {
             __typename
@@ -46,6 +53,7 @@ function M.load(tracker)
     local config = tracker.config
     local project = config.project
     local status = config.fields.status
+    local priority = config.fields.priority
     local repository = config.repository.owner .. "/" .. config.repository.repo
     local epic_label = vim.tbl_get(config, "labels", "groups", "kind", "values", "epic", "name")
 
@@ -54,6 +62,7 @@ function M.load(tracker)
             owner = project.owner,
             number = project.number,
             status = status.field,
+            priority = priority.field,
             cursor = cursor,
         })
         local items = vim.tbl_get(queue.data(URL, response), "owner", "projectV2", "items")
@@ -63,8 +72,9 @@ function M.load(tracker)
         return items
     end)
 
-    local result = {}
-    for _, node in ipairs(nodes) do
+    local result = {} ---@type QueueItem[]
+    local orders = {} ---@type table<QueueItem, QueueOrder>
+    for position, node in ipairs(nodes) do
         local content = node.content
         if
             vim.tbl_get(node, "status", "name") == status.values.todo
@@ -85,9 +95,32 @@ function M.load(tracker)
                 kind = content.__typename == "PullRequest" and { kind = "pr" } or M.kind(content, epic_label),
             }
             table.insert(result, item)
+            orders[item] = { rank = M.priority_rank(node.priority, priority.values), position = position }
         end
     end
+    queue.sort_by_priority(result, function(item)
+        return orders[item]
+    end)
     return result
+end
+
+--- Rank of an item's Priority value in the configured order, whether the
+--- field is the Project's own or an issue field shown on the Project; nil
+--- when unset or not a configured value.
+---@param value table? The item's `priority` field value.
+---@param values string[] Configured Priority options, highest first.
+---@return integer?
+function M.priority_rank(value, values)
+    if type(value) ~= "table" then
+        return nil
+    end
+    local name = value.name or vim.tbl_get(value, "issueFieldValue", "name")
+    for rank, option in ipairs(values) do
+        if option == name then
+            return rank
+        end
+    end
+    return nil
 end
 
 ---@param issue table
