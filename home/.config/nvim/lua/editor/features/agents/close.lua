@@ -176,8 +176,8 @@ function M.stop_grace_ms(path)
     return configured
 end
 
---- The agent's Pi launch: `nono run --profile <NONO_PROFILE>` processes (as
---- written by the descriptor) whose working directory is in the agent, and
+--- The agent's Pi launch: `nono run` processes (as written by the
+--- descriptor, see `clone.is_pi_launch`) whose working directory is in the agent, and
 --- every process under them.
 ---@param real string
 ---@return string[] processes as "<pid> <command>"
@@ -192,12 +192,7 @@ function M.pi_processes(real)
             table.insert(children[ppid], pid)
             -- Only the nono executable itself, not a shell whose command text mentions it.
             local program, args = command:match("^(%S+)(.*)$")
-            local padded = args .. " "
-            if
-                vim.fs.basename(program) == "nono"
-                and vim.startswith(padded, " run ")
-                and padded:find(" --profile " .. clone.NONO_PROFILE .. " ", 1, true)
-            then
+            if vim.fs.basename(program) == "nono" and clone.is_pi_launch(args) then
                 table.insert(launches, pid)
             end
         end

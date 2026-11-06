@@ -17,6 +17,10 @@ pcall(
 local CLONE_NOFOLLOW = 0x0001
 
 M.NONO_PROFILE = "pi-agent"
+-- Optional nono profile fragment in the source checkout, layered over
+-- `NONO_PROFILE` for that project's agents. Read from the source, never the
+-- agent, so a sandboxed agent can't widen its own sandbox.
+M.NONO_OVERLAY = ".nono.json"
 -- The only path an agent shares with its source, as a symlink.
 M.SHARED_PATH = ".project/.local"
 
@@ -74,7 +78,7 @@ function M.setup(agent)
     local shared = M.link_shared(agent.source, agent.path)
 
     local descriptor = M.descriptor_path()
-    M.write_descriptor(vim.fs.joinpath(agent.path, descriptor), shared)
+    M.write_descriptor(vim.fs.joinpath(agent.path, descriptor), M.nono_overlay(agent.source), shared)
     M.exclude(agent.path, "/" .. descriptor)
 
     util.git_ok(agent.path, { "config", "--local", "agent.source", agent.source }, "git config failed")
@@ -117,10 +121,53 @@ function M.descriptor_path()
     return descriptor
 end
 
+--- The source's `NONO_OVERLAY`, when it has one.
+---@param source string
+---@return string? overlay Absolute path.
+function M.nono_overlay(source)
+    local overlay = vim.fs.joinpath(source, M.NONO_OVERLAY)
+    local stat = vim.uv.fs_stat(overlay)
+    if not stat then
+        return nil
+    end
+    if stat.type ~= "file" then
+        util.refuse("Can't use " .. overlay .. ": not a regular file")
+    end
+    return overlay
+end
+
+--- nono arguments selecting the sandbox profile: `NONO_PROFILE`, extended by
+--- `overlay` when given.
+---@param overlay string?
+---@return string[]
+function M.nono_profile_args(overlay)
+    if overlay then
+        -- `--extends` takes a profile name only, so the overlay is the profile.
+        return { "--profile", overlay, "--extends", M.NONO_PROFILE }
+    end
+    return { "--profile", M.NONO_PROFILE }
+end
+
+--- Whether `nono run` arguments (as one string, without the program) are an
+--- agent's Pi launch, as written by `write_descriptor`.
+---@param args string
+---@return boolean
+function M.is_pi_launch(args)
+    local padded = " " .. vim.trim(args) .. " "
+    return vim.startswith(padded, " run ")
+        and (
+            padded:find(" --profile " .. M.NONO_PROFILE .. " ", 1, true) ~= nil
+            or padded:find(" --extends " .. M.NONO_PROFILE .. " ", 1, true) ~= nil
+        )
+end
+
 ---@param file string
+---@param overlay string? Source `NONO_OVERLAY` to layer over `NONO_PROFILE`.
 ---@param shared string? Source directory the agent links to.
-function M.write_descriptor(file, shared)
-    local cmd = { "mise", "exec", "--", "nono", "run", "-s", "--profile", M.NONO_PROFILE, "--allow-cwd" }
+function M.write_descriptor(file, overlay, shared)
+    local cmd = { "mise", "exec", "--", "nono", "run", "-s" }
+    vim.list_extend(cmd, M.nono_profile_args(overlay))
+    table.insert(cmd, "--allow-cwd")
     if shared then
         vim.list_extend(cmd, { "--allow", shared })
     end

@@ -20,5 +20,12 @@
         "bash(rg * --pre=*)",
         "bash(rg --pre *)",
         "bash(rg --pre=*)"
+    ],
+    "ask": [
+        "edit(.nono.json)",
+        "edit(*/.nono.json)",
+        "write(.nono.json)",
+        "write(*/.nono.json)",
+        "bash(* *.nono.json*)"
     ]
 }
