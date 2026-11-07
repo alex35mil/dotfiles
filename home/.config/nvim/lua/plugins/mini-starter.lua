@@ -1,3 +1,7 @@
+-- The welcome screen's buffer while it exists. Wiping it (it has
+-- `bufhidden=wipe`) is what switches the session to work mode.
+local starter_bufid
+
 NVMiniStarter = {
     "echasnovski/mini.starter",
     opts = function()
@@ -48,8 +52,6 @@ NVMiniStarter = {
         local starter = require("mini.starter")
 
         starter.setup(opts)
-
-        local starter_bufid
 
         vim.api.nvim_create_autocmd("User", {
             pattern = "MiniStarterOpened",
@@ -112,6 +114,20 @@ end
 
 function NVMiniStarter.refresh()
     require("mini.starter").refresh()
+end
+
+--- Leave the welcome screen for work mode, as opening a file from it does:
+--- its window gets an empty buffer, which wipes the starter buffer and makes
+--- that tab the main one. No-op once it's gone.
+function NVMiniStarter.dismiss()
+    if not (starter_bufid and vim.api.nvim_buf_is_valid(starter_bufid)) then
+        return
+    end
+    for _, win in ipairs(vim.fn.win_findbuf(starter_bufid)) do
+        vim.api.nvim_win_call(win, function()
+            vim.cmd("enew")
+        end)
+    end
 end
 
 return { NVMiniStarter }

@@ -34,7 +34,7 @@ end
 ---@param relative_file string?
 ---@param draft string? Text to pre-fill in the Pi prompt.
 function M.open(agent, relative_file, draft)
-    vim.cmd("tabnew")
+    NVTabs.new()
     vim.cmd("tcd " .. vim.fn.fnameescape(agent.path))
     NVTabs.set_label({ icon = M.ICON, name = M.tab_label(agent.label) })
 
@@ -80,7 +80,7 @@ function M.switch_to_source(source, relative_file)
         vim.api.nvim_set_current_tabpage(tab)
         return
     end
-    vim.cmd("tabnew")
+    NVTabs.new()
     vim.cmd("tcd " .. vim.fn.fnameescape(source))
     NVTabs.set_label({ icon = M.SOURCE_ICON, name = vim.fs.basename(source) })
     if relative_file then

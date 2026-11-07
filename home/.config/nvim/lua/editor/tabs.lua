@@ -20,7 +20,7 @@ end
 function fn.create_tab()
     Snacks.input({ prompt = "Tab name: " }, function(name)
         if name and name ~= "" then
-            vim.cmd("tabnew")
+            NVTabs.new()
             NVTabs.set_label({ icon = NVTabs.editor_icon, name = name })
             NVPi.open_float()
         end
@@ -38,6 +38,13 @@ function fn.close_tab()
     end
 
     NVAgents.close_tab(agent)
+end
+
+--- Open a new tab. Leaves the welcome screen first, so its tab becomes the
+--- main one instead of staying behind the new tab.
+function NVTabs.new()
+    NVMiniStarter.dismiss()
+    vim.cmd("tabnew")
 end
 
 function NVTabs.render_label(label)
