@@ -1,6 +1,6 @@
--- The source's queued (Todo) tracker work, read from the tracker configured
--- in `<source>/.project/integrations.json`, with the credential the tracker's
--- MCP registration names.
+-- The source's queued (Todo and Backlog) tracker work, read from the tracker
+-- configured in `<source>/.project/integrations.json`, with the credential
+-- the tracker's MCP registration names.
 
 ---@class QueueParent
 ---@field mention string How a workflow command names the Epic.
@@ -14,8 +14,13 @@
 ---| { kind: "pr" } An incoming pull request.
 ---| { kind: "unclassified" } Top-level work in a tracker with no Epic Kind label configured to tell an Epic from a Gig.
 
+---@alias QueueStatus
+---| "todo"
+---| "backlog"
+
 ---@class QueueItem
 ---@field id string Stable identity, stored as the agent's `agent.issue`.
+---@field status QueueStatus
 ---@field mention string How a workflow command names the item.
 ---@field marker string? Short reference, when the tracker has one (`#12`, `ENG-42`).
 ---@field title string
@@ -33,7 +38,8 @@ local M = {}
 
 local INTEGRATIONS = ".project/integrations.json"
 
---- Todo items in tracker order. Refuses when the tracker can't be read.
+--- Queued items, Todo before Backlog, each in tracker priority order.
+--- Refuses when the tracker can't be read.
 ---@param source string
 ---@return QueueItem[]
 function M.load(source)
@@ -196,6 +202,39 @@ function M.paginate(page)
     end
     util.refuse("Tracker returned too many pages")
     error("unreachable")
+end
+
+-- Queue statuses, in the order the picker lists them.
+---@type QueueStatus[]
+M.STATUSES = { "todo", "backlog" }
+
+--- The queue status a tracker status name maps to; nil for any other status.
+---@param name string?
+---@param values {todo: string, backlog: string} Configured status names.
+---@return QueueStatus?
+function M.status_of(name, values)
+    for _, status in ipairs(M.STATUSES) do
+        if name == values[status] then
+            return status
+        end
+    end
+    return nil
+end
+
+--- `items` regrouped by status in `STATUSES` order, keeping their order
+--- within a status.
+---@param items QueueItem[]
+---@return QueueItem[]
+function M.group_by_status(items)
+    local result = {}
+    for _, status in ipairs(M.STATUSES) do
+        for _, item in ipairs(items) do
+            if item.status == status then
+                table.insert(result, item)
+            end
+        end
+    end
+    return result
 end
 
 ---@class QueueOrder

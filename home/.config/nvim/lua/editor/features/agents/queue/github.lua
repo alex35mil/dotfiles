@@ -1,5 +1,5 @@
--- Todo items of a GitHub Project, ordered by the configured Priority, then
--- by the Project's manual order.
+-- Todo and Backlog items of a GitHub Project: Todo first, each ordered by the
+-- configured Priority, then by the Project's manual order.
 
 local util = require("editor.features.agents.util")
 local queue = require("editor.features.agents.queue")
@@ -76,8 +76,9 @@ function M.load(tracker)
     local orders = {} ---@type table<QueueItem, QueueOrder>
     for position, node in ipairs(nodes) do
         local content = node.content
+        local queue_status = queue.status_of(vim.tbl_get(node, "status", "name"), status.values)
         if
-            vim.tbl_get(node, "status", "name") == status.values.todo
+            queue_status
             and type(content) == "table"
             and content.number
             and content.state == "OPEN"
@@ -88,6 +89,7 @@ function M.load(tracker)
             ---@type QueueItem
             local item = {
                 id = "github:" .. repository .. marker,
+                status = queue_status,
                 mention = marker,
                 marker = marker,
                 title = content.title,
@@ -101,7 +103,7 @@ function M.load(tracker)
     queue.sort_by_priority(result, function(item)
         return orders[item]
     end)
-    return result
+    return queue.group_by_status(result)
 end
 
 --- Rank of an item's Priority value in the configured order, whether the

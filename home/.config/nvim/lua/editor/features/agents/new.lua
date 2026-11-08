@@ -1,6 +1,6 @@
--- The new-agent picker: adopt a queued Todo item, or create a plain agent
--- named by what's typed, always offered as the last row. Todos load when it
--- opens.
+-- The new-agent picker: adopt a queued Todo or Backlog item, or create a
+-- plain agent named by what's typed, always offered as the last row. Queued
+-- items load when it opens, Todo above Backlog.
 
 ---@alias NewAgentEntry
 ---| { kind: "queued", item: QueueItem }
@@ -8,7 +8,7 @@
 
 ---@alias NewAgentQueueState
 ---| { kind: "loading" }
----| { kind: "loaded", count: integer }
+---| { kind: "loaded", todo: integer, backlog: integer }
 ---| { kind: "unavailable", message: string }
 
 local util = require("editor.features.agents.util")
@@ -21,15 +21,40 @@ local M = {}
 local ISSUE_ICON = ""
 local PR_ICON = ""
 
+-- Picker groups, top to bottom; `sort` keeps them apart whatever the score.
+local NAMED_GROUP = 2
+
+---@param status QueueStatus
+---@return integer
+local function status_group(status)
+    if status == "todo" then
+        return 0
+    elseif status == "backlog" then
+        return 1
+    end
+    error("unknown queue status: " .. vim.inspect(status))
+end
+
+---@param status QueueStatus
+---@return string
+local function status_text(status)
+    if status == "todo" then
+        return "Todo"
+    elseif status == "backlog" then
+        return "Backlog"
+    end
+    error("unknown queue status: " .. vim.inspect(status))
+end
+
 ---@param state NewAgentQueueState
 ---@return string
 local function title(state)
     if state.kind == "loading" then
-        return "New agent · loading todos…"
+        return "New agent · loading queue…"
     elseif state.kind == "loaded" then
-        return "New agent · " .. state.count .. " Todo" .. (state.count == 1 and "" or "s")
+        return ("New agent · %d Todo%s · %d Backlog"):format(state.todo, state.todo == 1 and "" or "s", state.backlog)
     elseif state.kind == "unavailable" then
-        return "New agent · Todos unavailable"
+        return "New agent · queue unavailable"
     end
     error("unknown queue state: " .. vim.inspect(state))
 end
@@ -78,16 +103,15 @@ function M.pick()
         end
     end
 
-    -- `group` keeps the named row below every Todo, whatever the score.
-    local named = { text = "", group = 1, entry = { kind = "named" } }
-    local todos = {} ---@type snacks.picker.finder.Item[]
+    local named = { text = "", group = NAMED_GROUP, entry = { kind = "named" } }
+    local queued_items = {} ---@type snacks.picker.finder.Item[]
     ---@type NewAgentQueueState
     local state = { kind = "loading" }
 
     local picker = Snacks.picker({
         title = title(state),
         finder = function()
-            local items = vim.list_extend({}, todos)
+            local items = vim.list_extend({}, queued_items)
             table.insert(items, named)
             return items
         end,
@@ -120,6 +144,11 @@ function M.pick()
             elseif kind.kind == "gig" or kind.kind == "pr" or kind.kind == "unclassified" then
                 -- The plain case: nothing to add.
             end
+            if queued.status == "backlog" then
+                table.insert(parts, { " · Backlog", "Comment" })
+            elseif queued.status == "todo" then
+                -- The default: nothing to add.
+            end
             return parts
         end,
         preview = function(ctx)
@@ -138,6 +167,7 @@ function M.pick()
                 queued.title,
                 "",
                 "Kind: " .. kind_text(queued),
+                "Status: " .. status_text(queued.status),
                 "URL: " .. queued.url,
                 "Agent: " .. vim.fs.basename(source) .. "--" .. queue.agent_name(queued),
                 "Prompt: " .. (queue.command(queued) or "(empty)"),
@@ -177,15 +207,24 @@ function M.pick()
             return queue.load(source)
         end)
         if result.kind == "ok" then
+            local counts = { todo = 0, backlog = 0 } ---@type table<QueueStatus, integer>
             for _, queued in
                 ipairs(result.value --[[@as QueueItem[] ]])
             do
                 if not started[queued.id] then
-                    local text = table.concat({ queued.marker or "", queued.title, kind_text(queued) }, " ")
-                    table.insert(todos, { text = text, group = 0, entry = { kind = "queued", item = queued } })
+                    local text = table.concat(
+                        { queued.marker or "", queued.title, kind_text(queued), status_text(queued.status) },
+                        " "
+                    )
+                    table.insert(queued_items, {
+                        text = text,
+                        group = status_group(queued.status),
+                        entry = { kind = "queued", item = queued },
+                    })
+                    counts[queued.status] = counts[queued.status] + 1
                 end
             end
-            update({ kind = "loaded", count = #todos })
+            update({ kind = "loaded", todo = counts.todo, backlog = counts.backlog })
         elseif result.kind == "refused" then
             log.warn(result.message)
             update({ kind = "unavailable", message = result.message })

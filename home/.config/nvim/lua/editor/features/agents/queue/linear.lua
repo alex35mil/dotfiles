@@ -1,6 +1,6 @@
--- Todo work of a Linear team: Projects (Epics) first, then issues (Tasks in
--- a Project, Gigs without one), each ordered by priority, then by Linear's
--- manual order within a priority.
+-- Todo and Backlog work of a Linear team: Todo first, and within each status
+-- Projects (Epics) first, then issues (Tasks in a Project, Gigs without one),
+-- each ordered by priority, then by Linear's manual order within a priority.
 
 local util = require("editor.features.agents.util")
 local queue = require("editor.features.agents.queue")
@@ -53,13 +53,29 @@ function M.load(tracker)
         return nodes
     end
 
+    local result = {} ---@type QueueItem[]
+    for _, status in ipairs(queue.STATUSES) do
+        vim.list_extend(result, M.projects(fetch, config, status))
+        vim.list_extend(result, M.issues(fetch, config, status))
+    end
+    return result
+end
+
+---@alias LinearFetch fun(query: string, variables: table, field: string): table[]
+
+---@param fetch LinearFetch
+---@param config table
+---@param status QueueStatus
+---@return QueueItem[]
+function M.projects(fetch, config, status)
     local result = {}
     for _, project in
-        ipairs(fetch(PROJECTS, { team = config.team, status = config.statuses.projects.todo }, "projects"))
+        ipairs(fetch(PROJECTS, { team = config.team, status = config.statuses.projects[status] }, "projects"))
     do
         ---@type QueueItem
         local item = {
             id = "linear:project:" .. project.id,
+            status = status,
             mention = project.url,
             title = project.name,
             url = project.url,
@@ -67,11 +83,21 @@ function M.load(tracker)
         }
         table.insert(result, item)
     end
-    for _, issue in ipairs(fetch(ISSUES, { team = config.team, state = config.statuses.issues.todo }, "issues")) do
+    return result
+end
+
+---@param fetch LinearFetch
+---@param config table
+---@param status QueueStatus
+---@return QueueItem[]
+function M.issues(fetch, config, status)
+    local result = {}
+    for _, issue in ipairs(fetch(ISSUES, { team = config.team, state = config.statuses.issues[status] }, "issues")) do
         local project = issue.project
         ---@type QueueItem
         local item = {
             id = "linear:issue:" .. issue.id,
+            status = status,
             mention = issue.identifier,
             marker = issue.identifier,
             title = issue.title,
