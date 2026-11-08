@@ -11,7 +11,7 @@ NVAgents = {}
 
 function NVAgents.keymaps()
     K.map({ "<C-S-n>", "New agent (from Todo or by name)", new.pick, mode = { "n", "i", "v", "t" } })
-    K.map({ "<D-g>w", "Show agent picker", picker.pick, mode = { "n", "i", "v", "t" } })
+    K.map({ "<C-S-t>", "Show agent picker", picker.pick, mode = { "n", "i", "v", "t" } })
 end
 
 --- The agent containing `path`, or nil when it isn't inside one.

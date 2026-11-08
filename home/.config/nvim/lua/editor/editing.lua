@@ -31,9 +31,9 @@ function NVEditing.keymaps()
     K.map({ "<D-CR>", "Insert new line above", "<Esc>O", mode = "i" })
     K.map({ "<S-CR>", "Insert new line below", "<Esc>o", mode = "i" })
 
-    K.map({ "<D-d>", "Duplicate line", [["yyy"yp]], mode = "n" })
-    K.map({ "<D-d>", "Duplicate line", [[<Esc>"yyy"ypgi]], mode = "i" })
-    K.map({ "<D-d>", "Duplicate selection", [["yy'>"ypgv]], mode = "v" })
+    K.map({ "<C-d>", "Duplicate line", [["yyy"yp]], mode = "n" })
+    K.map({ "<C-d>", "Duplicate line", [[<Esc>"yyy"ypgi]], mode = "i" })
+    K.map({ "<C-d>", "Duplicate selection", [["yy'>"ypgv]], mode = "v" })
 
     K.map({ "<M-Up>", "Move line up", "<Cmd>m .-2<CR>==", mode = "n" })
     K.map({ "<M-Down>", "Move line down", "<Cmd>m .+1<CR>==", mode = "n" })

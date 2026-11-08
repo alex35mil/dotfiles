@@ -40,18 +40,6 @@ function NVLspPopup.keymaps()
             mode = { "n", "i" },
         },
         {
-            "<D-S-r>",
-            "LSP: Rename current file",
-            function()
-                Snacks.rename.rename_file()
-            end,
-            mode = { "n", "i" },
-            has = {
-                vim.lsp.protocol.Methods.workspace_didRenameFiles,
-                vim.lsp.protocol.Methods.workspace_willRenameFiles,
-            },
-        },
-        {
             "<C-a>",
             "LSP: Code actions",
             function()
@@ -124,7 +112,7 @@ function NVLspPopup.keymaps()
             mode = { "n", "i" },
         },
         {
-            "<C-S-h>",
+            "<M-C-h>",
             "LSP: Jump to next warning",
             function()
                 DiagnosticPopup.show_next(WARN)
@@ -132,7 +120,7 @@ function NVLspPopup.keymaps()
             mode = { "n", "i" },
         },
         {
-            "<C-S-t>",
+            "<M-C-t>",
             "LSP: Jump to previous warning",
             function()
                 DiagnosticPopup.show_previous(WARN)
