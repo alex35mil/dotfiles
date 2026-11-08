@@ -14,15 +14,21 @@
         "allow": [
             "$HOME/.config/pi/agent",
             "$HOME/.config/claude",
-            "$HOME/Library/Keychains"
+            "$HOME/Library/Keychains",
+            "$HOME/Library/Caches/mise",
+            "$HOME/.cargo/registry",
+            "$HOME/.cargo/git",
+            "$HOME/.rustup/update-hashes",
+            "$HOME/.rustup/tmp",
+            "$HOME/.rustup/downloads"
         ],
         "read": [
             "$HOME/Projects/personal/configs/dotfiles/home",
             "$HOME/Projects/personal/configs/pi-af",
             "$HOME/.config",
             "$HOME/.local/state/mise/trusted-configs",
-            "$HOME/.cargo/bin",
-            "$HOME/.rustup/toolchains"
+            "$HOME/.cargo",
+            "$HOME/.rustup"
         ],
         "deny": [
             "$HOME/Projects/personal/configs/dotfiles/home/.config/shell/secrets.sh"
