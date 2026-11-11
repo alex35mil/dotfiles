@@ -1,6 +1,6 @@
 {
     "meta": {
-        "name": "pi-agent",
+        "name": "piton",
         "description": "Pi on the host, confined to one agent checkout, sharing the host Pi and Claude Code setup"
     },
     "extends": "mise-dev",
@@ -20,11 +20,14 @@
             "$HOME/.cargo/git",
             "$HOME/.rustup/update-hashes",
             "$HOME/.rustup/tmp",
-            "$HOME/.rustup/downloads"
+            "$HOME/.rustup/downloads",
+            "$HOME/.local/state/mise/incomplete-installs",
+            "$HOME/.local/state/mise/tracked-configs"
+
         ],
         "read": [
             "$HOME/Projects/personal/configs/dotfiles/home",
-            "$HOME/Projects/personal/configs/pi-af",
+            "$HOME/Projects/personal/tooling/piton",
             "$HOME/.config",
             "$HOME/.local/state/mise/trusted-configs",
             "$HOME/.cargo",
@@ -54,7 +57,7 @@
     },
     "environment": {
         "set_vars": {
-            "PI_AF_RUNTIME": "sandbox"
+            "PITON_RUNTIME": "sandbox"
         }
     }
 }

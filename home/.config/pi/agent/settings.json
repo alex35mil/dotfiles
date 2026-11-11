@@ -5,7 +5,7 @@
   "defaultProjectTrust": "always",
   "theme": "dark",
   "packages": [
-    "/Users/Alex/Projects/personal/configs/pi-af",
+    "/Users/Alex/Projects/personal/tooling/piton/pi",
     "https://github.com/earendil-works/pi-claude-code"
   ],
   "extensions": [

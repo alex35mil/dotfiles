@@ -23,7 +23,6 @@ NVTerminal.keymaps()
 NVFocusMode.keymaps()
 NVDebug.keymaps()
 NVGitCommit.keymaps()
-NVAgents.keymaps()
 
 -- Autocmds
 

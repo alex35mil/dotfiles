@@ -7,4 +7,5 @@ default.profraw
 neovide_backtraces.log
 mise.local.toml
 mise.local.lock
+.nono.local.json
 **/.agents/*.local.json

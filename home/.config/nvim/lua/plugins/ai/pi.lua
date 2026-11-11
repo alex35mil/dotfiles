@@ -44,6 +44,9 @@ NVPi = {
             { match = "gpt-6.1-sol", exact = true },
         },
         process = {
+            kind = "attached",
+            cmd = { "piton", "attach" },
+            terminate = { "piton", "stop", "--session", "${{SESSION_ID}}" },
             descriptor = {
                 path = ".agents/pi.nvim.json",
                 trusted_paths = { "~/Projects/personal/" },

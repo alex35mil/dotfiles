@@ -28,7 +28,9 @@ function fn.create_tab()
 end
 
 function fn.close_tab()
-    local agent = NVAgents.get(vim.fn.getcwd(-1, 0))
+    -- Required here, not at load: lazy loads piton on first use.
+    local piton = require("piton")
+    local agent = piton.get(vim.fn.getcwd(-1, 0))
 
     if not agent then
         if NVDialogs.confirm("Close tab?", "&Yes\n&No", 2) == 1 then
@@ -37,7 +39,7 @@ function fn.close_tab()
         return
     end
 
-    NVAgents.close_tab(agent)
+    piton.close_tab(agent)
 end
 
 --- Open a new tab. Leaves the welcome screen first, so its tab becomes the

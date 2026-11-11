@@ -1,0 +1,5 @@
+# Where the apps may browse and start sessions. piton attach and the CLI aren't limited.
+roots = ["~/Projects"]
+
+[logging]
+mode = "debug"

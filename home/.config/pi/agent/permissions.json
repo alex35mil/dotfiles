@@ -24,8 +24,16 @@
     "ask": [
         "edit(.nono.json)",
         "edit(*/.nono.json)",
+        "edit(.nono.local.json)",
+        "edit(*/.nono.local.json)",
         "write(.nono.json)",
         "write(*/.nono.json)",
-        "bash(* *.nono.json*)"
+        "write(.nono.local.json)",
+        "write(*/.nono.local.json)",
+        "bash(* *.nono.json*)",
+        "bash(* *.nono.local.json*)",
+        "edit(*permissions*.json)",
+        "write(*permissions*.json)",
+        "bash(* *permissions*.json*)"
     ]
 }
