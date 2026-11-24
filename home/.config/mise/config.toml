@@ -298,6 +298,7 @@ value = { enabled = false, value = { parameters = [32, 49, 1179648], type = "sta
 "brew-cask:jump-desktop-connect" = "latest"
 "brew-cask:karabiner-elements" = "latest"
 "brew-cask:keyboard-maestro" = "latest"
+"brew-cask:ladybird" = "latest"
 "brew-cask:ledger-wallet" = "latest"
 "brew-cask:linear" = "latest"
 "brew-cask:little-snitch" = "latest"
