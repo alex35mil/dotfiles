@@ -354,6 +354,17 @@ checksum = "sha256:623dc0afc81b92e4d4606b380d7bc91916ba7b97814263e554d50923a39e4
 url = "https://github.com/sharkdp/fd/releases/download/v10.4.2/fd-v10.4.2-aarch64-apple-darwin.tar.gz"
 url_api = "https://api.github.com/repos/sharkdp/fd/releases/assets/370661116"
 
+[[tools.fnox]]
+version = "1.50.0"
+backend = "packslip:github.com/jdx/fnox"
+specifiers = ["1.50.0"]
+
+[tools.fnox."platforms.macos-arm64"]
+checksum = "sha256:cf8301a5355c3249284b4102c871b0c4b5e5924cd7b61397f7539f4328041eff"
+url = "https://github.com/jdx/fnox/releases/download/v1.50.0/fnox-aarch64-apple-darwin.tar.gz"
+signer = "sigstore-oidc:https://github.com/jdx/fnox/.github/workflows/release.yml"
+repository_ids = { repository = "1078762196" }
+
 [[tools.fzf]]
 version = "0.73.1"
 backend = "aqua:junegunn/fzf"
@@ -365,14 +376,14 @@ url = "https://github.com/junegunn/fzf/releases/download/v0.73.1/fzf-0.73.1-darw
 url_api = "https://api.github.com/repos/junegunn/fzf/releases/assets/429088717"
 
 [[tools.gh]]
-version = "2.96.0"
+version = "2.105.0"
 backend = "aqua:cli/cli"
-specifiers = ["2.96.0"]
+specifiers = ["2.105.0"]
 
 [tools.gh."platforms.macos-arm64"]
-checksum = "sha256:f23a0c37d963aacc3bed703ccbd59b41c5ca22101fab7f00eb2b7cad23aba463"
-url = "https://github.com/cli/cli/releases/download/v2.96.0/gh_2.96.0_macOS_arm64.zip"
-url_api = "https://api.github.com/repos/cli/cli/releases/assets/464728562"
+checksum = "sha256:2a5d03103ae444927383b93d9ffd65579a26e2eb900ce1cf11f55258d5319ded"
+url = "https://github.com/cli/cli/releases/download/v2.105.0/gh_2.105.0_macOS_arm64.zip"
+url_api = "https://api.github.com/repos/cli/cli/releases/assets/761188673"
 provenance = "github-attestations"
 
 [[tools.go]]

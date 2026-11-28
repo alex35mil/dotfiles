@@ -1,6 +1,6 @@
 NVPiton = {
     name = "piton",
-    dir = "/Users/Alex/Projects/personal/tooling/piton/nvim",
+    dir = "/Users/Alex/Projects/personal/tooling/Piton/nvim",
     dependencies = {
         "pi.nvim",
         "folke/snacks.nvim",
@@ -21,6 +21,11 @@ NVPiton = {
         confirm = function(message)
             return NVDialogs.confirm(message, "&Yes\n&No", 2) == 1
         end,
+        queue = {
+            with_credential = function(command, credential)
+                return vim.list_extend({ "fnox", "exec", "--only", credential.variable, "--" }, command)
+            end,
+        },
     },
     keys = function()
         return {

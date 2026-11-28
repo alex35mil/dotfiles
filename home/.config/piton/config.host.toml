@@ -1,0 +1,5 @@
+roots = ["~/Projects"]
+
+[debugging]
+log_level = "debug"
+session_analysis = true

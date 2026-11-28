@@ -31,6 +31,7 @@ local WEEKLY_PLAN = {
 }
 
 NVPi = {
+    name = "pi.nvim",
     main = "pi",
     dir = "/Users/Alex/Projects/personal/tooling/pi.nvim",
     dependencies = {
@@ -41,7 +42,6 @@ NVPi = {
         expand_startup_details = false,
         models = {
             { match = "claude-opus-5-5", exact = true },
-            { match = "gpt-6.1-sol", exact = true },
         },
         process = {
             kind = "attached",
@@ -275,7 +275,10 @@ function NVPi.autocmds()
                 vim.cmd("PiAbort")
             end)
             keymap("<D-S-w>", event, function()
-                vim.cmd("PiStop")
+                vim.cmd("PiDetach")
+            end)
+            keymap("<D-S-M-w>", event, function()
+                vim.cmd("PiDetach")
             end)
             keymap("<C-o>", event, function()
                 pi.toggle_history_blocks()

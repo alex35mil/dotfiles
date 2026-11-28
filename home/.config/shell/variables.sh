@@ -9,6 +9,7 @@ export HOMEBREW_PREFIX="/opt/homebrew"
 export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 
 export PI_CODING_AGENT_DIR="$XDG_CONFIG_HOME/pi/agent"
+export PI_CLAUDE_CODE_CONFIG_DIR="$XDG_CONFIG_HOME/pi/claude"
 export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
 
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"

@@ -23,8 +23,9 @@ claude-code = "2.1.309"
 "conda:wget" = "1.25.0"
 direnv = "2.37.1"
 fd = "10.4.2"
+fnox = { version = "1.50.0", workflow = "release.yml" }
 fzf = "0.73.1"
-gh = "2.96.0"
+gh = "2.105.0"
 hostctl = "1.1.4"
 jq = "1.8.2"
 lazygit = "0.63.0"
@@ -248,7 +249,7 @@ value = { enabled = false, value = { parameters = [32, 49, 1179648], type = "sta
 "~/Projects/personal/libs/steward" = { url = "git@github.com:alex35mil/steward.git" }
 "~/Projects/personal/tooling/delta.nvim" = { url = "git@github.com:alex35mil/delta.nvim.git" }
 "~/Projects/personal/tooling/pi.nvim" = { url = "git@github.com:alex35mil/pi.nvim.git" }
-"~/Projects/personal/tooling/piton" = { url = "git@github.com:alex35mil/piton.git" }
+"~/Projects/personal/tooling/Piton" = { url = "git@github.com:alex35mil/Piton.git" }
 "~/Projects/personal/configs/dotfiles" = { url = "git@github.com:alex35mil/dotfiles.git" }
 "~/Projects/personal/configs/zmk-config" = { url = "git@github.com:alex35mil/zmk-config.git" }
 "~/Projects/personal/infra/vpn" = { url = "git@github.com:alex35mil/vpn.git" }

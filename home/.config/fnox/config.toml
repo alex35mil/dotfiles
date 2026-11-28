@@ -1,0 +1,51 @@
+[providers.keychain]
+type = "keychain"
+service = "fnox"
+
+[providers.op]
+type = "1password"
+token = { secret = "OP_AGENT_SERVICE_ACCOUNT_TOKEN" }
+
+[secrets]
+OP_AGENT_SERVICE_ACCOUNT_TOKEN= { provider = "keychain", value = "OP_AGENT_SERVICE_ACCOUNT_TOKEN", env = false }
+CLAUDE_CODE_OAUTH_TOKEN = { provider = "op", value = "op://Agent/claude-token/credential", env = false }
+GITHUB_PERSONAL_ACCESS_TOKEN = { provider = "op", value = "op://Agent/personal-github-token/credential", env = "exec" }
+GH_TOKEN = { provider = "op", value = "op://Agent/personal-github-token/credential", env = false }
+LINEAR_API_KEY = { default = "fnox_proxy_248a7d334cb39f6e8ac0942d", description = "Linear API key; set per folder", env = "exec" }
+
+[proxy]
+egress = "permissive"
+
+[[proxy.rules]]
+secret = "CLAUDE_CODE_OAUTH_TOKEN"
+domain = "api.anthropic.com"
+header = "authorization"
+placeholder = "sk-ant-oat01-pitonplaceholder0000000000000000000000000000000000000000000000000000000000000000000000000000"
+
+[[proxy.rules]]
+secret = "GITHUB_PERSONAL_ACCESS_TOKEN"
+domain = "api.githubcopilot.com"
+header = "authorization"
+
+[[proxy.rules]]
+secret = "GITHUB_PERSONAL_ACCESS_TOKEN"
+domain = "api.github.com"
+header = "authorization"
+
+[[proxy.rules]]
+secret = "GH_TOKEN"
+domain = "api.github.com"
+header = "authorization"
+
+[[proxy.rules]]
+secret = "LINEAR_API_KEY"
+domain = "mcp.linear.app"
+header = "authorization"
+
+[[proxy.rules]]
+secret = "LINEAR_API_KEY"
+domain = "api.linear.app"
+header = "authorization"
+
+[audit]
+enabled = true

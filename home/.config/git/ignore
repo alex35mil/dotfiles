@@ -5,6 +5,7 @@
 default.profraw
 .nvim.lua
 neovide_backtraces.log
+fnox.local.toml
 mise.local.toml
 mise.local.lock
 .nono.local.json

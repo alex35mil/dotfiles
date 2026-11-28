@@ -10,7 +10,8 @@ You are likely working around the real problem when:
 - you add optional fields, boolean flags, fallback values, or adapters to cover a concept the model doesn't represent (model it per `domain-modeling.md`);
 - several callers need, or will need, the same workaround;
 - you keep an old signature, alias, or shim only so existing callers don't have to change;
-- logic is repeated where it should be a type, state machine, or shared operation;
+- logic is repeated where it should be a type or shared operation;
+- state is an implicit state machine: flags or fields that change together, transitions spread across handlers, or required call order (model it per `domain-modeling.md`);
 - the fix still allows invalid states or leaves the same defect for other callers.
 
 ## What to do

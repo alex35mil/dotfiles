@@ -5,19 +5,17 @@ source = "home"
 mode = "symlink-each"
 exclude = [
     ".config/karabiner",
-    ".config/nono/profiles",
     ".config/nvim",
     ".config/shell",
     ".config/zellij",
     ".config/pi/agent/prompts",
-    ".config/pi/agent/rules",
+    ".config/piton/agents/rules",
 ]
 
 [dotfiles]
 "~/.config/karabiner" = { source = "home/.config/karabiner", mode = "symlink" }
-"~/.config/nono/profiles" = { source = "home/.config/nono/profiles", mode = "symlink" }
 "~/.config/nvim" = { source = "home/.config/nvim", mode = "symlink" }
 "~/.config/shell" = { source = "home/.config/shell", mode = "symlink" }
 "~/.config/zellij" = { source = "home/.config/zellij", mode = "symlink" }
 "~/.config/pi/agent/prompts" = { source = "home/.config/pi/agent/prompts", mode = "symlink" }
-"~/.config/pi/agent/rules" = { source = "home/.config/pi/agent/rules", mode = "symlink" }
+"~/.config/piton/agents/rules" = { source = "home/.config/piton/agents/rules", mode = "symlink" }
